@@ -69,6 +69,23 @@ class LogicaLogin:
 
     # ---------------------------------------------------------
 
-    # ---------------------------------------------------------
+    def login(self, db: Session, correo: str, contrasena: str):
+        """
+        Proceso completo de login.
+        
+        Args:
+            db (Session): Sesión de BD.
+            correo (str): Correo.
+            contrasena (str): Contraseña.
+        
+        Returns:
+            str: Token si éxito.
+        """
+        usuario = self.validar_credenciales(db, correo, contrasena)
+        if not usuario:
+            raise ValueError("Credenciales inválidas")
+        return self.generar_token(str(usuario.usuario_id), usuario.rol_id)
 
-    # ---------------------------------------------------------
+# ---------------------------------------------------------
+# class
+

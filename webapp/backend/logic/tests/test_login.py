@@ -73,6 +73,20 @@ def test_generar_token(db_session):
 
 # ---------------------------------------------------------
 
-# ---------------------------------------------------------
+def test_login_exitoso(db_session):
+    # Si las credenciales son incorrectas el token no se generara - Error
+
+    logica = LogicaLogin()
+    token = logica.login(db_session, "test@fake.com", "testpass")
+    assert isinstance(token, str)
 
 # ---------------------------------------------------------
+
+def test_login_fallido(db_session):
+    # Comprobamos que si las credenciales no son correctas da error, si son correctas - Error
+    logica = LogicaLogin()
+    with pytest.raises(ValueError):
+        logica.login(db_session, "test@fake.com", "wrongpass")
+
+# ---------------------------------------------------------
+
