@@ -53,3 +53,18 @@ def test_validar_credenciales_correctas(db_session):
     assert usuario.correo == "test@fake.com"
 
 # ---------------------------------------------------------
+
+def test_validar_credenciales_incorrectas(db_session):
+    # Si la contraseña es incorrecta - Error
+
+    logica = LogicaLogin()
+    usuario = logica.validar_credenciales(db_session, "test@fake.com", "wrongpass")
+    assert usuario is None
+
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
