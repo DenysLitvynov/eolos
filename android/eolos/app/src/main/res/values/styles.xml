@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/azul_profundo</item>
+        <item name="colorPrimaryVariant">@color/azul_medio</item>
+        <item name="android:windowBackground">@color/blanco</item>
+    </style>
+
+    <style name="BotonPrincipal" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item>
+        <item name="android:background">@drawable/boton_principal</item>
+        <item name="android:textColor">@color/blanco</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/rethink_sans</item>
+    </style>
+
+    <style name="BotonSecundario" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="backgroundTint">@null</item>
+        <item name="android:background">@drawable/boton_secundario</item>
+        <item name="android:textColor">@color/azul_profundo</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/rethink_sans</item>
+        <item name="rippleColor">@color/azul_medio</item>
+    </style>
+
+    <style name="InputField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundMode">none</item>
+        <item name="boxStrokeColor">@color/azul_profundo</item>
+        <item name="android:textColor">@color/azul_medio</item>
+        <item name="android:textColorHint">#999999</item>
+        <item name="fontFamily">@font/rethink_sans</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+</resources>
