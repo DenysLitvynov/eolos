@@ -63,6 +63,14 @@ def test_validar_credenciales_incorrectas(db_session):
 
 # ---------------------------------------------------------
 
+def test_generar_token(db_session):
+    # Si el token no se ha creado o se ha creado vacio - Error 
+
+    logica = LogicaLogin()
+    token = logica.generar_token(str(uuid.uuid4()), 1)
+    assert isinstance(token, str)
+    assert len(token) > 0
+
 # ---------------------------------------------------------
 
 # ---------------------------------------------------------

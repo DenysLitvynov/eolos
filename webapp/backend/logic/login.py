@@ -11,7 +11,7 @@ from ..db.models import Usuario
 from passlib.context import CryptContext
 import jwt
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 
 # ---------------------------------------------------------
@@ -48,6 +48,24 @@ class LogicaLogin:
             raise RuntimeError(f"Error validando credenciales: {e}")
 
     # ---------------------------------------------------------
+
+    def generar_token(self, usuario_id: str, rol_id: int):
+        """
+        Genera un token JWT.
+        
+        Args:
+            usuario_id (str): ID del usuario.
+            rol_id (int): ID del rol.
+        
+        Returns:
+            str: Token JWT.
+        """
+        try:
+            expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+            to_encode = {"sub": str(usuario_id), "rol": rol_id, "exp": expire}
+            return jwt.encode(to_encode, JWT_SECRET, algorithm=JWT_ALGORITHM)
+        except Exception as e:
+            raise RuntimeError(f"Error generando token: {e}")
 
     # ---------------------------------------------------------
 
