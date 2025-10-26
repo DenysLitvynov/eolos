@@ -18,6 +18,7 @@ class Mibisivalencia(Base):
     __tablename__ = "mibisivalencia"
     
     targeta_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    correo = Column(String(100))
 
 # ---------------------------------------------------------
 
@@ -40,7 +41,6 @@ class Usuario(Base):
     apellido = Column(String(100))
     correo = Column(String(100), unique=True, nullable=False)
     contrasena_hash = Column(Text, nullable=False)
-    fecha_registro = Column(TIMESTAMP, server_default=func.current_timestamp())
     
     mibisivalencia = relationship("Mibisivalencia")
     rol = relationship("Rol")
