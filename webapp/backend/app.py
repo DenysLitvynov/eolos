@@ -39,9 +39,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = BASE_DIR / "frontend"
 
 #app.mount("/logica_fake", StaticFiles(directory=FRONTEND_DIR / "logica_fake"), name="logica_fake")
-#app.mount("/utilidades", StaticFiles(directory=FRONTEND_DIR / "utilidades"), name="utilidades")
-#app.mount("/scripts", StaticFiles(directory=FRONTEND_DIR / "scripts"), name="scripts")
-
+app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
+#app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR / "frontend"), name="frontend")
+app.mount("/images", StaticFiles(directory=FRONTEND_DIR / "images"), name="images")
 app.mount("/pages", StaticFiles(directory=FRONTEND_DIR / "pages"), name="pages")
 app.mount("/js", StaticFiles(directory=FRONTEND_DIR / "js"), name="js")
 app.mount("/css", StaticFiles(directory=FRONTEND_DIR / "css"), name="css")
