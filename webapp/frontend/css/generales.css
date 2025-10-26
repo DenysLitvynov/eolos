@@ -1,0 +1,71 @@
+/* 
+Autor: Denys Litvynov Lymanets
+Fecha: 29-09-2025
+Descripción: Estilos minimalistas en escala de grises para la aplicación. 
+*/
+
+body {
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    background-color: #f9f9f9; /* gris muy claro */
+    color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    text-align: center;
+    background-color: #fff;
+    padding: 60px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Título principal */
+h1 {
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Subtítulo */
+h2 {
+    font-size: 1.4em;
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Botón estilizado */
+button {
+    background-color: #222;
+    color: #fff;
+    border: none;
+    padding: 18px 36px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+/* Caja de resultados */
+.display-box {
+    margin-top: 30px;
+    padding: 40px;
+    background-color: #f0f0f0; /* gris claro */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #111;
+    min-height: 80px;
+}
