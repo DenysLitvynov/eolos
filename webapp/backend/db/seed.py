@@ -17,6 +17,10 @@ import uuid
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def seed_data():
+    
+    from .database import Base, engine  # importa Base y engine aquí
+    Base.metadata.create_all(bind=engine)  # <-- Esto crea todas las tablas si no existen
+
     db = SessionLocal()
     try:
         # Roles de prueba
@@ -38,7 +42,7 @@ def seed_data():
         db.commit()
         
         # Usuarios de prueba 
-        hash1 = pwd_context.hash("password_segura1")
+        hash1 = pwd_context.hash("password_segura1".encode("utf-8")[:72])
         usuario1 = Usuario(
             usuario_id=uuid.uuid4(),
             targeta_id=carnet1.targeta_id,  # Asocia a carnet1
@@ -48,7 +52,7 @@ def seed_data():
             correo="prueba1@fake.com",
             contrasena_hash=hash1
         )
-        hash2 = pwd_context.hash("password_segura2")
+        hash2 = pwd_context.hash("password_segura2".encode("utf-8")[:72])
         usuario2 = Usuario(
             usuario_id=uuid.uuid4(),
             targeta_id=None,  # Sin targeta
