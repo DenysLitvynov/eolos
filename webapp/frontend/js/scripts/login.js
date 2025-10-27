@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultado = await logicaFake.login(correo, contrasena);
             localStorage.setItem('token', resultado.token);
             mensaje.textContent = 'Login exitoso!';
-            // Redirigir a dashboard o index
-            window.location.href = '/';
+            // Redirigir a la página de prueba
+            window.setTimeout(() => { window.location.href = '/pages/prueba.html'; }, 2000); 
         } catch (error) {
             mensaje.textContent = 'Error en login';
             console.error(error);

@@ -54,12 +54,13 @@ Descripción: Estilos específicos para formularios de autenticación (login, re
 
 /* Etiquetas de inputs */
 .input-label {
-    display: none; /* Ocultas ya que los placeholders simulan labels como en la imagen */
+    display: none; 
 }
 
 /* Inputs */
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
     width: 100%;
     padding: 12px 20px;
     margin-bottom: 15px;
