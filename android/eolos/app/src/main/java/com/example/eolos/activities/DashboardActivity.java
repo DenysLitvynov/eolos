@@ -6,7 +6,7 @@
  * @since 27/10/2025
  */
 
-package com.example.eolos;
+package com.example.eolos.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.eolos.R;
 import com.google.android.material.button.MaterialButton;
 
 public class DashboardActivity extends AppCompatActivity {
