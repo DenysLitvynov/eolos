@@ -12,6 +12,17 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_grande">
 
+        <!-- Botón de retroceso -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backButton"
+            style="@style/BackButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:icon="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <!-- Título Registrarse -->
         <TextView
             android:id="@+id/titleTextView"
@@ -23,8 +34,9 @@
             android:textStyle="bold"
             android:fontFamily="@font/rethink_sans"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/backButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
 
         <!-- Subtítulo -->
         <TextView
@@ -58,7 +70,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="Juan Bautista"
                 android:fontFamily="@font/rethink_sans" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +91,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="Peris"
                 android:fontFamily="@font/rethink_sans" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +112,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:text="juanba@gmail.com"
                 android:fontFamily="@font/rethink_sans" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -124,7 +133,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:text="12345HDC"
                 android:fontFamily="@font/rethink_sans" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -146,7 +154,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text="***************"
                 android:fontFamily="@font/rethink_sans" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -168,7 +175,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text="***************"
                 android:fontFamily="@font/rethink_sans" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -27,6 +27,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Configurar el botón de retroceso
+        MaterialButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
         TextInputEditText emailEditText = findViewById(R.id.emailEditText);
         TextInputEditText passwordEditText = findViewById(R.id.passwordEditText);
         MaterialButton loginButton = findViewById(R.id.loginButton);
@@ -60,8 +66,8 @@ public class LoginActivity extends AppCompatActivity {
             });
         });
 
-//        registerLink.setOnClickListener(v -> {
-//            startActivity(new Intent(this, RegisterActivity.class));
-//        });
+        registerLink.setOnClickListener(v -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+        });
     }
 }
