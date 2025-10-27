@@ -19,33 +19,39 @@ Descripción: Página de registro con formulario, header simulado y sección de 
         <a href="/" class="back-link">Volver al Inicio</a>
     </header>
     <div class="auth-container">
+        <div class="image-section">
+            <img src="/images/tioenbici.png" alt="Ilustración de registro">
+        </div>
         <div class="form-section">
-            <h1 class="auth-title">Regístrate</h1>
-            <h2 class="auth-subtitle">Crea tu cuenta ahora!</h2>
+            <h1 class="auth-title">Registrarse</h1>
+            <h2 class="auth-subtitle">Bienvenido a éolos!</h2>
             <form id="registroForm">
                 <label for="nombre" class="input-label">Nombre</label>
                 <input type="text" id="nombre" placeholder="Nombre" required>
+                
                 <label for="apellido" class="input-label">Apellido</label>
                 <input type="text" id="apellido" placeholder="Apellido" required>
-                <label for="correo" class="input-label">Correo electrónico</label>
+                
+                <label for="correo" class="input-label">Correo o número de teléfono</label>
                 <input type="text" id="correo" placeholder="juanba@gmail.com" required>
-                <label for="targeta_id" class="input-label">ID de Targeta</label>
-                <input type="text" id="targeta_id" placeholder="ID de Targeta (ej. 12345678A)" required>
+                
+                <label for="targeta_id" class="input-label">ID Tarjeta</label>
+                <input type="text" id="targeta_id" placeholder="12345HDC" required>
+                
                 <label for="contrasena" class="input-label">Contraseña</label>
-                <input type="password" id="contrasena" placeholder="••••••••••••••" required>
-                <label for="contrasena_repite" class="input-label">Repite Contraseña</label>
-                <input type="password" id="contrasena_repite" placeholder="••••••••••••••" required>
+                <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                
+                <label for="contrasena_repite" class="input-label">Repite tu contraseña</label>
+                <input type="password" id="contrasena_repite" placeholder="++++++++++++++++++" required>
+                
                 <button type="button" id="registroBtn" class="auth-button">Registrarse</button>
             </form>
-            <div id="mensaje" class="display-box"></div> <!-- Para mensajes de éxito/error -->
-            <p class="register-link">¿Ya tienes cuenta? <a href="/pages/login.html">Inicia Sesión</a></p>
+            <div id="mensaje" class="display-box"></div>
+            <p class="register-link">¿Ya tienes cuenta? <a href="/pages/login.html">Iniciar sesión</a></p>
             <div class="footer-links">
                 <a href="#">Términos y condiciones</a>
                 <a href="#">Política de privacidad</a>
             </div>
-        </div>
-        <div class="image-section">
-            <img src="/images/tioenbici.png" alt="Ilustración de registro">
         </div>
     </div>
     <script type="module" src="/js/scripts/registro.js"></script>

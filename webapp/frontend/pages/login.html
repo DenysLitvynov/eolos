@@ -19,26 +19,29 @@ Descripción: Página de login con formulario, header simulado y sección de ima
         <a href="/" class="back-link">Volver al Inicio</a>
     </header>
     <div class="auth-container">
+        <div class="image-section">
+            <img src="/images/tioenbici.png" alt="Ilustración de login">
+        </div>
         <div class="form-section">
             <h1 class="auth-title">Inicia Sesión</h1>
             <h2 class="auth-subtitle">Bienvenido de nuevo!</h2>
             <form id="loginForm">
                 <label for="correo" class="input-label">Correo o número de teléfono</label>
                 <input type="text" id="correo" placeholder="juanba@gmail.com" required>
+                
                 <label for="contrasena" class="input-label">Contraseña</label>
-                <input type="password" id="contrasena" placeholder="••••••••••••••" required>
+                <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                
                 <a href="#" class="forgot-link">¿Has olvidado tu contraseña?</a>
+                
                 <button type="button" id="loginBtn" class="auth-button">Login</button>
             </form>
-            <div id="mensaje" class="display-box"></div> <!-- Añadido aquí -->
-            <p class="register-link">¿No tienes cuenta todavía? <a href="/pages/register.html">Regístrate</a></p>
+            <div id="mensaje" class="display-box"></div>
+            <p class="register-link">¿No tienes cuenta todavía? <a href="/pages/register.html">Registrarse</a></p>
             <div class="footer-links">
                 <a href="#">Términos y condiciones</a>
                 <a href="#">Política de privacidad</a>
             </div>
-        </div>
-        <div class="image-section">
-            <img src="/images/tioenbici.png" alt="Ilustración de login">
         </div>
     </div>
     <script type="module" src="/js/scripts/login.js"></script>
