@@ -9,7 +9,7 @@ Descripción: Tests para LogicaLogin usando BD temporal con SQLAlchemy.
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from ...db.models import Base, Usuario
+from ...db.models import Base, Usuario, Rol
 from ...db.database import get_db
 from ..login import LogicaLogin
 from passlib.context import CryptContext
@@ -26,10 +26,18 @@ def db_session():
     Session = sessionmaker(bind=engine)
     session = Session()
     
+    # Insertar rol de prueba (necesario para foreign key)
+    test_rol = Rol(
+        rol_id=1,
+        nombre="usuario",
+        descripcion="Usuario estándar"
+    )
+    session.add(test_rol)
+    
     # Insertar datos de prueba directamente
     hash_test = pwd_context.hash("testpass")
     test_user = Usuario(
-        usuario_id=uuid.uuid4(),
+        usuario_id=str(uuid.uuid4()),
         rol_id=1,
         nombre="Test",
         apellido="User",
@@ -89,4 +97,3 @@ def test_login_fallido(db_session):
         logica.login(db_session, "test@fake.com", "wrongpass")
 
 # ---------------------------------------------------------
-

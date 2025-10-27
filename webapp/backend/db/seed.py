@@ -1,13 +1,13 @@
 """
 Autor: Denys Litvynov Lymanets
-Fecha: 26-10-2025
+Fecha: 27-10-2025
 Descripción: Script para insertar datos de prueba (seeds) en la BD. 
 Ejecutar: python backend/db/seed.py
 """
 
 # ---------------------------------------------------------
 
-from .database import SessionLocal
+from .database import SessionLocal, Base, engine
 from .models import Rol, Usuario, Mibisivalencia
 from passlib.context import CryptContext
 import uuid
@@ -17,9 +17,8 @@ import uuid
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def seed_data():
-    
-    from .database import Base, engine  # importa Base y engine aquí
-    Base.metadata.create_all(bind=engine)  # <-- Esto crea todas las tablas si no existen
+    # Crear tablas si no existen
+    Base.metadata.create_all(bind=engine)
 
     db = SessionLocal()
     try:
@@ -30,32 +29,28 @@ def seed_data():
         db.add(rol_admin)
         db.commit()
         
-        # Mibisivalencia de prueba 
-        carnet1 = Mibisivalencia(
-            targeta_id=uuid.uuid4()
-        )
-        carnet2 = Mibisivalencia(
-            targeta_id=uuid.uuid4()
-        )
+        # Mibisivalencia de prueba (carnets con formato DNI)
+        carnet1 = Mibisivalencia(targeta_id="12345678A")
+        carnet2 = Mibisivalencia(targeta_id="87654321B")
         db.add(carnet1)
         db.add(carnet2)
         db.commit()
         
-        # Usuarios de prueba 
-        hash1 = pwd_context.hash("password_segura1".encode("utf-8")[:72])
+        # Usuarios de prueba
+        hash1 = pwd_context.hash("password1".encode("utf-8")[:72])
         usuario1 = Usuario(
-            usuario_id=uuid.uuid4(),
-            targeta_id=carnet1.targeta_id,  # Asocia a carnet1
+            usuario_id=str(uuid.uuid4()),  # UUID como string
+            targeta_id="12345678A",  # Asocia a carnet1
             rol_id=1,  # usuario
             nombre="Usuario",
             apellido="Prueba1",
             correo="prueba1@fake.com",
             contrasena_hash=hash1
         )
-        hash2 = pwd_context.hash("password_segura2".encode("utf-8")[:72])
+        hash2 = pwd_context.hash("password2".encode("utf-8")[:72])
         usuario2 = Usuario(
-            usuario_id=uuid.uuid4(),
-            targeta_id=None,  # Sin targeta
+            usuario_id=str(uuid.uuid4()),
+            targeta_id=None,  # Sin carnet
             rol_id=2,  # admin
             nombre="Admin",
             apellido="Prueba2",
