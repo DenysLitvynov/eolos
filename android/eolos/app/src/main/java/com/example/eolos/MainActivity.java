@@ -10,6 +10,8 @@
 
 package com.example.eolos;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.button.MaterialButton;
 
 // -------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------
@@ -40,8 +44,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvMedidas = findViewById(R.id.tv_medidas);
+        // Verificar si hay token
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        if (token != null) {
+            startActivity(new Intent(this, DashboardActivity.class));
+            finish();
+            return;
+        }
 
+        // Inicializar UI
+        tvMedidas = findViewById(R.id.tv_medidas);
+        MaterialButton loginButton = findViewById(R.id.loginButton);
+        //MaterialButton registerButton = findViewById(R.id.registerButton);
+
+        // Configurar botones
+        loginButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginActivity.class));
+        });
+
+//        registerButton.setOnClickListener(v -> {
+//            startActivity(new Intent(this, RegisterActivity.class));
+//        });
         escaner = new EscanerIBeacons(this, jsonMedida -> {
             runOnUiThread(() -> {
                 tvMedidas.setText("Última medida recibida: " + jsonMedida);
