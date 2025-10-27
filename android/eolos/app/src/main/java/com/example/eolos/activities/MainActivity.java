@@ -8,8 +8,10 @@
  * @since 25/09/2025
  */
 
-package com.example.eolos;
+package com.example.eolos.activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.eolos.EscanerIBeacons;
+import com.example.eolos.R;
+import com.example.eolos.logica_fake.LogicaFake;
+import com.google.android.material.button.MaterialButton;
 
 // -------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------
@@ -28,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private LogicaFake logicaFake = new LogicaFake();
     private TextView tvMedidas;
     // private String urlServidor = "https://webhook.site/d839c356-4b86-4e52-b23a-6dc7b339a7c9";
-    private String baseUrl = "http://192.168.1.30:8000";  // <- Solo cambia ESTO (IP + puerto).
+    private String baseUrl = "http://192.168.1.25:8000";  // <- Solo cambia ESTO (IP + puerto).
     private String endpointGuardar = "/api/v1/guardar-medida";  // <- Endpoint específico
     private static final String ETIQUETA_LOG = ">>>>";
 
@@ -40,8 +47,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvMedidas = findViewById(R.id.tv_medidas);
+        // Verificar si hay token
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        if (token != null) {
+            startActivity(new Intent(this, DashboardActivity.class));
+            finish();
+            return;
+        }
 
+        // Inicializar UI
+        tvMedidas = findViewById(R.id.tv_medidas);
+        MaterialButton loginButton = findViewById(R.id.loginButton);
+        //MaterialButton registerButton = findViewById(R.id.registerButton);
+
+        // Configurar botones
+        loginButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, LoginActivity.class));
+        });
+
+//        registerButton.setOnClickListener(v -> {
+//            startActivity(new Intent(this, RegisterActivity.class));
+//        });
         escaner = new EscanerIBeacons(this, jsonMedida -> {
             runOnUiThread(() -> {
                 tvMedidas.setText("Última medida recibida: " + jsonMedida);
