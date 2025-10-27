@@ -7,6 +7,17 @@
     android:background="@color/blanco"
     android:padding="@dimen/padding_grande">
 
+    <!-- Botón de retroceso -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        style="@style/BackButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:icon="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- Título Inicia Sesión -->
     <TextView
         android:id="@+id/titleTextView"
@@ -20,7 +31,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
 
     <!-- Subtítulo Bienvenido -->
     <TextView
@@ -53,7 +64,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:text="juanba@gmail.com"
             android:fontFamily="@font/rethink_sans" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -75,7 +85,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:text="************"
             android:fontFamily="@font/rethink_sans" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -113,7 +122,6 @@
         android:layout_height="1dp"
         android:layout_marginTop="24dp"
         android:background="#E0E0E0"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loginButton" />
@@ -145,6 +153,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registerPromptTextView"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
