@@ -61,3 +61,20 @@ class LogicaRegistro:
             raise ValueError("Correo ya registrado")
         
         return True
+    
+    # ---------------------------------------------------------
+
+    def hashear_contrasena(self, contrasena: str):
+        """
+        Hashea la contraseña.
+        
+        Args:
+            contrasena (str): Contraseña plana.
+        
+        Returns:
+            str: Hash.
+        """
+        return pwd_context.hash(contrasena)
+
+    # ---------------------------------------------------------
+
