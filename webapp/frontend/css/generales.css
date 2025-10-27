@@ -1,12 +1,14 @@
 /* 
 Autor: Denys Litvynov Lymanets
 Fecha: 29-09-2025
-Descripción: Estilos generales para la aplicación, incluyendo header, container y botones grandes. Ajustados para coincidir con tonos azules del diseño.
+Descripción: Estilos generales para la aplicación, incluyendo header, container y botones grandes. 
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap');
+
 body {
-    font-family: 'Roboto', 'Segoe UI', sans-serif;
-    background-color: #f9f9f9; /* gris muy claro */
+    font-family: "Rethink Sans", sans-serif;
+    background-color: #f9f9f9;
     color: #222;
     margin: 0;
     min-height: 100vh;
@@ -27,7 +29,7 @@ body {
 /* Título principal */
 h1 {
     font-size: 2.5em;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 10px;
 }
 
@@ -49,7 +51,7 @@ h2 {
 
 /* Botones grandes */
 .big-button {
-    background-color: #1a2f5e; /* azul oscuro */
+    background-color: #0D47A1;
     color: #fff;
     border: none;
     padding: 20px 40px;
@@ -58,25 +60,28 @@ h2 {
     cursor: pointer;
     text-decoration: none;
     transition: all 0.3s ease;
+    font-family: "Rethink Sans", sans-serif;
+    font-weight: 600;
 }
 
 .big-button:hover {
-    background-color: #2c4a8e; /* azul más claro al hover */
+    background-color: #1976D2;
 }
 
 /* Header general */
 .header {
-    background-color: #1a2f5e; /* azul oscuro */
+    background-color: #0D47A1;
     color: #fff;
-    padding: 10px 20px;
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: "Rethink Sans", sans-serif;
 }
 
 .logo {
     font-size: 1.5em;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .back-link {
@@ -86,6 +91,8 @@ h2 {
     border-radius: 20px;
     text-decoration: none;
     transition: background-color 0.3s;
+    font-family: "Rethink Sans", sans-serif;
+    font-weight: 500;
 }
 
 .back-link:hover {
