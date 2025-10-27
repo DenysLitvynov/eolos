@@ -6,14 +6,15 @@
  * @since 27/10/2025
  */
 
-package com.example.eolos;
+package com.example.eolos.logica_fake;
 
-import android.util.Log;
+import com.example.eolos.PeticionarioREST;
+
 import org.json.JSONObject;
 
 public class LoginFake {
 
-    private static final String BASE_URL = "http://192.168.1.30:8000";
+    private static final String BASE_URL = "http://10.0.2.2:8000";
     private static final String ENDPOINT_LOGIN = "/api/v1/auth/login";
 
     public interface LoginCallback {

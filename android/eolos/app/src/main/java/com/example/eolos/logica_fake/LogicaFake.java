@@ -6,9 +6,11 @@
  * @since 25/09/2025
  */
 
-package com.example.eolos;
+package com.example.eolos.logica_fake;
 
 import android.util.Log;
+
+import com.example.eolos.PeticionarioREST;
 
 // -------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------

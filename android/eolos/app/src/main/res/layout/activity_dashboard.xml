@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/blanco"
     android:padding="@dimen/padding_grande"
-    tools:context=".DashboardActivity">
+    tools:context=".activities.DashboardActivity">
 
     <TextView
         android:id="@+id/titleTextView"
