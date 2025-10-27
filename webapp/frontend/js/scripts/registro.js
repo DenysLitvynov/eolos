@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('token', resultadoLogin.token);  // Almacena token como en login
             mensaje.textContent = 'Registro e inicio de sesión exitosos! Redirigiendo...';
 
-            // Redirigir a home después de 2 segundos
-            window.setTimeout(() => { window.location.href = '/'; }, 2000);
+            // Redirigir a prueba después de 2 segundos
+            window.setTimeout(() => { window.location.href = '/pages/prueba.html'; }, 2000);
         } catch (error) {
             mensaje.textContent = 'Error en registro: ' + (error.message || 'Desconocido');
             console.error(error);
