@@ -27,6 +27,12 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        // Configurar el botón de retroceso
+        MaterialButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
         TextInputEditText nameEditText = findViewById(R.id.nameEditText);
         TextInputEditText surnameEditText = findViewById(R.id.lastnameEditText);
         TextInputEditText emailEditText = findViewById(R.id.emailEditText);
