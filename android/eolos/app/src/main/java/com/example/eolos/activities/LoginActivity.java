@@ -60,8 +60,8 @@ public class LoginActivity extends AppCompatActivity {
             });
         });
 
-//        registerLink.setOnClickListener(v -> {
-//            startActivity(new Intent(this, RegisterActivity.class));
-//        });
+        registerLink.setOnClickListener(v -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+        });
     }
 }

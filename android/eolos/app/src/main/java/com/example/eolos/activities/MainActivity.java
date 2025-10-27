@@ -59,16 +59,16 @@ public class MainActivity extends AppCompatActivity {
         // Inicializar UI
         tvMedidas = findViewById(R.id.tv_medidas);
         MaterialButton loginButton = findViewById(R.id.loginButton);
-        //MaterialButton registerButton = findViewById(R.id.registerButton);
+        MaterialButton registerButton = findViewById(R.id.registerButton);
 
         // Configurar botones
         loginButton.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
         });
 
-//        registerButton.setOnClickListener(v -> {
-//            startActivity(new Intent(this, RegisterActivity.class));
-//        });
+        registerButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+        });
         escaner = new EscanerIBeacons(this, jsonMedida -> {
             runOnUiThread(() -> {
                 tvMedidas.setText("Última medida recibida: " + jsonMedida);
