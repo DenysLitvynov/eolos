@@ -22,7 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eolos.EscanerIBeacons;
 import com.example.eolos.R;
+import com.example.eolos.fragments.BeaconStatusFragment;
 import com.example.eolos.logica_fake.LogicaFake;
+import com.example.eolos.utils.EscanerSingleton;
 import com.google.android.material.button.MaterialButton;
 
 // -------------------------------------------------------------------------------
@@ -85,6 +87,17 @@ public class MainActivity extends AppCompatActivity {
         Log.d(ETIQUETA_LOG, " onCreate(): termina ");
 
         escaner.iniciarEscaneoAutomatico("EmisoraBLE");
+
+        EscanerSingleton escanerSingleton = EscanerSingleton.getInstance();
+        escanerSingleton.iniciarEscaneo(new EscanerIBeacons(this, jsonMedida -> {
+            escanerSingleton.ultimaRecepcion = System.currentTimeMillis();
+        }));
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.status_container, new BeaconStatusFragment())
+                .commit();
+
     }
 
     // -------------------------------------------------------------------------------
