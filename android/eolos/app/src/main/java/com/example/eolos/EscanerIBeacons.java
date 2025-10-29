@@ -36,7 +36,7 @@ public class EscanerIBeacons {
     private static final int CODIGO_PETICION_PERMISOS = 11223344;
     private BluetoothLeScanner elEscanner;
     private ScanCallback callbackDelEscaneo = null;
-    private Context context;
+    public Context context;
     private Handler handler = new Handler();
     private OnBeaconDetectedListener listener;
 
