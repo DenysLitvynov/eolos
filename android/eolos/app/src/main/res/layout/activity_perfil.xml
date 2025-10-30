@@ -154,13 +154,13 @@
                 android:textColor="@android:color/white"
                 android:layout_marginEnd="8dp" />
 
-            <Button
+         <Button
                 android:id="@+id/btnVolver"
                 android:text="Volver a principal"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="48dp"
-                android:backgroundTint="#FFFFFF"
+                android:backgroundTint="@android:color/white"
                 android:textColor="#0A3D91"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/bg_outline_button" />
@@ -168,3 +168,4 @@
 
     </LinearLayout>
 </ScrollView>
+
