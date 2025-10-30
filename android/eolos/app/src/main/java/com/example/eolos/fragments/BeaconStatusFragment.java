@@ -27,23 +27,31 @@ public class BeaconStatusFragment extends Fragment {
 
     private TextView tvStatus;
     private Handler handler = new Handler();
-
-    private static final long TIEMPO_OK = 5000;       // ms: conexión activa
-    private static final long TIEMPO_PERDIDO = 10000; // ms: conexión perdida
-
     /**
      * Tarea periódica: verifica la última recepción y actualiza la vista de estado.
      */
+    private static final long TIEMPO_MAX_SIN_BEACON = 8000; // si pasan más de 8s sin recepción -> perdida
+
+    private boolean conectado = false;
+    private long ultimaRecepcionConfirmada = 0;
+
     private final Runnable verificarConexion = new Runnable() {
         @Override
         public void run() {
             long ultimaRecepcion = EscanerSingleton.getInstance().getUltimaRecepcion();
             long ahora = System.currentTimeMillis();
 
-            if (ahora - ultimaRecepcion <= TIEMPO_OK) {
-                tvStatus.setText("Conexión OK");
-            } else if (ahora - ultimaRecepcion > TIEMPO_PERDIDO) {
-                tvStatus.setText("Conexión perdida");
+            if (ahora - ultimaRecepcion <= 2000) { // beacons llegan con normalidad
+                ultimaRecepcionConfirmada = ahora;
+                if (!conectado) {
+                    conectado = true;
+                    tvStatus.setText("Conexión OK");
+                }
+            } else if (ahora - ultimaRecepcionConfirmada > TIEMPO_MAX_SIN_BEACON) {
+                if (conectado) {
+                    conectado = false;
+                    tvStatus.setText("Conexión perdida");
+                }
             }
 
             handler.postDelayed(this, 1000);
