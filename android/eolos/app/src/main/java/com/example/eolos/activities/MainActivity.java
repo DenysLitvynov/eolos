@@ -68,7 +68,12 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
         });
-
+        
+         MaterialButton perfilButton = findViewById(R.id.btnPerfil);
+        perfilButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, PerfilActivity.class));
+        });
+        
         registerButton.setOnClickListener(v -> {
             startActivity(new Intent(this, RegisterActivity.class));
         });
@@ -134,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
   *              }
    *             return;
     *    }
+        **/
         @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -146,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         PermisosHelper.onActivityResult(this, requestCode, resultCode, data);
     }
     } // ()
-     */
+     
 } // class
 
 // -----------------------------------------------------------------------------------
