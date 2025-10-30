@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">eolos</string>
+
+    <!-- Login Strings -->
+    <string name="login_title">Inicia Sesión</string>
+    <string name="login_subtitle">Bienvenido de nuevo!</string>
+    <string name="email_hint">Correo</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="forgot_password">¿Has olvidado tu contraseña?</string>
+    <string name="login_button">Login</string>
+    <string name="no_account_prompt">No tienes cuenta?</string>
+    <string name="register_link">Registrarse</string>
+
+    <!-- Register Strings -->
+    <string name="register_title">Registrarse</string>
+    <string name="register_subtitle">Crea una cuenta para disfrutar de grandes descuentos.</string>
+    <string name="name_hint">Nombre</string>
+    <string name="lastname_hint">Apellidos</string>
+    <string name="card_id_hint">ID Tarjeta</string>
+    <string name="repeat_password_hint">Repite tu contraseña</string>
+    <string name="register_button">Registrarse</string>
+    <string name="have_account_prompt">Ya tienes cuenta?</string>
+    <string name="login_link">Inicia sesión</string>
+</resources>
