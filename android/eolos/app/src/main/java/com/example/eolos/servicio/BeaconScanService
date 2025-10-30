@@ -1,0 +1,273 @@
+/**
+ * Fichero: BeaconScanService.java
+ * Descripción: Implementar la recepción de Beacons en la app android como un servicio
+ * Autor: JINWEI
+ * Fecha: 30/10/2025
+ */
+package com.example.eolos.servicio;
+
+import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.Service;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
+import android.bluetooth.le.ScanFilter;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.IBinder;
+import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+
+import com.example.eolos.TramaIBeacon;
+import com.example.eolos.Utilidades;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class BeaconScanService extends Service {
+
+    // Nombre del dispositivo objetivo (filtrado por nombre)
+    private static final String TARGET_DEVICE_NAME = "Tu ibeacon";
+
+    private static final String TAG = "BeaconSvc";
+    private static final String ETIQUETA_LOG = ">>>>>";
+
+    // Broadcast para informar estado a la Activity
+    public static final String ACTION_STATUS = "com.example.sprint1.STATUS";
+    public static final String EXTRA_OK   = "ok";
+    public static final String EXTRA_STEP = "step";
+    public static final String EXTRA_MSG  = "msg";
+
+    private BluetoothLeScanner scanner;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.i(TAG, "Service onCreate()");
+        ensureChannel(); // Asegura que exista el canal de notificaciones (O+)
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i(TAG, "onStartCommand()");
+
+        // Construye la notificación de primer plano
+        Notification notification = new NotificationCompat.Builder(this, PermisosHelper.CHANNEL_ID)
+                .setContentTitle("Beacon scanning")
+                .setContentText("Scanning BLE beacons in foreground…")
+                .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth) // reemplázalo por tu icono
+                .setOngoing(true)
+                .build();
+
+        startForeground(1, notification);
+
+        // Inicia el escaneo BLE
+        startScan();
+
+        // Mantener el servicio vivo si el proceso es finalizado
+        return START_STICKY;
+    }
+
+    /** Arranca el escaneo con comprobaciones de adaptación y permisos */
+    private void startScan() {
+        sendStatus(true, "CHECK_BT_ADAPTER", "BluetoothAdapter get");
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter == null) {
+            sendStatus(false, "CHECK_BT_ADAPTER", "BluetoothAdapter == null (not supported)");
+            stopSelf();
+            return;
+        }
+
+        // En Android 12+ se debe verificar SCAN/CONNECT en tiempo de ejecución
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED
+                    || ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                sendStatus(false, "PERMISSION", "Missing BLUETOOTH_SCAN/CONNECT");
+                stopSelf();
+                return;
+            }
+        }
+
+        scanner = adapter.getBluetoothLeScanner();
+        if (scanner == null) {
+            sendStatus(false, "GET_SCANNER", "BluetoothLeScanner == null");
+            stopSelf();
+            return;
+        }
+        sendStatus(true, "GET_SCANNER", "BluetoothLeScanner OK");
+
+        // Ajustes de escaneo (bajo consumo)
+        ScanSettings settings = new ScanSettings.Builder()
+                .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
+                .build();
+
+        try {
+            // Filtro por nombre de dispositivo
+            List<ScanFilter> filters = new ArrayList<>();
+            filters.add(new ScanFilter.Builder()
+                    .setDeviceName(TARGET_DEVICE_NAME)
+                    .build());
+
+            scanner.startScan(filters, settings, callback);
+            sendStatus(true, "START_SCAN", "startScan() invoked");
+            Log.i(TAG, "startScan() called");
+        } catch (Throwable t) {
+            sendStatus(false, "START_SCAN", "startScan failed: " + t.getMessage());
+            Log.e(TAG, "startScan failed", t);
+            stopSelf();
+        }
+    }
+
+    // Callback del escaneo BLE
+    private final ScanCallback callback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            mostrarInformacionDispositivoBTLE(result); // Log de datos relevantes del beacon
+        }
+
+        @Override
+        public void onScanFailed(int errorCode) {
+            sendStatus(false, "SCAN_FAILED", "errorCode=" + errorCode);
+            Log.e(TAG, "Scan failed: " + errorCode);
+            stopSelf();
+        }
+    };
+
+    /** Muestra por Log información detallada del dispositivo/beacon detectado */
+    private void mostrarInformacionDispositivoBTLE( ScanResult resultado ) {
+
+        BluetoothDevice bluetoothDevice = resultado.getDevice();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
+                    != PackageManager.PERMISSION_GRANTED) {
+                Log.w(TAG, "Missing BLUETOOTH_CONNECT, skip device identity fields");
+                // Sin permiso, evita acceder a campos restringidos de identidad
+            } else {
+                Log.d(ETIQUETA_LOG, " nombre = " + bluetoothDevice.getName());
+                Log.d(ETIQUETA_LOG, " dirección = " + bluetoothDevice.getAddress());
+            }
+        } else {
+            // En versiones anteriores no se requiere CONNECT
+            Log.d(ETIQUETA_LOG, " nombre = " + bluetoothDevice.getName());
+            Log.d(ETIQUETA_LOG, " dirección = " + bluetoothDevice.getAddress());
+        }
+
+        byte[] bytes = resultado.getScanRecord().getBytes();
+        int rssi = resultado.getRssi();
+
+        Log.d(ETIQUETA_LOG, " ****************************************************");
+        Log.d(ETIQUETA_LOG, " ****** DISPOSITIVO DETECTADO BTLE ****************** ");
+        Log.d(ETIQUETA_LOG, " ****************************************************");
+        Log.d(ETIQUETA_LOG, " nombre = " + bluetoothDevice.getName());
+        Log.d(ETIQUETA_LOG, " toString = " + bluetoothDevice.toString());
+
+        // Si necesitas UUIDs del dispositivo (no del anuncio), ojo: muchos periféricos no exponen esto fuera de una conexión.
+        /*
+        ParcelUuid[] puuids = bluetoothDevice.getUuids();
+        if ( puuids.length >= 1 ) {
+            // Log.d(ETIQUETA_LOG, " uuid = " + puuids[0].getUuid());
+            // Log.d(ETIQUETA_LOG, " uuid = " + puuids[0].toString());
+        }*/
+
+        Log.d(ETIQUETA_LOG, " dirección = " + bluetoothDevice.getAddress());
+        Log.d(ETIQUETA_LOG, " rssi = " + rssi );
+
+        Log.d(ETIQUETA_LOG, " bytes = " + new String(bytes));
+        Log.d(ETIQUETA_LOG, " bytes (" + bytes.length + ") = " + Utilidades.bytesToHexString(bytes));
+
+        // Parseo de tramas iBeacon (estructura específica)
+        TramaIBeacon tib = new TramaIBeacon(bytes);
+
+        Log.d(ETIQUETA_LOG, " ----------------------------------------------------");
+        Log.d(ETIQUETA_LOG, " prefijo  = " + Utilidades.bytesToHexString(tib.getPrefijo()));
+        Log.d(ETIQUETA_LOG, "          advFlags = " + Utilidades.bytesToHexString(tib.getAdvFlags()));
+        Log.d(ETIQUETA_LOG, "          advHeader = " + Utilidades.bytesToHexString(tib.getAdvHeader()));
+        Log.d(ETIQUETA_LOG, "          companyID = " + Utilidades.bytesToHexString(tib.getCompanyID()));
+        Log.d(ETIQUETA_LOG, "          iBeacon type = " + Integer.toHexString(tib.getiBeaconType()));
+        Log.d(ETIQUETA_LOG, "          iBeacon length 0x = " + Integer.toHexString(tib.getiBeaconLength()) + " ( "
+                + tib.getiBeaconLength() + " ) ");
+        Log.d(ETIQUETA_LOG, " uuid  = " + Utilidades.bytesToHexString(tib.getUUID()));
+        Log.d(ETIQUETA_LOG, " uuid  = " + Utilidades.bytesToString(tib.getUUID()));
+        Log.d(ETIQUETA_LOG, " major  = " + Utilidades.bytesToHexString(tib.getMajor()) + "( "
+                + Utilidades.bytesToInt(tib.getMajor()) + " ) ");
+        Log.d(ETIQUETA_LOG, " minor  = " + Utilidades.bytesToHexString(tib.getMinor()) + "( "
+                + Utilidades.bytesToInt(tib.getMinor()) + " ) ");
+        Log.d(ETIQUETA_LOG, " txPower  = " + Integer.toHexString(tib.getTxPower()) + " ( " + tib.getTxPower() + " )");
+        Log.d(ETIQUETA_LOG, " ****************************************************");
+
+    } // mostrarInformacionDispositivoBTLE()
+
+    /** Detiene el escaneo de forma segura y limpia el recurso */
+    private void stopScan() {
+        if (scanner != null) {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    // En Android 12+ es obligatorio comprobar BLUETOOTH_SCAN
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        Log.w(TAG, "stopScan: missing BLUETOOTH_SCAN permission");
+                        // Si falta permiso, evita invocar stopScan()
+                        return;
+                    }
+                }
+
+                scanner.stopScan(callback);
+                Log.i(TAG, "stopScan() called");
+            } catch (SecurityException e) {
+                Log.e(TAG, "SecurityException while stopping scan", e);
+            } catch (Throwable t) {
+                Log.e(TAG, "Unexpected error in stopScan()", t);
+            } finally {
+                scanner = null;
+            }
+        }
+    }
+
+    /** Crea el canal de notificación si no existe (Android O+) */
+    private void ensureChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (nm != null && nm.getNotificationChannel(PermisosHelper.CHANNEL_ID) == null) {
+                NotificationChannel ch = new NotificationChannel(
+                        PermisosHelper.CHANNEL_ID, "Beacon Scan", NotificationManager.IMPORTANCE_LOW);
+                ch.setDescription("Scanning BLE beacons");
+                nm.createNotificationChannel(ch);
+                Log.i(TAG, "Created notification channel in service: " + PermisosHelper.CHANNEL_ID);
+            }
+        }
+    }
+
+    /** Envía un broadcast con el estado al Activity */
+    private void sendStatus(boolean ok, String step, String msg) {
+        Intent i = new Intent(ACTION_STATUS);
+        i.putExtra(EXTRA_OK, ok);
+        i.putExtra(EXTRA_STEP, step);
+        i.putExtra(EXTRA_MSG, msg);
+        sendBroadcast(i);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopScan(); // Asegura parar el escaneo al destruir el servicio
+        Log.i(TAG, "Service onDestroy()");
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null; // Servicio no enlazado
+    }
+}
