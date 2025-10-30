@@ -24,6 +24,7 @@ import com.example.eolos.EscanerIBeacons;
 import com.example.eolos.R;
 import com.example.eolos.fragments.BeaconStatusFragment;
 import com.example.eolos.logica_fake.LogicaFake;
+import com.example.eolos.servicio.PermisosHelper;
 import com.example.eolos.utils.EscanerSingleton;
 import com.google.android.material.button.MaterialButton;
 
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(ETIQUETA_LOG, " onCreate(): termina ");
 
-        escaner.iniciarEscaneoAutomatico("EmisoraBLE");
+        escaner.iniciarEscaneoAutomatico("Grupo2PBIO");
 
         EscanerSingleton escanerSingleton = EscanerSingleton.getInstance();
         escanerSingleton.iniciarEscaneo(new EscanerIBeacons(this, jsonMedida -> {
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.status_container, new BeaconStatusFragment())
                 .commit();
 
-    }
+
+}
 
     // -------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------
@@ -144,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         PermisosHelper.onActivityResult(this, requestCode, resultCode, data);
     }
     } // ()
+     */
 } // class
 
 // -----------------------------------------------------------------------------------

@@ -46,7 +46,7 @@ public class EscanerSingleton {
     public void iniciarEscaneo(EscanerIBeacons escaner) {
         this.escaner = escaner;
         this.escaner.inicializarBlueTooth();
-        this.escaner.iniciarEscaneoAutomatico("EmisoraBLE");
+        this.escaner.iniciarEscaneoAutomatico("Grupo2PBIO");
 
         // Reemplaza el escáner con una instancia que actualiza la marca de tiempo
         this.escaner = new EscanerIBeacons(escaner.context, jsonMedida -> {
