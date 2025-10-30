@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FB"
+    tools:context=".activities.PerfilActivity"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 顶部蓝色条 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#0A3D91"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <TextView
+                android:text="éolos"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- 图标/插画 -->
+        <ImageView
+            android:id="@+id/imagePerfil"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/foto"
+            android:layout_marginTop="24dp"
+            android:contentDescription="perfil ilustración" />
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perfil"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000" />
+
+        <!-- Nombre -->
+        <TextView
+            android:text="Nombre y apellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="#808080" />
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_field"
+            android:text="Juan Bautista Peris"
+            android:paddingHorizontal="12dp" />
+
+        <!-- Correo -->
+        <TextView
+            android:text="Correo o número de teléfono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#808080" />
+
+        <EditText
+            android:id="@+id/etCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_field"
+            android:text="juanba@gmail.com"
+            android:paddingHorizontal="12dp"
+            android:inputType="textEmailAddress" />
+
+        <!-- ID Tarjeta -->
+        <TextView
+            android:text="ID Tarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#808080" />
+
+        <EditText
+            android:id="@+id/etTarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_field"
+            android:text="12345HDC"
+            android:paddingHorizontal="12dp" />
+
+        <!-- Contraseña -->
+        <TextView
+            android:text="Contraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#808080" />
+
+        <EditText
+            android:id="@+id/etContrasena"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_field"
+            android:text="********"
+            android:paddingHorizontal="12dp"
+            android:inputType="textPassword" />
+
+        <!-- Fecha Registro -->
+        <TextView
+            android:text="Fecha Registro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#808080" />
+
+        <EditText
+            android:id="@+id/etFecha"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_field"
+            android:text="1/1/2025"
+            android:paddingHorizontal="12dp" />
+
+        <!-- 按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:text="Guardar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:backgroundTint="#0A3D91"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btnVolver"
+                android:text="Volver a principal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:backgroundTint="#FFFFFF"
+                android:textColor="#0A3D91"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_outline_button" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
