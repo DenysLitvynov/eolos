@@ -42,6 +42,7 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.DashboardActivity" />
+         <activity android:name=".activities.PerfilActivity" />
     </application>
 
 </manifest>
