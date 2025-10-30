@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             });
             // logicaFake.guardarMedida(jsonMedida, urlServidor);
             logicaFake.guardarMedida(jsonMedida, baseUrl, endpointGuardar);
+            //iniciar servicio
+            PermisosHelper.verificarYIniciarServicio(this);
         });
 
         Log.d(ETIQUETA_LOG, " onCreate(): empieza ");
@@ -112,24 +114,35 @@ public class MainActivity extends AppCompatActivity {
      * @param permissions String[] - Lista de permisos solicitados.
      * @param grantResults int[] - Resultados de cada permiso (concedido o denegado).
      */
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-        super.onRequestPermissionsResult( requestCode, permissions, grantResults);
+    /**public void onRequestPermissionsResult(int requestCode, String[] permissions,
+        *                                   int[] grantResults) {
+       * super.onRequestPermissionsResult( requestCode, permissions, grantResults);
 
-        switch (requestCode) {
-            case CODIGO_PETICION_PERMISOS:
-                if (grantResults.length > 0 &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        *switch (requestCode) {
+         *   case CODIGO_PETICION_PERMISOS:
+          *      if (grantResults.length > 0 &&
+           *             grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    Log.d(ETIQUETA_LOG, " onRequestPermissionResult(): permisos concedidos  !!!!");
-                    escaner.iniciarEscaneoAutomatico("ProbaEnCasa");
-                }  else {
+            *        Log.d(ETIQUETA_LOG, " onRequestPermissionResult(): permisos concedidos  !!!!");
+             *       escaner.iniciarEscaneoAutomatico("ProbaEnCasa");
+              *  }  else {
+*
+ *                   Log.d(ETIQUETA_LOG, " onRequestPermissionResult(): Socorro: permisos NO concedidos  !!!!");
 
-                    Log.d(ETIQUETA_LOG, " onRequestPermissionResult(): Socorro: permisos NO concedidos  !!!!");
+  *              }
+   *             return;
+    *    }
+        @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermisosHelper.onRequestPermissionsResult(this, requestCode);
+    }
 
-                }
-                return;
-        }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        PermisosHelper.onActivityResult(this, requestCode, resultCode, data);
+    }
     } // ()
 } // class
 
