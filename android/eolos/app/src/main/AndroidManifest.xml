@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -27,6 +32,7 @@
         android:theme="@style/Theme.Eolos">
         <activity
             android:name=".activities.MainActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +49,12 @@
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.DashboardActivity" />
          <activity android:name=".activities.PerfilActivity" />
+
+        <service
+            android:name=".servicio.BeaconScanService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice|location"
+            android:stopWithTask="false"/>
     </application>
 
 </manifest>
