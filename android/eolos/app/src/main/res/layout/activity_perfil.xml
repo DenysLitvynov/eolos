@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F9FB"
-    tools:context=".activities.PerfilActivity"
-    >
+    tools:context=".activities.PerfilActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -67,8 +66,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_field"
-            android:text="Juan Bautista Peris"
-            android:paddingHorizontal="12dp" />
+            android:paddingHorizontal="12dp"
+            android:hint="Introduce tu nombre"
+            android:saveEnabled="false" />
 
         <!-- Correo -->
         <TextView
@@ -83,9 +83,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_field"
-            android:text="juanba@gmail.com"
             android:paddingHorizontal="12dp"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:hint="ejemplo@correo.com"
+            android:saveEnabled="false" />
 
         <!-- ID Tarjeta -->
         <TextView
@@ -100,8 +101,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_field"
-            android:text="12345HDC"
-            android:paddingHorizontal="12dp" />
+            android:paddingHorizontal="12dp"
+            android:hint="Introduce tu ID de tarjeta"
+            android:saveEnabled="false" />
 
         <!-- Contraseña -->
         <TextView
@@ -116,9 +118,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_field"
-            android:text="********"
             android:paddingHorizontal="12dp"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:hint="Introduce tu contraseña"
+            android:saveEnabled="false" />
 
         <!-- Fecha Registro -->
         <TextView
@@ -133,8 +136,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_field"
-            android:text="1/1/2025"
-            android:paddingHorizontal="12dp" />
+            android:paddingHorizontal="12dp"
+            android:hint="Selecciona una fecha"
+            android:focusable="false"
+            android:clickable="true"
+            android:saveEnabled="false" />
 
         <!-- 按钮 -->
         <LinearLayout
@@ -154,7 +160,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginEnd="8dp" />
 
-         <Button
+            <Button
                 android:id="@+id/btnVolver"
                 android:text="Volver a principal"
                 android:layout_width="0dp"
@@ -168,4 +174,3 @@
 
     </LinearLayout>
 </ScrollView>
-

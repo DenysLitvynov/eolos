@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
-
+        PermisosHelper.verificarYIniciarServicio(this);
         // Inicializar UI
         tvMedidas = findViewById(R.id.tv_medidas);
         MaterialButton loginButton = findViewById(R.id.loginButton);
@@ -151,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         PermisosHelper.onActivityResult(this, requestCode, resultCode, data);
     }
-    } // ()
      
 } // class
 
