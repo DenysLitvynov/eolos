@@ -1,188 +1,288 @@
-// /js/scripts/perfil.js  —— 纯前端 fake，无需后端
-// 依赖：你的 HTML 中存在这些 id：#nombre #correo #targeta_id #contrasena #fecha
-//       按钮 class：.btn-primary（保存），.btn-segundo（返回）
-// <script type="module" src="/js/scripts/perfil.js"></script>
+// /js/scripts/perfil.js
+// 模式：优先调用 API（PostgreSQL）；失败则自动降级到 PerfilFake（localStorage）
 
-///////////////////////////
-// 假后端：PerfilFake
-///////////////////////////
-class PerfilFake {
-    constructor(prefix = 'perfil_') {
-        this.prefix = prefix;
-    }
-    _key(uid) {
-        return `${this.prefix}${uid}`;
-    }
-    _delay(ms = 120) {
-        return new Promise(r => setTimeout(r, ms));
-    }
-    async ensureSeed(uid) {
-        const key = this._key(uid);
-        if (!localStorage.getItem(key)) {
-            const sample = {
-                usuario_id: uid,
-                nombre: 'Juan Pérez',
-                correo: 'juanba@gmail.com',
-                targeta_id: '12345HDC',
-                fecha: '1990-01-01' // YYYY-MM-DD
-                // contrasena: 不回显，保存时才写入
-            };
-            localStorage.setItem(key, JSON.stringify(sample));
-        }
-    }
-    async obtenerPerfil(uid) {
-        await this._delay();
-        if (!uid) throw new Error('usuario_id requerido');
-        const raw = localStorage.getItem(this._key(uid));
-        return raw ? JSON.parse(raw) : null;
-    }
-    async actualizarPerfil(uid, datos) {
-        await this._delay();
-        if (!uid) throw new Error('usuario_id requerido');
-        const key = this._key(uid);
-        const base = localStorage.getItem(key);
-        const perfil = base ? JSON.parse(base) : { usuario_id: uid };
+import { PeticionarioREST } from '/js/utilidades/peticionario_REST.js';
+import '/js/logica_fake/perfil_fake.js';
 
-        const allowed = ['nombre', 'correo', 'targeta_id', 'contrasena', 'fecha'];
-        allowed.forEach(k => {
-            if (k in datos) {
-                if (k === 'contrasena' && (!datos[k] || datos[k] === '')) return; // 不存空密码
-                perfil[k] = datos[k];
-            }
+// ============ 日志 ============
+const LOG = (() => {
+    const ENABLED = true;
+    const tag = (lvl) => `[perfil:${lvl}]`;
+    const ts = () => new Date().toISOString();
+    const dump = (x) => { if (x !== undefined) try { console.log(x); } catch {} };
+    return {
+        group(title) { if (!ENABLED) return () => {}; console.groupCollapsed(`%c${title}`, 'color:#555'); return () => console.groupEnd(); },
+        info(m, x) { if (ENABLED) { console.log(`${ts()} ${tag('INFO')} ℹ️ ${m}`); dump(x); } },
+        ok(m, x) { if (ENABLED) { console.log(`${ts()} ${tag('OK')} ✅ ${m}`); dump(x); } },
+        warn(m, x) { if (ENABLED) { console.warn(`${ts()} ${tag('WARN')} ⚠️ ${m}`); dump(x); } },
+        err(m, x) { if (ENABLED) { console.error(`${ts()} ${tag('ERR')} ❌ ${m}`); dump(x); } },
+        evt(m, x) { if (ENABLED) { console.log(`${ts()} ${tag('EVT')} ✳️ ${m}`); dump(x); } },
+    };
+})();
+
+// ============ 常量 & DOM ============
+const API_URL = '/api/v1/perfil';
+
+const $ = (s) => document.querySelector(s);
+const form = $('#registroForm');
+const nombre = $('#nombre');
+const apellido = $('#apellido'); // 你的表里有 apellido
+const correo = $('#correo');
+const targetaInp = $('#targeta_id'); // 与库保持 "targeta_id"
+const contrasena = $('#contrasena');
+const fecha = $('#fecha');
+const btnGuardar = document.querySelector('.btn-primary');
+const btnVolver = document.querySelector('.btn-segundo');
+
+// ============ 悬浮提示（改进版） ============
+function msgNode() {
+    const oldInForm = document.querySelector('#registroForm #mensaje');
+    if (oldInForm && oldInForm.parentNode) oldInForm.parentNode.removeChild(oldInForm);
+
+    let n = document.querySelector('#mensaje');
+    if (!n) {
+        n = document.createElement('div');
+        n.id = 'mensaje';
+        Object.assign(n.style, {
+            position: 'fixed',
+            right: '20px',
+            bottom: '20px',
+            maxWidth: '420px',
+            padding: '10px 16px',
+            background: 'rgba(255,255,255,0.98)',
+            border: '1px solid #ddd',
+            borderRadius: '10px',
+            boxShadow: '0 6px 18px rgba(0,0,0,.12)',
+            fontSize: '14px',
+            lineHeight: '1.25',
+            zIndex: '2147483647',
+            pointerEvents: 'auto',
+            display: 'none',
         });
 
-        localStorage.setItem(key, JSON.stringify(perfil));
-        return perfil;
+        const text = document.createElement('span');
+        text.id = 'mensaje_texto';
+
+        const close = document.createElement('button');
+        close.textContent = '×';
+        Object.assign(close.style, {
+            marginLeft: '12px',
+            border: 'none',
+            background: 'transparent',
+            cursor: 'pointer',
+            fontSize: '18px',
+            lineHeight: '1',
+        });
+        close.addEventListener('click', () => { n.style.display = 'none'; });
+
+        n.appendChild(text);
+        n.appendChild(close);
+        document.body.appendChild(n);
+    }
+    return n;
+}
+
+function setMsg(text, { type = 'info', ms = null } = {}) {
+    const n = msgNode();
+    const textNode = n.querySelector('#mensaje_texto') || n;
+
+    const colors = {
+        ok: '#00aa55',
+        err: 'crimson',
+        warn: '#b36b00',
+        info: '#0066cc',
+    };
+
+    const borderColors = {
+        ok: '#b6efc1',
+        err: '#f3b3b3',
+        warn: '#f5d19a',
+        info: '#cbd8ff',
+    };
+
+    textNode.textContent = text || '';
+    n.style.borderColor = borderColors[type] || '#ddd';
+    textNode.style.color = colors[type] || '#333';
+    n.style.display = text ? 'flex' : 'none';
+    n.style.alignItems = 'center';
+
+    // 覆盖旧计时器
+    if (setMsg._t) {
+        clearTimeout(setMsg._t);
+        setMsg._t = null;
+    }
+
+    if (ms) {
+        setMsg._t = setTimeout(() => {
+            n.style.display = 'none';
+            setMsg._t = null;
+        }, ms);
     }
 }
 
-///////////////////////////
-// UI 逻辑（与你的 HTML 对应）
-///////////////////////////
-const $ = s => document.querySelector(s);
-
-const nombre     = $('#nombre');
-const correo     = $('#correo');
-const targeta    = $('#targeta_id');
-const contrasena = $('#contrasena');
-const fecha      = $('#fecha');
-const btnGuardar = document.querySelector('.btn-primary');
-const btnVolver  = document.querySelector('.btn-segundo');
-const form       = $('#registroForm');
-
-const api = new PerfilFake();
-
+// ============ 工具函数 ============
+function lockUI(b) {
+    [nombre, apellido, correo, targetaInp, contrasena, fecha, btnGuardar].forEach(el => el && (el.disabled = !!b));
+}
 function getUid() {
     let uid = localStorage.getItem('usuario_id');
     if (!uid) { uid = 'guest'; localStorage.setItem('usuario_id', uid); }
     return uid;
 }
-
-// 简易消息：如果没有#mensaje，就自动创建一个
-function getMsgNode() {
-    let n = document.querySelector('#mensaje');
-    if (!n) {
-        n = document.createElement('p');
-        n.id = 'mensaje';
-        n.style.marginTop = '10px';
-        n.style.fontSize = '14px';
-        n.style.minHeight = '18px';
-        form?.appendChild(n);
-    }
-    return n;
-}
-function setMsg(text, isError = false, timeout = 2500) {
-    const n = getMsgNode();
-    n.textContent = text || '';
-    n.style.color = isError ? 'crimson' : '#0a0';
-    if (timeout) {
-        clearTimeout(setMsg._t);
-        setMsg._t = setTimeout(() => { n.textContent = ''; }, timeout);
-    }
-}
-function lockUI(lock) {
-    [nombre, correo, targeta, contrasena, fecha, btnGuardar].forEach(el => el && (el.disabled = !!lock));
-}
-
 function normDateInput(v) {
     if (!v) return '';
-    if (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v)) return v;
-    const d = new Date(v);
-    if (isNaN(d)) return '';
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const dd = String(d.getDate()).padStart(2, '0');
+    if (/^\d{4}-\d{2}-\d{2}$/.test(v)) return v;
+    const d = new Date(v); if (isNaN(d)) return '';
+    const y = d.getFullYear(), m = String(d.getMonth() + 1).padStart(2, '0'), dd = String(d.getDate()).padStart(2, '0');
     return `${y}-${m}-${dd}`;
 }
 
-function validarCampos({ nombre, correo }) {
-    if (!nombre || !nombre.trim()) return 'Nombre y apellido es obligatorio';
-    if (!correo || !correo.trim()) return 'Correo o teléfono es obligatorio';
-    // 允许邮件或电话号码（简单规则）
-    const esEmail = /\S+@\S+\.\S+/.test(correo);
-    const esTel   = /^[0-9+\s-]{6,}$/.test(correo);
-    if (!esEmail && !esTel) return 'Ingrese un correo válido o un número de teléfono';
+const http = new PeticionarioREST();
+const fake = new window.PerfilFake();
+
+function looksLikeDbDown(t = '') {
+    const s = String(t).toLowerCase();
+    return ['psycopg', 'connection refused', 'could not connect', 'timeout', 'database is not connected', 'sqlalchemy', 'migrations'].some(k => s.includes(k));
+}
+const safePreview = (o) => {
+    try {
+        const c = JSON.parse(JSON.stringify(o || {}));
+        if (c.contrasena) c.contrasena = '***';
+        return c;
+    } catch { return o; }
+};
+
+// ============ API 调用 ============
+async function apiGet(uid) {
+    const url = `${API_URL}?usuario_id=${encodeURIComponent(uid)}`;
+    const end = LOG.group(`GET ${url}`);
+    try {
+        const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        const raw = await r.text(); let data; try { data = raw ? JSON.parse(raw) : null; } catch { }
+        if (!r.ok) {
+            if (r.status === 404) LOG.warn('GET 404：请确认后端路由与查询参数');
+            throw new Error(raw || `HTTP ${r.status}`);
+        }
+        LOG.ok('GET OK', safePreview(data));
+        return data;
+    } catch (e) {
+        LOG.err('GET FAIL', e?.message);
+        if (looksLikeDbDown(e?.message)) LOG.err('疑似数据库未连/迁移未执行/连接串错误');
+        throw e;
+    } finally { end(); }
+}
+
+async function apiPut(payload) {
+    const end = LOG.group('PUT /perfil');
+    try {
+        const res = await http.hacerPeticionRest('PUT', API_URL, payload);
+        LOG.ok('PUT OK', safePreview(res));
+        return res;
+    } catch (e) {
+        LOG.err('PUT FAIL', e?.message);
+        throw e;
+    } finally { end(); }
+}
+
+// ============ fake 调用 ============
+async function fakeGet(uid) {
+    await fake.ensureSeed(uid);
+    return fake.obtenerPerfil(uid);
+}
+async function fakePut(uid, payload) {
+    return fake.actualizarPerfil(uid, payload);
+}
+
+// ============ 表单读/写 ============
+function fillForm(d = {}) {
+    if (nombre) nombre.value = d.nombre ?? '';
+    if (apellido) apellido.value = d.apellido ?? '';
+    if (correo) correo.value = d.correo ?? '';
+    if (targetaInp) targetaInp.value = d.targeta_id ?? '';
+    if (fecha) fecha.value = normDateInput(d.fecha ?? '');
+    if (contrasena) contrasena.value = ''; // 安全：不回填
+}
+function readForm() {
+    const v = {
+        nombre: (nombre?.value || '').trim(),
+        apellido: (apellido?.value || '').trim(),
+        correo: (correo?.value || '').trim(),
+        targeta_id: (targetaInp?.value || '').trim(),
+        fecha: normDateInput((fecha?.value || '').trim()) || undefined,
+    };
+    const pass = (contrasena?.value || '').trim();
+    if (pass) v.contrasena = pass;
+    return v;
+}
+
+function validate(v) {
+    if (!v.nombre || !v.correo || !v.targeta_id) return 'Todos los campos son obligatorios';
     return null;
 }
 
+// ============ 主流程 ============
 async function cargarPerfil() {
     const uid = getUid();
-    await api.ensureSeed(uid);
     try {
-        lockUI(true);
-        setMsg('Cargando perfil...');
-        const p = await api.obtenerPerfil(uid);
-        if (!p) {
-            setMsg('No hay datos. Completa y guarda.', true, 4000);
-            return;
-        }
-        if (nombre)     nombre.value     = p.nombre || '';
-        if (correo)     correo.value     = p.correo || '';
-        if (targeta)    targeta.value    = p.targeta_id || '';
-        if (fecha)      fecha.value      = normDateInput(p.fecha);
-        if (contrasena) contrasena.value = ''; // 不回显密码
-        setMsg('Perfil cargado ✅');
-    } catch (e) {
-        console.error('[perfil] cargar error:', e);
-        setMsg('Error al cargar', true, 4000);
-    } finally {
-        lockUI(false);
+        const data = await apiGet(uid);
+        fillForm(data || {});
+        setModeBadge('API');
+        setMsg('Perfil cargado (API) ✅', { type: 'ok' });
+    } catch (_) {
+        const data = await fakeGet(uid);
+        fillForm(data || {});
+        setModeBadge('LOCAL');
+        setMsg('Perfil cargado (local) ✅', { type: 'ok' });
     }
 }
 
 async function guardarPerfil() {
     const uid = getUid();
-    const payload = {
-        nombre:     (nombre?.value || '').trim(),
-        correo:     (correo?.value || '').trim(),
-        targeta_id: (targeta?.value || '').trim(),
-        fecha:       fecha?.value || ''
-    };
-    const pass = (contrasena?.value || '').trim();
-    if (pass) payload.contrasena = pass;
+    const payload = readForm();
+    const err = validate(payload);
+    if (err) { setMsg(err, { type: 'err' }); return; }
 
-    const err = validarCampos({ nombre: payload.nombre, correo: payload.correo });
-    if (err) return setMsg(err, true);
-
+    lockUI(true);
+    setMsg('Guardando...', { type: 'info' });
     try {
-        lockUI(true);
-        setMsg('Guardando...');
-        await api.actualizarPerfil(uid, payload);
-        if (contrasena) contrasena.value = ''; // 保存后清空
-        setMsg('Perfil guardado ✅');
-        await cargarPerfil(); // 立即刷新数据
+        await apiPut({ ...payload, usuario_id: uid });
+        setModeBadge('API');
+        setMsg('Perfil guardado (API) ✅', { type: 'ok' });
     } catch (e) {
-        console.error('[perfil] guardar error:', e);
-        setMsg('Error al guardar', true, 4000);
+        await fakePut(uid, { ...payload, usuario_id: uid });
+        setModeBadge('LOCAL');
+        setMsg('Perfil guardado (local) ✅', { type: 'ok' });
     } finally {
+        if (contrasena) contrasena.value = '';
         lockUI(false);
+        try { await cargarPerfil(); } catch { }
     }
 }
 
+// ============ 模式徽章 ============
+function setModeBadge(mode) {
+    let h1 = document.querySelector('.auth-title');
+    if (!h1) return;
+    let b = h1.querySelector('.mode-badge');
+    if (!b) {
+        b = document.createElement('span');
+        b.className = 'mode-badge';
+        b.style.marginLeft = '8px';
+        b.style.fontSize = '12px';
+        b.style.padding = '2px 6px';
+        b.style.borderRadius = '10px';
+        h1.appendChild(b);
+    }
+    const api = mode === 'API';
+    b.textContent = api ? 'API' : 'LOCAL';
+    b.style.background = api ? '#e6ffed' : '#fff5e6';
+    b.style.color = api ? '#095' : '#b36b00';
+}
+
+// ============ init ============
 document.addEventListener('DOMContentLoaded', () => {
-    // 阻止回车提交刷新
-    form?.addEventListener('submit', e => e.preventDefault());
+    if (form) form.addEventListener('submit', (e) => e.preventDefault());
     btnGuardar?.addEventListener('click', guardarPerfil);
-    btnVolver?.addEventListener('click', () => { window.location.href = '/'; });
+    btnVolver?.addEventListener('click', () => (window.location.href = '/'));
     cargarPerfil();
 });

@@ -1,88 +1,58 @@
-// Perfil fake usando localStorage como "base de datos" local.
-// API async para simular llamadas a servidor (fácil de reemplazar por fetch cuando tengas backend real).
+// /js/logica_fake/perfil_fake.js
+// 用 localStorage 模拟后端。字段对齐数据库：usuario_id, nombre, apellido, correo, targeta_id, (fecha 可选)
 
 class PerfilFake {
-    constructor(storageKeyPrefix = 'perfil_') {
-        this.prefix = storageKeyPrefix;
-        // Puedes inicializar perfiles de ejemplo si quieres:
-        this._initSampleDataIfMissing();
-    }
+    constructor(prefix='perfil_'){ this.prefix = prefix; this._initSample(); }
+    _k(uid){ return `${this.prefix}${uid}`; }
 
-    _storageKey(usuario_id) {
-        return `${this.prefix}${usuario_id}`;
-    }
-
-    _initSampleDataIfMissing() {
-        // Si no existe ningún perfil, crea uno de ejemplo para 'guest'
+    _initSample(){
         const uid = localStorage.getItem('usuario_id') || 'guest';
-        const key = this._storageKey(uid);
-        if (!localStorage.getItem(key)) {
-            const sample = {
+        const k = this._k(uid);
+        if(!localStorage.getItem(k)){
+            localStorage.setItem(k, JSON.stringify({
                 usuario_id: uid,
-                nombre: 'Juan Pérez',
+                nombre: 'Juan',
+                apellido: 'Pérez',
                 correo: 'juanba@gmail.com',
                 targeta_id: '12345HDC',
-                // contrasena: solo si desea cambiarla, por seguridad no rellenamos
-                fecha: '1990-01-01' // formato YYYY-MM-DD
-            };
-            localStorage.setItem(key, JSON.stringify(sample));
+                fecha: '1990-01-01'
+            }));
+        }
+    }
+    _delay(ms=80){ return new Promise(r=>setTimeout(r,ms)); }
+
+    async ensureSeed(uid){
+        await this._delay();
+        const k = this._k(uid);
+        if(!localStorage.getItem(k)){
+            localStorage.setItem(k, JSON.stringify({
+                usuario_id: uid, nombre:'', apellido:'', correo:'', targeta_id:'', fecha:'1990-01-01'
+            }));
         }
     }
 
-    // Simula latencia opcional (ms)
-    _delay(ms = 150) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    async obtenerPerfil(uid){
+        await this._delay();
+        if(uid==null) throw new Error('usuario_id requerido');
+        const raw = localStorage.getItem(this._k(uid));
+        try{ return raw? JSON.parse(raw): null; }catch{ return null; }
     }
 
-    // Obtener perfil por usuario_id (simula GET)
-    async obtenerPerfil(usuario_id) {
+    async actualizarPerfil(uid, datos){
         await this._delay();
-        if (usuario_id == null) throw new Error('usuario_id es requerido');
-        const key = this._storageKey(usuario_id);
-        const raw = localStorage.getItem(key);
-        if (!raw) return null;
-        try {
-            return JSON.parse(raw);
-        } catch (e) {
-            console.warn('perfil_fake: JSON parse error', e);
-            return null;
-        }
+        if(uid==null) throw new Error('usuario_id requerido');
+        const k = this._k(uid);
+        const base = (()=>{ try{ return JSON.parse(localStorage.getItem(k)||'{}'); }catch{ return {}; }})();
+        const allowed = ['nombre','apellido','correo','targeta_id','fecha','contrasena']; // contrasena 只做占位
+        for(const a of allowed){ if(a in datos){ if(a==='contrasena' && !datos[a]) continue; base[a]=datos[a]; } }
+        base.usuario_id = uid;
+        localStorage.setItem(k, JSON.stringify(base));
+        return base;
     }
 
-    // Actualizar perfil (simula PUT). datosPerfil puede incluir nombre, correo, targeta_id, contrasena, fecha
-    async actualizarPerfil(usuario_id, datosPerfil) {
-        await this._delay();
-        if (usuario_id == null) throw new Error('usuario_id es requerido');
-
-        const key = this._storageKey(usuario_id);
-        const raw = localStorage.getItem(key);
-        const existing = raw ? JSON.parse(raw) : { usuario_id };
-
-        // Nota: en un backend real deberías hashear la contraseña y validar unicidad del correo, etc.
-        // Aquí simplemente actualizamos las propiedades permitidas.
-        const allowed = ['nombre', 'correo', 'targeta_id', 'contrasena', 'fecha'];
-        for (const k of allowed) {
-            if (k in datosPerfil) {
-                // no guardamos contrasena si viene vacía
-                if (k === 'contrasena' && (datosPerfil[k] === null || datosPerfil[k] === '')) {
-                    continue;
-                }
-                existing[k] = datosPerfil[k];
-            }
-        }
-
-        localStorage.setItem(key, JSON.stringify(existing));
-        return existing;
-    }
-
-    // Borrar perfil (opcional)
-    async borrarPerfil(usuario_id) {
-        await this._delay();
-        const key = this._storageKey(usuario_id);
-        localStorage.removeItem(key);
-        return true;
+    async borrarPerfil(uid){
+        await this._delay(); localStorage.removeItem(this._k(uid)); return true;
     }
 }
 
-// Exponer en window para uso desde otros scripts
 window.PerfilFake = PerfilFake;
