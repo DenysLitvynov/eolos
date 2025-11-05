@@ -2,8 +2,11 @@
 package com.example.eolos.activities;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Base64;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,10 +14,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.eolos.PeticionarioREST;
 import com.example.eolos.R;
-import com.example.eolos.data.PerfilDto;
-import com.example.eolos.data.PerfilRemoteDataSource;
+import com.example.eolos.logica_fake.PerfilFake;
 
+import org.json.JSONObject;
+
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,32 +28,32 @@ import java.util.Locale;
 
 /**
  * Clase: PerfilActivity
- * Descripción: Pantalla que permite al usuario ver, editar y guardar su información de perfil.
- *              Los datos se obtienen de una fuente remota (API) con respaldo local "fake" en caso
- *              de no tener conexión. También incluye un selector de fecha para la fecha de nacimiento.
+ * Descripción:
+ *  - Pantalla para mostrar y editar el perfil del usuario.
+ *  - Al iniciar, intenta obtener los datos del servidor usando el correo extraído del token JWT.
+ *  - Si falla la conexión o el token no contiene correo, usa un perfil de ejemplo local (PerfilFake).
+ *  - Permite guardar cambios mediante una petición POST.
+ *
  * Autor: JINWEI
- * Fecha: 30/09/2025
+ * Fecha: 2025
  */
-
 public class PerfilActivity extends AppCompatActivity {
 
-    // Campos de entrada de texto
+    private static final String TAG = "PerfilActivity";
+
+    // ================== Referencias UI ==================
     private EditText etNombre, etCorreo, etTarjeta, etContrasena, etFecha;
-    // Botones de acción
     private Button btnGuardar, btnVolver;
 
-    // Formato de fecha para mostrar y parsear
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
-
-    // Fuente de datos remota (maneja comunicación con servidor)
-    private PerfilRemoteDataSource dataSource;
+    private PerfilFake perfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
-        // ------------------- Inicialización de componentes UI -------------------
+        // 1) Vincular elementos UI
         etNombre = findViewById(R.id.etNombre);
         etCorreo = findViewById(R.id.etCorreo);
         etTarjeta = findViewById(R.id.etTarjeta);
@@ -56,133 +62,149 @@ public class PerfilActivity extends AppCompatActivity {
         btnGuardar = findViewById(R.id.btnGuardar);
         btnVolver = findViewById(R.id.btnVolver);
 
-        // Inicializar el acceso remoto a los datos de perfil
-        dataSource = new PerfilRemoteDataSource(this);
-
-        // ------------------- Cargar datos del perfil -------------------
-        // Se deshabilitan los botones mientras se carga la información
-        setEnabled(false);
-
-        // Se intenta obtener los datos del perfil desde el servidor.
-        // Si falla, la fuente remota devuelve datos "fake" para demostración.
-        dataSource.getPerfil(new PerfilRemoteDataSource.Callback<PerfilDto>() {
-            @Override
-            public void onSuccess(PerfilDto dto, boolean fromFake) {
-                bind(dto); // Muestra los datos en los campos de texto
-                setEnabled(true);
-                Toast.makeText(PerfilActivity.this,
-                        fromFake ? "Sin conexión: mostrando datos de demostración."
-                                : "Perfil cargado desde la base de datos.",
-                        Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(String message) {
-                setEnabled(true);
-                Toast.makeText(PerfilActivity.this,
-                        "Error al cargar perfil: " + message,
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // ------------------- Configuración del campo de fecha -------------------
-        // Se evita que el teclado aparezca y se usa un selector de fecha.
+        // 2) Configurar selector de fecha (evita mostrar teclado)
         etFecha.setInputType(InputType.TYPE_NULL);
         etFecha.setOnClickListener(v -> showDatePicker());
-        etFecha.setOnFocusChangeListener((v, hasFocus) -> { if (hasFocus) showDatePicker(); });
 
-        // ------------------- Botón: Guardar perfil -------------------
+        // 3) Al iniciar: obtener el perfil desde el servidor usando el token JWT.
+        //    Si falla o no hay token válido → carga datos de ejemplo.
+        cargarPerfilPreferServidorUsandoToken();
+
+        // 4) Acción "Guardar": envía los datos del formulario con POST.
         btnGuardar.setOnClickListener(v -> {
-            // Validar los datos antes de guardar
-            if (validateInputs()) {
-                PerfilDto dto = collect(); // Recoge los valores del formulario
-                setEnabled(false);
+            if (!validateInputs()) return;
 
-                // Llamada a la fuente de datos para guardar el perfil
-                dataSource.savePerfil(dto, new PerfilRemoteDataSource.Callback<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean data, boolean fromFake) {
-                        setEnabled(true);
-                        Toast.makeText(PerfilActivity.this,
-                                "Perfil guardado en la base de datos.",
-                                Toast.LENGTH_SHORT).show();
-                    }
+            if (perfil == null) perfil = new PerfilFake();
+            perfil.setNombre(s(etNombre.getText()));
+            perfil.setCorreo(s(etCorreo.getText()));
+            perfil.setTarjeta(s(etTarjeta.getText()));
+            perfil.setContrasena(s(etContrasena.getText()));
+            perfil.setFechaRegistro(s(etFecha.getText()));
 
-                    @Override
-                    public void onError(String message) {
-                        setEnabled(true);
-                        Toast.makeText(PerfilActivity.this,
-                                "No se pudo guardar: " + message,
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
+            Toast.makeText(this, "Guardando perfil...", Toast.LENGTH_SHORT).show();
+            perfil.guardarPerfil();
         });
 
-        // ------------------- Botón: Volver -------------------
+        // 5) Botón "Volver": regresa a la pantalla anterior
         btnVolver.setOnClickListener(v -> finish());
     }
 
-    // -------------------------------------------------------------------
-    // Enlaza un objeto PerfilDto con los campos de texto de la UI
-    private void bind(PerfilDto d) {
-        etNombre.setText(d.nombre);
-        etCorreo.setText(d.correo);
-        etTarjeta.setText(d.tarjeta);
-        etContrasena.setText(d.contrasena);
-        etFecha.setText(d.fecha);
+    /**
+     * Método principal: intenta obtener el correo desde el token JWT almacenado en SharedPreferences.
+     * Si se obtiene un correo válido, solicita los datos del perfil desde el servidor.
+     * Si no hay token o el correo no se puede extraer, carga un perfil de ejemplo local.
+     */
+    private void cargarPerfilPreferServidorUsandoToken() {
+        setEnabled(false);
+
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+
+        String correo = extraerEmailDeJWT(token); // Puede devolver vacío si el token no tiene correo
+        Log.d(TAG, "Correo extraído del token = " + correo);
+
+        if (!correo.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+            // Si el correo es válido → intenta obtener los datos desde el servidor
+            perfil = new PerfilFake(correo, (p, desdeServidor) -> runOnUiThread(() -> {
+                setEnabled(true);
+                perfil = p;
+                rellenarUI(perfil);
+                Toast.makeText(this,
+                        desdeServidor ? "Perfil cargado desde el servidor"
+                                : "Sin datos en servidor, usando ejemplo local",
+                        Toast.LENGTH_SHORT).show();
+            }));
+        } else {
+            // Si no se puede obtener correo → usa perfil local de ejemplo
+            perfil = new PerfilFake();
+            rellenarUI(perfil);
+            setEnabled(true);
+            Toast.makeText(this, "Token sin correo. Cargando ejemplo local.", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    // -------------------------------------------------------------------
-    // Crea un objeto PerfilDto a partir de los valores actuales del formulario
-    private PerfilDto collect() {
-        return new PerfilDto(
-                etNombre.getText().toString().trim(),
-                etCorreo.getText().toString().trim(),
-                etTarjeta.getText().toString().trim(),
-                etContrasena.getText().toString(),
-                etFecha.getText().toString().trim()
-        );
+    /**
+     * Extrae el correo electrónico de un token JWT.
+     * Busca en los campos comunes del payload: "email", "sub", "preferred_username".
+     * Si no encuentra ninguno válido, devuelve cadena vacía.
+     */
+    private String extraerEmailDeJWT(String jwt) {
+        if (jwt == null || jwt.trim().isEmpty()) return "";
+        try {
+            String[] parts = jwt.split("\\.");
+            if (parts.length < 2) return "";
+
+            // El segundo segmento del JWT es el "payload", codificado en Base64 URL-safe
+            byte[] decoded = Base64.decode(parts[1], Base64.URL_SAFE | Base64.NO_WRAP | Base64.NO_PADDING);
+            String json = new String(decoded, StandardCharsets.UTF_8);
+            JSONObject o = new JSONObject(json);
+
+            // Prioridad: email → sub → preferred_username
+            String email = o.optString("email", "");
+            if (!email.isEmpty()) return email;
+
+            String sub = o.optString("sub", "");
+            if (!sub.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(sub).matches()) return sub;
+
+            String preferred = o.optString("preferred_username", "");
+            if (!preferred.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(preferred).matches()) return preferred;
+
+            return "";
+        } catch (Exception e) {
+            Log.e(TAG, "Error al parsear JWT: " + e.getMessage());
+            return "";
+        }
     }
 
-    // -------------------------------------------------------------------
-    // Valida los datos introducidos por el usuario antes de guardarlos
+    /** Rellena los campos del formulario con los datos del perfil cargado */
+    private void rellenarUI(PerfilFake p) {
+        if (p == null) return;
+        etNombre.setText(nv(p.getNombre()));
+        etCorreo.setText(nv(p.getCorreo()));
+        etTarjeta.setText(nv(p.getTarjeta()));
+        etContrasena.setText(nv(p.getContrasena()));
+        etFecha.setText(nv(p.getFechaRegistro()));
+    }
+
+    /** Validaciones básicas de los campos antes de guardar */
     private boolean validateInputs() {
-        String nombre = etNombre.getText().toString().trim();
-        String correo = etCorreo.getText().toString().trim();
-        String tarjeta = etTarjeta.getText().toString().trim();
-        String pass = etContrasena.getText().toString();
-        String fecha = etFecha.getText().toString().trim();
+        String nombre = s(etNombre.getText());
+        String correo = s(etCorreo.getText());
+        String tarjeta = s(etTarjeta.getText());
+        String fecha = s(etFecha.getText());
 
-        // Validaciones básicas de campos obligatorios y formato de correo
-        if (nombre.isEmpty()) { etNombre.setError("Campo requerido"); etNombre.requestFocus(); return false; }
+        if (nombre.isEmpty()) {
+            etNombre.setError("Campo requerido");
+            etNombre.requestFocus();
+            return false;
+        }
         if (correo.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
             etCorreo.setError("Correo electrónico inválido");
             etCorreo.requestFocus();
             return false;
         }
-        if (tarjeta.isEmpty()) { etTarjeta.setError("Campo requerido"); etTarjeta.requestFocus(); return false; }
-        if (correo.isEmpty() || !correo.contains("@")) {
-            etCorreo.setError("Correo debe contener @");
-            etCorreo.requestFocus();
+        if (tarjeta.isEmpty()) {
+            etTarjeta.setError("Campo requerido");
+            etTarjeta.requestFocus();
             return false;
         }
-        if (fecha.isEmpty()) { etFecha.setError("Campo requerido"); etFecha.requestFocus(); return false; }
-
+        if (fecha.isEmpty()) {
+            etFecha.setError("Campo requerido");
+            etFecha.requestFocus();
+            return false;
+        }
         return true;
     }
 
-    // -------------------------------------------------------------------
-    // Muestra un cuadro de diálogo para seleccionar la fecha (DatePicker)
+    /** Muestra un selector de fecha (DatePickerDialog) y actualiza el campo de texto */
     private void showDatePicker() {
         final Calendar cal = Calendar.getInstance();
         try {
-            String txt = etFecha.getText().toString();
+            String txt = s(etFecha.getText());
             if (!txt.isEmpty()) cal.setTime(dateFormat.parse(txt));
         } catch (ParseException ignored) {}
 
-        // Crea el DatePickerDialog y actualiza el campo de texto al seleccionar una fecha
-        DatePickerDialog dlg = new DatePickerDialog(
+        new DatePickerDialog(
                 this,
                 (view, year, month, dayOfMonth) -> {
                     cal.set(Calendar.YEAR, year);
@@ -193,14 +215,21 @@ public class PerfilActivity extends AppCompatActivity {
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)
-        );
-        dlg.show();
+        ).show();
     }
 
-    // -------------------------------------------------------------------
-    // Habilita o deshabilita los botones mientras se realizan operaciones remotas
+    /** Habilita o deshabilita los controles de la interfaz */
     private void setEnabled(boolean enabled) {
         btnGuardar.setEnabled(enabled);
         btnVolver.setEnabled(enabled);
+        etNombre.setEnabled(enabled);
+        etCorreo.setEnabled(enabled);
+        etTarjeta.setEnabled(enabled);
+        etContrasena.setEnabled(enabled);
+        etFecha.setEnabled(enabled);
     }
+
+    // Utilidades para manejo seguro de strings
+    private String s(CharSequence cs) { return cs == null ? "" : cs.toString().trim(); }
+    private String nv(String s) { return s == null ? "" : s; }
 }

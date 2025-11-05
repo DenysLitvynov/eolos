@@ -15,6 +15,7 @@ from .api.auth import router as auth_router  # Agregado para auth
 from .db.database import engine
 from .db.models import Base
 
+from .api import perfil_api
 # ---------------------------------------------------------
 
 app = FastAPI(title="API REST para Proyecto Biometría y Medio Ambiente", version="1.0.0")
@@ -24,6 +25,7 @@ Base.metadata.create_all(bind=engine)
 
 # Routers
 app.include_router(auth_router, prefix="/api/v1")
+app.include_router(perfil_api.router, prefix="/api/v1")
 
 # Middleware CORS
 app.add_middleware(
