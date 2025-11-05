@@ -1,191 +1,173 @@
 package com.example.eolos.logica_fake;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+
 import com.example.eolos.PeticionarioREST;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Clase: PerfilFake (versión JWT)
+ * Descripción:
+ *  - Carga y guarda el perfil contra el backend real usando JWT (GET/PUT /api/v1/perfil).
+ *  - Si falla la red o el token, rellena datos de ejemplo locales.
+ */
 public class PerfilFake {
-
-    // ===================== Configuración de red =====================
-    private static final String BASE_URL = "http://10.0.2.2:8000";               // Servidor local (en producción usar https://api.miapp.com)
-    private static final String ENDPOINT_PERFIL = "/api/v1/perfil_api";          // Endpoint del perfil
 
     private static final String TAG = "PerfilFake";
 
-    // ===================== Campos de datos =====================
+    // 📌 Cambia BASE_URL si ejecutas en dispositivo físico (usa IP de tu PC).
+    private static final String BASE_URL = "http://10.0.2.2:8000";
+    private static final String ENDPOINT_PERFIL = "/api/v1/perfil";
+
+    // Campos de datos
     private String nombre;
+    private String apellido;      // opcional (no lo usas en UI, pero lo soporta backend)
     private String correo;
     private String tarjeta;
     private String contrasena;
     private String fechaRegistro;
 
-    // ===================== Callback de inicialización =====================
-    /**
-     * Callback de inicialización:
-     * desdeServidor = true  → datos obtenidos del servidor correctamente.
-     * desdeServidor = false → se usaron datos de ejemplo locales.
-     */
-    public interface InitCallback {
-        void onListo(PerfilFake perfil, boolean desdeServidor);
+    public interface InitCallback { void onListo(PerfilFake perfil, boolean desdeServidor); }
+    public interface SaveCallback { void onResult(boolean exito, int codigo, String cuerpo); }
+
+    private final Context context;
+
+    // ===== Constructores =====
+    /** Recomendado: pasar Context para poder leer token en SharedPreferences */
+    public PerfilFake(Context context) {
+        this.context = context.getApplicationContext();
     }
 
-    // ===================== Constructores =====================
-    /**
-     * Constructor por defecto: intenta primero obtener datos del servidor
-     * (si previamente se ha establecido el correo).
-     * Si no hay correo, carga directamente los datos de ejemplo.
-     */
-    public PerfilFake() {
-        inicializarPerfil(null);
-    }
-
-    /**
-     * Constructor recomendado: recibe un correo y un callback.
-     * Intenta obtener el perfil desde el servidor según el correo.
-     * Si no existe o falla, carga el ejemplo local.
-     */
-    public PerfilFake(String correoInicial, InitCallback cb) {
-        this.correo = correoInicial;
+    /** Carga inicial (intenta servidor con JWT; si falla -> ejemplo local) */
+    public PerfilFake(Context context, InitCallback cb) {
+        this.context = context.getApplicationContext();
         inicializarPerfil(cb);
     }
 
-    // ===================== Lógica de inicialización =====================
-    /**
-     * Intenta obtener el perfil desde el servidor.
-     * Si no hay datos o la petición falla, se cargan datos de ejemplo.
-     *
-     * Reglas:
-     *  - Si hay correo → hace GET /perfil?correo=xxx
-     *  - Si no hay correo → carga directamente el ejemplo
-     */
+    // ===== Carga de perfil desde backend con JWT =====
     public void inicializarPerfil(InitCallback cb) {
-        if (correo == null || correo.trim().isEmpty()) {
-            Log.d(TAG, "Inicialización: sin correo, cargando ejemplo local");
+        SharedPreferences prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+
+        if (token == null || token.trim().isEmpty()) {
+            Log.w(TAG, "Sin token, usando datos locales de ejemplo");
             cargarPerfilEjemplo();
             if (cb != null) cb.onListo(this, false);
             return;
         }
 
-        String encoded = correo;
-        try { encoded = URLEncoder.encode(correo, "UTF-8"); } catch (UnsupportedEncodingException ignored) {}
+        String url = BASE_URL + ENDPOINT_PERFIL;
+        Log.d(TAG, "➡️ GET " + url);
 
-        String url = BASE_URL + ENDPOINT_PERFIL + "?correo=" + encoded;
-        Log.d(TAG, "Inicialización: intentando obtener perfil del servidor -> " + url);
-
-        PeticionarioREST peticion = new PeticionarioREST();
-        peticion.hacerPeticionREST("GET", url, null, (codigo, cuerpo) -> {
+        PeticionarioREST peti = new PeticionarioREST();
+        peti.hacerPeticionRESTconAuth("GET", url, null, token, (codigo, cuerpo) -> {
             Log.d(TAG, "GET resp code=" + codigo + ", body=" + cuerpo);
 
-            boolean ok = false;
-            if (codigo >= 200 && codigo < 300 && cuerpo != null && !cuerpo.trim().isEmpty() && !"null".equalsIgnoreCase(cuerpo.trim())) {
+            if (codigo >= 200 && codigo < 300) {
                 try {
-                    if (fromJsonSeguro(cuerpo)) {
-                        ok = true; // Datos válidos obtenidos
+                    if (fromJsonServidor(cuerpo)) {
+                        if (cb != null) cb.onListo(this, true);
+                        return;
                     }
                 } catch (JSONException e) {
-                    Log.e(TAG, "Error al analizar JSON: " + e.getMessage());
+                    Log.e(TAG, "Error JSON: " + e.getMessage());
                 }
             }
 
-            if (ok) {
-                Log.d(TAG, "Inicialización completada: datos desde el servidor");
-                if (cb != null) cb.onListo(this, true);
-            } else {
-                Log.d(TAG, "Sin datos válidos del servidor, cargando ejemplo local");
-                cargarPerfilEjemplo();
-                if (cb != null) cb.onListo(this, false);
-            }
+            Log.w(TAG, "Fallo GET perfil, usando ejemplo local");
+            cargarPerfilEjemplo();
+            if (cb != null) cb.onListo(this, false);
         });
     }
 
-    // ===================== Datos de ejemplo =====================
-    private void cargarPerfilEjemplo() {
-        this.nombre = "María López";
-        if (this.correo == null || this.correo.isEmpty()) {
-            this.correo = "maria@eolos.com"; // Si no hay correo, usar uno por defecto
+    // ===== Guardado en backend con JWT (PUT /perfil) =====
+    public void guardarPerfil(SaveCallback cb) {
+        SharedPreferences prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+
+        if (token == null || token.trim().isEmpty()) {
+            if (cb != null) cb.onResult(false, 401, "Sin token JWT");
+            return;
         }
+
+        String url = BASE_URL + ENDPOINT_PERFIL;
+        String cuerpoJson = toJsonServidor(); // mapea a los campos que espera tu backend
+
+        Log.d(TAG, "➡️ PUT " + url);
+        Log.d(TAG, "📦 body: " + cuerpoJson);
+
+        PeticionarioREST peti = new PeticionarioREST();
+        peti.hacerPeticionRESTconAuth("PUT", url, cuerpoJson, token, (codigo, cuerpo) -> {
+            Log.d(TAG, "✅ PUT resp code=" + codigo + ", body=" + cuerpo);
+            boolean exito = (codigo >= 200 && codigo < 300);
+            if (exito) {
+                try {
+                    fromJsonServidor(cuerpo); // refrescar datos locales con lo devuelto
+                } catch (JSONException ignored) {}
+            }
+            if (cb != null) cb.onResult(exito, codigo, cuerpo);
+        });
+    }
+
+    // ===== JSON <-> Objeto (según tu backend JWT) =====
+    private boolean fromJsonServidor(String cuerpo) throws JSONException {
+        JSONObject o = new JSONObject(cuerpo);
+        this.nombre = o.optString("nombre", "");
+        this.apellido = o.optString("apellido", "");
+        this.correo = o.optString("correo", "");
+        this.tarjeta = o.optString("targeta_id", "");   // 🛈 en BD se llama targeta_id
+        this.fechaRegistro = o.optString("fecha_registro", "");
+        this.contrasena = ""; // nunca viene la contraseña en claro
+        return (this.correo != null && !this.correo.isEmpty());
+    }
+
+    /** Cuerpo esperado por PUT /api/v1/perfil */
+    private String toJsonServidor() {
+        JSONObject o = new JSONObject();
+        try {
+            // Campos soportados por PerfilUpdateIn (backend):
+            // nombre, apellido, correo, targeta_id, contrasena
+            if (nombre != null)      o.put("nombre", nombre);
+            if (apellido != null)    o.put("apellido", apellido);
+            if (correo != null)      o.put("correo", correo);
+            if (tarjeta != null)     o.put("targeta_id", tarjeta);
+            if (contrasena != null && !contrasena.isEmpty()) {
+                o.put("contrasena", contrasena); // el backend la encripta si viene
+            } else {
+                o.put("contrasena", JSONObject.NULL); // para "no cambiar" contraseña
+            }
+        } catch (JSONException ignored) {}
+        return o.toString();
+    }
+
+    // ===== Datos de ejemplo (fallback local) =====
+    private void cargarPerfilEjemplo() {
+        this.nombre = "Ejemplo Usuario";
+        this.apellido = "Demo";
+        this.correo = "ejemplo@eolos.com";
         this.tarjeta = "ABC123";
         this.contrasena = "password";
         this.fechaRegistro = new SimpleDateFormat("d/M/yyyy", Locale.getDefault()).format(new Date());
     }
 
-    // ===================== Utilidades JSON =====================
-    /** Convierte el objeto a JSON para enviarlo al backend. */
-    public String toJson() {
-        JSONObject o = new JSONObject();
-        try {
-            o.put("nombre", nvl(nombre));
-            o.put("correo", nvl(correo));
-            o.put("tarjeta", nvl(tarjeta));
-            o.put("contrasena", nvl(contrasena));
-            o.put("fecha", nvl(fechaRegistro));
-        } catch (JSONException ignored) {}
-        return o.toString();
-    }
-
-    /**
-     * Analiza un JSON de manera segura.
-     * Soporta estructura plana o anidada dentro de "data".
-     * Solo se considera válido si al menos contiene nombre o correo.
-     */
-    private boolean fromJsonSeguro(String cuerpo) throws JSONException {
-        JSONObject root = new JSONObject(cuerpo);
-        JSONObject s = root;
-        if (root.has("data") && root.opt("data") instanceof JSONObject) {
-            s = root.getJSONObject("data");
-        }
-
-        String nombreNuevo = s.optString("nombre", null);
-        String correoNuevo = s.optString("correo", null);
-        String tarjetaNueva = s.optString("tarjeta", null);
-        String contrasenaNueva = s.optString("contrasena", null);
-        String fechaNueva = s.optString("fecha", s.optString("fechaRegistro", null));
-
-        // Valido si hay al menos correo o nombre
-        boolean valido = (correoNuevo != null && !correoNuevo.isEmpty()) ||
-                (nombreNuevo != null && !nombreNuevo.isEmpty());
-
-        if (valido) {
-            if (nombreNuevo != null) this.nombre = nombreNuevo;
-            if (correoNuevo != null) this.correo = correoNuevo;
-            if (tarjetaNueva != null) this.tarjeta = tarjetaNueva;
-            if (contrasenaNueva != null) this.contrasena = contrasenaNueva;
-            if (fechaNueva != null) this.fechaRegistro = fechaNueva;
-        }
-        return valido;
-    }
-
-    private String nvl(String s) { return s == null ? "" : s; }
-
-    // ===================== Lógica de guardado existente =====================
-    /** Envía el perfil al servidor mediante POST (creación o guardado). */
-    public void guardarPerfil() {
-        String urlCompleta = BASE_URL + ENDPOINT_PERFIL;
-        String cuerpoJson = toJson();
-
-        Log.d(TAG, "➡️ POST: " + urlCompleta);
-        Log.d(TAG, "📦 body: " + cuerpoJson);
-
-        PeticionarioREST peticion = new PeticionarioREST();
-        peticion.hacerPeticionREST("POST", urlCompleta, cuerpoJson, (codigo, cuerpo) -> {
-            Log.d(TAG, "✅ POST resp: código=" + codigo + ", cuerpo=" + cuerpo);
-        });
-    }
-
-    // ===================== Getters / Setters =====================
+    // ===== Getters / Setters =====
     public String getNombre() { return nombre; }
+    public String getApellido() { return apellido; }
     public String getCorreo() { return correo; }
     public String getTarjeta() { return tarjeta; }
     public String getContrasena() { return contrasena; }
     public String getFechaRegistro() { return fechaRegistro; }
 
     public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setApellido(String apellido) { this.apellido = apellido; }
     public void setCorreo(String correo) { this.correo = correo; }
     public void setTarjeta(String tarjeta) { this.tarjeta = tarjeta; }
     public void setContrasena(String contrasena) { this.contrasena = contrasena; }
@@ -195,6 +177,7 @@ public class PerfilFake {
     public String toString() {
         return "PerfilFake{" +
                 "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
                 ", correo='" + correo + '\'' +
                 ", tarjeta='" + tarjeta + '\'' +
                 ", contrasena='" + contrasena + '\'' +
