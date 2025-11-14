@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.eolos.R;
 import com.example.eolos.servicio.BeaconScanService;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONObject;
@@ -47,10 +49,20 @@ public class ConnectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conectar_desconectar);
+        MaterialCardView cardConnect = findViewById(R.id.card_connect);
+        MaterialCardView cardDisconnect = findViewById(R.id.card_disconnect);
 
         setupBottomNavigation(); // Configura la barra de navegación inferior
         setupConnectButton();    // Configura botón de conexión
         setupDisconnectButton(); // Configura botón de desconexión
+
+        if (BeaconScanService.isRunning()) {
+            cardConnect.setVisibility(View.GONE);
+            cardDisconnect.setVisibility(View.VISIBLE);
+        } else {
+            cardConnect.setVisibility(View.VISIBLE);
+            cardDisconnect.setVisibility(View.VISIBLE);
+        }
     }
 
     // --------------------------------------------------------------------
