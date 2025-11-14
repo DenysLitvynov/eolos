@@ -2,24 +2,44 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- ====================== PERMISOS ====================== -->
+
+    <!-- Notificaciones (para el foreground service) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Foreground Service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
 
+    <!-- Bluetooth clásico (para Android < 12) -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- Ubicación (necesaria para BLE en Android < 12) -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
 
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
-        android:usesPermissionFlags="neverForLocation"/>
+    <!-- Internet (si usas API) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Bluetooth LE (Android 12+) -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
 
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <!-- Cámara (para QR) -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- Requiere BLE -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <!-- ====================== APP ====================== -->
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
@@ -30,31 +50,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Eolos">
+
+        <!-- Main Activity -->
         <activity
             android:name=".activities.MainActivity"
             android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-
         </activity>
+
+        <!-- Otras Activities -->
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.DashboardActivity" />
-         <activity android:name=".activities.PerfilActivity" />
+        <activity android:name=".activities.PerfilActivity" />
+        <activity android:name=".activities.ConnectionActivity" />
+        <activity android:name=".activities.QRScannerActivity" />
 
+        <!-- =================== SERVICIO BLE =================== -->
         <service
             android:name=".servicio.BeaconScanService"
             android:exported="false"
             android:foregroundServiceType="connectedDevice|location"
-            android:stopWithTask="false"/>
-    </application>
+            android:stopWithTask="false" />
 
+    </application>
 </manifest>
