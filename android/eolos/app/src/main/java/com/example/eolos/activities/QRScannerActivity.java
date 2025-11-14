@@ -1,3 +1,9 @@
+/**
+ * Autor: Hugo Belda
+ * Fecha: 14/11/2025
+ * Descripción:
+ */
+
 package com.example.eolos.activities;
 
 import android.content.Intent;
@@ -103,7 +109,12 @@ public class QRScannerActivity extends AppCompatActivity {
 
             // Mostrar contenido por Toast
             Toast.makeText(this, "QR Escaneado: " + qrContent, Toast.LENGTH_LONG).show();
-            
+
+            // Devolver resultado a la actividad que inició el escaneo
+            Intent data = new Intent();
+            data.putExtra("qr_result", qrContent);
+            setResult(RESULT_OK, data);
+
             finish(); // Cierra la actividad de escaneo
         });
     }
