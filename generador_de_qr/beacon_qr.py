@@ -20,8 +20,8 @@ from PIL import Image, ImageDraw
 
 # Datos del beacon
 data = {
-    "name": "Emisora01",
-    "uuid": "fda50693-a4e2-4fb1-afcf-c6eb07647825"
+    "name": "Grupo2PBIO",
+    "uuid": ""
 }
 
 # Convertir a JSON
@@ -39,4 +39,4 @@ qr.make(fit=True)
 
 # Generar imagen
 img = qr.make_image(fill_color="black", back_color="white")
-img.save("beacon_qr.png")
+img.save("qr-images/qr-emisora.png")
