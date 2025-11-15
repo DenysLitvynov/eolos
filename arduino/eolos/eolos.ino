@@ -31,8 +31,6 @@ namespace Globales {
   LED elLED ( /* NUMERO DEL PIN LED = */ 7 );
 
   PuertoSerie elPuerto ( /* velocidad = */ 115200 ); // 115200 o 9600 o ...
-
-  // Serial1 en el ejemplo de Curro creo que es la conexión placa-sensor 
 };
 
 // --------------------------------------------------------------
@@ -64,9 +62,6 @@ void inicializarPlaquita () {
 // setup()
 // --------------------------------------------------------------
 void setup() {
-
- // Globales::elPuerto.esperarDisponible();
-
   // 
   // 
   // 
@@ -170,9 +165,6 @@ void loop () {
 	'H', 'o', 'l', 'a',
 	'H'
   };
-
-  // elPublicador.laEmisora.emitirAnuncioIBeaconLibre ( &datos[0], 21 );
-  //elPublicador.laEmisora.emitirAnuncioIBeaconLibre ( "MolaMolaMolaMolaMolaM", 21 );
 
   esperar( 2000 );
 
