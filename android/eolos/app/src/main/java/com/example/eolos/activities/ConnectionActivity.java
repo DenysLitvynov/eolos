@@ -104,7 +104,10 @@ public class ConnectionActivity extends AppCompatActivity {
             } else {
                 startService(stopIntent);
             }
-            // Mostrar notificación visual al usuario
+            
+            // Cancelar notificación
+            NotificationHelper.cancel(this, 1); // 1 = NOTIF_ID de BeaconScanService
+            
             Toast.makeText(this, "Escaneo detenido", Toast.LENGTH_SHORT).show();
         });
     }

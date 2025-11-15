@@ -61,7 +61,7 @@ public class BeaconScanService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        // 1. Detención vía acción "Stop"
+        // 1. Detención vía acción "Stop" (desde notificación o UI)
         if (intent != null && ACTION_STOP.equals(intent.getAction())) {
             Log.i(TAG, "Deteniendo servicio por botón");
             if (escanerIBeacons != null) {
@@ -74,11 +74,23 @@ public class BeaconScanService extends Service {
             return START_NOT_STICKY;
         }
 
-        // 2. StartForeground inmediata con notificación mínima
+        // 2. StartForeground inmediata con notificación + acción "Detener"
         Intent openApp = new Intent(this, MainActivity.class);
         PendingIntent contentPi = PendingIntent.getActivity(this, 100, openApp, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        Notification notification = new NotificationCompat.Builder(this, PermisosHelper.CHANNEL_ID).setContentTitle("Escaneando beacon...").setSmallIcon(android.R.drawable.stat_sys_data_bluetooth).setOngoing(true).setContentIntent(contentPi).build();
+        // Intent para acción "Detener" en la notificación
+        Intent stopIntent = new Intent(this, BeaconScanService.class);
+        stopIntent.setAction(ACTION_STOP);
+        PendingIntent stopPi = PendingIntent.getService(this, 101, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        // Usar nuevo método con acción "Detener"
+        Notification notification = NotificationHelper.buildForegroundNotificationWithStopAction(
+                this,
+                "Escaneando beacon...",
+                "Enviando datos en segundo plano",
+                contentPi,
+                stopPi
+        );
 
         startForeground(NOTIF_ID, notification);
 
@@ -108,25 +120,7 @@ public class BeaconScanService extends Service {
 
         escanerIBeacons = EscanerIBeacons.getInstance(this, json -> {
             long ahora = System.currentTimeMillis();
-
-            // Solo procesar si han pasado al menos 10 segundos desde la última medida enviada
-            if (ahora - lastDetectedTime >= 10000) {  // 10000 ms = 10 s
-                lastDetectedTime = ahora;
-
-                Log.i(TAG, "MEDIDA CADA 10s: " + json);
-
-                // Broadcast local para fragment/actividad
-                Intent intent1 = new Intent("com.example.eolos.BEACON_DETECTED");
-                intent1.putExtra("json_medida", json);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(intent1);
-
-                // Guardar medida en servidor
-                LogicaFake logicaFake = new LogicaFake();
-                logicaFake.guardarMedida(json, baseUrl, endpointGuardar);
-
-                // Enviar estado general
-                sendStatus(true, "BEACON", json);
-            }
+            lastDetectedTime = ahora;
         });
 
         escanerIBeacons.iniciarEscaneoAutomatico(targetDeviceName);
@@ -142,7 +136,10 @@ public class BeaconScanService extends Service {
         super.onDestroy();
         if (escanerIBeacons != null) {
             escanerIBeacons.destroy();
+            escanerIBeacons = null;
         }
+        // Cancelar la notificación al destruir el servicio
+        NotificationHelper.cancel(this, NOTIF_ID);
         stopForeground(true);
         isRunning = false;
         Log.i(TAG, "Servicio detenido");
