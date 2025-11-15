@@ -1,29 +1,23 @@
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 15-11-2025
-Descripción: Script para insertar datos de prueba (seeds) en la BD. 
-Ejecutar: python backend/db/seed.py   (o desde cualquier sitio)
+Descripción: Seed con 10 carnets reales (DNI) + todo lo demás
 """
 
 # ---------------------------------------------------------
-# SOLUCIÓN AL ImportError → añadimos backend al path para que funcione siempre
 import os
 import sys
 from pathlib import Path
 
-# Añadimos la carpeta backend al path (así los imports absolutos funcionan aunque ejecutes el script directamente)
 backend_path = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(backend_path))
 
-# Ahora los imports son absolutos dentro del paquete backend
 from db.database import SessionLocal, Base, engine
 from db.models import (
     Rol, Usuario, Mibisivalencia, Estacion, Bicicleta, 
     PlacaSensores, Trayecto, Medida, Incidencia,
     TipoMedidaEnum, EstadoBicicleta, EstadoIncidencia, FuenteReporte
 )
-# ---------------------------------------------------------
-
 from passlib.context import CryptContext
 import uuid
 from datetime import datetime, timezone
@@ -32,10 +26,29 @@ from datetime import datetime, timezone
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+# Generador de DNI válidos (8 números + letra correcta)
+def generar_dni_valido(numero: int) -> str:
+    letras = "TRWAGMYFPDXBNJZSQVHLCKE"
+    letra = letras[numero % 23]
+    return f"{numero:08d}{letra}"
+
+# 10 carnets reales para pruebas
+CARNES_DNI = [
+    generar_dni_valido(12345678),  # 12345678Z
+    generar_dni_valido(87654321),  # 87654321T
+    generar_dni_valido(11111111),  # 11111111H
+    generar_dni_valido(22222222),  # 22222222Y
+    generar_dni_valido(33333333),  # 33333333F
+    generar_dni_valido(44444444),  # 44444444P
+    generar_dni_valido(55555555),  # 55555555D
+    generar_dni_valido(66666666),  # 66666666X
+    generar_dni_valido(77777777),  # 77777777B
+    generar_dni_valido(88888888),  # 88888888N
+]
+
 def seed_data():
-    # Recrear todas las tablas con la nueva estructura
-    Base.metadata.drop_all(bind=engine)      # ← BORRA TODO lo anterior
-    Base.metadata.create_all(bind=engine)    # ← Crea las 12 tablas nuevas
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
 
     db = SessionLocal()
     try:
@@ -45,12 +58,9 @@ def seed_data():
         db.add_all([rol_usuario, rol_admin])
         db.commit()
 
-        # 2. Mibisivalencia (targetas válidas) - ahora UUID
-        targeta1_id = str(uuid.uuid4())
-        targeta2_id = str(uuid.uuid4())
-        carnet1 = Mibisivalencia(targeta_id=targeta1_id)
-        carnet2 = Mibisivalencia(targeta_id=targeta2_id)
-        db.add_all([carnet1, carnet2])
+        # 2. Mibisivalencia - 10 carnets reales
+        carnets = [Mibisivalencia(targeta_id=dni) for dni in CARNES_DNI]
+        db.add_all(carnets)
         db.commit()
 
         # 3. Usuarios de prueba
@@ -59,7 +69,7 @@ def seed_data():
 
         usuario_normal = Usuario(
             usuario_id=str(uuid.uuid4()),
-            targeta_id=targeta1_id,
+            targeta_id=CARNES_DNI[0],  # 12345678Z
             nombre="Pepe",
             apellido="García",
             correo="pepe@fake.com",
@@ -74,10 +84,9 @@ def seed_data():
             contrasena_hash=hash2
         )
 
-        # Asignar roles
         usuario_normal.roles.append(rol_usuario)
         usuario_admin.roles.append(rol_admin)
-        usuario_admin.roles.append(rol_usuario)  # el admin también tiene rol usuario
+        usuario_admin.roles.append(rol_usuario)
 
         db.add_all([usuario_normal, usuario_admin])
         db.commit()
@@ -106,13 +115,13 @@ def seed_data():
         db.add_all([bici1, bici2])
         db.commit()
 
-        # 6. Placas sensores
+        # 6. Placas
         placa1 = PlacaSensores(placa_id=str(uuid.uuid4()), bicicleta_id=bici1.bicicleta_id, estado="activa")
         placa2 = PlacaSensores(placa_id=str(uuid.uuid4()), bicicleta_id=bici2.bicicleta_id, estado="activa")
         db.add_all([placa1, placa2])
         db.commit()
 
-        # 7. Trayecto de ejemplo
+        # 7. Trayecto
         trayecto = Trayecto(
             trayecto_id=str(uuid.uuid4()),
             usuario_id=usuario_normal.usuario_id,
@@ -159,11 +168,11 @@ def seed_data():
         db.add(incidencia)
 
         db.commit()
-        print("✅ Seed completado perfectamente – 15-11-2025")
+        print("Seed completado: 10 carnets DNI válidos + todo lo demás")
 
     except Exception as e:
         db.rollback()
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
         raise
     finally:
         db.close()

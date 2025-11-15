@@ -40,12 +40,9 @@ class LogicaRegistro:
         
         if not re.match(r"[^@]+@[^@]+\.[^@]+", correo):
             raise ValueError("Correo inválido")
-        
-        # Validar que targeta_id sea UUID válido
-        try:
-            uuid.UUID(targeta_id)
-        except ValueError:
-            raise ValueError("ID de tarjeta inválido (debe ser un UUID válido)")
+       
+        if not re.match(r"^\d{8}[A-Z]$", targeta_id):
+            raise ValueError("ID de carnet inválido: debe ser 8 dígitos + 1 letra mayúscula")
         
         # Validar targeta_id existe en mibisivalencia
         carnet = db.query(Mibisivalencia).filter(Mibisivalencia.targeta_id == targeta_id).first()

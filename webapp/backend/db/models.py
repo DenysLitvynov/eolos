@@ -73,8 +73,7 @@ usuario_roles = Table(
 
 class Mibisivalencia(Base):
     __tablename__ = "mibisivalencia"
-    
-    targeta_id = Column(String(36), primary_key=True)  # Usuario targeta_id puede ser null (admin no tiene)
+    targeta_id = Column(String(9), primary_key=True)  # 12345678A   
 
 class Rol(Base):
     __tablename__ = "roles"

@@ -15,7 +15,7 @@ export class RegistroFake {
 
     async registro(nombre, apellido, correo, targeta_id, contrasena, contrasena_repite) {
         const url = '/api/v1/auth/registro';
-        const body = { nombre, apellido, correo, targeta_id, contrasena, contrasena_repite };
+        const body = { nombre, apellido, correo, targeta_id, contrasena, contrasena_repite, acepta_politica: true };
         return await this.peticionario.hacerPeticionRest('POST', url, body);
     }
 }
