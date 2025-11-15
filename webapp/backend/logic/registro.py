@@ -1,53 +1,51 @@
 """
 Autor: Denys Litvynov Lymanets
-Fecha: 27-10-2025
+Fecha: 15-11-2025
 Descripción: Lógica de negocio para el registro. Valida datos y inserta usuario.
 """
 
 # ---------------------------------------------------------
 
 from sqlalchemy.orm import Session
-from ..db.models import Usuario, Mibisivalencia
+from ..db.models import Usuario, Mibisivalencia, Rol
 from passlib.context import CryptContext
 import re
-import uuid  # Añadido para generar UUID en usuario_id
+import uuid
 
 # ---------------------------------------------------------
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+# Regex contraseña fuerte (mínimo 8, mayús, minús, número y símbolo)
+PASSWORD_REGEX = re.compile(
+    r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+)
+
 # ---------------------------------------------------------
 
 class LogicaRegistro:
     
-    def validar_datos(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str):
+    def validar_datos(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool = False):
         """
         Valida los datos de registro.
-        
-        Args:
-            db (Session): Sesión de BD.
-            nombre (str): Nombre.
-            apellido (str): Apellido.
-            correo (str): Correo.
-            targeta_id (str): ID de carnet (formato DNI: 8 dígitos + letra).
-            contrasena (str): Contraseña.
-            contrasena_repite (str): Repetición de contraseña.
-        
-        Returns:
-            bool: True si válido.
         """
+        if not acepta_politica:
+            raise ValueError("Debes aceptar la política de privacidad y términos")
+            
         if contrasena != contrasena_repite:
             raise ValueError("Las contraseñas no coinciden")
         
-        if len(contrasena) < 8:
-            raise ValueError("La contraseña debe tener al menos 8 caracteres")
+        if not PASSWORD_REGEX.match(contrasena):
+            raise ValueError("La contraseña debe tener mínimo 8 caracteres, mayúscula, minúscula, número y símbolo")
         
         if not re.match(r"[^@]+@[^@]+\.[^@]+", correo):
             raise ValueError("Correo inválido")
         
-        # Validar formato DNI (8 dígitos + 1 letra mayúscula)
-        if not re.match(r"^\d{8}[A-Z]$", targeta_id):
-            raise ValueError("ID de carnet inválido, debe ser 8 dígitos seguidos de una letra mayúscula")
+        # Validar que targeta_id sea UUID válido
+        try:
+            uuid.UUID(targeta_id)
+        except ValueError:
+            raise ValueError("ID de tarjeta inválido (debe ser un UUID válido)")
         
         # Validar targeta_id existe en mibisivalencia
         carnet = db.query(Mibisivalencia).filter(Mibisivalencia.targeta_id == targeta_id).first()
@@ -69,41 +67,34 @@ class LogicaRegistro:
     # ---------------------------------------------------------
 
     def hashear_contrasena(self, contrasena: str):
-        """
-        Hashea la contraseña.
-        
-        Args:
-            contrasena (str): Contraseña plana.
-        
-        Returns:
-            str: Hash.
-        """
-        return pwd_context.hash(contrasena.encode("utf-8")[:72])
-    
+        return pwd_context.hash(contrasena)
+
     # ---------------------------------------------------------
     
-    def registrar(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str):
+    def registrar(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool):
         """
-        Proceso completo de registro.
-        
-        Args:
-            ... (como en validar_datos)
-        
-        Returns:
-            bool: True si éxito.
+        Proceso completo de registro (temporal hasta que añadamos verificación por email).
         """
         try:
-            self.validar_datos(db, nombre, apellido, correo, targeta_id, contrasena, contrasena_repite)
+            self.validar_datos(db, nombre, apellido, correo, targeta_id, contrasena, contrasena_repite, acepta_politica)
+            
             hash_contrasena = self.hashear_contrasena(contrasena)
+            
             nuevo_usuario = Usuario(
                 usuario_id=str(uuid.uuid4()),
                 targeta_id=targeta_id,
-                rol_id=1,  # Default: usuario
                 nombre=nombre,
                 apellido=apellido,
                 correo=correo,
                 contrasena_hash=hash_contrasena
             )
+            
+            # Asignar rol "usuario" por defecto
+            rol_usuario = db.query(Rol).filter(Rol.nombre == "usuario").one_or_none()
+            if not rol_usuario:
+                raise RuntimeError("Rol 'usuario' no encontrado en la BD")
+            nuevo_usuario.roles.append(rol_usuario)
+            
             db.add(nuevo_usuario)
             db.commit()
             return True
