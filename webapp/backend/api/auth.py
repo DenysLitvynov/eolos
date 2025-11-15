@@ -1,6 +1,6 @@
 """
 Autor: Denys Litvynov Lymanets
-Fecha: 26-10-2025
+Fecha: 15-11-2025
 Descripción: Rutas para autenticación 
 """
 
@@ -28,6 +28,7 @@ class RegistroRequest(BaseModel):
     targeta_id: str
     contrasena: str
     contrasena_repite: str
+    acepta_politica: bool = False   # ← nuevo campo obligatorio
 
 class ResponseToken(BaseModel):
     token: str
@@ -42,7 +43,7 @@ class ResponseRegistro(BaseModel):
 def ruta_login(login_data: LoginRequest, db: Session = Depends(get_db)):
     try:
         logica = LogicaLogin()
-        token = logica.login(db, login_data.correo, login_data.contrasena)
+        token = logica.login(db, login_data.correo, login_data.contrasena)  # ← funciona igual
         return ResponseToken(token=token)
     except ValueError as e:
         raise HTTPException(status_code=401, detail=str(e))
@@ -62,7 +63,8 @@ def ruta_registro(registro_data: RegistroRequest, db: Session = Depends(get_db))
             registro_data.correo,
             registro_data.targeta_id,
             registro_data.contrasena,
-            registro_data.contrasena_repite
+            registro_data.contrasena_repite,
+            registro_data.acepta_politica
         )
         return ResponseRegistro(exito=exito, mensaje="Registro exitoso")
     except ValueError as e:

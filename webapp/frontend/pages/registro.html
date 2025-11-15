@@ -43,7 +43,13 @@ Descripción: Página de registro con formulario, header simulado y sección de 
                 
                 <label for="contrasena_repite" class="input-label">Repite tu contraseña</label>
                 <input type="password" id="contrasena_repite" placeholder="++++++++++++++++++" required>
-                
+                 <!-- CHECKBOX OBLIGATORIO -->
+                <div class="checkbox-container" style="margin: 15px 0; display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="acepta_politica" required style="width: auto;">
+                    <label for="acepta_politica" style="margin: 0; font-size: 0.9em;">
+                        He leído y acepto la <a href="#" style="color: #007bff;">Política de Privacidad</a> y los <a href="#" style="color: #007bff;">Términos y Condiciones</a>
+                    </label>
+                </div>               
                 <button type="button" id="registroBtn" class="auth-button">Registrarse</button>
             </form>
             <div id="mensaje" class="display-box"></div>
