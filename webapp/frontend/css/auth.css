@@ -184,3 +184,20 @@ input::placeholder {
     text-align: center;
     font-size: 0.9em;
 }
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.password-wrapper input {
+    width: 100%;
+    padding-right: 70px;
+}
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: #0D47A1;
+    user-select: none;
+}

@@ -1,13 +1,13 @@
 /* 
 Autor: Denys Litvynov Lymanets
 Fecha: 16-11-2025
-Descripción: Handlers para forgot-password.html.
+Descripción: Handlers para forgot-password.html. Solo interfaz.
 */
 
-import { PeticionarioREST } from '../utilidades/peticionario_REST.js';
+import { ForgotPasswordFake } from '../logica_fake/forgot_password_fake.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const peticionario = new PeticionarioREST();
+    const fake = new ForgotPasswordFake();
     const correoInput = document.getElementById('correo');
     const sendBtn = document.getElementById('sendBtn');
     const resendBtn = document.getElementById('resendBtn');
@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resendBtn.style.display = 'inline-block';
         sendBtn.style.display = 'none';
         timerSpan.textContent = tiempo;
-
         countdown = setInterval(() => {
             tiempo--;
             timerSpan.textContent = tiempo;
@@ -41,13 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            await peticionario.hacerPeticionRest('POST', '/api/v1/auth/forgot-password', { correo });
+            await fake.enviar(correo);
             mensaje.textContent = 'Enlace enviado. Revisa tu correo.';
             mensaje.style.color = 'green';
             iniciarTemporizador();
         } catch (error) {
-            mensaje.textContent = 'Error: correo no registrado o fallo en el servidor.';
-            console.error(error);
+            mensaje.textContent = 'Correo no registrado.';
         }
     };
 

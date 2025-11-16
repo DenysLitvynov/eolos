@@ -1,7 +1,7 @@
 <!-- 
 Autor: Denys Litvynov Lymanets
-Fecha: 27-10-2025
-Descripción: Página de registro con formulario, header simulado y sección de imagen.
+Fecha: 16-11-2025
+Descripción: Página de registro con formulario completo, botón ojo, checkbox de política y validaciones.
 -->
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ Descripción: Página de registro con formulario, header simulado y sección de 
         </div>
         <div class="form-section">
             <h1 class="auth-title">Registrarse</h1>
-            <h2 class="auth-subtitle">Bienvenido a éolos!</h2>
+            <h2 class="auth-subtitle">Bienvenido a Éolos!</h2>
             <form id="registroForm">
                 <label for="nombre" class="input-label">Nombre</label>
                 <input type="text" id="nombre" placeholder="Nombre" required>
@@ -32,23 +32,31 @@ Descripción: Página de registro con formulario, header simulado y sección de 
                 <label for="apellido" class="input-label">Apellido</label>
                 <input type="text" id="apellido" placeholder="Apellido" required>
                 
-                <label for="correo" class="input-label">Correo o número de teléfono</label>
-                <input type="text" id="correo" placeholder="juanba@gmail.com" required>
+                <label for="correo" class="input-label">Correo electrónico</label>
+                <input type="email" id="correo" placeholder="juanba@gmail.com" required>
                 
                 <label for="targeta_id" class="input-label">ID Tarjeta</label>
-                <input type="text" id="targeta_id" placeholder="12345HDC" required>
+                <input type="text" id="targeta_id" placeholder="12345678A" required>
                 
                 <label for="contrasena" class="input-label">Contraseña</label>
-                <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                <div class="password-wrapper">
+                    <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                    <span class="toggle-password">Mostrar</span>
+                </div>
                 
                 <label for="contrasena_repite" class="input-label">Repite tu contraseña</label>
-                <input type="password" id="contrasena_repite" placeholder="++++++++++++++++++" required>
+                <div class="password-wrapper">
+                    <input type="password" id="contrasena_repite" placeholder="++++++++++++++++++" required>
+                    <span class="toggle-password">Mostrar</span>
+                </div>
+
                 <div class="checkbox-container" style="margin: 15px 0; display: flex; align-items: center; gap: 8px;">
                     <input type="checkbox" id="acepta_politica" required style="width: auto;">
                     <label for="acepta_politica" style="margin: 0; font-size: 0.9em;">
                         He leído y acepto la <a href="#" style="color: #007bff;">Política de Privacidad</a> y los <a href="#" style="color: #007bff;">Términos y Condiciones</a>
                     </label>
                 </div>               
+                
                 <button type="button" id="registroBtn" class="auth-button">Registrarse</button>
             </form>
             <div id="mensaje" class="display-box"></div>

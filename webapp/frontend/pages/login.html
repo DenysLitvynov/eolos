@@ -1,7 +1,7 @@
 <!-- 
 Autor: Denys Litvynov Lymanets
-Fecha: 26-10-2025
-Descripción: Página de login con formulario, header simulado y sección de imagen.
+Fecha: 16-11-2025
+Descripción: Página de login con formulario, header simulado, sección de imagen, botón ojo y enlace a recuperación.
 -->
 
 <!DOCTYPE html>
@@ -30,14 +30,17 @@ Descripción: Página de login con formulario, header simulado y sección de ima
                 <input type="text" id="correo" placeholder="juanba@gmail.com" required>
                 
                 <label for="contrasena" class="input-label">Contraseña</label>
-                <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                <div class="password-wrapper">
+                    <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                    <span class="toggle-password">Mostrar</span>
+                </div>
                 
-                <a href="#" class="forgot-link">¿Has olvidado tu contraseña?</a>
+                <a href="/pages/forgot-password.html" class="forgot-link">¿Has olvidado tu contraseña?</a>
                 
                 <button type="button" id="loginBtn" class="auth-button">Login</button>
             </form>
             <div id="mensaje" class="display-box"></div>
-            <p class="register-link">¿No tienes cuenta todavía? <a href="/pages/register.html">Registrarse</a></p>
+            <p class="register-link">¿No tienes cuenta todavía? <a href="/pages/registro.html">Registrarse</a></p>
             <div class="footer-links">
                 <a href="#">Términos y condiciones</a>
                 <a href="#">Política de privacidad</a>
