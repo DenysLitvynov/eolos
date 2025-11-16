@@ -28,7 +28,8 @@ export class PeticionarioREST {
         }
         const response = await fetch(url, options);
         if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
+            const errorText = await response.text();
+            throw new Error(`Error ${response.status}: ${errorText}`);
         }
         return await response.json();
     }

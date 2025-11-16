@@ -26,6 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const contrasena = contrasenaInput.value;
     const contrasena_repite = contrasenaRepiteInput.value;
     const acepta_politica = document.getElementById('acepta_politica').checked;
+       
+    console.log("CHECKBOX VALUE:", acepta_politica);
+    console.log("ENVIANDO AL BACKEND:", { nombre, apellido, correo, targeta_id, contrasena, contrasena_repite, acepta_politica });
+    
+    if (!acepta_politica) {
+        mensaje.textContent = 'Debes aceptar la política de privacidad.';
+        return;
+    }
 
     // Validación frontend
     if (!nombre || !apellido || !correo || !targeta_id || !contrasena || !contrasena_repite) {
@@ -44,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logicaRegistroFake = new RegistroFake();
     try {
         const resultadoRegistro = await logicaRegistroFake.registro(
-            nombre, apellido, correo, targeta_id, contrasena, contrasena_repite
+            nombre, apellido, correo, targeta_id, contrasena, contrasena_repite, acepta_politica
         );
         mensaje.textContent = resultadoRegistro.mensaje;
 
