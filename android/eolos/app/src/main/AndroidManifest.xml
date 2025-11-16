@@ -38,6 +38,9 @@
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <!-- ====================== APP ====================== -->
     <application
@@ -72,6 +75,7 @@
         <activity
             android:name=".activities.VerifyRegistrationActivity"
             android:exported="false" />
+        <activity android:name=".activities.Home_UR" />
 
         <!-- =================== SERVICIO BLE =================== -->
         <service
