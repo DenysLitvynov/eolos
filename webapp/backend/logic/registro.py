@@ -7,12 +7,26 @@ Descripción: Lógica de negocio para el registro. Valida datos y inserta usuari
 # ---------------------------------------------------------
 
 from sqlalchemy.orm import Session
-from ..db.models import Usuario, Mibisivalencia, Rol
+from ..db.models import Usuario, Mibisivalencia, Rol, PendingRegistration
 from passlib.context import CryptContext
 import re
 import uuid
+from datetime import datetime, timedelta, timezone
+import random
+import smtplib
+from email.mime.text import MIMEText
+from dotenv import load_dotenv
+import os
+from .login import LogicaLogin
 
 # ---------------------------------------------------------
+
+load_dotenv()
+SMTP_SERVER = os.getenv("SMTP_SERVER")
+SMTP_PORT = int(os.getenv("SMTP_PORT"))
+SMTP_USER = os.getenv("SMTP_USER")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+FROM_EMAIL = os.getenv("FROM_EMAIL")
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -24,8 +38,8 @@ PASSWORD_REGEX = re.compile(
 # ---------------------------------------------------------
 
 class LogicaRegistro:
-    
-    def validar_datos(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool = False):
+
+     def validar_datos(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool = False):
         """
         Valida los datos de registro.
         """
@@ -65,6 +79,11 @@ class LogicaRegistro:
 
     def hashear_contrasena(self, contrasena: str):
         return pwd_context.hash(contrasena)
+
+    # ---------------------------------------------------------
+
+    def generar_codigo_verificacion(self):
+        return f"{random.randint(100000, 999999)}"
 
     # ---------------------------------------------------------
     

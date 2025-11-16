@@ -88,7 +88,7 @@ class Usuario(Base):
     __tablename__ = "usuarios"
     
     usuario_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    targeta_id = Column(String(36), ForeignKey("mibisivalencia.targeta_id", ondelete="SET NULL"), nullable=True)
+    targeta_id = Column(String(9), ForeignKey("mibisivalencia.targeta_id", ondelete="SET NULL"), nullable=True)
     nombre = Column(String(100), nullable=False)
     apellido = Column(String(100))
     correo = Column(String(100), unique=True, nullable=False)
