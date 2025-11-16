@@ -177,7 +177,7 @@ class PendingRegistration(Base):
     nombre = Column(String(100), nullable=False)
     apellido = Column(String(100))
     correo = Column(String(100), unique=True, nullable=False)
-    targeta_id = Column(String(36), ForeignKey("mibisivalencia.targeta_id", ondelete="SET NULL"), nullable=True)
+    targeta_id = Column(String(9), ForeignKey("mibisivalencia.targeta_id", ondelete="SET NULL"), nullable=True)
     contrasena_hash = Column(Text, nullable=False)
     verification_code = Column(String(6), nullable=False)  # "637821"
     expires_at = Column(TIMESTAMP(timezone=True), nullable=False)

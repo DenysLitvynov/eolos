@@ -11,7 +11,7 @@ from ..db.models import Usuario, Mibisivalencia, Rol, PendingRegistration
 from passlib.context import CryptContext
 import re
 import uuid
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, UTC
 import random
 import smtplib
 from email.mime.text import MIMEText
@@ -23,7 +23,7 @@ from .login import LogicaLogin
 
 load_dotenv()
 SMTP_SERVER = os.getenv("SMTP_SERVER")
-SMTP_PORT = int(os.getenv("SMTP_PORT"))
+SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 FROM_EMAIL = os.getenv("FROM_EMAIL")
@@ -86,8 +86,6 @@ class LogicaRegistro:
     def generar_codigo_verificacion(self):
         return f"{random.randint(100000, 999999)}"
 
-    # ---------------------------------------------------------
-
     def enviar_email_verificacion(self, correo: str, codigo: str):
         try:
             msg = MIMEText(f"Tu código de verificación es: {codigo}. Expira en 15 minutos.")
@@ -102,8 +100,6 @@ class LogicaRegistro:
         except Exception as e:
             raise RuntimeError(f"Error enviando email: {e}")
 
-    # ---------------------------------------------------------
-
     def iniciar_registro(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool):
         """
         Inicia el proceso de registro guardando en pending y enviando código.
@@ -113,7 +109,7 @@ class LogicaRegistro:
             
             hash_contrasena = self.hashear_contrasena(contrasena)
             codigo = self.generar_codigo_verificacion()
-            expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+            expires_at = datetime.now(UTC) + timedelta(minutes=15)
 
             # Eliminar pendientes anteriores para este correo
             db.query(PendingRegistration).filter(PendingRegistration.correo == correo).delete()
@@ -140,47 +136,63 @@ class LogicaRegistro:
             db.rollback()
             raise RuntimeError(f"Error iniciando registro: {e}")
 
-    # ---------------------------------------------------------
-
     def reenviar_codigo(self, db: Session, correo: str):
         """
         Reenvía un nuevo código de verificación, invalidando el anterior.
         """
         try:
+            # Buscar registro pendiente
             pendiente = db.query(PendingRegistration).filter(PendingRegistration.correo == correo).first()
             if not pendiente:
                 raise ValueError("No hay registro pendiente para este correo")
-            if pendiente.expires_at < datetime.now(timezone.utc):
+            
+            # Asegurarse de que expires_at tenga zona horaria
+            expires_at = pendiente.expires_at
+            if expires_at.tzinfo is None:
+                expires_at = expires_at.replace(tzinfo=UTC)
+            
+            # Comprobar si el código ha expirado
+            if expires_at < datetime.now(UTC):
                 raise ValueError("Registro pendiente expirado, inicia de nuevo")
-
+            
+            # Generar nuevo código y actualizar expiración
             codigo = self.generar_codigo_verificacion()
             pendiente.verification_code = codigo
-            pendiente.expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+            pendiente.expires_at = datetime.now(UTC) + timedelta(minutes=15)
             db.commit()
-
+            
+            # Enviar email
             self.enviar_email_verificacion(correo, codigo)
             return True
+        
         except ValueError as e:
             raise e
         except Exception as e:
             db.rollback()
             raise RuntimeError(f"Error reenviando código: {e}")
 
-    # ---------------------------------------------------------
-
     def verificar_y_completar(self, db: Session, correo: str, verification_code: str):
         """
         Verifica el código y completa el registro creando el usuario, con auto-login.
         """
         try:
+            # Buscar registro pendiente
             pendiente = db.query(PendingRegistration).filter(PendingRegistration.correo == correo).first()
             if not pendiente:
                 raise ValueError("No hay registro pendiente para este correo")
             if pendiente.verification_code != verification_code:
                 raise ValueError("Código de verificación incorrecto")
-            if pendiente.expires_at < datetime.now(timezone.utc):
+            
+            # Asegurarse de que expires_at tenga zona horaria
+            expires_at = pendiente.expires_at
+            if expires_at.tzinfo is None:
+                expires_at = expires_at.replace(tzinfo=UTC)
+            
+            # Comprobar expiración
+            if expires_at < datetime.now(UTC):
                 raise ValueError("Código de verificación expirado")
-
+            
+            # Crear usuario nuevo
             nuevo_usuario = Usuario(
                 usuario_id=str(uuid.uuid4()),
                 targeta_id=pendiente.targeta_id,
@@ -190,19 +202,21 @@ class LogicaRegistro:
                 contrasena_hash=pendiente.contrasena_hash
             )
             
-            # Asignar rol "usuario" por defecto
+            # Asignar rol "usuario"
             rol_usuario = db.query(Rol).filter(Rol.nombre == "usuario").one_or_none()
             if not rol_usuario:
                 raise RuntimeError("Rol 'usuario' no encontrado en la BD")
             nuevo_usuario.roles.append(rol_usuario)
             
+            # Guardar usuario y eliminar registro pendiente
             db.add(nuevo_usuario)
             db.delete(pendiente)
             db.commit()
-
-            # Auto-login generando token
+            
+            # Auto-login: generar token
             logica_login = LogicaLogin()
             return logica_login.generar_token(nuevo_usuario)
+        
         except ValueError as e:
             raise e
         except Exception as e:
@@ -210,3 +224,4 @@ class LogicaRegistro:
             raise RuntimeError(f"Error completando registro: {e}")
 
 # ---------------------------------------------------------
+

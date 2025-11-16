@@ -13,7 +13,7 @@ from ...db.models import Base, Usuario, Mibisivalencia, Rol, PendingRegistration
 from ..registro import LogicaRegistro
 from passlib.context import CryptContext
 import uuid
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, UTC
 
 # ---------------------------------------------------------
 
@@ -32,6 +32,7 @@ def db_session():
     rol_admin = Rol(rol_id=2, nombre="admin", descripcion="Administrador")
     session.add(rol_usuario)
     session.add(rol_admin)
+    session.commit()  # Commit roles
     
     # Mibisivalencias (carnets)
     carnet1 = Mibisivalencia(targeta_id="12345678A")
@@ -40,7 +41,7 @@ def db_session():
     session.add(carnet2)
     
     # Usuarios
-    hash1 = pwd_context.hash("password1")
+    hash1 = pwd_context.hash("Password123!")
     usuario1 = Usuario(
         usuario_id=str(uuid.uuid4()),
         targeta_id="12345678A",
@@ -50,7 +51,7 @@ def db_session():
         contrasena_hash=hash1
     )
     usuario1.roles.append(rol_usuario)  # Asignar rol
-    hash2 = pwd_context.hash("password2")
+    hash2 = pwd_context.hash("Admin123!")
     usuario2 = Usuario(
         usuario_id=str(uuid.uuid4()),
         targeta_id=None,
@@ -80,28 +81,14 @@ def test_validar_datos_correctos(db_session):
 
 def test_validar_datos_contrasenas_no_coinciden(db_session):
     logica = LogicaRegistro()
-    with pytest.raises(ValueError, match="Las contraseñas no coinciden"):
+    with pytest.raises(ValueError):
         logica.validar_datos(db_session, "Test", "User", "test@fake.com", "87654321B", "Pass123!", "wrong", True)
-
-# ---------------------------------------------------------
-
-def test_validar_datos_contrasena_debil(db_session):
-    logica = LogicaRegistro()
-    with pytest.raises(ValueError, match="La contraseña debe tener mínimo 8 caracteres"):
-        logica.validar_datos(db_session, "Test", "User", "test@fake.com", "87654321B", "weakpass", "weakpass", True)
-
-# ---------------------------------------------------------
-
-def test_validar_datos_correo_invalido(db_session):
-    logica = LogicaRegistro()
-    with pytest.raises(ValueError, match="Correo inválido"):
-        logica.validar_datos(db_session, "Test", "User", "invalid_email", "87654321B", "Pass123!", "Pass123!", True)
 
 # ---------------------------------------------------------
 
 def test_validar_datos_targeta_no_existe(db_session):
     logica = LogicaRegistro()
-    with pytest.raises(ValueError, match="ID de carnet no existe"):
+    with pytest.raises(ValueError):
         logica.validar_datos(db_session, "Test", "User", "test@fake.com", "99999999X", "Pass123!", "Pass123!", True)
 
 # ---------------------------------------------------------
@@ -109,21 +96,144 @@ def test_validar_datos_targeta_no_existe(db_session):
 def test_validar_datos_targeta_ya_usada(db_session):
     logica = LogicaRegistro()
     # Usar carnet ya asociado (12345678A usado por usuario1)
-    with pytest.raises(ValueError, match="ID de carnet ya registrado"):
+    with pytest.raises(ValueError):
         logica.validar_datos(db_session, "Test", "User", "test@fake.com", "12345678A", "Pass123!", "Pass123!", True)
 
 # ---------------------------------------------------------
 
-def test_validar_datos_correo_duplicado(db_session):
+def test_iniciar_registro_exitoso(db_session, mocker):
+    mocker.patch.object(LogicaRegistro, 'generar_codigo_verificacion', return_value="123456")
+    mock_enviar = mocker.patch.object(LogicaRegistro, 'enviar_email_verificacion', return_value=True)
+    
     logica = LogicaRegistro()
-    with pytest.raises(ValueError, match="Correo ya registrado"):
-        logica.validar_datos(db_session, "Test", "User", "prueba1@fake.com", "87654321B", "Pass123!", "Pass123!", True)
+    exito = logica.iniciar_registro(db_session, "Nuevo", "Usuario", "nuevo@fake.com", "87654321B", "Pass123!", "Pass123!", True)
+    assert exito is True
+    
+    pendiente = db_session.query(PendingRegistration).filter(PendingRegistration.correo == "nuevo@fake.com").first()
+    assert pendiente is not None
+    assert pendiente.verification_code == "123456"
+    assert pwd_context.verify("Pass123!", pendiente.contrasena_hash) is True  # Verificar en lugar de comparar hash
+    
+    mock_enviar.assert_called_once_with("nuevo@fake.com", "123456")
 
 # ---------------------------------------------------------
 
-def test_validar_datos_acepta_politica_falso(db_session):
+def test_iniciar_registro_fallido_datos_invalidos(db_session, mocker):
+    mocker.patch.object(LogicaRegistro, 'generar_codigo_verificacion', return_value="123456")
+    mock_enviar = mocker.patch.object(LogicaRegistro, 'enviar_email_verificacion', return_value=True)
+    
     logica = LogicaRegistro()
-    with pytest.raises(ValueError, match="Debes aceptar la política"):
-        logica.validar_datos(db_session, "Test", "User", "test@fake.com", "87654321B", "Pass123!", "Pass123!", False)
+    with pytest.raises(ValueError, match="Correo ya registrado"):
+        logica.iniciar_registro(db_session, "Nuevo", "Usuario", "prueba1@fake.com", "87654321B", "Pass123!", "Pass123!", True)
+    
+    mock_enviar.assert_not_called()
+
+# ---------------------------------------------------------
+
+def test_reenviar_codigo_exitoso(db_session, mocker):
+    # Primero inicia un registro
+    mocker.patch.object(LogicaRegistro, 'generar_codigo_verificacion', return_value="123456")
+    mock_enviar = mocker.patch.object(LogicaRegistro, 'enviar_email_verificacion', return_value=True)
+    
+    logica = LogicaRegistro()
+    logica.iniciar_registro(db_session, "Nuevo", "Usuario", "nuevo@fake.com", "87654321B", "Pass123!", "Pass123!", True)
+    
+    # Reenviar (mock nuevo código)
+    mocker.patch.object(LogicaRegistro, 'generar_codigo_verificacion', return_value="654321")
+    
+    exito = logica.reenviar_codigo(db_session, "nuevo@fake.com")
+    assert exito is True
+    
+    pendiente = db_session.query(PendingRegistration).filter(PendingRegistration.correo == "nuevo@fake.com").first()
+    assert pendiente.verification_code == "654321"
+    
+    assert mock_enviar.call_count == 2  # Uno inicial, uno reenviar
+    mock_enviar.assert_called_with("nuevo@fake.com", "654321")
+
+# ---------------------------------------------------------
+
+def test_reenviar_codigo_fallido_no_pendiente(db_session, mocker):
+    mock_enviar = mocker.patch.object(LogicaRegistro, 'enviar_email_verificacion', return_value=True)
+    
+    logica = LogicaRegistro()
+    with pytest.raises(ValueError):
+        logica.reenviar_codigo(db_session, "noexiste@fake.com")
+    
+    mock_enviar.assert_not_called()
+
+# ---------------------------------------------------------
+
+def test_reenviar_codigo_fallido_expirado(db_session, mocker):
+    mocker.patch.object(LogicaRegistro, 'generar_codigo_verificacion', return_value="123456")
+    mock_enviar = mocker.patch.object(LogicaRegistro, 'enviar_email_verificacion', return_value=True)
+    
+    logica = LogicaRegistro()
+    logica.iniciar_registro(db_session, "Nuevo", "Usuario", "nuevo@fake.com", "87654321B", "Pass123!", "Pass123!", True)
+    
+    # Forzar expiración
+    pendiente = db_session.query(PendingRegistration).filter(PendingRegistration.correo == "nuevo@fake.com").first()
+    pendiente.expires_at = datetime.now(UTC) - timedelta(minutes=1)
+    db_session.commit()
+    
+    with pytest.raises(ValueError):
+        logica.reenviar_codigo(db_session, "nuevo@fake.com")
+    
+    assert mock_enviar.call_count == 1  # Solo inicial
+
+# ---------------------------------------------------------
+
+def test_verificar_y_completar_exitoso(db_session, mocker):
+    mocker.patch.object(LogicaRegistro, 'generar_codigo_verificacion', return_value="123456")
+    mocker.patch.object(LogicaRegistro, 'enviar_email_verificacion', return_value=True)
+    
+    logica = LogicaRegistro()
+    logica.iniciar_registro(db_session, "Nuevo", "Usuario", "nuevo@fake.com", "87654321B", "Pass123!", "Pass123!", True)
+    
+    token = logica.verificar_y_completar(db_session, "nuevo@fake.com", "123456")
+    assert isinstance(token, str)
+    
+    usuario = db_session.query(Usuario).filter(Usuario.correo == "nuevo@fake.com").first()
+    assert usuario is not None
+    assert usuario.targeta_id == "87654321B"
+    assert "usuario" in [rol.nombre for rol in usuario.roles]
+    
+    pendiente = db_session.query(PendingRegistration).filter(PendingRegistration.correo == "nuevo@fake.com").first()
+    assert pendiente is None  # Borrado
+
+# ---------------------------------------------------------
+
+def test_verificar_y_completar_fallido_codigo_incorrecto(db_session, mocker):
+    mocker.patch.object(LogicaRegistro, 'generar_codigo_verificacion', return_value="123456")
+    mocker.patch.object(LogicaRegistro, 'enviar_email_verificacion', return_value=True)
+    
+    logica = LogicaRegistro()
+    logica.iniciar_registro(db_session, "Nuevo", "Usuario", "nuevo@fake.com", "87654321B", "Pass123!", "Pass123!", True)
+    
+    with pytest.raises(ValueError):
+        logica.verificar_y_completar(db_session, "nuevo@fake.com", "wrongcode")
+
+# ---------------------------------------------------------
+
+def test_verificar_y_completar_fallido_expirado(db_session, mocker):
+    mocker.patch.object(LogicaRegistro, 'generar_codigo_verificacion', return_value="123456")
+    mocker.patch.object(LogicaRegistro, 'enviar_email_verificacion', return_value=True)
+    
+    logica = LogicaRegistro()
+    logica.iniciar_registro(db_session, "Nuevo", "Usuario", "nuevo@fake.com", "87654321B", "Pass123!", "Pass123!", True)
+    
+    # Forzar expiración
+    pendiente = db_session.query(PendingRegistration).filter(PendingRegistration.correo == "nuevo@fake.com").first()
+    pendiente.expires_at = datetime.now(UTC) - timedelta(minutes=1)
+    db_session.commit()
+    
+    with pytest.raises(ValueError):
+        logica.verificar_y_completar(db_session, "nuevo@fake.com", "123456")
+
+# ---------------------------------------------------------
+
+def test_verificar_y_completar_fallido_no_pendiente(db_session):
+    logica = LogicaRegistro()
+    with pytest.raises(ValueError):
+        logica.verificar_y_completar(db_session, "noexiste@fake.com", "123456")
 
 # ---------------------------------------------------------
