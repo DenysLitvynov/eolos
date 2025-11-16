@@ -1,0 +1,45 @@
+<!-- 
+Autor: Denys Litvynov Lymanets
+Fecha: 16-11-2025
+Descripción: Página para verificar código de registro.
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Registro</title>
+    <link rel="stylesheet" href="/css/generales.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Éolos</div>
+        <a href="/" class="back-link">Volver al Inicio</a>
+    </header>
+    <div class="auth-container">
+        <div class="image-section">
+            <img src="/images/tioenbici.png" alt="Ilustración de verificación">
+        </div>
+        <div class="form-section">
+            <h1 class="auth-title">Verificar Correo</h1>
+            <h2 class="auth-subtitle">Introduce el código de 6 dígitos enviado a tu correo</h2>
+            <form id="verifyForm">
+                <label for="codigo" class="input-label">Código de verificación</label>
+                <input type="text" id="codigo" maxlength="6" placeholder="637821" required>
+                
+                <button type="button" id="verifyBtn" class="auth-button">Verificar</button>
+                <button type="button" id="resendBtn" class="auth-button secondary" style="display: none; margin-top: 10px;">
+                    Reenviar código (<span id="timer">60</span>s)
+                </button>
+            </form>
+            <div id="mensaje" class="display-box"></div>
+            <p class="register-link">
+                <a href="/pages/registro.html">Volver al registro</a>
+            </p>
+        </div>
+    </div>
+    <script type="module" src="/js/scripts/verify-registration.js"></script>
+</body>
+</html>
