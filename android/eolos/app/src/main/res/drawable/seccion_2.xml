@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo transparente -->
+    <solid android:color="@color/zxing_transparent"/>
+
+    <!-- Bordes redondeados (30dp en todas las esquinas) -->
+    <corners android:radius="30dp"/>
+
+    <!-- Borde fino (cambia el color si quieres otro) -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/azul_profundo"/>
+</shape>

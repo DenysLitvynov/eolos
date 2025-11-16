@@ -1,6 +1,6 @@
 """
 Autor: Denys Litvynov Lymanets
-Fecha: 26-10-2025
+Fecha: 15-11-2025
 Descripción: Lógica de negocio para el login. Valida credenciales y genera JWT.
 """
 
@@ -49,20 +49,24 @@ class LogicaLogin:
 
     # ---------------------------------------------------------
 
-    def generar_token(self, usuario_id: str, rol_id: int):
+    def generar_token(self, usuario):
         """
-        Genera un token JWT.
+        Genera un token JWT con lista de roles.
         
         Args:
-            usuario_id (str): ID del usuario.
-            rol_id (int): ID del rol.
+            usuario: Objeto Usuario completo
         
         Returns:
             str: Token JWT.
         """
         try:
             expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-            to_encode = {"sub": str(usuario_id), "rol": rol_id, "exp": expire}
+            roles = [rol.nombre for rol in usuario.roles]  # ← LISTA DE ROLES
+            to_encode = {
+                "sub": str(usuario.usuario_id),
+                "roles": roles,           # ← ahora es "roles" (lista)
+                "exp": expire
+            }
             return jwt.encode(to_encode, JWT_SECRET, algorithm=JWT_ALGORITHM)
         except Exception as e:
             raise RuntimeError(f"Error generando token: {e}")
@@ -84,8 +88,6 @@ class LogicaLogin:
         usuario = self.validar_credenciales(db, correo, contrasena)
         if not usuario:
             raise ValueError("Credenciales inválidas")
-        return self.generar_token(str(usuario.usuario_id), usuario.rol_id)
+        return self.generar_token(usuario)   # ← solo pasamos el objeto usuario
 
 # ---------------------------------------------------------
-# class
-

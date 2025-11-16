@@ -1,18 +1,83 @@
-# Archivos de Python
+# ----------------------------------
+# Python
+# ----------------------------------
 __pycache__/
 *.py[cod]
 *.pyo
+*.pyd
 
-# Entornos virtuales
+# ----------------------------------
+# Entornos virtuales / entornos
+# ----------------------------------
 venv/
+.venv/
+env/
+
+# ----------------------------------
+# Variables de entorno (sensibles)
+# ----------------------------------
 .env
+.env.*
 .env.local
 
-# Archivos de configuración de IDEs
+# ----------------------------------
+# Tests / Cache
+# ----------------------------------
+.pytest_cache/
+.coverage
+coverage/
+htmlcov/
+
+# ----------------------------------
+# Node / Frontend
+# ----------------------------------
+node_modules/
+frontend/dist/
+frontend/build/
+
+# ----------------------------------
+# Logs
+# ----------------------------------
+*.log
+
+# ----------------------------------
+# Bases de datos locales
+# ----------------------------------
+*.sqlite3
+*.db
+*.db-journal
+
+# ----------------------------------
+# IDEs / Editores
+# ----------------------------------
 .idea/
 .vscode/
 *.swp
 
+# ----------------------------------
 # Archivos del sistema
+# ----------------------------------
 .DS_Store
 Thumbs.db
+
+# ----------------------------------
+# Distribuciones / builds
+# ----------------------------------
+dist/
+build/
+*.egg-info/
+
+# ----------------------------------
+# Archivos generados
+# ----------------------------------
+tags
+*.map
+*.min.js
+*.tgz
+
+# ----------------------------------
+# Otros
+# ----------------------------------
+.vagrant/
+
+webapp/.env
