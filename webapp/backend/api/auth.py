@@ -10,6 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from ..logic.login import LogicaLogin
 from ..logic.registro import LogicaRegistro
+from ..logic.reset_password import LogicaResetPassword
 from ..db.database import get_db
 from sqlalchemy.orm import Session
 
@@ -30,10 +31,25 @@ class RegistroRequest(BaseModel):
     contrasena_repite: str
     acepta_politica: bool = False   # ← nuevo campo obligatorio
 
+class VerifyRegistrationRequest(BaseModel):
+    correo: str
+    verification_code: str
+
+class ResendVerificationRequest(BaseModel):
+    correo: str
+
+class ForgotPasswordRequest(BaseModel):
+    correo: str
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    contrasena: str
+    contrasena_repite: str
+
 class ResponseToken(BaseModel):
     token: str
 
-class ResponseRegistro(BaseModel):
+class Response(BaseModel):
     exito: bool
     mensaje: str
 
@@ -43,20 +59,18 @@ class ResponseRegistro(BaseModel):
 def ruta_login(login_data: LoginRequest, db: Session = Depends(get_db)):
     try:
         logica = LogicaLogin()
-        token = logica.login(db, login_data.correo, login_data.contrasena)  # ← funciona igual
+        token = logica.login(db, login_data.correo, login_data.contrasena)
         return ResponseToken(token=token)
     except ValueError as e:
         raise HTTPException(status_code=401, detail=str(e))
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# ---------------------------------------------------------
-
 @router.post("/registro")
 def ruta_registro(registro_data: RegistroRequest, db: Session = Depends(get_db)):
     try:
         logica = LogicaRegistro()
-        exito = logica.registrar(
+        exito = logica.iniciar_registro(
             db,
             registro_data.nombre,
             registro_data.apellido,
@@ -66,7 +80,62 @@ def ruta_registro(registro_data: RegistroRequest, db: Session = Depends(get_db))
             registro_data.contrasena_repite,
             registro_data.acepta_politica
         )
-        return ResponseRegistro(exito=exito, mensaje="Registro exitoso")
+        return Response(exito=exito, mensaje="Código de verificación enviado al correo")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/verify-registration")
+def ruta_verify_registration(verify_data: VerifyRegistrationRequest, db: Session = Depends(get_db)):
+    try:
+        logica = LogicaRegistro()
+        token = logica.verificar_y_completar(db, verify_data.correo, verify_data.verification_code)
+        return ResponseToken(token=token)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/resend-verification")
+def ruta_resend_verification(resend_data: ResendVerificationRequest, db: Session = Depends(get_db)):
+    try:
+        logica = LogicaRegistro()
+        exito = logica.reenviar_codigo(db, resend_data.correo)
+        return Response(exito=exito, mensaje="Código reenviado al correo")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/forgot-password")
+def ruta_forgot_password(forgot_data: ForgotPasswordRequest, db: Session = Depends(get_db)):
+    try:
+        logica = LogicaResetPassword()
+        exito = logica.enviar_reset_token(db, forgot_data.correo)
+        return Response(exito=exito, mensaje="Enlace de recuperación enviado al correo")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/resend-reset")
+def ruta_resend_reset(resend_data: ForgotPasswordRequest, db: Session = Depends(get_db)):
+    try:
+        logica = LogicaResetPassword()
+        exito = logica.enviar_reset_token(db, resend_data.correo)  # Reusa, genera nuevo
+        return Response(exito=exito, mensaje="Enlace reenviado al correo")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/reset-password")
+def ruta_reset_password(reset_data: ResetPasswordRequest, db: Session = Depends(get_db)):
+    try:
+        logica = LogicaResetPassword()
+        exito = logica.resetear_contrasena(db, reset_data.token, reset_data.contrasena, reset_data.contrasena_repite)
+        return Response(exito=exito, mensaje="Contraseña actualizada exitosamente")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except RuntimeError as e:

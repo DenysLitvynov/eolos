@@ -38,48 +38,48 @@ PASSWORD_REGEX = re.compile(
 
 class LogicaResetPassword:
 
+
     def enviar_reset_token(self, db: Session, correo: str):
-        """
-        Envía un token de reset al correo del usuario, invalidando anteriores.
-        """
-        try:
-            usuario = db.query(Usuario).filter(Usuario.correo == correo).first()
-            if not usuario:
-                raise ValueError("Correo no registrado")  # Genérico
+        # 1. PRIMERO: CREAR TOKEN EN BD (SIEMPRE)
+        usuario = db.query(Usuario).filter(Usuario.correo == correo).first()
+        if not usuario:
+            raise ValueError("Correo no registrado")
 
-            token = str(uuid.uuid4())
-            expires_at = datetime.now(UTC) + timedelta(minutes=15)
+        token = str(uuid.uuid4())
+        expires_at = datetime.now(UTC) + timedelta(minutes=15)
 
-            # Eliminar tokens anteriores para este usuario
-            db.query(PasswordResetToken).filter(PasswordResetToken.usuario_id == usuario.usuario_id).delete()
-            db.commit()
+        # Eliminar anteriores
+        db.query(PasswordResetToken).filter(PasswordResetToken.usuario_id == usuario.usuario_id).delete()
+        db.commit()
 
-            reset_token = PasswordResetToken(
-                id=str(uuid.uuid4()),
-                usuario_id=usuario.usuario_id,
-                token=token,
-                expires_at=expires_at
-            )
-            db.add(reset_token)
-            db.commit()
+        reset_token = PasswordResetToken(
+            id=str(uuid.uuid4()),
+            usuario_id=usuario.usuario_id,
+            token=token,
+            expires_at=expires_at
+        )
+        db.add(reset_token)
+        db.commit()
 
-            enlace = f"{BASE_URL}/pages/reset-password.html?token={token}"
-            msg = MIMEText(f"Para resetear tu contraseña, haz clic aquí: {enlace}. Expira en 15 minutos.")
-            msg['Subject'] = "Recuperación de Contraseña"
-            msg['From'] = FROM_EMAIL
-            msg['To'] = correo
-
-            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-                server.login(SMTP_USER, SMTP_PASSWORD)
-                server.sendmail(FROM_EMAIL, [correo], msg.as_string())
-
+        # 2. DESPUÉS: ENVIAR EMAIL (solo si no es test)
+        if os.getenv("TESTING") == "True":
+            print(f"[TEST] Token para {correo}: {token}")
             return True
-        except ValueError as e:
-            raise e
-        except Exception as e:
-            db.rollback()
-            raise RuntimeError(f"Error enviando token de reset: {e}")
 
+        # Email real con Brevo
+        enlace = f"{BASE_URL}/pages/reset-password.html?token={token}"
+        msg = MIMEText(f"Enlace: {enlace}. Expira en 15 min.")
+        msg['Subject'] = "Recuperar Contraseña"
+        msg['From'] = os.getenv("FROM_EMAIL")
+        msg['To'] = correo
+
+        with smtplib.SMTP(os.getenv("SMTP_SERVER"), int(os.getenv("SMTP_PORT"))) as server:
+            server.starttls()
+            server.login(os.getenv("SMTP_USER"), os.getenv("SMTP_PASSWORD"))
+            server.sendmail(os.getenv("FROM_EMAIL"), [correo], msg.as_string())
+
+        return True
+    
     def resetear_contrasena(self, db: Session, token: str, contrasena: str, contrasena_repite: str):
         """
         Resetea la contraseña usando el token, validando seguridad.

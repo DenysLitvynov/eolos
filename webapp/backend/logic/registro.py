@@ -27,6 +27,7 @@ SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 FROM_EMAIL = os.getenv("FROM_EMAIL")
+TESTING = os.getenv("TESTING", "False").lower() == "true"
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -87,15 +88,22 @@ class LogicaRegistro:
         return f"{random.randint(100000, 999999)}"
 
     def enviar_email_verificacion(self, correo: str, codigo: str):
+        # SI ESTAMOS EN TESTS → NO ENVÍO EMAIL, SOLO PRINT
+        if TESTING:
+            print(f"[TEST MODE] Código para {correo}: {codigo}")
+            return True
+
+        # SI NO → ENVÍO CON BREVO
         try:
             msg = MIMEText(f"Tu código de verificación es: {codigo}. Expira en 15 minutos.")
-            msg['Subject'] = "Código de Verificación para Registro"
-            msg['From'] = FROM_EMAIL
+            msg['Subject'] = "Código de Verificación"
+            msg['From'] = os.getenv("FROM_EMAIL")
             msg['To'] = correo
 
-            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-                server.login(SMTP_USER, SMTP_PASSWORD)
-                server.sendmail(FROM_EMAIL, [correo], msg.as_string())
+            with smtplib.SMTP(os.getenv("SMTP_SERVER"), int(os.getenv("SMTP_PORT"))) as server:
+                server.starttls()
+                server.login(os.getenv("SMTP_USER"), os.getenv("SMTP_PASSWORD"))
+                server.sendmail(os.getenv("FROM_EMAIL"), [correo], msg.as_string())
             return True
         except Exception as e:
             raise RuntimeError(f"Error enviando email: {e}")
