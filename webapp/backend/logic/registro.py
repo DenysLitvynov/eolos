@@ -1,7 +1,7 @@
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 15-11-2025
-Descripción: Lógica de negocio para el registro. Valida datos y inserta usuario.
+Descripción: Lógica de negocio para el registro. Valida datos, maneja pendientes y verificación por email.
 """
 
 # ---------------------------------------------------------
@@ -38,8 +38,8 @@ PASSWORD_REGEX = re.compile(
 # ---------------------------------------------------------
 
 class LogicaRegistro:
-
-     def validar_datos(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool = False):
+    
+    def validar_datos(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool = False):
         """
         Valida los datos de registro.
         """
@@ -68,10 +68,11 @@ class LogicaRegistro:
         if usuario_existente:
             raise ValueError("ID de carnet ya registrado por otro usuario")
         
-        # Validar correo único
-        correo_existente = db.query(Usuario).filter(Usuario.correo == correo).first()
+        # Validar correo único (en usuarios y pendientes)
+        correo_existente = db.query(Usuario).filter(Usuario.correo == correo).first() or \
+                           db.query(PendingRegistration).filter(PendingRegistration.correo == correo).first()
         if correo_existente:
-            raise ValueError("Correo ya registrado")
+            raise ValueError("Correo ya registrado o en proceso")
         
         return True
     
@@ -86,23 +87,107 @@ class LogicaRegistro:
         return f"{random.randint(100000, 999999)}"
 
     # ---------------------------------------------------------
-    
-    def registrar(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool):
+
+    def enviar_email_verificacion(self, correo: str, codigo: str):
+        try:
+            msg = MIMEText(f"Tu código de verificación es: {codigo}. Expira en 15 minutos.")
+            msg['Subject'] = "Código de Verificación para Registro"
+            msg['From'] = FROM_EMAIL
+            msg['To'] = correo
+
+            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+                server.login(SMTP_USER, SMTP_PASSWORD)
+                server.sendmail(FROM_EMAIL, [correo], msg.as_string())
+            return True
+        except Exception as e:
+            raise RuntimeError(f"Error enviando email: {e}")
+
+    # ---------------------------------------------------------
+
+    def iniciar_registro(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool):
         """
-        Proceso completo de registro (temporal hasta que añadamos verificación por email).
+        Inicia el proceso de registro guardando en pending y enviando código.
         """
         try:
             self.validar_datos(db, nombre, apellido, correo, targeta_id, contrasena, contrasena_repite, acepta_politica)
             
             hash_contrasena = self.hashear_contrasena(contrasena)
-            
-            nuevo_usuario = Usuario(
-                usuario_id=str(uuid.uuid4()),
-                targeta_id=targeta_id,
+            codigo = self.generar_codigo_verificacion()
+            expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+
+            # Eliminar pendientes anteriores para este correo
+            db.query(PendingRegistration).filter(PendingRegistration.correo == correo).delete()
+            db.commit()
+
+            pendiente = PendingRegistration(
+                id=str(uuid.uuid4()),
                 nombre=nombre,
                 apellido=apellido,
                 correo=correo,
-                contrasena_hash=hash_contrasena
+                targeta_id=targeta_id,
+                contrasena_hash=hash_contrasena,
+                verification_code=codigo,
+                expires_at=expires_at
+            )
+            db.add(pendiente)
+            db.commit()
+
+            self.enviar_email_verificacion(correo, codigo)
+            return True
+        except ValueError as e:
+            raise e
+        except Exception as e:
+            db.rollback()
+            raise RuntimeError(f"Error iniciando registro: {e}")
+
+    # ---------------------------------------------------------
+
+    def reenviar_codigo(self, db: Session, correo: str):
+        """
+        Reenvía un nuevo código de verificación, invalidando el anterior.
+        """
+        try:
+            pendiente = db.query(PendingRegistration).filter(PendingRegistration.correo == correo).first()
+            if not pendiente:
+                raise ValueError("No hay registro pendiente para este correo")
+            if pendiente.expires_at < datetime.now(timezone.utc):
+                raise ValueError("Registro pendiente expirado, inicia de nuevo")
+
+            codigo = self.generar_codigo_verificacion()
+            pendiente.verification_code = codigo
+            pendiente.expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+            db.commit()
+
+            self.enviar_email_verificacion(correo, codigo)
+            return True
+        except ValueError as e:
+            raise e
+        except Exception as e:
+            db.rollback()
+            raise RuntimeError(f"Error reenviando código: {e}")
+
+    # ---------------------------------------------------------
+
+    def verificar_y_completar(self, db: Session, correo: str, verification_code: str):
+        """
+        Verifica el código y completa el registro creando el usuario, con auto-login.
+        """
+        try:
+            pendiente = db.query(PendingRegistration).filter(PendingRegistration.correo == correo).first()
+            if not pendiente:
+                raise ValueError("No hay registro pendiente para este correo")
+            if pendiente.verification_code != verification_code:
+                raise ValueError("Código de verificación incorrecto")
+            if pendiente.expires_at < datetime.now(timezone.utc):
+                raise ValueError("Código de verificación expirado")
+
+            nuevo_usuario = Usuario(
+                usuario_id=str(uuid.uuid4()),
+                targeta_id=pendiente.targeta_id,
+                nombre=pendiente.nombre,
+                apellido=pendiente.apellido,
+                correo=pendiente.correo,
+                contrasena_hash=pendiente.contrasena_hash
             )
             
             # Asignar rol "usuario" por defecto
@@ -112,12 +197,16 @@ class LogicaRegistro:
             nuevo_usuario.roles.append(rol_usuario)
             
             db.add(nuevo_usuario)
+            db.delete(pendiente)
             db.commit()
-            return True
+
+            # Auto-login generando token
+            logica_login = LogicaLogin()
+            return logica_login.generar_token(nuevo_usuario)
         except ValueError as e:
             raise e
         except Exception as e:
             db.rollback()
-            raise RuntimeError(f"Error registrando usuario: {e}")
+            raise RuntimeError(f"Error completando registro: {e}")
 
 # ---------------------------------------------------------
