@@ -1,7 +1,7 @@
 <!-- 
 Autor: Denys Litvynov Lymanets
-Fecha: 26-10-2025
-Descripción: Página de login con formulario, header simulado y sección de imagen.
+Fecha: 16-11-2025
+Descripción: Página de login con formulario, header simulado, sección de imagen, botón ojo y enlace a recuperación.
 -->
 
 <!DOCTYPE html>
@@ -26,21 +26,28 @@ Descripción: Página de login con formulario, header simulado y sección de ima
             <h1 class="auth-title">Inicia Sesión</h1>
             <h2 class="auth-subtitle">Bienvenido de nuevo!</h2>
             <form id="loginForm">
-                <label for="correo" class="input-label">Correo o número de teléfono</label>
+                <label for="correo" class="input-label">Correo electrónico</label>
                 <input type="text" id="correo" placeholder="juanba@gmail.com" required>
+                <span class="help-text">Introduce tu correo electrónico registrado</span>
+                <span class="error-message" id="correoError"></span>
                 
                 <label for="contrasena" class="input-label">Contraseña</label>
-                <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                <div class="password-wrapper">
+                    <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                    <button type="button" class="toggle-password">Mostrar</button>
+                </div>
+                <span class="help-text">Introduce tu contraseña</span>
+                <span class="error-message" id="contrasenaError"></span>
                 
-                <a href="#" class="forgot-link">¿Has olvidado tu contraseña?</a>
+                <a href="/pages/forgot-password.html" class="forgot-link">¿Has olvidado tu contraseña?</a>
                 
-                <button type="button" id="loginBtn" class="auth-button">Login</button>
+                <button type="button" id="loginBtn" class="auth-button">Iniciar Sesión</button>
             </form>
             <div id="mensaje" class="display-box"></div>
-            <p class="register-link">¿No tienes cuenta todavía? <a href="/pages/register.html">Registrarse</a></p>
+            <p class="register-link">¿No tienes cuenta todavía? <a href="/pages/registro.html">Registrarse</a></p>
             <div class="footer-links">
-                <a href="#">Términos y condiciones</a>
-                <a href="#">Política de privacidad</a>
+                <a href="/terminos-condiciones.html" target="_blank">Términos y condiciones</a>
+                <a href="/politica-privacidad.html" target="_blank">Política de privacidad</a>
             </div>
         </div>
     </div>

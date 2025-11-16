@@ -1,7 +1,7 @@
 <!-- 
 Autor: Denys Litvynov Lymanets
-Fecha: 27-10-2025
-Descripción: Página de registro con formulario, header simulado y sección de imagen.
+Fecha: 16-11-2025
+Descripción: Página de registro con formulario completo, botón ojo, checkbox de política y validaciones básicas.
 -->
 
 <!DOCTYPE html>
@@ -24,39 +24,59 @@ Descripción: Página de registro con formulario, header simulado y sección de 
         </div>
         <div class="form-section">
             <h1 class="auth-title">Registrarse</h1>
-            <h2 class="auth-subtitle">Bienvenido a éolos!</h2>
+            <h2 class="auth-subtitle">Bienvenido a Éolos!</h2>
             <form id="registroForm">
                 <label for="nombre" class="input-label">Nombre</label>
                 <input type="text" id="nombre" placeholder="Nombre" required>
+                <span class="help-text">Campo obligatorio</span>
+                <span class="error-message" id="nombreError"></span>
                 
                 <label for="apellido" class="input-label">Apellido</label>
                 <input type="text" id="apellido" placeholder="Apellido" required>
+                <span class="help-text">Campo obligatorio</span>
+                <span class="error-message" id="apellidoError"></span>
                 
-                <label for="correo" class="input-label">Correo o número de teléfono</label>
-                <input type="text" id="correo" placeholder="juanba@gmail.com" required>
+                <label for="correo" class="input-label">Correo electrónico</label>
+                <input type="email" id="correo" placeholder="juanba@gmail.com" required>
+                <span class="help-text">Debe ser un correo válido</span>
+                <span class="error-message" id="correoError"></span>
                 
                 <label for="targeta_id" class="input-label">ID Tarjeta</label>
-                <input type="text" id="targeta_id" placeholder="12345HDC" required>
+                <input type="text" id="targeta_id" placeholder="12345678A" required>
+                <span class="help-text">Formato: 8 dígitos + 1 letra</span>
+                <span class="error-message" id="targeta_idError"></span>
                 
                 <label for="contrasena" class="input-label">Contraseña</label>
-                <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                <div class="password-wrapper">
+                    <input type="password" id="contrasena" placeholder="+++++++++++++++" required>
+                    <button type="button" class="toggle-password">Mostrar</button>
+                </div>
+                <span class="help-text">Mínimo 8 caracteres, debe incluir: mayúsculas, minúsculas, números y símbolos (@$!%*?&)</span>
+                <span class="error-message" id="contrasenaError"></span>
                 
                 <label for="contrasena_repite" class="input-label">Repite tu contraseña</label>
-                <input type="password" id="contrasena_repite" placeholder="++++++++++++++++++" required>
-                 <!-- CHECKBOX OBLIGATORIO -->
-                <div class="checkbox-container" style="margin: 15px 0; display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" id="acepta_politica" required style="width: auto;">
-                    <label for="acepta_politica" style="margin: 0; font-size: 0.9em;">
-                        He leído y acepto la <a href="#" style="color: #007bff;">Política de Privacidad</a> y los <a href="#" style="color: #007bff;">Términos y Condiciones</a>
+                <div class="password-wrapper">
+                    <input type="password" id="contrasena_repite" placeholder="++++++++++++++++++" required>
+                    <button type="button" class="toggle-password">Mostrar</button>
+                </div>
+                <span class="help-text">Debe coincidir con la contraseña anterior</span>
+                <span class="error-message" id="contrasena_repiteError"></span>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="acepta_politica" required>
+                    <label for="acepta_politica">
+                        He leído y acepto la <a href="/politica-privacidad.html" target="_blank">Política de Privacidad</a> y los <a href="/terminos-condiciones.html" target="_blank">Términos y Condiciones</a>
                     </label>
-                </div>               
+                </div>
+                <span class="error-message" id="acepta_politicaError"></span>
+                
                 <button type="button" id="registroBtn" class="auth-button">Registrarse</button>
             </form>
             <div id="mensaje" class="display-box"></div>
             <p class="register-link">¿Ya tienes cuenta? <a href="/pages/login.html">Iniciar sesión</a></p>
             <div class="footer-links">
-                <a href="#">Términos y condiciones</a>
-                <a href="#">Política de privacidad</a>
+                <a href="/terminos-condiciones.html" target="_blank">Términos y condiciones</a>
+                <a href="/politica-privacidad.html" target="_blank">Política de privacidad</a>
             </div>
         </div>
     </div>

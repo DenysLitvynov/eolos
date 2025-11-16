@@ -20,6 +20,11 @@ import com.example.eolos.logica_fake.LoginFake;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
+
+import android.net.Uri;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -37,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         TextInputEditText passwordEditText = findViewById(R.id.passwordEditText);
         MaterialButton loginButton = findViewById(R.id.loginButton);
         TextView registerLink = findViewById(R.id.registerLinkTextView);
+        TextView forgotPassword = findViewById(R.id.forgotPasswordTextView);
+
 
         LoginFake loginFake = new LoginFake();
 
@@ -68,6 +75,16 @@ public class LoginActivity extends AppCompatActivity {
 
         registerLink.setOnClickListener(v -> {
             startActivity(new Intent(this, RegisterActivity.class));
+        });
+
+        forgotPassword.setOnClickListener(v -> {
+            String url = "http://10.0.2.2:8000/pages/forgot-password.html";
+            Uri uri = Uri.parse(url);
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            builder.setToolbarColor(ContextCompat.getColor(this, R.color.azul_profundo));
+            builder.addDefaultShareMenuItem();
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(this, uri);
         });
     }
 }
