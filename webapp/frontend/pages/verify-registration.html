@@ -28,6 +28,8 @@ Descripción: Página para verificar código de registro.
             <form id="verifyForm">
                 <label for="codigo" class="input-label">Código de verificación</label>
                 <input type="text" id="codigo" maxlength="6" placeholder="637821" required>
+                <span class="help-text">Introduce el código de 6 dígitos que recibiste por correo</span>
+                <span class="error-message" id="codigoError"></span>
                 
                 <button type="button" id="verifyBtn" class="auth-button">Verificar</button>
                 <button type="button" id="resendBtn" class="auth-button secondary" style="display: none; margin-top: 10px;">

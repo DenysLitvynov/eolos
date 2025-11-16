@@ -13,59 +13,140 @@ document.addEventListener('DOMContentLoaded', () => {
     const resendBtn = document.getElementById('resendBtn');
     const timerSpan = document.getElementById('timer');
     const mensaje = document.getElementById('mensaje');
+    const codigoError = document.getElementById('codigoError');
 
     const correo = localStorage.getItem('pending_email');
     if (!correo) {
-        mensaje.textContent = 'Sesión expirada. Regístrate de nuevo.';
+        mensaje.textContent = 'Sesión expirada. Por favor, completa el registro nuevamente.';
+        mensaje.style.color = '#d32f2f';
         verifyBtn.disabled = true;
+        resendBtn.disabled = true;
         return;
     }
 
     let countdown;
+    let tiempoRestante = 60;
 
+    // TEMPORIZADOR RESTAURADO: Iniciar temporizador al cargar
     const iniciarTemporizador = () => {
-        let tiempo = 60;
-        resendBtn.style.display = 'inline-block';
-        verifyBtn.style.display = 'none';
-        timerSpan.textContent = tiempo;
+        tiempoRestante = 60;
+        resendBtn.style.display = 'none';
+        verifyBtn.style.display = 'inline-block';
+        timerSpan.textContent = tiempoRestante;
+        timerSpan.style.display = 'inline';
+        
         countdown = setInterval(() => {
-            tiempo--;
-            timerSpan.textContent = tiempo;
-            if (tiempo <= 0) {
+            tiempoRestante--;
+            timerSpan.textContent = tiempoRestante;
+            
+            if (tiempoRestante <= 0) {
                 clearInterval(countdown);
-                resendBtn.style.display = 'none';
-                verifyBtn.style.display = 'inline-block';
+                resendBtn.style.display = 'inline-block';
+                verifyBtn.style.display = 'none';
+                timerSpan.style.display = 'none';
             }
         }, 1000);
     };
 
+    // Iniciar temporizador al cargar
+    iniciarTemporizador();
+
+    // Validación básica en tiempo real del código
+    codigoInput.addEventListener('blur', () => {
+        const codigo = codigoInput.value.trim();
+        if (!codigo) {
+            mostrarError(codigoError, 'El código de verificación es obligatorio');
+            codigoInput.classList.add('error');
+        } else if (!/^\d{6}$/.test(codigo)) {
+            mostrarError(codigoError, 'El código debe tener 6 dígitos');
+            codigoInput.classList.add('error');
+        } else {
+            ocultarError(codigoError);
+            codigoInput.classList.remove('error');
+        }
+    });
+
+    function mostrarError(elemento, mensaje) {
+        elemento.textContent = mensaje;
+        elemento.classList.add('show');
+    }
+
+    function ocultarError(elemento) {
+        elemento.textContent = '';
+        elemento.classList.remove('show');
+    }
+
+    function validarCodigo() {
+        const codigo = codigoInput.value.trim();
+        if (!codigo) {
+            mostrarError(codigoError, 'El código de verificación es obligatorio');
+            codigoInput.classList.add('error');
+            return false;
+        }
+        if (!/^\d{6}$/.test(codigo)) {
+            mostrarError(codigoError, 'El código debe tener 6 dígitos');
+            codigoInput.classList.add('error');
+            return false;
+        }
+        return true;
+    }
+
     verifyBtn.addEventListener('click', async () => {
-        const verification_code = codigoInput.value.trim();
-        if (!/^\d{6}$/.test(verification_code)) {
-            mensaje.textContent = 'Código debe tener 6 dígitos.';
+        if (!validarCodigo()) {
             return;
         }
 
+        const verification_code = codigoInput.value.trim();
+
         try {
+            mensaje.textContent = 'Verificando código...';
+            mensaje.style.color = '#666';
+
             const res = await fake.verificar(correo, verification_code);
             localStorage.setItem('token', res.token);
             localStorage.removeItem('pending_email');
-            mensaje.textContent = '¡Registro completado! Redirigiendo...';
+            
+            mensaje.textContent = '¡Registro completado exitosamente! Redirigiendo...';
             mensaje.style.color = 'green';
-            setTimeout(() => { window.location.href = '/pages/prueba.html'; }, 2000);
+            
+            setTimeout(() => { 
+                window.location.href = '/pages/prueba.html'; 
+            }, 2000);
+            
         } catch (error) {
-            mensaje.textContent = 'Código incorrecto o expirado.';
+            // Mensaje genérico para seguridad
+            mensaje.textContent = 'Código incorrecto o expirado. Verifica el código e intenta nuevamente.';
+            mensaje.style.color = '#d32f2f';
+            codigoInput.classList.add('error');
+            console.error('Error detallado en verify registration:', error);
         }
     });
 
     resendBtn.addEventListener('click', async () => {
         try {
+            mensaje.textContent = 'Reenviando código...';
+            mensaje.style.color = '#666';
+
             await fake.reenviar(correo);
-            mensaje.textContent = 'Código reenviado.';
+            
+            mensaje.textContent = 'Código reenviado. Revisa tu correo electrónico.';
             mensaje.style.color = 'green';
+            
+            // Reiniciar temporizador
+            clearInterval(countdown);
             iniciarTemporizador();
+            
         } catch (error) {
-            mensaje.textContent = 'Error al reenviar.';
+            mensaje.textContent = 'Error al reenviar el código. Intenta nuevamente.';
+            mensaje.style.color = '#d32f2f';
+            console.error('Error detallado al reenviar código:', error);
+        }
+    });
+
+    // Permitir envío con Enter
+    codigoInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            verifyBtn.click();
         }
     });
 });
