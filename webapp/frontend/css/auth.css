@@ -18,6 +18,7 @@ Descripción: Estilos específicos para formularios de autenticación optimizado
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     min-height: 480px;
     font-family: "Rethink Sans", sans-serif;
+    box-sizing: border-box;
 }
 
 /* Sección del formulario más compacta */
@@ -28,6 +29,7 @@ Descripción: Estilos específicos para formularios de autenticación optimizado
     display: flex;
     flex-direction: column;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 /* Sección de la imagen más compacta */
@@ -38,6 +40,7 @@ Descripción: Estilos específicos para formularios de autenticación optimizado
     align-items: center;
     justify-content: center;
     padding: 15px;
+    box-sizing: border-box;
 }
 
 .image-section img {
@@ -133,6 +136,7 @@ input::placeholder {
     transition: all 0.3s ease;
     margin-top: 8px;
     font-family: "Rethink Sans", sans-serif;
+    box-sizing: border-box;
 }
 
 .auth-button:hover {
@@ -194,6 +198,7 @@ input::placeholder {
     text-align: center;
     font-size: 0.85em;
     min-height: 20px;
+    box-sizing: border-box;
 }
 
 /* Mensajes de error - solo espacio cuando hay error */
@@ -235,6 +240,7 @@ input.valid {
     display: flex;
     align-items: flex-start;
     gap: 6px;
+    box-sizing: border-box;
 }
 
 .checkbox-container input[type="checkbox"] {
@@ -263,6 +269,7 @@ input.valid {
     display: flex;
     align-items: center;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .password-wrapper input {
@@ -295,4 +302,205 @@ input.valid {
 input[type="text"]:not(.password-wrapper input),
 input[type="email"]:not(.password-wrapper input) {
     padding-right: 12px;
+}
+
+/* ============================================= */
+/* MEDIA QUERIES PARA DISPOSITIVOS MÓVILES - CORREGIDOS */
+/* ============================================= */
+
+/* Tablets pequeñas y móviles grandes (768px y menos) */
+@media (max-width: 768px) {
+    .auth-container {
+        flex-direction: column;
+        width: calc(100% - 30px); /* Margen simétrico de 15px a cada lado */
+        max-width: none;
+        margin: 15px auto;
+        min-height: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-section {
+        width: 100%;
+        padding: 25px;
+        order: 2;
+    }
+    
+    .image-section {
+        width: 100%;
+        padding: 20px;
+        order: 1;
+    }
+    
+    .image-section img {
+        max-width: 70%;
+        max-height: 200px;
+        object-fit: contain;
+    }
+    
+    .auth-title {
+        font-size: 1.4em;
+        text-align: center;
+    }
+    
+    .auth-subtitle {
+        font-size: 0.85em;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Móviles medianos (576px y menos) */
+@media (max-width: 576px) {
+    .auth-container {
+        width: calc(100% - 20px); /* Margen simétrico de 10px a cada lado */
+        margin: 10px auto;
+        border-radius: 0;
+        box-shadow: none;
+        min-height: 100vh;
+        justify-content: flex-start;
+    }
+    
+    .form-section {
+        padding: 20px;
+    }
+    
+    .image-section {
+        padding: 15px;
+    }
+    
+    .image-section img {
+        max-width: 60%;
+        max-height: 150px;
+    }
+    
+    .auth-title {
+        font-size: 1.3em;
+    }
+    
+    .auth-subtitle {
+        font-size: 0.8em;
+    }
+    
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+        padding: 12px;
+        font-size: 16px; /* Previene zoom en iOS */
+    }
+    
+    .auth-button {
+        padding: 14px;
+        font-size: 1em;
+    }
+    
+    .help-text {
+        font-size: 0.65em;
+        line-height: 1.3;
+    }
+    
+    .checkbox-container label {
+        font-size: 0.8em;
+        line-height: 1.4;
+    }
+}
+
+/* Móviles pequeños (400px y menos) */
+@media (max-width: 400px) {
+    .auth-container {
+        width: calc(100% - 10px); /* Margen simétrico de 5px a cada lado */
+        margin: 5px auto;
+    }
+    
+    .form-section {
+        padding: 15px;
+    }
+    
+    .image-section {
+        padding: 10px;
+    }
+    
+    .image-section img {
+        max-width: 50%;
+        max-height: 120px;
+    }
+    
+    .auth-title {
+        font-size: 1.2em;
+    }
+    
+    .input-label {
+        font-size: 0.8em;
+    }
+    
+    .auth-button {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+    
+    .register-link {
+        font-size: 0.8em;
+    }
+    
+    .footer-links {
+        font-size: 0.7em;
+    }
+}
+
+/* Ajustes específicos para el header en móviles */
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 15px;
+        box-sizing: border-box;
+    }
+    
+    .logo {
+        font-size: 1.3em;
+    }
+    
+    .back-link {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+}
+
+/* Ajustes para landscape en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    .auth-container {
+        min-height: auto;
+        margin: 5px auto;
+        width: calc(100% - 20px);
+    }
+    
+    .image-section {
+        display: none; /* Ocultamos la imagen en landscape para ahorrar espacio */
+    }
+    
+    .form-section {
+        padding: 15px 25px;
+    }
+    
+    .auth-title {
+        margin-bottom: 2px;
+    }
+    
+    .auth-subtitle {
+        margin-bottom: 15px;
+    }
+    
+    .input-label {
+        margin-top: 8px;
+    }
+}
+
+/* Asegurar que el body no tenga márgenes no deseados */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Previene scroll horizontal */
 }

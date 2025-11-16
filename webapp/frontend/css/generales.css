@@ -98,3 +98,97 @@ h2 {
 .back-link:hover {
     background-color: rgba(255, 255, 255, 0.3);
 }
+
+/* ============================================= */
+/* MEDIA QUERIES PARA DISPOSITIVOS MÓVILES */
+/* ============================================= */
+
+/* Tablets (768px y menos) */
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 30px;
+        margin: 30px auto;
+        border-radius: 8px;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    h2 {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 30px;
+    }
+    
+    .big-button {
+        width: 100%;
+        max-width: 300px;
+        padding: 18px 30px;
+        font-size: 1.1em;
+    }
+}
+
+/* Móviles (576px y menos) */
+@media (max-width: 576px) {
+    .container {
+        padding: 30px 20px;
+        margin: 20px auto;
+        width: 95%;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    h2 {
+        font-size: 1.1em;
+        margin-bottom: 25px;
+    }
+    
+    .big-button {
+        padding: 16px 25px;
+        font-size: 1em;
+        max-width: 100%;
+    }
+    
+    .header {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        font-size: 1.3em;
+    }
+    
+    .back-link {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+}
+
+/* Móviles pequeños (400px y menos) */
+@media (max-width: 400px) {
+    .container {
+        padding: 20px 15px;
+        margin: 15px auto;
+    }
+    
+    h1 {
+        font-size: 1.6em;
+    }
+    
+    h2 {
+        font-size: 1em;
+    }
+    
+    .big-button {
+        padding: 14px 20px;
+        font-size: 0.95em;
+    }
+}
