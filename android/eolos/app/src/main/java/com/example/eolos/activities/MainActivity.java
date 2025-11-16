@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // === MENÚ DE NAVEGACIÓN INFERIOR ===
-        setupBottomNavigation();
+        //setupBottomNavigation();
 
         // === Verificar permisos ===
         PermisosHelper.verificarYIniciarServicio(this);
@@ -48,12 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         // === BOTONES LOGIN/REGISTER ===
         iniciarBotonoes();
-
-        // === FRAGMENTO DE ESTADO ===
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.status_container, new BeaconStatusFragment())
-                .commit();
     }
 
     private void setupBottomNavigation() {
