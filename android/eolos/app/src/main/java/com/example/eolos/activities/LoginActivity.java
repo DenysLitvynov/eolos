@@ -25,6 +25,9 @@ import androidx.core.content.ContextCompat;
 
 import android.net.Uri;
 
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -44,9 +47,14 @@ public class LoginActivity extends AppCompatActivity {
         TextView registerLink = findViewById(R.id.registerLinkTextView);
         TextView forgotPassword = findViewById(R.id.forgotPasswordTextView);
 
+        // -------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------
 
         LoginFake loginFake = new LoginFake();
 
+        /**
+         * Acción del botón de login: valida campos y llama al backend.
+         */
         loginButton.setOnClickListener(v -> {
             String correo = emailEditText.getText().toString().trim();
             String contrasena = passwordEditText.getText().toString().trim();
@@ -73,10 +81,19 @@ public class LoginActivity extends AppCompatActivity {
             });
         });
 
+        // -------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------
+
+        /**
+         * Enlace para ir a la pantalla de registro.
+         */
         registerLink.setOnClickListener(v -> {
             startActivity(new Intent(this, RegisterActivity.class));
         });
 
+        /**
+         * Abre la página web de recuperación de contraseña en Chrome Custom Tab.
+         */
         forgotPassword.setOnClickListener(v -> {
             String url = "http://10.0.2.2:8000/pages/forgot-password.html";
             Uri uri = Uri.parse(url);
@@ -88,3 +105,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------

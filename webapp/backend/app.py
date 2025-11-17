@@ -1,7 +1,8 @@
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 26-10-2025
-Descripción: Archivo principal de la aplicación FastAPI. Configuramos app, middleware, rutas.
+Descripción: Archivo principal de la aplicación FastAPI.
+Crea la app FastAPI, genera las tablas si no existen, monta las rutas, maneja los CORS y sirve el frontend de la aplicación web.
 """
 
 # ---------------------------------------------------------
@@ -16,6 +17,7 @@ from .db.database import engine
 from .db.models import Base
 
 from .api import perfil_api
+
 # ---------------------------------------------------------
 
 app = FastAPI(title="API REST para Proyecto Biometría y Medio Ambiente", version="1.0.0")
@@ -52,3 +54,4 @@ app.mount("/css", StaticFiles(directory=FRONTEND_DIR / "css"), name="css")
 async def root():
     return FileResponse(FRONTEND_DIR / "index.html")
 # ---------------------------------------------------------
+

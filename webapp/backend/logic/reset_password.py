@@ -38,8 +38,20 @@ PASSWORD_REGEX = re.compile(
 
 class LogicaResetPassword:
 
-
     def enviar_reset_token(self, db: Session, correo: str):
+        """
+        Descripción:
+            Genera un token de recuperación, lo guarda en BD y envía email con enlace.
+            Si el correo no existe lanza error.
+
+        Args:
+            db (Session): Sesión de base de datos.
+            correo (str): Correo del usuario que solicita recuperación.
+
+        Returns:
+            bool: True si se creó el token y se envió (o imprimió en test).
+        """
+
         # 1. PRIMERO: CREAR TOKEN EN BD (SIEMPRE)
         usuario = db.query(Usuario).filter(Usuario.correo == correo).first()
         if not usuario:
@@ -79,10 +91,23 @@ class LogicaResetPassword:
             server.sendmail(os.getenv("FROM_EMAIL"), [correo], msg.as_string())
 
         return True
-    
+
+    # ---------------------------------------------------------
+
     def resetear_contrasena(self, db: Session, token: str, contrasena: str, contrasena_repite: str):
         """
-        Resetea la contraseña usando el token, validando seguridad.
+        Descripción:
+            Valida el token y cambia la contraseña si todo es correcto.
+            Marca el token como usado.
+
+        Args:
+            db (Session): Sesión de base de datos.
+            token (str): Token recibido por URL.
+            contrasena (str): Nueva contraseña.
+            contrasena_repite (str): Repetición de la nueva contraseña.
+
+        Returns:
+            bool: True si la contraseña se cambió con éxito.
         """
         try:
             reset_token = db.query(PasswordResetToken).filter(PasswordResetToken.token == token).first()

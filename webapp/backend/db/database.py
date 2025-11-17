@@ -14,7 +14,10 @@ from dotenv import load_dotenv
 
 # ---------------------------------------------------------
 
+# Carga variables de entorno desde .env
 load_dotenv()
+
+# URL de conexión
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
@@ -25,6 +28,9 @@ Base = declarative_base()
 # ---------------------------------------------------------
 
 def get_db():
+    """
+    Generador que provee una sesión de DB.
+    """
     db = SessionLocal()
     try:
         yield db

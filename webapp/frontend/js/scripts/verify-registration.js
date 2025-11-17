@@ -1,8 +1,10 @@
 /* 
 Autor: Denys Litvynov Lymanets
 Fecha: 16-11-2025
-Descripción: Handlers para verify-registration.html. Solo interfaz.
+Descripción: Script que maneja la interfaz de verificación de código: temporizador, validaciones en frontend, envío del código y reenvío, redirigiendo si todo sale bien.
 */
+
+// ----------------------------------------------------------
 
 import { VerifyFake } from '../logica_fake/verify_registration_fake.js';
 
@@ -27,6 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let countdown;
     let tiempoRestante = 60;
 
+// ----------------------------------------------------------
+// Método que inicia y maneja un temporizador de 60 segundos, mostrando botones según el estado.
+//
+// -> iniciarTemporizador() -> void
+// ----------------------------------------------------------
     // TEMPORIZADOR RESTAURADO: Iniciar temporizador al cargar
     const iniciarTemporizador = () => {
         tiempoRestante = 60;
@@ -66,16 +73,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+// ----------------------------------------------------------
+// Método que muestra un mensaje de error en un elemento y añade clase de error.
+//
+// elemento : HTMLElement
+// mensaje : string
+// -> mostrarError() -> void
+// ----------------------------------------------------------
     function mostrarError(elemento, mensaje) {
         elemento.textContent = mensaje;
         elemento.classList.add('show');
     }
 
+// ----------------------------------------------------------
+// Método que oculta un mensaje de error en un elemento y quita clase de error.
+//
+// elemento : HTMLElement
+// -> ocultarError() -> void
+// ----------------------------------------------------------
     function ocultarError(elemento) {
         elemento.textContent = '';
         elemento.classList.remove('show');
     }
 
+// ----------------------------------------------------------
+// Método que valida si el código es obligatorio y tiene 6 dígitos, mostrando errores si no.
+//
+// -> validarCodigo() -> boolean
+// ----------------------------------------------------------
     function validarCodigo() {
         const codigo = codigoInput.value.trim();
         if (!codigo) {
@@ -106,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('token', res.token);
             localStorage.removeItem('pending_email');
             
-            mensaje.textContent = '¡Registro completado exitosamente! Redirigiendo...';
+            mensaje.textContent = '¡¡Registro completado exitosamente! Redirigiendo...';
             mensaje.style.color = 'green';
             
             setTimeout(() => { 

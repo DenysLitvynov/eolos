@@ -1,7 +1,7 @@
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 15-11-2025
-Descripción: Seed con 10 carnets reales (DNI) + todo lo demás
+Descripción: Script para poblar todas las tablas de la base de datos con unos pocos datos de prueba.  
 """
 
 # ---------------------------------------------------------
@@ -47,6 +47,9 @@ CARNES_DNI = [
 ]
 
 def seed_data():
+    """
+    Método para poblar las tablas con datos simulados.
+    """
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
@@ -58,10 +61,14 @@ def seed_data():
         db.add_all([rol_usuario, rol_admin])
         db.commit()
 
+        # ---------------------------------------------------------
+
         # 2. Mibisivalencia - 10 carnets reales
         carnets = [Mibisivalencia(targeta_id=dni) for dni in CARNES_DNI]
         db.add_all(carnets)
         db.commit()
+
+        # ---------------------------------------------------------
 
         # 3. Usuarios de prueba
         hash1 = pwd_context.hash("Password123!")
@@ -91,11 +98,15 @@ def seed_data():
         db.add_all([usuario_normal, usuario_admin])
         db.commit()
 
+        # ---------------------------------------------------------
+
         # 4. Estaciones
         est1 = Estacion(nombre="Estación 001 - Plaza del Ayuntamiento", lat=39.4699, lon=-0.3763, capacidad=30)
         est2 = Estacion(nombre="Estación 045 - Malvarrosa", lat=39.4780, lon=-0.3266, capacidad=25)
         db.add_all([est1, est2])
         db.commit()
+
+        # ---------------------------------------------------------
 
         # 5. Bicicletas
         bici1 = Bicicleta(
@@ -115,11 +126,15 @@ def seed_data():
         db.add_all([bici1, bici2])
         db.commit()
 
+        # ---------------------------------------------------------
+
         # 6. Placas
         placa1 = PlacaSensores(placa_id=str(uuid.uuid4()), bicicleta_id=bici1.bicicleta_id, estado="activa")
         placa2 = PlacaSensores(placa_id=str(uuid.uuid4()), bicicleta_id=bici2.bicicleta_id, estado="activa")
         db.add_all([placa1, placa2])
         db.commit()
+
+        # ---------------------------------------------------------
 
         # 7. Trayecto
         trayecto = Trayecto(
@@ -132,6 +147,8 @@ def seed_data():
         )
         db.add(trayecto)
         db.commit()
+
+        # ---------------------------------------------------------
 
         # 8. Medidas
         medida1 = Medida(
@@ -155,6 +172,8 @@ def seed_data():
             lon=-0.3550
         )
         db.add_all([medida1, medida2])
+        
+        # ---------------------------------------------------------
 
         # 9. Incidencia
         incidencia = Incidencia(
@@ -177,5 +196,8 @@ def seed_data():
     finally:
         db.close()
 
+# ---------------------------------------------------------
+
 if __name__ == "__main__":
     seed_data()
+

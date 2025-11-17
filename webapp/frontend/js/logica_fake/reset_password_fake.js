@@ -11,6 +11,14 @@ export class ResetPasswordFake {
         this.peticionario = new PeticionarioREST();
     }
 
+    // ----------------------------------------------------------
+    // Método que envía el token recibido por email y las nuevas contraseñas al backend.
+    //
+    // token : string
+    // contrasena : string
+    // contrasena_repite : string
+    // -> resetear() -> Promise<json>
+    // ----------------------------------------------------------
     async resetear(token, contrasena, contrasena_repite) {
         return await this.peticionario.hacerPeticionRest('POST', '/api/v1/auth/reset-password', {
             token, contrasena, contrasena_repite

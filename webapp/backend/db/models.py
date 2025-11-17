@@ -2,6 +2,7 @@
 Autor: Denys Litvynov Lymanets
 Fecha: 15-11-2025
 Descripción: Define todos los modelos de base de datos usando SQLAlchemy.
+Se utiliza para crear las tablas en la base de datos sin utilizar SQL, en su lugar utilizando la sintaxis de Python. 
 """
 
 # ---------------------------------------------------------
@@ -72,10 +73,18 @@ usuario_roles = Table(
 # ---------------------------------------------------------
 
 class Mibisivalencia(Base):
+    """
+    Tabla que simula la base de datos de VALENBISI. Contiene IDs de tarjetas simulados. 
+    """
     __tablename__ = "mibisivalencia"
     targeta_id = Column(String(9), primary_key=True)  # 12345678A   
 
+# ---------------------------------------------------------
+
 class Rol(Base):
+    """
+    Tabla para guardar los roles existentes en el proyecto que pueden tomar los usuarios.
+    """
     __tablename__ = "roles"
     
     rol_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -84,7 +93,12 @@ class Rol(Base):
 
     usuarios = relationship("Usuario", secondary=usuario_roles, back_populates="roles")
 
+# ---------------------------------------------------------
+
 class Usuario(Base):
+    """
+    Tabla para almacenar los datos de todos los usuarios registrados.
+    """
     __tablename__ = "usuarios"
     
     usuario_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -101,6 +115,9 @@ class Usuario(Base):
 # ---------------------------------------------------------
 
 class Estacion(Base):
+    """
+    Tabla para almacenar las estaciones fijas existentes de bicicletas.
+    """
     __tablename__ = "estaciones"
     
     estacion_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -111,7 +128,12 @@ class Estacion(Base):
 
     bicicletas = relationship("Bicicleta", back_populates="estacion")
 
+# ---------------------------------------------------------
+
 class Bicicleta(Base):
+    """
+    Tabla para almacenar todas las biciletas.
+    """
     __tablename__ = "bicicletas"
     
     bicicleta_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -123,7 +145,12 @@ class Bicicleta(Base):
     estacion = relationship("Estacion", back_populates="bicicletas")
     placa = relationship("PlacaSensores", uselist=False, back_populates="bicicleta")
 
+# ---------------------------------------------------------
+
 class PlacaSensores(Base):
+    """
+    Tabla para guardar todas las placas/sensores en uso. 
+    """
     __tablename__ = "placas_sensores"
     
     placa_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -132,7 +159,12 @@ class PlacaSensores(Base):
 
     bicicleta = relationship("Bicicleta", back_populates="placa")
 
+# ---------------------------------------------------------
+
 class Trayecto(Base):
+    """
+    Tabla para almacenar los trayectos realizados.
+    """
     __tablename__ = "trayectos"
     
     trayecto_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -144,7 +176,12 @@ class Trayecto(Base):
     destino_estacion_id = Column(Integer, ForeignKey("estaciones.estacion_id"), nullable=True)
     distancia_total = Column(Float)
 
+# ---------------------------------------------------------
+
 class Medida(Base):
+    """
+    Tabla para almacenar las medidas.
+    """
     __tablename__ = "medidas"
     
     lectura_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -156,7 +193,12 @@ class Medida(Base):
     lat = Column(Numeric(9,6), nullable=False)
     lon = Column(Numeric(9,6), nullable=False)
 
+# ---------------------------------------------------------
+
 class Incidencia(Base):
+    """
+    Tabla para almacenar las incidencias de los usuarios.
+    """
     __tablename__ = "incidencias"
     
     incidencia_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -171,6 +213,9 @@ class Incidencia(Base):
 
 # Tablas para auth con verificación
 class PendingRegistration(Base):
+    """
+    Tabla para almacenar temporalmente los datos de usuario hasta que verifique su correo para completar el registro.
+    """
     __tablename__ = "pending_registrations"
     
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -183,7 +228,12 @@ class PendingRegistration(Base):
     expires_at = Column(TIMESTAMP(timezone=True), nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now(), nullable=False)
 
+# ---------------------------------------------------------
+
 class PasswordResetToken(Base):
+    """
+    Tabla para almacenar los tokens de reseteo de contraseña.
+    """
     __tablename__ = "password_reset_tokens"
     
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))

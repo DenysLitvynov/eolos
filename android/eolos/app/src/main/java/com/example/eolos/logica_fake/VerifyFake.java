@@ -1,8 +1,19 @@
+/**
+ * Fichero: VerifyFake.java
+ * Descripción: Clase que envía petición REST para verificar el correo del usuario.
+ * @author Denys Litvynov Lymanets
+ * @version 2.0
+ * @since 16/11/2025
+ */
+
 package com.example.eolos.logica_fake;
 
 import com.example.eolos.PeticionarioREST;
 
 import org.json.JSONObject;
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
 
 public class VerifyFake {
 
@@ -18,6 +29,16 @@ public class VerifyFake {
         void onError(String error);
     }
 
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
+    /**
+     * Envía el código de verificación al backend para completar el registro.
+     *
+     * @param correo            Correo electrónico del usuario
+     * @param verification_code Código de 6 dígitos recibido por email
+     * @param callback          Callback que recibe el token JWT o error
+     */
     public void verificar(String correo, String verification_code, VerifyCallback callback) {
         PeticionarioREST p = new PeticionarioREST();
         String url = BASE_URL + "/api/v1/auth/verify-registration";
@@ -50,6 +71,15 @@ public class VerifyFake {
         }
     }
 
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
+    /**
+     * Solicita el reenvío del código de verificación al correo indicado.
+     *
+     * @param correo    Correo electrónico del usuario pendiente de verificación
+     * @param callback  Callback que notifica éxito o error
+     */
     public void reenviar(String correo, ReenvioCallback callback) {
         PeticionarioREST p = new PeticionarioREST();
         String url = BASE_URL + "/api/v1/auth/resend-verification";
@@ -74,3 +104,6 @@ public class VerifyFake {
         }
     }
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------

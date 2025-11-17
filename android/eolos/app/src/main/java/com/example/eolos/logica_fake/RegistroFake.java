@@ -15,6 +15,9 @@ import com.example.eolos.PeticionarioREST;
 
 import org.json.JSONObject;
 
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
+
 public class RegistroFake {
 
     private static final String BASE_URL = "http://10.0.2.2:8000";
@@ -30,10 +33,20 @@ public class RegistroFake {
         void onError(String error);
     }
 
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
     /**
-     * Inicia el proceso de registro.
-     * Envía todos los datos incluyendo acepta_politica.
-     * El backend responde con éxito si se envió el código.
+     * Inicia el proceso de registro enviando todos los datos del formulario al backend.
+     *
+     * @param nombre            Nombre del usuario
+     * @param apellido          Apellido del usuario
+     * @param correo            Correo electrónico
+     * @param targetaId         ID del carnet (DNI/NIE)
+     * @param contrasena        Contraseña
+     * @param contrasenaRepite  Repetición de contraseña
+     * @param aceptaPolitica    Aceptación de política de privacidad
+     * @param callback          Callback con resultado
      */
     public void registro(String nombre, String apellido, String correo, String targetaId,
                          String contrasena, String contrasenaRepite, boolean aceptaPolitica,
@@ -82,3 +95,6 @@ public class RegistroFake {
         }
     }
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
