@@ -14,15 +14,15 @@
 }
 .buttonperfil{
         display: flex;
-        justify-content: center;  /* 居中 */
-        gap: 12px;                /* 按钮间距 */
+        justify-content: center;
+        gap: 12px;
         margin-top: 16px;
 }
 
 .buttonperfil button,
 .buttonperfil a {
-    flex: 1;                  /* 自动等分空间 */
-    max-width: 160px;         /* 限制最大宽度，可根据设计调整 */
+    flex: 1;
+    max-width: 160px;
     padding: 10px 0;
     border-radius: 20px;
     font-weight: 500;
@@ -30,7 +30,7 @@
     text-decoration: none;
 }
 
-/* 按钮样式 */
+
 .btn-primary {
     background-color: #0047A1;
     color: white;

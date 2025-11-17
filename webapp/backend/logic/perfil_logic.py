@@ -10,24 +10,15 @@ from passlib.context import CryptContext
 
 from ..db.models import Usuario
 
-# Contexto para encriptar contraseñas con bcrypt
+# Contexto usado para encriptar contraseñas mediante bcrypt
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class LogicaPerfil:
     def obtener_perfil(self, db: Session, usuario_id: str) -> Usuario:
         """
-        Obtiene el perfil de un usuario a partir de su ID.
-
-        Parámetros:
-            db (Session): Sesión de base de datos de SQLAlchemy.
-            usuario_id (str): ID único del usuario.
-
-        Retorna:
-            Usuario: Objeto del modelo Usuario correspondiente.
-
-        Lanza:
-            ValueError: Si el usuario no existe.
+        Obtiene el perfil de un usuario por su ID.
+        Lanza ValueError si el usuario no existe.
         """
         usuario = db.query(Usuario).filter(Usuario.usuario_id == str(usuario_id)).first()
         if not usuario:
@@ -48,41 +39,47 @@ class LogicaPerfil:
         """
         Actualiza la información del perfil de un usuario.
 
-        Parámetros:
-            db (Session): Sesión de base de datos.
-            usuario_id (str): ID del usuario autenticado.
-            nombre (str, opcional): Nuevo nombre.
-            apellido (str, opcional): Nuevo apellido.
-            correo (str, opcional): Nuevo correo (verifica duplicados).
-            targeta_id (str, opcional): Nuevo ID de la tarjeta asociada.
-            contrasena (str, opcional): Nueva contraseña (se encripta si se proporciona).
-
-        Retorna:
-            Usuario: Objeto Usuario actualizado.
-
-        Lanza:
-            ValueError: Si el usuario no existe o el correo ya está en uso.
+        Campos que se pueden modificar:
+          - nombre, apellido, correo, targeta_id, contrasena.
         """
         usuario = self.obtener_perfil(db, usuario_id)
 
-        # Validar si el nuevo correo está en uso por otro usuario
+        # Normalización de cadenas para evitar espacios y errores comunes
+        if nombre is not None:
+            nombre = nombre.strip()
+        if apellido is not None:
+            apellido = apellido.strip()
+        if correo is not None:
+            correo = correo.strip().lower()   # Es habitual almacenar correos en minúsculas
+        if targeta_id is not None:
+            targeta_id = targeta_id.strip()
+
+        # Validar que el correo nuevo no esté siendo usado por otro usuario
         if correo is not None and correo != usuario.correo:
             existe = db.query(Usuario).filter(Usuario.correo == correo).first()
             if existe:
                 raise ValueError("El correo ya está en uso por otro usuario")
             usuario.correo = correo
 
-        # Actualizar los campos si se proporcionan
+        # Actualizar atributos básicos
         if nombre is not None:
             usuario.nombre = nombre
+
+        # Campo opcional 'apellido': lo mantienes por compatibilidad con el frontend
         if apellido is not None:
             usuario.apellido = apellido
+
+        # targeta_id: convertir "" o "null" en valor NULL en la BD
         if targeta_id is not None:
-            usuario.targeta_id = targeta_id
+            if targeta_id == "" or targeta_id.lower() == "null":
+                usuario.targeta_id = None
+            else:
+                usuario.targeta_id = targeta_id  # El validador Pydantic controla longitud máx.
+
+        # Actualizar contraseña solo si se proporciona
         if contrasena:
             usuario.contrasena_hash = pwd_context.hash(contrasena)
 
-        # Guardar los cambios en la base de datos
         db.add(usuario)
         db.commit()
         db.refresh(usuario)

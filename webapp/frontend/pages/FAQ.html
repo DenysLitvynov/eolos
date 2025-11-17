@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Éolos – FAQ</title>
+
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/privacidad.css">
+</head>
+
+
+<body>
+
+
+<header class="header" data-breakpoint="1050">
+    <div class="logo">
+        <img src="/images/logo.png" alt="logo" />
+    </div>
+
+    <!-- Botón hamburger -->
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+        <!-- Ícono (SVG) -->
+        <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="menu-toggle__label">Menú</span>
+    </button>
+
+    <!-- Menú de navegación -->
+    <nav class="nav" id="site-nav">
+        <a href="landing.html">Inicio</a>
+        <a href="#">Mapas</a>
+        <a href="#">Sobre Nosotros</a>
+        <a href="FAQ.html">Faq</a>
+        <a href="#">Contacto</a>
+        <a href="login.html" class="login">Inicia Sesión</a>
+        <a href="registro.html" class="login">Registrarse</a>
+    </nav>
+</header>
+
+<div class="faq-page">
+<div class="privacy-container">
+
+    <div class="titulo">Preguntas Frecuentes</div>
+    <div class="faq">
+        <details class="faq-item" open>
+            <summary>¿Qué es eolos?</summary>
+            <p>
+                eolos es un sistema de monitoreo ambiental urbano que utiliza sensores instalados en bicicletas públicas
+                para medir la calidad del aire en tiempo real. Los datos recopilados permiten a los ayuntamientos generar
+                mapas dinámicos de contaminación y tomar decisiones informadas sobre movilidad y sostenibilidad.
+            </p>
+        </details>
+
+        <details class="faq-item">
+            <summary>¿Cómo funciona eolos?</summary>
+            <p>
+                eolos funciona mediante sensores conectados que recopilan información ambiental y la envían a la aplicación,
+                donde se procesa y se muestra en tiempo real para su análisis.
+            </p>
+        </details>
+
+        <details class="faq-item">
+            <summary>¿Quién puede usar eolos?</summary>
+            <p>
+                Cualquier ciudadano puede acceder a la aplicación para consultar datos ambientales o participar en programas
+                impulsados por el Ayuntamiento.
+            </p>
+        </details>
+
+        <details class="faq-item" open>
+            <summary>¿eolos vende el hardware o la aplicación al público?</summary>
+            <p>
+                No. El sistema es implementado y financiado por el Ayuntamiento. Los ciudadanos solo interactúan con la
+                aplicación para emparejar el sensor y enviar datos, sin necesidad de comprar hardware.
+            </p>
+        </details>
+
+        <details class="faq-item">
+            <summary>¿Qué beneficios ofrece a los usuarios?</summary>
+            <p>
+                eolos proporciona información ambiental en tiempo real, incentivos sostenibles y contribuye a mejorar la
+                calidad del aire en la comunidad.
+            </p>
+        </details>
+    </div>
+</div>
+
+</div>
+
+<footer class="ft">
+    <div class="ft__wrap ft--two-cols">
+        <!-- 左列 -->
+        <div class="ft__brand">
+                <span class="ft__logo">
+                    <img src="/images/logo_footer.png" alt="logo" />
+                </span>
+            <address class="ft__addr">
+                <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
+                <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
+                <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
+            </address>
+        </div>
+
+        <!-- 右列：一个容器，内部再拆 3 栏 -->
+        <div class="ft__links">
+            <nav class="ft__col">
+                <a href="#">Inicio</a>
+                <a href="#">Mapas</a>
+                <a href="#">Sobre nosotros</a>
+            </nav>
+
+            <nav class="ft__col">
+                <a href="#">Contacto</a>
+                <a href="#">Iniciar sesión</a>
+            </nav>
+
+            <nav class="ft__col">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="ft__copy">
+        Copyright ©éolos. Todos los derechos reservados.
+    </div>
+</footer>
+
+
+<script>
+    (function(){
+        const header = document.querySelector('.header');
+        const nav = header.querySelector('.nav');
+        const btn = header.querySelector('.menu-toggle');
+
+        function closeMenu(){
+            btn.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('is-open');
+        }
+
+        function openMenu(){
+            btn.setAttribute('aria-expanded', 'true');
+            nav.classList.add('is-open');
+        }
+
+        btn.addEventListener('click', () => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            expanded ? closeMenu() : openMenu();
+        });
+
+        // 回到桌面端自动关闭
+        window.addEventListener('resize', () => {
+            if(window.innerWidth > 1050) closeMenu();
+        });
+    })();
+</script>
+
+
+</body>
+</html>

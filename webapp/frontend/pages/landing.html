@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Éolos – Landing</title>
+
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/landing.css">
+
+</head>
+<body>
+
+<header class="header" data-breakpoint="1050">
+    <div class="logo">
+        <img src="/images/logo.png" alt="logo" />
+    </div>
+
+    <!-- Botón hamburger -->
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+        <!-- Ícono (SVG) -->
+        <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="menu-toggle__label">Menú</span>
+    </button>
+
+    <!-- Menú de navegación -->
+    <nav class="nav" id="site-nav">
+        <a href="landing.html">Inicio</a>
+        <a href="#">Mapas</a>
+        <a href="#">Sobre Nosotros</a>
+        <a href="FAQ.html">Faq</a>
+        <a href="#">Contacto</a>
+        <a href="login.html" class="login">Inicia Sesión</a>
+        <a href="registro.html" class="login">Registrarse</a>
+    </nav>
+</header>
+
+    <div>
+        <section class="hero">
+            <div class="hero__content">
+                <h1>
+                    Movilidad inteligente<br>
+                    al servicio del aire que<br> respiramos.
+                </h1>
+                <div class="hero__buttons">
+                    <a href="#" class="btn">Más Info</a>
+                    <a href="#" class="btn">Ver app</a>
+                </div>
+            </div>
+             <div class="background_elli"></div>
+            <div class="hero__image">
+                <img src="/images/bici.png" alt="persona en bicicleta" />
+            </div>
+        </section>
+
+        <!-- para la mapa -->
+        <div class="map">
+            <img src="/images/mapa.png" class="mapa" alt="mapa"/>
+            <a href="#"
+               class="map__btn"
+               aria-label="Ver mapa completo">Ver mapa</a>
+        </div>
+
+
+        <!-- wuran-->
+        <section class="pollution-card">
+            <div class="pollution-grid">
+                <!-- 左侧：标题 + 两个并排列表 -->
+                <div class="pollution-left">
+                    <h2>Contaminación en tiempo real</h2>
+
+                    <div class="pollution-lists">
+                        <ul class="pollution-list">
+                            <li><span class="dot red"></span> Nodo en rojo: C/ Ferraz</li>
+                            <li><span class="dot red"></span> Nodo en rojo: C/ Colón</li>
+                            <li><span class="dot red"></span> Nodo en rojo: C/ Jaume I</li>
+                            <li><span class="dot red"></span> Nodo en rojo: C/ Cid</li>
+                            <li><span class="dot green"></span> Nodo en verde: C/ Riu del Turia</li>
+                        </ul>
+
+                        <ul class="pollution-list">
+                            <li><span class="dot red"></span> Nodo en rojo: C/ La depresió</li>
+                            <li><span class="dot red"></span> Nodo en rojo: C/ Zapadores</li>
+                            <li><span class="dot red"></span> Nodo en rojo: C/ Jávea</li>
+                            <li><span class="dot red"></span> Nodo en rojo: C/ Xàtiva</li>
+                            <li><span class="dot green"></span> Nodo en verde: C/ Paraiso Floral</li>
+                        </ul>
+                    </div>
+
+                    <a href="#" class="pollution-btn">info del estado</a>
+                </div>
+
+                <!-- 右侧：图例在上，图片在下 -->
+                <aside class="pollution-right">
+                    <div class="pollution-legend">
+                        <div><span class="dot red"></span> Contaminación alta</div>
+                        <div><span class="dot yellow"></span> Contaminación media</div>
+                        <div><span class="dot green"></span> Contaminación baja</div>
+                    </div>
+
+                    <img class="pollution-img" src="/images/canvas_1.png" alt="persona con móvil">
+                </aside>
+            </div>
+        </section>
+
+
+        <section class="pedaleo-section">
+            <div class="pedaleo-container">
+
+                <!-- 左侧卡片 -->
+                <div class="pedaleo-left">
+                    <h2 class="pedaleo-title">Tu pedaleo<br>también cuenta.</h2>
+
+                    <div class="pedaleo-content-row">
+                        <p>
+                            Cada vez que utilizas una bicicleta pública equipada con sensor,
+                            estás ayudando a construir un mapa vivo de la calidad del aire en Valencia.
+                        </p>
+
+                        <img src="/images/bici.png" alt="persona en bicicleta" class="pedaleo-img">
+                    </div>
+                </div>
+
+                <!-- 右侧卡片 -->
+                <div class="pedaleo-right">
+                    <h2 class="pedaleo-title">¿Cómo funciona?</h2>
+                    <ul class="pedaleo-list">
+                        <li>Usa una bici con sensor y pedalea por la ciudad.</li>
+                        <li>Conecta tu app MIBISIVALENCIA escaneando el código QR del sensor.</li>
+                        <li>Contribuye al mapa enviando datos en tiempo real sobre CO₂, ozono y temperatura.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+
+
+    </div>
+
+
+    <footer class="ft">
+        <div class="ft__wrap ft--two-cols">
+            <!-- 左列 -->
+            <div class="ft__brand">
+                <span class="ft__logo">
+                    <img src="/images/logo_footer.png" alt="logo" />
+                </span>
+                <address class="ft__addr">
+                    <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
+                    <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
+                    <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
+                </address>
+            </div>
+
+            <!-- 右列：一个容器，内部再拆 3 栏 -->
+            <div class="ft__links">
+                <nav class="ft__col">
+                    <a href="#">Inicio</a>
+                    <a href="#">Mapas</a>
+                    <a href="#">Sobre nosotros</a>
+                </nav>
+
+                <nav class="ft__col">
+                    <a href="#">Contacto</a>
+                    <a href="#">Iniciar sesión</a>
+                </nav>
+
+                <nav class="ft__col">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="ft__copy">
+            Copyright ©éolos. Todos los derechos reservados.
+        </div>
+    </footer>
+
+<script>
+    (function(){
+        const header = document.querySelector('.header');
+        const nav = header.querySelector('.nav');
+        const btn = header.querySelector('.menu-toggle');
+
+        function closeMenu(){
+            btn.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('is-open');
+        }
+
+        function openMenu(){
+            btn.setAttribute('aria-expanded', 'true');
+            nav.classList.add('is-open');
+        }
+
+        btn.addEventListener('click', () => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            expanded ? closeMenu() : openMenu();
+        });
+
+        // 回到桌面端自动关闭
+        window.addEventListener('resize', () => {
+            if(window.innerWidth > 1050) closeMenu();
+        });
+    })();
+</script>
+
+</body>
+</html>

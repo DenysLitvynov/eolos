@@ -1,0 +1,146 @@
+/* ===== Estilos simplificados de la Política de Privacidad ===== */
+body {
+    font-family: "Rethink Sans", ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background:#FFFFFF;
+}
+
+.privacy-container {
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #E9EEF0;
+}
+.titulo {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    color: #0D47A1;
+    padding: 20px;
+}
+
+/* Título principal de la página */
+.privacy-container h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/* Subtítulos de secciones */
+.privacy-container h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* Párrafos del texto */
+.privacy-container p {
+    font-size: 24px;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+/* Listas */
+.privacy-container ul {
+    font-size: 24px;
+    line-height: 1.6;
+    margin: 10px 0 10px 30px;
+    list-style: disc;
+}
+
+/* Optimización para pantallas pequeñas */
+@media (max-width: 600px) {
+    .privacy-container {
+        padding: 20px;
+    }
+    .privacy-container h1 { font-size: 24px; }
+    .privacy-container h2 { font-size: 22px; }
+    .privacy-container p,
+    .privacy-container ul { font-size: 18px; }
+    .titulo{font-size: 24px;}
+
+    .faq-item summary {
+        font-size: 20px;
+    }
+    .faq-item p {
+        font-size: 18px;
+    }
+    .privacy-container ul {
+        margin: 0;
+    }
+}
+
+
+/* ===== Estilos del FAQ ===== */
+
+
+/* Ajustes exclusivos para la página FAQ */
+.faq-page .privacy-container {
+    margin: 0 20px;
+    border-radius: 20px;
+    padding:0 20vw;
+    box-sizing:border-box;
+    background-color: #FFFFFF;
+}
+
+.faq {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 10px;
+}
+
+/* Contenedor de cada pregunta */
+.faq-item {
+    background: #ffffff;                 /* Fondo blanco por defecto */
+    border-radius: 20px;
+    padding: 18px 24px;
+    border: 1px solid #dfe4e8;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Sombra ligera al pasar el cursor */
+.faq-item:hover {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Fondo gris claro cuando el ítem está abierto */
+.faq-item[open] {
+    background: #E9EEF0;
+}
+
+/* Estilo del summary (título de la pregunta) */
+.faq-item summary {
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Eliminar el marcador triangular por defecto */
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Flecha personalizada */
+.faq-item summary::after {
+    content: "›";
+    font-size: 24px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+}
+
+/* Rotación de flecha al abrir */
+.faq-item[open] summary::after {
+    transform: rotate(90deg);
+}
+
+/* Contenido del FAQ */
+.faq-item p {
+    font-size: 20px;
+    margin: 12px 0 0 0;
+    line-height: 1.6;
+}
+
