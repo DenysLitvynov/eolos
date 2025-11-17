@@ -13,7 +13,6 @@
 
 ```bash
 git clone <enlace-de-github>
-git checkout develop
 cd eolos/webapp
 ```
 
@@ -25,9 +24,9 @@ Crear archivo `.env` en la carpeta `webapp` con el siguiente contenido:
 # .env
 SMTP_SERVER=smtp-relay.brevo.com
 SMTP_PORT=587
-SMTP_USER=9bb880001@smtp-brevo.com
-SMTP_PASSWORD= "completar"
-FROM_EMAIL= "completar"
+SMTP_USER=
+SMTP_PASSWORD=
+FROM_EMAIL=
 BASE_URL=http://localhost:8000
 DATABASE_URL=postgresql://postgres:1234@localhost:5432/pbio_eolos
 JWT_SECRET=una_clave_muy_segura
@@ -48,8 +47,6 @@ sudo dnf install postgresql-server postgresql-contrib -y
 
 # Inicializar la base de datos (solo primera vez)
 sudo postgresql-setup --initdb
-
-# Continuar igual aunque ponga: "ERROR: Data directory /var/lib/pgsql/data is not empty! ....
 
 # Iniciar el servicio
 sudo systemctl start postgresql
@@ -199,27 +196,27 @@ python run.py
 ```bash
 uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
 ```
+📱 Integración con Android
 
-## 📱 Integración con Android
+⚠️ IMPORTANTE: Si se integra con un cliente Android, es necesario:
 
-**⚠️ IMPORTANTE:** Si se integra con un cliente Android, es necesario:
+    Ejecutar el servidor con acceso externo:
+    bash
 
-1. **Ejecutar el servidor con acceso externo:**
-   ```bash
-   uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
-   ```
+uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
 
-2. **Obtener la IP del servidor:**
-   - **Linux/macOS:** `hostname -I` o `ip addr show`
-   - **Windows:** `ipconfig`
+Obtener la IP del servidor:
 
-3. **En el cliente Android,** usar la IP del servidor en lugar de `localhost`:
-   ```
-   http://[IP-DEL-SERVIDOR]:8000
-   ```
+    Linux/macOS: hostname -I o ip addr show
 
-4. **Verificar firewall** para permitir conexiones en el puerto 8000
+    Windows: ipconfig
 
+En el cliente Android, usar la IP del servidor en lugar de localhost:
+text
+
+http://[IP-DEL-SERVIDOR]:8000
+
+Verificar firewall para permitir conexiones en el puerto 8000
 ## 🔍 Probar la Aplicación
 
 - **Aplicación web:** http://localhost:8000/
