@@ -29,16 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let countdown;
     let tiempoRestante = 60;
 
-// ----------------------------------------------------------
-// Método que inicia y maneja un temporizador de 60 segundos, mostrando botones según el estado.
-//
-// -> iniciarTemporizador() -> void
-// ----------------------------------------------------------
-    // TEMPORIZADOR RESTAURADO: Iniciar temporizador al cargar
+    // CORRECCIÓN: Iniciar temporizador al cargar - NO ocultar el botón de verificar
     const iniciarTemporizador = () => {
         tiempoRestante = 60;
         resendBtn.style.display = 'none';
-        verifyBtn.style.display = 'inline-block';
+        verifyBtn.style.display = 'inline-block'; // Siempre visible
         timerSpan.textContent = tiempoRestante;
         timerSpan.style.display = 'inline';
         
@@ -48,8 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (tiempoRestante <= 0) {
                 clearInterval(countdown);
+                // CORRECCIÓN: Solo mostrar el botón de reenviar, NO ocultar el de verificar
                 resendBtn.style.display = 'inline-block';
-                verifyBtn.style.display = 'none';
+                // verifyBtn.style.display = 'none'; // ELIMINADO - no ocultar el botón de verificar
                 timerSpan.style.display = 'none';
             }
         }, 1000);
@@ -73,34 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-// ----------------------------------------------------------
-// Método que muestra un mensaje de error en un elemento y añade clase de error.
-//
-// elemento : HTMLElement
-// mensaje : string
-// -> mostrarError() -> void
-// ----------------------------------------------------------
     function mostrarError(elemento, mensaje) {
         elemento.textContent = mensaje;
         elemento.classList.add('show');
     }
 
-// ----------------------------------------------------------
-// Método que oculta un mensaje de error en un elemento y quita clase de error.
-//
-// elemento : HTMLElement
-// -> ocultarError() -> void
-// ----------------------------------------------------------
     function ocultarError(elemento) {
         elemento.textContent = '';
         elemento.classList.remove('show');
     }
 
-// ----------------------------------------------------------
-// Método que valida si el código es obligatorio y tiene 6 dígitos, mostrando errores si no.
-//
-// -> validarCodigo() -> boolean
-// ----------------------------------------------------------
     function validarCodigo() {
         const codigo = codigoInput.value.trim();
         if (!codigo) {

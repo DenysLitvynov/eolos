@@ -45,13 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-// ----------------------------------------------------------
-// Método que muestra un mensaje de error en un elemento y añade clase de error.
-//
-// elemento : HTMLElement
-// mensaje : string
-// -> mostrarError() -> void
-// ----------------------------------------------------------
+    // ----------------------------------------------------------
+    // Método que muestra un mensaje de error en un elemento y añade clase de error.
+    //
+    // elemento : HTMLElement
+    // mensaje : string
+    // -> mostrarError() -> void
+    // ----------------------------------------------------------
     function mostrarError(elemento, mensaje) {
         elemento.textContent = mensaje;
         elemento.classList.add('show');
