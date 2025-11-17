@@ -1,14 +1,14 @@
 /**
  * Fichero: EscanerIBeacons.java
- * SOLO escanea el beacon del QR. Ignora TODOS los demás.
- * Implementa patrón singleton y control de duplicados.
- * @author Denys Litvynov Lymanets
- * @editor Hugo Belda Revert
- * @fecha 14/11/2025
+ * SOLO escanea el beacon cuyo nombre viene en el QR. Ignora TODOS los demás.
+ * Patrón singleton + filtro anti-duplicados (5 s).
+ *
+ * @author  Denys Litvynov Lymanets
+ * @editor  Hugo Belda Revert
+ * @fecha   14/11/2025
  * @version 2.0
- * @since 25/09/2025
+ * @since   25/09/2025
  */
-
 package com.example.eolos;
 
 import android.Manifest;
@@ -23,225 +23,251 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
-
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class EscanerIBeacons {
-    private static final String ETIQUETA_LOG = ">>>>";
-    private static final long DUPLICATE_THRESHOLD_MS = 5000; // ms para filtrar duplicados
+
+    private static final String TAG = ">>>>";
+    private static final long DUPLICATE_THRESHOLD_MS = 5000;   // Ignorar duplicados < 5 s
+    private static final long REPEAT_SCAN_MS = 30_000;         // Repetir cada 30 s
+
     private static EscanerIBeacons instance;
 
-    private BluetoothLeScanner elEscanner;
-    private ScanCallback callbackDelEscaneo;
+    private BluetoothLeScanner scanner;
+    private ScanCallback scanCallback;
     public Context context;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private OnBeaconDetectedListener listener;
-    private Map<String, Long> detectedBeacons = new HashMap<>(); // Direcciones de beacons detectados con timestamp
+    private final Map<String, Long> lastSeen = new HashMap<>(); // MAC → timestamp
 
-    // --------------------------------------------------------------------
-    // Interfaz callback para notificar detección de beacon
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // CALLBACK
+    // =============================================================================
+    /**
+     * Interfaz callback para notificar detección de beacon
+     */
     public interface OnBeaconDetectedListener {
         void onBeaconDetected(String jsonMedida);
     }
 
-    // --------------------------------------------------------------------
-    // Constructor privado, asigna contexto y listener
-    // --------------------------------------------------------------------
-    public EscanerIBeacons(Context context, OnBeaconDetectedListener listener) {
+    // =============================================================================
+    // CONSTRUCTOR PRIVADO (Singleton)
+    // =============================================================================
+    /**
+     * Constructor privado (singleton).
+     *
+     * @param context  Contexto de la aplicación
+     * @param listener Listener que recibirá las medidas cuando se detecte el beacon correcto
+     */
+    private EscanerIBeacons(Context context, OnBeaconDetectedListener listener) {
         this.context = context.getApplicationContext();
         this.listener = listener;
     }
 
-    // --------------------------------------------------------------------
-    // Patrón singleton: devuelve instancia única
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // SINGLETON
+    // =============================================================================
+    /**
+     * Obtiene la única instancia de EscanerIBeacons (patrón Singleton).
+     * Si ya existe, actualiza el listener.
+     *
+     * @param context  Contexto de la aplicación
+     * @param listener Listener para recibir las detecciones
+     * @return Instancia única de EscanerIBeacons
+     */
     public static synchronized EscanerIBeacons getInstance(Context context, OnBeaconDetectedListener listener) {
         if (instance == null) {
             instance = new EscanerIBeacons(context, listener);
         }
-        instance.listener = listener; // Actualiza listener si se llama de nuevo
+        instance.listener = listener;
         return instance;
     }
 
-    // --------------------------------------------------------------------
-    // Muestra información básica del dispositivo BLE detectado
-    // Filtra detecciones repetidas en menos de 5s
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // FILTRADO DE DUPLICADOS + LOG
+    // =============================================================================
+    /**
+     * Muestra información del dispositivo detectado y filtra duplicados en menos de 5 segundos.
+     *
+     * @param resultado Resultado del escaneo BLE
+     */
     private void mostrarInformacionDispositivoBTLE(ScanResult resultado) {
         BluetoothDevice device = resultado.getDevice();
         String address = device.getAddress();
         long now = System.currentTimeMillis();
 
-        // Filtrado de detecciones repetidas
-        if (detectedBeacons.containsKey(address) && now - detectedBeacons.get(address) < DUPLICATE_THRESHOLD_MS) {
-            Log.d(ETIQUETA_LOG, "Beacon duplicado ignorado: " + address);
+        if (lastSeen.containsKey(address) && now - lastSeen.get(address) < DUPLICATE_THRESHOLD_MS) {
+            Log.d(TAG, "Duplicado ignorado → " + address);
             return;
         }
+        lastSeen.put(address, now);
 
-        detectedBeacons.put(address, now);
-
-        byte[] bytes = resultado.getScanRecord() != null ? resultado.getScanRecord().getBytes() : new byte[0];
         int rssi = resultado.getRssi();
-
-        Log.d(ETIQUETA_LOG, "DISPOSITIVO: " + device.getAddress() + " RSSI: " + rssi);
-        Log.d(ETIQUETA_LOG, "Bytes del paquete: " + bytes.length);
+        Log.d(TAG, "Detectado → " + address + " | RSSI: " + rssi);
     }
 
-    // --------------------------------------------------------------------
-    // Busca un dispositivo BLE por nombre específico (solo QR)
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // ESCANEO EXCLUSIVO POR NOMBRE
+    // =============================================================================
+    /**
+     * Inicia el escaneo BLE filtrando exclusivamente por el nombre del beacon indicado.
+     *
+     * @param dispositivoBuscado Nombre exacto del beacon a buscar (case-insensitive)
+     */
     private void buscarEsteDispositivoBTLE(String dispositivoBuscado) {
-        Log.d(ETIQUETA_LOG, ">>> BUSCANDO SOLO: " + dispositivoBuscado + " <<<");
+        Log.d(TAG, ">>> BUSCANDO EXCLUSIVAMENTE: " + dispositivoBuscado + " <<<");
 
-        // Si ya había un callback activo, lo detenemos
-        if (callbackDelEscaneo != null) {
-            detenerBusquedaDispositivosBTLE();
-        }
+        if (scanCallback != null) detenerBusquedaDispositivosBTLE();
 
-        // ----------------------------------------------------------------
-        // Configuración del callback del escaneo
-        // ----------------------------------------------------------------
-        callbackDelEscaneo = new ScanCallback() {
+        scanCallback = new ScanCallback() {
             @Override
-            public void onScanResult(int callbackType, ScanResult resultado) {
-                super.onScanResult(callbackType, resultado);
-                BluetoothDevice bd = resultado.getDevice();
+            public void onScanResult(int callbackType, ScanResult result) {
+                BluetoothDevice device = result.getDevice();
                 String name = null;
 
-                // Obtener nombre dependiendo de la versión Android y permisos
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
-                        name = bd.getName();
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        name = device.getName();
                     }
                 } else {
-                    name = bd.getName();
+                    name = device.getName();
                 }
 
-                // ----------------------------------------------------------------
-                // FILTRO ESTRICTO: solo beacon del nombre correcto
-                // ----------------------------------------------------------------
                 if (name != null && name.equalsIgnoreCase(dispositivoBuscado)) {
-                    Log.d(ETIQUETA_LOG, "¡BEACON CORRECTO! -> " + name);
+                    Log.d(TAG, "¡BEACON CORRECTO ENCONTRADO! → " + name);
+                    mostrarInformacionDispositivoBTLE(result);
 
-                    // Mostrar información del dispositivo
-                    mostrarInformacionDispositivoBTLE(resultado);
-
-                    // Convertir trama iBeacon a JSON y notificar listener
-                    byte[] bytes = resultado.getScanRecord().getBytes();
-                    TramaIBeacon tib = new TramaIBeacon(bytes);
-                    String json = convertirTramaAJson(tib);
-                    if (listener != null) {
-                        listener.onBeaconDetected(json);
-                    }
+                    byte[] record = result.getScanRecord().getBytes();
+                    TramaIBeacon trama = new TramaIBeacon(record);
+                    String json = convertirTramaAJson(trama);
+                    if (listener != null) listener.onBeaconDetected(json);
                 }
-                // Los demás beacons se ignoran silenciosamente
             }
 
             @Override
             public void onScanFailed(int errorCode) {
-                Log.e(ETIQUETA_LOG, "Escaneo fallido: " + errorCode);
+                Log.e(TAG, "Escaneo fallido → código: " + errorCode);
             }
         };
 
-        if (elEscanner == null) {
-            Log.e(ETIQUETA_LOG, "Escáner no disponible");
+        if (scanner == null) {
+            Log.e(TAG, "Scanner no inicializado");
             return;
         }
 
-        // ----------------------------------------------------------------
-        // Configuración del escaneo BLE
-        // ----------------------------------------------------------------
         ScanSettings settings = new ScanSettings.Builder()
                 .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
                 .build();
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
-                    elEscanner.startScan(null, settings, callbackDelEscaneo);
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    scanner.startScan(null, settings, scanCallback);
                 }
             } else {
-                elEscanner.startScan(null, settings, callbackDelEscaneo);
+                scanner.startScan(null, settings, scanCallback);
             }
         } catch (Exception e) {
-            Log.e(ETIQUETA_LOG, "Error startScan: " + e.getMessage());
+            Log.e(TAG, "Error al iniciar escaneo → " + e.getMessage());
         }
     }
 
-    // --------------------------------------------------------------------
-    // Detiene búsqueda de dispositivos BLE si callback activo
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // DETENER ESCANEO
+    // =============================================================================
+    /**
+     * Detiene el escaneo BLE actual si está en curso.
+     */
     public void detenerBusquedaDispositivosBTLE() {
-        if (elEscanner != null && callbackDelEscaneo != null) {
+        if (scanner != null && scanCallback != null) {
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
-                        elEscanner.stopScan(callbackDelEscaneo);
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        scanner.stopScan(scanCallback);
                     }
                 } else {
-                    elEscanner.stopScan(callbackDelEscaneo);
+                    scanner.stopScan(scanCallback);
                 }
             } catch (Exception e) {
-                Log.e(ETIQUETA_LOG, "Error stopScan: " + e.getMessage());
+                Log.e(TAG, "Error al detener escaneo → " + e.getMessage());
             }
         }
-        callbackDelEscaneo = null;
+        scanCallback = null;
     }
 
-    // --------------------------------------------------------------------
-    // Inicializa adaptador Bluetooth y escáner BLE
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // INICIALIZAR BLUETOOTH
+    // =============================================================================
+    /**
+     * Inicializa el adaptador Bluetooth y obtiene el BluetoothLeScanner.
+     * Si Bluetooth no está disponible o desactivado, registra advertencia.
+     */
     public void inicializarBlueTooth() {
-        BluetoothAdapter bta = BluetoothAdapter.getDefaultAdapter();
-        if (bta == null || !bta.isEnabled()) {
-            Log.w(ETIQUETA_LOG, "Bluetooth no disponible");
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter == null || !adapter.isEnabled()) {
+            Log.w(TAG, "Bluetooth no disponible o desactivado");
             return;
         }
-
-        elEscanner = bta.getBluetoothLeScanner();
-        Log.d(ETIQUETA_LOG, "Escáner BLE inicializado");
+        scanner = adapter.getBluetoothLeScanner();
+        Log.d(TAG, "Bluetooth LE inicializado correctamente");
     }
 
-    // --------------------------------------------------------------------
-    // Inicia escaneo automático del beacon por nombre, repite cada 30s
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // ESCANEO AUTOMÁTICO CADA 30 SEGUNDOS
+    // =============================================================================
+    /**
+     * Inicia el escaneo automático del beacon indicado. Detiene cualquier escaneo previo,
+     * realiza un primer escaneo inmediato y lo repite cada 30 segundos.
+     *
+     * @param nombreDispositivo Nombre exacto del beacon a escanear
+     */
     public void iniciarEscaneoAutomatico(String nombreDispositivo) {
         if (nombreDispositivo == null || nombreDispositivo.trim().isEmpty()) {
-            Log.w(ETIQUETA_LOG, "Nombre vacío - NO escaneo");
+            Log.w(TAG, "Nombre vacío → no se inicia escaneo");
             return;
         }
 
-        handler.removeCallbacksAndMessages(null); // Cancelar escaneos previos
+        handler.removeCallbacksAndMessages(null);
         inicializarBlueTooth();
         buscarEsteDispositivoBTLE(nombreDispositivo);
 
-        // Repetir escaneo cada 30 segundos
         handler.postDelayed(() -> {
             detenerBusquedaDispositivosBTLE();
             buscarEsteDispositivoBTLE(nombreDispositivo);
-        }, 30000);
+        }, REPEAT_SCAN_MS);
     }
 
-    // --------------------------------------------------------------------
-    // Convierte trama iBeacon a JSON {"medida": valor}
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // CONVERSIÓN A JSON
+    // =============================================================================
+    /**
+     * Convierte la trama iBeacon en un JSON con la medida (minor).
+     *
+     * @param tib Objeto TramaIBeacon con los datos del paquete recibido
+     * @return String JSON con formato {"medida": valor}
+     */
     private String convertirTramaAJson(TramaIBeacon tib) {
         int medida = Utilidades.bytesToInt(tib.getMinor());
         return "{\"medida\": " + medida + "}";
     }
 
-    // --------------------------------------------------------------------
-    // Limpia callbacks, handler y mapa de beacons; destruye instancia singleton
-    // --------------------------------------------------------------------
+    // =============================================================================
+    // LIMPIEZA TOTAL Y DESTRUCCIÓN DE INSTANCIA
+    // =============================================================================
+    /**
+     * Detiene el escaneo, limpia todos los recursos y destruye la instancia singleton.
+     * Debe llamarse al cerrar la aplicación o al desconectar.
+     */
     public void destroy() {
         detenerBusquedaDispositivosBTLE();
         handler.removeCallbacksAndMessages(null);
-        detectedBeacons.clear();
+        lastSeen.clear();
         instance = null;
+        Log.d(TAG, "EscanerIBeacons destruido");
     }
 }
