@@ -1,148 +1,256 @@
-# Proyecto Aplicaciones Biometría Medioambiente EQ2
+# Guía de Instalación y Configuración - Eolos WebApp
 
+## 📋 Prerrequisitos
 
-## Instalación paso a paso
+- Git instalado
+- Python 3.7+
+- PostgreSQL
+- pip (gestor de paquetes de Python)
 
-### 1. Clonar el repositorio
+## 🚀 Instalación Rápida
 
-```bash
-cd ~/Projects  # O cd %USERPROFILE%\Projects en Windows
-git clone https://github.com/DenysLitvynov/proyecto-aplicaciones-biometria-medioambiente-eq2.git
-cd proyecto-aplicaciones-biometria-medioambiente-eq2
-```
-
----
-
-### 2. Crear entorno virtual
-
-- **Linux/macOS:**
-  ```bash
-  python3 -m venv .venv
-  source .venv/bin/activate
-  ```
-
-- **Windows:**
-  ```powershell
-  python -m venv .venv
-  .\.venv\Scripts\Activate.ps1
-  ```
-
-Usa `deactivate` para salir del entorno virtual.
-
----
-
-### 3. Instalar dependencias
+### 1. Clonar el Repositorio
 
 ```bash
-pip install --upgrade pip
-pip install -r requirements.txt
+git clone <enlace-de-github>
+cd eolos/webapp
 ```
 
----
+### 2. Configurar Variables de Entorno
 
-### 4. Instalar PostgreSQL
+Crear archivo `.env` en la carpeta `webapp` con el siguiente contenido:
 
-Instala PostgreSQL 16+ según tu sistema operativo.
+```env
+# .env
+SMTP_SERVER=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_USER=
+SMTP_PASSWORD=
+FROM_EMAIL=
+BASE_URL=http://localhost:8000
+DATABASE_URL=postgresql://postgres:1234@localhost:5432/pbio_eolos
+JWT_SECRET=una_clave_muy_segura
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+ALGORITHM=HS256
+```
 
-- **Linux (Fedora):**
-  ```bash
-  sudo dnf install postgresql-server postgresql-contrib -y
-  sudo postgresql-setup --initdb
-  sudo systemctl enable --now postgresql
-  ```
+## 🗄️ Instalación y Configuración de PostgreSQL
 
-- **Linux (Ubuntu/Debian):**
-  ```bash
-  sudo apt update
-  sudo apt install postgresql postgresql-contrib -y
-  sudo systemctl enable --now postgresql
-  ```
+### Linux (Fedora/RHEL)
 
-- **macOS (Homebrew):**
-  ```bash
-  brew install postgresql@16
-  brew services start postgresql@16
-  ```
+```bash
+# Verificar si PostgreSQL está instalado
+psql --version
 
-- **Windows:**
-  1. Descarga el instalador desde [https://www.postgresql.org/download/windows/](https://www.postgresql.org/download/windows/)
-  2. Ejecuta como administrador y establece contraseña `123456` para usuario `postgres`.
+# Si no está instalado, instalar:
+sudo dnf install postgresql-server postgresql-contrib -y
 
----
+# Inicializar la base de datos (solo primera vez)
+sudo postgresql-setup --initdb
 
-### 5. Crear base de datos y usuario
+# Iniciar el servicio
+sudo systemctl start postgresql
 
-```sql
+# Verificar estado
+sudo systemctl status postgresql
+```
+
+### Windows
+
+1. Descargar PostgreSQL desde [postgresql.org](https://www.postgresql.org/download/windows/)
+2. Ejecutar el instalador y seguir las instrucciones
+3. Durante la instalación, establecer contraseña `1234` para el usuario postgres
+4. Crear la base de datos `pbio_eolos` usando pgAdmin o línea de comandos
+
+### macOS
+
+```bash
+# Instalar con Homebrew
+brew install postgresql
+
+# Iniciar servicio
+brew services start postgresql
+
+# O instalar desde postgresapp.com (GUI)
+```
+
+## 🔧 Configuración de la Base de Datos
+
+```bash
+# Acceder a PostgreSQL
+sudo -u postgres psql
+
+# En la consola de PostgreSQL, ejecutar:
+ALTER USER postgres WITH PASSWORD '1234';
 CREATE DATABASE pbio_eolos;
-CREATE USER postgres WITH PASSWORD '123456';
 GRANT ALL PRIVILEGES ON DATABASE pbio_eolos TO postgres;
+
+# Salir de psql
+\q
+
+# Probar conexión
+psql -h localhost -U postgres -d pbio_eolos
+# Contraseña: 1234
+
+# Si entra correctamente, salir con:
 \q
 ```
 
----
+## 🐍 Entorno Virtual Python
 
-### 6. Configurar `.env`
+### Crear y activar entorno virtual
 
-Crea un archivo `.env` en la raíz del proyecto o en `webapp/backend`:
-
-```env
-DATABASE_URL=postgresql://postgres:123456@localhost:5432/pbio_eolos
-JWT_SECRET=clave_secreta_equipo2_pl1
+```bash
+# Desde la carpeta webapp
+python3 -m venv venv
 ```
 
----
+### Activación del entorno virtual
 
-### 7. Limpiar base de datos (opcional)
-
-Si quieres reiniciar la base antes de ejecutar seeds:
-
+**Linux/macOS:**
 ```bash
-psql pbio_eolos -c "TRUNCATE TABLE usuarios, roles, mibisivalencia RESTART IDENTITY CASCADE;"
+# Bash
+source venv/bin/activate
+
+# Fish
+source venv/bin/activate.fish
+
+# Zsh
+source venv/bin/activate
 ```
 
----
+**Windows:**
+```cmd
+# Command Prompt
+venv\Scripts\activate
 
-### 8. Ejecutar seeds (insertar datos de prueba)
+# PowerShell
+venv\Scripts\Activate.ps1
+```
+
+## 📦 Instalación de Dependencias
+
+Con el entorno virtual activado:
 
 ```bash
-python -m webapp.backend.db.seed
-``` Esto crea tablas y datos iniciales.
----
+# Actualizar pip
+pip install --upgrade pip
 
-### 9. Ejecutar la aplicación FastAPI
+# Opción 1: Instalar dependencias individualmente
+pip install fastapi uvicorn sqlalchemy alembic python-dotenv passlib[bcrypt] psycopg2-binary pydantic[email] python-multipart pyjwt
+
+# Opción 2: Si existe requirements.txt
+pip install -r requirements.txt
+```
+
+## 🗃️ Migraciones de Base de Datos
 
 ```bash
-cd webapp
+# Verificar migraciones existentes
+ls backend/migrations/versions
+
+# Si no hay migraciones, generar la inicial
+alembic revision --autogenerate -m "Inicial: Crea tablas de models"
+
+# Aplicar migraciones
+alembic upgrade head
+```
+
+## 🌱 Poblar Base de Datos (Seed)
+
+```bash
+# Navegar a la carpeta de la base de datos
+cd backend/db
+
+# Solucionar posibles conflictos con bcrypt
+pip uninstall -y bcrypt
+pip install bcrypt==4.1.2
+pip install --force-reinstall passlib
+
+# Ejecutar script de seed
+python seed.py
+```
+
+**Nota:** Si aparece el error:
+```
+(trapped) error reading bcrypt version
+AttributeError: module 'bcrypt' has no attribute '__about__'
+```
+No afecta el funcionamiento, siempre que luego muestre "Seed completado: ..."
+
+Regresar a la carpeta principal:
+```bash
+cd ../..
+```
+
+## 🚀 Ejecutar el Servidor
+
+Desde la carpeta `webapp`:
+
+### Opción 1: Con run.py
+```bash
 python run.py
 ```
 
-O en modo desarrollo con recarga automática:
-
+### Opción 2: Con uvicorn (recomendado para desarrollo)
 ```bash
 uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
 ```
+📱 Integración con Android
 
-API disponible en: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+⚠️ IMPORTANTE: Si se integra con un cliente Android, es necesario:
 
----
+    Ejecutar el servidor con acceso externo:
+    bash
 
-### 10. Nota sobre Android
+uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
 
-Si se integra con un cliente Android, es necesario indicar la **IP del dispositivo** donde se ejecuta el servidor para enviar las peticiones correctamente, en lugar de usar `localhost`.
+Obtener la IP del servidor:
 
----
+    Linux/macOS: hostname -I o ip addr show
 
-## Notas finales
+    Windows: ipconfig
 
-- Siempre activa el entorno virtual antes de usar Python.
-- Para reiniciar completamente la base de datos:
-  ```sql
-  DROP SCHEMA public CASCADE;
-  CREATE SCHEMA public;
-  \q
-  ```
-  Luego ejecuta seeds nuevamente.
-- Documentación API: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+En el cliente Android, usar la IP del servidor en lugar de localhost:
+text
 
----
+http://[IP-DEL-SERVIDOR]:8000
 
+Verificar firewall para permitir conexiones en el puerto 8000
+## 🔍 Probar la Aplicación
+
+- **Aplicación web:** http://localhost:8000/
+- **Documentación API:** http://localhost:8000/docs (Swagger)
+
+### 👤 Usuarios de Prueba
+
+**Usuario normal:**
+- Email: `pepe@fake.com`
+- Contraseña: `Password123!`
+
+**Usuario administrador:**
+- Email: `admin@fake.com`
+- Contraseña: `Admin123!`
+
+## ❗ Solución de Problemas Comunes
+
+### Error de conexión a PostgreSQL
+- Verificar que el servicio esté ejecutándose
+- Confirmar credenciales en el archivo `.env`
+- Asegurar que la base de datos `pbio_eolos` existe
+
+### Error de dependencias
+- Verificar que el entorno virtual esté activado
+- Ejecutar `pip install --upgrade pip` antes de instalar dependencias
+
+### Error de migraciones
+- Verificar que la base de datos esté creada y accesible
+- Confirmar que los modelos estén correctamente definidos
+
+## 📞 Soporte
+
+Si encuentras problemas durante la instalación, verifica:
+1. Todas las variables en `.env` son correctas
+2. PostgreSQL está ejecutándose
+3. El entorno virtual está activado
+4. Todas las dependencias están instaladas

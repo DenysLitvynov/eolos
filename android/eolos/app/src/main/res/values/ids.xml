@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="contenedor_km" type="id" />
+    <item name="tv_km_titulo" type="id" />
+    <item name="tv_km_valor" type="id" />
+    <item name="progreso_km" type="id" />
+    <item name="btn_ver_recompensas" type="id" />
+    <item name="tv_km_desc" type="id" />
+    <item name="iv_ciclista" type="id" />
+</resources>

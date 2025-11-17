@@ -10,7 +10,6 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from ...db.models import Base, Usuario, Rol
-from ...db.database import get_db
 from ..login import LogicaLogin
 from passlib.context import CryptContext
 import uuid
@@ -26,24 +25,25 @@ def db_session():
     Session = sessionmaker(bind=engine)
     session = Session()
     
-    # Insertar rol de prueba (necesario para foreign key)
+    # Insertar rol de prueba
     test_rol = Rol(
         rol_id=1,
         nombre="usuario",
         descripcion="Usuario estándar"
     )
     session.add(test_rol)
+    session.commit()  # Commit para que el rol exista antes de asignar
     
     # Insertar datos de prueba directamente
-    hash_test = pwd_context.hash("testpass")
+    hash_test = pwd_context.hash("Testpass123!")
     test_user = Usuario(
         usuario_id=str(uuid.uuid4()),
-        rol_id=1,
         nombre="Test",
         apellido="User",
         correo="test@fake.com",
         contrasena_hash=hash_test
     )
+    test_user.roles.append(test_rol)  # Asignar rol via relación
     session.add(test_user)
     session.commit()
     
@@ -53,18 +53,14 @@ def db_session():
 # ---------------------------------------------------------
 
 def test_validar_credenciales_correctas(db_session):
-    #Si el usuario no se crea y/o no tiene el correo que corresponde - Error
-    
     logica = LogicaLogin()
-    usuario = logica.validar_credenciales(db_session, "test@fake.com", "testpass")
+    usuario = logica.validar_credenciales(db_session, "test@fake.com", "Testpass123!")
     assert usuario is not None
     assert usuario.correo == "test@fake.com"
 
 # ---------------------------------------------------------
 
 def test_validar_credenciales_incorrectas(db_session):
-    # Si la contraseña es incorrecta - Error
-
     logica = LogicaLogin()
     usuario = logica.validar_credenciales(db_session, "test@fake.com", "wrongpass")
     assert usuario is None
@@ -72,26 +68,22 @@ def test_validar_credenciales_incorrectas(db_session):
 # ---------------------------------------------------------
 
 def test_generar_token(db_session):
-    # Si el token no se ha creado o se ha creado vacio - Error 
-
     logica = LogicaLogin()
-    token = logica.generar_token(str(uuid.uuid4()), 1)
+    usuario = db_session.query(Usuario).first()  # Usa el usuario creado en fixture
+    token = logica.generar_token(usuario)
     assert isinstance(token, str)
     assert len(token) > 0
 
 # ---------------------------------------------------------
 
 def test_login_exitoso(db_session):
-    # Si las credenciales son incorrectas el token no se generara - Error
-
     logica = LogicaLogin()
-    token = logica.login(db_session, "test@fake.com", "testpass")
+    token = logica.login(db_session, "test@fake.com", "Testpass123!")
     assert isinstance(token, str)
 
 # ---------------------------------------------------------
 
 def test_login_fallido(db_session):
-    # Comprobamos que si las credenciales no son correctas da error, si son correctas - Error
     logica = LogicaLogin()
     with pytest.raises(ValueError):
         logica.login(db_session, "test@fake.com", "wrongpass")
