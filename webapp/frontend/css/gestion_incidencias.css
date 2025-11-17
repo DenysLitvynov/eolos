@@ -1,0 +1,96 @@
+.h1 {color:#0D47A1;}
+
+
+.container-incidencias {
+width: 90%;
+max-width: 1400px;
+margin: 20px auto;
+}
+
+/*====================================================================*/
+/*Barra de búsqueda y filtros */
+/*====================================================================*/
+.search-bar {
+display: flex;
+gap: 15px;
+margin-bottom: 30px;
+flex-wrap: wrap;
+
+}
+
+.search-input {
+flex: 1;
+min-width: 250px;
+padding: 12px 20px;
+border: 1px solid #ddd;
+border-radius: 25px;
+font-size: 14px;
+font-family: "Rethink Sans", sans-serif;
+}
+
+
+.search-input:focus {
+outline: none;
+border-color: #0D47A1;
+box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+}
+
+
+.filter-buttons {
+display: flex;
+gap: 10px;
+}
+
+
+.filter-btn {
+background: white;
+border: 1px solid #ddd;
+padding: 10px 15px;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s;
+font-family: "Rethink Sans", sans-serif;
+}
+
+.filter-btn:hover {
+background: #f0f0f0;
+border-color: #0D47A1;
+}
+
+/*====================================================================*/
+/*Barra de búsqueda y filtros */
+/*====================================================================*/
+.grid-incidencias {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+}
+
+/*=============================================*/
+/*Estilo de cartas de incidencias*/
+/*=============================================*/
+.carta-incidencia {
+background: #fff;
+border-radius: 8px;
+padding: 15px;
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+border-top: 35px solid;
+transition: transform 0.3s, box-shadow 0.3s;
+width: 270px;
+}
+
+.carta-incidencia:hover { 
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+
+.estado-noresuelto{ border-color: #e74c3c; }
+.estado-resuelto { border-color: #2ecc71; }
+.carta-incidencia h4 { margin: 0 0 10px; font-size: 1rem; }
+.carta-incidencia small h5 { display: block; color: #666; margin-bottom: 4px; }
+
+
+
+/*=============================================*/
+/*Estilo de cartas de incidencias*/
+/*=============================================*/
+
