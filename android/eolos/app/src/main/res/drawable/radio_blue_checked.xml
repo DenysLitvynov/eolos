@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  
-</selector>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 最底层：蓝色外圈（里面先铺白色） -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/blanco"/>
+            <stroke android:width="2dp" android:color="@color/azul_medio"/>
+        </shape>
+    </item>
+
+    <!-- 顶层：黑色实心点（通过 inset 控制点的大小） -->
+    <item
+        android:top="5dp" android:bottom="5dp"
+        android:left="5dp" android:right="5dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/negro"/>
+        </shape>
+    </item>
+</layer-list>

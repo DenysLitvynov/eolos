@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  
-</selector>
+<!-- res/drawable/radio_blue_unchecked.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <size android:width="20dp" android:height="20dp"/>
+    <solid android:color="@android:color/transparent"/>
+    <stroke android:width="2dp" android:color="@color/azul_profundo"/>
+</shape>

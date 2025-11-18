@@ -52,21 +52,10 @@ body {
     .privacy-container {
         padding: 20px;
     }
-    .privacy-container h1 { font-size: 24px; }
+    .privacy-container h1 { font-size: 26px; }
     .privacy-container h2 { font-size: 22px; }
     .privacy-container p,
     .privacy-container ul { font-size: 18px; }
-    .titulo{font-size: 24px;}
-
-    .faq-item summary {
-        font-size: 20px;
-    }
-    .faq-item p {
-        font-size: 18px;
-    }
-    .privacy-container ul {
-        margin: 0;
-    }
 }
 
 
@@ -144,3 +133,15 @@ body {
     line-height: 1.6;
 }
 
+/* Optimización para móviles */
+@media (max-width: 600px) {
+    .faq-item summary {
+        font-size: 20px;
+    }
+    .faq-item p {
+        font-size: 18px;
+    }
+    .privacy-container ul {
+        margin: 0;
+    }
+}
