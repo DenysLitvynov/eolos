@@ -167,6 +167,7 @@ public class ConnectionActivity extends AppCompatActivity {
         try {
             JSONObject json = new JSONObject(qrContent);
             String name = json.getString("name");
+            String idBici = json.getString("id_bici");
 
             // DETENER SERVicio ANTERIOR SI EXISTE
             if (BeaconScanService.isRunning()) {

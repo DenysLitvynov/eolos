@@ -41,6 +41,7 @@ public class EscanerIBeacons {
     private final Handler handler = new Handler();
     private OnBeaconDetectedListener listener;
     private final Map<String, Long> lastSeen = new HashMap<>(); // MAC → timestamp
+    private String idBici;
 
     // =============================================================================
     // CALLBACK
@@ -106,6 +107,10 @@ public class EscanerIBeacons {
 
         int rssi = resultado.getRssi();
         Log.d(TAG, "Detectado → " + address + " | RSSI: " + rssi);
+    }
+
+    public void setIdBici(String id) {
+        this.idBici = id;
     }
 
     // =============================================================================
@@ -253,7 +258,7 @@ public class EscanerIBeacons {
      */
     private String convertirTramaAJson(TramaIBeacon tib) {
         int medida = Utilidades.bytesToInt(tib.getMinor());
-        return "{\"medida\": " + medida + "}";
+        return "{\"medida\": " + medida + ", \"id_bici\": \"" + idBici + "\"}";
     }
 
     // =============================================================================
