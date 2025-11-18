@@ -21,7 +21,7 @@ from PIL import Image, ImageDraw
 # Datos del beacon
 data = {
     "name": "Grupo2PBIO",
-    "uuid": ""
+    "id_bici": "VLC001"
 }
 
 # Convertir a JSON
@@ -32,11 +32,11 @@ qr = qrcode.QRCode(
     version=1,
     error_correction=qrcode.constants.ERROR_CORRECT_L,
     box_size=10,
-    border=4,
-)
+    border=4,)
+
 qr.add_data(payload)
 qr.make(fit=True)
 
 # Generar imagen
 img = qr.make_image(fill_color="black", back_color="white")
-img.save("qr-images/qr-emisora.png")
+img.save("qr-images/VLC001.png")
