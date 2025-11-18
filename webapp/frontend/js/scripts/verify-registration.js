@@ -1,8 +1,10 @@
 /* 
 Autor: Denys Litvynov Lymanets
 Fecha: 16-11-2025
-Descripción: Handlers para verify-registration.html. Solo interfaz.
+Descripción: Script que maneja la interfaz de verificación de código: temporizador, validaciones en frontend, envío del código y reenvío, redirigiendo si todo sale bien.
 */
+
+// ----------------------------------------------------------
 
 import { VerifyFake } from '../logica_fake/verify_registration_fake.js';
 
@@ -27,11 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let countdown;
     let tiempoRestante = 60;
 
-    // TEMPORIZADOR RESTAURADO: Iniciar temporizador al cargar
+    // CORRECCIÓN: Iniciar temporizador al cargar - NO ocultar el botón de verificar
     const iniciarTemporizador = () => {
         tiempoRestante = 60;
         resendBtn.style.display = 'none';
-        verifyBtn.style.display = 'inline-block';
+        verifyBtn.style.display = 'inline-block'; // Siempre visible
         timerSpan.textContent = tiempoRestante;
         timerSpan.style.display = 'inline';
         
@@ -41,8 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (tiempoRestante <= 0) {
                 clearInterval(countdown);
+                // CORRECCIÓN: Solo mostrar el botón de reenviar, NO ocultar el de verificar
                 resendBtn.style.display = 'inline-block';
-                verifyBtn.style.display = 'none';
+                // verifyBtn.style.display = 'none'; // ELIMINADO - no ocultar el botón de verificar
                 timerSpan.style.display = 'none';
             }
         }, 1000);
@@ -106,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('token', res.token);
             localStorage.removeItem('pending_email');
             
-            mensaje.textContent = '¡Registro completado exitosamente! Redirigiendo...';
+            mensaje.textContent = '¡¡Registro completado exitosamente! Redirigiendo...';
             mensaje.style.color = 'green';
             
             setTimeout(() => { 

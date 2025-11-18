@@ -1,7 +1,7 @@
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 27-10-2025
-Descripción: Configuración de Alembic para migraciones de la base de datos.
+Descripción: Configuración de Alembic para migraciones de la base de datos. Carga el .env y conecta con SQLAlchemy.
 """
 
 # ---------------------------------------------------------
@@ -13,6 +13,8 @@ from dotenv import load_dotenv
 from pathlib import Path
 import os
 from backend.db.models import Base  # Vincular modelos
+
+# ---------------------------------------------------------
 
 # Cargar .env desde la raíz del proyecto (webapp/)
 load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent.parent / ".env")
@@ -30,6 +32,8 @@ if config.config_file_name is not None:
 # MetaData para autogenerate
 target_metadata = Base.metadata
 
+# ---------------------------------------------------------
+
 def run_migrations_offline():
     """
     Ejecutar migraciones en modo offline.
@@ -44,6 +48,8 @@ def run_migrations_offline():
 
     with context.begin_transaction():
         context.run_migrations()
+
+# ---------------------------------------------------------
 
 def run_migrations_online():
     """
@@ -71,3 +77,4 @@ else:
     run_migrations_online()
 
 # ---------------------------------------------------------
+

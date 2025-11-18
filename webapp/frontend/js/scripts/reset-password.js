@@ -1,7 +1,7 @@
 /* 
 Autor: Denys Litvynov Lymanets
 Fecha: 16-11-2025
-Descripción: Handlers para reset-password.html. Solo interfaz.
+Descripción: Script que controla la página reset-password.html: lee el token de la URL, valida contraseñas y envía el cambio.
 */
 
 import { ResetPasswordFake } from '../logica_fake/reset_password_fake.js';

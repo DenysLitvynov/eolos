@@ -1,9 +1,10 @@
 /**
  * Autor: Hugo Belda
  * Fecha: 14/11/2025
- * Descripción:
-     Activity para gestionar la conexión con sensores mediante QR.
-     Incluye navegación inferior, botones de conectar/desconectar y
+ * Descripción: Activity para gestionar la conexión con sensores mediante QR. Incluye navegación inferior,
+ *             botones de conectar/desconectar y gestión del servicio de escaneo de beacons en segundo plano.
+ *             Permite escanear un código QR que contiene el nombre del beacon, detener un escaneo anterior
+ *             si lo hubiera, e iniciar uno nuevo mostrando confirmación al usuario.
  */
 package com.example.eolos.activities;
 
@@ -34,8 +35,7 @@ public class ConnectionActivity extends AppCompatActivity {
 
     // Lanzador de actividad para escaneo de QR. Recibe el resultado del QR escaneado.
     private final ActivityResultLauncher<Intent> qrLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
+            new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     String qrResult = result.getData().getStringExtra("qr_result");
                     procesarQR(qrResult); // Procesa el contenido del QR
@@ -45,16 +45,20 @@ public class ConnectionActivity extends AppCompatActivity {
     // --------------------------------------------------------------------
     // Ciclo de vida onCreate: inicializa layout y componentes principales
     // --------------------------------------------------------------------
+    /**
+     * @param savedInstanceState Estado previamente guardado de la actividad (puede ser null)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conectar_desconectar);
+
         MaterialCardView cardConnect = findViewById(R.id.card_connect);
         MaterialCardView cardDisconnect = findViewById(R.id.card_disconnect);
 
-        setupBottomNavigation(); // Configura la barra de navegación inferior
-        setupConnectButton();    // Configura botón de conexión
-        setupDisconnectButton(); // Configura botón de desconexión
+        setupBottomNavigation();    // Configura la barra de navegación inferior
+        setupConnectButton();       // Configura botón de conexión
+        setupDisconnectButton();    // Configura botón de desconexión
 
         if (BeaconScanService.isRunning()) {
             cardConnect.setVisibility(View.GONE);
@@ -68,6 +72,10 @@ public class ConnectionActivity extends AppCompatActivity {
     // --------------------------------------------------------------------
     // Configura la navegación inferior con iconos y acciones
     // --------------------------------------------------------------------
+    /**
+     * Configura los listeners de la barra de navegación inferior.
+     * No recibe parámetros ni devuelve nada.
+     */
     private void setupBottomNavigation() {
         LinearLayout bottomNav = findViewById(R.id.bottom_navigation);
         TextView iconInicio = (TextView) bottomNav.getChildAt(0);
@@ -86,6 +94,10 @@ public class ConnectionActivity extends AppCompatActivity {
     // --------------------------------------------------------------------
     // Configura botón de conexión para iniciar escaneo de QR
     // --------------------------------------------------------------------
+    /**
+     * Configura el botón "Conectar" para lanzar la actividad de escaneo QR.
+     * No recibe parámetros ni devuelve nada.
+     */
     private void setupConnectButton() {
         MaterialButton conectar = findViewById(R.id.btn_connect);
         conectar.setOnClickListener(v -> qrLauncher.launch(new Intent(this, QRScannerActivity.class)));
@@ -94,6 +106,10 @@ public class ConnectionActivity extends AppCompatActivity {
     // --------------------------------------------------------------------
     // Configura botón de desconexión para detener el servicio de beacon
     // --------------------------------------------------------------------
+    /**
+     * Configura el botón "Desconectar" para detener el servicio de escaneo de beacons.
+     * No recibe parámetros ni devuelve nada.
+     */
     private void setupDisconnectButton() {
         MaterialButton desconectar = findViewById(R.id.btn_disconnect);
         desconectar.setOnClickListener(v -> {
@@ -109,18 +125,20 @@ public class ConnectionActivity extends AppCompatActivity {
         });
     }
 
-
     // --------------------------------------------------------------------
     // Procesa el contenido del QR recibido
     // json esperado: { "name": "nombre_beacon" }
     // Si hay un servicio de beacon activo, lo detiene antes de iniciar uno nuevo
     // --------------------------------------------------------------------
+    /**
+     * @param qrContent Contenido en formato JSON del código QR escaneado
+     */
     private void procesarQR(String qrContent) {
         try {
             JSONObject json = new JSONObject(qrContent);
             String name = json.getString("name");
 
-            // DETENER SERVICIO ANTERIOR SI EXISTE
+            // DETENER SERVicio ANTERIOR SI EXISTE
             if (BeaconScanService.isRunning()) {
                 Intent stopIntent = new Intent(this, BeaconScanService.class);
                 stopIntent.setAction("ACTION_STOP_BEACON_SCAN");
@@ -134,7 +152,6 @@ public class ConnectionActivity extends AppCompatActivity {
             } else {
                 iniciarNuevoEscaneo(name);
             }
-
         } catch (Exception e) {
             // Dialogo de error si QR no válido
             new MaterialAlertDialogBuilder(this)
@@ -149,6 +166,9 @@ public class ConnectionActivity extends AppCompatActivity {
     // Inicia un nuevo escaneo de beacon
     // Muestra un diálogo de confirmación y arranca el servicio en segundo plano
     // --------------------------------------------------------------------
+    /**
+     * @param name Nombre del beacon obtenido del QR
+     */
     private void iniciarNuevoEscaneo(String name) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Conexión iniciada")

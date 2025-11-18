@@ -1,7 +1,7 @@
 /* 
 Autor: Denys Litvynov Lymanets
 Fecha: 16-11-2025
-Descripción: Handlers para registro.html. Solo validaciones básicas de frontend.
+Descripción: Script que maneja el formulario de registro: validaciones en tiempo real, manejo de errores específicos del backend y redirección a verificación si sale bien.
 */
 
 import { RegistroFake } from '../logica_fake/registro_fake.js';
@@ -45,16 +45,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ----------------------------------------------------------
+    // Método que muestra un mensaje de error en un elemento y añade clase de error.
+    //
+    // elemento : HTMLElement
+    // mensaje : string
+    // -> mostrarError() -> void
+    // ----------------------------------------------------------
     function mostrarError(elemento, mensaje) {
         elemento.textContent = mensaje;
         elemento.classList.add('show');
     }
 
+// ----------------------------------------------------------
+// Método que oculta un mensaje de error en un elemento y quita clase de error.
+//
+// elemento : HTMLElement
+// -> ocultarError() -> void
+// ----------------------------------------------------------
     function ocultarError(elemento) {
         elemento.textContent = '';
         elemento.classList.remove('show');
     }
 
+// ----------------------------------------------------------
+// Método que configura validación en tiempo real para un input, mostrando error si vacío.
+//
+// input : HTMLElement
+// errorElement : HTMLElement
+// -> setupValidation() -> void
+// ----------------------------------------------------------
     // Validaciones básicas en tiempo real
     function setupValidation(input, errorElement) {
         input.addEventListener('blur', () => {
@@ -91,44 +111,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Validación del checkbox
+    // Validación especial para política
     inputs.acepta_politica.addEventListener('change', () => {
-        if (!inputs.acepta_politica.checked) {
-            mostrarError(errors.acepta_politica, 'Debes aceptar la política de privacidad y términos');
-        } else {
+        if (inputs.acepta_politica.checked) {
             ocultarError(errors.acepta_politica);
         }
     });
 
+// ----------------------------------------------------------
+// Método que valida todos los campos del formulario antes de enviar, mostrando errores si hay.
+//
+// -> validarFormulario() -> boolean
+// ----------------------------------------------------------
     function validarFormulario() {
         let isValid = true;
 
-        // Verificar campos obligatorios
-        if (!inputs.nombre.value.trim()) {
-            mostrarError(errors.nombre, 'El nombre es obligatorio');
-            inputs.nombre.classList.add('error');
-            isValid = false;
-        }
-        if (!inputs.apellido.value.trim()) {
-            mostrarError(errors.apellido, 'El apellido es obligatorio');
-            inputs.apellido.classList.add('error');
-            isValid = false;
-        }
-        if (!inputs.correo.value.trim()) {
-            mostrarError(errors.correo, 'El correo electrónico es obligatorio');
-            inputs.correo.classList.add('error');
-            isValid = false;
-        }
-        if (!inputs.targeta_id.value.trim()) {
-            mostrarError(errors.targeta_id, 'El ID de tarjeta es obligatorio');
-            inputs.targeta_id.classList.add('error');
-            isValid = false;
-        }
-        if (!inputs.contrasena.value) {
-            mostrarError(errors.contrasena, 'La contraseña es obligatoria');
-            inputs.contrasena.classList.add('error');
-            isValid = false;
-        }
+        // Validar campos obligatorios
+        Object.entries(inputs).forEach(([key, input]) => {
+            if (key !== 'acepta_politica') {
+                if (!input.value.trim()) {
+                    mostrarError(errors[key], 'Este campo es obligatorio');
+                    input.classList.add('error');
+                    isValid = false;
+                } else {
+                    ocultarError(errors[key]);
+                    input.classList.remove('error');
+                }
+            }
+        });
+
+        // Validación especial contraseña repite
         if (!inputs.contrasena_repite.value) {
             mostrarError(errors.contrasena_repite, 'Debes repetir la contraseña');
             inputs.contrasena_repite.classList.add('error');

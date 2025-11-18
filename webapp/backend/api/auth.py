@@ -1,7 +1,7 @@
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 15-11-2025
-Descripción: Rutas para autenticación 
+Descripción: Rutas del servidor para las funcionalidades de autenticación (registro, login, otros) 
 """
 
 # ---------------------------------------------------------
@@ -18,6 +18,8 @@ from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/auth")
 
+# Clases para represenetar los campos que tien que recibir la api o responder
+
 class LoginRequest(BaseModel):
     correo: str
     contrasena: str
@@ -29,7 +31,7 @@ class RegistroRequest(BaseModel):
     targeta_id: str
     contrasena: str
     contrasena_repite: str
-    acepta_politica: bool = False   # ← nuevo campo obligatorio
+    acepta_politica: bool = False   
 
 class VerifyRegistrationRequest(BaseModel):
     correo: str
@@ -57,6 +59,9 @@ class Response(BaseModel):
 
 @router.post("/login")
 def ruta_login(login_data: LoginRequest, db: Session = Depends(get_db)):
+    """
+    Ruta para login de usuario
+    """
     try:
         logica = LogicaLogin()
         token = logica.login(db, login_data.correo, login_data.contrasena)
@@ -66,8 +71,13 @@ def ruta_login(login_data: LoginRequest, db: Session = Depends(get_db)):
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# ---------------------------------------------------------
+
 @router.post("/registro")
 def ruta_registro(registro_data: RegistroRequest, db: Session = Depends(get_db)):
+    """
+    Ruta para iniciar registro (envia codigo por email)
+    """
     try:
         logica = LogicaRegistro()
         exito = logica.iniciar_registro(
@@ -86,8 +96,13 @@ def ruta_registro(registro_data: RegistroRequest, db: Session = Depends(get_db))
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# ---------------------------------------------------------
+
 @router.post("/verify-registration")
 def ruta_verify_registration(verify_data: VerifyRegistrationRequest, db: Session = Depends(get_db)):
+    """
+    Ruta para verificar código y completar el registro
+    """
     try:
         logica = LogicaRegistro()
         token = logica.verificar_y_completar(db, verify_data.correo, verify_data.verification_code)
@@ -97,8 +112,13 @@ def ruta_verify_registration(verify_data: VerifyRegistrationRequest, db: Session
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# ---------------------------------------------------------
+
 @router.post("/resend-verification")
 def ruta_resend_verification(resend_data: ResendVerificationRequest, db: Session = Depends(get_db)):
+    """
+    Ruta para reenviar el código de verificación para el registro
+    """
     try:
         logica = LogicaRegistro()
         exito = logica.reenviar_codigo(db, resend_data.correo)
@@ -108,8 +128,13 @@ def ruta_resend_verification(resend_data: ResendVerificationRequest, db: Session
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# ---------------------------------------------------------
+
 @router.post("/forgot-password")
 def ruta_forgot_password(forgot_data: ForgotPasswordRequest, db: Session = Depends(get_db)):
+    """
+    Ruta para solicitar cambio de contraseña
+    """
     try:
         logica = LogicaResetPassword()
         exito = logica.enviar_reset_token(db, forgot_data.correo)
@@ -119,19 +144,29 @@ def ruta_forgot_password(forgot_data: ForgotPasswordRequest, db: Session = Depen
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# ---------------------------------------------------------
+
 @router.post("/resend-reset")
 def ruta_resend_reset(resend_data: ForgotPasswordRequest, db: Session = Depends(get_db)):
+    """
+    Ruta para enviar token de reset
+    """
     try:
         logica = LogicaResetPassword()
-        exito = logica.enviar_reset_token(db, resend_data.correo)  # Reusa, genera nuevo
+        exito = logica.enviar_reset_token(db, resend_data.correo)  
         return Response(exito=exito, mensaje="Enlace reenviado al correo")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# ---------------------------------------------------------
+
 @router.post("/reset-password")
 def ruta_reset_password(reset_data: ResetPasswordRequest, db: Session = Depends(get_db)):
+    """
+    Ruta para resetear la contraseña con token
+    """
     try:
         logica = LogicaResetPassword()
         exito = logica.resetear_contrasena(db, reset_data.token, reset_data.contrasena, reset_data.contrasena_repite)

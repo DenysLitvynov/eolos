@@ -1,7 +1,7 @@
 /* 
 Autor: Denys Litvynov Lymanets
 Fecha: 16-11-2025
-Descripción: Handlers para forgot-password.html. Solo interfaz.
+Descripción: Script que controla forgot-password.html: envío del correo, temporizador de 60s y reenvío.
 */
 
 import { ForgotPasswordFake } from '../logica_fake/forgot_password_fake.js';
