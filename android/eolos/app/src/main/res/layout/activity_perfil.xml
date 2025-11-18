@@ -159,6 +159,17 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logoutButton"
+                    style="@style/BotonPrincipal"
+                    android:text="Cerrar Sesión"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="#0A3D91"
+                    android:layout_marginEnd="8dp" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnGuardar"
                     style="@style/BotonPrincipal"
                     android:text="Guardar"
@@ -179,7 +190,10 @@
                     android:textColor="#0A3D91"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/bg_outline_button" />
+
+
             </LinearLayout>
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

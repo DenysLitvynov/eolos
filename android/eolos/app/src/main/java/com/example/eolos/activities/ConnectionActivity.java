@@ -9,10 +9,12 @@
 package com.example.eolos.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +69,21 @@ public class ConnectionActivity extends AppCompatActivity {
             cardConnect.setVisibility(View.VISIBLE);
             cardDisconnect.setVisibility(View.VISIBLE);
         }
+
+
+        // SI AIXOOO EU BORREM
+        // Verificar token
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        if (token == null) {
+            Toast.makeText(this, "No estás autenticado. Redirigiendo...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
+
+
     }
 
     // --------------------------------------------------------------------
@@ -76,20 +93,33 @@ public class ConnectionActivity extends AppCompatActivity {
      * Configura los listeners de la barra de navegación inferior.
      * No recibe parámetros ni devuelve nada.
      */
-    private void setupBottomNavigation() {
-        LinearLayout bottomNav = findViewById(R.id.bottom_navigation);
-        TextView iconInicio = (TextView) bottomNav.getChildAt(0);
-        TextView iconMapa = (TextView) bottomNav.getChildAt(1);
-        TextView iconQR = (TextView) bottomNav.getChildAt(2);
-        TextView iconAlertas = (TextView) bottomNav.getChildAt(3);
-        TextView iconPerfil = (TextView) bottomNav.getChildAt(4);
 
-        iconInicio.setOnClickListener(v -> startActivity(new Intent(this, MainActivity.class)));
-        iconMapa.setOnClickListener(v -> Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show());
-        iconQR.setOnClickListener(v -> startActivity(new Intent(this, ConnectionActivity.class)));
-        iconAlertas.setOnClickListener(v -> Toast.makeText(this, "Alertas", Toast.LENGTH_SHORT).show());
-        iconPerfil.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
+    private void setupBottomNavigation() {
+
+        // Recuperamos cada icono directamente por su ID real del XML
+        ImageView iconInicio = findViewById(R.id.icon1);
+        ImageView iconMapa = findViewById(R.id.icon2);
+        ImageView iconQR = findViewById(R.id.icon3);
+        ImageView iconAlertas = findViewById(R.id.icon4);
+        ImageView iconPerfil = findViewById(R.id.icon5);
+
+        // Listeners según tu lógica original
+        iconInicio.setOnClickListener(v ->
+                startActivity(new Intent(this, HomeActivity.class)));
+
+        iconMapa.setOnClickListener(v ->
+                Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show());
+
+        iconQR.setOnClickListener(v ->
+                startActivity(new Intent(this, ConnectionActivity.class)));
+
+        iconAlertas.setOnClickListener(v ->
+                Toast.makeText(this, "Alertas", Toast.LENGTH_SHORT).show());
+
+        iconPerfil.setOnClickListener(v ->
+                startActivity(new Intent(this, PerfilActivity.class)));
     }
+
 
     // --------------------------------------------------------------------
     // Configura botón de conexión para iniciar escaneo de QR

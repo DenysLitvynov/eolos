@@ -77,7 +77,7 @@
         <activity
             android:name=".activities.VerifyRegistrationActivity"
             android:exported="false" />
-        <activity android:name=".activities.Home_UR" />
+        <activity android:name=".activities.HomeActivity" />
 
         <!-- =================== SERVICIO BLE =================== -->
         <service

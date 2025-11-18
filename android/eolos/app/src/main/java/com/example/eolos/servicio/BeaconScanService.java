@@ -39,7 +39,7 @@ public class BeaconScanService extends Service {
     private static final String ACTION_STOP = "ACTION_STOP_BEACON_SCAN";
     private static final int NOTIF_ID = 1;
     private static boolean isRunning = false;   // Estado del servicio
-    private String baseUrl = "http://192.168.1.25:8000";  // <- Solo cambia ESTO (IP + puerto).
+    private String baseUrl = "http://172.20.10.12:8000";  // <- Solo cambia ESTO (IP + puerto).
     private String endpointGuardar = "/api/v1/guardar-medida";  // <- Endpoint específico
 
     // Timestamp de la última detección de beacon

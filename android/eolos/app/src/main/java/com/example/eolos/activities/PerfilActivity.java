@@ -1,18 +1,23 @@
 package com.example.eolos.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eolos.R;
 import com.example.eolos.logica_fake.PerfilFake;
+import com.google.android.material.button.MaterialButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +49,35 @@ public class PerfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
+
+
+
+        setupBottomNavigation();    // Configura la barra de navegación inferior
+
+
+        // Verificar token
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        if (token == null) {
+            Toast.makeText(this, "No estás autenticado. Redirigiendo...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
+        Button logoutButton = findViewById(R.id.logoutButton);
+
+
+        logoutButton.setOnClickListener(v -> {
+            prefs.edit().remove("token").apply();
+            Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
+
+
+
 
         // 1) Vincular vistas
         etNombre = findViewById(R.id.etNombre);
@@ -91,6 +125,32 @@ public class PerfilActivity extends AppCompatActivity {
             rellenarUI(perfil);  // 恢复原数据
             Toast.makeText(this, "Cambios descartados", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private void setupBottomNavigation() {
+
+        // Recuperamos cada icono directamente por su ID real del XML
+        ImageView iconInicio = findViewById(R.id.icon1);
+        ImageView iconMapa = findViewById(R.id.icon2);
+        ImageView iconQR = findViewById(R.id.icon3);
+        ImageView iconAlertas = findViewById(R.id.icon4);
+        ImageView iconPerfil = findViewById(R.id.icon5);
+
+        // Listeners según tu lógica original
+        iconInicio.setOnClickListener(v ->
+                startActivity(new Intent(this, HomeActivity.class)));
+
+        iconMapa.setOnClickListener(v ->
+                Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show());
+
+        iconQR.setOnClickListener(v ->
+                startActivity(new Intent(this, ConnectionActivity.class)));
+
+        iconAlertas.setOnClickListener(v ->
+                Toast.makeText(this, "Alertas", Toast.LENGTH_SHORT).show());
+
+        iconPerfil.setOnClickListener(v ->
+                startActivity(new Intent(this, PerfilActivity.class)));
     }
 
     private void cargarPerfil() {
@@ -200,4 +260,7 @@ public class PerfilActivity extends AppCompatActivity {
     private String nv(String s) {
         return s == null ? "" : s;
     }
+
+
+
 }

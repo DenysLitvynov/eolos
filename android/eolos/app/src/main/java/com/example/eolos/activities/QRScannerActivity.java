@@ -40,27 +40,6 @@ public class QRScannerActivity extends AppCompatActivity {
         capture = new CaptureManager(this, barcodeScannerView);
         capture.initializeFromIntent(getIntent(), savedInstanceState);
         capture.decode(); // Inicia el escaneo automático;
-
-        // === MENÚ DE NAVEGACIÓN INFERIOR ===
-        LinearLayout bottomNav = findViewById(R.id.bottom_navigation);
-
-        // Obtener cada ícono por posición (getChildAt)
-        TextView iconInicio = (TextView) bottomNav.getChildAt(0);
-        TextView iconMapa = (TextView) bottomNav.getChildAt(1);
-        TextView iconQR = (TextView) bottomNav.getChildAt(2);
-        TextView iconAlertas = (TextView) bottomNav.getChildAt(3);
-        TextView iconPerfil = (TextView) bottomNav.getChildAt(4);
-
-        // Configurar clics
-        iconInicio.setOnClickListener(v -> Toast.makeText(this, "Inicio", Toast.LENGTH_SHORT).show());
-        iconMapa.setOnClickListener(v -> Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show());
-        iconQR.setOnClickListener(v -> {
-            startActivity(new Intent(this, ConnectionActivity.class));
-        });
-        iconAlertas.setOnClickListener(v -> Toast.makeText(this, "Alertas", Toast.LENGTH_SHORT).show());
-        iconPerfil.setOnClickListener(v -> {
-            startActivity(new Intent(this, PerfilActivity.class));
-        });
     }
 
     /**

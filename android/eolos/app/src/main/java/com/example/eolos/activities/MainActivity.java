@@ -41,13 +41,15 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
         String token = prefs.getString("token", null);
         if (token != null) {
-            startActivity(new Intent(this, DashboardActivity.class));
+            startActivity(new Intent(this, HomeActivity.class));
             finish();
             return;
         }
 
         // === BOTONES LOGIN/REGISTER ===
         iniciarBotonoes();
+
+
     }
 
     private void setupBottomNavigation() {
