@@ -117,11 +117,11 @@
                         android:textColor="@color/negro" />
 
                     <RadioButton
-                        android:text="Caja del sensor falta o está floja"
+                        android:text="Caja del sensor falta o esta floja"
                         android:textColor="@color/negro" />
 
                     <RadioButton
-                        android:text="Sensor bloquea la cesta o está mal colocado"
+                        android:text="Sensor bloquea la cesta o esta mal colocado"
                         android:textColor="@color/negro" />
 
                     <RadioButton

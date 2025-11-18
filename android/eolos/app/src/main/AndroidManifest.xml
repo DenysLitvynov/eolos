@@ -72,6 +72,8 @@
         <activity android:name=".activities.PerfilActivity" />
         <activity android:name=".activities.ConnectionActivity" />
         <activity android:name=".activities.QRScannerActivity" />
+        <activity android:name=".activities.IncidenciaActivity" />
+
         <activity
             android:name=".activities.VerifyRegistrationActivity"
             android:exported="false" />

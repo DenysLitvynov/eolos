@@ -35,7 +35,9 @@ public class PerfilActivity extends AppCompatActivity {
     private EditText etNombre, etCorreo, etTarjeta, etContrasena, etFecha;
     private Button btnGuardar, btnVolver;
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
+    private final SimpleDateFormat dateFormat =
+            new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
+
     private PerfilFake perfil;
 
     @Override
@@ -63,7 +65,7 @@ public class PerfilActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(v -> {
             if (!validateInputs()) return;
 
-            if (perfil == null) perfil = new PerfilFake(this); // fallback
+            if (perfil == null) perfil = new PerfilFake(this); // fallback local
             perfil.setNombre(s(etNombre.getText()));
             perfil.setCorreo(s(etCorreo.getText()));
             perfil.setTarjeta(s(etTarjeta.getText()));
@@ -85,7 +87,10 @@ public class PerfilActivity extends AppCompatActivity {
         });
 
         // 5) Volver
-        btnVolver.setOnClickListener(v -> finish());
+        btnVolver.setOnClickListener(v -> {
+            rellenarUI(perfil);  // 恢复原数据
+            Toast.makeText(this, "Cambios descartados", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void cargarPerfil() {
@@ -107,8 +112,8 @@ public class PerfilActivity extends AppCompatActivity {
         if (p == null) return;
         etNombre.setText(nv(p.getNombre()));
         etCorreo.setText(nv(p.getCorreo()));
-        etTarjeta.setText(nv(p.getTarjeta()));
-        etContrasena.setText(nv(p.getContrasena()));
+        etTarjeta.setText(nv(p.getTarjeta()));          // puede estar vacío
+        etContrasena.setText(nv(p.getContrasena()));    // normalmente no viene del servidor
         etFecha.setText(nv(p.getFechaRegistro()));
     }
 
@@ -119,11 +124,35 @@ public class PerfilActivity extends AppCompatActivity {
         String tarjeta = s(etTarjeta.getText());
         String fecha = s(etFecha.getText());
 
-        if (nombre.isEmpty()) { etNombre.setError("Campo requerido"); etNombre.requestFocus(); return false; }
+        if (nombre.isEmpty()) {
+            etNombre.setError("Campo requerido");
+            etNombre.requestFocus();
+            return false;
+        }
+
         if (correo.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-            etCorreo.setError("Correo inválido"); etCorreo.requestFocus(); return false; }
-        if (tarjeta.isEmpty()) { etTarjeta.setError("Campo requerido"); etTarjeta.requestFocus(); return false; }
-        if (fecha.isEmpty()) { etFecha.setError("Campo requerido"); etFecha.requestFocus(); return false; }
+            etCorreo.setError("Correo inválido");
+            etCorreo.requestFocus();
+            return false;
+        }
+
+        // tarjeta: OPCIONAL，但如果填了，可以做一些简单校验（长度 <= 9）
+        if (!tarjeta.isEmpty() && tarjeta.length() > 9) {
+            etTarjeta.setError("Máximo 9 caracteres");
+            etTarjeta.requestFocus();
+            return false;
+        }
+
+        // fecha：可选，不强制
+        // 如果你想强制要求日期，可以取消下面注释
+        /*
+        if (fecha.isEmpty()) {
+            etFecha.setError("Campo requerido");
+            etFecha.requestFocus();
+            return false;
+        }
+        */
+
         return true;
     }
 
@@ -164,6 +193,11 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     // ==== Utilidades de strings ====
-    private String s(CharSequence cs) { return cs == null ? "" : cs.toString().trim(); }
-    private String nv(String s) { return s == null ? "" : s; }
+    private String s(CharSequence cs) {
+        return cs == null ? "" : cs.toString().trim();
+    }
+
+    private String nv(String s) {
+        return s == null ? "" : s;
+    }
 }
