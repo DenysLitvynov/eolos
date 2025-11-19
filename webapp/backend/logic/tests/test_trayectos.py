@@ -4,6 +4,7 @@ Fecha: 19-11-2025
 Descripción: Tests para LogicaTrayectos.
 """
 
+
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -17,13 +18,18 @@ from datetime import datetime, timezone, timedelta
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+# ---------------------------------------------------------
 @pytest.fixture(scope="function")
 def db_session():
+    """
+    Crea y destruye una base de datos en memoria para pruebas.
+    """
     engine = create_engine("sqlite:///:memory:")
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    # ---------------------------------------------------------
     # Datos de prueba básicos
     targeta_id = "12345678Z"
     carnet = Mibisivalencia(targeta_id=targeta_id)
@@ -71,16 +77,20 @@ def db_session():
         placa_id=placa_id,
         bicicleta_id=bicicleta_id,
         estado="activa",
-        ult_actualizacion_estado=datetime.utcnow()  # Usar naive UTC para consistencia
+        ult_actualizacion_estado=datetime.now(timezone.utc)  # Usar aware UTC
     )
     session.add(placa)
 
     session.commit()
     yield session
     Base.metadata.drop_all(engine)
+# ---------------------------------------------------------
 
+# ---------------------------------------------------------
 # Tests para guardar_medida (1-2 tests)
+# ---------------------------------------------------------
 def test_guardar_medida_exitoso(db_session):
+    # Test que guarda una medida correctamente
     logica = LogicaTrayectos()
     posicion = PosicionGPS(39.4699, -0.3763)
     trayecto_id = str(uuid.uuid4())
@@ -90,7 +100,7 @@ def test_guardar_medida_exitoso(db_session):
         placa_id=placa.placa_id,
         tipo=TipoMedidaEnum.pm2_5,
         valor=12.5,
-        fecha_hora=datetime.utcnow(),
+        fecha_hora=datetime.now(timezone.utc),
         posicion=posicion
     )
     result = logica.guardar_medida(db_session, medida_dto)
@@ -98,12 +108,16 @@ def test_guardar_medida_exitoso(db_session):
     saved_medida = db_session.query(DBMedida).filter(DBMedida.trayecto_id == trayecto_id).first()
     assert saved_medida is not None
     assert saved_medida.valor == 12.5
+# ---------------------------------------------------------
 
+# ---------------------------------------------------------
 # Tests para iniciar_trayecto (1-2 tests)
+# ---------------------------------------------------------
 def test_iniciar_trayecto_exitoso(db_session):
+    # Test que inicia un trayecto correctamente
     logica = LogicaTrayectos()
-    posicion = PosicionGPS(39.4699, -0.3763)  # Coincide con estación 1
-    trayecto_id = logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", datetime.utcnow(), posicion)
+    posicion = PosicionGPS(39.4699, -0.3763)
+    trayecto_id = logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", datetime.now(timezone.utc), posicion)
     assert trayecto_id is not None
     assert len(trayecto_id) > 0
     saved_trayecto = db_session.query(DBTrayecto).filter(DBTrayecto.trayecto_id == trayecto_id).first()
@@ -111,33 +125,42 @@ def test_iniciar_trayecto_exitoso(db_session):
     assert saved_trayecto.origen_estacion_id == 1
 
 def test_iniciar_trayecto_origen_invalido(db_session):
+    # Test que falla al iniciar trayecto con origen inválido
     logica = LogicaTrayectos()
-    posicion_invalida = PosicionGPS(0.0, 0.0)  # No coincide con ninguna estación
-    with pytest.raises(RuntimeError):  # Espera RuntimeError ya que envuelve ValueError
-        logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", datetime.utcnow(), posicion_invalida)
+    posicion_invalida = PosicionGPS(0.0, 0.0)
+    with pytest.raises(RuntimeError):
+        logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", datetime.now(timezone.utc), posicion_invalida)
+# ---------------------------------------------------------
 
+# ---------------------------------------------------------
 # Tests para obtener_datos_trayecto (1-2 tests)
+# ---------------------------------------------------------
 def test_obtener_datos_trayecto_exitoso(db_session):
+    # Test que obtiene correctamente usuario_id y placa_id
     logica = LogicaTrayectos()
     posicion = PosicionGPS(39.4699, -0.3763)
-    trayecto_id = logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", datetime.utcnow(), posicion)
+    trayecto_id = logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", datetime.now(timezone.utc), posicion)
     usuario_id, placa_id = logica.obtener_datos_trayecto(db_session, trayecto_id)
     assert usuario_id is not None
     assert placa_id is not None
 
 def test_obtener_datos_trayecto_no_existente(db_session):
+    # Test que falla al obtener datos de trayecto inexistente
     logica = LogicaTrayectos()
-    with pytest.raises(RuntimeError):  # Espera RuntimeError ya que envuelve ValueError
+    with pytest.raises(RuntimeError):
         logica.obtener_datos_trayecto(db_session, "invalid_id")
+# ---------------------------------------------------------
 
+# ---------------------------------------------------------
 # Tests para finalizar_trayecto (1-2 tests)
+# ---------------------------------------------------------
 def test_finalizar_trayecto_exitoso_con_distancia(db_session):
+    # Test que finaliza trayecto calculando distancia
     logica = LogicaTrayectos()
     origen = PosicionGPS(39.4699, -0.3763)
-    fecha_inicio = datetime.utcnow() - timedelta(minutes=30)
+    fecha_inicio = datetime.now(timezone.utc) - timedelta(minutes=30)
     trayecto_id = logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", fecha_inicio, origen)
 
-    # Agregar medidas de prueba para cálculo de distancia
     placa = db_session.query(PlacaSensores).first()
     medida1 = DBMedida(
         lectura_id=str(uuid.uuid4()),
@@ -163,46 +186,54 @@ def test_finalizar_trayecto_exitoso_con_distancia(db_session):
     db_session.commit()
 
     destino = PosicionGPS(39.4700, -0.3764)
-    result = logica.finalizar_trayecto(db_session, trayecto_id, datetime.utcnow(), destino)
+    result = logica.finalizar_trayecto(db_session, trayecto_id, datetime.now(timezone.utc), destino)
     assert result == "OK"
 
-    # Verificar que la distancia se calculó y guardó
     saved_trayecto = db_session.query(DBTrayecto).filter(DBTrayecto.trayecto_id == trayecto_id).first()
-    assert saved_trayecto.distancia_total > 0  # Debe ser positiva
+    assert saved_trayecto.distancia_total > 0
     assert saved_trayecto.destino_estacion_id == 2
 
 def test_finalizar_trayecto_sin_medidas(db_session):
+    # Test que finaliza trayecto sin medidas (distancia 0)
     logica = LogicaTrayectos()
     origen = PosicionGPS(39.4699, -0.3763)
-    trayecto_id = logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", datetime.utcnow(), origen)
+    trayecto_id = logica.iniciar_trayecto(db_session, "12345678Z", "VLC001", datetime.now(timezone.utc), origen)
     destino = PosicionGPS(39.4700, -0.3764)
-    result = logica.finalizar_trayecto(db_session, trayecto_id, datetime.utcnow(), destino)
+    result = logica.finalizar_trayecto(db_session, trayecto_id, datetime.now(timezone.utc), destino)
     assert result == "OK"
     saved_trayecto = db_session.query(DBTrayecto).filter(DBTrayecto.trayecto_id == trayecto_id).first()
-    assert saved_trayecto.distancia_total == 0.0  # Sin medidas, distancia 0
+    assert saved_trayecto.distancia_total == 0.0
+# ---------------------------------------------------------
 
+# ---------------------------------------------------------
 # Tests para actualizar_estado_placa (1-2 tests)
+# ---------------------------------------------------------
 def test_actualizar_estado_placa_exitoso(db_session):
+    # Test que actualiza correctamente el estado de la placa
     logica = LogicaTrayectos()
     placa = db_session.query(PlacaSensores).first()
     nuevo_estado = "inactiva"
-    nueva_fecha = datetime.utcnow()  # Usar naive UTC
+    nueva_fecha = datetime.now(timezone.utc)
     result = logica.actualizar_estado_placa(db_session, placa.placa_id, nuevo_estado, nueva_fecha)
     assert result == "OK"
     updated_placa = db_session.query(PlacaSensores).filter(PlacaSensores.placa_id == placa.placa_id).first()
     assert updated_placa.estado == nuevo_estado
-    # Comparar ignorando microsegundos si es necesario, pero como son naive, debería coincidir
-    assert updated_placa.ult_actualizacion_estado.replace(microsecond=0) == nueva_fecha.replace(microsecond=0)
+    assert updated_placa.ult_actualizacion_estado.replace(microsecond=0, tzinfo=None) == nueva_fecha.replace(microsecond=0, tzinfo=None)
 
 def test_actualizar_estado_placa_no_existente(db_session):
+    # Test que falla al actualizar placa inexistente
     logica = LogicaTrayectos()
-    with pytest.raises(RuntimeError):  # Espera RuntimeError ya que envuelve ValueError
-        logica.actualizar_estado_placa(db_session, "invalid_id", "inactiva", datetime.utcnow())
+    with pytest.raises(RuntimeError):
+        logica.actualizar_estado_placa(db_session, "invalid_id", "inactiva", datetime.now(timezone.utc))
+# ---------------------------------------------------------
 
+# ---------------------------------------------------------
 # Tests para actualizar_estado_bici (1-2 tests)
+# ---------------------------------------------------------
 def test_actualizar_estado_bici_exitoso(db_session):
+    # Test que actualiza estado de bicicleta correctamente
     logica = LogicaTrayectos()
-    posicion = PosicionGPS(39.4700, -0.3764)  # Coincide con estación 2
+    posicion = PosicionGPS(39.4700, -0.3764)
     nuevo_estado = EstadoBicicleta.en_uso
     result = logica.actualizar_estado_bici(db_session, "VLC001", posicion, nuevo_estado)
     assert result == "OK"
@@ -211,24 +242,32 @@ def test_actualizar_estado_bici_exitoso(db_session):
     assert updated_bici.estado == nuevo_estado
 
 def test_actualizar_estado_bici_posicion_invalida(db_session):
+    # Test actualizar bicicleta con posición inválida
     logica = LogicaTrayectos()
     posicion_invalida = PosicionGPS(0.0, 0.0)
     nuevo_estado = EstadoBicicleta.en_uso
     result = logica.actualizar_estado_bici(db_session, "VLC001", posicion_invalida, nuevo_estado)
-    assert result == "OK"  # Debería actualizar estado pero estacion_id a None
+    assert result == "OK"
     updated_bici = db_session.query(Bicicleta).filter(Bicicleta.bicicleta_id == "VLC001").first()
     assert updated_bici.estacion_id is None
     assert updated_bici.estado == nuevo_estado
+# ---------------------------------------------------------
 
+# ---------------------------------------------------------
 # Tests para comprobar_estacion_bici (1-2 tests)
+# ---------------------------------------------------------
 def test_comprobar_estacion_bici_coincidente(db_session):
+    # Test que encuentra estación coincidente
     logica = LogicaTrayectos()
-    posicion = PosicionGPS(39.4699, -0.3763)  # Coincide con estación 1
+    posicion = PosicionGPS(39.4699, -0.3763)
     estacion_id = logica.comprobar_estacion_bici(db_session, posicion)
     assert estacion_id == 1
 
 def test_comprobar_estacion_bici_no_coincidente(db_session):
+    # Test que retorna None si no hay estación cercana
     logica = LogicaTrayectos()
-    posicion = PosicionGPS(0.0, 0.0)  # No coincide
+    posicion = PosicionGPS(0.0, 0.0)
     estacion_id = logica.comprobar_estacion_bici(db_session, posicion)
     assert estacion_id is None
+# ---------------------------------------------------------
+
