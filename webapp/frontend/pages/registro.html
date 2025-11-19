@@ -10,8 +10,8 @@ Descripción: Página de registro con formulario completo, botón ojo, checkbox 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="/css/generales.css">
-    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="../css/generales.css">
+    <link rel="stylesheet" href="../css/auth.css">
 </head>
 <body>
     <header class="header">
@@ -20,7 +20,7 @@ Descripción: Página de registro con formulario completo, botón ojo, checkbox 
     </header>
     <div class="auth-container">
         <div class="image-section">
-            <img src="/images/tioenbici.png" alt="Ilustración de registro">
+            <img src="../images/tioenbici.png" alt="Ilustración de registro">
         </div>
         <div class="form-section">
             <h1 class="auth-title">Registrarse</h1>
@@ -65,7 +65,7 @@ Descripción: Página de registro con formulario completo, botón ojo, checkbox 
                 <div class="checkbox-container">
                     <input type="checkbox" id="acepta_politica" required>
                     <label for="acepta_politica">
-                        He leído y acepto la <a href="/politica-privacidad.html" target="_blank">Política de Privacidad</a> y los <a href="/terminos-condiciones.html" target="_blank">Términos y Condiciones</a>
+                        He leído y acepto la <a href="privacidad.html" target="_blank">Política de Privacidad</a> y los <a href="condiciones.html" target="_blank">Términos y Condiciones</a>
                     </label>
                 </div>
                 <span class="error-message" id="acepta_politicaError"></span>
@@ -73,13 +73,13 @@ Descripción: Página de registro con formulario completo, botón ojo, checkbox 
                 <button type="button" id="registroBtn" class="auth-button">Registrarse</button>
             </form>
             <div id="mensaje" class="display-box"></div>
-            <p class="register-link">¿Ya tienes cuenta? <a href="/pages/login.html">Iniciar sesión</a></p>
+            <p class="register-link">¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a></p>
             <div class="footer-links">
                 <a href="condiciones.html" target="_blank">Términos y condiciones</a>
                 <a href="privacidad.html" target="_blank">Política de privacidad</a>
             </div>
         </div>
     </div>
-    <script type="module" src="/js/scripts/registro.js"></script>
+    <script type="module" src="../js/scripts/registro.js"></script>
 </body>
 </html>

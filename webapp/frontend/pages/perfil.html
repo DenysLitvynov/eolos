@@ -5,29 +5,24 @@
     <title>Perfil</title>
 
     <!--Enlaces a hojas de estilo -->
-    <link rel="stylesheet" href="/css/auth.css" />
-    <link rel="stylesheet" href="/css/generales.css" />
-    <link rel="stylesheet" href="/css/perfil.css" />
-    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="../css/auth.css" />
+    <link rel="stylesheet" href="../css/generales.css" />
+    <link rel="stylesheet" href="../css/perfil.css" />
+    <link rel="stylesheet" href="../css/header.css" />
 </head>
 <style>
     html { overflow-y: scroll; }
 </style>
 
-
 <body>
-<!-- ========================================= -->
-<!-- ENCABEZADO / BARRA SUPERIOR -->
-<!-- ========================================= -->
 
 <header class="header" data-breakpoint="1050">
     <div class="logo">
-        <img src="/images/logo.png" alt="logo" />
+        <img src="../images/logo.png" alt="logo" />
     </div>
 
     <!-- Botón hamburger -->
     <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
-        <!-- Ícono (SVG) -->
         <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
@@ -81,11 +76,10 @@
 
 <footer class="ft">
     <div class="ft__wrap ft--two-cols">
-        <!-- 左列 -->
         <div class="ft__brand">
-                <span class="ft__logo">
-                    <img src="/images/logo_footer.png" alt="logo" />
-                </span>
+            <span class="ft__logo">
+                <img src="../images/logo_footer.png" alt="logo" />
+            </span>
             <address class="ft__addr">
                 <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
                 <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
@@ -93,7 +87,6 @@
             </address>
         </div>
 
-        <!-- 右列：一个容器，内部再拆 3 栏 -->
         <div class="ft__links">
             <nav class="ft__col">
                 <a href="#">Inicio</a>
@@ -140,13 +133,12 @@
             expanded ? closeMenu() : openMenu();
         });
 
-        // 回到桌面端自动关闭
         window.addEventListener('resize', () => {
             if(window.innerWidth > 1050) closeMenu();
         });
     })();
 </script>
 
-<script type="module" src="/js/scripts/perfil.js"></script>
+<script type="module" src="../js/scripts/perfil.js"></script>
 </body>
 </html>
