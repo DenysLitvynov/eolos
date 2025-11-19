@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Éolos – Landing</title>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/calidad-aire.css">
+
+    <script src="../js/scripts/calidad-aire.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header" data-breakpoint="1050">
+        <div class="logo">
+            <img src="../images/logo.png" alt="logo" />
+        </div>
+
+        <!-- Botón hamburger -->
+        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+            <!-- Ícono (SVG) -->
+            <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <span class="menu-toggle__label">Menú</span>
+        </button>
+
+        <!-- Menú de navegación -->
+        <nav class="nav" id="site-nav">
+            <a href="landing.html">Inicio</a>
+            <a href="#">Mapas</a>
+            <a href="#">Sobre Nosotros</a>
+            <a href="FAQ.html">Faq</a>
+            <a href="#">Contacto</a>
+            <a href="login.html" class="login">Inicia Sesión</a>
+            <a href="registro.html" class="login">Registrarse</a>
+        </nav>
+    </header>
+    <main class="air-quality-container">
+        <h1>Calidad de Aire</h1>
+        
+        <section class="aqi-card">
+            <div class="aqi-info">
+                <h2>Índice de Calidad del Aire (AQI)</h2>
+                <p class="aqi-value"><span id="aqi-number">--</span> <span id="aqi-text"></span></p>
+                <p id="aqi-description"></p>
+            </div>
+        
+            <div class="aqi-icon" id="aqi-icon">
+                <!-- Aquí se insertará el SVG dinámico -->
+            </div>
+        </section>
+        
+        <section class="scale">
+            <h2>Escala de Nivel del aire</h2>
+        
+            <div class="scale-item">
+                <div class="dot good"></div>
+                <strong>Buena</strong> <span class="range">0–49</span>
+                <p>La calidad del aire es generalmente aceptable para la mayoría de personas. Sin embargo, los grupos sensibles
+                    pueden experimentar síntomas de menores a moderados por la exposición a largo plazo.</p>
+            </div>
+        
+            <div class="scale-item">
+                <div class="dot moderate"></div>
+                <strong>Mala</strong> <span class="range">50–99</span>
+                <p>El aire ha alcanzado un nivel alto de contaminación y es poco saludable para los grupos sensibles. Reduzca el
+                    tiempo que pasa fuera si siente síntomas como dificultad para respirar o irritación de la garganta.</p>
+            </div>
+        
+            <div class="scale-item">
+                <div class="dot bad"></div>
+                <strong>Poco Saludable</strong> <span class="range">+100</span>
+                <p>Los grupos sensibles pueden sentir inmediatamente los efectos sobre la salud. Las personas sanas pueden
+                    experimentar dificultad para respirar e irritación de la garganta tras una exposición prolongada.</p>
+            </div>
+        </section>
+        <section class="co2-section">
+            <h2>Niveles del Aire en las últimas 24 horas</h2>
+            <div class="chart-container">
+                <canvas id="co2Chart"></canvas>
+            </div>
+        </section>
+
+    </main>
+    <footer class="ft">
+        <div class="ft__wrap ft--two-cols">
+            <div class="ft__brand">
+                <span class="ft__logo">
+                    <img src="../images/logo_footer.png" alt="logo" />
+                </span>
+                <address class="ft__addr">
+                    <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
+                    <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
+                    <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
+                </address>
+            </div>
+    
+            <div class="ft__links">
+                <nav class="ft__col">
+                    <a href="landing.html">Inicio</a>
+                    <a href="#">Mapas</a>
+                    <a href="#">Sobre nosotros</a>
+                </nav>
+    
+                <nav class="ft__col">
+                    <a href="#">Contacto</a>
+                    <a href="#">Iniciar sesión</a>
+                </nav>
+    
+                <nav class="ft__col">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </nav>
+            </div>
+        </div>
+    
+        <div class="ft__copy">
+            Copyright ©éolos. Todos los derechos reservados.
+        </div>
+    </footer>
+</body>
+</html>
