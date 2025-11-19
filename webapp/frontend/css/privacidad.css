@@ -47,21 +47,8 @@ body {
     list-style: disc;
 }
 
-/* Optimización para pantallas pequeñas */
-@media (max-width: 600px) {
-    .privacy-container {
-        padding: 20px;
-    }
-    .privacy-container h1 { font-size: 26px; }
-    .privacy-container h2 { font-size: 22px; }
-    .privacy-container p,
-    .privacy-container ul { font-size: 18px; }
-}
-
 
 /* ===== Estilos del FAQ ===== */
-
-
 /* Ajustes exclusivos para la página FAQ */
 .faq-page .privacy-container {
     margin: 0 20px;
@@ -144,4 +131,16 @@ body {
     .privacy-container ul {
         margin: 0;
     }
+    .privacy-container {
+        padding: 20px;
+    }
+
+    .faq-page .privacy-container {
+        padding:0 20px
+    }
+    .privacy-container h1 { font-size: 26px; }
+    .privacy-container h2 { font-size: 22px; }
+    .privacy-container p,
+    .privacy-container ul { font-size: 18px; }
 }
+

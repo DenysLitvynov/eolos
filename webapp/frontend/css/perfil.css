@@ -65,8 +65,3 @@ input[type="date"]:focus {
     border-color: #0047A1;
     box-shadow: 0 0 3px rgba(0, 71, 161, 0.4);
 }
-
-
-
-
- html { overflow-y: scroll; }

@@ -3,38 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Éolos – Landing</title>
+  <title>Condicion</title>
 
   <link rel="stylesheet" href="../css/header.css">
   <link rel="stylesheet" href="../css/privacidad.css">
 </head>
 
 <body>
-
 <header class="header" data-breakpoint="1050">
-  <div class="logo">
-    <img src="../images/logo.png" alt="logo" />
-  </div>
+    <div class="logo">
+        <img src="../images/logo.png" alt="logo" />
+    </div>
 
-  <!-- Botón hamburger -->
-  <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
-    <!-- Ícono (SVG) -->
-    <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <span class="menu-toggle__label">Menú</span>
-  </button>
+    <!-- Botón hamburger -->
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="menu-toggle__label">Menú</span>
+    </button>
 
-  <!-- Menú de navegación -->
-  <nav class="nav" id="site-nav">
-    <a href="landing.html">Inicio</a>
-    <a href="#">Mapas</a>
-    <a href="#">Sobre Nosotros</a>
-    <a href="FAQ.html">Faq</a>
-    <a href="#">Contacto</a>
-    <a href="login.html" class="login">Inicia Sesión</a>
-    <a href="registro.html" class="login">Registrarse</a>
-  </nav>
+    <!-- Menú de navegación -->
+    <nav class="nav" id="site-nav">
+        <a href="../index.html">Inicio</a>
+        <a href="mapas.html">Mapas</a>
+        <a href="sobre-nosotros.html">Sobre Nosotros</a>
+        <a href="FAQ.html">Faq</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="login.html" class="login">Inicia Sesión</a>
+        <a href="registro.html" class="login">Registrarse</a>
+    </nav>
 </header>
 
 <div class="titulo">Términos y condiciones</div>
@@ -80,24 +78,24 @@
       </address>
     </div>
 
-    <div class="ft__links">
-      <nav class="ft__col">
-        <a href="#">Inicio</a>
-        <a href="#">Mapas</a>
-        <a href="#">Sobre nosotros</a>
-      </nav>
+      <div class="ft__links">
+          <nav class="ft__col">
+              <a href="../index.html">Inicio</a>
+              <a href="mapas.html">Mapas</a>
+              <a href="sobre-nosotros.html">Sobre nosotros</a>
+          </nav>
 
-      <nav class="ft__col">
-        <a href="#">Contacto</a>
-        <a href="#">Iniciar sesión</a>
-      </nav>
+          <nav class="ft__col">
+              <a href="contacto.html">Contacto</a>
+              <a href="login.html">Iniciar sesión</a>
+          </nav>
 
-      <nav class="ft__col">
-        <a href="#">Facebook</a>
-        <a href="#">Twitter</a>
-        <a href="#">Instagram</a>
-      </nav>
-    </div>
+          <nav class="ft__col">
+              <a href="#">Facebook</a>
+              <a href="#">Twitter</a>
+              <a href="#">Instagram</a>
+          </nav>
+      </div>
   </div>
 
   <div class="ft__copy">
@@ -126,7 +124,7 @@
       expanded ? closeMenu() : openMenu();
     });
 
-    // 回到桌面端自动关闭
+
     window.addEventListener('resize', () => {
       if(window.innerWidth > 1050) closeMenu();
     });
