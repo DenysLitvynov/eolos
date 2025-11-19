@@ -156,20 +156,20 @@ public class ConnectionActivity extends AppCompatActivity {
     }
 
     // --------------------------------------------------------------------
-    // Procesa el contenido del QR recibido
-    // json esperado: { "name": "nombre_beacon" }
-    // Si hay un servicio de beacon activo, lo detiene antes de iniciar uno nuevo
+    // Procesa el contenido del QR escaneado
     // --------------------------------------------------------------------
     /**
-     * @param qrContent Contenido en formato JSON del código QR escaneado
+     * Recibe el contenido de un QR, lo interpreta como JSON, obtiene el UUID y la ID de bici,
+     * detiene cualquier escaneo previo y lanza uno nuevo si es válido.
+     * @param qrContent Contenido del QR escaneado
      */
     private void procesarQR(String qrContent) {
         try {
             JSONObject json = new JSONObject(qrContent);
-            String name = json.getString("name");
+            String uuid = json.getString("uuid");
             String idBici = json.getString("id_bici");
 
-            // DETENER SERVicio ANTERIOR SI EXISTE
+            // DETENER SERVICIO ANTERIOR SI EXISTE
             if (BeaconScanService.isRunning()) {
                 Intent stopIntent = new Intent(this, BeaconScanService.class);
                 stopIntent.setAction("ACTION_STOP_BEACON_SCAN");
@@ -178,13 +178,11 @@ public class ConnectionActivity extends AppCompatActivity {
                 } else {
                     startService(stopIntent);
                 }
-                // Espera 500ms antes de iniciar nuevo escaneo
-                new Handler().postDelayed(() -> iniciarNuevoEscaneo(name), 500);
+                new Handler().postDelayed(() -> iniciarNuevoEscaneo(uuid, idBici), 500);
             } else {
-                iniciarNuevoEscaneo(name);
+                iniciarNuevoEscaneo(uuid, idBici);
             }
         } catch (Exception e) {
-            // Dialogo de error si QR no válido
             new MaterialAlertDialogBuilder(this)
                     .setTitle("Error")
                     .setMessage("QR no válido")
@@ -194,19 +192,22 @@ public class ConnectionActivity extends AppCompatActivity {
     }
 
     // --------------------------------------------------------------------
-    // Inicia un nuevo escaneo de beacon
-    // Muestra un diálogo de confirmación y arranca el servicio en segundo plano
+    // Inicia un nuevo escaneo de beacon en segundo plano
     // --------------------------------------------------------------------
     /**
-     * @param name Nombre del beacon obtenido del QR
+     * Inicia el servicio de escaneo de beacons con el UUID y la ID de bici proporcionados.
+     * Muestra un diálogo de confirmación al usuario.
+     * @param uuid UUID del beacon a escanear
+     * @param idBici Identificador de la bicicleta asociada
      */
-    private void iniciarNuevoEscaneo(String name) {
+    private void iniciarNuevoEscaneo(String uuid, String idBici) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Conexión iniciada")
-                .setMessage("Escaneando beacon:\n\n" + name)
+                .setMessage("Escaneando beacon:\n\n" + uuid)
                 .setPositiveButton("OK", (dialog, which) -> {
                     Intent serviceIntent = new Intent(this, BeaconScanService.class);
-                    serviceIntent.putExtra("beacon_name", name);
+                    serviceIntent.putExtra("beacon_uuid", uuid);
+                    serviceIntent.putExtra("id_bici", idBici);
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         startForegroundService(serviceIntent);
                     } else {
