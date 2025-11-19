@@ -24,7 +24,7 @@ public class PerfilFake {
     private static final String TAG = "PerfilFake";
 
     // 📌 Cambia BASE_URL si ejecutas en dispositivo físico (usa IP de tu PC).
-    private static final String BASE_URL = "http://192.168.1.24:8000";
+    private static final String BASE_URL = "http://192.168.1.133:8000";
     private static final String ENDPOINT_PERFIL = "/api/v1/perfil";
 
     // Campos de datos que realmente usas en la app

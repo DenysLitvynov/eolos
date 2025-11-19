@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         // === REDIRECCIÓN SI YA ESTÁ LOGUEADO ===
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
         String token = prefs.getString("token", null);
-        if (token != null) {
+        boolean biometricEnabled = prefs.getBoolean("biometric_enabled", false);
+        if (token != null && biometricEnabled) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
             return;
