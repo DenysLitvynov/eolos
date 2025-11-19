@@ -1,0 +1,137 @@
+/* ------------------------------
+   CONTENEDOR GENERAL
+--------------------------------*/
+.bike-page {
+    padding: 2rem 3rem;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.page-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #0F4C81;
+}
+
+/* ------------------------------
+   BUSCADOR Y FILTROS
+--------------------------------*/
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ccc;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    padding: 0.4rem;
+    font-size: 1rem;
+}
+
+.search-box button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.state-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.state-btn {
+    background: #eee;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.state-btn:hover {
+    background: #ddd;
+}
+
+/* ------------------------------
+   LISTA DE TARJETAS
+--------------------------------*/
+.bike-list {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ------------------------------
+   TARJETAS DE BICI
+--------------------------------*/
+.bike-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem 1.2rem;
+    border-top: 10px solid #005bbb;
+    /* color por defecto */
+    position: relative;
+}
+
+.bike-card.danado {
+    border-color: #e24d4d;
+}
+
+.bike-card.desactivado {
+    border-color: #0d48a181;
+}
+
+.problem-badge {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: #e24d4d;
+    color: #fff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.bike-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.bike-info {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+}
+
+.sensor-tags {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: #005bbb;
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
