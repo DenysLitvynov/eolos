@@ -63,6 +63,11 @@
     transition: 0.2s;
 }
 
+.state-btn.active {
+    background: #0F4C81;
+    color: white;
+}
+
 .state-btn:hover {
     background: #ddd;
 }
