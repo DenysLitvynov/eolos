@@ -20,7 +20,8 @@ from db.models import (
 )
 from passlib.context import CryptContext
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+import random
 
 # ---------------------------------------------------------
 
@@ -100,49 +101,68 @@ def seed_data():
 
         # ---------------------------------------------------------
 
-        # 4. Estaciones
-        est1 = Estacion(nombre="Estación 001 - Plaza del Ayuntamiento", lat=39.4699, lon=-0.3763, capacidad=30)
-        est2 = Estacion(nombre="Estación 045 - Malvarrosa", lat=39.4780, lon=-0.3266, capacidad=25)
-        db.add_all([est1, est2])
+        # 4. Estaciones (10 estaciones de Valencia) - sin capacidad
+        estaciones_info = [
+            ("Plaza del Ayuntamiento", 39.4699, -0.3763),
+            ("Malvarrosa", 39.4780, -0.3266),
+            ("Ruzafa", 39.4618, -0.3764),
+            ("Benimaclet", 39.4901, -0.3619),
+            ("Campanar", 39.4890, -0.4001),
+            ("Patraix", 39.4572, -0.3972),
+            ("Ciudad de las Artes", 39.4541, -0.3505),
+            ("Turia - Puente de Serranos", 39.4787, -0.3769),
+            ("Mestalla", 39.4746, -0.3585),
+            ("Orriols", 39.5030, -0.3642),
+        ]
+        estaciones = []
+        for nombre, lat, lon in estaciones_info:
+            estaciones.append(Estacion(nombre=nombre, lat=lat, lon=lon))
+        db.add_all(estaciones)
         db.commit()
 
         # ---------------------------------------------------------
 
-        # 5. Bicicletas
-        bici1 = Bicicleta(
-            bicicleta_id=str(uuid.uuid4()),
-            estacion_id=est1.estacion_id,
-            qr_code="QR-VAL-001-ABC123",
-            short_code="VLC001",
-            estado=EstadoBicicleta.estacionada
-        )
-        bici2 = Bicicleta(
-            bicicleta_id=str(uuid.uuid4()),
-            estacion_id=est2.estacion_id,
-            qr_code="QR-VAL-045-XYZ789",
-            short_code="VLC045",
-            estado=EstadoBicicleta.en_uso
-        )
-        db.add_all([bici1, bici2])
+        # 5. Bicicletas (50) VLC001 - VLC050
+        bicicletas = []
+        for i in range(1, 51):
+            code = f"VLC{i:03d}"
+            estacion = random.choice(estaciones)
+            bici = Bicicleta(
+                bicicleta_id=code,
+                estacion_id=estacion.estacion_id,
+                qr_code=f"QR-{code}",
+                estado=random.choice(list(EstadoBicicleta))
+            )
+            bicicletas.append(bici)
+        db.add_all(bicicletas)
         db.commit()
 
         # ---------------------------------------------------------
 
-        # 6. Placas
-        placa1 = PlacaSensores(placa_id=str(uuid.uuid4()), bicicleta_id=bici1.bicicleta_id, estado="activa")
-        placa2 = PlacaSensores(placa_id=str(uuid.uuid4()), bicicleta_id=bici2.bicicleta_id, estado="activa")
-        db.add_all([placa1, placa2])
+        # 6. Placas (una por bicicleta) con ult_actualizacion_estado
+        placas = []
+        for bici in bicicletas:
+            placa = PlacaSensores(
+                placa_id=str(uuid.uuid4()),
+                bicicleta_id=bici.bicicleta_id,
+                estado="activa",
+                ult_actualizacion_estado=datetime.now(timezone.utc)
+            )
+            placas.append(placa)
+        db.add_all(placas)
         db.commit()
 
         # ---------------------------------------------------------
 
-        # 7. Trayecto
+        # 7. Trayecto de ejemplo (usar una de las bicicletas creadas)
+        ejemplo_bici = random.choice(bicicletas)
         trayecto = Trayecto(
             trayecto_id=str(uuid.uuid4()),
             usuario_id=usuario_normal.usuario_id,
-            bicicleta_id=bici2.bicicleta_id,
-            fecha_inicio=datetime.now(timezone.utc),
-            origen_estacion_id=est2.estacion_id,
+            bicicleta_id=ejemplo_bici.bicicleta_id,
+            fecha_inicio=datetime.now(timezone.utc) - timedelta(minutes=30),
+            fecha_fin=None,
+            origen_estacion_id=ejemplo_bici.estacion_id,
             distancia_total=4.2
         )
         db.add(trayecto)
@@ -150,44 +170,47 @@ def seed_data():
 
         # ---------------------------------------------------------
 
-        # 8. Medidas
-        medida1 = Medida(
-            lectura_id=str(uuid.uuid4()),
-            placa_id=placa2.placa_id,
-            trayecto_id=trayecto.trayecto_id,
-            fecha_hora=datetime.now(timezone.utc),
-            tipo=TipoMedidaEnum.pm2_5,
-            valor=12.5,
-            lat=39.4750,
-            lon=-0.3500
-        )
-        medida2 = Medida(
-            lectura_id=str(uuid.uuid4()),
-            placa_id=placa2.placa_id,
-            trayecto_id=trayecto.trayecto_id,
-            fecha_hora=datetime.now(timezone.utc),
-            tipo=TipoMedidaEnum.temperatura,
-            valor=24.8,
-            lat=39.4760,
-            lon=-0.3550
-        )
-        db.add_all([medida1, medida2])
-        
+        # 8. Medidas (2 ejemplos) asociadas a la placa de la bici del trayecto
+        placa_rel = db.query(PlacaSensores).filter_by(bicicleta_id=ejemplo_bici.bicicleta_id).first()
+        if placa_rel:
+            medida1 = Medida(
+                lectura_id=str(uuid.uuid4()),
+                placa_id=placa_rel.placa_id,
+                trayecto_id=trayecto.trayecto_id,
+                fecha_hora=datetime.now(timezone.utc) - timedelta(minutes=20),
+                tipo=TipoMedidaEnum.pm2_5,
+                valor=12.5,
+                lat=39.4750,
+                lon=-0.3500
+            )
+            medida2 = Medida(
+                lectura_id=str(uuid.uuid4()),
+                placa_id=placa_rel.placa_id,
+                trayecto_id=trayecto.trayecto_id,
+                fecha_hora=datetime.now(timezone.utc) - timedelta(minutes=10),
+                tipo=TipoMedidaEnum.temperatura,
+                valor=24.8,
+                lat=39.4760,
+                lon=-0.3550
+            )
+            db.add_all([medida1, medida2])
+            db.commit()
+
         # ---------------------------------------------------------
 
-        # 9. Incidencia
+        # 9. Incidencia de ejemplo
         incidencia = Incidencia(
             incidencia_id=str(uuid.uuid4()),
             usuario_id=usuario_normal.usuario_id,
-            bicicleta_id=bici1.bicicleta_id,
+            bicicleta_id=bicicletas[0].bicicleta_id,
             descripcion="Rueda pinchada",
             estado=EstadoIncidencia.nuevo,
             fuente=FuenteReporte.web
         )
         db.add(incidencia)
-
         db.commit()
-        print("Seed completado: 10 carnets DNI válidos + todo lo demás")
+
+        print("Seed completado: 10 carnets DNI válidos + estaciones + 50 bicis + placas + trayecto + medidas + incidencia")
 
     except Exception as e:
         db.rollback()

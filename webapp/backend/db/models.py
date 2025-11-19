@@ -122,9 +122,9 @@ class Estacion(Base):
     
     estacion_id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(100), nullable=False)
-    lat = Column(Numeric(9, 6), nullable=False)
-    lon = Column(Numeric(9, 6), nullable=False)
-    capacidad = Column(Integer, nullable=False)
+    lat = Column(Float, nullable=False)
+    lon = Column(Float, nullable=False)
+    # capacidad eliminado según petición
 
     bicicletas = relationship("Bicicleta", back_populates="estacion")
 
@@ -136,10 +136,10 @@ class Bicicleta(Base):
     """
     __tablename__ = "bicicletas"
     
-    bicicleta_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    bicicleta_id = Column(String(20), primary_key=True)   # cambiado y sin default
     estacion_id = Column(Integer, ForeignKey("estaciones.estacion_id", ondelete="SET NULL"), nullable=True)
     qr_code = Column(String(100), unique=True, nullable=False)
-    short_code = Column(String(20), unique=True, nullable=False)
+    # short_code eliminado
     estado = Column(SQLEnum(EstadoBicicleta), default=EstadoBicicleta.estacionada, nullable=False)
 
     estacion = relationship("Estacion", back_populates="bicicletas")
@@ -154,8 +154,9 @@ class PlacaSensores(Base):
     __tablename__ = "placas_sensores"
     
     placa_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    bicicleta_id = Column(String(36), ForeignKey("bicicletas.bicicleta_id", ondelete="CASCADE"), unique=True)
+    bicicleta_id = Column(String(20), ForeignKey("bicicletas.bicicleta_id", ondelete="CASCADE"), unique=True)
     estado = Column(String(50), nullable=False)  # activo / inactivo / etc.
+    ult_actualizacion_estado = Column(TIMESTAMP(timezone=True), server_default=func.now(), nullable=False)
 
     bicicleta = relationship("Bicicleta", back_populates="placa")
 
@@ -169,7 +170,7 @@ class Trayecto(Base):
     
     trayecto_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     usuario_id = Column(String(36), ForeignKey("usuarios.usuario_id"))
-    bicicleta_id = Column(String(36), ForeignKey("bicicletas.bicicleta_id"))
+    bicicleta_id = Column(String(20), ForeignKey("bicicletas.bicicleta_id"))
     fecha_inicio = Column(TIMESTAMP(timezone=True), nullable=False)
     fecha_fin = Column(TIMESTAMP(timezone=True), nullable=True)
     origen_estacion_id = Column(Integer, ForeignKey("estaciones.estacion_id"))
@@ -190,8 +191,8 @@ class Medida(Base):
     fecha_hora = Column(TIMESTAMP(timezone=True), nullable=False)
     tipo = Column(SQLEnum(TipoMedidaEnum), nullable=False)
     valor = Column(Float, nullable=False)
-    lat = Column(Numeric(9,6), nullable=False)
-    lon = Column(Numeric(9,6), nullable=False)
+    lat = Column(Float, nullable=False)
+    lon = Column(Float, nullable=False)
 
 # ---------------------------------------------------------
 
@@ -203,7 +204,7 @@ class Incidencia(Base):
     
     incidencia_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     usuario_id = Column(String(36), ForeignKey("usuarios.usuario_id"))
-    bicicleta_id = Column(String(36), ForeignKey("bicicletas.bicicleta_id"), nullable=True)
+    bicicleta_id = Column(String(20), ForeignKey("bicicletas.bicicleta_id"), nullable=True)
     descripcion = Column(Text, nullable=False)
     fecha_reporte = Column(TIMESTAMP(timezone=True), server_default=func.now())
     estado = Column(SQLEnum(EstadoIncidencia), default=EstadoIncidencia.nuevo)
@@ -243,4 +244,3 @@ class PasswordResetToken(Base):
     used = Column(Boolean, default=False, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now(), nullable=False)
 
-# ---------------------------------------------------------
