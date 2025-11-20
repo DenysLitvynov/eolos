@@ -86,5 +86,9 @@
             android:foregroundServiceType="connectedDevice|location"
             android:stopWithTask="false" />
 
+        <service
+            android:name=".servicio.GpsDistanceTrackerService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
     </application>
 </manifest>

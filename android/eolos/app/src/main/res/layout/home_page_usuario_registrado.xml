@@ -356,7 +356,67 @@
                 </LinearLayout>
 
             </FrameLayout>
+            <!-- ==================== TRAYECTO ACTUAL (SIN ERRORES) ==================== -->
+            <FrameLayout
+                android:id="@+id/contenedor_trayecto_actual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/seccion_1">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Trayecto actual"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/rethink_sans"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_distancia_actual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="0.0 m"
+                        android:textSize="64sp"
+                        android:textStyle="bold"
+                        android:fontFamily="monospace"
+                        android:textColor="@color/azul_profundo"
+                        android:gravity="center_horizontal"
+                        android:letterSpacing="0.05" />
+
+                    <TextView
+                        android:id="@+id/tv_estado_conexion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Conectado al sensor • GPS activo"
+                        android:textSize="14sp"
+                        android:textColor="#2e7d32"
+                        android:fontFamily="@font/rethink_sans"
+                        android:gravity="center_horizontal" />
+
+                    <!-- Icono opcional – usa uno que exista o bórralo -->
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/foto_ciclista"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="En movimiento" />
+
+                </LinearLayout>
+            </FrameLayout>
             <!-- CONTENEDOR KM -->
             <FrameLayout
                 android:id="@+id/contenedor_km"

@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 public class LoginFake {
 
-    private static final String BASE_URL = "http://172.20.10.12:8000";
+    private static final String BASE_URL = "http://192.168.1.24:8000";
     private static final String ENDPOINT_LOGIN = "/api/v1/auth/login";
 
     public interface LoginCallback {

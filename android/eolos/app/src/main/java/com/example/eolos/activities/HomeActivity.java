@@ -1,17 +1,25 @@
 package com.example.eolos.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eolos.R;
+import com.example.eolos.servicio.GpsDistanceTrackerService;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.biometric.BiometricManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class HomeActivity extends AppCompatActivity {
     @Override
@@ -103,6 +111,74 @@ public class HomeActivity extends AppCompatActivity {
 
         iconPerfil.setOnClickListener(v ->
                 startActivity(new Intent(this, PerfilActivity.class)));
+    }
+    //------------------------------------------------------------------------------------------
+    //  void  →  void
+    //  setupDistanceLiveTracking() – VERSIÓN FINAL 100% FUNCIONAL
+    //------------------------------------------------------------------------------------------
+    private final BroadcastReceiver distanceReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.d("GPS_DIST", "BROADCAST RECIBIDO en Home → " + action);
+
+            View contenedor = findViewById(R.id.contenedor_trayecto_actual);
+            TextView tv = findViewById(R.id.tv_distancia_actual);
+
+            if (contenedor == null || tv == null) {
+                Log.e("GPS_DIST", "ERROR: Views no encontradas!");
+                return;
+            }
+
+            if (GpsDistanceTrackerService.ACCION_ACTUALIZAR_DISTANCIA.equals(action)) {
+                float metros = intent.getFloatExtra(GpsDistanceTrackerService.EXTRA_DISTANCIA, 0f);
+                Log.d("GPS_DIST", "Distancia actualizada: " + metros + " metros");
+
+                contenedor.setVisibility(View.VISIBLE);
+                tv.setText(metros >= 1000
+                        ? String.format("%.2f km", metros / 1000f)
+                        : String.format("%.1f m", metros));
+            }
+            else if (GpsDistanceTrackerService.ACCION_SERVICIO_DETENIDO.equals(action)) {
+                Log.d("GPS_DIST", "Servicio GPS detenido");
+                contenedor.setVisibility(View.GONE);
+                tv.setText("0.0 m");
+            }
+        }
+    };
+
+    private void iniciarSeguiminetoDistancia() {
+        // Verificar estado actual del servicio al iniciar la actividad
+        if (GpsDistanceTrackerService.isRunning()) {
+            View contenedor = findViewById(R.id.contenedor_trayecto_actual);
+            if (contenedor != null) {
+                contenedor.setVisibility(View.VISIBLE);
+            }
+            Log.d("GPS_DIST", "Servicio GPS está corriendo al iniciar Home");
+        } else {
+            Log.d("GPS_DIST", "Servicio GPS NO está corriendo al iniciar Home");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(GpsDistanceTrackerService.ACCION_ACTUALIZAR_DISTANCIA);
+        filter.addAction(GpsDistanceTrackerService.ACCION_SERVICIO_DETENIDO);
+        LocalBroadcastManager.getInstance(this).registerReceiver(distanceReceiver, filter);
+
+        Log.d("GPS_DIST", "Receiver registrado correctamente");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            LocalBroadcastManager.getInstance(this).unregisterReceiver(distanceReceiver);
+        } catch (Exception ignored) {}
+        Log.d("GPS_DIST", "Receiver desregistrado");
     }
 
 }

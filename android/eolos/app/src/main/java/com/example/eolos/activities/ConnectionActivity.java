@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -12,10 +13,12 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.eolos.R;
 import com.example.eolos.logica_fake.LogicaTrayectosFake;
 import com.example.eolos.servicio.BeaconScanService;
+import com.example.eolos.servicio.GpsDistanceTrackerService;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -128,6 +131,15 @@ public class ConnectionActivity extends AppCompatActivity {
             startService(stopIntent);
         }
 
+        // Detener GPS distance service
+        Intent stopGpsIntent = new Intent(this, GpsDistanceTrackerService.class);
+        stopGpsIntent.setAction(GpsDistanceTrackerService.ACCION_DETENER);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(stopGpsIntent);
+        } else {
+            startService(stopGpsIntent);
+        }
+
         // Resetear instancia del Singleton
         LogicaTrayectosFake.resetInstance();
 
@@ -150,7 +162,7 @@ public class ConnectionActivity extends AppCompatActivity {
                 Intent stopIntent = new Intent(this, BeaconScanService.class);
                 stopIntent.setAction("ACTION_STOP_BEACON_SCAN");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    startForegroundService(stopIntent);
+                    startService(stopIntent);
                 } else {
                     startService(stopIntent);
                 }
@@ -170,17 +182,21 @@ public class ConnectionActivity extends AppCompatActivity {
     private void iniciarNuevoEscaneo(String uuid, String idBici) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Conexión iniciada")
-                .setMessage("Escaneando beacon:\n\n" + uuid + "\n\nBicicleta: " + idBici)
+                .setMessage("Escaneando beacon:\n\n" + uuid + "\n\nBicicleta: " + idBici + "\n\nTambién se está midiendo la distancia GPS recorrida.")
                 .setPositiveButton("OK", (dialog, which) -> {
-                    Intent serviceIntent = new Intent(this, BeaconScanService.class);
-                    serviceIntent.putExtra("beacon_uuid", uuid);
-                    serviceIntent.putExtra("id_bici", idBici);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        startForegroundService(serviceIntent);
-                    } else {
-                        startService(serviceIntent);
-                    }
-                    Toast.makeText(this, "Escaneo en segundo plano iniciado", Toast.LENGTH_SHORT).show();
+                    // === BEACON SERVICE ===
+                    Intent beaconIntent = new Intent(this, BeaconScanService.class);
+                    beaconIntent.putExtra("beacon_uuid", uuid);
+                    beaconIntent.putExtra("id_bici", idBici);
+                    ContextCompat.startForegroundService(this, beaconIntent);
+
+                    // === GPS DISTANCE SERVICE ===
+                    Intent gpsIntent = new Intent(this, GpsDistanceTrackerService.class);
+                    startService(gpsIntent);
+
+                    Log.d("GPS_DIST", "Servicio GPS iniciado desde ConnectionActivity");
+
+                    Toast.makeText(this, "Escaneo + GPS activos", Toast.LENGTH_LONG).show();
                     finish();
                 })
                 .setCancelable(false)
