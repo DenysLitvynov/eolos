@@ -1,3 +1,5 @@
+import { CalidadAireFake } from '../logica_fake/calidad_aire_fake.js';
+
 // -------------------------------
 // SVGs
 // -------------------------------
@@ -24,34 +26,52 @@ const svgBad = `
 // APARIENCIA SEGÚN AQI
 // -------------------------------
 
-// Valor de prueba
-const aqi = 30; // TODO: sustituir por fetch() al back
+// Obtener placa_id del localStorage (guardado en login)
+const placa_id = localStorage.getItem('placa_id') || "8fb5ef4c-f552-4cad-9c58-6f0e80a97b53";
 
 const numberEl = document.getElementById("aqi-number");
 const textEl = document.getElementById("aqi-text");
 const descEl = document.getElementById("aqi-description");
 const iconEl = document.getElementById("aqi-icon");
 
-numberEl.textContent = aqi;
+const logicaAire = new CalidadAireFake();
 
-if (aqi <= 49) {
-    numberEl.style.color = "#4CAF50";
-    textEl.textContent = "Buena";
-    descEl.textContent = "La calidad del aire es satisfactoria y la contaminación del aire presenta poco o ningún riesgo.";
-    iconEl.innerHTML = svgGood;
+// Función para actualizar la UI
+function actualizarUI(aqi) {
+    numberEl.textContent = aqi;
 
-} else if (aqi <= 99) {
-    numberEl.style.color = "#ffcc00";
-    textEl.textContent = "Mala";
-    descEl.textContent = "El aire presenta niveles elevados de contaminación. Las personas sensibles pueden experimentar efectos.";
-    iconEl.innerHTML = svgModerate;
+    if (aqi <= 49) {
+        numberEl.style.color = "#4CAF50";
+        textEl.textContent = "Buena";
+        descEl.textContent = "La calidad del aire es satisfactoria y la contaminación del aire presenta poco o ningún riesgo.";
+        iconEl.innerHTML = svgGood;
 
-} else {
-    numberEl.style.color = "#e53935";
-    textEl.textContent = "Poco saludable";
-    descEl.textContent = "La calidad del aire es dañina especialmente para grupos sensibles. Evite la exposición prolongada.";
-    iconEl.innerHTML = svgBad;
+    } else if (aqi <= 99) {
+        numberEl.style.color = "#ffcc00";
+        textEl.textContent = "Mala";
+        descEl.textContent = "El aire presenta niveles elevados de contaminación. Las personas sensibles pueden experimentar efectos.";
+        iconEl.innerHTML = svgModerate;
+
+    } else {
+        numberEl.style.color = "#e53935";
+        textEl.textContent = "Poco saludable";
+        descEl.textContent = "La calidad del aire es dañina especialmente para grupos sensibles. Evite la exposición prolongada.";
+        iconEl.innerHTML = svgBad;
+    }
 }
+
+// Cargar AQI al iniciar
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const resultado = await logicaAire.obtenerAQI(placa_id);
+        actualizarUI(resultado.aqi);
+    } catch (error) {
+        console.error('Error al obtener AQI:', error);
+        numberEl.textContent = "N/A";
+        textEl.textContent = "Error";
+        descEl.textContent = "No se pudo obtener la información de calidad del aire.";
+    }
+});
 
 
 // -------------------------------
