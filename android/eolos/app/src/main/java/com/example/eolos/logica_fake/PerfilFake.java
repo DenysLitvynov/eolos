@@ -24,7 +24,7 @@ public class PerfilFake {
     private static final String TAG = "PerfilFake";
 
     // 📌 Cambia BASE_URL si ejecutas en dispositivo físico (usa IP de tu PC).
-    private static final String BASE_URL = "http://192.168.1.133:8000";
+    private static final String BASE_URL = "http://172.20.10.12:8000";
     private static final String ENDPOINT_PERFIL = "/api/v1/perfil";
 
     // Campos de datos que realmente usas en la app
@@ -72,6 +72,8 @@ public class PerfilFake {
             if (codigo >= 200 && codigo < 300) {
                 try {
                     if (fromJsonServidor(cuerpo)) {
+                        // GUARDAR targeta_id EN SHAREDPREFERENCES PARA LogicaTrayectosFake
+                        guardarTargetaIdEnPrefs();
                         if (cb != null) cb.onListo(this, true);
                         return;
                     }
@@ -82,8 +84,21 @@ public class PerfilFake {
 
             Log.w(TAG, "Fallo GET perfil, usando ejemplo local");
             cargarPerfilEjemplo();
+            // También guardar targeta_id de ejemplo
+            guardarTargetaIdEnPrefs();
             if (cb != null) cb.onListo(this, false);
         });
+    }
+
+    // ===== Guardar targeta_id en SharedPreferences =====
+    private void guardarTargetaIdEnPrefs() {
+        if (tarjeta != null && !tarjeta.trim().isEmpty()) {
+            SharedPreferences prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+            prefs.edit().putString("targeta_id", tarjeta.trim()).apply();
+            Log.d(TAG, "✅ targeta_id guardada en SharedPreferences: " + tarjeta);
+        } else {
+            Log.w(TAG, "targeta_id vacía, no se guarda en SharedPreferences");
+        }
     }
 
     // ===== Guardado en backend con JWT (PUT /perfil) =====
@@ -109,6 +124,8 @@ public class PerfilFake {
             if (exito) {
                 try {
                     fromJsonServidor(cuerpo); // refrescar datos locales con lo devuelto
+                    // ACTUALIZAR targeta_id EN SHAREDPREFERENCES
+                    guardarTargetaIdEnPrefs();
                 } catch (JSONException ignored) {}
             }
             if (cb != null) cb.onResult(exito, codigo, cuerpo);
@@ -123,6 +140,8 @@ public class PerfilFake {
         this.tarjeta = o.optString("targeta_id", "");      // en BD se llama targeta_id
         this.fechaRegistro = o.optString("fecha_registro", "");
         this.contrasena = ""; // nunca viene la contraseña en claro
+
+        Log.d(TAG, "Perfil cargado - targeta_id: " + this.tarjeta);
         return (this.correo != null && !this.correo.isEmpty());
     }
 
@@ -135,18 +154,18 @@ public class PerfilFake {
             if (nombre != null)  o.put("nombre", nombre);
             if (correo != null)  o.put("correo", correo);
 
-            // tarjeta / targeta_id：可以为空 → 发送 JSON null
+            // tarjeta / targeta_id：puede estar vacío → enviar JSON null
             if (tarjeta == null || tarjeta.trim().isEmpty()) {
                 o.put("targeta_id", JSONObject.NULL);
             } else {
                 o.put("targeta_id", tarjeta.trim()); // varchar(9) en tu BD
             }
 
-            // contrasena：只有当用户真的写了新密码时才发送
+            // contrasena：solo enviar si el usuario escribió nueva contraseña
             if (contrasena != null && !contrasena.isEmpty()) {
                 o.put("contrasena", contrasena);
             } else {
-                o.put("contrasena", JSONObject.NULL); // 表示“不要修改密码”
+                o.put("contrasena", JSONObject.NULL); // indicar "no modificar contraseña"
             }
         } catch (JSONException ignored) {}
         return o.toString();
@@ -156,11 +175,13 @@ public class PerfilFake {
     private void cargarPerfilEjemplo() {
         this.nombre = "Ejemplo Usuario";
         this.correo = "ejemplo@eolos.com";
-        this.tarjeta = ""; // sin tarjeta por defecto
+        this.tarjeta = "USER_001"; // valor de ejemplo para testing
         this.contrasena = "";
         this.fechaRegistro = new SimpleDateFormat(
                 "d/M/yyyy", Locale.getDefault()
         ).format(new Date());
+
+        Log.d(TAG, "Perfil de ejemplo cargado - targeta_id: " + this.tarjeta);
     }
 
     // ===== Getters / Setters =====
@@ -172,7 +193,10 @@ public class PerfilFake {
 
     public void setNombre(String nombre) { this.nombre = nombre; }
     public void setCorreo(String correo) { this.correo = correo; }
-    public void setTarjeta(String tarjeta) { this.tarjeta = tarjeta; }
+    public void setTarjeta(String tarjeta) {
+        this.tarjeta = tarjeta;
+        Log.d(TAG, "targeta_id establecida: " + tarjeta);
+    }
     public void setContrasena(String contrasena) { this.contrasena = contrasena; }
     public void setFechaRegistro(String fechaRegistro) { this.fechaRegistro = fechaRegistro; }
 

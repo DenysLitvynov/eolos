@@ -11,6 +11,7 @@ package com.example.eolos.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,9 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.concurrent.Executor;
 
 
@@ -41,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
+    private static final String TAG = "LogintarjetaId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,17 +83,42 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             loginFake.login(correo, contrasena, new LoginFake.LoginCallback() {
+                // En el método onSuccess del login en LoginActivity, añadir:
+
                 @Override
                 public void onSuccess(String token) {
-
                     SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-                    prefs.edit().
-                            putString("token", token)
-                            .putString("biometric_email", correo)
-                            .apply();
-                    Toast.makeText(LoginActivity.this, "Login exitoso", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                    finish();
+
+                    try {
+                        // Intentar parsear la respuesta como JSON para obtener targeta_id
+                        JSONObject response = new JSONObject(token);
+                        String tokenJWT = response.getString("token");
+                        String targetaId = response.optString("targeta_id", ""); // targeta_id si viene en la respuesta
+
+                        prefs.edit()
+                                .putString("token", tokenJWT)
+                                .putString("biometric_email", correo)
+                                .apply();
+
+                        // Si viene targeta_id en la respuesta del login, guardarla
+                        if (!targetaId.isEmpty()) {
+                            prefs.edit().putString("targeta_id", targetaId).apply();
+                            Log.d(TAG, "targeta_id guardada desde login: " + targetaId);
+                        }
+
+                        Toast.makeText(LoginActivity.this, "Login exitoso", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        finish();
+                    } catch (JSONException e) {
+                        // Si no es JSON, asumir que el token es directamente el string
+                        prefs.edit()
+                                .putString("token", token)
+                                .putString("biometric_email", correo)
+                                .apply();
+                        Toast.makeText(LoginActivity.this, "Login exitoso", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        finish();
+                    }
                 }
 
                 @Override

@@ -1,11 +1,3 @@
-/**
- * Fichero: BeaconStatusFragment.java
- * Autor: Hugo Belda
- * Fecha: 29/10/2025
- * Descripción: Fragmento que muestra en tiempo real el estado de conexión con el beacon BLE
- *             y la última medida recibida (valor del minor). Se actualiza mediante
- *             LocalBroadcast desde BeaconScanService.
- */
 package com.example.eolos.fragments;
 
 import android.content.BroadcastReceiver;
@@ -26,17 +18,17 @@ import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.eolos.R;
+import com.example.eolos.logica_fake.LogicaTrayectosFake;
 import com.example.eolos.servicio.BeaconScanService;
 
 public class BeaconStatusFragment extends Fragment {
 
     private TextView tvEstado;
-    private TextView tvMedida;      // Muestra la medida actual (valor del minor)
+    private TextView tvMedida;
+    private TextView tvTrayectoInfo;
     private View cardStatus;
+    private LogicaTrayectosFake logicaTrayectos;
 
-    // =============================================================================
-    // CICLO DE VIDA: INFLADO DEL LAYOUT
-    // =============================================================================
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,7 +40,11 @@ public class BeaconStatusFragment extends Fragment {
         // Vinculación de vistas
         tvEstado    = view.findViewById(R.id.tv_status);
         tvMedida    = view.findViewById(R.id.tv_medida);
+        // tvTrayectoInfo = view.findViewById(R.id.tv_trayecto_info);
         cardStatus  = view.findViewById(R.id.card_status);
+
+        // Inicializar lógica de trayectos
+        logicaTrayectos = LogicaTrayectosFake.getInstance(requireContext());
 
         // Estado inicial según servicio
         if (BeaconScanService.isBeaconDetectedRecently()) {
@@ -59,12 +55,12 @@ public class BeaconStatusFragment extends Fragment {
             cardStatus.setBackgroundColor(Color.parseColor("#FFCDD2")); // Rojo suave
         }
 
+        // Actualizar información del trayecto
+        actualizarInfoTrayecto();
+
         return view;
     }
 
-    // =============================================================================
-    // RECEPTOR DE BROADCASTS DEL SERVICIO
-    // =============================================================================
     private final BroadcastReceiver beaconReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -75,10 +71,25 @@ public class BeaconStatusFragment extends Fragment {
             actualizarEstado("Conectado");
             cardStatus.setBackgroundColor(Color.parseColor("#C8E6C9"));
 
-            // Parsear JSON simple: {"medida": 123}
+            // Parsear JSON y mostrar medida
             try {
-                int medida = new org.json.JSONObject(json).getInt("medida");
-                tvMedida.setText("Medida: " + medida);
+                org.json.JSONObject jsonObj = new org.json.JSONObject(json);
+                double valorMedido = jsonObj.getDouble("valor_medido");
+                int tipoMedicion = jsonObj.getInt("tipo_medicion");
+
+                String tipoTexto = "";
+                switch (tipoMedicion) {
+                    case 11: tipoTexto = "PM2.5"; break;
+                    case 12: tipoTexto = "PM10"; break;
+                    case 13: tipoTexto = "CO2"; break;
+                    default: tipoTexto = "Desconocido";
+                }
+
+                tvMedida.setText(String.format("Medida: %.2f (%s)", valorMedido, tipoTexto));
+
+                // Actualizar información del trayecto
+                actualizarInfoTrayecto();
+
             } catch (Exception e) {
                 tvMedida.setText("Medida: —");
                 Log.e("BeaconStatusFrag", "Error parseando JSON de medida", e);
@@ -86,15 +97,15 @@ public class BeaconStatusFragment extends Fragment {
         }
     };
 
-    // =============================================================================
-    // REGISTRO Y DESREGISTRO DEL RECEPTOR
-    // =============================================================================
     @Override
     public void onResume() {
         super.onResume();
         LocalBroadcastManager.getInstance(requireContext())
                 .registerReceiver(beaconReceiver,
                         new IntentFilter("com.example.eolos.BEACON_DETECTED"));
+
+        // Actualizar información al volver a la actividad
+        actualizarInfoTrayecto();
     }
 
     @Override
@@ -104,18 +115,9 @@ public class BeaconStatusFragment extends Fragment {
             LocalBroadcastManager.getInstance(requireContext())
                     .unregisterReceiver(beaconReceiver);
         } catch (Exception ignored) {
-            // En caso raro de que ya esté desregistrado
         }
     }
 
-    // =============================================================================
-    // ACTUALIZAR ESTADO DE CONEXIÓN
-    // =============================================================================
-    /**
-     * Actualiza el texto y el color de fondo del card según el estado de conexión.
-     *
-     * @param texto Texto a mostrar ("Conectado" o "No conectado")
-     */
     public void actualizarEstado(String texto) {
         if (tvEstado != null) {
             tvEstado.setText(texto);
@@ -128,16 +130,29 @@ public class BeaconStatusFragment extends Fragment {
         }
     }
 
-    // =============================================================================
-    // LIMPIAR VALORES (por si en el futuro se añaden más campos)
-    // =============================================================================
-    /**
-     * Limpia los valores mostrados en pantalla (útil para futuras ampliaciones).
-     * Actualmente solo se usa tvMedida, pero se mantiene por compatibilidad.
-     */
+    private void actualizarInfoTrayecto() {
+        if (tvTrayectoInfo != null) {
+            if (logicaTrayectos.estaActivo()) {
+                String info = String.format("Trayecto: %s\nBici: %s\nPlaca: %s",
+                        logicaTrayectos.getTrayectoId() != null ?
+                                logicaTrayectos.getTrayectoId().substring(0, 8) + "..." : "N/A",
+                        logicaTrayectos.getBicicletaId() != null ?
+                                logicaTrayectos.getBicicletaId() : "N/A",
+                        logicaTrayectos.getPlacaId() != null ?
+                                logicaTrayectos.getPlacaId().substring(0, 8) + "..." : "N/A");
+                tvTrayectoInfo.setText(info);
+            } else {
+                tvTrayectoInfo.setText("No hay trayecto activo");
+            }
+        }
+    }
+
     private void limpiarValores() {
         if (tvMedida != null) {
             tvMedida.setText("Medida: —");
+        }
+        if (tvTrayectoInfo != null) {
+            tvTrayectoInfo.setText("No hay trayecto activo");
         }
     }
 }

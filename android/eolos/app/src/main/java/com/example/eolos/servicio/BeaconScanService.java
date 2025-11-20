@@ -1,12 +1,3 @@
-/**
- * Fichero: BeaconScanService.java
- * Descripción: Servicio en primer plano para escaneo de beacons BLE.
- *              Escanea exclusivamente el UUID recibido por QR.
- *              Mantiene notificación persistente y permite detenerlo.
- * Autor: JINWEI
- * Editor: Hugo Belda
- * Fecha: 18/11/2025  ← versión corregida y actualizada
- */
 package com.example.eolos.servicio;
 
 import android.app.Notification;
@@ -24,36 +15,29 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.eolos.EscanerIBeacons;
 import com.example.eolos.activities.MainActivity;
-import com.example.eolos.logica_fake.LogicaFake;
+import com.example.eolos.logica_fake.LogicaTrayectosFake;
 
-// --------------------------------------------------------------------
-// Servicio en primer plano para escaneo BLE
-// --------------------------------------------------------------------
 public class BeaconScanService extends Service {
 
     private EscanerIBeacons escanerIBeacons;
+    private LogicaTrayectosFake logicaTrayectos;
     private static final String TAG = "BeaconSvc";
     private static final String ACTION_STOP = "ACTION_STOP_BEACON_SCAN";
     private static final int NOTIF_ID = 1;
     private static boolean isRunning = false;
 
-    private String baseUrl = "http://172.20.10.12:8000";           // Cambia solo esta IP si hace falta
-    private String endpointGuardar = "/api/v1/guardar-medida";
-
-    private static long lastDetectedTime = 0;   // Para limitar envío cada 10 s
+    private static long lastDetectedTime = 0;
 
     @Override
     public void onCreate() {
         super.onCreate();
         ensureChannel();
+        // Usar Singleton
+        logicaTrayectos = LogicaTrayectosFake.getInstance(this);
     }
 
-    // --------------------------------------------------------------------
-    // Maneja comandos entrantes
-    // --------------------------------------------------------------------
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         // 1. DETENER SERVICIO
         if (intent != null && ACTION_STOP.equals(intent.getAction())) {
             Log.i(TAG, "Deteniendo servicio por orden explícita");
@@ -82,7 +66,7 @@ public class BeaconScanService extends Service {
             return START_STICKY;
         }
 
-        // 4. VALIDAR PARÁMETROS OBLIGATORIOS (solo usamos beacon_uuid ahora)
+        // 4. VALIDAR PARÁMETROS OBLIGATORIOS
         if (intent == null || intent.getStringExtra("beacon_uuid") == null) {
             Log.e(TAG, "Falta el parámetro 'beacon_uuid'. Deteniendo servicio.");
             stopSelf();
@@ -96,7 +80,7 @@ public class BeaconScanService extends Service {
             return START_NOT_STICKY;
         }
 
-        String idBici = intent.getStringExtra("id_bici"); // puede ser null, no es obligatorio aquí
+        String idBici = intent.getStringExtra("id_bici");
 
         // 5. INICIAR ESCANEO
         isRunning = true;
@@ -116,14 +100,19 @@ public class BeaconScanService extends Service {
                 broadcast.putExtra("json_medida", json);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(broadcast);
 
-                // Enviar al servidor (fake o real)
-                new LogicaFake().guardarMedida(json, baseUrl, endpointGuardar);
+                // VERIFICAR que el trayecto está activo antes de guardar
+                if (logicaTrayectos.estaActivo()) {
+                    logicaTrayectos.guardarMedidaDesdeBeacon(json);
+                    Log.i(TAG, "✅ Medida enviada a LogicaTrayectosFake");
+                } else {
+                    Log.w(TAG, "⚠️ Trayecto no activo, medida ignorada");
+                }
 
                 sendStatus(true, "BEACON", json);
             }
         });
 
-        // Pasamos el id de la bici al escáner (para incluirlo en el JSON)
+        // Pasamos el id de la bici al escáner
         escanerIBeacons.setIdBici(idBici);
 
         // ¡Aquí empieza el escaneo real!
@@ -132,9 +121,6 @@ public class BeaconScanService extends Service {
         return START_STICKY;
     }
 
-    // --------------------------------------------------------------------
-    // Detención limpia del servicio
-    // --------------------------------------------------------------------
     private void detenerEscaneo() {
         if (escanerIBeacons != null) {
             escanerIBeacons.destroy();
@@ -154,12 +140,9 @@ public class BeaconScanService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return null; // no enlazable
+        return null;
     }
 
-    // --------------------------------------------------------------------
-    // Canal de notificación (Android 8+)
-    // --------------------------------------------------------------------
     private void ensureChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -173,9 +156,6 @@ public class BeaconScanService extends Service {
         }
     }
 
-    // --------------------------------------------------------------------
-    // Broadcast de estado general (por si alguien lo necesita)
-    // --------------------------------------------------------------------
     private void sendStatus(boolean ok, String step, String msg) {
         Intent i = new Intent("com.example.sprint1.STATUS");
         i.putExtra("ok", ok);

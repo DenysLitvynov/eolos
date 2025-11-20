@@ -20,7 +20,7 @@ import org.json.JSONObject;
 
 public class RegistroFake {
 
-    private static final String BASE_URL = "http://192.168.1.133:8000";
+    private static final String BASE_URL = "http://172.20.10.12:8000";
     private static final String ENDPOINT_REGISTRO = "/api/v1/auth/registro";
 
     /**
