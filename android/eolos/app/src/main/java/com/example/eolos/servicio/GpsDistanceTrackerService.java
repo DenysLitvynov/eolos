@@ -8,13 +8,18 @@
 
 package com.example.eolos.servicio;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
 
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.location.*;
@@ -56,35 +61,41 @@ public class GpsDistanceTrackerService extends Service {
     //------------------------------------------------------------------------------------------
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, ">>> SERVICIO GPS onStartCommand() - Acción: " +
-                (intent != null ? intent.getAction() : "null") + " <<<");
 
         if (intent != null && ACCION_DETENER.equals(intent.getAction())) {
-            Log.d(TAG, "Recibida acción DETENER");
             detenerSeguimientoYTerminar();
             return START_NOT_STICKY;
         }
 
-        if (servicioEjecutandose) {
-            Log.d(TAG, "Servicio ya estaba ejecutándose");
-            return START_STICKY;
+        if (!servicioEjecutandose) {
+            servicioEjecutandose = true;
+
+            // Crear canal si SDK >= 26
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel(
+                        "gps_channel",
+                        "GPS Tracker",
+                        NotificationManager.IMPORTANCE_LOW
+                );
+                getSystemService(NotificationManager.class).createNotificationChannel(channel);
+            }
+
+            Notification notification = new NotificationCompat.Builder(this, "gps_channel")
+                    .setContentTitle("GPS activo")
+                    .setContentText("Calculando distancia recorrida")
+                    .build();
+
+            startForeground(1, notification);
+
+            distanciaTotalMetros = 0.0f;
+            ultimaUbicacion = null;
+            solicitarActualizacionesUbicacion();
+            emitirDistancia(0.0f);
         }
-
-        Log.d(TAG, ">>> INICIANDO SERVICIO GPS POR PRIMERA VEZ <<<");
-        servicioEjecutandose = true;
-
-        // REINICIAMOS A CERO ANTES DE EMPEZAR
-        distanciaTotalMetros = 0.0f;
-        ultimaUbicacion = null;
-
-        // INICIAR GPS REAL (SIN NOTIFICACIÓN)
-        solicitarActualizacionesUbicacion();
-
-        // Emitir distancia inicial
-        emitirDistancia(0.0f);
 
         return START_STICKY;
     }
+
 
     //------------------------------------------------------------------------------------------
     //  void  →  void
