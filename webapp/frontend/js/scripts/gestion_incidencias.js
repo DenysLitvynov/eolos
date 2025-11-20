@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
             event.stopPropagation(); 
             
             // --- 2. Preparar los datos para el pop-up ---
-            
             // Clonamos el contenido para que el original se quede en su sitio
             const contenidoOriginal = tarjeta.querySelector('.contenido-tarjeta');
             const contenidoPopup = contenidoOriginal.cloneNode(true);

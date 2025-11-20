@@ -1,7 +1,7 @@
 /**
  * Clase para crear y gestionar un Pop-up reutilizable.
  */
- export class Popup {
+export class Popup {
     /**
      * @param {string} title El título a mostrar en el encabezado del pop-up.
      * @param {HTMLElement} contentElement El elemento DIV con el contenido a mostrar.
@@ -17,18 +17,18 @@
         this.contentWrapper.className = 'popup-content';
 
         // 3. Crear el título
-        const titleElement = document.createElement('h2');
+        const titleElement = document.createElement('h1');
         titleElement.textContent = title;
-
+    
         // 4. Crear el botón de cerrar
+         // 4. Botón de cerrar (usa icono 'X' para mantener el diseño)
         const closeButton = document.createElement('button');
-        closeButton.textContent = 'Cerrar';
-        closeButton.className = 'close-popup-btn';
+        closeButton.className = 'close-popup-btn fas fa-times'; // CLASE DE ICONO 'X
 
         // 5. Ensamblar la estructura:
+        this.contentWrapper.appendChild(closeButton);
         this.contentWrapper.appendChild(titleElement);
         this.contentWrapper.appendChild(contentElement); // Añadir el DIV de contenido personalizado
-        this.contentWrapper.appendChild(closeButton);
         this.popupElement.appendChild(this.contentWrapper);
 
         // 6. Añadir el pop-up al cuerpo del documento (solo una vez)
