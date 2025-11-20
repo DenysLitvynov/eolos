@@ -1,5 +1,9 @@
 package com.example.eolos.activities;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.eolos.R;
@@ -28,6 +33,9 @@ import org.json.JSONObject;
 public class ConnectionActivity extends AppCompatActivity {
 
     private LogicaTrayectosFake logicaTrayectos;
+    private static final String CHANNEL_ID = "connection_channel";
+    private static final int NOTIFICATION_ID = 1001;
+    private NotificationManager notificationManager;
 
     private final ActivityResultLauncher<Intent> qrLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -44,6 +52,10 @@ public class ConnectionActivity extends AppCompatActivity {
 
         MaterialCardView cardConnect = findViewById(R.id.card_connect);
         MaterialCardView cardDisconnect = findViewById(R.id.card_disconnect);
+
+        // Inicializar NotificationManager
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        createNotificationChannel();
 
         // Usar Singleton
         logicaTrayectos = LogicaTrayectosFake.getInstance(this);
@@ -69,6 +81,78 @@ public class ConnectionActivity extends AppCompatActivity {
             finish();
             return;
         }
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "Estado de Conexión",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel.setDescription("Notificaciones sobre el estado de conexión de bicicletas");
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    private void showConnectionNotification(String bikeId, String uuid) {
+        // Intent para abrir la Activity cuando se toque la notificación
+        Intent intent = new Intent(this, ConnectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        // Intent para desconectar desde la notificación
+        Intent disconnectIntent = new Intent(this, ConnectionActivity.class);
+        disconnectIntent.setAction("ACTION_DISCONNECT_FROM_NOTIFICATION");
+        PendingIntent disconnectPendingIntent = PendingIntent.getActivity(this, 1, disconnectIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.foto_ciclista) // Asegúrate de tener este icono
+                .setContentTitle("🚴 Trayecto Activo")
+                .setContentText("Bicicleta: " + bikeId + " conectada")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Bicicleta: " + bikeId + " conectada\n" +
+                                "UUID: " + uuid + "\n" +
+                                "Escaneando beacons y monitoreando GPS"))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .addAction(R.drawable.foto_ciclista, "Desconectar", disconnectPendingIntent)
+                .setAutoCancel(false)
+                .setOngoing(true) // Hace que la notificación sea persistente
+                .setOnlyAlertOnce(true)
+                .build();
+
+        notificationManager.notify(NOTIFICATION_ID, notification);
+    }
+
+    private void showDisconnectionNotification() {
+        Intent intent = new Intent(this, ConnectionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.foto_ciclista)
+                .setContentTitle("✅ Trayecto Finalizado")
+                .setContentText("Bicicleta desconectada correctamente")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setOngoing(false)
+                .build();
+
+        notificationManager.notify(NOTIFICATION_ID, notification);
+
+        // Cancelar la notificación después de 3 segundos
+        new Handler().postDelayed(() -> {
+            notificationManager.cancel(NOTIFICATION_ID);
+        }, 3000);
+    }
+
+    private void cancelConnectionNotification() {
+        notificationManager.cancel(NOTIFICATION_ID);
     }
 
     private void setupBottomNavigation() {
@@ -122,23 +206,18 @@ public class ConnectionActivity extends AppCompatActivity {
             Toast.makeText(this, "Deteniendo escaneo...", Toast.LENGTH_SHORT).show();
         }
 
+        // Mostrar notificación de desconexión
+        showDisconnectionNotification();
+
         // Detener servicio de beacon
         Intent stopIntent = new Intent(this, BeaconScanService.class);
         stopIntent.setAction("ACTION_STOP_BEACON_SCAN");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(stopIntent);
-        } else {
-            startService(stopIntent);
-        }
+        startService(stopIntent);
 
         // Detener GPS distance service
         Intent stopGpsIntent = new Intent(this, GpsDistanceTrackerService.class);
         stopGpsIntent.setAction(GpsDistanceTrackerService.ACCION_DETENER);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(stopGpsIntent);
-        } else {
-            startService(stopGpsIntent);
-        }
+        startService(stopGpsIntent);
 
         // Resetear instancia del Singleton
         LogicaTrayectosFake.resetInstance();
@@ -161,11 +240,7 @@ public class ConnectionActivity extends AppCompatActivity {
             if (BeaconScanService.isRunning()) {
                 Intent stopIntent = new Intent(this, BeaconScanService.class);
                 stopIntent.setAction("ACTION_STOP_BEACON_SCAN");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    startService(stopIntent);
-                } else {
-                    startService(stopIntent);
-                }
+                startService(stopIntent);
                 new Handler().postDelayed(() -> iniciarNuevoEscaneo(uuid, idBici), 500);
             } else {
                 iniciarNuevoEscaneo(uuid, idBici);
@@ -194,6 +269,9 @@ public class ConnectionActivity extends AppCompatActivity {
                     Intent gpsIntent = new Intent(this, GpsDistanceTrackerService.class);
                     startService(gpsIntent);
 
+                    // Mostrar notificación de conexión
+                    showConnectionNotification(idBici, uuid);
+
                     Log.d("GPS_DIST", "Servicio GPS iniciado desde ConnectionActivity");
 
                     Toast.makeText(this, "Escaneo + GPS activos", Toast.LENGTH_LONG).show();
@@ -204,8 +282,18 @@ public class ConnectionActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        // Manejar acción de desconexión desde la notificación
+        if (intent != null && "ACTION_DISCONNECT_FROM_NOTIFICATION".equals(intent.getAction())) {
+            desconectarTrayecto();
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        // No resetear aquí automáticamente, solo cuando el usuario desconecta explícitamente
+        // No cancelar la notificación aquí para que persista incluso si la Activity se cierra
+        // La notificación se cancela solo cuando el usuario desconecta explícitamente
     }
 }
