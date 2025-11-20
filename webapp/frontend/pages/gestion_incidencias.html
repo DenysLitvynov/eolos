@@ -1,54 +1,175 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Éolos - Incidencias</title>
-    <link rel="stylesheet" href="/webapp/frontend/css/gestion_incidencias.css" />
-    <link rel="stylesheet" href="/webapp/frontend/css/generales.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Éolos - Incidencias</title>
+    <!-- Incluimos los estilos, asumiendo que el archivo CSS se llama estilos_incidencias.css -->
+    <link rel="stylesheet" href="../css/gestion_incidencias.css" />
+    <link rel="stylesheet" href="../css/generales.css" />
+    <!-- Iconos para la barra de navegación (simulando los del diseño) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container-incidencias">
-    <h1 class="h1">Incidencias</h1>
-        <div class="search-bar">
-
-                <input type="text" class="search-input" placeholder="Buscar una incidencia Específica">
-
-                <div class="filter-buttons">
-
-                <button class="filter-btn">⇅</button>
-
-                <button class="filter-btn">⇵</button>
-
-                <button class="filter-btn">⚲</button>
+    <main class="contenedor-principal">
+        <h1>Incidencias</h1>
+        
+        <div class="barra-busqueda-filtros">
+            <!-- Barra de búsqueda -->
+            <div class="contenedor-busqueda">
+                <input type="text" class="campo-busqueda" placeholder="Buscar una incidencia Específica">
+                <i class="icono-busqueda fas fa-search"></i>
+            </div>
+            
+            <!-- Botones de filtro -->
+            <div class="botones-filtro">
+                <button class="boton-filtro" aria-label="Ordenar ascendente"><i class="fas fa-arrow-up"></i></button>
+                <button class="boton-filtro" aria-label="Ordenar descendente"><i class="fas fa-arrow-down"></i></button>
+                <button class="boton-filtro" aria-label="Filtros"><i class="fas fa-filter"></i></button>
             </div>
         </div>
 
-    <div class="grid-incidencias">
-        <div class="carta-incidencia estado-noresuelto">
-            <h4>Error al Escanear QR</h4>
-            <h5>Hace 5min</h5>
-            <h5>Web</h5>
-        </div>
+        <!-- Contenedor de las tarjetas de incidencia (Grid) -->
+        <div class="grid-incidencias">
+            
+            <!-- Incidencias NO RESUELTAS (Rojo) -->
+            <div class="tarjeta-incidencia">
+                <!-- Zona de estado y píldora, ahora agrupada -->
+                <div class="encabezado-estado estado-noresuelto">
+                    <span class="pildora-estado">NO RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Error al Escanear QR</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">Web</p>
+                </div>
+            </div>
 
-         <div class="carta-incidencia estado-noresuelto">
-            <h4>Error al Escanear QR</h4>
-            <h5>Hace 5min</h5>
-            <h5>Web</h5>
-        </div>
+            
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-noresuelto">
+                    <span class="pildora-estado">NO RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Datos no se Actualizan</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App</p>
+                </div>
+            </div>
 
-         <div class="carta-incidencia estado-noresuelto">
-            <h4>Error al Escanear QR</h4>
-            <h5>Hace 5min</h5>
-            <h5>Web</h5>
-        </div>
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-noresuelto">
+                    <span class="pildora-estado">NO RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Fallo al subir datos a la nube</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App</p>
+                </div>
+            </div>
 
-         <div class="carta-incidencia estado-resuelto">
-            <h4>Error al Escanear QR</h4>
-            <h5>Hace 5min</h5>
-            <h5>Parada: Cuitat Vela</h5>
-            <h5>Bici 891919</h5>
-        </div>
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-noresuelto">
+                    <span class="pildora-estado">NO RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Error al reclamar recompensa</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App/Web</p>
+                </div>
+            </div>
 
-    </body>
+            <!-- Incidencias RESUELTAS (Verde) -->
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-resuelto">
+                    <span class="pildora-estado">RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Error al Escanear QR</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">Web</p>
+                </div>
+            </div>
+
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-resuelto">
+                    <span class="pildora-estado">RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Datos no se Actualizan</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App</p>
+                </div>
+            </div>
+
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-resuelto">
+                    <span class="pildora-estado">RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Fallo al subir datos a la nube</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App</p>
+                </div>
+            </div>
+
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-resuelto">
+                    <span class="pildora-estado">RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Error al reclamar recompensa</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App/Web</p>
+                </div>
+            </div>
+            
+            <!-- Repetimos algunas para simular las 4x3 de la imagen -->
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-noresuelto">
+                    <span class="pildora-estado">NO RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Error al Escanear QR</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">Web</p>
+                </div>
+            </div>
+            
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-noresuelto">
+                    <span class="pildora-estado">NO RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Datos no se Actualizan</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App</p>
+                </div>
+            </div>
+
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-noresuelto">
+                    <span class="pildora-estado">NO RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Fallo al subir datos a la nube</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App</p>
+                </div>
+            </div>
+
+            <div class="tarjeta-incidencia">
+                <div class="encabezado-estado estado-resuelto">
+                    <span class="pildora-estado">RESUELTO</span>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h2 class="titulo-incidencia">Error al reclamar recompensa</h2>
+                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
+                    <p class="detalle-incidencia fuente">App/Web</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
 </html>
