@@ -10,6 +10,7 @@ package com.example.eolos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class QRScannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_scan);
+        setupBottomNavigation();
 
         // === VISTA DE ESCANEO ===
         barcodeScannerView = findViewById(R.id.zxing_barcode_scanner);
@@ -114,4 +116,27 @@ public class QRScannerActivity extends AppCompatActivity {
             finish(); // Cierra la actividad de escaneo
         });
     }
+    private void setupBottomNavigation() {
+        ImageView iconInicio = findViewById(R.id.icon1);
+        ImageView iconMapa = findViewById(R.id.icon2);
+        ImageView iconQR = findViewById(R.id.icon3);
+        ImageView iconAlertas = findViewById(R.id.icon4);
+        ImageView iconPerfil = findViewById(R.id.icon5);
+
+        iconInicio.setOnClickListener(v ->
+                startActivity(new Intent(this, HomeActivity.class)));
+
+        iconMapa.setOnClickListener(v ->
+                Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show());
+
+        iconQR.setOnClickListener(v ->
+                startActivity(new Intent(this, ConnectionActivity.class)));
+
+        iconAlertas.setOnClickListener(v ->
+                Toast.makeText(this, "Alertas", Toast.LENGTH_SHORT).show());
+
+        iconPerfil.setOnClickListener(v ->
+                startActivity(new Intent(this, PerfilActivity.class)));
+    }
+
 }
