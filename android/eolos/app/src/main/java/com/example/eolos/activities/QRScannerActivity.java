@@ -42,6 +42,15 @@ public class QRScannerActivity extends AppCompatActivity {
         capture = new CaptureManager(this, barcodeScannerView);
         capture.initializeFromIntent(getIntent(), savedInstanceState);
         capture.decode(); // Inicia el escaneo automático;
+
+        // FLECHA ATRÁS DEL HEADER
+        ImageView backArrow = findViewById(R.id.back_arrow);
+        if (backArrow != null) {
+            backArrow.setOnClickListener(v ->
+                    getOnBackPressedDispatcher().onBackPressed()
+            );
+            // o simplemente: finish();
+        }
     }
 
     /**
@@ -127,13 +136,14 @@ public class QRScannerActivity extends AppCompatActivity {
                 startActivity(new Intent(this, HomeActivity.class)));
 
         iconMapa.setOnClickListener(v ->
-                Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, MapaActivity.class)));
 
         iconQR.setOnClickListener(v ->
                 startActivity(new Intent(this, ConnectionActivity.class)));
 
         iconAlertas.setOnClickListener(v ->
-                Toast.makeText(this, "Alertas", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, IncidenciaActivity.class)));
+
 
         iconPerfil.setOnClickListener(v ->
                 startActivity(new Intent(this, PerfilActivity.class)));

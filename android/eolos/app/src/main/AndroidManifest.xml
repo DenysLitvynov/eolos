@@ -73,6 +73,7 @@
         <activity android:name=".activities.ConnectionActivity" />
         <activity android:name=".activities.QRScannerActivity" />
         <activity android:name=".activities.IncidenciaActivity" />
+        <activity android:name=".activities.MapaActivity" />
 
         <activity
             android:name=".activities.VerifyRegistrationActivity"
