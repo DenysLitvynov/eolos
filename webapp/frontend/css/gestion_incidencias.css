@@ -250,9 +250,9 @@ h1{
     background-color: rgba(121, 120, 120, 0.6); /* Fondo semi-transparente */
 }
 
-.popup-container h1 {
-    color: var(--color-principal);
-}
+.popup-container h1 {color: var(--color-principal);}
+.popup-container h2 {color: var(--color-secundario);margin-bottom: 0;}
+
 
 .close-popup-btn {
     color: #aaa;
@@ -274,4 +274,42 @@ h1{
     /* Define un ancho visible */
     max-width: 450px; 
     width: 80%;
+}
+
+
+.estado-pop-up.no-resuelto {
+    color: var(--color-no-resuelto);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.estado-pop-up.resuelto {
+    color: var(--color-resuelto);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+
+.popup-detalles {
+    background-color: #f4f7fa; /* Gris claro */
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+/* 5. Botón de Acción (Marcar como Resuelto) */
+.popup-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 90%;
+    margin: 0 auto 30px auto; /* Centrado y con margen inferior */
+    background: var(--color-principal); /* Azul oscuro de Éolos */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
 }
