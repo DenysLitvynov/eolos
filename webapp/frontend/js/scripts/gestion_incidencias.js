@@ -1,39 +1,38 @@
-// Obtener referencias a los elementos
-
-// ❌ ERROR 1 CORREGIDO: Usar querySelectorAll en lugar de getElementsByClassName 
-// y almacenamos MÚLTIPLES elementos (una NodeList)
-const tarjetas = document.querySelectorAll('.tarjeta-incidencia');
-
-const closeBtn = document.getElementById('closePopupBtn');
-
-// ❌ ERROR 2 CORREGIDO: Usar el ID CORRECTO de tu pop-up (popup_incidencia)
-const popup = document.getElementById('popup_incidencia');
+// --- Gestión de Incidencias: Pop-up Dinámico ---
+import { Popup } from '../utilidades/class_popup.js';
 
 
-// --- Funciones (se mantienen igual) ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Obtener todas las tarjetas de incidencia
+    const tarjetas = document.querySelectorAll('.tarjeta-incidencia');
 
-function openPopup() {
-    popup.style.display = 'block';
-}
+    tarjetas.forEach(tarjeta => {
+        tarjeta.addEventListener('click', (event) => {
+            // Evitar que el clic en los elementos internos active doble evento
+            event.stopPropagation(); 
+            
+            // --- 2. Preparar los datos para el pop-up ---
+            
+            // Clonamos el contenido para que el original se quede en su sitio
+            const contenidoOriginal = tarjeta.querySelector('.contenido-tarjeta');
+            const contenidoPopup = contenidoOriginal.cloneNode(true);
+            
+            // Obtenemos el título de la tarjeta para usarlo como título del pop-up
+            const tituloIncidencia = tarjeta.querySelector('.titulo-incidencia').textContent;
+            
+            // Opcional: Crear un detalle extra que no esté en la tarjeta original
+            const detalleExtra = document.createElement('p');
+            detalleExtra.innerHTML = '<strong>Detalles Adicionales:</strong> Se ha registrado un error de conexión.';
+            contenidoPopup.appendChild(detalleExtra);
 
-function closePopup() {
-    popup.style.display = 'none';
-}
 
-
-// --- Event Listeners (Control de eventos) ---
-
-// ❌ ERROR 3 CORREGIDO: Iterar sobre la lista de tarjetas y agregar el listener a cada una
-tarjetas.forEach(tarjeta => {
-    tarjeta.addEventListener('click', openPopup);
-});
-
-// 2. Cerrar al hacer clic en el botón dentro del pop-up
-closeBtn.addEventListener('click', closePopup);
-
-// Opcional: Cerrar el pop-up haciendo clic fuera de su contenido (en el fondo oscuro)
-window.addEventListener('click', (event) => {
-    if (event.target === popup) {
-        closePopup();
-    }
+            // --- 3. Crear y Abrir el Pop-up ---
+            // Creamos una nueva instancia de la clase Popup.
+            // Nota: Esta implementación crea un nuevo elemento HTML CADA VEZ que se abre, 
+            // asegurando que siempre tengas el contenido más actualizado.
+            const incidenciaPopup = new Popup(tituloIncidencia, contenidoPopup);
+            
+            incidenciaPopup.abrirPopup();
+        });
+    });
 });
