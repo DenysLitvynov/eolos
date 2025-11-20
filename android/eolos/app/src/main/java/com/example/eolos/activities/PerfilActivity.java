@@ -39,6 +39,7 @@ public class PerfilActivity extends AppCompatActivity {
     // Referencias UI
     private EditText etNombre, etCorreo, etTarjeta, etContrasena, etFecha;
     private Button btnGuardar, btnVolver;
+    private MaterialButton btnLogout;
 
     private final SimpleDateFormat dateFormat =
             new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
@@ -50,11 +51,7 @@ public class PerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
-
-
-
         setupBottomNavigation();    // Configura la barra de navegación inferior
-
 
         // Verificar token
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
@@ -66,18 +63,14 @@ public class PerfilActivity extends AppCompatActivity {
             return;
         }
 
-        Button logoutButton = findViewById(R.id.logoutButton);
-
-
-        logoutButton.setOnClickListener(v -> {
-            prefs.edit().remove("token").apply();
+        // Configurar botón de logout
+        btnLogout = findViewById(R.id.logoutButton);
+        btnLogout.setOnClickListener(v -> {
+            prefs.edit().remove("token").remove("targeta_id").apply();
             Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainActivity.class));
             finish();
         });
-
-
-
 
         // 1) Vincular vistas
         etNombre = findViewById(R.id.etNombre);
@@ -113,6 +106,12 @@ public class PerfilActivity extends AppCompatActivity {
                 setEnabled(true);
                 if (exito) {
                     Toast.makeText(this, "✅ Guardado correctamente", Toast.LENGTH_SHORT).show();
+                    // Mostrar targeta_id actualizada
+                    String targetaActual = perfil.getTarjeta();
+                    if (targetaActual != null && !targetaActual.isEmpty()) {
+                        etTarjeta.setText(targetaActual);
+                        Toast.makeText(this, "Targeta ID: " + targetaActual, Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(this, "❌ Error al guardar (" + codigo + ")", Toast.LENGTH_SHORT).show();
                     Log.w(TAG, "PUT /perfil fallo: code=" + codigo + ", body=" + cuerpo);
@@ -122,7 +121,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         // 5) Volver
         btnVolver.setOnClickListener(v -> {
-            rellenarUI(perfil);  // 恢复原数据
+            rellenarUI(perfil);  // Restaurar datos originales
             Toast.makeText(this, "Cambios descartados", Toast.LENGTH_SHORT).show();
         });
     }
@@ -160,10 +159,21 @@ public class PerfilActivity extends AppCompatActivity {
             setEnabled(true);
             perfil = p;
             rellenarUI(perfil);
-            Toast.makeText(this,
-                    desdeServidor ? "Perfil cargado desde el servidor"
-                            : "No hay token o conexión. Usando datos locales.",
-                    Toast.LENGTH_SHORT).show();
+
+            // Mostrar targeta_id cargada
+            String targetaCargada = perfil.getTarjeta();
+            if (targetaCargada != null && !targetaCargada.isEmpty()) {
+                Toast.makeText(this,
+                        desdeServidor ?
+                                "Perfil cargado - Targeta ID: " + targetaCargada
+                                : "Usando datos locales - Targeta ID: " + targetaCargada,
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this,
+                        desdeServidor ? "Perfil cargado desde el servidor"
+                                : "No hay token o conexión. Usando datos locales.",
+                        Toast.LENGTH_SHORT).show();
+            }
         }));
     }
 
@@ -172,7 +182,7 @@ public class PerfilActivity extends AppCompatActivity {
         if (p == null) return;
         etNombre.setText(nv(p.getNombre()));
         etCorreo.setText(nv(p.getCorreo()));
-        etTarjeta.setText(nv(p.getTarjeta()));          // puede estar vacío
+        etTarjeta.setText(nv(p.getTarjeta()));          // targeta_id
         etContrasena.setText(nv(p.getContrasena()));    // normalmente no viene del servidor
         etFecha.setText(nv(p.getFechaRegistro()));
     }
@@ -196,22 +206,12 @@ public class PerfilActivity extends AppCompatActivity {
             return false;
         }
 
-        // tarjeta: OPCIONAL，但如果填了，可以做一些简单校验（长度 <= 9）
+        // targeta_id: OPCIONAL, pero si se llena, validar longitud <= 9
         if (!tarjeta.isEmpty() && tarjeta.length() > 9) {
             etTarjeta.setError("Máximo 9 caracteres");
             etTarjeta.requestFocus();
             return false;
         }
-
-        // fecha：可选，不强制
-        // 如果你想强制要求日期，可以取消下面注释
-        /*
-        if (fecha.isEmpty()) {
-            etFecha.setError("Campo requerido");
-            etFecha.requestFocus();
-            return false;
-        }
-        */
 
         return true;
     }
@@ -260,7 +260,4 @@ public class PerfilActivity extends AppCompatActivity {
     private String nv(String s) {
         return s == null ? "" : s;
     }
-
-
-
 }
