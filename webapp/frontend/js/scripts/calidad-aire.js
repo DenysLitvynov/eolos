@@ -96,6 +96,55 @@ function getColorForValue(v) {
 
 const pointColors = co2Values.map(v => getColorForValue(v));
 
+// Función para calcular resumen de los datos del gráfico
+function calcularResumen(valores) {
+    const promedio = Math.round(valores.reduce((a, b) => a + b, 0) / valores.length);
+    const maximo = Math.max(...valores);
+    const minimo = Math.min(...valores);
+    
+    return {
+        promedio,
+        maximo,
+        minimo,
+        total_mediciones: valores.length
+    };
+}
+
+// Calcular resumen con datos del gráfico
+const resumen = calcularResumen(co2Values);
+
+// Función para obtener color según valor
+function getColorAQI(valor) {
+    if (valor <= 49) return "#4CAF50";
+    if (valor <= 99) return "#ffcc00";
+    return "#e53935";
+}
+
+// Función para actualizar el resumen diario
+function actualizarResumenDiario(datos) {
+    const resumenEl = document.getElementById('resumen-diario');
+    if (resumenEl) {
+        resumenEl.innerHTML = `
+            <div class="resumen-item">
+                <span class="resumen-label">Promedio</span>
+                <span class="resumen-valor" style="color: ${getColorAQI(datos.promedio)}">${datos.promedio}</span>
+            </div>
+            <div class="resumen-item">
+                <span class="resumen-label">Máximo</span>
+                <span class="resumen-valor" style="color: ${getColorAQI(datos.maximo)}">${datos.maximo}</span>
+            </div>
+            <div class="resumen-item">
+                <span class="resumen-label">Mínimo</span>
+                <span class="resumen-valor" style="color: ${getColorAQI(datos.minimo)}">${datos.minimo}</span>
+            </div>
+            <div class="resumen-item">
+                <span class="resumen-label">Mediciones</span>
+                <span class="resumen-valor">${datos.total_mediciones}</span>
+            </div>
+        `;
+    }
+}
+
 const ctx = document.getElementById('co2Chart').getContext('2d');
 
 const co2Chart = new Chart(ctx, {
@@ -136,3 +185,6 @@ const co2Chart = new Chart(ctx, {
         }
     }
 });
+
+// Actualizar el resumen cuando el gráfico esté listo
+actualizarResumenDiario(resumen);
