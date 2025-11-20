@@ -10,26 +10,11 @@
     --color-resuelto: #2ecc71; /* Verde Resuelto */
     --color-no-resuelto: #e74c3c; /* Rojo No Resuelto */
 }
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    background-color: var(--color-fondo-claro);
-    color: var(--color-texto-oscuro);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
+h1{
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--color-principal);
 }
 
 .contenedor-principal {
@@ -47,60 +32,6 @@ a {
     margin-bottom: 30px;
     padding-bottom: 5px;
     border-bottom: 2px solid var(--color-borde);
-}
-
-/*====================================================================*/
-/* CABECERA (Header) */
-/*====================================================================*/
-.cabecera-principal {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-principal);
-}
-
-.menu-navegacion {
-    display: flex;
-    gap: 30px;
-}
-
-.menu-navegacion a {
-    color: var(--color-texto-oscuro);
-    padding: 5px 0;
-    transition: color 0.3s;
-    font-weight: 500;
-}
-
-.menu-navegacion a:hover,
-.menu-navegacion a.activo {
-    color: var(--color-principal);
-    border-bottom: 2px solid var(--color-principal);
-}
-
-.menu-navegacion .usuario-link {
-    background-color: var(--color-principal);
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 20px;
-    border-bottom: none !important; /* Desactiva el borde azul del activo */
-    margin-left: 20px;
-}
-
-.boton-menu-hamburguesa {
-    display: none; /* Oculto por defecto en escritorio */
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--color-principal);
-    cursor: pointer;
 }
 
 /*====================================================================*/
@@ -173,6 +104,7 @@ a {
     border-color: var(--color-principal);
 }
 
+
 /*====================================================================*/
 /* GRID DE INCIDENCIAS (Tarjetas) */
 /*====================================================================*/
@@ -207,18 +139,19 @@ a {
 }
 
 /* Colores de estado */
-.estado-noresuelto { background-color: var(--color-no-resuelto); }
-.estado-resuelto { background-color: var(--color-resuelto); }
+.estado-noresuelto,.pildora-estado p { background-color: var(--color-no-resuelto);color: var(--color-no-resuelto); }
+.estado-resuelto { background-color: var(--color-resuelto);color:var(--color-resuelto); }
 
 /* Estilo de la píldora de estado */
 .pildora-estado {
     background-color: #fff; /* Fondo blanco */
-    color: var(--color-texto-oscuro);
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.7rem;
-    font-weight: 700;
+    font-weight: 850;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* ¡Añadimos el borde con el color del estado! */
+    border: 1px solid transparent; 
 }
 
 /* Contenido de la tarjeta (Parte blanca inferior) */
@@ -240,65 +173,6 @@ a {
     font-weight: 400;
 }
 
-/*====================================================================*/
-/* PIE DE PÁGINA (Footer) */
-/*====================================================================*/
-.pie-pagina {
-    background-color: #fff;
-    border-top: 1px solid var(--color-borde);
-    padding: 40px 0 0;
-    margin-top: 50px;
-}
-
-.pie-contenedor {
-    width: 95%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 15px 30px;
-    display: grid;
-    grid-template-columns: 1.5fr 2fr 1.5fr 1fr;
-    gap: 30px;
-    border-bottom: 1px solid var(--color-borde);
-}
-
-.pie-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-principal);
-}
-
-.pie-detalles p,
-.pie-menu a,
-.pie-redes a {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    color: var(--color-texto-oscuro);
-}
-
-.pie-detalles p:first-child { font-weight: 500; }
-.pie-detalles a { color: var(--color-secundario); }
-
-.pie-menu {
-    display: flex;
-    flex-direction: column;
-}
-
-.pie-redes {
-    display: flex;
-    flex-direction: column;
-}
-
-.pie-copyright {
-    width: 95%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 15px 15px;
-    text-align: center;
-    font-size: 0.8rem;
-    color: #999;
-}
-
 
 /*====================================================================*/
 /* RESPONSIVIDAD (Media Queries) */
@@ -306,36 +180,7 @@ a {
 
 /* Teléfonos (max-width: 768px) */
 @media (max-width: 768px) {
-    /* CABECERA: Menú hamburguesa */
-    .menu-navegacion {
-        display: none; /* Oculta el menú */
-        position: absolute;
-        top: 65px; /* Altura de la cabecera */
-        left: 0;
-        right: 0;
-        background-color: #fff;
-        flex-direction: column;
-        align-items: center;
-        padding: 15px 0;
-        border-top: 1px solid var(--color-borde);
-        box-shadow: 0 4px 4px rgba(0,0,0,0.05);
-        z-index: 10;
-    }
 
-    .boton-menu-hamburguesa {
-        display: block; /* Muestra el botón */
-    }
-
-    .menu-navegacion a {
-        padding: 10px 0;
-        width: 80%;
-        text-align: center;
-    }
-
-    .menu-navegacion .usuario-link {
-        margin-left: 0;
-        margin-top: 10px;
-    }
 
     /* BARRA DE BÚSQUEDA Y FILTROS: Los filtros se apilan si es necesario */
     .barra-busqueda-filtros {
@@ -361,21 +206,6 @@ a {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 15px;
     }
-
-    /* PIE DE PÁGINA: Se apila la información */
-    .pie-contenedor {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .pie-menu, .pie-redes {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-    }
-    .pie-detalles p, .pie-menu a, .pie-redes a { margin-bottom: 0; }
-    .pie-detalles { margin-bottom: 15px; }
 
 }
 
