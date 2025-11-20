@@ -3,10 +3,14 @@ package com.example.eolos.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eolos.R;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -36,6 +40,42 @@ public class IncidenciaActivity extends AppCompatActivity {
         setupRadioGroups();
         updateOtherFieldState();
         setupButtons();
+        setupBottomNavigation();
+
+        // FLECHA ATRÁS DEL HEADER
+        ImageView backArrow = findViewById(R.id.back_arrow);
+        if (backArrow != null) {
+            backArrow.setOnClickListener(v ->
+                    getOnBackPressedDispatcher().onBackPressed()
+            );
+            // o simplemente: finish();
+        }
+
+    }
+
+    private void setupBottomNavigation() {
+
+        ImageView iconInicio = findViewById(R.id.icon1);
+        ImageView iconMapa = findViewById(R.id.icon2);
+        ImageView iconQR = findViewById(R.id.icon3);
+        ImageView iconAlertas = findViewById(R.id.icon4);
+        ImageView iconPerfil = findViewById(R.id.icon5);
+
+        iconInicio.setOnClickListener(v ->
+                startActivity(new Intent(this, HomeActivity.class)));
+
+        iconMapa.setOnClickListener(v ->
+                startActivity(new Intent(this, MapaActivity.class)));
+
+        iconQR.setOnClickListener(v ->
+                startActivity(new Intent(this, ConnectionActivity.class)));
+
+        iconAlertas.setOnClickListener(v ->
+                startActivity(new Intent(this, IncidenciaActivity.class)));
+
+
+        iconPerfil.setOnClickListener(v ->
+                startActivity(new Intent(this, PerfilActivity.class)));
     }
 
     private void initViews() {
@@ -50,6 +90,7 @@ public class IncidenciaActivity extends AppCompatActivity {
         etOther.setEnabled(false);
         etOther.setHint("Selecciona \"Otro\" para escribir");
     }
+
 
     private void setupRadioGroups() {
         rgBikeEnv.setOnCheckedChangeListener((group, checkedId) -> {

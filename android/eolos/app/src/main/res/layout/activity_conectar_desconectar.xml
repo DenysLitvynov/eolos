@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanco"
-    tools:context=".activities.ConnectionActivity">
+    tools:context=".activities.ConnectionActivity"
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/menu_inferior"

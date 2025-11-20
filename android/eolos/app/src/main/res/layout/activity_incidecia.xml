@@ -5,8 +5,8 @@
     android:id="@+id/layout_report_incident"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blanco">
-
+    android:background="@color/blanco"
+    android:fitsSystemWindows="true">>
     <!-- ⭐ 可滚动的内容区 -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_form"
