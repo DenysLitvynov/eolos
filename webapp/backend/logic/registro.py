@@ -43,6 +43,22 @@ class LogicaRegistro:
     def validar_datos(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool = False):
         """
         Valida los datos de registro.
+
+        Args:
+            db (Session): Sesión de la base de datos.
+            nombre (str): Nombre del usuario.
+            apellido (str): Apellido del usuario.
+            correo (str): Correo electrónico.
+            targeta_id (str): ID del carnet.
+            contrasena (str): Contraseña.
+            contrasena_repite (str): Repetición de contraseña.
+            acepta_politica (bool): Si acepta la política (default False).
+
+        Raises:
+            ValueError: Si algún dato es inválido.
+        
+        Returns:
+            bool: True si todo es válido.
         """
         if not acepta_politica:
             raise ValueError("Debes aceptar la política de privacidad y términos")
@@ -80,14 +96,44 @@ class LogicaRegistro:
     # ---------------------------------------------------------
 
     def hashear_contrasena(self, contrasena: str):
+        """
+        Hashea la contraseña usando bcrypt.
+
+        Args:
+            contrasena (str): Contraseña en texto plano.
+
+        Returns:
+            str: Hash de la contraseña.
+        """
         return pwd_context.hash(contrasena)
 
     # ---------------------------------------------------------
 
     def generar_codigo_verificacion(self):
+        """
+        Genera un código de verificación de 6 dígitos.
+
+        Returns:
+            str: Código generado.
+        """
         return f"{random.randint(100000, 999999)}"
 
+    # ---------------------------------------------------------
+    
     def enviar_email_verificacion(self, correo: str, codigo: str):
+        """
+        Envía email con código de verificación (o print si TESTING=True).
+
+        Args:
+            correo (str): Destinatario.
+            codigo (str): Código a enviar.
+
+        Raises:
+            RuntimeError: Si falla el envío.
+
+        Returns:
+            bool: True si se envió.
+        """
         # SI ESTAMOS EN TESTS → NO ENVÍO EMAIL, SOLO PRINT
         if TESTING:
             print(f"[TEST MODE] Código para {correo}: {codigo}")
@@ -108,13 +154,31 @@ class LogicaRegistro:
         except Exception as e:
             raise RuntimeError(f"Error enviando email: {e}")
 
+    # ---------------------------------------------------------
+    
     def iniciar_registro(self, db: Session, nombre: str, apellido: str, correo: str, targeta_id: str, contrasena: str, contrasena_repite: str, acepta_politica: bool):
         """
         Inicia el proceso de registro guardando en pending y enviando código.
+
+        Args:
+            db (Session): Sesión de la base de datos.
+            nombre (str): Nombre del usuario.
+            apellido (str): Apellido del usuario.
+            correo (str): Correo electrónico.
+            targeta_id (str): ID del carnet.
+            contrasena (str): Contraseña.
+            contrasena_repite (str): Repetición de contraseña.
+            acepta_politica (bool): Si acepta la política.
+
+        Raises:
+            ValueError: Si validación falla.
+            RuntimeError: Si error interno.
+
+        Returns:
+            bool: True si iniciado correctamente.
         """
         try:
             self.validar_datos(db, nombre, apellido, correo, targeta_id, contrasena, contrasena_repite, acepta_politica)
-            
             hash_contrasena = self.hashear_contrasena(contrasena)
             codigo = self.generar_codigo_verificacion()
             expires_at = datetime.now(UTC) + timedelta(minutes=15)
@@ -144,9 +208,22 @@ class LogicaRegistro:
             db.rollback()
             raise RuntimeError(f"Error iniciando registro: {e}")
 
+    # ---------------------------------------------------------
+    
     def reenviar_codigo(self, db: Session, correo: str):
         """
         Reenvía un nuevo código de verificación, invalidando el anterior.
+
+        Args:
+            db (Session): Sesión de la base de datos.
+            correo (str): Correo del pendiente.
+
+        Raises:
+            ValueError: Si no pendiente o expirado.
+            RuntimeError: Si error interno.
+
+        Returns:
+            bool: True si reenviado.
         """
         try:
             # Buscar registro pendiente
@@ -179,9 +256,23 @@ class LogicaRegistro:
             db.rollback()
             raise RuntimeError(f"Error reenviando código: {e}")
 
+    # ---------------------------------------------------------
+    
     def verificar_y_completar(self, db: Session, correo: str, verification_code: str):
         """
         Verifica el código y completa el registro creando el usuario, con auto-login.
+
+        Args:
+            db (Session): Sesión de la base de datos.
+            correo (str): Correo del pendiente.
+            verification_code (str): Código a verificar.
+
+        Raises:
+            ValueError: Si código inválido o expirado.
+            RuntimeError: Si error interno.
+
+        Returns:
+            str: Token de login generado.
         """
         try:
             # Buscar registro pendiente

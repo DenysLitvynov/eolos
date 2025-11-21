@@ -62,9 +62,9 @@ public class PeticionarioREST extends AsyncTask<Void, Void, Boolean> {
     }
 
     // --------------------------------------------------------------------
-// ⭐ Método NUEVO (CON cabecera Authorization: Bearer <token>)
-//    Solo lo usa la parte de Perfil. El resto de pantallas no se ven afectadas.
-// --------------------------------------------------------------------
+    // ⭐ Método NUEVO (CON cabecera Authorization: Bearer <token>)
+    //    Solo lo usa la parte de Perfil. El resto de pantallas no se ven afectadas.
+    // --------------------------------------------------------------------
     public void hacerPeticionRESTconAuth(String metodo, String urlDestino, String cuerpo, String token, RespuestaREST laRespuesta) {
         this.elMetodo = metodo;
         this.urlDestino = urlDestino;

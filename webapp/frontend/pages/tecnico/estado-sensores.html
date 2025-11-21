@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éolos – Sensores</title>
+
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/estado-sensores.css">
+
+    <script type="module" src="../../js/scripts/estado-sensores.js" defer></script>
+
+    <!-- <link rel="stylesheet" href="../../css/estado-sensores.css"> -->
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="../../images/logo.png" alt="logo" />
+        </div>
+        
+        <!-- Botón hamburger -->
+        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+            <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <span class="menu-toggle__label">Menú</span>
+        </button>
+        
+        <!-- Menú de navegación -->
+        <nav class="nav" id="site-nav">
+            <a href="../landing.html">Inicio</a>
+            <a href="#">Incidencias</a>
+            <a href="estado-sensores.html">Sensores</a>
+            <a href="#">Mapas</a>
+            <a href="#"><b>Marc Roig</b></a>
+        </nav>
+    </header>
+    <main class="bike-page">
+        <h1 class="page-title">Lista de Sensores</h1>
+    
+        <!-- Buscador + Estado -->
+        <div class="filters">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar por id o zona">
+                <button id="searchBtn">
+                    <span class="material-icon">🔍</span>
+                </button>
+            </div>
+    
+            <div class="state-filters">
+                <span>Estado:</span>
+                <button class="state-btn" data-state="activa">Activa</button>
+                <button class="state-btn" data-state="danada">Dañada</button>
+                <button class="state-btn" data-state="desactivada">Desactivado</button>
+            </div>
+        </div>
+    
+        <!-- Contenedor de tarjetas -->
+        <section id="bikeList" class="bike-list"></section>
+    </main>
+    <footer class="ft">
+        <!-- Footer -->
+        <div class="ft__wrap ft--two-cols">
+            <div class="ft__brand">
+                <span class="ft__logo">
+                    <img src="../../images/logo_footer.png" alt="logo" />
+                </span>
+                <address class="ft__addr">
+                    <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
+                    <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
+                    <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
+                </address>
+            </div>
+    
+            <div class="ft__links">
+                <nav class="ft__col">
+                    <a href="../landing.html">Inicio</a>
+                    <a href="#">Mapas</a>
+                    <a href="#">Sobre nosotros</a>
+                </nav>
+    
+                <nav class="ft__col">
+                    <a href="#">Contacto</a>
+                    <a href="#">Iniciar sesión</a>
+                </nav>
+    
+                <nav class="ft__col">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </nav>
+            </div>
+        </div>
+    
+        <div class="ft__copy">
+            Copyright ©éolos. Todos los derechos reservados.
+        </div>
+    </footer>
+</body>
+</html>

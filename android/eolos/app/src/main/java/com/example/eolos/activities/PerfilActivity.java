@@ -1,18 +1,23 @@
 package com.example.eolos.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eolos.R;
 import com.example.eolos.logica_fake.PerfilFake;
+import com.google.android.material.button.MaterialButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,14 +39,38 @@ public class PerfilActivity extends AppCompatActivity {
     // Referencias UI
     private EditText etNombre, etCorreo, etTarjeta, etContrasena, etFecha;
     private Button btnGuardar, btnVolver;
+    private MaterialButton btnLogout;
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
+    private final SimpleDateFormat dateFormat =
+            new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
+
     private PerfilFake perfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
+        setupBottomNavigation();    // Configura la barra de navegación inferior
+
+        // Verificar token
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String token = prefs.getString("token", null);
+        if (token == null) {
+            Toast.makeText(this, "No estás autenticado. Redirigiendo...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
+
+        // Configurar botón de logout
+        btnLogout = findViewById(R.id.logoutButton);
+        btnLogout.setOnClickListener(v -> {
+            prefs.edit().remove("token").remove("targeta_id").apply();
+            Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
 
         // 1) Vincular vistas
         etNombre = findViewById(R.id.etNombre);
@@ -63,7 +92,7 @@ public class PerfilActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(v -> {
             if (!validateInputs()) return;
 
-            if (perfil == null) perfil = new PerfilFake(this); // fallback
+            if (perfil == null) perfil = new PerfilFake(this); // fallback local
             perfil.setNombre(s(etNombre.getText()));
             perfil.setCorreo(s(etCorreo.getText()));
             perfil.setTarjeta(s(etTarjeta.getText()));
@@ -77,6 +106,12 @@ public class PerfilActivity extends AppCompatActivity {
                 setEnabled(true);
                 if (exito) {
                     Toast.makeText(this, "✅ Guardado correctamente", Toast.LENGTH_SHORT).show();
+                    // Mostrar targeta_id actualizada
+                    String targetaActual = perfil.getTarjeta();
+                    if (targetaActual != null && !targetaActual.isEmpty()) {
+                        etTarjeta.setText(targetaActual);
+                        Toast.makeText(this, "Targeta ID: " + targetaActual, Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(this, "❌ Error al guardar (" + codigo + ")", Toast.LENGTH_SHORT).show();
                     Log.w(TAG, "PUT /perfil fallo: code=" + codigo + ", body=" + cuerpo);
@@ -85,7 +120,43 @@ public class PerfilActivity extends AppCompatActivity {
         });
 
         // 5) Volver
-        btnVolver.setOnClickListener(v -> finish());
+        btnVolver.setOnClickListener(v -> {
+            rellenarUI(perfil);  // Restaurar datos originales
+            Toast.makeText(this, "Cambios descartados", Toast.LENGTH_SHORT).show();
+        });
+
+        // FLECHA ATRÁS DEL HEADER
+        ImageView backArrow = findViewById(R.id.back_arrow);
+        if (backArrow != null) {
+            backArrow.setOnClickListener(v ->
+                    getOnBackPressedDispatcher().onBackPressed()
+            );
+            // o simplemente: finish();
+        }
+    }
+
+    private void setupBottomNavigation() {
+        ImageView iconInicio = findViewById(R.id.icon1);
+        ImageView iconMapa = findViewById(R.id.icon2);
+        ImageView iconQR = findViewById(R.id.icon3);
+        ImageView iconAlertas = findViewById(R.id.icon4);
+        ImageView iconPerfil = findViewById(R.id.icon5);
+
+        iconInicio.setOnClickListener(v ->
+                startActivity(new Intent(this, HomeActivity.class)));
+
+        iconMapa.setOnClickListener(v ->
+                startActivity(new Intent(this, MapaActivity.class)));
+
+        iconQR.setOnClickListener(v ->
+                startActivity(new Intent(this, ConnectionActivity.class)));
+
+        iconAlertas.setOnClickListener(v ->
+                startActivity(new Intent(this, IncidenciaActivity.class)));
+
+
+        iconPerfil.setOnClickListener(v ->
+                startActivity(new Intent(this, PerfilActivity.class)));
     }
 
     private void cargarPerfil() {
@@ -95,10 +166,21 @@ public class PerfilActivity extends AppCompatActivity {
             setEnabled(true);
             perfil = p;
             rellenarUI(perfil);
-            Toast.makeText(this,
-                    desdeServidor ? "Perfil cargado desde el servidor"
-                            : "No hay token o conexión. Usando datos locales.",
-                    Toast.LENGTH_SHORT).show();
+
+            // Mostrar targeta_id cargada
+            String targetaCargada = perfil.getTarjeta();
+            if (targetaCargada != null && !targetaCargada.isEmpty()) {
+                Toast.makeText(this,
+                        desdeServidor ?
+                                "Perfil cargado - Targeta ID: " + targetaCargada
+                                : "Usando datos locales - Targeta ID: " + targetaCargada,
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this,
+                        desdeServidor ? "Perfil cargado desde el servidor"
+                                : "No hay token o conexión. Usando datos locales.",
+                        Toast.LENGTH_SHORT).show();
+            }
         }));
     }
 
@@ -107,8 +189,8 @@ public class PerfilActivity extends AppCompatActivity {
         if (p == null) return;
         etNombre.setText(nv(p.getNombre()));
         etCorreo.setText(nv(p.getCorreo()));
-        etTarjeta.setText(nv(p.getTarjeta()));
-        etContrasena.setText(nv(p.getContrasena()));
+        etTarjeta.setText(nv(p.getTarjeta()));          // targeta_id
+        etContrasena.setText(nv(p.getContrasena()));    // normalmente no viene del servidor
         etFecha.setText(nv(p.getFechaRegistro()));
     }
 
@@ -119,11 +201,25 @@ public class PerfilActivity extends AppCompatActivity {
         String tarjeta = s(etTarjeta.getText());
         String fecha = s(etFecha.getText());
 
-        if (nombre.isEmpty()) { etNombre.setError("Campo requerido"); etNombre.requestFocus(); return false; }
+        if (nombre.isEmpty()) {
+            etNombre.setError("Campo requerido");
+            etNombre.requestFocus();
+            return false;
+        }
+
         if (correo.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-            etCorreo.setError("Correo inválido"); etCorreo.requestFocus(); return false; }
-        if (tarjeta.isEmpty()) { etTarjeta.setError("Campo requerido"); etTarjeta.requestFocus(); return false; }
-        if (fecha.isEmpty()) { etFecha.setError("Campo requerido"); etFecha.requestFocus(); return false; }
+            etCorreo.setError("Correo inválido");
+            etCorreo.requestFocus();
+            return false;
+        }
+
+        // targeta_id: OPCIONAL, pero si se llena, validar longitud <= 9
+        if (!tarjeta.isEmpty() && tarjeta.length() > 9) {
+            etTarjeta.setError("Máximo 9 caracteres");
+            etTarjeta.requestFocus();
+            return false;
+        }
+
         return true;
     }
 
@@ -164,6 +260,11 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     // ==== Utilidades de strings ====
-    private String s(CharSequence cs) { return cs == null ? "" : cs.toString().trim(); }
-    private String nv(String s) { return s == null ? "" : s; }
+    private String s(CharSequence cs) {
+        return cs == null ? "" : cs.toString().trim();
+    }
+
+    private String nv(String s) {
+        return s == null ? "" : s;
+    }
 }

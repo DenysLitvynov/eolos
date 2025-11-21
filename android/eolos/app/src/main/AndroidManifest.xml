@@ -72,10 +72,13 @@
         <activity android:name=".activities.PerfilActivity" />
         <activity android:name=".activities.ConnectionActivity" />
         <activity android:name=".activities.QRScannerActivity" />
+        <activity android:name=".activities.IncidenciaActivity" />
+        <activity android:name=".activities.MapaActivity" />
+
         <activity
             android:name=".activities.VerifyRegistrationActivity"
             android:exported="false" />
-        <activity android:name=".activities.Home_UR" />
+        <activity android:name=".activities.HomeActivity" />
 
         <!-- =================== SERVICIO BLE =================== -->
         <service
@@ -84,5 +87,9 @@
             android:foregroundServiceType="connectedDevice|location"
             android:stopWithTask="false" />
 
+        <service
+            android:name=".servicio.GpsDistanceTrackerService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
     </application>
 </manifest>

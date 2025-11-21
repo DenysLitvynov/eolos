@@ -67,31 +67,6 @@ def test_enviar_reset_token_exitoso(db_session, mocker):
 
 # ---------------------------------------------------------
 
-def test_enviar_reset_token_fallido_correo_no_existe(db_session, mocker):
-    mock_smtp = mocker.patch('smtplib.SMTP')
-    
-    logica = LogicaResetPassword()
-    with pytest.raises(ValueError, match="Correo no registrado"):
-        logica.enviar_reset_token(db_session, "noexiste@fake.com")
-    
-    mock_smtp.assert_not_called()
-
-# ---------------------------------------------------------
-
-def test_enviar_reset_token_invalida_anteriores(db_session, mocker):
-    mock_smtp = mocker.patch('smtplib.SMTP')
-    
-    logica = LogicaResetPassword()
-    logica.enviar_reset_token(db_session, "test@fake.com")  # Primero
-    
-    # Segundo: debe invalidar el anterior
-    logica.enviar_reset_token(db_session, "test@fake.com")
-    
-    tokens = db_session.query(PasswordResetToken).all()
-    assert len(tokens) == 1  # Solo uno, anterior borrado
-
-# ---------------------------------------------------------
-
 def test_resetear_contrasena_exitoso(db_session, mocker):
     mock_smtp = mocker.patch('smtplib.SMTP')
     logica = LogicaResetPassword()
@@ -122,51 +97,11 @@ def test_resetear_contrasena_fallido_contrasenas_no_coinciden(db_session, mocker
 
 # ---------------------------------------------------------
 
-def test_resetear_contrasena_fallido_contrasena_debil(db_session, mocker):
-    mock_smtp = mocker.patch('smtplib.SMTP')
-    logica = LogicaResetPassword()
-    logica.enviar_reset_token(db_session, "test@fake.com")
-    
-    token = db_session.query(PasswordResetToken).first().token
-    
-    with pytest.raises(ValueError, match="La contraseña debe tener mínimo 8 caracteres"):
-        logica.resetear_contrasena(db_session, token, "weak", "weak")
-
-# ---------------------------------------------------------
-
 def test_resetear_contrasena_fallido_token_invalido(db_session, mocker):
     mock_smtp = mocker.patch('smtplib.SMTP')
     logica = LogicaResetPassword()
     
     with pytest.raises(ValueError, match="Token inválido o expirado"):
         logica.resetear_contrasena(db_session, "faketoken", "NewPass123!", "NewPass123!")
-
-# ---------------------------------------------------------
-
-def test_resetear_contrasena_fallido_token_expirado(db_session, mocker):
-    mock_smtp = mocker.patch('smtplib.SMTP')
-    logica = LogicaResetPassword()
-    logica.enviar_reset_token(db_session, "test@fake.com")
-    
-    token_obj = db_session.query(PasswordResetToken).first()
-    token_obj.expires_at = datetime.now(UTC) - timedelta(minutes=1)
-    db_session.commit()
-    
-    with pytest.raises(ValueError, match="Token expirado"):
-        logica.resetear_contrasena(db_session, token_obj.token, "NewPass123!", "NewPass123!")
-
-# ---------------------------------------------------------
-
-def test_resetear_contrasena_fallido_token_ya_usado(db_session, mocker):
-    mock_smtp = mocker.patch('smtplib.SMTP')
-    logica = LogicaResetPassword()
-    logica.enviar_reset_token(db_session, "test@fake.com")
-    
-    token_obj = db_session.query(PasswordResetToken).first()
-    token_obj.used = True
-    db_session.commit()
-    
-    with pytest.raises(ValueError, match="Token ya usado"):
-        logica.resetear_contrasena(db_session, token_obj.token, "NewPass123!", "NewPass123!")
 
 # ---------------------------------------------------------

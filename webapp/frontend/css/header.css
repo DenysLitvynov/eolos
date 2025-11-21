@@ -1,0 +1,254 @@
+/*
+Autor: jinwei
+Fecha: 16-11-2025
+Descripción: Estilos responsivos y simplificados para el header y el footer.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap');
+
+/* ====== Base ====== */
+:root{
+    --font-sans: "Rethink Sans", ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --c-primary: #0D47A1;
+    --c-white: #fff;
+    --c-muted: #E9EEF0;
+    --radius: 30px;
+    --space: 16px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+    font-family: var(--font-sans);
+    line-height: 1.4;
+}
+
+body {
+    margin: 20px 12px;
+}
+
+/* Tipografías fluidas */
+h1 { font-size: clamp(72px, 2vw + 8px, 80px); }
+h2 { font-size: clamp(55px, 3vw + 8px, 62px); }
+h3 { font-size: clamp(24px, 2vw + 6px, 55px); }
+p  { font-size: clamp(16px, 1vw + 12px, 24px); }
+
+/* ====== Header ====== */
+.header {
+    background-color: var(--c-primary);
+    color: var(--c-white);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--radius);
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    margin-left: clamp(0px, 3vw, 30px);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;            /* → enlaces pasan a varias líneas si es necesario */
+    gap: 8px 12px;
+}
+
+.nav a {
+    color: var(--c-white);
+    text-decoration: none;
+    font-size: clamp(16px, 1vw + 12px, 24px);
+    padding: 6px 10px;          /* base; el hover añade borde sin mover tanto */
+    border-radius: 30px;
+    transition: background-color .2s ease, border-color .2s ease;
+}
+
+.nav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 0.5px solid var(--c-white);
+}
+
+.nav .login {
+    border: 1.5px solid var(--c-white);
+}
+
+/* ====== Header: preparación para menú móvil ====== */
+.header { position: relative; }
+
+/* Botón hamburguesa (oculto en escritorio) */
+.menu-toggle{
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255,255,255,.5);
+    background: transparent;
+    color: var(--c-white);
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, opacity .2s ease;
+}
+.menu-toggle:hover{ background-color: rgba(255,255,255,.2); border-color: var(--c-white); }
+.menu-toggle__icon{ width: 22px; height: 22px; display: block; }
+.menu-toggle__label{
+    font-size: clamp(14px, 1vw + 8px, 18px);
+    line-height: 1;
+}
+
+/* ====== Breakpoint móvil ====== */
+@media (max-width: 1050px){
+    /* botón visible; nav se convierte en panel desplegable */
+    .menu-toggle{ display: inline-flex; }
+
+    /* fila principal: logo a la izquierda, botón a la derecha */
+    .header{
+        padding: 10px clamp(10px, 3vw, 16px);
+        gap: 8px;
+    }
+
+    /* Nav como menú desplegable */
+    .nav{
+        position: absolute;
+        left: clamp(8px, 2vw, 16px);
+        right: clamp(8px, 2vw, 16px);
+        top: calc(100% + 8px);
+        background: var(--c-primary);
+        border: 1px solid rgba(255,255,255,.35);
+        border-radius: calc(var(--radius) - 6px);
+        padding: 10px;
+        display: grid;              /* columna en móvil */
+        gap: 6px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.25);
+
+        /* Estado cerrado (animable) */
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform-origin: top;
+        transition: max-height .35s ease, opacity .25s ease;
+        z-index: 50;
+    }
+
+    /* En móvil los enlaces ocupan todo el ancho */
+    .nav a{
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        font-size: clamp(16px, 1vw + 12px, 18px); /* más compacto en móvil */
+    }
+
+    /* Estado abierto */
+    .nav.is-open{
+        max-height: 80vh;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* La nav horizontal ya no se usa en móvil */
+    .header { justify-content: space-between; }
+}
+
+/* Opcional: animar icono al abrir (cambia a "X") */
+.menu-toggle[aria-expanded="true"] .menu-toggle__icon path{
+    d: path("M4 4L20 20M20 4L4 20"); /* compatible con navegadores modernos */
+}
+
+/* ========== Footer ========== */
+.ft{
+    background:#E9EEF0;
+    margin:20px 0 0 0;
+    padding: clamp(12px, 2vw, 24px);
+    font-family: var(--font-sans);
+    margin:20px -12px -20px -12px;
+}
+
+.ft__wrap{
+    display:grid;
+    grid-template-columns: 1.5fr 1.5fr repeat(3, 1fr);
+    gap: clamp(8px, 2vw, 24px);
+    align-items:start;
+}
+
+.ft__brand{
+    display: contents;           /* hace que .ft__logo y .ft__addr formen parte directa del grid */
+}
+
+/* Control individual de logo y dirección */
+.ft__logo img{
+    height: 40px;
+    width: auto;
+    margin-top: 10px;
+    margin-left: 12vw; /* mantener un toque de margen izquierdo */
+}
+
+.ft__addr{                      /* tu HTML usa class="ft__addr" */
+    font-style: normal;         /* address es itálico por defecto; se normaliza */
+}
+
+.addres{                        /* clase original del bloque de texto (se conserva) */
+    font-size: clamp(18px, 1.2vw + 14px, 24px);
+    padding: 4px 0 8px 0;
+    font-weight: 500;
+}
+
+.ft__links{
+    display: contents;          /* las tres columnas de enlaces entran directo al grid */
+}
+
+.ft__col{
+    display:flex;
+    flex-direction:column;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.ft__col a{
+    color: inherit;
+    text-decoration: none;
+    padding: 4px 0;
+}
+
+/* Fila de copyright */
+.ft__copy{
+    display:flex;
+    justify-content:center;
+    margin-top: clamp(8px, 2vw, 16px);
+    font-size: 12px;
+    text-align:center;
+}
+
+/* ====== Responsivo: 5 columnas → 3 → 2 → 1 ====== */
+@media (max-width: 1100px){
+    .ft__wrap{
+        grid-template-columns: auto 1.2fr 1fr 1fr;  /* 4 columnas: logo / dirección / dos columnas de enlaces */
+    }
+}
+
+@media (max-width: 900px){
+    .ft__wrap{
+        grid-template-columns: auto 1fr 1fr;        /* 3 columnas: logo / dirección / una columna de enlaces */
+    }
+}
+
+@media (max-width: 700px){
+    .ft__wrap{
+        grid-template-columns: 1fr 1fr;             /* 2 columnas */
+    }
+    .ft__logo img{ margin-left: 0; }
+}
+
+@media (max-width: 520px){
+    .ft__wrap{
+        grid-template-columns: 1fr;                 /* 1 columna vertical */
+    }
+    .ft__col{ font-size: 14px; }
+    .ft__copy{ margin-top: 12px; }
+}

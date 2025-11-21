@@ -1,3 +1,11 @@
+/**
+ * Fichero: VerifyRegistrationActivity.java
+ * Descripción: Actividad para verificar el correo del usuario.
+ * @author Denys Litvynov Lymanets
+ * @version 1.0
+ * @since 16/11/2025
+ */
+
 package com.example.eolos.activities;
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -26,6 +34,9 @@ public class VerifyRegistrationActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private String correo;
 
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +64,9 @@ public class VerifyRegistrationActivity extends AppCompatActivity {
         findViewById(R.id.backButton).setOnClickListener(v -> finish());
     }
 
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
     private void startTimer() {
         resendButton.setEnabled(false);
         resendButton.setText("Reenviar código (60s)");
@@ -66,6 +80,9 @@ public class VerifyRegistrationActivity extends AppCompatActivity {
             }
         }.start();
     }
+
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
 
     private void verificar() {
         String code = codeEditText.getText().toString().trim();
@@ -91,6 +108,9 @@ public class VerifyRegistrationActivity extends AppCompatActivity {
         });
     }
 
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
     private void reenviar() {
         verifyFake.reenviar(correo, new VerifyFake.ReenvioCallback() {
             @Override
@@ -107,3 +127,6 @@ public class VerifyRegistrationActivity extends AppCompatActivity {
         startTimer();
     }
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------

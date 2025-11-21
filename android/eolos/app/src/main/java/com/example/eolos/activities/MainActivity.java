@@ -11,6 +11,7 @@ package com.example.eolos.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,29 +41,40 @@ public class MainActivity extends AppCompatActivity {
         // === REDIRECCIÓN SI YA ESTÁ LOGUEADO ===
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
         String token = prefs.getString("token", null);
-        if (token != null) {
-            startActivity(new Intent(this, DashboardActivity.class));
+        boolean biometricEnabled = prefs.getBoolean("biometric_enabled", false);
+        if (token != null && biometricEnabled) {
+            startActivity(new Intent(this, HomeActivity.class));
             finish();
             return;
         }
 
         // === BOTONES LOGIN/REGISTER ===
         iniciarBotonoes();
+
     }
 
     private void setupBottomNavigation() {
-        LinearLayout bottomNav = findViewById(R.id.bottom_navigation);
-        TextView iconInicio    = (TextView) bottomNav.getChildAt(0);
-        TextView iconMapa      = (TextView) bottomNav.getChildAt(1);
-        TextView iconQR        = (TextView) bottomNav.getChildAt(2);
-        TextView iconAlertas   = (TextView) bottomNav.getChildAt(3);
-        TextView iconPerfil    = (TextView) bottomNav.getChildAt(4);
+        ImageView iconInicio = findViewById(R.id.icon1);
+        ImageView iconMapa = findViewById(R.id.icon2);
+        ImageView iconQR = findViewById(R.id.icon3);
+        ImageView iconAlertas = findViewById(R.id.icon4);
+        ImageView iconPerfil = findViewById(R.id.icon5);
 
-        iconInicio.setOnClickListener(v -> Toast.makeText(this, "Inicio", Toast.LENGTH_SHORT).show());
-        iconMapa.setOnClickListener(v -> Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show());
-        iconQR.setOnClickListener(v -> startActivity(new Intent(this, ConnectionActivity.class)));
-        iconAlertas.setOnClickListener(v -> Toast.makeText(this, "Alertas", Toast.LENGTH_SHORT).show());
-        iconPerfil.setOnClickListener(v -> startActivity(new Intent(this, PerfilActivity.class)));
+        iconInicio.setOnClickListener(v ->
+                startActivity(new Intent(this, HomeActivity.class)));
+
+        iconMapa.setOnClickListener(v ->
+                startActivity(new Intent(this, MapaActivity.class)));
+
+        iconQR.setOnClickListener(v ->
+                startActivity(new Intent(this, ConnectionActivity.class)));
+
+        iconAlertas.setOnClickListener(v ->
+                startActivity(new Intent(this, IncidenciaActivity.class)));
+
+
+        iconPerfil.setOnClickListener(v ->
+                startActivity(new Intent(this, PerfilActivity.class)));
     }
 
     private void iniciarBotonoes() {

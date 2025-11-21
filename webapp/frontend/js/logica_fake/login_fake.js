@@ -12,7 +12,14 @@ export class LoginFake {
     constructor() {
         this.peticionario = new PeticionarioREST();
     }
-
+    
+    // ----------------------------------------------------------
+    // Método que envía las credenciales al backend y devuelve la respuesta como promesa.
+    //
+    // correo : string
+    // contrasena : string
+    // -> login() -> Promise<json>
+    // ----------------------------------------------------------
     async login(correo, contrasena) {
         const url = '/api/v1/auth/login';
         const body = { correo, contrasena };

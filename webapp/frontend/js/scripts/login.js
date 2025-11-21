@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target && e.target.classList.contains('toggle-password')) {
             e.preventDefault();
             const wrapper = e.target.closest('.password-wrapper');
-            const input = wrapper.querySelector('input[type="password"], input[type="text"]');
+            const input = wrapper.querySelector('input');
             if (input) {
                 const isPassword = input.type === 'password';
                 input.type = isPassword ? 'text' : 'password';

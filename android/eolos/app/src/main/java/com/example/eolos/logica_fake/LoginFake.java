@@ -12,9 +12,12 @@ import com.example.eolos.PeticionarioREST;
 
 import org.json.JSONObject;
 
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
+
 public class LoginFake {
 
-    private static final String BASE_URL = "http://10.0.2.2:8000";
+    private static final String BASE_URL = "http://192.168.1.133:8000";
     private static final String ENDPOINT_LOGIN = "/api/v1/auth/login";
 
     public interface LoginCallback {
@@ -22,6 +25,16 @@ public class LoginFake {
         void onError(String error);
     }
 
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
+    /**
+     * Realiza el login enviando correo y contraseña al endpoint de autenticación.
+     *
+     * @param correo     Correo electrónico del usuario
+     * @param contrasena Contraseña en texto plano
+     * @param callback   Callback con el token JWT o mensaje de error
+     */
     public void login(String correo, String contrasena, LoginCallback callback) {
         PeticionarioREST peticionario = new PeticionarioREST();
         String url = BASE_URL + ENDPOINT_LOGIN;
@@ -57,3 +70,6 @@ public class LoginFake {
         }
     }
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------

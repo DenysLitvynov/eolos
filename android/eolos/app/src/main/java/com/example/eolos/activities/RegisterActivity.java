@@ -22,9 +22,15 @@ import com.example.eolos.logica_fake.RegistroFake;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
+
 public class RegisterActivity extends AppCompatActivity {
 
     private CheckBox aceptaPoliticaCheckBox; // ← nuevo: checkbox de política
+
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         // ← NUEVO: checkbox de política
         aceptaPoliticaCheckBox = findViewById(R.id.acepta_politica_checkbox);
+
+        // -------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------
 
         RegistroFake registroFake = new RegistroFake();
 
@@ -79,6 +88,9 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
+            // -------------------------------------------------------------------------------
+            // -------------------------------------------------------------------------------
+
             // Enviar al backend
             registroFake.registro(nombre, apellido, correo, targetaId, contrasena, contrasenaRepite, aceptaPolitica,
                     new RegistroFake.RegistroCallback() {
@@ -104,9 +116,15 @@ public class RegisterActivity extends AppCompatActivity {
                     });
         });
 
+        // -------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------
+
         // Enlace para ir al login
         loginLink.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
         });
     }
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
