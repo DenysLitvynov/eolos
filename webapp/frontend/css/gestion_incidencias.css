@@ -1,0 +1,332 @@
+
+:root {
+    --color-principal: #0D47A1; /* Azul Éolos */
+    --color-secundario: #1E88E5;
+    --color-texto-oscuro: #333;
+    --color-fondo-claro: #f4f7fa;
+    --color-borde: #ddd;
+    --color-resuelto: #2ecc71; /* Verde Resuelto */
+    --color-no-resuelto: #e74c3c; /* Rojo No Resuelto */
+}
+h1{
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--color-principal);
+}
+
+.contenedor-principal {
+    width: 95%;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 15px;
+    flex-grow: 1;
+}
+
+.titulo-pagina {
+    color: var(--color-principal);
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--color-borde);
+}
+
+/*====================================================================*/
+/* BARRA DE BÚSQUEDA Y FILTROS */
+/*====================================================================*/
+.barra-busqueda-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.contenedor-busqueda {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid var(--color-borde);
+    border-radius: 25px;
+    padding: 5px 15px;
+    min-width: 280px;
+    max-width: 500px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.contenedor-busqueda:focus-within {
+    border-color: var(--color-principal);
+    box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+}
+
+.campo-busqueda {
+    flex-grow: 1;
+    border: none;
+    padding: 8px 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.icono-busqueda {
+    color: #999;
+    padding-right: 5px;
+    font-size: 1rem;
+    order: -1; /* Mueve el icono a la izquierda */
+}
+
+.botones-filtro {
+    display: flex;
+    gap: 10px;
+}
+
+.boton-filtro {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    color: var(--color-texto-oscuro);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boton-filtro:hover {
+    background: var(--color-principal);
+    color: #fff;
+    border-color: var(--color-principal);
+}
+
+
+/*====================================================================*/
+/* GRID DE INCIDENCIAS (Tarjetas) */
+/*====================================================================*/
+.grid-incidencias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 90px;
+}
+
+/* Contenedor general de la tarjeta */
+.tarjeta-incidencia {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    overflow: hidden; 
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tarjeta-incidencia:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* Encabezado con color de estado (el bloque grande) */
+.encabezado-estado {
+    height: 90px; 
+    display: flex;
+    justify-content: flex-end; 
+    align-items: flex-start; 
+    padding: 15px 15px 0 0;
+}
+
+
+.estado-noresuelto,.pildora-estado p { background-color: var(--color-no-resuelto);color: var(--color-no-resuelto); }
+.estado-resuelto { background-color: var(--color-resuelto);color:var(--color-resuelto); }
+
+/* Estilo de la píldora de estado */
+.pildora-estado {
+    background-color: #fff; /* Fondo blanco */
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 850;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+    border: 1px solid transparent; 
+}
+
+.contenido-tarjeta {
+    padding: 20px 20px 15px 20px;
+}
+
+.titulo-incidencia {
+    font-size: 1.25rem; 
+    font-weight: 700;
+    margin: 0 0 15px;
+    color: var(--color-texto-oscuro);
+}
+
+.detalle-incidencia {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+
+/*====================================================================*/
+/* POP UP INCIDENCIAS 
+/*====================================================================*/
+.popup-container {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(121, 120, 120, 0.6); 
+}
+
+.popup-container h1 {
+    color: var(--color-principal);
+    font-size: 2rem; 
+    font-weight: 700;
+}
+
+.popup-container h2 {
+    color: var(--color-principal);
+    font-size: 1.6rem; 
+    margin: 0; 
+
+}
+.popup-container h2 {color: rgba(25, 118, 210, 1);;margin-bottom: 0;}
+
+/*color: rgba(25, 118, 210, 1);*/
+.close-popup-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Para centrarlo */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    max-width: 450px; 
+    width: 80%;
+}
+
+
+.estado-pop-up.no-resuelto {
+    color: var(--color-no-resuelto);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.estado-pop-up.resuelto {
+    color: var(--color-resuelto);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+
+.popup-detalles {
+    background-color: #f4f7fa; /* Gris claro */
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.popup-content ul {
+    list-style-type: none; /* Quita los puntos */
+    background-color: rgba(214, 226, 229, 0.3); /* Gris claro */
+    border-radius: 15px;
+    padding: 0;
+    margin-bottom: 35px;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.popup-action-btn {
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    gap: 8px;
+    width: 90%;
+    background: var(--color-principal); /* Azul oscuro de Éolos */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.1s;
+}
+
+.popup-action-btn:hover {
+    background: var(--color-secundario);
+    box-shadow: 0 6px 12px rgba(13, 71, 161, 0.4);
+}
+
+.popup-action-btn:active {
+    transform: scale(0.99);
+}
+/*====================================================================*/
+/* POP UP INCIDENCIAS 
+/*====================================================================*/
+
+
+
+/*====================================================================*/
+/* RESPONSIVIDAD (Media Queries) */
+/*====================================================================*/
+
+/* Teléfonos (max-width: 768px) */
+@media (max-width: 768px) {
+
+
+    /* BARRA DE BÚSQUEDA Y FILTROS: Los filtros se apilan si es necesario */
+    .barra-busqueda-filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .contenedor-busqueda {
+        max-width: 100%;
+    }
+    
+    .botones-filtro {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .boton-filtro {
+        flex-grow: 1;
+    }
+
+    /* GRID DE INCIDENCIAS: Columnas más pequeñas */
+    .grid-incidencias {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
+
+}
+
+/* Tablets (min-width: 769px and max-width: 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* GRID: 2 o 3 columnas, pero ya no 4 */
+    .grid-incidencias {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+/*====================================================================*/
+/* RESPONSIVIDAD (Media Queries) */
+/*====================================================================*/
