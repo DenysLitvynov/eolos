@@ -1,16 +1,23 @@
-/**
- * Clase para crear y gestionar un Pop-up reutilizable.
+
+/**========================
+ * CLASE POPUP
+ * =========================
+ *  Clase para crear y manejar pop-ups dinámicos en la aplicación web.
+ * @author Ariel Bejaran
+ * @note esta clase solo vuelve divs y otras cosas en pop ups, el css se debe aplicar por separado
+ * ========================
  */
 export class Popup {
     /**
      * @param {string} title El título a mostrar en el encabezado del pop-up.
      * @param {HTMLElement} contentElement El elemento DIV con el contenido a mostrar.
+     * 
      */
     constructor(title, contentElement) {
-        // 1. Crear la estructura HTML del pop-up
+        //Crea la estructura HTML del pop-up
         this.popupElement = document.createElement('div');
-        this.popupElement.id = 'dynamicPopup'; // Un ID único para el pop-up
-        this.popupElement.className = 'popup-container'; // Aplica los estilos CSS de fondo
+        this.popupElement.id = 'dynamicPopup'; 
+        this.popupElement.className = 'popup-container'; 
 
         // 2. Crear el contenido interno
         this.contentWrapper = document.createElement('div');
@@ -21,7 +28,6 @@ export class Popup {
         titleElement.textContent = title;
     
         // 4. Crear el botón de cerrar
-         // 4. Botón de cerrar (usa icono 'X' para mantener el diseño)
         const closeButton = document.createElement('button');
         closeButton.className = 'close-popup-btn fas fa-times'; // CLASE DE ICONO 'X
 
@@ -44,17 +50,10 @@ export class Popup {
             }
         });
     }
-
-    /**
-     * Muestra el pop-up en la pantalla.
-     */
     abrirPopup() {
         this.popupElement.style.display = 'block';
     }
 
-    /**
-     * Oculta el pop-up.
-     */
     cerrarPopup() {
         this.popupElement.style.display = 'none';
     }
