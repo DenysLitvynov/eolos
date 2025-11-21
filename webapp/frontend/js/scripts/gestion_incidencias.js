@@ -27,10 +27,9 @@ function obtenerDatosIncidencia(tarjeta) {
     const estadoElement = tarjeta.querySelector('.encabezado-estado');
     const esResuelto = estadoElement.classList.contains('estado-resuelto');
     const estadoTexto = esResuelto ? 'RESUELTO' : 'NO RESUELTO';
-    const actionText = esResuelto ? 'Reabrir Incidencia' : 'Marcar como Resuelto';
+    const actionText = esResuelto ? 'cerrar incidencia' : 'Marcar como Resuelto';
 
     // Datos Fijos (por ahora, se simularán con datos reales de la DB en el futuro)
-    const paradaIncidencia = "Parada: Alboraya"; 
     const idUsuarioUnico = "ID Usuario: 1821981"; 
 
     return {
@@ -40,7 +39,6 @@ function obtenerDatosIncidencia(tarjeta) {
         esResuelto: esResuelto,
         estadoTexto: estadoTexto,
         actionText: actionText,
-        parada: paradaIncidencia,
         idUsuario: idUsuarioUnico
     };
 }
@@ -54,7 +52,7 @@ function obtenerDatosIncidencia(tarjeta) {
 function crearContenidoPopup(datos) {
     const contenidoPopup = document.createElement('div');
     
-    const subtitle = document.createElement('h3');
+    const subtitle = document.createElement('h2');
     subtitle.textContent = 'Datos de la incidencia';
     contenidoPopup.appendChild(subtitle);
     
@@ -63,10 +61,9 @@ function crearContenidoPopup(datos) {
 
     const ul = document.createElement('ul');
     ul.innerHTML = `
-        <li><strong>${datos.tiempo}</strong></li>
-        <li><strong>${datos.parada}</strong></li>
-        <li><strong>${datos.idUsuario}</strong></li>
-        <li><strong>Tipo:</strong> ${datos.fuente}</li> 
+        <li>${datos.tiempo}</li>
+        <li>${datos.fuente}</li> 
+        <li>${datos.idUsuario}</li>
     `;
     
     const statusDiv = document.createElement('div');
@@ -87,7 +84,7 @@ function crearContenidoPopup(datos) {
 
     // Función de Acción (Simulación - se necesita la instancia del popup para cerrarlo)
     const handleAction = () => {
-        console.log(`Incidencia "${datos.titulo}" marcada como ${datos.esResuelto ? 'reabierta' : 'resuelta'} (Simulación)`); 
+        console.log(`Incidencia "${datos.titulo}" marcada como ${datos.esResuelto ? 'cerrada' : 'resuelta'} (Simulación)`); 
         // Nota: El popup se cerrará fuera de esta función, después de la creación.
     };
     actionButton.addEventListener('click', handleAction);
@@ -115,11 +112,10 @@ function configurarEventosIncidencias() {
                 contenido 
             );
             
-            // Paso D: Actualizar el listener del botón de acción para cerrar el pop-up
             actionButton.removeEventListener('click', actionButton.handleAction); // Eliminar listener temporal si existiera
             actionButton.addEventListener('click', () => {
                 // Aquí ejecutamos la lógica de acción que estaba en crearContenidoPopup
-                console.log(`Incidencia "${datosIncidencia.titulo}" marcada como ${datosIncidencia.esResuelto ? 'reabierta' : 'resuelta'} (Simulación)`); 
+                console.log(`Incidencia "${datosIncidencia.titulo}" marcada como ${datosIncidencia.esResuelto ? 'cerrada' : 'resuelta'} (Simulación)`); 
                 incidenciaPopup.cerrarPopup(); // Cierra el pop-up después de la acción
             });
 

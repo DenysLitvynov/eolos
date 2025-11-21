@@ -1,6 +1,4 @@
-/*====================================================================*/
-/* GENERALES Y TIPOGRAFÍA */
-/*====================================================================*/
+
 :root {
     --color-principal: #0D47A1; /* Azul Éolos */
     --color-secundario: #1E88E5;
@@ -22,7 +20,7 @@ h1{
     max-width: 1400px;
     margin: 30px auto;
     padding: 0 15px;
-    flex-grow: 1; /* Permite que el contenido ocupe el espacio disponible */
+    flex-grow: 1;
 }
 
 .titulo-pagina {
@@ -110,9 +108,9 @@ h1{
 /*====================================================================*/
 .grid-incidencias {
     display: grid;
-    /* Usa un layout responsivo con columnas que se ajustan automáticamente */
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
+    margin-bottom: 90px;
 }
 
 /* Contenedor general de la tarjeta */
@@ -120,7 +118,7 @@ h1{
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    overflow: hidden; /* Importante para los bordes redondeados */
+    overflow: hidden; 
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -131,14 +129,14 @@ h1{
 
 /* Encabezado con color de estado (el bloque grande) */
 .encabezado-estado {
-    height: 90px; /* Altura fija para el bloque de color */
+    height: 90px; 
     display: flex;
-    justify-content: flex-end; /* Alinea la píldora a la derecha */
-    align-items: flex-start; /* Alinea la píldora arriba */
+    justify-content: flex-end; 
+    align-items: flex-start; 
     padding: 15px 15px 0 0;
 }
 
-/* Colores de estado */
+
 .estado-noresuelto,.pildora-estado p { background-color: var(--color-no-resuelto);color: var(--color-no-resuelto); }
 .estado-resuelto { background-color: var(--color-resuelto);color:var(--color-resuelto); }
 
@@ -150,17 +148,16 @@ h1{
     font-size: 0.7rem;
     font-weight: 850;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* ¡Añadimos el borde con el color del estado! */
+  
     border: 1px solid transparent; 
 }
 
-/* Contenido de la tarjeta (Parte blanca inferior) */
 .contenido-tarjeta {
     padding: 20px 20px 15px 20px;
 }
 
 .titulo-incidencia {
-    font-size: 1.25rem; /* Hacemos el título más grande como en la imagen */
+    font-size: 1.25rem; 
     font-weight: 700;
     margin: 0 0 15px;
     color: var(--color-texto-oscuro);
@@ -174,87 +171,36 @@ h1{
 }
 
 
-
-
-/*====================================================================*/
-/* RESPONSIVIDAD (Media Queries) */
-/*====================================================================*/
-
-/* Teléfonos (max-width: 768px) */
-@media (max-width: 768px) {
-
-
-    /* BARRA DE BÚSQUEDA Y FILTROS: Los filtros se apilan si es necesario */
-    .barra-busqueda-filtros {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .contenedor-busqueda {
-        max-width: 100%;
-    }
-    
-    .botones-filtro {
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .boton-filtro {
-        flex-grow: 1;
-    }
-
-    /* GRID DE INCIDENCIAS: Columnas más pequeñas */
-    .grid-incidencias {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 15px;
-    }
-
-}
-
-/* Tablets (min-width: 769px and max-width: 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .cabecera-principal {
-        padding: 15px 20px;
-    }
-
-    .menu-navegacion {
-        gap: 15px;
-    }
-    
-    /* GRID: 2 o 3 columnas, pero ya no 4 */
-    .grid-incidencias {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-    
-    /* PIE: Mantenemos el grid pero con menos columnas */
-    .pie-contenedor {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .pie-logo { grid-column: 1 / 3; } /* Ocupa todo el ancho */
-}
-
-
-
 /*====================================================================*/
 /* POP UP INCIDENCIAS 
 /*====================================================================*/
 .popup-container {
     display: none; 
-    position: fixed; /* 👈 MUY IMPORTANTE: Lo mantiene visible */
-    z-index: 1000; /* Lo pone por encima de todo */
+    position: fixed; 
+    z-index: 1000; 
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(121, 120, 120, 0.6); /* Fondo semi-transparente */
+    background-color: rgba(121, 120, 120, 0.6); 
 }
 
-.popup-container h1 {color: var(--color-principal);}
+.popup-container h1 {
+    color: var(--color-principal);
+    font-size: 2rem; 
+    font-weight: 700;
+}
+
+.popup-container h2 {
+    color: var(--color-principal);
+    font-size: 1.6rem; 
+    margin: 0; 
+
+}
 .popup-container h2 {color: rgba(25, 118, 210, 1);;margin-bottom: 0;}
 
-
+/*color: rgba(25, 118, 210, 1);*/
 .close-popup-btn {
     color: #aaa;
     float: right;
@@ -265,14 +211,12 @@ h1{
     border: none;
 }
 
-/* 2. Contenido interno (el cuadro blanco/gris) */
 .popup-content {
     background-color: #fefefe;
     margin: 15% auto; /* Para centrarlo */
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    /* Define un ancho visible */
     max-width: 450px; 
     width: 80%;
 }
@@ -337,4 +281,52 @@ h1{
 }
 /*====================================================================*/
 /* POP UP INCIDENCIAS 
+/*====================================================================*/
+
+
+
+/*====================================================================*/
+/* RESPONSIVIDAD (Media Queries) */
+/*====================================================================*/
+
+/* Teléfonos (max-width: 768px) */
+@media (max-width: 768px) {
+
+
+    /* BARRA DE BÚSQUEDA Y FILTROS: Los filtros se apilan si es necesario */
+    .barra-busqueda-filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .contenedor-busqueda {
+        max-width: 100%;
+    }
+    
+    .botones-filtro {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .boton-filtro {
+        flex-grow: 1;
+    }
+
+    /* GRID DE INCIDENCIAS: Columnas más pequeñas */
+    .grid-incidencias {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
+
+}
+
+/* Tablets (min-width: 769px and max-width: 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* GRID: 2 o 3 columnas, pero ya no 4 */
+    .grid-incidencias {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+/*====================================================================*/
+/* RESPONSIVIDAD (Media Queries) */
 /*====================================================================*/
