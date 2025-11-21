@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Éolos – Landing</title>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/privacidad.css">
+</head>
+<body>
+<header class="header" data-breakpoint="1050">
+    <div class="logo">
+        <img src="../images/logo.png" alt="logo" />
+    </div>
+
+    <!-- Botón hamburger -->
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="menu-toggle__label">Menú</span>
+    </button>
+
+    <!-- Menú de navegación -->
+    <nav class="nav" id="site-nav">
+        <a href="../index.html">Inicio</a>
+        <a href="mapas.html">Mapas</a>
+        <a href="sobre-nosotros.html">Sobre Nosotros</a>
+        <a href="FAQ.html">Faq</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="login.html" class="login">Inicia Sesión</a>
+        <a href="registro.html" class="login">Registrarse</a>
+    </nav>
+</header>
+
+
+<div class="titulo">Política de Privacidad</div>
+    <div class="privacy-container">
+        <h1>Política de Privacidad</h1>
+
+        <p>En Eolos, valoramos y protegemos tu privacidad. Esta Política explica cómo tratamos los datos personales de los usuarios que utilizan nuestra aplicación.</p>
+
+        <h2>1. Responsable del tratamiento</h2>
+        <p>El responsable del tratamiento de los datos es Eolos, en colaboración con el Ayuntamiento correspondiente cuando sea aplicable.</p>
+
+        <h2>2. Finalidad del tratamiento</h2>
+        <p>Los datos personales recogidos a través de Eolos se utilizan únicamente para el funcionamiento y mejora de la aplicación, incluyendo:</p>
+        <ul>
+            <li>La gestión y seguimiento de las funcionalidades ofrecidas.</li>
+            <li>La comunicación de información relevante sobre el uso del servicio.</li>
+            <li>La entrega de recompensas propias de la app, acordadas con el Ayuntamiento.</li>
+        </ul>
+        <p>En ningún caso los datos serán vendidos, cedidos o utilizados con fines comerciales ajenos a la aplicación.</p>
+
+        <h2>3. Base legal</h2>
+        <p>El tratamiento de los datos se realiza sobre la base del consentimiento del usuario y/o el cumplimiento de una función de interés público cuando interviene el Ayuntamiento.</p>
+
+        <h2>4. Conservación de los datos</h2>
+        <p>Los datos se conservarán durante el tiempo necesario para cumplir con las finalidades indicadas o según lo exija la legislación aplicable.</p>
+
+        <h2>5. Comunicación de datos a terceros</h2>
+        <p>Eolos no comparte datos personales con terceros salvo cuando sea estrictamente necesario para el funcionamiento técnico de la app o cuando lo requiera una entidad pública en el marco de la colaboración con el Ayuntamiento.</p>
+
+        <h2>6. Derechos del usuario</h2>
+        <p>El usuario puede ejercer en cualquier momento sus derechos de acceso, rectificación, supresión, oposición o limitación del tratamiento, contactando con [correo de contacto o formulario dentro de la app].</p>
+
+        <h2>7. Seguridad de los datos</h2>
+        <p>Eolos aplica medidas técnicas y organizativas adecuadas para proteger los datos personales frente a accesos no autorizados, pérdidas o alteraciones.</p>
+
+        <h2>8. Modificaciones</h2>
+        <p>Nos reservamos el derecho a actualizar esta Política de Privacidad. Cualquier cambio será comunicado dentro de la aplicación y publicado con la fecha de revisión actualizada.</p>
+    </div>
+
+<footer class="ft">
+    <div class="ft__wrap ft--two-cols">
+        <div class="ft__brand">
+            <span class="ft__logo">
+                <img src="../images/logo_footer.png" alt="logo" />
+            </span>
+            <address class="ft__addr">
+                <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
+                <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
+                <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
+            </address>
+        </div>
+
+        <div class="ft__links">
+            <nav class="ft__col">
+                <a href="../index.html">Inicio</a>
+                <a href="mapas.html">Mapas</a>
+                <a href="sobre-nosotros.html">Sobre nosotros</a>
+            </nav>
+
+            <nav class="ft__col">
+                <a href="contacto.html">Contacto</a>
+                <a href="login.html">Iniciar sesión</a>
+            </nav>
+
+            <nav class="ft__col">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="ft__copy">
+        Copyright ©éolos. Todos los derechos reservados.
+    </div>
+</footer>
+
+<script>
+    (function(){
+        const header = document.querySelector('.header');
+        const nav = header.querySelector('.nav');
+        const btn = header.querySelector('.menu-toggle');
+
+        function closeMenu(){
+            btn.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('is-open');
+        }
+
+        function openMenu(){
+            btn.setAttribute('aria-expanded', 'true');
+            nav.classList.add('is-open');
+        }
+
+        btn.addEventListener('click', () => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            expanded ? closeMenu() : openMenu();
+        });
+
+        window.addEventListener('resize', () => {
+            if(window.innerWidth > 1050) closeMenu();
+        });
+    })();
+</script>
+</body>
+</html>

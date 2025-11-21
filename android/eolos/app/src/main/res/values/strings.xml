@@ -21,4 +21,17 @@
     <string name="register_button">Registrarse</string>
     <string name="have_account_prompt">Ya tienes cuenta?</string>
     <string name="login_link">Inicia sesión</string>
+
+    <!-- Biometría -->
+    <string name="biometric_login_description">Iniciar sesión con huella dactilar</string>
+    <string name="biometric_prompt_title">Iniciar sesión con huella</string>
+    <string name="biometric_prompt_subtitle">Usa tu huella guardada en este dispositivo</string>
+    <string name="biometric_prompt_negative">Cancelar</string>
+    <string name="biometric_not_enabled">Primero activa el acceso con huella iniciando sesión.</string>
+    <string name="biometric_not_available">Este dispositivo no tiene biometría disponible.</string>
+    <string name="biometric_enable_title">¿Activar inicio con huella?</string>
+    <string name="biometric_enable_message">
+        Podrás usar la huella guardada en este dispositivo para no escribir la contraseña cada vez.
+    </string>
+
 </resources>

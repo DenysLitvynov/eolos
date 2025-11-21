@@ -1,0 +1,417 @@
+/* ========== Variables base (compartibles con header.css) ========== */
+:root{
+    --c-primary:#0D47A1;
+    --c-muted:#E9EEF0;
+    --radius-lg:24px;
+    --space: clamp(12px, 2vw, 24px);
+    --space-lg: clamp(20px, 4vw, 40px);
+}
+
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+    padding:20px 0 15vh 0;
+}
+
+/* Contenido de texto (lado izquierdo) */
+.hero__content {
+    flex: 2;
+    z-index: 2;
+}
+
+.hero__content h1 {
+    color: #0D47A1;
+    font-size: 64px;
+    line-height: 1.5;
+    margin: 40px 0 40px 30px;
+    font-weight: 700;
+}
+
+/* Estilos de botones */
+.hero__buttons {
+    display: flex;
+    gap: 24px;
+    padding: 0 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border: 2px solid #0D47A1;
+    border-radius: 40px;
+    color: #0D47A1;
+    font-size: 18px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0D47A1;
+    color: white;
+}
+
+.background_elli{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    /* Tamaño con ancho + relación de aspecto (cuadrado) */
+    width: 50vw;
+    aspect-ratio: 1 / 1;
+
+    background: #E9EEF0;
+    border-bottom-left-radius: 100%;  /* Cuarto de círculo (esquina superior derecha) */
+    z-index: 0;            /* En el plano inferior */
+    pointer-events: none;  /* No bloquea la interacción */
+
+}
+.hero__image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-size: contain;
+}
+
+.hero__image img {
+    width: 100%;
+    height: auto;
+    z-index: 2;
+    position: relative;
+    margin-left: -10vw;
+}
+/* ========== MAP ========== */
+.map{
+    position:relative;
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.map .mapa{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:90svh;
+}
+
+.map__btn{
+    position:absolute;
+    left: clamp(12px, 2vw, 16px);
+    bottom: clamp(12px, 2vw, 16px);
+    z-index:2;
+    display:inline-flex; align-items:center; gap:.5em;
+    padding: clamp(10px, 1.2vw, 14px) clamp(16px, 2.2vw, 28px);
+    border:2px solid var(--c-primary);
+    border-radius:999px;
+    color: var(--c-primary);
+    background:#fff;
+    font-size: clamp(14px, 1.4vw, 18px);
+    text-decoration:none;
+    transition: background-color .25s ease, transform .12s ease;
+}
+.map__btn:hover{ background:#fff; }
+.map__btn:active{ transform: translateY(1px); }
+.map__btn:focus-visible{ outline: 3px solid var(--c-primary); outline-offset: 3px; }
+
+/* ========== POLLUTION (tarjeta de contaminación en tiempo real) ========== */
+.pollution-card{
+    background: var(--c-muted);
+    border-radius:20px;
+    margin-top:40px;
+    padding: clamp(16px, 3vw, 24px) clamp(12px, 3vw, 40px);
+    overflow:hidden;
+}
+
+.pollution-grid{
+    display:grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: clamp(16px, 3vw, 40px);
+    align-items:start;
+}
+
+.pollution-left{
+    display:grid;
+    grid-template-rows:auto auto auto;
+    gap: clamp(12px, 4vw, 40px);
+}
+
+.pollution-left h2{
+    color: var(--c-primary);
+    font-weight:800;
+    font-size: clamp(24px, 4.5vw, 56px);
+    margin:0;
+}
+
+.pollution-lists{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(12px, 2vw, 24px);
+}
+
+.pollution-list{
+    list-style:none; margin:0; padding:0;
+    display:grid; gap: clamp(12px, 2vw, 20px);
+    /* Tamaño de fuente fluido para listas */
+    font-size: clamp(14px, 1.6vw, 24px);
+    color:#000; font-weight:700;
+}
+.pollution-list li{ display:flex; align-items:center; gap:12px; }
+
+.dot{ display:inline-block; width: clamp(14px, 3vw, 40px); height: clamp(14px, 3vw, 40px); border-radius:50%; flex:0 0 auto; }
+.dot.red{ background:#db4c4f; }
+.dot.yellow{ background:#f7d85d; }
+.dot.green{ background:#57b161; }
+
+.pollution-right{
+    display:flex; flex-direction:column; align-items:center; gap: clamp(8px, 2vw, 16px);
+    overflow:hidden; position:relative;
+}
+
+.pollution-legend{
+    border:2px solid var(--c-primary);
+    border-radius:16px;
+    padding: clamp(10px, 2vw, 20px) clamp(16px, 4vw, 60px) clamp(10px, 2vw, 20px) clamp(10px, 2vw, 10px);
+    display:grid; gap: clamp(10px, 2vw, 30px);
+    font-weight:700;
+    font-size: clamp(12px, 1.6vw, 22px);
+}
+.pollution-legend div{ display:flex; align-items:center; gap:12px; }
+
+.pollution-img{ width: clamp(140px, 22vw, 260px); height:auto; }
+
+.pollution-btn{
+    justify-self:start;
+    margin-top:8px;
+    padding: clamp(8px, 1.2vw, 10px) clamp(16px, 2vw, 24px);
+    border:2px solid var(--c-primary);
+    border-radius:999px;
+    color: var(--c-primary);
+    text-decoration:none;
+    transition:.25s;
+    font-size: clamp(14px, 1.6vw, 22px);
+}
+.pollution-btn:hover{ background: var(--c-primary); color:#fff; }
+
+/* ========== PEDALEO (sección de dos tarjetas) ========== */
+.pedaleo-section{
+    padding: var(--space-lg) 0;
+    display:flex; justify-content:center;
+}
+
+.pedaleo-container{
+    width:100%;
+    display:grid;
+    /* Clave anti-desbordes: minmax(0,1fr) */
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+    gap: clamp(16px, 4vw, 40px);
+    box-sizing:border-box;
+    padding-inline: clamp(12px, 3vw, 24px);
+}
+
+.pedaleo-left,
+.pedaleo-right{ min-width:0; } /* Evita que el contenido fuerce el ancho mínimo por su contenido */
+
+.pedaleo-left{
+    background: var(--c-muted);
+    border-radius: var(--radius-lg);
+    padding: clamp(16px, 3vw, 40px);
+    display:grid;
+    grid-template-rows:auto 1fr;
+    gap: clamp(12px, 3vw, 30px);
+}
+
+.pedaleo-title{
+    color: var(--c-primary);
+    font-weight:800;
+    font-size: clamp(24px, 5vw, 64px);
+    line-height: 1.2;
+    margin:0;
+    overflow-wrap:anywhere; /* Corta palabras largas */
+}
+
+.pedaleo-content-row{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    align-items:end;
+    gap: clamp(12px, 2vw, 20px);
+}
+
+.pedaleo-content-row p{
+    font-size: clamp(16px, 2.2vw, 24px);
+    line-height: clamp(1.5, 3.6vw, 2);
+    margin:0;
+}
+
+.pedaleo-img{
+    width: clamp(140px, 20vw, 280px);
+    max-width:100%;
+    height:auto;
+}
+
+.pedaleo-right{
+    background:#fff;
+    border:2px solid var(--c-muted);
+    border-radius: var(--radius-lg);
+    padding: clamp(16px, 3vw, 40px);
+    display:grid;
+    grid-template-rows:auto 1fr;
+    gap: clamp(12px, 2vw, 20px);
+}
+
+.pedaleo-list{
+    list-style:none; margin:0; padding:0;
+    display:grid; gap: clamp(10px, 2vw, 20px);
+}
+.pedaleo-list li{
+    position:relative; padding-left: 1.2em;
+    font-size: clamp(16px, 2.2vw, 24px);
+    line-height:1.6;
+}
+.pedaleo-list li::before{
+    content:"•"; color: var(--c-primary);
+    position:absolute; left:0;
+}
+
+/* ========== Breakpoints: degradación de layout y reglas especiales del Hero ========== */
+
+/* <1050px: ocultar ilustración/decoración, centrar el contenido */
+@media (max-width: 1050px){
+    .background_elli,
+    .hero__image{ display:none !important; }
+
+    .hero{
+        flex-direction:column;
+        align-items:center;      /* centrado horizontal */
+        justify-content:center;  /* centrado vertical */
+        text-align:center;
+        padding: clamp(5px, 8vw, 80px) 0;
+    }
+    .hero__content{
+        flex:none; max-width: 800px; width: 90%; margin: 0 auto; padding:0;
+    }
+    .hero__buttons{ justify-content:center; padding:0; }
+}
+
+/* <1024px: tarjeta de contaminación a una sola columna */
+@media (max-width: 1024px){
+    .pollution-grid{ grid-template-columns: 1fr; }
+    .pollution-right{ align-items:flex-start; }
+}
+
+/* <700px: listas de contaminación en una sola columna */
+@media (max-width: 700px){
+    .pollution-lists{ grid-template-columns: 1fr; }
+}
+
+/* <800px: las dos tarjetas pasan a una columna */
+@media (max-width: 800px){
+    .pedaleo-container{ grid-template-columns: 1fr; padding: 0; }
+    .pedaleo-content-row{ grid-template-columns: 1fr; align-items:start; }
+    .pedaleo-img{ justify-self:start; width: clamp(160px, 46vw, 260px); }
+
+}
+
+/* Preferencia de reducir movimiento */
+@media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+}
+
+
+/* ========== FUENTE & BOTONES RESPONSIVE EXTRA ========== */
+/* <900px: reducir fuentes grandes y botones */
+@media (max-width: 900px) {
+
+    /* HERO --------------------- */
+    .hero__content h1{
+        font-size: clamp(28px, 6vw, 40px);
+        margin: clamp(20px, 4vw, 30px) 0;
+    }
+
+    .hero__buttons a,
+    .btn{
+        font-size: clamp(12px, 3vw, 16px);
+        padding: 5px;
+        border-width: 1.5px;
+    }
+
+    /* MAP BUTTON ---------------- */
+    .map__btn{
+        font-size: clamp(12px, 2.6vw, 16px);
+        padding: 5px;
+    }
+
+    /* POLLUTION ----------------- */
+    .pollution-left h2{
+        font-size: clamp(22px, 5vw, 36px);
+    }
+
+    .pollution-list{
+        font-size: clamp(12px, 3vw, 18px);
+    }
+
+    .pollution-btn{
+        font-size: clamp(12px, 3vw, 16px);
+        padding: clamp(8px, 2vw, 12px) clamp(12px, 2.5vw, 18px);
+    }
+
+    /* PEDALEO ------------------- */
+    .pedaleo-title{
+        font-size: clamp(22px, 6vw, 40px);
+    }
+
+    .pedaleo-content-row p{
+        font-size: clamp(14px, 3vw, 18px);
+        line-height: 1.6;
+    }
+
+    .pedaleo-list li{
+        font-size: clamp(14px, 3vw, 18px);
+    }
+}
+
+/* <600px: aún más pequeño */
+@media (max-width: 600px){
+
+    /* HERO TITLE */
+    .hero__content h1{
+        font-size: clamp(24px, 7vw, 34px);
+    }
+
+    /* HERO BUTTONS */
+    .btn{
+        font-size: clamp(10px, 3.5vw, 14px);
+        padding: clamp(6px, 2vw, 10px) clamp(10px, 3vw, 16px);
+    }
+
+    /* Pollution dots smaller */
+    .dot{
+        width: clamp(10px, 3vw, 20px);
+        height: clamp(10px, 3vw, 20px);
+    }
+
+    /* Pedaleo image small */
+    .pedaleo-img{
+        width: clamp(100px, 30vw, 180px);
+    }
+}
+/* <500px: eliminar todos los line-height personalizados */
+@media (max-width: 500px) {
+
+    .hero__content h1,
+    .pedaleo-content-row p,
+    .pedaleo-list li,
+    .pollution-left h2,
+    .pollution-list,
+    .pollution-list li,
+    .pollution-btn,
+    .pedaleo-title {
+        line-height: normal !important;
+    }
+}
+

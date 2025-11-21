@@ -52,4 +52,6 @@
         <item name="iconTint">@color/azul_profundo</item>
         <item name="android:scaleType">center</item>
     </style>
+
+
 </resources>

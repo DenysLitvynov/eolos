@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:id="@+id/root_dashboard"
+    android:fitsSystemWindows="true">
+
+    <!-- SCROLL DEL CONTENIDO -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/menu_inferior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- LOGO -->
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:text="éolos"
+                android:fontFamily="@font/rethink_sans"
+                android:textColor="@color/azul_profundo"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <!-- TÍTULO MAPA -->
+            <TextView
+                android:id="@+id/tv_mapa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mapa"
+                android:fontFamily="@font/rethink_sans"
+                android:textColor="@color/azul_profundo"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp" />
+
+            <!-- CONTENEDOR MAPA -->
+            <FrameLayout
+                android:id="@+id/contenedor_mapa"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/drawable_map_section">
+
+                <TextView
+                    android:id="@+id/tv_placeholder_mapa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/rethink_sans"
+                    android:text="Aquí va el mapa"
+                    android:textColor="@color/azul_profundo"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <!-- CONTENEDOR NIVEL / GASES -->
+            <FrameLayout
+                android:id="@+id/contenedor_nuevo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/seccion_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_nivel_actual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rethink_sans"
+                            android:text="Nivel actual"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/icono_flecha_abajo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/negro" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- GAS 1 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_gas1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rethink_sans"
+                            android:textColor="@color/negro"
+                            android:text="Gas 1: ..."
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/dot_gas1"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:background="@drawable/circulo_rojo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- GAS 2 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_gas2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rethink_sans"
+                            android:textColor="@color/negro"
+                            android:text="Gas 2: ..."
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/dot_gas2"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:background="@drawable/circulo_amarillo"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- GAS 3 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_gas3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/negro"
+                            android:fontFamily="@font/rethink_sans"
+                            android:text="Gas 3: ..."
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/dot_gas3"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:background="@drawable/circulo_verde"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- IMPACTO POSITIVO -->
+                    <TextView
+                        android:id="@+id/tv_impacto_titulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/rethink_sans"
+                        android:text="Impacto positivo"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_impacto_texto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans"
+                        android:text="“Has contribuido con 12 rutas limpias”\no “Evitaste 0.8 kg de CO₂”\n\n“Tienes 35 puntos para canjear en Valenbisi”"
+                        android:textSize="14sp" />
+
+                    <!-- ÚLTIMO TRAYECTO -->
+                    <TextView
+                        android:id="@+id/tv_ultimo_titulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/rethink_sans"
+                        android:textColor="@color/negro"
+                        android:text="Último trayecto"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_ultimo_detalle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/rethink_sans"
+                        android:textColor="@color/negro"
+                        android:text="Distancia: 2.8 km\nTiempo: 21 min"
+                        android:textSize="14sp" />
+
+                    <!-- CALIDAD DEL AIRE -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_calidad"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/rethink_sans"
+                            android:textColor="@color/negro"
+                            android:text="Calidad del aire promedio:"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/dot_calidad"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:background="@drawable/circulo_amarillo" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <!-- CONTENEDOR AQI -->
+            <FrameLayout
+                android:id="@+id/contenedor_aqi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/seccion_2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_aqi_titulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Índice de Calidad del Aire (AQI)"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/rethink_sans"
+                        android:textColor="@android:color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_aqi_valor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/rethink_sans"
+                            android:text="100"
+                            android:textColor="@color/verde"
+                            android:textSize="32sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_aqi_estado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/rethink_sans"
+                            android:text="Bien"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_aqi_descripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="La calidad del aire es satisfactoria y la contaminación del aire presenta poco o ningún riesgo."
+                        android:textSize="14sp"
+                        android:fontFamily="@font/rethink_sans"
+                        android:textColor="@color/negro" />
+
+                    <Button
+                        android:id="@+id/btn_ver_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="16dp"
+                        android:paddingLeft="26dp"
+                        android:paddingRight="26dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:text="Ver Información"
+                        android:textSize="14sp"
+                        style="@style/BotonPrincipal"/>
+
+                </LinearLayout>
+
+            </FrameLayout>
+            <!-- ==================== TRAYECTO ACTUAL (SIN ERRORES) ==================== -->
+            <FrameLayout
+                android:id="@+id/contenedor_trayecto_actual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/seccion_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Trayecto actual"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/rethink_sans"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_distancia_actual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="0.0 m"
+                        android:textSize="64sp"
+                        android:textStyle="bold"
+                        android:fontFamily="monospace"
+                        android:textColor="@color/azul_profundo"
+                        android:gravity="center_horizontal"
+                        android:letterSpacing="0.05" />
+
+                    <TextView
+                        android:id="@+id/tv_estado_conexion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Conectado al sensor • GPS activo"
+                        android:textSize="14sp"
+                        android:textColor="#2e7d32"
+                        android:fontFamily="@font/rethink_sans"
+                        android:gravity="center_horizontal" />
+
+                    <!-- Icono opcional – usa uno que exista o bórralo -->
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/foto_ciclista"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="En movimiento" />
+
+                </LinearLayout>
+            </FrameLayout>
+            <!-- CONTENEDOR KM -->
+            <FrameLayout
+                android:id="@+id/contenedor_km"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/seccion_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- TÍTULO -->
+                    <TextView
+                        android:id="@+id/tv_km_titulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Km acumulados"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/rethink_sans"
+                        android:textColor="@android:color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp">
+
+                        <!-- el texto ocupa todo el espacio libre -->
+                        <TextView
+                            android:id="@+id/tv_km_valor"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="15 de 30 Km"
+                            android:textColor="@color/azul_profundo"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <!-- la bici queda a la derecha y de tamaño razonable -->
+                        <ImageView
+                            android:id="@+id/iv_ciclista"
+                            android:layout_width="120dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/foto_ciclista" />
+                    </LinearLayout>
+
+                    <!-- BARRA DE PROGRESO -->
+                    <ProgressBar
+                        android:id="@+id/progreso_km"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="12dp"
+                        android:progress="50"
+                        android:max="100"
+                        android:progressDrawable="@drawable/barra_progreso" />
+
+                    <!-- TEXTO DESCRIPTIVO -->
+                    <TextView
+                        android:id="@+id/tv_km_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Recorre kilómetros en nuestra app para obtener recompensas en tus compras del día a día"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/rethink_sans"
+                        android:textColor="#444444"/>
+
+                    <!-- BOTÓN ABAJO A LA DERECHA -->
+                    <Button
+                        android:id="@+id/btn_ver_recompensas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="16dp"
+                        android:paddingLeft="26dp"
+                        android:paddingRight="26dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:text="Ver Recompensas"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/rethink_sans"
+                        style="@style/BotonPrincipal"/>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- MENÚ INFERIOR FIJO -->
+    <include
+        android:id="@+id/menu_inferior"
+        layout="@layout/menu_navegacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

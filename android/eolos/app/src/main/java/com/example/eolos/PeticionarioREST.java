@@ -32,6 +32,10 @@ public class PeticionarioREST extends AsyncTask<Void, Void, Boolean> {
     private int codigoRespuesta;
     private String cuerpoRespuesta = "";
 
+    // ⭐ Nuevo: token JWT opcional (solo se usa si se llama al método con auth)
+    private String authToken = null;
+
+
     // --------------------------------------------------------------------
     // --------------------------------------------------------------------
     public PeticionarioREST() {
@@ -55,6 +59,19 @@ public class PeticionarioREST extends AsyncTask<Void, Void, Boolean> {
         this.laRespuesta = laRespuesta;
 
         this.execute(); // otro thread ejecutará doInBackground()
+    }
+
+    // --------------------------------------------------------------------
+    // ⭐ Método NUEVO (CON cabecera Authorization: Bearer <token>)
+    //    Solo lo usa la parte de Perfil. El resto de pantallas no se ven afectadas.
+    // --------------------------------------------------------------------
+    public void hacerPeticionRESTconAuth(String metodo, String urlDestino, String cuerpo, String token, RespuestaREST laRespuesta) {
+        this.elMetodo = metodo;
+        this.urlDestino = urlDestino;
+        this.elCuerpo = cuerpo;
+        this.laRespuesta = laRespuesta;
+        this.authToken = token; // guardar token para usarlo en doInBackground()
+        this.execute();
     }
 
     // --------------------------------------------------------------------
@@ -83,6 +100,12 @@ public class PeticionarioREST extends AsyncTask<Void, Void, Boolean> {
 
             // connection.setUseCaches(false);
             connection.setDoInput(true);
+
+            // ⭐ Si se proporcionó token, añadir cabecera Authorization
+            if (this.authToken != null && !this.authToken.isEmpty()) {
+                connection.setRequestProperty("Authorization", "Bearer " + this.authToken);
+            }
+
 
             if (!this.elMetodo.equals("GET") && this.elCuerpo != null) {
                 Log.d("clienterestandroid", "doInBackground(): no es get, pongo cuerpo");

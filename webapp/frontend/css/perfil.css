@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap');
+
+.background {
+    width: 70%;
+    background-image: url("../images/image_perfil.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right center;
+
+}
+
+.form-section {
+    transform: translateX(-25%);
+}
+.buttonperfil{
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 16px;
+}
+
+.buttonperfil button,
+.buttonperfil a {
+    flex: 1;
+    max-width: 160px;
+    padding: 10px 0;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+
+.btn-primary {
+    background-color: #0047A1;
+    color: white;
+    border: none;
+}
+
+.btn-segundo {
+    border: 2px solid #0047A1;
+    color: #0047A1;
+    background-color: transparent;
+}
+
+.auth-title {
+    text-align: center;
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    font-size: 0.95em;
+    color: #333;
+    transition: border-color 0.3s;
+    font-family: "Rethink Sans", sans-serif;
+}
+
+input[type="date"]:focus {
+    border-color: #0047A1;
+    box-shadow: 0 0 3px rgba(0, 71, 161, 0.4);
+}

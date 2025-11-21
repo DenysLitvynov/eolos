@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_report_incident"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    android:fitsSystemWindows="true">>
+    <!-- ⭐ 可滚动的内容区 -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_form"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/menu_inferior">
+
+        <!-- 所有内容放这里 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- LOGO -->
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/rethink_sans"
+                android:text="éolos"
+                android:textColor="@color/azul_profundo"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <!-- 标题 -->
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reportar Incidencia"
+                android:textColor="@color/azul_profundo"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <!-- Código bicicleta -->
+            <TextView
+                android:id="@+id/tv_bike_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Código de la bicicleta"
+                android:textColor="@color/negro"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/et_bike_code"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Ingrese el código"
+                android:textColor="@color/negro"
+                android:textColorHint="@color/azul_grisaceo"
+                android:background="@drawable/edittext_background"
+                android:padding="10dp"
+                android:layout_marginTop="6dp" />
+
+            <!-- Tipo incidencia -->
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo de incidencia"
+                android:textColor="@color/negro"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Grupo 1 -->
+            <LinearLayout
+                android:id="@+id/group_bike_env"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background"
+                android:padding="12dp"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bicicleta / entorno"
+                    android:textStyle="bold"
+                    android:textColor="@color/negro"
+                    android:layout_marginBottom="8dp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_bike_env"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:text="Caja dañada o abierta"
+                        android:textColor="@color/negro" />
+
+                    <RadioButton
+                        android:text="LED del sensor no enciende"
+                        android:textColor="@color/negro" />
+
+                    <RadioButton
+                        android:text="Bicicleta vandalizada"
+                        android:textColor="@color/negro" />
+
+                    <RadioButton
+                        android:text="Caja del sensor falta o esta floja"
+                        android:textColor="@color/negro" />
+
+                    <RadioButton
+                        android:text="Sensor bloquea la cesta o esta mal colocado"
+                        android:textColor="@color/negro" />
+
+                    <RadioButton
+                        android:text="Otro"
+                        android:textColor="@color/negro" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Grupo 2 -->
+            <LinearLayout
+                android:id="@+id/group_comm_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_background"
+                android:padding="12dp"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:text="Comunicación / App"
+                    android:textStyle="bold"
+                    android:textColor="@color/negro"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioGroup
+                    android:id="@+id/rg_comm_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:text="No puedo conectar con el sensor"
+                        android:textColor="@color/negro" />
+
+                    <RadioButton
+                        android:text="Error al escanear QR"
+                        android:textColor="@color/negro" />
+
+                    <RadioButton
+                        android:text="Datos no se actualizan"
+                        android:textColor="@color/negro" />
+
+                    <RadioButton
+                        android:text="Otro"
+                        android:textColor="@color/negro" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Otro texto -->
+            <EditText
+                android:id="@+id/et_other"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Otro tipo"
+                android:gravity="top|start"
+                android:background="@drawable/edittext_background"
+                android:padding="10dp"
+                android:textColor="@color/negro"
+                android:textColorHint="@color/azul_grisaceo"
+                android:layout_marginTop="12dp" />
+
+            <!-- Botones -->
+            <LinearLayout
+                android:id="@+id/button_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btn_send"
+                    android:layout_width="129dp"
+                    android:layout_height="54dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/azul_profundo"
+                    android:text="Enviar"
+                    android:textColor="@color/blanco" />
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="129dp"
+                    android:layout_height="54dp"
+                    android:backgroundTint="@color/azul_grisaceo"
+                    android:text="Cancelar"
+                    android:textColor="@color/azul_profundo" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_bottom_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="* Recibirás un correo cuando la incidencia haya sido solucionada."
+                android:textColor="@color/negro"
+                android:textSize="13sp"
+                android:layout_marginTop="10dp"
+                android:gravity="center" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <include
+        android:id="@+id/menu_inferior"
+        layout="@layout/menu_navegacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

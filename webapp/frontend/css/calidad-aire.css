@@ -1,0 +1,134 @@
+.air-quality-container {
+    width: 80%;
+    margin: 2rem auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #0D47A1;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #0D47A1;
+}
+
+.aqi-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.aqi-info {
+    max-width: 60%;
+}
+
+.aqi-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+#a qi-number {
+    font-size: 2.5rem;
+}
+
+.aqi-icon svg {
+    width: 180px;
+    height: 180px;
+}
+
+.scale-item {
+    margin-bottom: 1.8rem;
+}
+
+.scale-item strong {
+    font-size: 1.5rem;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.good {
+    background-color: #4CAF50;
+}
+
+.moderate {
+    background-color: #ffcc00;
+}
+
+.bad {
+    background-color: #e53935;
+}
+
+.range {
+    float: right;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Sección gráfica */
+
+.co2-section {
+    margin-top: 3rem;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 1.5rem auto;
+}
+
+#co2Chart {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.resumen-diario {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.resumen-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.resumen-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.resumen-valor {
+    font-size: 1.8rem;
+    font-weight: bold;
+}

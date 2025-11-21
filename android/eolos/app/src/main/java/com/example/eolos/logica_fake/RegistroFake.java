@@ -1,9 +1,10 @@
 /**
  * Fichero: RegistroFake.java
- * Descripción: Clase que envía peticiones REST para registro y realiza auto-login.
+ * Descripción: Clase que envía petición REST para iniciar registro (sin auto-login).
+ *              Solo envía el formulario y espera código de verificación.
  * @author Denys Litvynov Lymanets
- * @version 1.0
- * @since 27/10/2025
+ * @version 2.0
+ * @since 16/11/2025
  */
 
 package com.example.eolos.logica_fake;
@@ -14,17 +15,43 @@ import com.example.eolos.PeticionarioREST;
 
 import org.json.JSONObject;
 
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
+
 public class RegistroFake {
 
-    private static final String BASE_URL = "http://10.0.2.2:8000";
+    private static final String BASE_URL = "http://172.20.10.12:8000";
     private static final String ENDPOINT_REGISTRO = "/api/v1/auth/registro";
 
+    /**
+     * Callback para el registro.
+     * - onCodigoEnviado(): el backend aceptó el registro y envió el código al correo
+     * - onError(): error en validación, conexión, etc.
+     */
     public interface RegistroCallback {
-        void onSuccess(String token);
+        void onCodigoEnviado();
         void onError(String error);
     }
 
-    public void registro(String nombre, String apellido, String correo, String targetaId, String contrasena, String contrasenaRepite, RegistroCallback callback) {
+    // -------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------
+
+    /**
+     * Inicia el proceso de registro enviando todos los datos del formulario al backend.
+     *
+     * @param nombre            Nombre del usuario
+     * @param apellido          Apellido del usuario
+     * @param correo            Correo electrónico
+     * @param targetaId         ID del carnet (DNI/NIE)
+     * @param contrasena        Contraseña
+     * @param contrasenaRepite  Repetición de contraseña
+     * @param aceptaPolitica    Aceptación de política de privacidad
+     * @param callback          Callback con resultado
+     */
+    public void registro(String nombre, String apellido, String correo, String targetaId,
+                         String contrasena, String contrasenaRepite, boolean aceptaPolitica,
+                         RegistroCallback callback) {
+
         PeticionarioREST peticionario = new PeticionarioREST();
         String url = BASE_URL + ENDPOINT_REGISTRO;
 
@@ -36,36 +63,38 @@ public class RegistroFake {
             body.put("targeta_id", targetaId);
             body.put("contrasena", contrasena);
             body.put("contrasena_repite", contrasenaRepite);
+            body.put("acepta_politica", aceptaPolitica); // ← campo obligatorio
+
+            Log.d("RegistroFake", "Enviando registro: " + body.toString());
 
             peticionario.hacerPeticionREST("POST", url, body.toString(), new PeticionarioREST.RespuestaREST() {
                 @Override
                 public void callback(int codigo, String cuerpo) {
-                    if (codigo == 200) {
-                        // Registro exitoso, realizar auto-login
-                        LoginFake loginFake = new LoginFake();
-                        loginFake.login(correo, contrasena, new LoginFake.LoginCallback() {
-                            @Override
-                            public void onSuccess(String token) {
-                                callback.onSuccess(token);
-                            }
+                    Log.d("RegistroFake", "Respuesta del servidor: código=" + codigo + ", cuerpo=" + cuerpo);
 
-                            @Override
-                            public void onError(String error) {
-                                callback.onError("Error en auto-login: " + error);
-                            }
-                        });
+                    if (codigo == 200) {
+                        Log.d("RegistroFake", "ÉXITO: Código enviado → llamando onCodigoEnviado()");
+                        callback.onCodigoEnviado();
                     } else {
                         try {
                             JSONObject errorResponse = new JSONObject(cuerpo);
-                            callback.onError(errorResponse.getString("detail"));
+                            String mensaje = errorResponse.getString("detail");
+                            Log.e("RegistroFake", "Error backend: " + mensaje);
+                            callback.onError(mensaje);
                         } catch (Exception e) {
-                            callback.onError("Error: Código " + codigo);
+                            Log.e("RegistroFake", "Error parseando error", e);
+                            callback.onError("Error: " + codigo);
                         }
                     }
                 }
             });
+
         } catch (Exception e) {
-            callback.onError("Error preparando petición: " + e.getMessage());
+            Log.e("RegistroFake", "Error preparando petición", e);
+            callback.onError("Error de conexión: " + e.getMessage());
         }
     }
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------

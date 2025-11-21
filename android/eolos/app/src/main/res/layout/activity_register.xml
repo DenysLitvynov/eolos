@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Autor: Denys Litvynov
+Fecha: 16/11/25
+Descripción: Intefaz de la página de registro
+-->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -179,6 +186,18 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <CheckBox
+            android:id="@+id/acepta_politica_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="Acepto la política de privacidad y términos de uso"
+            android:textSize="14sp"
+            android:textColor="@color/azul_profundo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repeatPasswordInputLayout" />
+
         <!-- Botón Registrarse -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/registerButton"
@@ -188,8 +207,8 @@
             android:text="@string/register_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repeatPasswordInputLayout"
-            android:layout_marginTop="32dp" />
+            app:layout_constraintTop_toBottomOf="@+id/acepta_politica_checkbox"
+            android:layout_marginTop="24dp" />
 
         <!-- Línea divisoria -->
         <View

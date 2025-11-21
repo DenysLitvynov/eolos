@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    tools:context=".activities.ConnectionActivity"
+    android:fitsSystemWindows="true">
+
+    <include
+        android:id="@+id/menu_inferior"
+        layout="@layout/menu_navegacion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/BackButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="éolos"
+        android:textColor="@color/azul_profundo"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.486" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_connect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFFDFD"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:strokeColor="@color/azul_medio"
+        app:strokeWidth="@dimen/grosor_borde">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_grande">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rethink_sans"
+                android:text="Conectar el sensor"
+                android:textColor="@color/azul_profundo"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/rethink_sans"
+                android:text="Al pulsar Conectar, escanea el código QR que se encuentra en tu bicicleta. Esto iniciará automáticamente las mediciones y comenzará el registro de tu trayecto."
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_connect"
+                style="@style/BotonPrincipal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Conectar" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Card: Desconectar el sensor -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_disconnect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_connect"
+        app:strokeColor="@color/azul_grisaceo"
+        app:strokeWidth="@dimen/grosor_borde">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azul_grisaceo"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_grande">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rethink_sans"
+                android:text="Desconectar el sensor"
+                android:textColor="@color/azul_profundo"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/rethink_sans"
+                android:text="Al pulsar Desconectar, se detendrá automáticamente el registro de tu trayecto y las mediciones, sin necesidad de escanear nada."
+                android:textColor="@color/negro"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_disconnect"
+                style="@style/BotonSecundario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Desconectar" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
