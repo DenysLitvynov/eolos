@@ -34,15 +34,15 @@ class LogicaIncidencias:
             raise ValueError("Usuario no encontrado")
         return usuario
 
-    def _obtener_bicicleta_por_short(self, db: Session, short_code: str) -> Bicicleta:
+    def _obtener_bicicleta_por_id(self, db: Session, bicicleta_id: str) -> Bicicleta:
         """
-        Busca una bicicleta usando su short_code (VLC001, VLC045, etc.).
-        Lanza ValueError si no existe ninguna bicicleta con ese código.
+        Busca una bicicleta usando su bicicleta_id (VLC001, VLC045, etc.).
+        Lanza ValueError si no existe ninguna bicicleta con ese ID.
         """
-        short_code = str(short_code).strip()
-        bici = db.query(Bicicleta).filter(Bicicleta.short_code == short_code).first()
-       	if not bici:
-            raise ValueError(f"Bicicleta no encontrada para el código: {short_code}")
+        bicicleta_id = str(bicicleta_id).strip()
+        bici = db.query(Bicicleta).filter(Bicicleta.bicicleta_id == bicicleta_id).first()
+        if not bici:
+            raise ValueError(f"Bicicleta no encontrada para el ID: {bicicleta_id}")
         return bici
 
     # -------- API pública --------
@@ -51,7 +51,7 @@ class LogicaIncidencias:
         db: Session,
         *,
         usuario_id: str,
-        short_code: str,
+        bicicleta_id: str,  # Cambiado de short_code a bicicleta_id
         descripcion: str,
         fuente_str: str,
     ) -> Incidencia:
@@ -60,7 +60,7 @@ class LogicaIncidencias:
 
         Parámetros:
           - usuario_id: viene del JWT (el backend lo resuelve a partir del token)
-          - short_code: código corto de la bici (VLC001, VLC045…)
+          - bicicleta_id: ID de la bici (VLC001, VLC045…)
           - descripcion: texto descriptivo del problema
           - fuente_str: "admin", "app" o "web", según desde dónde se reporta
         """
@@ -80,7 +80,7 @@ class LogicaIncidencias:
 
         # Verificar que el usuario y la bicicleta existan
         usuario = self._obtener_usuario(db, usuario_id)
-        bici = self._obtener_bicicleta_por_short(db, short_code)
+        bici = self._obtener_bicicleta_por_id(db, bicicleta_id)  # Cambiado el método
 
         # Crear instancia de Incidencia
         incidencia = Incidencia(

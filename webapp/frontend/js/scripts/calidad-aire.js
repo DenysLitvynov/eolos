@@ -27,7 +27,7 @@ const svgBad = `
 // -------------------------------
 
 // Obtener placa_id del localStorage (guardado en login)
-const placa_id = localStorage.getItem('placa_id') || "8fb5ef4c-f552-4cad-9c58-6f0e80a97b53";
+const placa_id = localStorage.getItem('placa_id') || "45505347-2D47-5449-2D50-524F592D3341";
 
 const numberEl = document.getElementById("aqi-number");
 const textEl = document.getElementById("aqi-text");

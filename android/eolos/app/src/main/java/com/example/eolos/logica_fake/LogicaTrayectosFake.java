@@ -25,7 +25,7 @@ import java.util.TimeZone;
 public class LogicaTrayectosFake {
 
     private static final String TAG = "LogicaTrayectosFake";
-    private static final String BASE_URL = "http://192.168.1.133:8000";
+    private static final String BASE_URL = "http://172.20.10.12:8000";
     private final Context context;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final LocationManager locationManager;

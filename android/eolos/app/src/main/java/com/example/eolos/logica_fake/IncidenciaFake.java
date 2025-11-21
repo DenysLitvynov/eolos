@@ -13,7 +13,7 @@ public class IncidenciaFake {
 
     private static final String TAG = "IncidenciaFake";
 
-    private static final String BASE_URL = "http://192.168.1.133:8000";
+    private static final String BASE_URL = "http://172.20.10.12:8000";
     private static final String ENDPOINT_INCIDENCIAS = "/api/v1/incidencias";
 
     // Callback para devolver el resultado de la petición
@@ -30,7 +30,7 @@ public class IncidenciaFake {
     /**
      * Crea una incidencia usando JWT:
      *  - el usuario_id lo obtiene el backend a partir del token
-     *  - enviamos short_code (VLC001...), descripcion y fuente ("admin"/"app")
+     *  - enviamos bicicleta_id (VLC001...), descripcion y fuente ("admin"/"app")
      */
     public void crearIncidencia(String bikeCode, String descripcion, String fuente, Callback cb) {
 
@@ -48,7 +48,7 @@ public class IncidenciaFake {
         // Construimos el objeto JSON que enviaremos en el cuerpo de la petición
         JSONObject json = new JSONObject();
         try {
-            json.put("short_code", bikeCode);               // Código de la bicicleta (VLC001 / VLC045)
+            json.put("bicicleta_id", bikeCode);             // Código de la bicicleta (VLC001 / VLC045)
             json.put("descripcion", descripcion);           // Descripción generada en la Activity
             json.put("fuente", fuente.toLowerCase());       // Origen: "admin" o "app"
         } catch (JSONException e) {
