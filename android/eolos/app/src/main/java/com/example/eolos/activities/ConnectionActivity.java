@@ -124,7 +124,7 @@ public class ConnectionActivity extends AppCompatActivity {
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText("Bicicleta: " + bikeId + " conectada\n" +
                                 "UUID: " + uuid + "\n" +
-                                "Escaneando beacons y monitoreando GPS"))
+                                "Escaneando el sensor y monitoreando GPS"))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .addAction(R.drawable.foto_ciclista, "Desconectar", disconnectPendingIntent)
