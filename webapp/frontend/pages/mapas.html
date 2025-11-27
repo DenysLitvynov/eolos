@@ -1,101 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mapas</title>
-    <link rel="stylesheet" href="../css/header.css">
-</head>
-<body>
-<header class="header" data-breakpoint="1050">
-        <div class="logo">
-            <img src="../images/logo.png" alt="logo" />
-        </div>
+<html lang="es">
 
-        <!-- Botón hamburger -->
-        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
-            <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span class="menu-toggle__label">Menú</span>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapas</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/generales.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/mapa.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <header class="header" data-breakpoint="1050">
+    <div class="logo">
+      <img src="../images/logo.png" alt="logo">
+    </div>
+
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false">
+      <svg class="menu-toggle__icon" viewBox="0 0 24 24">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      </svg>
     </button>
 
-    <!-- Menú de navegación -->
     <nav class="nav" id="site-nav">
-        <a href="../index.html">Inicio</a>
-        <a href="mapas.html">Mapas</a>
-        <a href="sobre-nosotros.html">Sobre Nosotros</a>
-        <a href="FAQ.html">Faq</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="login.html" class="login">Inicia Sesión</a>
-        <a href="registro.html" class="login">Registrarse</a>
+      <a href="../index.html">Inicio</a>
+      <a href="mapas.html">Mapas</a>
+      <a href="sobre-nosotros.html">Sobre Nosotros</a>
+      <a href="FAQ.html">Faq</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="login.html" class="login">Inicia Sesión</a>
+      <a href="registro.html" class="login">Registrarse</a>
     </nav>
-</header>
+  </header>
 
-<footer class="ft">
+  <div class="map-container">
+    <aside class="sidebar">
+      <h2>Filtros</h2>
+
+      <div class="filter-section">
+        <h3>Capas</h3>
+        <label><input type="checkbox" id="layer-bikes" checked>Bicicletas</label>
+        <label><input type="checkbox" id="layer-pollution" checked>Contaminación</label>
+      </div>
+
+      <div class="filter-section">
+        <h3>Tipo de gas</h3>
+        <div class="select-wrapper">
+          <select id="gas-select">
+            <option value="pm25">PM 2.5</option>
+            <option value="pm10">PM 10</option>
+            <option value="no2">NO2</option>
+            <option value="o3">O3</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Calidad del aire (AQI)</h3>
+        <div class="legend-item"><span class="dot good"></span>Buena</div>
+        <div class="legend-item"><span class="dot moderate"></span>Moderada</div>
+        <div class="legend-item"><span class="dot unhealthy"></span>Mala</div>
+      </div>
+    </aside>
+
+    <button id="toggle-sidebar">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <div id="map"></div>
+  </div>
+
+  <section class="pollution-info">
+    <h2>Niveles de Calidad del Aire</h2>
+
+    <div class="pollution-cards">
+      <div class="pollution-card good">
+        <h3>Buena</h3>
+        <span class="range">AQI 0 - 50</span>
+        <p>La calidad del aire es satisfactoria.</p>
+      </div>
+
+      <div class="pollution-card moderate">
+        <h3>Moderada</h3>
+        <span class="range">AQI 51 - 100</span>
+        <p>La calidad del aire es aceptable.</p>
+      </div>
+
+      <div class="pollution-card bad">
+        <h3>Mala</h3>
+        <span class="range">AQI > 100</span>
+        <p>Pueden aparecer efectos negativos en grupos sensibles.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="ft">
     <div class="ft__wrap ft--two-cols">
-        <div class="ft__brand">
-      <span class="ft__logo">
-        <img src="../images/logo_footer.png" alt="logo" />
-      </span>
-            <address class="ft__addr">
-                <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
-                <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
-                <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
-            </address>
-        </div>
+      <div class="ft__brand">
+        <span class="ft__logo">
+          <img src="../images/logo_footer.png" alt="logo">
+        </span>
+        <address class="ft__addr">
+          Calle Juanba Peris, Nº 11, Gandia, España<br>
+          <a href="tel:+34345464356">(434) 546-4356</a><br>
+          <a href="mailto:contact@eolos.com">contact@eolos.com</a>
+        </address>
+      </div>
 
-        <div class="ft__links">
-            <nav class="ft__col">
-                <a href="../index.html">Inicio</a>
-                <a href="mapas.html">Mapas</a>
-                <a href="sobre-nosotros.html">Sobre nosotros</a>
-            </nav>
+      <div class="ft__links">
+        <nav class="ft__col">
+          <a href="../index.html">Inicio</a>
+          <a href="mapas.html">Mapas</a>
+          <a href="sobre-nosotros.html">Sobre nosotros</a>
+        </nav>
 
-            <nav class="ft__col">
-                <a href="contacto.html">Contacto</a>
-                <a href="login.html">Iniciar sesión</a>
-            </nav>
+        <nav class="ft__col">
+          <a href="contacto.html">Contacto</a>
+          <a href="login.html">Iniciar sesión</a>
+        </nav>
 
-            <nav class="ft__col">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
-            </nav>
-        </div>
+        <nav class="ft__col">
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+        </nav>
+      </div>
     </div>
 
     <div class="ft__copy">
-        Copyright ©éolos. Todos los derechos reservados.
+      Copyright © eolos.
     </div>
-</footer>
+  </footer>
 
-<script>
-    (function(){
-        const header = document.querySelector('.header');
-        const nav = header.querySelector('.nav');
-        const btn = header.querySelector('.menu-toggle');
-
-        function closeMenu(){
-            btn.setAttribute('aria-expanded', 'false');
-            nav.classList.remove('is-open');
-        }
-
-        function openMenu(){
-            btn.setAttribute('aria-expanded', 'true');
-            nav.classList.add('is-open');
-        }
-
-        btn.addEventListener('click', () => {
-            const expanded = btn.getAttribute('aria-expanded') === 'true';
-            expanded ? closeMenu() : openMenu();
-        });
-
-
-        window.addEventListener('resize', () => {
-            if(window.innerWidth > 1050) closeMenu();
-        });
-    })();
-</script>
+  <script src="../js/mapa.js"></script>
 </body>
+
 </html>
