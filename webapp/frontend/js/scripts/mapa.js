@@ -22,24 +22,25 @@ document.addEventListener('DOMContentLoaded', () => {
         dateFilter.addEventListener('change', (e) => {
             const selectedDate = e.target.value;
             console.log(`Fecha seleccionada: ${selectedDate}`);
-            // Aquí iría la lógica para filtrar los datos del mapa según la fecha
+            updateMapFilters();
         });
     }
 
-    // Time Filter Listener
-    const timeFilter = document.getElementById('time-filter');
-    if (timeFilter) {
-        // Set default to current time
-        const now = new Date();
-        const currentTime = now.toTimeString().slice(0, 5); // Format HH:MM
-        timeFilter.value = currentTime;
-
-        timeFilter.addEventListener('change', (e) => {
-            const selectedTime = e.target.value;
-            console.log(`Hora seleccionada: ${selectedTime}`);
-            // Aquí iría la lógica para filtrar los datos del mapa según la hora
-        });
+    // Function stubs for map interactions
+    function loadMapData() {
+        console.log('Loading map data...');
     }
+
+    function updateMapFilters() {
+        console.log('Updating map filters...');
+    }
+
+    function handleLayerToggle(layerId, isVisible) {
+        console.log(`Toggling layer ${layerId}: ${isVisible}`);
+    }
+
+    // Initial data load
+    loadMapData();
 
     // Sidebar Toggle (Mobile)
     const sidebar = document.querySelector('.sidebar');
@@ -50,4 +51,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+});
+
+
+
+const header = document.querySelector('.header');
+const nav = header.querySelector('.nav');
+const btn = header.querySelector('.menu-toggle');
+
+function closeMenu() {
+    btn.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('is-open');
+}
+
+function openMenu() {
+    btn.setAttribute('aria-expanded', 'true');
+    nav.classList.add('is-open');
+}
+
+btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    expanded ? closeMenu() : openMenu();
+});
+
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1050) closeMenu();
 });
