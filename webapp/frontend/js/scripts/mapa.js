@@ -32,7 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateMapFilters() {
-        console.log('Updating map filters...');
+        const gasSelect = document.getElementById('gas-select');
+        const selectedGas = gasSelect ? gasSelect.value : 'general';
+        console.log(`Updating map filters... Selected gas: ${selectedGas}`);
+
+        // Here you would add logic to switch map layers based on selectedGas
+        // For 'general', you might show a composite index layer
     }
 
     function handleLayerToggle(layerId, isVisible) {

@@ -51,6 +51,7 @@
         <h3>Tipo de gas</h3>
         <div class="select-wrapper">
           <select id="gas-select">
+            <option value="general">Calidad General</option>
             <option value="pm25">PM 2.5</option>
             <option value="pm10">PM 10</option>
             <option value="no2">NO2</option>
@@ -74,6 +75,21 @@
     </button>
 
     <div id="map"></div>
+
+    <div class="map-legend">
+      <div class="legend-item">
+        <span class="dot good"></span>
+        <span>Buena</span>
+      </div>
+      <div class="legend-item">
+        <span class="dot moderate"></span>
+        <span>Moderada</span>
+      </div>
+      <div class="legend-item">
+        <span class="dot unhealthy"></span>
+        <span>Mala</span>
+      </div>
+    </div>
   </div>
 
   <section class="pollution-info">
