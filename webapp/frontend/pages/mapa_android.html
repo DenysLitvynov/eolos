@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapas</title>
+
+  <link rel="stylesheet" href="../css/generales.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/mapa.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <div class="map-container">
+    <aside class="sidebar">
+      <h2>Filtros</h2>
+
+      <div class="filter-section">
+        <h3>Capas</h3>
+        <label><input type="checkbox" id="layer-bikes" checked>Bicicletas</label>
+        <label><input type="checkbox" id="layer-pollution" checked>Contaminación</label>
+      </div>
+
+      <div class="filter-section">
+        <h3>Tipo de gas</h3>
+        <div class="select-wrapper">
+          <select id="gas-select">
+            <option value="general">Calidad General</option>
+            <option value="pm25">PM 2.5</option>
+            <option value="pm10">PM 10</option>
+            <option value="no2">NO2</option>
+            <option value="o3">O3</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <h3>Fecha</h3>
+        <input type="date" id="date-filter" class="date-input">
+      </div>
+
+
+    </aside>
+
+    <button id="toggle-sidebar">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <div id="map"></div>
+
+    <div class="map-legend">
+      <div class="legend-item">
+        <span class="dot good"></span>
+        <span>Buena</span>
+      </div>
+      <div class="legend-item">
+        <span class="dot moderate"></span>
+        <span>Moderada</span>
+      </div>
+      <div class="legend-item">
+        <span class="dot unhealthy"></span>
+        <span>Mala</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="pollution-info">
+    <h2>Niveles de Calidad del Aire</h2>
+
+    <div class="pollution-cards">
+      <div class="pollution-card good">
+        <h3>Buena</h3>
+        <span class="range">AQI 0 - 50</span>
+        <p>La calidad del aire es satisfactoria.</p>
+      </div>
+
+      <div class="pollution-card moderate">
+        <h3>Moderada</h3>
+        <span class="range">AQI 51 - 100</span>
+        <p>La calidad del aire es aceptable.</p>
+      </div>
+
+      <div class="pollution-card bad">
+        <h3>Mala</h3>
+        <span class="range">AQI > 100</span>
+        <p>Pueden aparecer efectos negativos en grupos sensibles.</p>
+      </div>
+    </div>
+  </section>
+  <script src="../js/scripts/mapa.js"></script>
+</body>
+
+</html>
