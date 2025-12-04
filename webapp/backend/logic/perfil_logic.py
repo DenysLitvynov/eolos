@@ -1,29 +1,43 @@
 """
 Autor: JINWEI
 Fecha: 5-11-2025
-Descripción: Lógica de negocio del perfil de usuario (tabla 'usuarios').
+Descripción: Lógica de negocio segura del perfil de usuario.
 """
 
 from typing import Optional
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
+import re
 
 from ..db.models import Usuario
 
-# Contexto usado para encriptar contraseñas mediante bcrypt
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class LogicaPerfil:
     def obtener_perfil(self, db: Session, usuario_id: str) -> Usuario:
-        """
-        Obtiene el perfil de un usuario por su ID.
-        Lanza ValueError si el usuario no existe.
-        """
-        usuario = db.query(Usuario).filter(Usuario.usuario_id == str(usuario_id)).first()
+        usuario = (
+            db.query(Usuario)
+            .filter(Usuario.usuario_id == str(usuario_id))
+            .first()
+        )
         if not usuario:
             raise ValueError("Usuario no encontrado")
         return usuario
+
+    def _password_valida(self, password: str) -> bool:
+        """
+        Reglas iguales al registro:
+            - Mínimo 8 caracteres
+            - Mayúsculas
+            - Minúsculas
+            - Números
+            - Símbolos especiales
+        """
+        patron = re.compile(
+            r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
+        )
+        return bool(patron.match(password))
 
     def actualizar_perfil(
         self,
@@ -34,53 +48,58 @@ class LogicaPerfil:
         apellido: Optional[str] = None,
         correo: Optional[str] = None,
         targeta_id: Optional[str] = None,
-        contrasena: Optional[str] = None,
+        contrasena_actual: Optional[str] = None,
+        contrasena_nueva: Optional[str] = None,
     ) -> Usuario:
-        """
-        Actualiza la información del perfil de un usuario.
-
-        Campos que se pueden modificar:
-          - nombre, apellido, correo, targeta_id, contrasena.
-        """
         usuario = self.obtener_perfil(db, usuario_id)
 
-        # Normalización de cadenas para evitar espacios y errores comunes
-        if nombre is not None:
-            nombre = nombre.strip()
-        if apellido is not None:
-            apellido = apellido.strip()
+        # ====== 1) Validar contraseña actual (obligatoria para cualquier cambio)
+        if not contrasena_actual:
+            raise ValueError("Debes introducir tu contraseña actual")
+
+        if not pwd_context.verify(contrasena_actual, usuario.contrasena_hash):
+            raise ValueError("La contraseña actual no es correcta")
+
+        # ====== 2) Validación de correo único
         if correo is not None:
-            correo = correo.strip().lower()   # Es habitual almacenar correos en minúsculas
-        if targeta_id is not None:
-            targeta_id = targeta_id.strip()
+            correo = correo.strip().lower()
+            if correo != usuario.correo:
+                existe = (
+                    db.query(Usuario)
+                    .filter(Usuario.correo == correo)
+                    .first()
+                )
+                if existe:
+                    raise ValueError(
+                        "El correo ya está en uso por otro usuario"
+                    )
+                usuario.correo = correo
 
-        # Validar que el correo nuevo no esté siendo usado por otro usuario
-        if correo is not None and correo != usuario.correo:
-            existe = db.query(Usuario).filter(Usuario.correo == correo).first()
-            if existe:
-                raise ValueError("El correo ya está en uso por otro usuario")
-            usuario.correo = correo
-
-        # Actualizar atributos básicos
+        # ====== 3) Actualizar campos simples
         if nombre is not None:
-            usuario.nombre = nombre
+            usuario.nombre = nombre.strip()
 
-        # Campo opcional 'apellido': lo mantienes por compatibilidad con el frontend
         if apellido is not None:
-            usuario.apellido = apellido
+            usuario.apellido = apellido.strip()
 
-        # targeta_id: convertir "" o "null" en valor NULL en la BD
+        # targeta_id: "" → None
         if targeta_id is not None:
-            if targeta_id == "" or targeta_id.lower() == "null":
-                usuario.targeta_id = None
-            else:
-                usuario.targeta_id = targeta_id  # El validador Pydantic controla longitud máx.
+            targeta_id = str(targeta_id).strip()
+            usuario.targeta_id = (
+                None if targeta_id == "" or targeta_id.lower() == "null" else targeta_id
+            )
 
-        # Actualizar contraseña solo si se proporciona
-        if contrasena:
-            usuario.contrasena_hash = pwd_context.hash(contrasena)
 
-        db.add(usuario)
+        # ====== 5) Si hay contraseña nueva → validar reglas & actualizar hash
+        if contrasena_nueva:
+            if not self._password_valida(contrasena_nueva):
+                raise ValueError(
+                    "La nueva contraseña no cumple los requisitos: mínimo 8 caracteres, "
+                    "incluyendo mayúsculas, minúsculas, números y símbolos (@$!%*?&)"
+                )
+
+            usuario.contrasena_hash = pwd_context.hash(contrasena_nueva)
+
         db.commit()
         db.refresh(usuario)
         return usuario

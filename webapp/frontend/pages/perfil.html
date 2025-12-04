@@ -49,26 +49,78 @@
         <h1 class="auth-title">Perfil</h1>
 
         <form id="registroForm" novalidate>
+            <!-- NOMBRE -->
             <label for="nombre" class="input-label">Nombre y apellido</label>
             <input type="text" id="nombre" placeholder="Nombre Apellido" autocomplete="name" required />
+            <span class="help-text">Campo obligatorio</span>
+            <span class="error-message" id="nombreError"></span>
 
+            <!-- CORREO -->
             <label for="correo" class="input-label">Correo o número de teléfono</label>
             <input type="text" id="correo" placeholder="juanba@gmail.com" autocomplete="email" inputmode="email" required />
+            <span class="help-text">Debe ser un correo o número de teléfono válido</span>
+            <span class="error-message" id="correoError"></span>
 
+            <!-- TARJETA -->
             <label for="targeta_id" class="input-label">ID Tarjeta</label>
             <input type="text" id="targeta_id" placeholder="12345HDC" autocomplete="off" required />
+            <span class="help-text">Formato según tu tarjeta de usuario</span>
+            <span class="error-message" id="targeta_idError"></span>
 
-            <label for="contrasena" class="input-label">Contraseña (solo si deseas cambiarla)</label>
-            <input type="text" id="contrasena" placeholder="••••••••" autocomplete="new-password" />
+            <!-- CONTRASEÑA ACTUAL -->
+            <label for="contrasena_actual" class="input-label">Contraseña actual</label>
+            <div class="password-wrapper">
+                <input
+                        type="password"
+                        id="contrasena_actual"
+                        placeholder="Introduce tu contraseña actual"
+                        autocomplete="current-password"
+                        required
+                />
+                <button type="button" class="toggle-password">Mostrar</button>
+            </div>
+            <span class="help-text">Necesaria para confirmar los cambios de tu perfil</span>
+            <span class="error-message" id="contrasena_actualError"></span>
 
-            <label for="fecha" class="input-label">Fecha</label>
-            <input type="text" id="fecha" name="fecha" placeholder="YYYY-MM-DD" required />
+            <!-- NUEVA CONTRASEÑA -->
+            <label for="nueva_contrasena" class="input-label">Nueva contraseña</label>
+            <div class="password-wrapper">
+                <input
+                        type="password"
+                        id="nueva_contrasena"
+                        placeholder="Nueva contraseña"
+                        autocomplete="new-password"
+                />
+                <button type="button" class="toggle-password">Mostrar</button>
+            </div>
+            <span class="help-text">
+                Mínimo 8 caracteres, debe incluir: mayúsculas, minúsculas, números y símbolos (@$!%*?&)
+            </span>
+            <span class="error-message" id="nueva_contrasenaError"></span>
+
+            <!-- REPITE NUEVA CONTRASEÑA -->
+            <label for="repetir_contrasena" class="input-label">Repite la nueva contraseña</label>
+            <div class="password-wrapper">
+                <input
+                        type="password"
+                        id="repetir_contrasena"
+                        placeholder="Repite la nueva contraseña"
+                        autocomplete="new-password"
+                />
+                <button type="button" class="toggle-password">Mostrar</button>
+            </div>
+            <span class="help-text">Debe coincidir con la nueva contraseña</span>
+            <span class="error-message" id="repetir_contrasenaError"></span>
+
 
             <div class="buttonperfil" style="display: flex; gap: 12px; margin-top: 8px;">
                 <button type="button" class="btn-primary">Guardar</button>
                 <button type="button" class="btn-segundo">Volver a principio</button>
             </div>
         </form>
+
+        <!-- Mensaje general para feedback (opcional, como en registro) -->
+        <div id="mensajePerfil" class="display-box"></div>
     </div>
 </div>
 
