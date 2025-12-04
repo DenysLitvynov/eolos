@@ -11,6 +11,124 @@
 import { Popup } from '../utilidades/class_popup.js';
 
 
+// Datos simulados para la prueba
+const datosIncidenciasSimulados = [
+    {
+        titulo: "Error al Escanear QR",
+        tiempo: "5min",
+        fuente: "Web",
+        esResuelto: false // NO RESUELTO (Rojo)
+    },
+    {
+        titulo: "Dispositivo Desconectado",
+        tiempo: "15min",
+        fuente: "App Móvil",
+        esResuelto: false // NO RESUELTO (Rojo)
+    },
+    {
+        titulo: "Fallo de Servidor API",
+        tiempo: "40min",
+        fuente: "Sistema",
+        esResuelto: true // RESUELTO (Verde)
+    },
+    {
+        titulo: "Reporte de Impresora Lenta",
+        tiempo: "1h 30min",
+        fuente: "Web",
+        esResuelto: false // NO RESUELTO (Rojo)
+    },
+    {
+        titulo: "Actualización de Datos Fallida",
+        tiempo: "2h",
+        fuente: "App Móvil",
+        esResuelto: true // RESUELTO (Verde)
+    }
+];
+
+/*========================================================================
+  FUNCIONAMIENTO TARJETAS
+ ========================================================================*/
+/**
+ * Crea el elemento DOM completo para una tarjeta de incidencia.
+ * @param {object} datos - Objeto con los datos de la incidencia.
+ * @param {string} datos.titulo - El título de la incidencia.
+ * @param {string} datos.tiempo - El tiempo transcurrido (e.g., "Hace: 5min").
+ * @param {string} datos.fuente - La fuente de la incidencia (e.g., "Web").
+ * @param {boolean} datos.esResuelto - True si la incidencia está resuelta.
+ * @returns {HTMLElement} El elemento div.tarjeta-incidencia creado.
+ */
+function crearTarjetaIncidencia(datos) {
+    // Determinar clases y textos basados en el estado
+    const estadoClase = datos.esResuelto ? 'estado-resuelto' : 'estado-noresuelto';
+    const estadoTexto = datos.esResuelto ? 'RESUELTO' : 'NO RESUELTO';
+
+    // 1. Elemento principal: <div class="tarjeta-incidencia">
+    const tarjeta = document.createElement('div');
+    tarjeta.classList.add('tarjeta-incidencia');
+
+    // 2. Encabezado de estado: <div class="encabezado-estado ...">
+    const encabezadoEstado = document.createElement('div');
+    encabezadoEstado.classList.add('encabezado-estado', estadoClase);
+
+    // 3. Píldora de estado: <span class="pildora-estado">
+    const pildoraEstado = document.createElement('span');
+    pildoraEstado.classList.add('pildora-estado');
+    pildoraEstado.textContent = estadoTexto;
+    encabezadoEstado.appendChild(pildoraEstado);
+    tarjeta.appendChild(encabezadoEstado);
+
+    // 4. Contenido de la tarjeta: <div class="contenido-tarjeta">
+    const contenidoTarjeta = document.createElement('div');
+    contenidoTarjeta.classList.add('contenido-tarjeta');
+
+    // 5. Título: <h2 class="titulo-incidencia">
+    const titulo = document.createElement('h2');
+    titulo.classList.add('titulo-incidencia');
+    titulo.textContent = datos.titulo;
+    contenidoTarjeta.appendChild(titulo);
+
+    // 6. Detalles: Tiempo y Fuente
+    const tiempo = document.createElement('p');
+    tiempo.classList.add('detalle-incidencia', 'tiempo');
+    // Asegurarse de que el texto de tiempo se pase con el prefijo "Hace:"
+    tiempo.textContent = datos.tiempo.startsWith('Hace:') ? datos.tiempo : `Hace: ${datos.tiempo}`; 
+    contenidoTarjeta.appendChild(tiempo);
+
+    const fuente = document.createElement('p');
+    fuente.classList.add('detalle-incidencia', 'fuente');
+    fuente.textContent = datos.fuente;
+    contenidoTarjeta.appendChild(fuente);
+    
+    // Añadir contenido al contenedor principal
+    tarjeta.appendChild(contenidoTarjeta);
+
+    // Devolver la tarjeta completa
+    return tarjeta;
+}
+
+/**
+ * Inserta múltiples tarjetas de incidencia en el contenedor 'grid-incidencias'.
+ * @param {Array<object>} incidencias - Array de objetos de datos de incidencia.
+ */
+function insertarIncidencias(incidencias) {
+    // Usamos el ID de contenedor proporcionado: 'grid-incidencias'
+    const contenedor = document.getElementById('grid-incidencias'); 
+    
+    if (!contenedor) {
+        console.error("Error: No se encontró el contenedor con ID 'grid-incidencias'.");
+        return;
+    }
+
+    incidencias.forEach(incidencia => {
+        const tarjeta = crearTarjetaIncidencia(incidencia);
+        contenedor.appendChild(tarjeta);
+    });
+}
+
+
+/*========================================================================
+  FUNCIONAMIENTO POP-UPS
+ ========================================================================*
 
 //Función para extraer los datos de la tarjeta DOM ---
 /**
@@ -126,4 +244,10 @@ function configurarEventosIncidencias() {
 }
 
 // Inicializar la aplicación cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', configurarEventosIncidencias);
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Insertar las tarjetas en 'grid-incidencias'
+    insertarIncidencias(datosIncidenciasSimulados);
+    
+    // 2. Configurar los eventos de clic para los popups
+    configurarEventosIncidencias();
+});
