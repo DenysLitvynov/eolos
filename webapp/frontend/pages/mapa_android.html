@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mapas</title>
 
-  <link rel="stylesheet" href="../css/generales.css">
-  <link rel="stylesheet" href="../css/header.css">
-  <link rel="stylesheet" href="../css/mapa.css">
+  <link rel="stylesheet" href="/css/generales.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/mapa.css">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <script src="/js/lib/leaflet.heat.js"></script>
 </head>
 
 <body>
@@ -41,6 +43,12 @@
       <div class="filter-section">
         <h3>Fecha</h3>
         <input type="date" id="date-filter" class="date-input">
+      </div>
+
+      <div class="filter-section">
+        <h3>Hora</h3>
+        <input type="range" id="hour-slider" min="0" max="23" value="12" step="1">
+        <span id="hour-display">12:00</span>
       </div>
 
 
@@ -93,7 +101,7 @@
       </div>
     </div>
   </section>
-  <script src="../js/scripts/mapa.js"></script>
+  <script src="/js/scripts/mapa.js" type="module"></script>
 </body>
 
 </html>
