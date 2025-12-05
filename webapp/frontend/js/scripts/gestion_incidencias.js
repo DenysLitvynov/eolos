@@ -9,41 +9,7 @@
 
 //clase pop up que nos permite hacer pop ups dinamicos
 import { Popup } from '../utilidades/class_popup.js';
-
-
-// Datos simulados para la prueba
-const datosIncidenciasSimulados = [
-    {
-        titulo: "Error al Escanear QR",
-        tiempo: "5min",
-        fuente: "Web",
-        esResuelto: false // NO RESUELTO (Rojo)
-    },
-    {
-        titulo: "Dispositivo Desconectado",
-        tiempo: "15min",
-        fuente: "App Móvil",
-        esResuelto: false // NO RESUELTO (Rojo)
-    },
-    {
-        titulo: "Fallo de Servidor API",
-        tiempo: "40min",
-        fuente: "Sistema",
-        esResuelto: true // RESUELTO (Verde)
-    },
-    {
-        titulo: "Reporte de Impresora Lenta",
-        tiempo: "1h 30min",
-        fuente: "Web",
-        esResuelto: false // NO RESUELTO (Rojo)
-    },
-    {
-        titulo: "Actualización de Datos Fallida",
-        tiempo: "2h",
-        fuente: "App Móvil",
-        esResuelto: true // RESUELTO (Verde)
-    }
-];
+import { GestionIncidenciasFake } from '../logica_fake/gestion_incidencias_fake.js';
 
 /*========================================================================
   FUNCIONAMIENTO TARJETAS
@@ -245,9 +211,20 @@ function configurarEventosIncidencias() {
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Insertar las tarjetas en 'grid-incidencias'
-    insertarIncidencias(datosIncidenciasSimulados);
-    
-    // 2. Configurar los eventos de clic para los popups
-    configurarEventosIncidencias();
+    const gestionFake = new GestionIncidenciasFake();
+
+    // 1. Intentar cargar incidencias reales desde la API
+    gestionFake.obtenerMisIncidencias()
+        .then(incidencias => {
+            // El backend devuelve objetos con { titulo, tiempo, fuente, esResuelto }
+            insertarIncidencias(incidencias);
+            // Configurar eventos después de añadir las tarjetas
+            configurarEventosIncidencias();
+        })
+        .catch(err => {
+            console.error('No se pudieron obtener incidencias desde la API:', err);
+            // En caso de fallo, mantener comportamiento sin datos
+            insertarIncidencias([]);
+            configurarEventosIncidencias();
+        });
 });
