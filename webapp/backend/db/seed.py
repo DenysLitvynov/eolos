@@ -1,10 +1,4 @@
-"""
-Autor: Denys Litvynov Lymanets
-Fecha: 15-11-2025
-Descripción: Script para poblar todas las tablas de la base de datos con unos pocos datos de prueba.  
-"""
-
-# ---------------------------------------------------------
+# File: backend/db/seed.py (MODIFICADO)
 import os
 import sys
 from pathlib import Path
@@ -14,75 +8,57 @@ sys.path.insert(0, str(backend_path))
 
 from db.database import SessionLocal, Base, engine
 from db.models import (
-    Rol, Usuario, Mibisivalencia, Estacion, Bicicleta, 
+    Rol, Usuario, Mibisivalencia, Estacion, Bicicleta,
     PlacaSensores, Trayecto, Medida, Incidencia,
-    TipoMedidaEnum, EstadoBicicleta, EstadoIncidencia, FuenteReporte
+    TipoMedidaEnum, EstadoBicicleta, EstadoIncidencia, FuenteReporte,
+    Recompensa, RecompensaUsuario, RecompensaObtenida,
+    Interpolada, CalidadGeneral
 )
 from passlib.context import CryptContext
 import uuid
 from datetime import datetime, timezone, timedelta
 import random
 
-# ---------------------------------------------------------
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# Generador de DNI válidos (8 números + letra correcta)
 def generar_dni_valido(numero: int) -> str:
     letras = "TRWAGMYFPDXBNJZSQVHLCKE"
     letra = letras[numero % 23]
     return f"{numero:08d}{letra}"
 
-# 10 carnets reales para pruebas
-CARNES_DNI = [
-    generar_dni_valido(12345678),  # 12345678Z
-    generar_dni_valido(87654321),  # 87654321T
-    generar_dni_valido(11111111),  # 11111111H
-    generar_dni_valido(22222222),  # 22222222Y
-    generar_dni_valido(33333333),  # 33333333F
-    generar_dni_valido(44444444),  # 44444444P
-    generar_dni_valido(55555555),  # 55555555D
-    generar_dni_valido(66666666),  # 66666666X
-    generar_dni_valido(77777777),  # 77777777B
-    generar_dni_valido(88888888),  # 88888888N
-]
+CARNES_DNI = [generar_dni_valido(12345678 + i) for i in range(2000)]
 
 def seed_data():
-    """
-    Método para poblar las tablas con datos simulados.
-    """
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
     db = SessionLocal()
     try:
-        # 1. Roles
         rol_usuario = Rol(nombre="usuario", descripcion="Usuario estándar")
         rol_admin = Rol(nombre="admin", descripcion="Administrador")
         db.add_all([rol_usuario, rol_admin])
         db.commit()
 
-        # ---------------------------------------------------------
-
-        # 2. Mibisivalencia - 10 carnets reales
         carnets = [Mibisivalencia(targeta_id=dni) for dni in CARNES_DNI]
         db.add_all(carnets)
         db.commit()
 
-        # ---------------------------------------------------------
-
-        # 3. Usuarios de prueba
         hash1 = pwd_context.hash("Password123!")
         hash2 = pwd_context.hash("Admin123!")
 
-        usuario_normal = Usuario(
-            usuario_id=str(uuid.uuid4()),
-            targeta_id=CARNES_DNI[0],  # 12345678Z
-            nombre="Pepe",
-            apellido="García",
-            correo="pepe@fake.com",
-            contrasena_hash=hash1
-        )
+        usuarios = []
+        for i in range(2000):
+            usuario = Usuario(
+                usuario_id=str(uuid.uuid4()),
+                targeta_id=CARNES_DNI[i],
+                nombre=f"User{i}",
+                apellido=f"Apellido{i}",
+                correo=f"user{i}@fake.com",
+                contrasena_hash=hash1
+            )
+            usuario.roles.append(rol_usuario)
+            usuarios.append(usuario)
+
         usuario_admin = Usuario(
             usuario_id=str(uuid.uuid4()),
             targeta_id=None,
@@ -91,117 +67,82 @@ def seed_data():
             correo="admin@fake.com",
             contrasena_hash=hash2
         )
-
-        usuario_normal.roles.append(rol_usuario)
         usuario_admin.roles.append(rol_admin)
         usuario_admin.roles.append(rol_usuario)
 
-        db.add_all([usuario_normal, usuario_admin])
+        db.add_all(usuarios + [usuario_admin])
         db.commit()
 
-        # ---------------------------------------------------------
-
-        # 4. Estaciones (10 estaciones de Valencia) - sin capacidad
+        # CAMBIO 1: Estaciones en Grau i Platja de Gandia
         estaciones_info = [
-            ("Plaza del Ayuntamiento", 39.4699, -0.3763),
-            ("Malvarrosa", 39.4780, -0.3266),
-            ("Ruzafa", 39.4618, -0.3764),
-            ("Benimaclet", 39.4901, -0.3619),
-            ("Campanar", 39.4890, -0.4001),
-            ("Patraix", 39.4572, -0.3972),
-            ("Ciudad de las Artes", 39.4541, -0.3505),
-            ("Turia - Puente de Serranos", 39.4787, -0.3769),
-            ("Mestalla", 39.4746, -0.3585),
-            ("Orriols", 39.5030, -0.3642),
+            ("Estación Renfe Gandia", 38.9665, -0.1830),
+            ("Grau - Puerto", 38.9960, -0.1660),
+            ("Platja - Club Náutico", 39.0010, -0.1630),
+            ("Platja - Hotel Bayren", 39.0080, -0.1690),
+            ("Platja - Final Paseo", 39.0190, -0.1750),
+            ("Campus UPV Gandia", 38.9955, -0.1670),
+            ("Plaza Prado", 38.9640, -0.1800),
+            ("Hospital Francesc de Borja", 38.9580, -0.1900),
+            ("Centro Histórico", 38.9670, -0.1810),
+            ("Polideportivo", 38.9620, -0.1850)
         ]
-        estaciones = []
-        for nombre, lat, lon in estaciones_info:
-            estaciones.append(Estacion(nombre=nombre, lat=lat, lon=lon))
+
+        estaciones = [
+            Estacion(estacion_id=i+1, nombre=info[0], lat=info[1], lon=info[2])
+            for i, info in enumerate(estaciones_info)
+        ]
         db.add_all(estaciones)
         db.commit()
 
-        # ---------------------------------------------------------
-
-        # 5. Bicicletas (50) VLC001 - VLC050
-        bicicletas = []
-        for i in range(1, 51):
-            code = f"VLC{i:03d}"
-            estacion = random.choice(estaciones)
-            bici = Bicicleta(
-                bicicleta_id=code,
-                estacion_id=estacion.estacion_id,
-                qr_code=f"QR-{code}",
-                estado=random.choice(list(EstadoBicicleta))
-            )
-            bicicletas.append(bici)
+        bicicletas = [
+            Bicicleta(
+                bicicleta_id=f"VLC{str(i+1).zfill(3)}",
+                estacion_id=random.choice(estaciones).estacion_id,
+                qr_code=f"QR-VLC{str(i+1).zfill(3)}",
+                estado=EstadoBicicleta.estacionada
+            ) for i in range(100)
+        ]
         db.add_all(bicicletas)
         db.commit()
 
-        # ---------------------------------------------------------
-
-        # 6. Placas (una por bicicleta) con ult_actualizacion_estado
-        placas = []
-        for bici in bicicletas:
-            placa = PlacaSensores(
+        placas = [
+            PlacaSensores(
                 placa_id=str(uuid.uuid4()),
-                bicicleta_id=bici.bicicleta_id,
+                bicicleta_id=bicicletas[i].bicicleta_id,
                 estado="activa",
                 ult_actualizacion_estado=datetime.now(timezone.utc)
-            )
-            placas.append(placa)
+            ) for i in range(100)
+        ]
         db.add_all(placas)
         db.commit()
 
-        # ---------------------------------------------------------
-
-        # 7. Trayecto de ejemplo (usar una de las bicicletas creadas)
-        ejemplo_bici = random.choice(bicicletas)
         trayecto = Trayecto(
             trayecto_id=str(uuid.uuid4()),
-            usuario_id=usuario_normal.usuario_id,
-            bicicleta_id=ejemplo_bici.bicicleta_id,
-            fecha_inicio=datetime.now(timezone.utc) - timedelta(minutes=30),
-            fecha_fin=None,
-            origen_estacion_id=ejemplo_bici.estacion_id,
-            distancia_total=4.2
+            usuario_id=usuarios[0].usuario_id,
+            bicicleta_id=bicicletas[0].bicicleta_id,
+            fecha_inicio=datetime.now(timezone.utc) - timedelta(hours=1),
+            origen_estacion_id=estaciones[0].estacion_id
         )
         db.add(trayecto)
         db.commit()
 
-        # ---------------------------------------------------------
-
-        # 8. Medidas (2 ejemplos) asociadas a la placa de la bici del trayecto
-        placa_rel = db.query(PlacaSensores).filter_by(bicicleta_id=ejemplo_bici.bicicleta_id).first()
-        if placa_rel:
-            medida1 = Medida(
+        db.add_all([
+            Medida(
                 lectura_id=str(uuid.uuid4()),
-                placa_id=placa_rel.placa_id,
-                trayecto_id=trayecto.trayecto_id,
-                fecha_hora=datetime.now(timezone.utc) - timedelta(minutes=20),
-                tipo=TipoMedidaEnum.pm2_5,
-                valor=12.5,
-                lat=39.4750,
-                lon=-0.3500
-            )
-            medida2 = Medida(
-                lectura_id=str(uuid.uuid4()),
-                placa_id=placa_rel.placa_id,
+                placa_id=placas[0].placa_id,
                 trayecto_id=trayecto.trayecto_id,
                 fecha_hora=datetime.now(timezone.utc) - timedelta(minutes=10),
                 tipo=TipoMedidaEnum.temperatura,
                 valor=24.8,
-                lat=39.4760,
-                lon=-0.3550
+                lat=39.0000, # Ajuste de latitud a Gandia
+                lon=-0.1650  # Ajuste de longitud a Gandia
             )
-            db.add_all([medida1, medida2])
-            db.commit()
+        ])
+        db.commit()
 
-        # ---------------------------------------------------------
-
-        # 9. Incidencia de ejemplo
         incidencia = Incidencia(
             incidencia_id=str(uuid.uuid4()),
-            usuario_id=usuario_normal.usuario_id,
+            usuario_id=usuarios[0].usuario_id,
             bicicleta_id=bicicletas[0].bicicleta_id,
             descripcion="Rueda pinchada",
             estado=EstadoIncidencia.nuevo,
@@ -210,7 +151,116 @@ def seed_data():
         db.add(incidencia)
         db.commit()
 
-        print("Seed completado: 10 carnets DNI válidos + estaciones + 50 bicis + placas + trayecto + medidas + incidencia")
+        r1 = Recompensa(
+            recompensa_id=str(uuid.uuid4()),
+            titulo="Bronce",
+            descripcion="Supera 10 km",
+            fecha_inicio=datetime.now(timezone.utc),
+            fecha_fin=datetime.now(timezone.utc) + timedelta(days=30),
+            criterio_num_km=10.0
+        )
+        r2 = Recompensa(
+            recompensa_id=str(uuid.uuid4()),
+            titulo="Plata",
+            descripcion="Supera 50 km",
+            fecha_inicio=datetime.now(timezone.utc),
+            fecha_fin=datetime.now(timezone.utc) + timedelta(days=30),
+            criterio_num_km=50.0
+        )
+        db.add_all([r1, r2])
+        db.commit()
+
+        ru = RecompensaUsuario(
+            usuario_id=usuarios[0].usuario_id,
+            km_acumulados=37.5
+        )
+        db.add(ru)
+        db.commit()
+
+        ro = RecompensaObtenida(
+            usuario_id=usuarios[0].usuario_id,
+            recompensa_id=r1.recompensa_id,
+            codigo_unico="CODIGO123ABC"
+        )
+        db.add(ro)
+        db.commit()
+
+        i1 = Interpolada(
+            lectura_id=str(uuid.uuid4()),
+            fecha_hora=datetime.now(timezone.utc),
+            tipo=TipoMedidaEnum.pm10,
+            lat=39.0000, # Ajuste de latitud a Gandia
+            lon=-0.1650, # Ajuste de longitud a Gandia
+            valor=28.4
+        )
+        i2 = Interpolada(
+            lectura_id=str(uuid.uuid4()),
+            fecha_hora=datetime.now(timezone.utc),
+            tipo=TipoMedidaEnum.co,
+            lat=39.0010, # Ajuste de latitud a Gandia
+            lon=-0.1660, # Ajuste de longitud a Gandia
+            valor=6.2
+        )
+        db.add_all([i1, i2])
+        db.commit()
+
+        cg = CalidadGeneral(
+            valor_id=str(uuid.uuid4()),
+            valor=72.5,
+            color="verde",
+            fecha_hora=datetime.now(timezone.utc),
+            lat=39.0000, # Ajuste de latitud a Gandia
+            lon=-0.1650  # Ajuste de longitud a Gandia
+        )
+        db.add(cg)
+        db.commit()
+
+        # Modified part: Generate lots of Medida for different gases and days
+        gases = [TipoMedidaEnum.pm2_5, TipoMedidaEnum.pm10, TipoMedidaEnum.no2, TipoMedidaEnum.o3]
+        num_days = 7
+        
+        # CAMBIO 2: Aumentar densidad de 50 a 800
+        num_medidas_per_gas_per_day = 800 
+        
+        # CAMBIO 3: Coordenadas de generación en Grau i Platja de Gandia
+        lat_min, lat_max = 38.9800, 39.0300
+        lon_min, lon_max = -0.1900, -0.1400
+        
+        value_ranges = {
+            TipoMedidaEnum.pm2_5: (0, 100),
+            TipoMedidaEnum.pm10: (0, 200),
+            TipoMedidaEnum.no2: (0, 200),
+            TipoMedidaEnum.o3: (0, 0.2)  # in ppm
+        }
+        
+        print(f"Generando {num_medidas_per_gas_per_day * len(gases) * num_days} medidas masivas...")
+
+        for day in range(num_days):
+            base_date = datetime.now(timezone.utc) - timedelta(days=day)
+            for gas in gases:
+                for _ in range(num_medidas_per_gas_per_day):
+                    hour = random.randint(0, 23)
+                    minute = random.randint(0, 59)
+                    fh = base_date.replace(hour=hour, minute=minute, second=0, microsecond=0)
+                    lat = round(random.uniform(lat_min, lat_max), 4)
+                    lon = round(random.uniform(lon_min, lon_max), 4)
+                    valor = round(random.uniform(*value_ranges[gas]), 2)
+                    medida = Medida(
+                        lectura_id=str(uuid.uuid4()),
+                        placa_id=random.choice(placas).placa_id,
+                        trayecto_id=trayecto.trayecto_id,  # Reuse trayecto
+                        fecha_hora=fh,
+                        tipo=gas,
+                        valor=valor,
+                        lat=lat,
+                        lon=lon
+                    )
+                    db.add(medida)
+            db.commit() 
+
+        # For interpolada and calidad, they can be generated by logic, so not populating here
+
+        print("Seed completo con nuevas tablas")
 
     except Exception as e:
         db.rollback()
@@ -219,8 +269,5 @@ def seed_data():
     finally:
         db.close()
 
-# ---------------------------------------------------------
-
 if __name__ == "__main__":
     seed_data()
-
