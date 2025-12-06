@@ -14,7 +14,7 @@ export class GestionIncidenciasFake {
 
     // Obtiene las incidencias del usuario autenticado
     async obtenerMisIncidencias() {
-        const url = `/api/v1/gestion-incidencias/mias`;
+        const url = `/api/v1/gestion-incidencias/public`;
         // Si existe un token JWT en localStorage lo usamos en la petición
         try {
             const token = localStorage.getItem('token') || sessionStorage.getItem('token');

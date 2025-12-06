@@ -23,53 +23,34 @@ import { GestionIncidenciasFake } from '../logica_fake/gestion_incidencias_fake.
  * @param {boolean} datos.esResuelto - True si la incidencia está resuelta.
  * @returns {HTMLElement} El elemento div.tarjeta-incidencia creado.
  */
-function crearTarjetaIncidencia(datos) {
-    // Determinar clases y textos basados en el estado
-    const estadoClase = datos.esResuelto ? 'estado-resuelto' : 'estado-noresuelto';
-    const estadoTexto = datos.esResuelto ? 'RESUELTO' : 'NO RESUELTO';
+class IncidenciaCard {
+    constructor({ titulo, tiempo, fuente, esResuelto = false }) {
+        this.titulo = titulo || 'Incidencia';
+        this.tiempo = tiempo || 'Hace: ahora';
+        this.fuente = fuente || '';
+        this.esResuelto = !!esResuelto;
+    }
 
-    // 1. Elemento principal: <div class="tarjeta-incidencia">
-    const tarjeta = document.createElement('div');
-    tarjeta.classList.add('tarjeta-incidencia');
+    render() {
+        const card = document.createElement('div');
+        card.classList.add('tarjeta-incidencia');
 
-    // 2. Encabezado de estado: <div class="encabezado-estado ...">
-    const encabezadoEstado = document.createElement('div');
-    encabezadoEstado.classList.add('encabezado-estado', estadoClase);
+        const estadoClase = this.esResuelto ? 'estado-resuelto' : 'estado-noresuelto';
+        const estadoTexto = this.esResuelto ? 'RESUELTO' : 'NO RESUELTO';
 
-    // 3. Píldora de estado: <span class="pildora-estado">
-    const pildoraEstado = document.createElement('span');
-    pildoraEstado.classList.add('pildora-estado');
-    pildoraEstado.textContent = estadoTexto;
-    encabezadoEstado.appendChild(pildoraEstado);
-    tarjeta.appendChild(encabezadoEstado);
+        card.innerHTML = `
+            <div class="encabezado-estado ${estadoClase}">
+                <span class="pildora-estado">${estadoTexto}</span>
+            </div>
+            <div class="contenido-tarjeta">
+                <h2 class="titulo-incidencia">${this.titulo}</h2>
+                <p class="detalle-incidencia tiempo">${this.tiempo.startsWith('Hace:') ? this.tiempo : 'Hace: ' + this.tiempo}</p>
+                <p class="detalle-incidencia fuente">${this.fuente}</p>
+            </div>
+        `;
 
-    // 4. Contenido de la tarjeta: <div class="contenido-tarjeta">
-    const contenidoTarjeta = document.createElement('div');
-    contenidoTarjeta.classList.add('contenido-tarjeta');
-
-    // 5. Título: <h2 class="titulo-incidencia">
-    const titulo = document.createElement('h2');
-    titulo.classList.add('titulo-incidencia');
-    titulo.textContent = datos.titulo;
-    contenidoTarjeta.appendChild(titulo);
-
-    // 6. Detalles: Tiempo y Fuente
-    const tiempo = document.createElement('p');
-    tiempo.classList.add('detalle-incidencia', 'tiempo');
-    // Asegurarse de que el texto de tiempo se pase con el prefijo "Hace:"
-    tiempo.textContent = datos.tiempo.startsWith('Hace:') ? datos.tiempo : `Hace: ${datos.tiempo}`; 
-    contenidoTarjeta.appendChild(tiempo);
-
-    const fuente = document.createElement('p');
-    fuente.classList.add('detalle-incidencia', 'fuente');
-    fuente.textContent = datos.fuente;
-    contenidoTarjeta.appendChild(fuente);
-    
-    // Añadir contenido al contenedor principal
-    tarjeta.appendChild(contenidoTarjeta);
-
-    // Devolver la tarjeta completa
-    return tarjeta;
+        return card;
+    }
 }
 
 /**
@@ -85,9 +66,22 @@ function insertarIncidencias(incidencias) {
         return;
     }
 
+    // Defensive: aceptar objeto único o null
+    if (!incidencias) {
+        console.warn('insertarIncidencias: no hay datos (undefined/null)');
+        contenedor.innerHTML = '';
+        return;
+    }
+
+    if (!Array.isArray(incidencias)) {
+        console.warn('insertarIncidencias: datos no son array, intentando convertir', incidencias);
+        incidencias = [incidencias];
+    }
+
+    contenedor.innerHTML = '';
     incidencias.forEach(incidencia => {
-        const tarjeta = crearTarjetaIncidencia(incidencia);
-        contenedor.appendChild(tarjeta);
+        const card = new IncidenciaCard(incidencia).render();
+        contenedor.appendChild(card);
     });
 }
 
@@ -211,20 +205,28 @@ function configurarEventosIncidencias() {
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    const gestionFake = new GestionIncidenciasFake();
-
-    // 1. Intentar cargar incidencias reales desde la API
-    gestionFake.obtenerMisIncidencias()
+    
+    // CAMBIO: Hacemos fetch directamente a la ruta PÚBLICA para ver todos los datos
+    // sin importar de quién sean.
+    fetch('/api/v1/gestion-incidencias/public')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la red al obtener incidencias públicas');
+            }
+            return response.json();
+        })
         .then(incidencias => {
-            // El backend devuelve objetos con { titulo, tiempo, fuente, esResuelto }
+            console.log("Datos recibidos del backend:", incidencias); // Para depurar
+            
+            // Insertamos las tarjetas
             insertarIncidencias(incidencias);
-            // Configurar eventos después de añadir las tarjetas
+            
+            // Configuramos los eventos
             configurarEventosIncidencias();
         })
         .catch(err => {
-            console.error('No se pudieron obtener incidencias desde la API:', err);
-            // En caso de fallo, mantener comportamiento sin datos
+            console.error('Error cargando incidencias:', err);
+            // En caso de fallo, limpiar contenedor
             insertarIncidencias([]);
-            configurarEventosIncidencias();
         });
 });
