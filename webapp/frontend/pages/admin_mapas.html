@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de Mapas (Admin)</title>
+
+  <link rel="stylesheet" href="/css/generales.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/mapa.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/js/lib/leaflet.heat.js"></script>
+</head>
+
+<body class="admin-map">
+  <header class="header">
+      <div class="logo"><img src="/images/logo.png" alt="logo"></div>
+      <nav class="nav">
+          <a href="/index.html">Inicio</a>
+          <a href="/pages/admin_mapas.html">Admin Mapas</a>
+      </nav>
+  </header>
+
+  <div class="main-title" style="padding: 20px; text-align: center;">
+      <h1>Historial de Mapas de Calidad del Aire</h1>
+  </div>
+
+  <div class="map-container">
+    <aside class="sidebar">
+      <h2>Filtros Históricos</h2>
+
+      <div class="filter-section">
+        <h3>Tipo de gas</h3>
+        <div class="select-wrapper">
+          <select id="gas-select">
+            <option value="general">Calidad General</option>
+            <option value="pm2_5">PM 2.5</option>
+            <option value="pm10">PM 10</option>
+            <option value="no2">NO2</option>
+            <option value="o3">O3</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-section" id="date-filter-container">
+        <h3>Fecha</h3>
+        <input type="date" id="date-filter" class="date-input">
+      </div>
+
+      <div class="filter-section">
+        <h3>Hora</h3>
+        <input type="range" id="hour-slider" min="0" max="23" step="1">
+        <span id="hour-display">--:00</span>
+      </div>
+    </aside>
+
+    <div id="map"></div>
+
+    <div class="map-legend">
+        <div class="legend-item"><span class="dot good"></span><span>Buena</span></div>
+        <div class="legend-item"><span class="dot moderate"></span><span>Moderada</span></div>
+        <div class="legend-item"><span class="dot unhealthy"></span><span>Mala</span></div>
+    </div>
+  </div>
+
+  <section class="data-table">
+    <h2>Medidas mostradas en el mapa</h2>
+    <div class="table-container">
+      <table id="measures-table">
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Contaminante</th>
+            <th>Valor</th>
+            <th>AQI / Calidad</th>
+          </tr>
+        </thead>
+        <tbody>
+            </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="ft">
+      </footer>
+
+  <script src="/js/scripts/mapa.js" type="module"></script>
+</body>
+</html>

@@ -113,106 +113,56 @@ class LogicaMapas:
 
     # File: backend/logic/mapas.py → método obtener_mapa_de_tipo_de_dia_de_destino
 
-    def obtener_mapa_de_tipo_de_dia_de_destino(self, db: Session, tipo: str, dia: datetime, esquina_inf_izq: PosicionGPS, esquina_sup_der: PosicionGPS) -> Dict:
-        start_day = dia.replace(hour=0, minute=0, second=0, microsecond=0, tzinfo=timezone.utc)
-        timestamps = [f"{h:02d}:00" for h in range(24)]
-        data: List[List[Dict]] = [[] for _ in range(24)]
-
+    def obtener_mapa_de_tipo_de_dia_de_destino(self, db: Session, tipo: str, fecha: datetime, esquina_inf_izq: PosicionGPS, esquina_sup_der: PosicionGPS) -> Dict:
+        response = {"data": {}}
         if tipo == "general":
-            # === CÓDIGO PARA CALIDAD GENERAL (acumulativo) ===
-            for h in range(24):
-                end_h = start_day + timedelta(hours=h+1)
-                subquery = db.query(
-                    CalidadGeneral.lat,
-                    CalidadGeneral.lon,
-                    func.max(CalidadGeneral.fecha_hora).label('max_fh')
-                ).filter(
-                    CalidadGeneral.fecha_hora <= end_h,
-                    CalidadGeneral.lat.between(esquina_inf_izq.lat, esquina_sup_der.lat),
-                    CalidadGeneral.lon.between(esquina_inf_izq.lon, esquina_sup_der.lon)
-                ).group_by(CalidadGeneral.lat, CalidadGeneral.lon).subquery()
+            # Consulta calidad_general en lugar de medidas
+            query = db.query(CalidadGeneral).filter(
+                CalidadGeneral.fecha_hora >= fecha.replace(hour=0, minute=0),
+                CalidadGeneral.fecha_hora < fecha + timedelta(days=1),
+                CalidadGeneral.lat >= esquina_inf_izq.lat,
+                CalidadGeneral.lat <= esquina_sup_der.lat,
+                CalidadGeneral.lon >= esquina_inf_izq.lon,
+                CalidadGeneral.lon <= esquina_sup_der.lon
+            )
+            results = query.all()
+            
+            # Si no hay resultados, calculamos bajo demanda y volvemos a consultar
+            if not results:
+                print(f"No hay datos de calidad general para {fecha.date()}. Calculando bajo demanda...")
+                unified = self.unificar_medidas_de_todos_tipos_de_dia(db, fecha, esquina_inf_izq, esquina_sup_der)
+                self.calcular_calidad_general_del_aire(db, unified, fecha)
+                results = query.all() # Re-query
 
-                points = db.query(CalidadGeneral).join(
-                    subquery,
-                    (CalidadGeneral.lat == subquery.c.lat) &
-                    (CalidadGeneral.lon == subquery.c.lon) &
-                    (CalidadGeneral.fecha_hora == subquery.c.max_fh)
-                ).all()
-
-                for p in points:
-                    data[h].append({
-                        "lat": p.lat,
-                        "lng": p.lon,
-                        "value": float(p.valor),
-                        "color": p.color
-                    })
-
+            for r in results:
+                hour = r.fecha_hora.hour
+                if hour not in response["data"]:
+                    response["data"][hour] = []
+                response["data"][hour].append({
+                    "lat": r.lat,
+                    "lng": r.lon,
+                    "value": r.valor,
+                    "color": r.color  # Usa el color precalculado
+                })
+            return response
         else:
-            # === CÓDIGO PARA GASES ESPECÍFICOS ===
-            try:
-                tipo_enum = TipoMedidaEnum[tipo]  # ahora tipo ya viene como "pm2_5", "pm10", etc.
-            except KeyError:
-                raise ValueError(f"Tipo desconocido: {tipo}")
-
-            for h in range(24):
-                end_h = start_day + timedelta(hours=h+1)
-
-                # Última medida (real o interpolada) hasta esta hora
-                m_sub = db.query(
-                    DBMedida.lat, DBMedida.lon,
-                    func.max(DBMedida.fecha_hora).label('max_fh')
-                ).filter(
-                    DBMedida.tipo == tipo_enum,
-                    DBMedida.fecha_hora <= end_h,
-                    DBMedida.lat.between(esquina_inf_izq.lat, esquina_sup_der.lat),
-                    DBMedida.lon.between(esquina_inf_izq.lon, esquina_sup_der.lon)
-                ).group_by(DBMedida.lat, DBMedida.lon).subquery()
-
-                i_sub = db.query(
-                    DBInterpolada.lat, DBInterpolada.lon,
-                    func.max(DBInterpolada.fecha_hora).label('max_fh')
-                ).filter(
-                    DBInterpolada.tipo == tipo_enum,
-                    DBInterpolada.fecha_hora <= end_h,
-                    DBInterpolada.lat.between(esquina_inf_izq.lat, esquina_sup_der.lat),
-                    DBInterpolada.lon.between(esquina_inf_izq.lon, esquina_sup_der.lon)
-                ).group_by(DBInterpolada.lat, DBInterpolada.lon).subquery()
-
-                all_points = db.query(
-                    func.coalesce(m_sub.c.lat, i_sub.c.lat).label('lat'),
-                    func.coalesce(m_sub.c.lon, i_sub.c.lon).label('lon'),
-                    func.coalesce(m_sub.c.max_fh, i_sub.c.max_fh).label('max_fh')
-                ).select_from(
-                    m_sub.outerjoin(i_sub, (m_sub.c.lat == i_sub.c.lat) & (m_sub.c.lon == i_sub.c.lon))
-                ).union_all(
-                    db.query(i_sub.c.lat, i_sub.c.lon, i_sub.c.max_fh).outerjoin(m_sub, (i_sub.c.lat == m_sub.c.lat) & (i_sub.c.lon == m_sub.c.lon))
-                ).subquery()
-
-                final_points = db.query(
-                    DBMedida.lat, DBMedida.lon, DBMedida.valor
-                ).filter(
-                    DBMedida.fecha_hora.in_(
-                        db.query(all_points.c.max_fh)
-                    )
-                ).all() + db.query(
-                    DBInterpolada.lat, DBInterpolada.lon, DBInterpolada.valor
-                ).filter(
-                    DBInterpolada.fecha_hora.in_(
-                        db.query(all_points.c.max_fh)
-                    )
-                ).all()
-
-                for lat, lon, val in final_points:
-                    aqi = self.get_aqi(tipo_enum, val)
-                    color = self.get_color_from_aqi(aqi)
-                    data[h].append({
-                        "lat": lat,
-                        "lng": lon,
-                        "value": float(val),
-                        "color": color
-                    })
-
-        return {"timestamps": timestamps, "data": data}    
+            # Código existente para gases específicos (mantén lo que ya tienes aquí, solo añade el if para general)
+            medidas = self.obtener_medidas_tipo_fecha_sitio(db, TipoMedidaEnum[tipo], fecha, esquina_inf_izq, esquina_sup_der, False)
+            interpoladas = self.obtener_medidas_tipo_fecha_sitio(db, TipoMedidaEnum[tipo], fecha, esquina_inf_izq, esquina_sup_der, True)
+            all_medidas = medidas + interpoladas
+            for m in all_medidas:
+                hour = m.fecha_hora.hour
+                if hour not in response["data"]:
+                    response["data"][hour] = []
+                aqi = self.get_aqi(TipoMedidaEnum[tipo], m.valor)
+                color = self.get_color_from_aqi(aqi)
+                response["data"][hour].append({
+                    "lat": m.posicion.lat,
+                    "lng": m.posicion.lon,
+                    "value": m.valor,
+                    "color": color
+                })
+            return response
 
     # ---------------------------------------------------------
 
@@ -344,6 +294,19 @@ class LogicaMapas:
     # ---------------------------------------------------------
     def calcular_calidad_general_del_aire(self, db: Session, medidas_json: Dict, fecha: datetime) -> str:
         try:
+            # 0. Check if data already exists for this day
+            start_day = fecha.replace(hour=0, minute=0, second=0, microsecond=0)
+            end_day = start_day + timedelta(days=1)
+            
+            exists = db.query(CalidadGeneral).filter(
+                CalidadGeneral.fecha_hora >= start_day,
+                CalidadGeneral.fecha_hora < end_day
+            ).first()
+            
+            if exists:
+                print(f"Calidad general para {start_day.date()} ya existe. No se recalcula.")
+                return "OK"
+
             for key, vals in medidas_json.items():
                 parts = key.split('_')
                 if len(parts) != 3:
