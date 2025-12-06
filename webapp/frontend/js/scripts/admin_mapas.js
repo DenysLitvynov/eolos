@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapas</title>
+  <title>Historial de Mapas (Admin)</title>
 
   <link rel="stylesheet" href="/css/generales.css">
   <link rel="stylesheet" href="/css/header.css">
@@ -16,7 +16,7 @@
   <script src="/js/lib/leaflet.heat.js"></script>
 </head>
 
-<body class="public-map">
+<body>
   <header class="header" data-breakpoint="1050">
     <div class="logo">
       <img src="/images/logo.png" alt="logo">
@@ -29,14 +29,13 @@
     </button>
 
     <nav class="nav" id="site-nav">
-      <a href="../index.html">Inicio</a>
-      <a href="mapas.html">Mapas</a>
-      <a href="calidad-aire.html">Calidad de aire</a>
-      <a href="sobre-nosotros.html">Sobre Nosotros</a>
-      <a href="FAQ.html">Faq</a>
-      <a href="contacto.html">Contacto</a>
-      <a href="login.html" class="login">Inicia Sesión</a>
-      <a href="registro.html" class="login">Registrarse</a>
+      <a href="/index.html">Inicio</a>
+      <a href="/pages/mapas.html">Mapas</a>
+      <a href="/pages/sobre-nosotros.html">Sobre Nosotros</a>
+      <a href="/pages/FAQ.html">Faq</a>
+      <a href="/pages/contacto.html">Contacto</a>
+      <a href="/pages/login.html" class="login">Inicia Sesión</a>
+      <a href="/pages/registro.html" class="login">Registrarse</a>
     </nav>
   </header>
 
@@ -64,11 +63,15 @@
       </div>
 
       <div class="filter-section">
+        <h3>Fecha</h3>
+        <input type="date" id="date-filter" class="date-input">
+      </div>
+
+      <div class="filter-section">
         <h3>Hora</h3>
         <input type="range" id="hour-slider" min="0" max="23" value="12" step="1">
         <span id="hour-display">12:00</span>
       </div>
-
     </aside>
 
     <button id="toggle-sidebar">
@@ -95,35 +98,22 @@
     </div>
   </div>
 
-  <section class="pollution-info">
-    <h2>Niveles de Calidad del Aire</h2>
-
-    <div class="pollution-cards">
-      <div class="pollution-card good">
-        <h3>Buena</h3>
-        <span class="range">AQI 0 - 50</span>
-        <p>La calidad del aire es satisfactoria.</p>
-      </div>
-
-      <div class="pollution-card moderate">
-        <h3>Moderada</h3>
-        <span class="range">AQI 51 - 100</span>
-        <p>La calidad del aire es aceptable.</p>
-      </div>
-
-      <div class="pollution-card bad">
-        <h3>Mala</h3>
-        <span class="range">AQI > 100</span>
-        <p>Pueden aparecer efectos negativos en grupos sensibles.</p>
-      </div>
-    </div>
-    </div>
-
-    <div style="text-align: center; margin-top: 2rem;">
-      <a href="informacion.html" class="pollution-btn"
-        style="display: inline-block; text-decoration: none; color: var(--c-primary); border: 2px solid var(--c-primary); padding: 10px 20px; border-radius: 30px; font-weight: bold; transition: all 0.3s;">
-        Más información sobre contaminantes
-      </a>
+  <section class="data-table">
+    <h2>Medidas Mostradas en el Mapa</h2>
+    <div class="table-container">
+      <table id="measures-table">
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
+            <th>Tipo Contaminante</th>
+            <th>Valor</th>
+            <th>Color</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
   </section>
 

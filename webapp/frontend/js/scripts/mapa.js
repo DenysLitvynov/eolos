@@ -1,11 +1,22 @@
-// File: frontend/js/scripts/mapa.js (COMPLETO y CORREGIDO)
+// File: frontend/js/scripts/mapa.js
+/**
+ * Autor: Denys Litvynov Lymanets
+ * Fecha: 05-12-2025
+ * Descripción: Script principal.
+ * VISUALIZACIÓN REVERTIDA: Usa la lógica original de radio/blur y colores sólidos.
+ * FUNCIONALIDAD: Mantiene soporte para Admin (tabla e historial) y Público (solo hoy).
+ */
+
 import { MapaFake } from '../logica_fake/mapa_fake.js';
+import { AdminMapasFake } from '../logica_fake/admin_mapas_fake.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar mapa
+    // Detección de si estamos en la página de admin
+    const isAdminPage = document.body.classList.contains('admin-map'); // Asegúrate de tener <body class="admin-map"> en el HTML de admin
+
     const map = L.map('map', {
         zoomControl: false
-    }).setView([39.0000, -0.1650], 14); // CAMBIO 1: Centrado en Grau de Gandia
+    }).setView([39.0000, -0.1650], 14);
 
     L.control.zoom({
         position: 'topright'
@@ -16,154 +27,180 @@ document.addEventListener('DOMContentLoaded', () => {
     }).addTo(map);
 
     let heatLayer;
+    let currentData = { data: {} };
 
-    // CAMBIO 2: Bounds fijos para Grau i Platja de Gandia
-    const defaultLatMin = 38.9800; 
-    const defaultLonMin = -0.1900; 
-    const defaultLatMax = 39.0300; 
-    const defaultLonMax = -0.1400; 
+    // Valores por defecto del mapa original
+    const defaultLatMin = 38.9800;
+    const defaultLonMin = -0.1900;
+    const defaultLatMax = 39.0300;
+    const defaultLonMax = -0.1400;
 
-    // Date Filter Listener
-    const dateFilter = document.getElementById('date-filter');
-    if (dateFilter) {
-        // Set default to today
-        const today = new Date().toISOString().split('T')[0];
-        dateFilter.value = today;
-
-        dateFilter.addEventListener('change', updateMapFilters);
-    }
-
-    // Gas Select Listener
     const gasSelect = document.getElementById('gas-select');
-    if (gasSelect) {
-        gasSelect.addEventListener('change', updateMapFilters);
-    }
-
-    // Hour Slider
     const hourSlider = document.getElementById('hour-slider');
     const hourDisplay = document.getElementById('hour-display');
-    if (hourSlider && hourDisplay) {
-        hourSlider.addEventListener('input', (e) => {
-            const hour = e.target.value;
-            hourDisplay.textContent = `${hour.padStart(2, '0')}:00`;
-            showHourData(hour);
-        });
-        // Initial set of hour
-        const initialHour = hourSlider.value.padStart(2, '0');
-        hourDisplay.textContent = `${initialHour}:00`;
+    const dateFilter = document.getElementById('date-filter');
+    const tableBody = document.querySelector('#measures-table tbody');
+
+    // Inicialización
+    const currentHour = new Date().getHours();
+    hourSlider.value = currentHour;
+    hourDisplay.textContent = `${String(currentHour).padStart(2, '0')}:00`;
+
+    const today = new Date().toISOString().split('T')[0];
+    if (isAdminPage && dateFilter) dateFilter.value = today;
+
+    // ----------------------------------------------------------
+    // LÓGICA VISUAL ORIGINAL (Recuperada de tu primer archivo)
+    // ----------------------------------------------------------
+    function calculateRadius(zoom) {
+        // Ajuste: Aumentar radio con el zoom para fusionar puntos cercanos al acercarse
+        // y reducirlo al alejarse para evitar cubrir todo el mapa.
+        // Ecuación lineal simple: Zoom 10 -> 10px, Zoom 14 -> 22px, Zoom 18 -> 34px
+        return Math.max(5, 10 + (zoom - 10) * 3);
     }
 
-    let currentData = { data: {} }; // Inicializar con estructura esperada
-
-    // Mapeo de tipos
-    function mapTipo(selected) {
-        if (selected === 'pm25') return 'pm2_5';
-        return selected;
+    function calculateBlur(zoom) {
+        // Blur proporcional al radio pero un poco menor para mantener definición
+        return Math.max(5, calculateRadius(zoom) * 0.7);
     }
 
+    function normalizeIntensity(value, color) {
+        // Tu lógica original de intensidades fijas
+        if (color === 'verde') return 0.3;
+        if (color === 'amarillo') return 0.6;
+        return 1.0;
+    }
+
+    // ----------------------------------------------------------
+    // Obtención de datos
+    // ----------------------------------------------------------
     async function updateMapFilters() {
-        const selectedGas = gasSelect ? mapTipo(gasSelect.value) : 'general';
-        const selectedDate = dateFilter ? dateFilter.value : new Date().toISOString().split('T')[0];
-        const selectedHour = hourSlider ? parseInt(hourSlider.value, 10) : 12;
+        const selectedGas = gasSelect.value;
+        const selectedHour = parseInt(hourSlider.value, 10);
+        // Si es admin usa el filtro de fecha, si es público usa "hoy"
+        const selectedDate = (isAdminPage && dateFilter) ? dateFilter.value : today;
 
-        console.log(`Actualizando mapa... Gas: ${selectedGas}, Fecha: ${selectedDate}, Hora: ${selectedHour}:00`);
-
-        const mapaFake = new MapaFake();
-
-        // Asegúrate de pasar TODOS los bounds como números
-        const lat_min = defaultLatMin;
-        const lon_min = defaultLonMin;
-        const lat_max = defaultLatMax;
-        const lon_max = defaultLonMax;
+        // Loading en la tabla (solo admin)
+        if (isAdminPage && tableBody) {
+            tableBody.innerHTML = '<tr><td colspan="6">Cargando datos...</td></tr>';
+        }
 
         try {
-            currentData = await mapaFake.obtenerMapa(
-                selectedGas,
-                selectedDate,
-                lat_min,
-                lon_min,
-                lat_max,
-                lon_max
-            );
+            let respuesta;
+            if (isAdminPage) {
+                const adminFake = new AdminMapasFake();
+                respuesta = await adminFake.obtenerMapaAdmin(
+                    selectedGas, selectedDate, defaultLatMin, defaultLonMin, defaultLatMax, defaultLonMax
+                );
+            } else {
+                const mapaFake = new MapaFake();
+                respuesta = await mapaFake.obtenerMapa(
+                    selectedGas, today, defaultLatMin, defaultLonMin, defaultLatMax, defaultLonMax
+                );
+            }
+
+            currentData = respuesta;
             showHourData(selectedHour);
+
+            if (isAdminPage) populateTable(selectedHour);
+
         } catch (error) {
             console.error('Error obteniendo datos del mapa:', error);
             if (heatLayer) {
                 map.removeLayer(heatLayer);
                 heatLayer = null;
             }
+            if (isAdminPage && tableBody) {
+                tableBody.innerHTML = '<tr><td colspan="6">Error al cargar datos.</td></tr>';
+            }
         }
     }
 
+    // ----------------------------------------------------------
+    // Mostrar datos en mapa (Lógica Original)
+    // ----------------------------------------------------------
     function showHourData(hour) {
-        if (!currentData) return;
+        if (!currentData || !currentData.data) return;
+
         const points = currentData.data[hour] || [];
+
         if (heatLayer) {
             map.removeLayer(heatLayer);
         }
+
+        const zoom = map.getZoom();
         const heatPoints = points.map(p => [p.lat, p.lng, normalizeIntensity(p.value, p.color)]);
+
+        // Configuración original del HeatLayer
         heatLayer = L.heatLayer(heatPoints, {
-            radius: 25,
-            blur: 15,
-            gradient: {0.0: 'green', 0.5: 'yellow', 1.0: 'red'}
+            radius: calculateRadius(zoom),
+            blur: calculateBlur(zoom),
+            gradient: { 0.0: 'green', 0.5: 'yellow', 1.0: 'red' } // Gradiente original sólido
         }).addTo(map);
     }
 
-    function addHeatLayer(points) {
-        if (heatLayer) {
-            map.removeLayer(heatLayer);
+    // ----------------------------------------------------------
+    // Poblar Tabla (Funcionalidad Nueva para Admin)
+    // ----------------------------------------------------------
+    function populateTable(hour) {
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+
+        const points = (currentData.data && currentData.data[hour]) ? currentData.data[hour] : [];
+
+        if (points.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="6">No hay medidas disponibles.</td></tr>';
+            return;
         }
-        
-        // El punto de calor se genera con [lat, lng, intensidad]
-        const heatPoints = points.map(p => [p.lat, p.lng, normalizeIntensity(p.value, p.color)]);
-        
-        heatLayer = L.heatLayer(heatPoints, {
-            radius: 35,   // CAMBIO 3: Aumentado para mayor densidad
-            blur: 20,     // CAMBIO 4: Aumentado para mayor difuminado
-            gradient: {0.0: 'green', 0.5: 'yellow', 1.0: 'red'}
-        }).addTo(map);
+
+        // Usamos Fragment para que sea rápido
+        const fragment = document.createDocumentFragment();
+
+        points.forEach(p => {
+            const tipo = gasSelect.options[gasSelect.selectedIndex].text;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${String(hour).padStart(2, '0')}:00</td>
+                <td>${p.lat.toFixed(4)}</td>
+                <td>${p.lng.toFixed(4)}</td>
+                <td>${tipo}</td>
+                <td>${p.value.toFixed(2)}</td>
+                <td style="color:${getColorCss(p.color)}; font-weight:bold;">${p.color.toUpperCase()}</td>
+            `;
+            fragment.appendChild(tr);
+        });
+        tableBody.appendChild(fragment);
     }
 
-    function normalizeIntensity(value, color) {
-        // Normalizar a 0-1 basado en color/value (usando el valor AQI del backend)
-        if (color === 'verde') return 0.3;
-        if (color === 'amarillo') return 0.6;
-        return 1.0;
+    function getColorCss(color) {
+        if (color === 'verde') return 'green';
+        if (color === 'amarillo') return '#DAA520'; // GoldenRod para que se lea mejor
+        if (color === 'rojo') return 'red';
+        return 'black';
     }
 
-    // Initial load
+    // ----------------------------------------------------------
+    // Listeners
+    // ----------------------------------------------------------
+    gasSelect.addEventListener('change', updateMapFilters);
+
+    if (isAdminPage && dateFilter) {
+        dateFilter.addEventListener('change', updateMapFilters);
+    }
+
+    hourSlider.addEventListener('input', (e) => {
+        const hour = e.target.value;
+        hourDisplay.textContent = `${hour.padStart(2, '0')}:00`;
+        showHourData(hour); // Renderizado directo, sin debounce
+        if (isAdminPage) populateTable(hour);
+    });
+
+    // Evento zoom original
+    map.on('zoomend moveend', () => {
+        const hour = hourSlider.value;
+        showHourData(hour);
+    });
+
+    // Carga inicial
     updateMapFilters();
-
-    // Sidebar Toggle (Mobile)
-    const sidebar = document.querySelector('.sidebar');
-    const toggleBtn = document.getElementById('toggle-sidebar');
-
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-    });
 });
-
-const header = document.querySelector('.header');
-if (header) {
-    const nav = header.querySelector('.nav');
-    const btn = header.querySelector('.menu-toggle');
-
-    function closeMenu() {
-        btn.setAttribute('aria-expanded', 'false');
-        nav.classList.remove('is-open');
-    }
-
-    function openMenu() {
-        btn.setAttribute('aria-expanded', 'true');
-        nav.classList.add('is-open');
-    }
-
-    btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        expanded ? closeMenu() : openMenu();
-    });
-
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 1050) closeMenu();
-    });
-}
