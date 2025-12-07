@@ -28,6 +28,7 @@ class IncidenciaListadoOut(BaseModel):
     incidencia_id: str
     titulo: str
     tiempo: str
+    fecha_reporte: datetime
     fuente: str
     esResuelto: bool
 
@@ -128,6 +129,7 @@ def listar_incidencias_filtradas_por_rol(
                 incidencia_id=getattr(inc, 'incidencia_id', None),
                 titulo=titulo,
                 tiempo=tiempo,
+                fecha_reporte=getattr(inc, 'fecha_reporte', None),
                 fuente=fuente.title(),
                 esResuelto=es_resuelto,
             )
@@ -164,6 +166,7 @@ def cambiar_estado_incidencia(
         incidencia_id=getattr(incidencia_actualizada, 'incidencia_id', None),
         titulo=titulo,
         tiempo=tiempo,
+        fecha_reporte=getattr(incidencia_actualizada, 'fecha_reporte', None),
         fuente=fuente.title(),
         esResuelto=es_resuelto,
     )
@@ -194,6 +197,7 @@ def listar_incidencias_publicas(
                 incidencia_id=getattr(inc, 'incidencia_id', None),
                 titulo=titulo,
                 tiempo=tiempo,
+                fecha_reporte=getattr(inc, 'fecha_reporte', None),
                 fuente=fuente.title(),
                 esResuelto=es_resuelto,
             )

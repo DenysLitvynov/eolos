@@ -87,6 +87,14 @@ function insertarIncidencias(incidencias) {
         if (incidencia.incidencia_id) {
             card.dataset.incidenciaId = incidencia.incidencia_id;
         }
+        // Guardar la fecha original (ISO) para permitir ordenamiento
+        if (incidencia.fecha_reporte) {
+            card.dataset.fecha = incidencia.fecha_reporte;
+        }
+        // Guardar estado resuelto/no resuelto para filtros
+        if (typeof incidencia.esResuelto !== 'undefined') {
+            card.dataset.resuelto = incidencia.esResuelto ? 'true' : 'false';
+        }
         contenedor.appendChild(card);
     });
 }
@@ -271,6 +279,142 @@ function configurarBusqueda() {
     });
 }
 
+// Ordenamiento: por fecha (dataset.fecha). masRecientes=true => más recientes primero
+function ordenarTarjetas(masRecientes = true) {
+    const contenedor = document.getElementById('grid-incidencias');
+    if (!contenedor) return;
+
+    const tarjetas = Array.from(contenedor.querySelectorAll('.tarjeta-incidencia'));
+    // Si no hay fechas, no hacemos nada
+    const anyFecha = tarjetas.some(t => t.dataset && t.dataset.fecha);
+    if (!anyFecha) return;
+
+    tarjetas.sort((a, b) => {
+        const ta = a.dataset.fecha ? new Date(a.dataset.fecha).getTime() : 0;
+        const tb = b.dataset.fecha ? new Date(b.dataset.fecha).getTime() : 0;
+        return masRecientes ? tb - ta : ta - tb;
+    });
+
+    tarjetas.forEach(t => contenedor.appendChild(t));
+}
+
+function configurarOrdenamiento() {
+    const botones = document.querySelectorAll('.botones-filtro .boton-filtro');
+    if (!botones || botones.length < 2) return;
+    const btnUp = botones[0];
+    const btnDown = botones[1];
+
+    btnUp.title = 'Mostrar incidencias más recientes';
+    btnDown.title = 'Mostrar incidencias más antiguas';
+
+    btnUp.addEventListener('click', () => {
+        ordenarTarjetas(true);
+        btnUp.classList.add('active-sort');
+        btnDown.classList.remove('active-sort');
+    });
+
+    btnDown.addEventListener('click', () => {
+        ordenarTarjetas(false);
+        btnDown.classList.add('active-sort');
+        btnUp.classList.remove('active-sort');
+    });
+}
+
+// Aplica el filtro por estado: 'all' | 'resueltas' | 'no_resueltas'
+function aplicarFiltroEstado(estado) {
+    const contenedor = document.getElementById('grid-incidencias');
+    if (!contenedor) return;
+    const tarjetas = Array.from(contenedor.querySelectorAll('.tarjeta-incidencia'));
+
+    tarjetas.forEach(tarjeta => {
+        // Si la tarjeta está ya oculta por la búsqueda, respetar eso (no sobreescribir si display 'none' por búsqueda)
+        const actualmenteOcultaPorBusqueda = tarjeta.classList.contains('hidden-by-search');
+        const esResuelto = tarjeta.dataset.resuelto === 'true';
+
+        let mostrar = true;
+        if (estado === 'resueltas') mostrar = !!esResuelto;
+        else if (estado === 'no_resueltas') mostrar = !esResuelto;
+
+        // Si la búsqueda ya la ocultó, mantenla oculta; en otro caso aplicar mostrar/ocultar según filtro
+        if (actualmenteOcultaPorBusqueda) {
+            tarjeta.style.display = 'none';
+        } else {
+            tarjeta.style.display = mostrar ? '' : 'none';
+        }
+    });
+}
+
+// Configura el menú de filtro que aparece al pulsar el botón de filtro
+function configurarFiltro() {
+    const contenedorBotones = document.querySelector('.botones-filtro');
+    if (!contenedorBotones) return;
+    const botones = contenedorBotones.querySelectorAll('.boton-filtro');
+    const btnFiltro = botones && botones[2] ? botones[2] : null;
+    if (!btnFiltro) return;
+
+    // Crear el menú flotante (si no existe)
+    let menu = document.querySelector('.filtro-menu');
+    if (!menu) {
+        menu = document.createElement('div');
+        menu.className = 'filtro-menu';
+        // estilos inline mínimos para que sea visible
+        menu.style.position = 'absolute';
+        menu.style.background = '#fff';
+        menu.style.border = '1px solid rgba(0,0,0,0.12)';
+        menu.style.padding = '6px';
+        menu.style.boxShadow = '0 2px 6px rgba(0,0,0,0.12)';
+        menu.style.zIndex = '9999';
+        menu.style.display = 'none';
+
+        const opcAll = document.createElement('button');
+        opcAll.textContent = 'Mostrar todas';
+        opcAll.className = 'filtro-opc';
+        opcAll.style.display = 'block';
+        opcAll.style.width = '100%';
+        opcAll.style.marginBottom = '4px';
+
+        const opcNo = document.createElement('button');
+        opcNo.textContent = 'Sólo no resueltas';
+        opcNo.className = 'filtro-opc';
+        opcNo.style.display = 'block';
+        opcNo.style.width = '100%';
+        opcNo.style.marginBottom = '4px';
+
+        const opcSi = document.createElement('button');
+        opcSi.textContent = 'Sólo resueltas';
+        opcSi.className = 'filtro-opc';
+        opcSi.style.display = 'block';
+        opcSi.style.width = '100%';
+
+        menu.appendChild(opcAll);
+        menu.appendChild(opcNo);
+        menu.appendChild(opcSi);
+        document.body.appendChild(menu);
+
+        // Listeners
+        opcAll.addEventListener('click', () => { aplicarFiltroEstado('all'); menu.style.display = 'none'; });
+        opcNo.addEventListener('click', () => { aplicarFiltroEstado('no_resueltas'); menu.style.display = 'none'; });
+        opcSi.addEventListener('click', () => { aplicarFiltroEstado('resueltas'); menu.style.display = 'none'; });
+    }
+
+    // Mostrar/ocultar menú al pulsar el botón
+    btnFiltro.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // posicionar debajo del botón
+        const rect = btnFiltro.getBoundingClientRect();
+        menu.style.top = `${rect.bottom + window.scrollY + 6}px`;
+        menu.style.left = `${rect.left + window.scrollX}px`;
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Cerrar cuando se hace click fuera
+    document.addEventListener('click', (e) => {
+        if (menu && e.target !== btnFiltro && !menu.contains(e.target)) {
+            menu.style.display = 'none';
+        }
+    });
+}
+
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -288,6 +432,10 @@ document.addEventListener('DOMContentLoaded', () => {
             configurarEventosIncidencias();
             // Configurar búsqueda en la barra
             configurarBusqueda();
+            // Configurar ordenamiento por fecha
+            configurarOrdenamiento();
+            // Configurar filtro por estado
+            configurarFiltro();
         })
         .catch(err => {
             console.error('Error cargando incidencias filtradas:', err);
