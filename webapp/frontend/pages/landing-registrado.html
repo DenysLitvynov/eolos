@@ -32,11 +32,11 @@
 
             <!-- Menú de navegación -->
             <nav class="nav" id="site-nav">
-                <a href="../landing.html">Inicio</a>
+                <a href="landing-registrado.html">Inicio</a>
                 <a href="#">Incidencias</a>
                 <a href="estado-sensores.html">Sensores</a>
                 <a href="#">Mapas</a>
-                <a href="#"><b>Marc Roig</b></a>
+                <a href="perfil.html"><b>Marc Roig</b></a>
             </nav>
         </header>
 
@@ -186,9 +186,72 @@
             </div>
         </section>
 
-    </body>
-</html>
 
 
+        <footer class="ft">
+            <div class="ft__wrap ft--two-cols">
+                <div class="ft__brand">
+      <span class="ft__logo">
+        <img src="../images/logo_footer.png" alt="logo" />
+      </span>
+                    <address class="ft__addr">
+                        <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
+                        <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
+                        <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
+                    </address>
+                </div>
+
+                <div class="ft__links">
+                    <nav class="ft__col">
+                        <a href="../index.html">Inicio</a>
+                        <a href="mapas.html">Mapas</a>
+                        <a href="sobre-nosotros.html">Sobre nosotros</a>
+                    </nav>
+
+                    <nav class="ft__col">
+                        <a href="contacto.html">Contacto</a>
+                        <a href="login.html">Iniciar sesión</a>
+                    </nav>
+
+                    <nav class="ft__col">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="ft__copy">
+                Copyright ©éolos. Todos los derechos reservados.
+            </div>
+        </footer>
+
+        <script>
+            (function(){
+                const header = document.querySelector('.header');
+                const nav = header.querySelector('.nav');
+                const btn = header.querySelector('.menu-toggle');
+
+                function closeMenu(){
+                    btn.setAttribute('aria-expanded', 'false');
+                    nav.classList.remove('is-open');
+                }
+
+                function openMenu(){
+                    btn.setAttribute('aria-expanded', 'true');
+                    nav.classList.add('is-open');
+                }
+
+                btn.addEventListener('click', () => {
+                    const expanded = btn.getAttribute('aria-expanded') === 'true';
+                    expanded ? closeMenu() : openMenu();
+                });
+
+
+                window.addEventListener('resize', () => {
+                    if(window.innerWidth > 1050) closeMenu();
+                });
+            })();
+        </script>
     </body>
 </html>

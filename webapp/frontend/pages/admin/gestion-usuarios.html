@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éolos – Gestion</title>
+
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+
+
+    <script type="module" src="../../js/scripts/admin.js" defer></script>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">
+        <img src="../../images/logo.png" alt="logo" />
+    </div>
+
+    <!-- Botón hamburger -->
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span class="menu-toggle__label">Menú</span>
+    </button>
+
+    <!-- Menú de navegación -->
+    <nav class="nav" id="site-nav">
+        <a href="../landing-registrado.html">Inicio</a>
+        <a href="../gestion_incidencias.html">Incidencias</a>
+        <a href="estado-sensores.html">Sensores</a>
+        <a href="#">Mapas</a>
+        <a href="../perfil.html"><b>Marc Roig</b></a>
+    </nav>
+</header>
+
+<main class="users-page">
+    <!-- 顶部标题 + 创建按钮 -->
+    <section class="users-header">
+        <h2>Listado de usuarios</h2>
+    </section>
+
+    <section class="users-actions">
+        <button id="btn-open-modal" class="btn primary">
+            + Crear usuario
+        </button>
+    </section>
+
+
+    <!-- 用户表格 -->
+    <section class="users-table-card">
+        <table class="users-table">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>ID de usuario</th>
+                <th>ID Tarjeta</th>
+                <th>Rol</th>
+                <th>Correo</th>
+                <th class="col-actions">Acciones</th>
+            </tr>
+            </thead>
+            <tbody id="users-tbody">
+            <!-- admin.js 会自动填充 -->
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<!-- ✅ 创建用户弹窗 -->
+<div id="modal-backdrop" class="modal-backdrop hidden">
+    <div class="modal">
+        <header class="modal-header">
+            <h2>Creación de usuario</h2>
+            <button id="btn-close-modal" class="icon-btn" aria-label="Cerrar">
+                ✕
+            </button>
+        </header>
+
+        <div class="modal-body">
+            <p class="modal-tip">
+                * Tanto la ID de usuario como la fecha de creación son campos autogenerados.
+            </p>
+
+            <form id="create-user-form" class="form">
+                <div class="form-field">
+                    <label for="nombre">Nombre</label>
+                    <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Juan"
+                            required
+                    />
+                </div>
+
+                <div class="form-field">
+                    <label for="apellido">Apellido</label>
+                    <input
+                            type="text"
+                            id="apellido"
+                            name="apellido"
+                            placeholder="Bautista Pérez"
+                            required
+                    />
+                </div>
+
+                <div class="form-field">
+                    <label for="email">Correo o número de teléfono</label>
+                    <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            placeholder="juan@example.com"
+                            required
+                    />
+                </div>
+
+                <div class="form-field">
+                    <label for="cardId">ID Tarjeta</label>
+                    <input
+                            type="text"
+                            id="cardId"
+                            name="cardId"
+                            placeholder="2025-03-27T14:05:03-0500"
+                    />
+                </div>
+
+                <div class="form-field">
+                    <label for="password">Contraseña</label>
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="••••••••"
+                            required
+                    />
+                </div>
+
+                <!-- 如果你想让创建时选择角色，可以解开这段
+                <div class="form-field">
+                  <label for="rol">Rol</label>
+                  <select id="rol" name="rol">
+                    <option value="Ciudadano">Ciudadano</option>
+                    <option value="Técnico">Técnico</option>
+                    <option value="Admin">Admin</option>
+                  </select>
+                </div>
+                -->
+
+                <div class="form-footer">
+                    <button type="button" class="btn secondary" id="btn-cancel-modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn primary">
+                        Crear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ 编辑用户弹窗 -->
+<div id="edit-user-modal" class="modal-backdrop hidden">
+    <div class="modal">
+        <header class="modal-header">
+            <h2>Editar usuario</h2>
+            <button id="btn-close-edit-modal" class="icon-btn" aria-label="Cerrar">
+                ✕
+            </button>
+        </header>
+
+        <div class="modal-body">
+            <form id="edit-user-form" class="form">
+                <div class="form-field">
+                    <label>Nombre</label>
+                    <input type="text" id="edit-name" required />
+                </div>
+
+                <div class="form-field">
+                    <label>Apellido</label>
+                    <input type="text" id="edit-lastname" required />
+                </div>
+
+                <div class="form-field">
+                    <label>Correo</label>
+                    <input type="email" id="edit-email" required />
+                </div>
+
+                <div class="form-field">
+                    <label>ID Tarjeta</label>
+                    <input type="text" id="edit-card" />
+                </div>
+
+                <div class="form-field">
+                    <label>Rol</label>
+                    <select id="edit-role">
+                        <option>admin</option>
+                        <option>técnico</option>
+                        <option>usuario</option>
+                    </select>
+                </div>
+
+
+
+                <div class="form-footer">
+                    <button type="button" class="btn secondary" id="btn-cancel-edit">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn primary">
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
