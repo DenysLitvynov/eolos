@@ -245,9 +245,6 @@ class PasswordResetToken(Base):
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now(), nullable=False)
 
 # ---------------------------------------------------------
-# Nuevas tablas solicitadas: recompensas, recompensas_usuario, recompensas_obtenidas,
-# interpoladas y calidad_general
-# ---------------------------------------------------------
 
 class Recompensa(Base):
     """
@@ -264,6 +261,7 @@ class Recompensa(Base):
 
     obtenidas = relationship("RecompensaObtenida", back_populates="recompensa")
 
+# ---------------------------------------------------------
 
 class RecompensaUsuario(Base):
     """
@@ -276,6 +274,7 @@ class RecompensaUsuario(Base):
 
     usuario = relationship("Usuario", backref="recompensa_estadistica", uselist=False)
 
+# ---------------------------------------------------------
 
 class RecompensaObtenida(Base):
     """
@@ -291,6 +290,7 @@ class RecompensaObtenida(Base):
     usuario = relationship("Usuario", backref="recompensas_obtenidas")
     recompensa = relationship("Recompensa", back_populates="obtenidas")
 
+# ---------------------------------------------------------
 
 class Interpolada(Base):
     """
@@ -305,6 +305,7 @@ class Interpolada(Base):
     lon = Column(Float, nullable=False)
     valor = Column(Float, nullable=False)
 
+# ---------------------------------------------------------
 
 class CalidadGeneral(Base):
     """
@@ -320,6 +321,5 @@ class CalidadGeneral(Base):
     lon = Column(Float, nullable=False)
 
 # ---------------------------------------------------------
-# Fin del archivo
 # ---------------------------------------------------------
 

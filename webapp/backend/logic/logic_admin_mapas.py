@@ -1,4 +1,3 @@
-# File: backend/logic/logic_admin_mapas.py
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 05-12-2025
@@ -6,11 +5,15 @@ Descripción: Lógica de negocio específica para el panel de administración de
 Permite obtener históricos completos sin restricciones de "solo hoy".
 """
 
+# ---------------------------------------------------------
+
 from datetime import datetime
 from sqlalchemy.orm import Session
 from typing import Dict
 from ..pojos.posicion_gps import PosicionGPS
 from .mapas import LogicaMapas
+
+# ---------------------------------------------------------
 
 class LogicaAdminMapas:
     
@@ -19,14 +22,7 @@ class LogicaAdminMapas:
         self.logica_base = LogicaMapas()
 
     # ---------------------------------------------------------
-    # Obtiene el mapa histórico para admin.
-    # Reutiliza la lógica compleja de unificación de medidas de LogicaMapas.
-    #
-    # db: Session
-    # tipo: str (tipo de gas o 'general')
-    # fecha: datetime (día a consultar)
-    # lat_min, lon_min, lat_max, lon_max: float
-    # ---------------------------------------------------------
+
     def obtener_mapa_admin(self, db: Session, tipo: str, fecha: datetime, lat_min: float, lon_min: float, lat_max: float, lon_max: float) -> Dict:
         """
         Obtiene los datos del mapa para un rango geográfico y una fecha histórica específica.
@@ -54,3 +50,4 @@ class LogicaAdminMapas:
         return self.logica_base.obtener_mapa_de_tipo_de_dia_de_destino(
             db, tipo, fecha, inf_izq, sup_der
         )
+# ---------------------------------------------------------

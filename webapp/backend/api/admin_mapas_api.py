@@ -4,6 +4,8 @@ Fecha: 05-12-2025
 Descripción: Rutas API REST para la gestión de mapas de administrador.
 """
 
+# ---------------------------------------------------------
+
 from fastapi import APIRouter, Depends, HTTPException
 from datetime import date, datetime
 from sqlalchemy.orm import Session
@@ -13,8 +15,7 @@ from ..logic.logic_admin_mapas import LogicaAdminMapas
 router = APIRouter(prefix="/admin-mapas", tags=["admin-mapas"])
 
 # ---------------------------------------------------------
-# Endpoint para obtener datos de mapa histórico (Admin)
-# ---------------------------------------------------------
+
 @router.get("/obtener-mapa-admin")
 def obtener_mapa_admin(
     tipo: str,
@@ -50,3 +51,5 @@ def obtener_mapa_admin(
         # En producción usar logger, aquí print para debug
         print(f"Error en admin-mapas: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+    
+# ---------------------------------------------------------

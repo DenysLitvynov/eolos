@@ -4,6 +4,8 @@ Fecha: 04-12-2025
 Descripción: Rutas API para mapas.
 """
 
+# ---------------------------------------------------------
+
 from fastapi import APIRouter, Depends, HTTPException
 from datetime import date, datetime  # <--- Añade datetime aquí
 from sqlalchemy.orm import Session
@@ -12,6 +14,8 @@ from ..logic.mapas import LogicaMapas
 from ..pojos.posicion_gps import PosicionGPS
 
 router = APIRouter(prefix="/mapas", tags=["mapas"])
+
+# ---------------------------------------------------------
 
 # File: backend/api/mapas_api.py
 @router.get("/obtener-mapa")

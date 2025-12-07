@@ -1,9 +1,7 @@
 /**
- * Autor: Denys Litvynov Lymanets
+ * Autores:Hugo Belda y Denys Litvynov 
  * Fecha: 05-12-2025
  * Descripción: Script principal.
- * VISUALIZACIÓN ESTABLE: Heatmap uniforme sin cambios por zoom.
- * FUNCIONALIDAD: Soporte para Admin (tabla e historial) y Público (solo hoy).
  */
 
 import { MapaFake } from '../logica_fake/mapa_fake.js';
@@ -48,24 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const today = new Date().toISOString().split('T')[0];
     if (isAdminPage && dateFilter) dateFilter.value = today;
 
-    // ==========================================================
-    // NUEVA VISUALIZACIÓN ESTABLE
-    // ==========================================================
-
-    // 🔥 Radio fijo para que NO cambie al ampliar/alejar
     const FIXED_RADIUS = 28;
     const FIXED_BLUR = 22;
 
-    // 🔥 Intensidad fija según el color (NO según valor del gas)
     function fixedIntensity(color) {
         if (color === 'verde') return 0.40;
         if (color === 'amarillo') return 0.70;
         return 1.00; // rojo
     }
 
-    // ==========================================================
-    // Obtener mapa desde API
-    // ==========================================================
     async function updateMapFilters() {
         const selectedGas = gasSelect.value;
         const selectedHour = parseInt(hourSlider.value, 10);
@@ -189,10 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isAdminPage) populateTable(hour);
     });
 
-    // 👇 ELIMINADO → ya NO redibujamos al mover/zoomear para evitar saltos
-    // map.on('zoomend moveend', ... )
-
-    // Carga inicial
     updateMapFilters();
 });
 
