@@ -61,10 +61,8 @@ body {
   background: rgba(255, 255, 255, 0.92);
   padding: 28px;
   border-radius: 28px;
-  z-index: 1001;
+  z-index: 1000;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  max-height: calc(100% - 60px);
-  overflow-y: auto;
 }
 
 .sidebar h2 {
@@ -345,7 +343,6 @@ body {
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     width: calc(100% - 40px);
     max-width: 320px;
-    max-height: calc(100% - 100px);
   }
 
   .sidebar.active {
@@ -356,58 +353,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .map-container {
-    height: 95vh;
-  }
-
-  .sidebar {
-    width: 220px;
-    padding: 20px;
-  }
-
-  .sidebar h2 {
-    font-size: 1.4rem;
-    margin-bottom: 16px;
-  }
-
-  .filter-section h3 {
-    font-size: 0.75rem;
-    margin-bottom: 10px;
-  }
-
-  .pollution-info {
-    padding: 1rem 0;
-  }
-
-  .pollution-info h2 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .pollution-cards {
-    gap: 20px;
-  }
-
-  .pollution-card {
-    width: 280px;
-    padding: 16px 24px;
-  }
-
-  .pollution-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-  }
-
-  .pollution-card .range {
-    font-size: 1rem;
-    margin-bottom: 14px;
-    padding: 8px 14px;
-  }
-
-  .pollution-card p {
-    font-size: 0.9rem;
   }
 }
 
@@ -421,7 +366,7 @@ body {
 
 .pollution-info h2 {
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 600;
   color: #0a0a0a;
   letter-spacing: -0.03em;
