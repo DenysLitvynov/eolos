@@ -1,5 +1,5 @@
 """
-Autor: GitHub Copilot (adaptado)
+Autor: Ariel Bejaran
 Fecha: 05-12-2025
 Descripción: API auxiliares para la gestión de incidencias (lista simplificada para frontend).
 Se reutiliza `LogicaIncidencias` y `get_current_user` para devolver una lista de incidencias
@@ -14,7 +14,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from ..db.database import get_db
-from ..db.models import Incidencia, EstadoIncidencia
+from ..db.models import Incidencia, EstadoIncidencia,FuenteReporte
 from ..logic.incidencias_logic import LogicaIncidencias
 from ..logic.gestion_incidencias_logic import GestionIncidenciasLogic
 from .perfil_api import get_current_user
@@ -59,27 +59,61 @@ def _formatear_tiempo_relativo(fecha_reporte: datetime) -> str:
     # Más de un día: devolver fecha en formato ISO corto
     return fecha_reporte.strftime("%Y-%m-%d")
 
-
-@router.get("/mias", response_model=List[IncidenciaListadoOut])
-def listar_mis_incidencias(
+## ➡️ NUEVA RUTA: Filtrada por Rol (Admin/Técnico)
+@router.get("/filtradas", response_model=List[IncidenciaListadoOut])
+def listar_incidencias_filtradas_por_rol(
     db: Session = Depends(get_db),
     current_user = Depends(get_current_user),
 ) -> List[IncidenciaListadoOut]:
-    """Devuelve una versión simplificada de las incidencias del usuario.
-
-    Ruta montada como: GET /api/v1/gestion-incidencias/mias
     """
+    Ruta que devuelve incidencias filtradas según el rol del usuario:
+    - Admin: Fuentes 'app' o 'web'.
+    - Tecnico: Fuente 'parada_bici'.
+    - Otros: Lista vacía.
+    
+    Ruta montada como: GET /api/v1/gestion-incidencias/filtradas
+    """
+    
+    # 1. Obtener nombres de roles desde current_user.roles (relación SQLAlchemy)
     try:
-        incidencias = logica.listar_incidencias_por_usuario(db, usuario_id=str(current_user.usuario_id))
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        role_names = [r.nombre for r in getattr(current_user, 'roles', [])]
+    except Exception:
+        role_names = []
 
+    print(f"[DEBUG] Usuario: {current_user.correo}, Roles: {role_names}")  # Log para depuración
+    
+    # 2. Definir los filtros según el rol
+    incidencias = []
+    
+    if 'admin' in role_names:
+        # Admin ve incidencias de app, web o admin
+        fuentes_filtrar = [FuenteReporte.app, FuenteReporte.web, FuenteReporte.admin]
+        try:
+            incidencias = gestion_logic.listar_incidencias_por_fuente(db, fuentes_filtrar)
+        except Exception as e:
+            print(f"Error filtrando por fuente (admin): {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+        
+    elif 'tecnico' in role_names:
+        # Técnico ve incidencias vinculadas a bicicletas
+        try:
+            incidencias = db.query(Incidencia).filter(Incidencia.bicicleta_id != None).order_by(Incidencia.fecha_reporte.desc()).all()
+        except Exception as e:
+            print(f"Error filtrando incidencias de técnico: {e}")
+            raise HTTPException(status_code=500, detail=str(e))
+    else:
+        # Si el rol no es admin ni tecnico, retorna lista vacía
+        print(f"[DEBUG] Usuario no es admin ni tecnico, retornando lista vacía")
+        return []
+
+    # 3. Formatear el resultado
     resultado = []
     for inc in incidencias:
-        titulo = inc.descripcion if getattr(inc, "descripcion", None) else "Incidencia"
+        titulo = inc.descripcion if getattr(inc, "descripcion", None) else "Incidencia sin descripción"
         tiempo = _formatear_tiempo_relativo(inc.fecha_reporte) if getattr(inc, "fecha_reporte", None) else "Hace: ahora"
-        fuente = getattr(inc.fuente, 'value', str(inc.fuente)) if inc.fuente is not None else "app"
-        es_resuelto = (inc.estado == EstadoIncidencia.resuelto)
+        # Usamos .value para obtener el string del Enum (si es un Enum)
+        fuente = getattr(inc.fuente, 'value', str(inc.fuente)) if inc.fuente is not None else "app" 
+        es_resuelto = (inc.estado.name == 'resuelto') if hasattr(inc.estado, 'name') else (inc.estado == 'resuelto')
 
         resultado.append(
             IncidenciaListadoOut(
@@ -90,23 +124,23 @@ def listar_mis_incidencias(
             )
         )
 
+    print(f"[DEBUG] Retornando {len(resultado)} incidencias filtradas")
     return resultado
 
 
+## ➡️ RUTA /public (Se mantiene para pruebas sin autenticación)
 @router.get("/public", response_model=List[IncidenciaListadoOut])
 def listar_incidencias_publicas(
-    db: Session = Depends(get_db),
+     db: Session = Depends(get_db),
 ) -> List[IncidenciaListadoOut]:
-    """Endpoint público de solo-lectura para pruebas en frontend.
-
-    Ruta: GET /api/v1/gestion-incidencias/public
-    Devuelve todas las incidencias sin requerir autenticación (solo para dev).
-    """
+    """Endpoint público de solo-lectura para pruebas en frontend."""
+    # ... (El código de la ruta /public se mantiene igual) ...
     try:
         incidencias = gestion_logic.listar_todas_incidencias(db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+    # ... (El código de formateo del resultado se mantiene igual) ...
     resultado = []
     for inc in incidencias:
         titulo = inc.descripcion if getattr(inc, "descripcion", None) else "Incidencia"

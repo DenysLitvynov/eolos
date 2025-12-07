@@ -24,3 +24,17 @@ class GestionIncidenciasLogic:
         Usar solo en entornos de desarrollo o para endpoints de depuración.
         """
         return db.query(Incidencia).order_by(Incidencia.fecha_reporte.desc()).all()
+
+    def listar_incidencias_por_fuente(self, db: Session, fuentes: list) -> List[Incidencia]:
+        """Devuelve incidencias filtradas por fuentes específicas.
+
+        Args:
+            db: Sesión de base de datos.
+            fuentes: Lista de enum FuenteReporte a filtrar (ej. [FuenteReporte.app, FuenteReporte.web]).
+
+        Returns:
+            Lista de incidencias que coinciden con las fuentes indicadas.
+        """
+        if not fuentes:
+            return []
+        return db.query(Incidencia).filter(Incidencia.fuente.in_(fuentes)).order_by(Incidencia.fecha_reporte.desc()).all()

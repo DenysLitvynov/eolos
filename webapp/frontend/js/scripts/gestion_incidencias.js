@@ -1,7 +1,7 @@
 /**========================
  * GESTION DE INCIDENCIAS.js
  * =========================
- *  Script que maneja la funcionalidad de la pagina de gestion de incidencias.
+ * Script que maneja la funcionalidad de la pagina de gestion de incidencias.
  * @author Ariel Bejaran
  * @todo implementar la conexión con la base de datos para obtener y actualizar el estado de las incidencias.
  * ========================
@@ -9,10 +9,10 @@
 
 //clase pop up que nos permite hacer pop ups dinamicos
 import { Popup } from '../utilidades/class_popup.js';
-import { GestionIncidenciasFake } from '../logica_fake/gestion_incidencias_fake.js';
+import { GestionIncidenciasFake } from '../logica_fake/gestion_incidencias_fake.js'; // ⬅️ Usaremos esta clase
 
 /*========================================================================
-  FUNCIONAMIENTO TARJETAS
+ FUNCIONAMIENTO TARJETAS
  ========================================================================*/
 /**
  * Crea el elemento DOM completo para una tarjeta de incidencia.
@@ -87,8 +87,8 @@ function insertarIncidencias(incidencias) {
 
 
 /*========================================================================
-  FUNCIONAMIENTO POP-UPS
- ========================================================================*
+ FUNCIONAMIENTO POP-UPS
+ ========================================================================*/
 
 //Función para extraer los datos de la tarjeta DOM ---
 /**
@@ -206,27 +206,29 @@ function configurarEventosIncidencias() {
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     
-    // CAMBIO: Hacemos fetch directamente a la ruta PÚBLICA para ver todos los datos
-    // sin importar de quién sean.
-    fetch('/api/v1/gestion-incidencias/public')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error en la red al obtener incidencias públicas');
-            }
-            return response.json();
-        })
+    // ⚠️ CAMBIO PRINCIPAL: Usamos GestionIncidenciasFake y la nueva ruta /filtradas
+    const logicaIncidencias = new GestionIncidenciasFake();
+    
+    // Llamamos al nuevo método (obtenerIncidenciasFiltradas) que apunta a la ruta autenticada
+    // que filtra por rol (admin o tecnico).
+    logicaIncidencias.obtenerIncidenciasFiltradas()
         .then(incidencias => {
-            console.log("Datos recibidos del backend:", incidencias); // Para depurar
+            console.log("Datos filtrados por rol recibidos del backend:", incidencias); // Para depurar
             
             // Insertamos las tarjetas
             insertarIncidencias(incidencias);
             
-            // Configuramos los eventos
+            // Configuramos los eventos después de que las tarjetas se han insertado
             configurarEventosIncidencias();
         })
         .catch(err => {
-            console.error('Error cargando incidencias:', err);
-            // En caso de fallo, limpiar contenedor
+            console.error('Error cargando incidencias filtradas:', err);
+            // Mostrar un mensaje de error o limpiar el contenedor
             insertarIncidencias([]);
+            // Opcional: mostrar un mensaje de error visible al usuario si no pudo autenticar o cargar datos
+            const contenedor = document.getElementById('grid-incidencias');
+            if (contenedor) {
+                contenedor.innerHTML = '<p class="error-carga">No se pudieron cargar las incidencias. Por favor, inicie sesión con el rol apropiado.</p>';
+            }
         });
 });
