@@ -25,11 +25,15 @@ gestion_logic = GestionIncidenciasLogic()
 
 
 class IncidenciaListadoOut(BaseModel):
+    incidencia_id: str
     titulo: str
     tiempo: str
     fuente: str
     esResuelto: bool
 
+#=====================================================================================================================================================
+# FUNCIONES 
+#=====================================================================================================================================================
 
 def _formatear_tiempo_relativo(fecha_reporte: datetime) -> str:
     """Devuelve una cadena simple tipo '5min', '1h 30min' o fecha.
@@ -59,8 +63,12 @@ def _formatear_tiempo_relativo(fecha_reporte: datetime) -> str:
     # Más de un día: devolver fecha en formato ISO corto
     return fecha_reporte.strftime("%Y-%m-%d")
 
+#=====================================================================================================================================================
+#RUTAS
+#=====================================================================================================================================================
+
 ## ➡️ NUEVA RUTA: Filtrada por Rol (Admin/Técnico)
-@router.get("/filtradas", response_model=List[IncidenciaListadoOut])
+@router.get("/admin_tecnico", response_model=List[IncidenciaListadoOut])
 def listar_incidencias_filtradas_por_rol(
     db: Session = Depends(get_db),
     current_user = Depends(get_current_user),
@@ -117,6 +125,7 @@ def listar_incidencias_filtradas_por_rol(
 
         resultado.append(
             IncidenciaListadoOut(
+                incidencia_id=getattr(inc, 'incidencia_id', None),
                 titulo=titulo,
                 tiempo=tiempo,
                 fuente=fuente.title(),
@@ -126,6 +135,38 @@ def listar_incidencias_filtradas_por_rol(
 
     print(f"[DEBUG] Retornando {len(resultado)} incidencias filtradas")
     return resultado
+
+@router.post("/cambiar_estado", response_model=IncidenciaListadoOut)
+def cambiar_estado_incidencia( 
+    incidencia_id: str,
+    nuevo_estado: str,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user),
+) -> IncidenciaListadoOut:
+    """
+    Cambia el estado de una incidencia dada.
+    
+    Ruta montada como: POST /api/v1/gestion-incidencias/cambiar_estado
+    """
+    try:
+        incidencia_actualizada = gestion_logic.cambiar_estado_incidencia(db, incidencia_id, nuevo_estado)
+    except ValueError as ve:
+        raise HTTPException(status_code=404, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    titulo = incidencia_actualizada.descripcion if getattr(incidencia_actualizada, "descripcion", None) else "Incidencia"
+    tiempo = _formatear_tiempo_relativo(incidencia_actualizada.fecha_reporte) if getattr(incidencia_actualizada, "fecha_reporte", None) else "Hace: ahora"
+    fuente = getattr(incidencia_actualizada.fuente, 'value', str(incidencia_actualizada.fuente)) if incidencia_actualizada.fuente is not None else "app"
+    es_resuelto = (incidencia_actualizada.estado.name == 'resuelto') if hasattr(incidencia_actualizada.estado, 'name') else (incidencia_actualizada.estado == 'resuelto')
+
+    return IncidenciaListadoOut(
+        incidencia_id=getattr(incidencia_actualizada, 'incidencia_id', None),
+        titulo=titulo,
+        tiempo=tiempo,
+        fuente=fuente.title(),
+        esResuelto=es_resuelto,
+    )
 
 
 ## ➡️ RUTA /public (Se mantiene para pruebas sin autenticación)
@@ -150,6 +191,7 @@ def listar_incidencias_publicas(
 
         resultado.append(
             IncidenciaListadoOut(
+                incidencia_id=getattr(inc, 'incidencia_id', None),
                 titulo=titulo,
                 tiempo=tiempo,
                 fuente=fuente.title(),

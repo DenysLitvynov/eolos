@@ -14,10 +14,10 @@ export class GestionIncidenciasFake {
 
 // Obtiene las incidencias filtradas según el rol del usuario autenticado
     async obtenerIncidenciasFiltradas() {
-     // 🚨 CAMBIO 1: Apuntamos a la nueva ruta que filtra por rol
-        const url = `/api/v1/gestion-incidencias/filtradas`; 
+        const url = `/api/v1/gestion-incidencias/admin_tecnico`;
+        // Nota: la ruta de cambio de estado se construye con query params en `cambiarEstadoIncidencia`.
 
-     // 🚨 CAMBIO 2: Centralizamos la lógica en la petición autenticada,
+     // Centralizamos la lógica en la petición autenticada,
         // ya que la ruta '/filtradas' REQUIERE token.
         
      try {
@@ -56,4 +56,35 @@ export class GestionIncidenciasFake {
  // Eliminamos la llamada a this.peticionario.hacerPeticionRest 
         // porque la ruta /filtradas siempre debe ir con token.
     }
+
+    async cambiarEstadoIncidencia(idIncidencia, nuevoEstado) {
+        // FastAPI espera parámetros query para `incidencia_id` y `nuevo_estado`.
+        const url = `/api/v1/gestion-incidencias/cambiar_estado?incidencia_id=${encodeURIComponent(idIncidencia)}&nuevo_estado=${encodeURIComponent(nuevoEstado)}`;
+        // Usamos fetch directo para adjuntar Authorization (no tocar `peticionario_REST.js`)
+        try {
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            if (!token) {
+                throw new Error('Usuario no autenticado. Falta token.');
+            }
+
+            const resp = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!resp.ok) {
+                const text = await resp.text();
+                throw new Error(`Error ${resp.status}: ${text}`);
+            }
+
+            return await resp.json();
+        } catch (e) {
+            console.error('Error en cambiarEstadoIncidencia:', e);
+            throw e;
+        }
+    }
+
 }

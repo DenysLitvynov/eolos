@@ -11,6 +11,8 @@
 import { Popup } from '../utilidades/class_popup.js';
 import { GestionIncidenciasFake } from '../logica_fake/gestion_incidencias_fake.js'; // ⬅️ Usaremos esta clase
 
+const logicaIncidencias = new GestionIncidenciasFake();
+
 /*========================================================================
  FUNCIONAMIENTO TARJETAS
  ========================================================================*/
@@ -81,6 +83,10 @@ function insertarIncidencias(incidencias) {
     contenedor.innerHTML = '';
     incidencias.forEach(incidencia => {
         const card = new IncidenciaCard(incidencia).render();
+        // Guardar el id de la incidencia en dataset para poder usarlo en acciones (cambiar estado)
+        if (incidencia.incidencia_id) {
+            card.dataset.incidenciaId = incidencia.incidencia_id;
+        }
         contenedor.appendChild(card);
     });
 }
@@ -109,6 +115,7 @@ function obtenerDatosIncidencia(tarjeta) {
 
     // Datos Fijos (por ahora, se simularán con datos reales de la DB en el futuro)
     const idUsuarioUnico = "ID Usuario: 1821981"; 
+    const incidenciaId = tarjeta.dataset.incidenciaId || null;
 
     return {
         titulo: tituloIncidencia,
@@ -117,7 +124,8 @@ function obtenerDatosIncidencia(tarjeta) {
         esResuelto: esResuelto,
         estadoTexto: estadoTexto,
         actionText: actionText,
-        idUsuario: idUsuarioUnico
+        idUsuario: idUsuarioUnico,
+        incidenciaId: incidenciaId
     };
 }
 
@@ -190,10 +198,24 @@ function configurarEventosIncidencias() {
                 contenido 
             );
             
+            
             actionButton.removeEventListener('click', actionButton.handleAction); // Eliminar listener temporal si existiera
             actionButton.addEventListener('click', () => {
                 // Aquí ejecutamos la lógica de acción que estaba en crearContenidoPopup
                 console.log(`Incidencia "${datosIncidencia.titulo}" marcada como ${datosIncidencia.esResuelto ? 'cerrada' : 'resuelta'} (Simulación)`); 
+                const nuevoEstado = datosIncidencia.esResuelto ? 'cerrado' : 'resuelto';
+                const idToUse = datosIncidencia.incidenciaId || tarjeta.dataset.incidenciaId || null;
+                if (idToUse) {
+                    logicaIncidencias.cambiarEstadoIncidencia(idToUse, nuevoEstado)
+                        .then(resp => {
+                            console.log('Cambio de estado OK:', resp);
+                        })
+                        .catch(err => {
+                            console.error('Error cambiando estado:', err);
+                        });
+                } else {
+                    console.warn('No se encontró incidencia_id para cambiar estado');
+                }
                 incidenciaPopup.cerrarPopup(); // Cierra el pop-up después de la acción
             });
 
@@ -206,8 +228,6 @@ function configurarEventosIncidencias() {
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     
-    // ⚠️ CAMBIO PRINCIPAL: Usamos GestionIncidenciasFake y la nueva ruta /filtradas
-    const logicaIncidencias = new GestionIncidenciasFake();
     
     // Llamamos al nuevo método (obtenerIncidenciasFiltradas) que apunta a la ruta autenticada
     // que filtra por rol (admin o tecnico).

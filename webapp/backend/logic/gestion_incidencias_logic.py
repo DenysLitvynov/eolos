@@ -8,7 +8,7 @@ Contiene funciones auxiliares para listar incidencias públicas (uso en frontend
 from typing import List
 from sqlalchemy.orm import Session
 
-from ..db.models import Incidencia
+from ..db.models import Incidencia, EstadoIncidencia
 
 
 class GestionIncidenciasLogic:
@@ -38,3 +38,35 @@ class GestionIncidenciasLogic:
         if not fuentes:
             return []
         return db.query(Incidencia).filter(Incidencia.fuente.in_(fuentes)).order_by(Incidencia.fecha_reporte.desc()).all()
+    
+    def cambiar_estado_incidencia(self, db: Session, incidencia_id: str, nuevo_estado: str) -> Incidencia:
+        """Cambia el estado de una incidencia dada.
+
+        Args:
+            db: Sesión de base de datos.
+            incidencia_id: ID de la incidencia a modificar.
+            nuevo_estado: Nuevo estado a asignar (debe ser un valor válido de EstadoIncidencia).
+
+        Returns:
+            La incidencia actualizada.
+
+        Raises:
+            ValueError: Si el nuevo estado no es válido.
+        """
+        # El modelo usa `incidencia_id` como nombre de columna (UUID string)
+        incidencia = db.query(Incidencia).filter(Incidencia.incidencia_id == incidencia_id).first()
+        if not incidencia:
+            raise ValueError("Incidencia no encontrada")
+
+        try:
+            # Convertir a Enum antes de asignar para asegurar valor válido
+            try:
+                incidencia.estado = EstadoIncidencia(nuevo_estado)
+            except Exception:
+                raise ValueError(f"Estado inválido: {nuevo_estado}")
+            db.commit()
+            db.refresh(incidencia)
+            return incidencia
+        except Exception as e:
+            db.rollback()
+            raise ValueError(f"Error al cambiar el estado de la incidencia: {str(e)}")
