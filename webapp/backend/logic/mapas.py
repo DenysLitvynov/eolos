@@ -1,4 +1,3 @@
-# File: backend/logic/mapas.py (MODIFICADO)
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 04-12-2025
@@ -266,66 +265,77 @@ class LogicaMapas:
     # ---------------------------------------------------------
     # Unifica medidas de todos tipos para un día (ambas tablas) - MODIFICADO para acumulativo hasta cada hora
     # ---------------------------------------------------------
-    def unificar_medidas_de_todos_tipos_de_dia(self, db: Session, fecha: datetime, esquina_inf_izq: PosicionGPS, esquina_sup_der: PosicionGPS) -> Dict:
-        unified: Dict[str, Dict] = {}
+    def unificar_medidas_de_todos_tipos_de_dia(self, db: Session, fecha: datetime, esquina_inf_izq, esquina_sup_der):
+        unified = {}
+
         for t in self.GASES:
             for h in range(24):
-                end_h = fecha.replace(hour=h, minute=59, second=59, microsecond=999999, tzinfo=timezone.utc)
-                medidas = self.obtener_medidas_tipo_fecha_sitio(db, t, fecha, esquina_inf_izq, esquina_sup_der, False)
-                interps = self.obtener_medidas_tipo_fecha_sitio(db, t, fecha, esquina_inf_izq, esquina_sup_der, True)
-                all_m_until_h = [m for m in (medidas + interps) if m.fecha_hora <= end_h]
-                
-                # Tomar última por ubicación
+                start_h = fecha.replace(hour=h, minute=0, second=0, microsecond=0, tzinfo=timezone.utc)
+                end_h   = fecha.replace(hour=h, minute=59, second=59, microsecond=999999, tzinfo=timezone.utc)
+
+                # Solo medidas de ESTA HORA (mucho más rápido)
+                reales = db.query(DBMedida).filter(
+                    DBMedida.tipo == t,
+                    DBMedida.fecha_hora >= start_h,
+                    DBMedida.fecha_hora <= end_h,
+                    DBMedida.lat >= esquina_inf_izq.lat,
+                    DBMedida.lat <= esquina_sup_der.lat,
+                    DBMedida.lon >= esquina_inf_izq.lon,
+                    DBMedida.lon <= esquina_sup_der.lon
+                ).all()
+
+                interps = db.query(DBInterpolada).filter(
+                    DBInterpolada.tipo == t,
+                    DBInterpolada.fecha_hora >= start_h,
+                    DBInterpolada.fecha_hora <= end_h,
+                    DBInterpolada.lat >= esquina_inf_izq.lat,
+                    DBInterpolada.lat <= esquina_sup_der.lat,
+                    DBInterpolada.lon >= esquina_inf_izq.lon,
+                    DBInterpolada.lon <= esquina_sup_der.lon
+                ).all()
+
+                # Elegimos siempre la última medida por posición
+                all_h = reales + interps
                 latest_by_pos = {}
-                for m in sorted(all_m_until_h, key=lambda x: x.fecha_hora):
-                    key_pos = f"{m.posicion.lat}_{m.posicion.lon}"
-                    latest_by_pos[key_pos] = m.valor
-                
-                for key_pos, valor in latest_by_pos.items():
-                    lat, lon = map(float, key_pos.split('_'))
-                    key = f"{h}_{lat}_{lon}"
-                    if key not in unified:
-                        unified[key] = {}
-                    unified[key][t.name] = valor
+                for m in sorted(all_h, key=lambda x: x.fecha_hora):
+                    key = f"{m.lat}_{m.lon}"
+                    latest_by_pos[key] = m.valor
+
+                for key, valor in latest_by_pos.items():
+                    lat, lon = map(float, key.split('_'))
+                    index = f"{h}_{key}"
+                    if index not in unified:
+                        unified[index] = {}
+                    unified[index][t.name] = valor
+
         return unified
 
     # ---------------------------------------------------------
     # Calcula calidad general y almacena en DB - Sin cambios mayores, pero usa unificado acumulativo
     # ---------------------------------------------------------
-    def calcular_calidad_general_del_aire(self, db: Session, medidas_json: Dict, fecha: datetime) -> str:
+    def calcular_calidad_general_del_aire(self, db: Session, medidas_json: Dict, fecha: datetime):
         try:
-            # 0. Check if data already exists for this day
-            start_day = fecha.replace(hour=0, minute=0, second=0, microsecond=0)
-            end_day = start_day + timedelta(days=1)
-            
-            exists = db.query(CalidadGeneral).filter(
-                CalidadGeneral.fecha_hora >= start_day,
-                CalidadGeneral.fecha_hora < end_day
-            ).first()
-            
-            if exists:
-                print(f"Calidad general para {start_day.date()} ya existe. No se recalcula.")
-                return "OK"
-
             for key, vals in medidas_json.items():
-                parts = key.split('_')
-                if len(parts) != 3:
-                    continue
-                h, lat_str, lon_str = parts
+                h, lat, lon = key.split('_')
                 h = int(h)
-                lat = float(lat_str)
-                lon = float(lon_str)
+                lat = float(lat)
+                lon = float(lon)
+
+                # Sacar AQI por contaminante
                 aqis = []
-                for t_name, val in vals.items():
+                for t_name, value in vals.items():
                     t = TipoMedidaEnum[t_name]
-                    aqi = self.get_aqi(t, val)
-                    aqis.append(aqi)
+                    aqis.append(self.get_aqi(t, value))
+
                 if not aqis:
                     continue
+
                 max_aqi = max(aqis)
                 color = self.get_color_from_aqi(max_aqi)
+
                 fh = fecha.replace(hour=h, minute=0, second=0, microsecond=0, tzinfo=timezone.utc)
-                cg = CalidadGeneral(
+
+                entry = CalidadGeneral(
                     valor_id=str(uuid.uuid4()),
                     valor=max_aqi,
                     color=color,
@@ -333,9 +343,11 @@ class LogicaMapas:
                     lat=lat,
                     lon=lon
                 )
-                db.add(cg)
+                db.add(entry)
+
             db.commit()
             return "OK"
+
         except Exception as e:
             db.rollback()
             return f"Error: {str(e)}"

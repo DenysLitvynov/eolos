@@ -1,4 +1,3 @@
-# File: backend/api/admin_mapas_api.py
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 05-12-2025

@@ -1,4 +1,3 @@
-# File: backend/logic/tests/test_logic_admin_mapas.py
 """
 Autor: Denys Litvynov Lymanets
 Fecha: 06-12-2025

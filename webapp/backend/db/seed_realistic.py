@@ -161,16 +161,26 @@ def seed_data():
         db.commit()
 
         # ---------------------------------------------------------
-        # ---------------------------------------------------------
-        # 8. Medidas FAKE – verde/amarillo/rojo – Gandia
 
-        def generar_medidas_fake(db, placas):
+        # ---------------------------------------------------------
+        # 8. Medidas REALISTAS – adaptadas a Platja i Grau de Gandia
+
+        def generar_medidas_realistas(db, placas):
             import uuid
             from datetime import datetime, timezone, timedelta
             import random
             from db.models import Medida, TipoMedidaEnum
 
             now = datetime.now(timezone.utc)
+
+            # Rango oficial del PDF + PMs normales
+            RANGOS = {
+                TipoMedidaEnum.o3:   (0, 140),
+                TipoMedidaEnum.no2:  (0, 200),
+                TipoMedidaEnum.co:   (0, 12),
+                TipoMedidaEnum.pm2_5:(1, 50),
+                TipoMedidaEnum.pm10: (5, 90),
+            }
 
             # ------------ COORDENADAS REALES DE PLATJA I GRAU DE GANDIA --------------
             LAT_MIN = 38.9865
@@ -179,67 +189,45 @@ def seed_data():
             LON_MAX = -0.1485
             # --------------------------------------------------------------------------
 
-            RANGOS = {
-                "verde": {
-                    TipoMedidaEnum.o3: (0, 80),
-                    TipoMedidaEnum.no2: (0, 30),
-                    TipoMedidaEnum.co: (0, 5),
-                    TipoMedidaEnum.pm2_5:(1, 12),
-                    TipoMedidaEnum.pm10:(5, 25),
-                },
-                "amarillo": {
-                    TipoMedidaEnum.o3: (100, 120),
-                    TipoMedidaEnum.no2: (40, 120),
-                    TipoMedidaEnum.co: (5, 10),
-                    TipoMedidaEnum.pm2_5:(12, 25),
-                    TipoMedidaEnum.pm10:(25, 50),
-                },
-                "rojo": {
-                    TipoMedidaEnum.o3: (120, 180),
-                    TipoMedidaEnum.no2: (200, 280),
-                    TipoMedidaEnum.co: (10, 18),
-                    TipoMedidaEnum.pm2_5:(25, 60),
-                    TipoMedidaEnum.pm10:(50, 120),
-                }
-            }
-
             medidas = []
-            POR_FRANJA = 5000
-            orden = ["verde", "amarillo", "rojo"]
+            TOTAL = 15000
 
-            for franja in orden:
-                for _ in range(POR_FRANJA):
-                    placa = random.choice(placas)
+            for _ in range(TOTAL):
+                placa = random.choice(placas)
 
-                    lat = random.uniform(LAT_MIN, LAT_MAX)
-                    lon = random.uniform(LON_MIN, LON_MAX)
-                    fecha = now - timedelta(hours=random.uniform(0, 48))
+                lat = random.uniform(LAT_MIN, LAT_MAX)
+                lon = random.uniform(LON_MIN, LON_MAX)
 
-                    tipo = random.choice(list(RANGOS[franja].keys()))
-                    vmin, vmax = RANGOS[franja][tipo]
-                    valor = random.uniform(vmin, vmax)
+                fecha = now - timedelta(hours=random.uniform(0, 48))
 
-                    medidas.append(
-                        Medida(
-                            lectura_id=str(uuid.uuid4()),
-                            placa_id=placa.placa_id,
-                            trayecto_id=None,
-                            fecha_hora=fecha,
-                            tipo=tipo,
-                            valor=valor,
-                            lat=lat,
-                            lon=lon
-                        )
+                tipo = random.choice(list(RANGOS.keys()))
+                vmin, vmax = RANGOS[tipo]
+                valor = random.uniform(vmin, vmax)
+
+                medidas.append(
+                    Medida(
+                        lectura_id=str(uuid.uuid4()),
+                        placa_id=placa.placa_id,
+                        trayecto_id=None,
+                        fecha_hora=fecha,
+                        tipo=tipo,
+                        valor=valor,
+                        lat=lat,
+                        lon=lon
                     )
+                )
 
             db.add_all(medidas)
             db.commit()
 
-        # Ejecutar tras placas
+        # Ejecutar tras crear las placas
         placas_all = db.query(PlacaSensores).all()
-        generar_medidas_fake(db, placas_all)
+        generar_medidas_realistas(db, placas_all)
 
-        print("Medidas FAKE (Gandia) generadas correctamente.")
+        print("Medidas REALISTAS (Gandia) generadas correctamente.")
+
+
+        # ---------------------------------------------------------
 
         # 9. Incidencia de ejemplo
         incidencia = Incidencia(
@@ -265,4 +253,5 @@ def seed_data():
 # ---------------------------------------------------------
 
 if __name__ == "__main__":
-    seed_data()
+     seed_data()
+
