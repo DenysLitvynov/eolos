@@ -218,7 +218,7 @@ def seed_data():
             bicicleta_id=bicicletas[0].bicicleta_id,
             descripcion="Rueda pinchada",
             estado=EstadoIncidencia.nuevo,
-            fuente=FuenteReporte.web
+            fuente=FuenteReporte.bici
         )
         db.add(incidencia_tec1)
         db.commit()
@@ -229,7 +229,7 @@ def seed_data():
             bicicleta_id=bicicletas[0].bicicleta_id,
             descripcion="Bici Vandalizada",
             estado=EstadoIncidencia.nuevo,
-            fuente=FuenteReporte.web
+            fuente=FuenteReporte.bici
         )
         db.add(incidencia_tec2)
         db.commit()
