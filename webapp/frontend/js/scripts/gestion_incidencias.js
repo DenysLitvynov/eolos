@@ -225,6 +225,52 @@ function configurarEventosIncidencias() {
     });
 }
 
+// Configura la búsqueda en la barra de búsqueda: filtra tarjetas por título (case-insensitive)
+function configurarBusqueda() {
+    const input = document.querySelector('.campo-busqueda');
+    const contenedor = document.getElementById('grid-incidencias');
+    if (!input || !contenedor) return;
+
+    // Elemento para mostrar cuando no hay resultados
+    let noResultsEl = document.querySelector('.no-results-message');
+    if (!noResultsEl) {
+        noResultsEl = document.createElement('p');
+        noResultsEl.className = 'no-results-message';
+        noResultsEl.style.display = 'none';
+        noResultsEl.textContent = 'No se encontraron incidencias que coincidan.';
+        contenedor.parentNode.insertBefore(noResultsEl, contenedor.nextSibling);
+    }
+
+    const filterFn = (query) => {
+        const q = (query || '').trim().toLowerCase();
+        const tarjetas = Array.from(contenedor.querySelectorAll('.tarjeta-incidencia'));
+        let visibleCount = 0;
+        tarjetas.forEach(tarjeta => {
+            const titulo = tarjeta.querySelector('.titulo-incidencia')?.textContent?.toLowerCase() || '';
+            const fuente = tarjeta.querySelector('.detalle-incidencia.fuente')?.textContent?.toLowerCase() || '';
+            // Coincidir si el query está en el título o en la fuente
+            const match = q === '' || titulo.includes(q) || fuente.includes(q);
+            tarjeta.style.display = match ? '' : 'none';
+            if (match) visibleCount += 1;
+        });
+
+        noResultsEl.style.display = visibleCount === 0 ? '' : 'none';
+    };
+
+    // Filtrado en tiempo real
+    input.addEventListener('input', (e) => {
+        filterFn(e.target.value);
+    });
+
+    // Soporte tecla Enter para buscar (prevenir submit si estuviera en form)
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            filterFn(e.target.value);
+        }
+    });
+}
+
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -240,6 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Configuramos los eventos después de que las tarjetas se han insertado
             configurarEventosIncidencias();
+            // Configurar búsqueda en la barra
+            configurarBusqueda();
         })
         .catch(err => {
             console.error('Error cargando incidencias filtradas:', err);
