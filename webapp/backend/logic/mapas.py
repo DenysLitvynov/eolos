@@ -23,9 +23,17 @@ class LogicaMapas:
         pass
 
     # ---------------------------------------------------------
-    # Función auxiliar para calcular AQI basado en el tipo y valor
-    # ---------------------------------------------------------
     def get_aqi(self, tipo: TipoMedidaEnum, value: float) -> float:
+        """
+        Calcula el AQI basado en el tipo y valor de la medida.
+
+        Args:
+            tipo (TipoMedidaEnum): Tipo de medida (pm2_5, pm10, no2, o3).
+            value (float): Valor de la medida.
+
+        Returns:
+            float: Valor de AQI calculado.
+        """
         if value < 0:
             return 0.0
 
@@ -94,9 +102,16 @@ class LogicaMapas:
         return 0.0
 
     # ---------------------------------------------------------
-    # Función auxiliar para obtener color basado en AQI
-    # ---------------------------------------------------------
     def get_color_from_aqi(self, aqi: float) -> str:
+        """
+        Obtiene el color basado en el valor de AQI.
+
+        Args:
+            aqi (float): Valor de AQI.
+
+        Returns:
+            str: Color correspondiente ("verde", "amarillo", "rojo").
+        """
         if aqi <= 50:
             return "verde"
         elif aqi <= 100:
@@ -105,14 +120,20 @@ class LogicaMapas:
             return "rojo"
 
     # ---------------------------------------------------------
-    # Obtiene el mapa para un tipo y día, dentro de bounds - MODIFICADO para acumulativo
-    # Para cada hora, recolecta todas las medidas hasta esa hora inclusive, y toma la más reciente por ubicación
-    # ---------------------------------------------------------
-    # File: backend/logic/mapas.py → método obtener_mapa_de_tipo_de_dia_de_destino
-
-    # File: backend/logic/mapas.py → método obtener_mapa_de_tipo_de_dia_de_destino
-
     def obtener_mapa_de_tipo_de_dia_de_destino(self, db: Session, tipo: str, fecha: datetime, esquina_inf_izq: PosicionGPS, esquina_sup_der: PosicionGPS) -> Dict:
+        """
+        Obtiene el mapa para un tipo y día, dentro de bounds. Para cada hora, recolecta todas las medidas hasta esa hora inclusive, y toma la más reciente por ubicación.
+
+        Args:
+            db (Session): Sesión de base de datos.
+            tipo (str): Tipo de medida o "general".
+            fecha (datetime): Fecha para obtener los datos.
+            esquina_inf_izq (PosicionGPS): Esquina inferior izquierda del bounding box.
+            esquina_sup_der (PosicionGPS): Esquina superior derecha del bounding box.
+
+        Returns:
+            Dict: Datos del mapa organizados por hora.
+        """
         response = {"data": {}}
         if tipo == "general":
             # Consulta calidad_general en lugar de medidas
@@ -164,10 +185,21 @@ class LogicaMapas:
             return response
 
     # ---------------------------------------------------------
-
-    # Obtiene medidas de tipo/fecha/sitio, reales o interpoladas - Sin cambios
-    # ---------------------------------------------------------
     def obtener_medidas_tipo_fecha_sitio(self, db: Session, tipo: TipoMedidaEnum, fecha: datetime, esquina_inf_izq: PosicionGPS, esquina_sup_der: PosicionGPS, interpoladas: bool = False) -> List[Medida]:
+        """
+        Obtiene medidas de un tipo, fecha y sitio, reales o interpoladas.
+
+        Args:
+            db (Session): Sesión de base de datos.
+            tipo (TipoMedidaEnum): Tipo de medida.
+            fecha (datetime): Fecha para obtener los datos.
+            esquina_inf_izq (PosicionGPS): Esquina inferior izquierda del bounding box.
+            esquina_sup_der (PosicionGPS): Esquina superior derecha del bounding box.
+            interpoladas (bool): Si se deben obtener interpoladas (default False).
+
+        Returns:
+            List[Medida]: Lista de medidas.
+        """
         start = fecha.replace(hour=0, minute=0, second=0, microsecond=0, tzinfo=timezone.utc)
         end = start + timedelta(days=1)
         if not interpoladas:
@@ -194,9 +226,17 @@ class LogicaMapas:
             return [Medida(None, None, q.tipo, q.valor, q.fecha_hora, PosicionGPS(q.lat, q.lon)) for q in query]
 
     # ---------------------------------------------------------
-    # Construye lista de puntos de grilla para interpolación - Sin cambios
-    # ---------------------------------------------------------
     def construir_matriz_interpolacion(self, esquina_inf_izq: PosicionGPS, esquina_sup_der: PosicionGPS) -> List[PosicionGPS]:
+        """
+        Construye una lista de puntos de grilla para interpolación.
+
+        Args:
+            esquina_inf_izq (PosicionGPS): Esquina inferior izquierda del bounding box.
+            esquina_sup_der (PosicionGPS): Esquina superior derecha del bounding box.
+
+        Returns:
+            List[PosicionGPS]: Lista de puntos en la grilla.
+        """
         delta_lat = 0.0009  # ~100m
         delta_lon = 0.00114  # ~100m at 39N
         points = []
@@ -210,9 +250,17 @@ class LogicaMapas:
         return points
 
     # ---------------------------------------------------------
-    # Interpola valor para un punto usando IDW - Sin cambios
-    # ---------------------------------------------------------
     def interpolar_para_punto(self, punto: PosicionGPS, medidas: List[Medida]) -> float:
+        """
+        Interpola el valor para un punto usando IDW (Inverse Distance Weighting).
+
+        Args:
+            punto (PosicionGPS): Punto para interpolar.
+            medidas (List[Medida]): Lista de medidas cercanas.
+
+        Returns:
+            float: Valor interpolado.
+        """
         if not medidas:
             return 0.0
         weights_sum = 0.0
@@ -230,9 +278,20 @@ class LogicaMapas:
         return weighted_val / weights_sum
 
     # ---------------------------------------------------------
-    # Realiza interpolación para tipo/fecha, almacena en DB - MODIFICADO para interpolaciones por hora
-    # ---------------------------------------------------------
     def interpolar_para_tipo_fecha(self, db: Session, tipo: TipoMedidaEnum, fecha: datetime, esquina_inf_izq: PosicionGPS, esquina_sup_der: PosicionGPS) -> str:
+        """
+        Realiza interpolación para un tipo y fecha, almacena en DB. Interpolaciones por hora.
+
+        Args:
+            db (Session): Sesión de base de datos.
+            tipo (TipoMedidaEnum): Tipo de medida.
+            fecha (datetime): Fecha para interpolar.
+            esquina_inf_izq (PosicionGPS): Esquina inferior izquierda del bounding box.
+            esquina_sup_der (PosicionGPS): Esquina superior derecha del bounding box.
+
+        Returns:
+            str: "OK" si exitoso, mensaje de error si no.
+        """
         try:
             grid_points = self.construir_matriz_interpolacion(esquina_inf_izq, esquina_sup_der)
             for h in range(24):
@@ -263,9 +322,19 @@ class LogicaMapas:
             return f"Error: {str(e)}"
 
     # ---------------------------------------------------------
-    # Unifica medidas de todos tipos para un día (ambas tablas) - MODIFICADO para acumulativo hasta cada hora
-    # ---------------------------------------------------------
     def unificar_medidas_de_todos_tipos_de_dia(self, db: Session, fecha: datetime, esquina_inf_izq, esquina_sup_der):
+        """
+        Unifica medidas de todos los tipos para un día (ambas tablas). Acumulativo hasta cada hora.
+
+        Args:
+            db (Session): Sesión de base de datos.
+            fecha (datetime): Fecha para unificar.
+            esquina_inf_izq (PosicionGPS): Esquina inferior izquierda del bounding box.
+            esquina_sup_der (PosicionGPS): Esquina superior derecha del bounding box.
+
+        Returns:
+            Dict: Medidas unificadas por hora y posición.
+        """
         unified = {}
 
         for t in self.GASES:
@@ -311,9 +380,18 @@ class LogicaMapas:
         return unified
 
     # ---------------------------------------------------------
-    # Calcula calidad general y almacena en DB - Sin cambios mayores, pero usa unificado acumulativo
-    # ---------------------------------------------------------
     def calcular_calidad_general_del_aire(self, db: Session, medidas_json: Dict, fecha: datetime):
+        """
+        Calcula la calidad general del aire y almacena en DB. Usa unificado acumulativo.
+
+        Args:
+            db (Session): Sesión de base de datos.
+            medidas_json (Dict): Medidas unificadas.
+            fecha (datetime): Fecha para calcular.
+
+        Returns:
+            str: "OK" si exitoso, mensaje de error si no.
+        """
         try:
             for key, vals in medidas_json.items():
                 h, lat, lon = key.split('_')

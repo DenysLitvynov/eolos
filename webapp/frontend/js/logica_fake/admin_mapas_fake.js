@@ -1,8 +1,7 @@
-// File: frontend/js/logica_fake/admin_mapas_fake.js
 /**
  * Autor: Denys Litvynov Lymanets
  * Fecha: 05-12-2025
- * Descripción: Clase fake para peticiones API de admin mapas.
+ * Descripción: Clase proxy para peticiones API de admin mapas.
  */
 
 import { PeticionarioREST } from '../utilidades/peticionario_REST.js';
