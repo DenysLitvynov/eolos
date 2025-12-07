@@ -1,59 +1,23 @@
 /**========================
  * GESTION DE INCIDENCIAS.js
  * =========================
- * Script que maneja la funcionalidad de la pagina de gestion de incidencias.
+ * Script que maneja la funcionalidad de la pagina de gestion de incidencias(conexion al backend,intro ).
  * @author Ariel Bejaran
- * @todo implementar la conexión con la base de datos para obtener y actualizar el estado de las incidencias.
+ * @date 05-12-2025
  * ========================
  */
 
 //clase pop up que nos permite hacer pop ups dinamicos
 import { Popup } from '../utilidades/class_popup.js';
-import { GestionIncidenciasFake } from '../logica_fake/gestion_incidencias_fake.js'; // ⬅️ Usaremos esta clase
+import { GestionIncidenciasFake } from '../logica_fake/gestion_incidencias_fake.js'; 
+import { IncidenciaCard } from '../utilidades/class_incidenciaCard.js';
+
 
 const logicaIncidencias = new GestionIncidenciasFake();
 
 /*========================================================================
  FUNCIONAMIENTO TARJETAS
  ========================================================================*/
-/**
- * Crea el elemento DOM completo para una tarjeta de incidencia.
- * @param {object} datos - Objeto con los datos de la incidencia.
- * @param {string} datos.titulo - El título de la incidencia.
- * @param {string} datos.tiempo - El tiempo transcurrido (e.g., "Hace: 5min").
- * @param {string} datos.fuente - La fuente de la incidencia (e.g., "Web").
- * @param {boolean} datos.esResuelto - True si la incidencia está resuelta.
- * @returns {HTMLElement} El elemento div.tarjeta-incidencia creado.
- */
-class IncidenciaCard {
-    constructor({ titulo, tiempo, fuente, esResuelto = false }) {
-        this.titulo = titulo || 'Incidencia';
-        this.tiempo = tiempo || 'Hace: ahora';
-        this.fuente = fuente || '';
-        this.esResuelto = !!esResuelto;
-    }
-
-    render() {
-        const card = document.createElement('div');
-        card.classList.add('tarjeta-incidencia');
-
-        const estadoClase = this.esResuelto ? 'estado-resuelto' : 'estado-noresuelto';
-        const estadoTexto = this.esResuelto ? 'RESUELTO' : 'NO RESUELTO';
-
-        card.innerHTML = `
-            <div class="encabezado-estado ${estadoClase}">
-                <span class="pildora-estado">${estadoTexto}</span>
-            </div>
-            <div class="contenido-tarjeta">
-                <h2 class="titulo-incidencia">${this.titulo}</h2>
-                <p class="detalle-incidencia tiempo">${this.tiempo.startsWith('Hace:') ? this.tiempo : 'Hace: ' + this.tiempo}</p>
-                <p class="detalle-incidencia fuente">${this.fuente}</p>
-            </div>
-        `;
-
-        return card;
-    }
-}
 
 /**
  * Inserta múltiples tarjetas de incidencia en el contenedor 'grid-incidencias'.
@@ -176,7 +140,6 @@ function crearContenidoPopup(datos) {
     actionButton.textContent = datos.actionText;
     actionButton.className = 'popup-action-btn fas fa-check'; 
 
-    // Función de Acción (Simulación - se necesita la instancia del popup para cerrarlo)
     const handleAction = () => {
         console.log(`Incidencia "${datos.titulo}" marcada como ${datos.esResuelto ? 'cerrada' : 'resuelta'} (Simulación)`); 
         // Nota: El popup se cerrará fuera de esta función, después de la creación.
@@ -225,6 +188,7 @@ function configurarEventosIncidencias() {
                     console.warn('No se encontró incidencia_id para cambiar estado');
                 }
                 incidenciaPopup.cerrarPopup(); // Cierra el pop-up después de la acción
+                window.location.reload();
             });
 
 
@@ -233,6 +197,14 @@ function configurarEventosIncidencias() {
     });
 }
 
+/*========================================================================
+ FUNCIONAMIENTO POP-UPS
+ ========================================================================*/
+
+
+ /*========================================================================
+ BARRA DE BÚSQUEDA, ORDENAMIENTO Y FILTRADO
+ ========================================================================*/
 // Configura la búsqueda en la barra de búsqueda: filtra tarjetas por título (case-insensitive)
 function configurarBusqueda() {
     const input = document.querySelector('.campo-busqueda');
@@ -414,6 +386,10 @@ function configurarFiltro() {
         }
     });
 }
+ /*========================================================================
+ BARRA DE BÚSQUEDA, ORDENAMIENTO Y FILTRADO
+ ========================================================================*/
+
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
@@ -427,7 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Insertamos las tarjetas
             insertarIncidencias(incidencias);
-            
             // Configuramos los eventos después de que las tarjetas se han insertado
             configurarEventosIncidencias();
             // Configurar búsqueda en la barra
@@ -441,7 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error cargando incidencias filtradas:', err);
             // Mostrar un mensaje de error o limpiar el contenedor
             insertarIncidencias([]);
-            // Opcional: mostrar un mensaje de error visible al usuario si no pudo autenticar o cargar datos
             const contenedor = document.getElementById('grid-incidencias');
             if (contenedor) {
                 contenedor.innerHTML = '<p class="error-carga">No se pudieron cargar las incidencias. Por favor, inicie sesión con el rol apropiado.</p>';
