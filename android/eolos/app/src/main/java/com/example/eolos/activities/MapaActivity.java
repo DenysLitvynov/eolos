@@ -35,8 +35,18 @@ public class MapaActivity extends AppCompatActivity {
         settings.setDomStorageEnabled(true);
 
         web.setWebViewClient(new WebViewClient());
+        //----------------------------------------------------------------------------
+        //----------------------------------------------------------------------------
+        //----------------------------------------------------------------------------
+        web.loadUrl("http://192.168.1.110:8000/pages/mapa_android.html"); //IMPORTANTE CAMBIAR URL POR LA IP QUE
+        //----------------------------------------------------------------------------
+        //----------------------------------------------------------------------------
+        //----------------------------------------------------------------------------
 
+<<<<<<< HEAD
         web.loadUrl("http://10.0.2.2:8000/pages/mapa_android.html");
+=======
+>>>>>>> origin/develop
     }
 
     private void setupBottomNavigation() {
