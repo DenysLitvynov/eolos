@@ -1,5 +1,5 @@
 /*
-Autor: Adaptado por GitHub Copilot
+Autor: Ariel Bejaran
 Fecha: 05-12-2025
 Descripción: Cliente fake (proxy) para gestionar incidencias desde el frontend.
 Se apoya en `PeticionarioREST` para comunicarse con la API backend.

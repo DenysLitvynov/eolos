@@ -1,5 +1,5 @@
 """
-Autor: GitHub Copilot (adaptado)
+Autor: Ariel Bejaran
 Fecha: 06-12-2025
 Descripción: Lógica específica para la página de gestión de incidencias.
 Contiene funciones auxiliares para listar incidencias públicas (uso en frontend de pruebas).
