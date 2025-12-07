@@ -5,6 +5,12 @@ Descripción: Script para generar JSONs con datos de la base de datos después d
 """
 
 import json
+import sys
+import os
+
+# Permitir imports absolutos desde backend
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from db.database import SessionLocal
 from db.models import Mibisivalencia, Estacion, Bicicleta
 
@@ -25,7 +31,12 @@ try:
 
     # Bicicletas
     bicicletas = [
-        {"bicicleta_id": b.bicicleta_id, "estacion_id": b.estacion_id, "qr_code": b.qr_code, "estado": b.estado}
+        {
+            "bicicleta_id": b.bicicleta_id,
+            "estacion_id": b.estacion_id,
+            "qr_code": b.qr_code,
+            "estado": str(b.estado)  # Convertir Enum a string
+        }
         for b in db.query(Bicicleta).all()
     ]
     with open('bicicletas.json', 'w') as f:
@@ -34,3 +45,4 @@ try:
     print("JSONs generados: targetas.json, estaciones.json, bicicletas.json")
 finally:
     db.close()
+

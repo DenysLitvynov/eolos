@@ -201,7 +201,7 @@ class SimuladorUsuarios:
         Returns:
             float: Intervalo en segundos entre medidas por usuario.
         """
-        base_interval = 0.01  # 10ms base → ajustable para stress
+        base_interval = 27.7  # 10ms base → ajustable para stress
         return base_interval / max(num_usuarios, 1)
 
     # ---------------------------------------------------------
