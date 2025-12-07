@@ -142,7 +142,6 @@ public class PerfilActivity extends AppCompatActivity {
         // ===== Volver / descartar cambios =====
         btnVolver.setOnClickListener(v -> {
             rellenarUI(perfil);  // restaura lo que hay en objeto perfil
-            Toast.makeText(this, "Cambios descartados", Toast.LENGTH_SHORT).show();
         });
 
         // ===== Flecha atrás del header =====
@@ -206,6 +205,7 @@ public class PerfilActivity extends AppCompatActivity {
     /** Rellena los campos visibles (nunca contraseña) */
     private void rellenarUI(PerfilFake p) {
         if (p == null) return;
+        Log.d("PerfilActivity", "rellenarUI: " + p.toString());
         etNombre.setText(nv(p.getNombre()));
         etCorreo.setText(nv(p.getCorreo()));
         etTarjeta.setText(nv(p.getTarjeta()));
@@ -214,6 +214,7 @@ public class PerfilActivity extends AppCompatActivity {
         etContrasenaActual.setText("");
         etNuevaContrasena.setText("");
         etRepetirContrasena.setText("");
+
     }
 
     // ---------------- Validaciones (igual que web) ----------------
