@@ -68,4 +68,40 @@ class LogicaCalidadAire:
         except Exception as e:
             raise RuntimeError(f"Error obteniendo AQI: {e}")
 
+    def obtener_historico_24h(self, db: Session, placa_id: str):
+        """
+        Obtiene todas las mediciones de las últimas 24 horas para una placa.
+        
+        Args:
+            db (Session): Sesión de BD.
+            placa_id (str): ID de la placa.
+        
+        Returns:
+            list: Lista de mediciones ordenadas por fecha
+        """
+        try:
+            from datetime import datetime, timedelta, timezone
+            hace_24h = datetime.now(timezone.utc) - timedelta(hours=24)
+            
+            mediciones = db.query(Medida).filter(
+                Medida.placa_id == placa_id,
+                Medida.fecha_hora >= hace_24h
+            ).order_by(Medida.fecha_hora.asc()).all()
+            
+            if not mediciones:
+                raise ValueError(f"No hay mediciones en las últimas 24 horas para {placa_id}")
+            
+            return [
+                {
+                    "valor": float(m.valor),
+                    "fecha_hora": m.fecha_hora.isoformat(),
+                    "aqi": self.convertir_pm25_a_aqi(m.valor)
+                }
+                for m in mediciones
+            ]
+        except ValueError:
+            raise
+        except Exception as e:
+            raise RuntimeError(f"Error obteniendo histórico: {e}")
+
 # ---------------------------------------------------------

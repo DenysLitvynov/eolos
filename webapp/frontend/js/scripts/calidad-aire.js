@@ -26,8 +26,8 @@ const svgBad = `
 // APARIENCIA SEGÚN AQI
 // -------------------------------
 
-// Obtener placa_id del localStorage (guardado en login)
-const placa_id = localStorage.getItem('placa_id') || "8fb5ef4c-f552-4cad-9c58-6f0e80a97b53";
+// Obtener placa_id del localStorage
+const placa_id = localStorage.getItem('placa_id') || "005d0194-d3f0-4eea-be1f-5a9b4ab39e05";
 
 const numberEl = document.getElementById("aqi-number");
 const textEl = document.getElementById("aqi-text");
@@ -65,6 +65,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const resultado = await logicaAire.obtenerAQI(placa_id);
         actualizarUI(resultado.aqi);
+        
+        // Cargar gráfico con histórico
+        await cargarGrafico(placa_id);
     } catch (error) {
         console.error('Error al obtener AQI:', error);
         numberEl.textContent = "N/A";
@@ -73,31 +76,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-
-// -------------------------------
-// GRÁFICA
-// -------------------------------
-
-// Datos provisionales CO2 (0–300)
-const hours = Array.from({ length: 24 }, (_, i) => {
-    const h = new Date();
-    h.setHours(h.getHours() - (23 - i));
-    return h.getHours() + ":00";
-});
-
-// Valores fake entre 20 y 280
-const co2Values = Array.from({ length: 24 }, () => Math.floor(Math.random() * 280));
-
-function getColorForValue(v) {
-    if (v <= 49) return "#4CAF50";      // buena
-    if (v <= 99) return "#ffcc00";      // mala
-    return "#e53935";                   // poco saludable
+// Función para formatear hora desde fecha ISO
+function formatearHora(fechaISO) {
+    const fecha = new Date(fechaISO);
+    return fecha.getHours().toString().padStart(2, '0') + ':' + 
+           fecha.getMinutes().toString().padStart(2, '0');
 }
 
-const pointColors = co2Values.map(v => getColorForValue(v));
+// Función para obtener color según valor
+function getColorAQI(valor) {
+    if (valor <= 49) return "#4CAF50";
+    if (valor <= 99) return "#ffcc00";
+    return "#e53935";
+}
 
-// Función para calcular resumen de los datos del gráfico
-function calcularResumen(valores) {
+// Función para calcular resumen de los datos
+function calcularResumen(mediciones) {
+    const valores = mediciones.map(m => m.aqi);
     const promedio = Math.round(valores.reduce((a, b) => a + b, 0) / valores.length);
     const maximo = Math.max(...valores);
     const minimo = Math.min(...valores);
@@ -108,16 +103,6 @@ function calcularResumen(valores) {
         minimo,
         total_mediciones: valores.length
     };
-}
-
-// Calcular resumen con datos del gráfico
-const resumen = calcularResumen(co2Values);
-
-// Función para obtener color según valor
-function getColorAQI(valor) {
-    if (valor <= 49) return "#4CAF50";
-    if (valor <= 99) return "#ffcc00";
-    return "#e53935";
 }
 
 // Función para actualizar el resumen diario
@@ -145,46 +130,72 @@ function actualizarResumenDiario(datos) {
     }
 }
 
-const ctx = document.getElementById('co2Chart').getContext('2d');
+// Variable para guardar la instancia del gráfico
+let co2Chart = null;
 
-const co2Chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: hours,
-        datasets: [{
-            label: 'CO₂ (ppm)',
-            data: co2Values,
-            borderColor: '#555',           
-            borderWidth: 2,
-            fill: false,
-            pointBackgroundColor: pointColors,
-            pointRadius: 6,
-            tension: 0.3
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                min: 0,
-                max: 300,
-                ticks: {
-                    stepSize: 50
-                },
-                title: {
-                    display: true,
-                    text: 'Niveles de CO₂ (ppm)'
-                }
+// Función para cargar y mostrar el gráfico
+async function cargarGrafico(placa_id) {
+    try {
+        const mediciones = await logicaAire.obtenerHistorico24h(placa_id);
+        
+        // Preparar datos
+        const horas = mediciones.map(m => formatearHora(m.fecha_hora));
+        const valores = mediciones.map(m => m.aqi);
+        const colores = valores.map(v => getColorAQI(v));
+        
+        // Destruir gráfico anterior si existe
+        if (co2Chart) {
+            co2Chart.destroy();
+        }
+        
+        // Crear gráfico
+        const ctx = document.getElementById('co2Chart').getContext('2d');
+        co2Chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: horas,
+                datasets: [{
+                    label: 'AQI',
+                    data: valores,
+                    borderColor: '#555',           
+                    borderWidth: 2,
+                    fill: false,
+                    pointBackgroundColor: colores,
+                    pointRadius: 6,
+                    tension: 0.3
+                }]
             },
-            x: {
-                title: {
-                    display: true,
-                    text: 'Hora del día'
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 300,
+                        ticks: {
+                            stepSize: 50
+                        },
+                        title: {
+                            display: true,
+                            text: 'Índice de Calidad del Aire (AQI)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Hora del día'
+                        }
+                    }
                 }
             }
-        }
+        });
+        
+        // Calcular y mostrar resumen
+        const resumen = calcularResumen(mediciones);
+        actualizarResumenDiario(resumen);
+        
+    } catch (error) {
+        console.error('Error al cargar gráfico:', error);
+        document.getElementById('resumen-diario').innerHTML = 
+            '<p class="error-message">Error al cargar los datos del gráfico</p>';
     }
-});
-
-// Actualizar el resumen cuando el gráfico esté listo
-actualizarResumenDiario(resumen);
+}

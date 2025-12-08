@@ -20,6 +20,11 @@ class AQIResponse(BaseModel):
     aqi: int
     fecha_hora: str
 
+class HistoricoResponse(BaseModel):
+    valor: float
+    fecha_hora: str
+    aqi: int
+
 # ---------------------------------------------------------
 
 @router.get("/aqi/{placa_id}")
@@ -31,6 +36,20 @@ def ruta_obtener_aqi(placa_id: str, db: Session = Depends(get_db)):
         logica = LogicaCalidadAire()
         resultado = logica.obtener_aqi_reciente(db, placa_id)
         return AQIResponse(**resultado)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/historico-24h/{placa_id}")
+def ruta_obtener_historico(placa_id: str, db: Session = Depends(get_db)):
+    """
+    Obtiene todas las mediciones de las últimas 24 horas.
+    """
+    try:
+        logica = LogicaCalidadAire()
+        resultado = logica.obtener_historico_24h(db, placa_id)
+        return [HistoricoResponse(**item) for item in resultado]
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except RuntimeError as e:
