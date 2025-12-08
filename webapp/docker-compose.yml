@@ -29,6 +29,8 @@ services:
       - .env                     # ← carga todo el .env automáticamente
     ports:
       - "8000:8000"
+    volumes:
+      - .:/app
 
   frontend:
     build:
