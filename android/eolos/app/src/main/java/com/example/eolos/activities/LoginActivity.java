@@ -20,6 +20,7 @@ import com.example.eolos.R;
 import com.example.eolos.logica_fake.LoginFake;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
@@ -52,6 +53,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Comprobar si ya hay sesión iniciada
+        SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+        String tokenExistente = prefs.getString("token", null);
+
+        if (tokenExistente != null && !tokenExistente.trim().isEmpty()) {
+            // Ya hay un token guardado → ir directamente a HomeActivity
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+            return;
+        }
+
         // Configurar el botón de retroceso
         MaterialButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> {
@@ -59,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         TextInputEditText emailEditText = findViewById(R.id.emailEditText);
+        TextInputLayout emailInputLayout = findViewById(R.id.emailInputLayout);
+        TextInputLayout passwordInputLayout = findViewById(R.id.passwordInputLayout);
         TextInputEditText passwordEditText = findViewById(R.id.passwordEditText);
         MaterialButton loginButton = findViewById(R.id.loginButton);
         TextView registerLink = findViewById(R.id.registerLinkTextView);
@@ -77,10 +91,25 @@ public class LoginActivity extends AppCompatActivity {
             String correo = emailEditText.getText().toString().trim();
             String contrasena = passwordEditText.getText().toString().trim();
 
-            if (correo.isEmpty() || contrasena.isEmpty()) {
-                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
-                return;
+            // Limpiar errores previos
+            emailInputLayout.setError(null);
+            passwordInputLayout.setError(null);
+
+            boolean hayError = false;
+
+
+            if (correo.isEmpty()) {
+                emailInputLayout.setError("Debes introducir un correo");
+                hayError = true;
             }
+
+            if (contrasena.isEmpty()) {
+                passwordInputLayout.setError("Debes introducir una contraseña");
+                hayError = true;
+            }
+
+            // Si falta algún campo, detenemos el login
+            if (hayError) return;
 
             loginFake.login(correo, contrasena, new LoginFake.LoginCallback() {
                 // En el método onSuccess del login en LoginActivity, añadir:

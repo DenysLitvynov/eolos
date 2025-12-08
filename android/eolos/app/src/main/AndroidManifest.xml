@@ -74,11 +74,16 @@
         <activity android:name=".activities.QRScannerActivity" />
         <activity android:name=".activities.IncidenciaActivity" />
         <activity android:name=".activities.MapaActivity" />
-
+        <activity android:name=".activities.FaqActivity" />
+        <activity android:name=".activities.AjustesActivity" />
+        <activity android:name=".activities.CalidadAireActivity" />
+        <activity android:name=".activities.TerminosCondicionesActivity" />
+        <activity android:name=".activities.RecompensaActivity" />
+        <activity android:name=".activities.HomeActivity" />
         <activity
             android:name=".activities.VerifyRegistrationActivity"
             android:exported="false" />
-        <activity android:name=".activities.HomeActivity" />
+
 
         <!-- =================== SERVICIO BLE =================== -->
         <service

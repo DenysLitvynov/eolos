@@ -10,17 +10,6 @@
     android:paddingTop="24dp"
     android:paddingBottom="12dp">
 
-    <!-- Flecha atrás -->
-    <ImageView
-        android:id="@+id/back_arrow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title_eolos"
-        app:layout_constraintBottom_toBottomOf="@+id/title_eolos"
-        app:tint="@color/azul_profundo" />
-
     <!-- Título centrado -->
     <TextView
         android:id="@+id/title_eolos"
@@ -32,8 +21,19 @@
         android:textStyle="bold"
         android:fontFamily="@font/rethink_sans"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Icono de ajustes a la derecha -->
+    <ImageView
+        android:id="@+id/settings_icon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/settings_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/title_eolos"
+        app:layout_constraintBottom_toBottomOf="@id/title_eolos"
+        app:tint="@color/azul_profundo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

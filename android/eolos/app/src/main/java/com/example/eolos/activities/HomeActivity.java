@@ -20,6 +20,7 @@ import com.example.eolos.servicio.GpsDistanceTrackerService;
 import androidx.appcompat.app.AlertDialog;
 import androidx.biometric.BiometricManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
     @Override
@@ -28,6 +29,24 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.home_page_usuario_registrado); // el que hemos ido tocando
 
         setupBottomNavigation();    // Configura la barra de navegación inferior
+
+        Button btnVerMapa = findViewById(R.id.btnVerMapa);
+        btnVerMapa.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, MapaActivity.class));
+        });
+
+
+        // ---------- BOTÓN "Ver Información" (Calidad del aire) ----------
+        Button btnVerInfo = findViewById(R.id.btn_ver_info);
+        btnVerInfo.setOnClickListener(v ->
+                startActivity(new Intent(this, CalidadAireActivity.class))
+        );
+
+        // ---------- BOTÓN "Ver Recompensas" ----------
+        Button btnVerRecompensas = findViewById(R.id.btn_ver_recompensas);
+        btnVerRecompensas.setOnClickListener(v ->
+                startActivity(new Intent(this, RecompensaActivity.class))
+        );
 
         // Verificar token
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);

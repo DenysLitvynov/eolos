@@ -24,6 +24,8 @@ import com.example.eolos.R;
 import com.example.eolos.logica_fake.VerifyFake;
 import com.google.android.material.textfield.TextInputEditText;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class VerifyRegistrationActivity extends AppCompatActivity {
 
     private VerifyFake verifyFake;
@@ -39,6 +41,13 @@ public class VerifyRegistrationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        TextInputLayout codeInputLayout = findViewById(R.id.codeInputLayout);
+        codeEditText = findViewById(R.id.codeEditText);
+        verifyButton = findViewById(R.id.verifyButton);
+        resendButton = findViewById(R.id.resendButton);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_registration);
 
@@ -85,9 +94,31 @@ public class VerifyRegistrationActivity extends AppCompatActivity {
     // -------------------------------------------------------------------------------
 
     private void verificar() {
+
+        TextInputLayout codeInputLayout = findViewById(R.id.codeInputLayout);
         String code = codeEditText.getText().toString().trim();
+
+        // Limpia errores anteriores
+        codeInputLayout.setError(null);
+
+        // 1) Comprobar que no esté vacío
+        if (code.isEmpty()) {
+            codeInputLayout.setError("Introduce el código enviado por correo");
+            codeEditText.requestFocus();
+            return;
+        }
+
+        // 2) Comprobar que tenga exactamente 6 dígitos
         if (code.length() != 6) {
-            Toast.makeText(this, "El código debe tener 6 dígitos", Toast.LENGTH_SHORT).show();
+            codeInputLayout.setError("El código debe tener 6 dígitos");
+            codeEditText.requestFocus();
+            return;
+        }
+
+        // (Opcional extra) asegurar que son solo números:
+        if (!code.matches("\\d{6}")) {
+            codeInputLayout.setError("El código solo puede contener números");
+            codeEditText.requestFocus();
             return;
         }
 
