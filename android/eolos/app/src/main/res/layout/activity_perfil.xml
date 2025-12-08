@@ -6,206 +6,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F9FB"
+    android:fitsSystemWindows="true"
     tools:context=".activities.PerfilActivity">
 
     <!-- ⭐ 可滚动内容区 -->
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll_perfil"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/menu_inferior">
+<androidx.core.widget.NestedScrollView
+android:id="@+id/scroll_perfil"
+android:layout_width="0dp"
+android:layout_height="0dp"
+android:fillViewport="true"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintBottom_toTopOf="@+id/menu_inferior">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="20dp"
+<LinearLayout
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- HEADER CON FLECHA -->
+    <include
+        android:id="@+id/header_container"
+        layout="@layout/header_logoyflecha" />
+
+    <!-- 图标/插画 -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imagePerfil"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/foto"
+        android:layout_marginTop="24dp"
+        android:contentDescription="perfil ilustración"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
+
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Perfil"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000" />
+
+    <!-- Nombre -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/InputField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Nombre y apellidos">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:inputType="textPersonName"
+            android:saveEnabled="false" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- 顶部 azul 深蓝条 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="#0A3D91"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
+    <!-- Correo -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/InputField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Correo o número de teléfono">
 
-                <TextView
-                    android:text="éolos"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:inputType="textEmailAddress"
+            android:saveEnabled="false" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- 图标/插画 -->
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imagePerfil"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:src="@drawable/foto"
-                android:layout_marginTop="24dp"
-                android:contentDescription="perfil ilustración"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large" />
+    <!-- ID Tarjeta -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/InputField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="ID Tarjeta">
 
-            <!-- 标题 -->
-            <TextView
-                android:id="@+id/textTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Perfil"
-                android:textStyle="bold"
-                android:textSize="22sp"
-                android:layout_marginTop="12dp"
-                android:textColor="#000000" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:saveEnabled="false" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Nombre -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/InputField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Nombre y apellidos">
+    <!-- Contraseña -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/InputField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Contraseña">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etNombre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="12dp"
-                    android:inputType="textPersonName"
-                    android:saveEnabled="false" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etContrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:inputType="textPassword"
+            android:saveEnabled="false" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Correo -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/InputField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:hint="Correo o número de teléfono">
+    <!-- Fecha Registro -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/InputField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Fecha Registro">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCorreo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="12dp"
-                    android:inputType="textEmailAddress"
-                    android:saveEnabled="false" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:saveEnabled="false" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- ID Tarjeta -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/InputField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:hint="ID Tarjeta">
+    <!-- 按钮 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTarjeta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="12dp"
-                    android:saveEnabled="false" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logoutButton"
+            style="@style/BotonPrincipal"
+            android:text="Cerrar Sesión"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:textColor="@android:color/white"
+            app:backgroundTint="#0A3D91"
+            android:layout_marginEnd="8dp" />
 
-            <!-- Contraseña -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/InputField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:hint="Contraseña">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardar"
+            style="@style/BotonPrincipal"
+            android:text="Guardar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:textColor="@android:color/white"
+            app:backgroundTint="#0A3D91"
+            android:layout_marginEnd="8dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etContrasena"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="12dp"
-                    android:inputType="textPassword"
-                    android:saveEnabled="false" />
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVolver"
+            style="@style/BotonPrincipal"
+            android:text="Volver"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:textColor="#0A3D91"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_outline_button" />
+    </LinearLayout>
 
-            <!-- Fecha Registro -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/InputField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:hint="Fecha Registro">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etFecha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="12dp"
-                    android:focusable="false"
-                    android:clickable="true"
-                    android:saveEnabled="false" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- 按钮 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/logoutButton"
-                    style="@style/BotonPrincipal"
-                    android:text="Cerrar Sesión"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="48dp"
-                    android:textColor="@android:color/white"
-                    app:backgroundTint="#0A3D91"
-                    android:layout_marginEnd="8dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGuardar"
-                    style="@style/BotonPrincipal"
-                    android:text="Guardar"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="48dp"
-                    android:textColor="@android:color/white"
-                    app:backgroundTint="#0A3D91"
-                    android:layout_marginEnd="8dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnVolver"
-                    style="@style/BotonPrincipal"
-                    android:text="Volver"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="48dp"
-                    android:textColor="#0A3D91"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_outline_button" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
     <!-- ⭐ 底部导航栏（固定） -->
-    <include
-        android:id="@+id/menu_inferior"
-        layout="@layout/menu_navegacion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<include
+android:id="@+id/menu_inferior"
+layout="@layout/menu_navegacion"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_marginBottom="16dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

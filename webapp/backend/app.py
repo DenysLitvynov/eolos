@@ -20,6 +20,9 @@ from .api import incidencias_api
 from .api import perfil_api
 from .api import trayectos_api
 from .api import calidad_aire_api
+from .api import estado_sensores_api
+from .api import mapas_api
+from .api import admin_mapas_api
 
 # ---------------------------------------------------------
 
@@ -34,6 +37,9 @@ app.include_router(perfil_api.router, prefix="/api/v1")
 app.include_router(incidencias_api.router, prefix="/api/v1")
 app.include_router(trayectos_api.router, prefix="/api/v1")  
 app.include_router(calidad_aire_api.router, prefix="/api/v1")
+app.include_router(estado_sensores_api.router, prefix="/api/v1")
+app.include_router(mapas_api.router, prefix="/api/v1")
+app.include_router(admin_mapas_api.router, prefix="/api/v1")
 
 # Middleware CORS
 app.add_middleware(

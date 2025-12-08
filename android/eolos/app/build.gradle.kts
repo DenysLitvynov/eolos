@@ -39,6 +39,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.play.services.location)
+    implementation(libs.google.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -46,4 +47,5 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.browser:browser:1.8.0")
     implementation("androidx.biometric:biometric:1.1.0")
+    implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
 }

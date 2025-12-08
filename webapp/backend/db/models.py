@@ -244,3 +244,82 @@ class PasswordResetToken(Base):
     used = Column(Boolean, default=False, nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now(), nullable=False)
 
+# ---------------------------------------------------------
+
+class Recompensa(Base):
+    """
+    Tabla de recompensas ofrecidas (externas o propias).
+    """
+    __tablename__ = "recompensas"
+
+    recompensa_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    titulo = Column(String(200), nullable=False)
+    descripcion = Column(Text)
+    fecha_inicio = Column(TIMESTAMP(timezone=True), nullable=True)
+    fecha_fin = Column(TIMESTAMP(timezone=True), nullable=True)
+    criterio_num_km = Column(Float)  # kilómetros necesarios para obtenerla
+
+    obtenidas = relationship("RecompensaObtenida", back_populates="recompensa")
+
+# ---------------------------------------------------------
+
+class RecompensaUsuario(Base):
+    """
+    Tabla que almacena kilómetros acumulados por usuario (una fila por usuario).
+    """
+    __tablename__ = "recompensas_usuario"
+
+    usuario_id = Column(String(36), ForeignKey("usuarios.usuario_id"), primary_key=True)
+    km_acumulados = Column(Float, default=0.0, nullable=False)
+
+    usuario = relationship("Usuario", backref="recompensa_estadistica", uselist=False)
+
+# ---------------------------------------------------------
+
+class RecompensaObtenida(Base):
+    """
+    Tabla que indica qué recompensas han sido obtenidas por qué usuario.
+    """
+    __tablename__ = "recompensas_obtenidas"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    usuario_id = Column(String(36), ForeignKey("usuarios.usuario_id"), nullable=False)
+    recompensa_id = Column(String(36), ForeignKey("recompensas.recompensa_id"), nullable=False)
+    codigo_unico = Column(String(100), nullable=False, unique=True)
+
+    usuario = relationship("Usuario", backref="recompensas_obtenidas")
+    recompensa = relationship("Recompensa", back_populates="obtenidas")
+
+# ---------------------------------------------------------
+
+class Interpolada(Base):
+    """
+    Tabla de medidas interpoladas (estructura igual que medidas, sin relación con otras tablas).
+    """
+    __tablename__ = "interpoladas"
+
+    lectura_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    fecha_hora = Column(TIMESTAMP(timezone=True), nullable=False)
+    tipo = Column(SQLEnum(TipoMedidaEnum), nullable=False)
+    lat = Column(Float, nullable=False)
+    lon = Column(Float, nullable=False)
+    valor = Column(Float, nullable=False)
+
+# ---------------------------------------------------------
+
+class CalidadGeneral(Base):
+    """
+    Tabla de calidad general (sin relación con otras tablas).
+    """
+    __tablename__ = "calidad_general"
+
+    valor_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    valor = Column(Float, nullable=False)
+    color = Column(String(50), nullable=True)  # se puede usar string o convertir a Enum si se desea
+    fecha_hora = Column(TIMESTAMP(timezone=True), nullable=False)
+    lat = Column(Float, nullable=False)
+    lon = Column(Float, nullable=False)
+
+# ---------------------------------------------------------
+# ---------------------------------------------------------
+

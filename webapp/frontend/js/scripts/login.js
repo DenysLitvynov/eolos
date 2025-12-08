@@ -8,6 +8,23 @@ import { LoginFake } from '../logica_fake/login_fake.js';
 
 // ----------------------------------------------------------
 
+// Función para decodificar JWT sin librerías externas
+function parseJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    } catch (error) {
+        console.error('Error decodificando JWT:', error);
+        return null;
+    }
+}
+
+// ----------------------------------------------------------
+
 document.addEventListener('DOMContentLoaded', () => {
     const boton = document.getElementById('loginBtn');
     const mensaje = document.getElementById('mensaje');
@@ -101,13 +118,54 @@ document.addEventListener('DOMContentLoaded', () => {
             mensaje.style.color = '#666';
             
             const resultado = await logicaFake.login(correo, contrasena);
+            
+            if (!resultado || !resultado.token) {
+                throw new Error('No se recibió token del servidor');
+            }
+            
             localStorage.setItem('token', resultado.token);
+            
+            // DEBUG: Mostrar el token en consola para verificar
+            console.log('Token recibido:', resultado.token);
+            
+            // Decodificar el token para obtener los roles
+            const decoded = parseJwt(resultado.token);
+            console.log('Token decodificado:', decoded); // DEBUG
+            
+            if (!decoded) {
+                throw new Error('Token inválido');
+            }
+            
+            const roles = decoded.roles; // Array de roles, e.g., ["usuario", "admin"]
+            console.log('Roles del usuario:', roles); // DEBUG
+            
+            if (!roles || !Array.isArray(roles) || roles.length === 0) {
+                throw new Error('El usuario no tiene roles asignados');
+            }
+            
+            let redirectUrl = '/index.html'; // Default para usuario estándar
+            
+            // Lógica de redirección basada en roles
+            if (roles.includes('admin')) {
+                redirectUrl = '/pages/tecnico/estado-sensores.html';
+                console.log('Redirigiendo a estado-sensores.html (admin)');
+            } else if (roles.includes('tecnico')) {
+                redirectUrl = '/pages/tecnico/estado-sensores.html'; 
+                console.log('Redirigiendo a estado-sensores.html (tecnico)');
+            } else if (roles.includes('usuario')) {
+                redirectUrl = '/index.html'; 
+                console.log('Redirigiendo a index.html (usuario)');
+            } else {
+                console.log('Rol no reconocido, redirigiendo por defecto');
+            }
+            
             mensaje.textContent = '¡Login exitoso! Redirigiendo...';
             mensaje.style.color = 'green';
             
-            // Redirigir a la página de prueba
+            // Redirigir a la página correspondiente
             setTimeout(() => { 
-                window.location.href = '/pages/prueba.html'; 
+                console.log('Redirigiendo a:', redirectUrl);
+                window.location.href = redirectUrl; 
             }, 1500);
             
         } catch (error) {
@@ -116,8 +174,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (mensajeError.includes('Credenciales inválidas')) {
                 mensaje.textContent = 'Correo electrónico o contraseña incorrectos. Verifica tus credenciales.';
-            } else if (mensajeError.includes('contraseña') && mensajeError.includes('mínimo 8')) {
-                mensaje.textContent = 'La contraseña no cumple los requisitos de seguridad';
+            } else if (mensajeError.includes('No se recibió token') || 
+                       mensajeError.includes('Token inválido') ||
+                       mensajeError.includes('no tiene roles')) {
+                mensaje.textContent = 'Error en la autenticación. Contacta al administrador.';
+                console.error('Error de autenticación:', error);
             } else {
                 mensaje.textContent = 'Error al iniciar sesión. Verifica tus credenciales.';
             }

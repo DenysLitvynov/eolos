@@ -24,9 +24,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Bluetooth LE (Android 12+) -->
+    <!--        android:usesPermissionFlags="neverForLocation"-->
     <uses-permission
         android:name="android.permission.BLUETOOTH_SCAN"
-        android:usesPermissionFlags="neverForLocation"
         tools:targetApi="s" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
@@ -73,6 +73,7 @@
         <activity android:name=".activities.ConnectionActivity" />
         <activity android:name=".activities.QRScannerActivity" />
         <activity android:name=".activities.IncidenciaActivity" />
+        <activity android:name=".activities.MapaActivity" />
 
         <activity
             android:name=".activities.VerifyRegistrationActivity"

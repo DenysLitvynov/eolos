@@ -97,7 +97,7 @@ public class VerifyRegistrationActivity extends AppCompatActivity {
                 SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
                 prefs.edit().putString("token", token).apply();
                 Toast.makeText(VerifyRegistrationActivity.this, "¡Registro completado!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(VerifyRegistrationActivity.this, DashboardActivity.class));
+                startActivity(new Intent(VerifyRegistrationActivity.this, HomeActivity.class));
                 finishAffinity(); // cierra registro + verify
             }
 

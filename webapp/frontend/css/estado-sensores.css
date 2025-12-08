@@ -91,16 +91,19 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 1rem 1.2rem;
     border-top: 10px solid #005bbb;
-    /* color por defecto */
     position: relative;
 }
 
-.bike-card.danado {
+.bike-card.activa {
+    border-color: #005bbb;
+}
+
+.bike-card.danada {
     border-color: #e24d4d;
 }
 
-.bike-card.desactivado {
-    border-color: #0d48a181;
+.bike-card.desactivada {
+    border-color: #9E9E9E;
 }
 
 .problem-badge {

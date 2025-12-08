@@ -26,11 +26,11 @@ class IncidenciaCreateIn(BaseModel):
     """
     Modelo de entrada para la creación de una incidencia.
     El cliente debe enviar:
-      - short_code: Código de la bicicleta (ej. "VLC001")
+      - bicicleta_id: Código de la bicicleta (ej. "VLC001")
       - descripcion: Texto descriptivo de la incidencia
       - fuente: Origen de la incidencia ("admin" o "app")
     """
-    short_code: str = Field(..., max_length=20)
+    bicicleta_id: str = Field(..., max_length=20)
     descripcion: str = Field(..., min_length=1)
     fuente: str = Field(..., max_length=10)  # "admin" / "app"
 
@@ -62,7 +62,7 @@ def crear_incidencia(
 ) -> IncidenciaOut:
     """
     Crea una nueva incidencia asociada al usuario autenticado.
-    - Valida el short_code y los datos de entrada.
+    - Valida el bicicleta_id y los datos de entrada.
     - Usa la lógica de negocio para registrar la incidencia.
     - Devuelve la incidencia recién creada.
 
@@ -73,7 +73,7 @@ def crear_incidencia(
         incidencia = logica.crear_incidencia(
             db,
             usuario_id=str(current_user.usuario_id),
-            short_code=data.short_code,
+            bicicleta_id=data.bicicleta_id,
             descripcion=data.descripcion,
             fuente_str=data.fuente,
         )
