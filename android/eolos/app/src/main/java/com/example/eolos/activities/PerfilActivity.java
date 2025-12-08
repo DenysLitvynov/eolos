@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eolos.R;
 import com.example.eolos.logica_fake.PerfilFake;
-import com.google.android.material.button.MaterialButton;
+/*import com.google.android.material.button.MaterialButton;*/
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,7 +39,7 @@ public class PerfilActivity extends AppCompatActivity {
     // Referencias UI
     private EditText etNombre, etCorreo, etTarjeta, etContrasena, etFecha;
     private Button btnGuardar, btnVolver;
-    private MaterialButton btnLogout;
+    //private MaterialButton btnLogout;
 
     private final SimpleDateFormat dateFormat =
             new SimpleDateFormat("d/M/yyyy", Locale.getDefault());
@@ -51,7 +51,7 @@ public class PerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
-        setupBottomNavigation();    // Configura la barra de navegación inferior
+
 
         // Verificar token
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
@@ -63,14 +63,14 @@ public class PerfilActivity extends AppCompatActivity {
             return;
         }
 
-        // Configurar botón de logout
-        btnLogout = findViewById(R.id.logoutButton);
-        btnLogout.setOnClickListener(v -> {
-            prefs.edit().remove("token").remove("targeta_id").apply();
-            Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        });
+        ImageView settingsIcon = findViewById(R.id.settings_icon);
+        if (settingsIcon != null) {
+            settingsIcon.setOnClickListener(v -> {
+                startActivity(new Intent(this, AjustesActivity.class));
+            });
+        }
+
+        setupBottomNavigation();    // Configura la barra de navegación inferior
 
         // 1) Vincular vistas
         etNombre = findViewById(R.id.etNombre);
@@ -121,8 +121,15 @@ public class PerfilActivity extends AppCompatActivity {
 
         // 5) Volver
         btnVolver.setOnClickListener(v -> {
-            rellenarUI(perfil);  // Restaurar datos originales
+            // Restaurar datos originales (lo que ya tenías)
+            rellenarUI(perfil);
             Toast.makeText(this, "Cambios descartados", Toast.LENGTH_SHORT).show();
+
+            // ➜ Añadido: ir a HomeActivity
+            Intent i = new Intent(PerfilActivity.this, HomeActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            finish();
         });
 
         // FLECHA ATRÁS DEL HEADER

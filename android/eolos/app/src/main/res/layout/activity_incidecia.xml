@@ -105,28 +105,28 @@
                     android:layout_height="wrap_content">
 
                     <RadioButton
-                        android:text="Caja dañada o abierta"
-                        android:textColor="@color/negro" />
+                        style="@style/EstiloRadioIncidencia"
+                        android:text="Caja dañada o abierta" />
 
                     <RadioButton
-                        android:text="LED del sensor no enciende"
-                        android:textColor="@color/negro" />
+                        style="@style/EstiloRadioIncidencia"
+                        android:text="LED del sensor no enciende"/>
 
                     <RadioButton
-                        android:text="Bicicleta vandalizada"
-                        android:textColor="@color/negro" />
+                        style="@style/EstiloRadioIncidencia"
+                        android:text="Bicicleta vandalizada"/>
 
                     <RadioButton
-                        android:text="Caja del sensor falta o esta floja"
-                        android:textColor="@color/negro" />
+                        style="@style/EstiloRadioIncidencia"
+                        android:text="Caja del sensor falta o esta floja"/>
 
                     <RadioButton
-                        android:text="Sensor bloquea la cesta o esta mal colocado"
-                        android:textColor="@color/negro" />
+                        style="@style/EstiloRadioIncidencia"
+                        android:text="Sensor bloquea la cesta o esta mal colocado"/>
 
                     <RadioButton
-                        android:text="Otro"
-                        android:textColor="@color/negro" />
+                        style="@style/EstiloRadioIncidencia"
+                        android:text="Otro"/>
                 </RadioGroup>
             </LinearLayout>
 
@@ -154,20 +154,24 @@
                     android:layout_height="wrap_content">
 
                     <RadioButton
-                        android:text="No puedo conectar con el sensor"
-                        android:textColor="@color/negro" />
+                        style="@style/EstiloRadioIncidencia"
+                        android:text="No puedo conectar con el sensor"/>
+
 
                     <RadioButton
+                        style="@style/EstiloRadioIncidencia"
                         android:text="Error al escanear QR"
-                        android:textColor="@color/negro" />
+                        />
 
                     <RadioButton
+                        style="@style/EstiloRadioIncidencia"
                         android:text="Datos no se actualizan"
-                        android:textColor="@color/negro" />
+                        />
 
                     <RadioButton
+                        style="@style/EstiloRadioIncidencia"
                         android:text="Otro"
-                        android:textColor="@color/negro" />
+                        />
                 </RadioGroup>
             </LinearLayout>
 

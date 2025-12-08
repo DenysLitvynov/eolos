@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.AjustesActivity">
+
+    <!-- HEADER REUTILIZABLE (flecha + éolos) -->
+    <include
+        android:id="@+id/header_container"
+        layout="@layout/header_logoyflecha"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- TÍTULO "Ajustes" -->
+    <TextView
+        android:id="@+id/tv_titulo_ajustes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajustes"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/azul_profundo"
+        android:fontFamily="@font/rethink_sans"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- CONTENIDO SCROLLEABLE -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_ajustes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_titulo_ajustes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/menu_inferior">
+
+        <LinearLayout
+            android:id="@+id/contenido_ajustes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ===== SWITCHES DE NOTIFICACIONES ===== -->
+
+            <!-- Permitir notificaciones -->
+            <LinearLayout
+                android:id="@+id/lyt_notificaciones_generales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/seccion_1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tv_notificaciones_generales"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Permitir notificaciones"
+                    android:textSize="14sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_notificaciones_generales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:checked="true" />
+            </LinearLayout>
+
+            <!-- Permitir notificaciones sobre la calidad del aire -->
+            <LinearLayout
+                android:id="@+id/lyt_notificaciones_calidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/seccion_1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tv_notificaciones_calidad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Permitir notificaciones sobre la calidad del aire"
+                    android:textSize="14sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_notificaciones_calidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:checked="true" />
+            </LinearLayout>
+
+            <!-- Permitir notificaciones sobre recompensas -->
+            <LinearLayout
+                android:id="@+id/lyt_notificaciones_recompensas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/seccion_1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tv_notificaciones_recompensas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Permitir notificaciones sobre recompensas"
+                    android:textSize="14sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_notificaciones_recompensas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:checked="true" />
+            </LinearLayout>
+
+            <!-- ===== LEGAL ===== -->
+
+            <TextView
+                android:id="@+id/tv_legal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Legal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_profundo"
+                android:fontFamily="@font/rethink_sans" />
+
+            <!-- Política de privacidad (plegable) -->
+            <FrameLayout
+                android:id="@+id/seccion_politica_privacidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/seccion_1"
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Cabecera: título + chevron -->
+                    <LinearLayout
+                        android:id="@+id/header_politica"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tv_titulo_politica"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Política de privacidad"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <ImageView
+                            android:id="@+id/icon_politica"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_chevron_right"
+                            android:tint="@color/azul_profundo" />
+                    </LinearLayout>
+
+                    <!-- TEXTO OCULTO AL INICIO -->
+                    <TextView
+                        android:id="@+id/tv_texto_politica"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/texto_politica_privacidad"
+                        android:textColor="@color/negro"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/rethink_sans"
+                        android:lineSpacingExtra="2dp"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Términos y condiciones (plegable) -->
+            <FrameLayout
+                android:id="@+id/seccion_terminos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/seccion_1"
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Cabecera: título + chevron -->
+                    <LinearLayout
+                        android:id="@+id/header_terminos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tv_titulo_terminos"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Términos y condiciones"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <ImageView
+                            android:id="@+id/icon_terminos"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_chevron_right"
+                            android:tint="@color/azul_profundo" />
+                    </LinearLayout>
+
+                    <!-- TEXTO OCULTO AL INICIO -->
+                    <TextView
+                        android:id="@+id/tv_texto_terminos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/texto_terminos_condiciones"
+                        android:textColor="@color/negro"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/rethink_sans"
+                        android:lineSpacingExtra="2dp"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Preguntas Frecuentes (plegable, con todas las FAQs dentro) -->
+            <FrameLayout
+                android:id="@+id/seccion_faqs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/seccion_1"
+                android:padding="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Cabecera: título + chevron -->
+                    <LinearLayout
+                        android:id="@+id/header_faqs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tv_titulo_faqs"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Preguntas Frecuentes"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <ImageView
+                            android:id="@+id/icon_faqs"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_chevron_right"
+                            android:tint="@color/azul_profundo" />
+                    </LinearLayout>
+
+                    <!-- CONTENEDOR DE TODAS LAS FAQ, OCULTO AL INICIO -->
+                    <LinearLayout
+                        android:id="@+id/contenedor_faqs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <!-- Aquí van todas tus FAQ 1..7 como ya las tenías -->
+
+                        <!-- FAQ 1 -->
+                        <TextView
+                            android:id="@+id/faq_p1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/faq_1_pregunta"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <TextView
+                            android:id="@+id/faq_r1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/faq_1_respuesta"
+                            android:textColor="@color/negro"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/rethink_sans"
+                            android:lineSpacingExtra="2dp" />
+
+
+                        <!-- FAQ 2 -->
+                        <TextView
+                            android:id="@+id/faq_p2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/faq_2_pregunta"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <TextView
+                            android:id="@+id/faq_r2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/faq_2_respuesta"
+                            android:textColor="@color/negro"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/rethink_sans"
+                            android:lineSpacingExtra="2dp" />
+
+
+                        <!-- FAQ 3 -->
+                        <TextView
+                            android:id="@+id/faq_p3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/faq_3_pregunta"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <TextView
+                            android:id="@+id/faq_r3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/faq_3_respuesta"
+                            android:textColor="@color/negro"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/rethink_sans"
+                            android:lineSpacingExtra="2dp" />
+
+
+                        <!-- FAQ 4 -->
+                        <TextView
+                            android:id="@+id/faq_p4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/faq_4_pregunta"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <TextView
+                            android:id="@+id/faq_r4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/faq_4_respuesta"
+                            android:textColor="@color/negro"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/rethink_sans"
+                            android:lineSpacingExtra="2dp" />
+
+
+                        <!-- FAQ 5 -->
+                        <TextView
+                            android:id="@+id/faq_p5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/faq_5_pregunta"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <TextView
+                            android:id="@+id/faq_r5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/faq_5_respuesta"
+                            android:textColor="@color/negro"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/rethink_sans"
+                            android:lineSpacingExtra="2dp" />
+
+
+                        <!-- FAQ 6 -->
+                        <TextView
+                            android:id="@+id/faq_p6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/faq_6_pregunta"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <TextView
+                            android:id="@+id/faq_r6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/faq_6_respuesta"
+                            android:textColor="@color/negro"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/rethink_sans"
+                            android:lineSpacingExtra="2dp" />
+
+
+                        <!-- FAQ 7 -->
+                        <TextView
+                            android:id="@+id/faq_p7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/faq_7_pregunta"
+                            android:textStyle="bold"
+                            android:textColor="@color/azul_profundo"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/rethink_sans" />
+
+                        <TextView
+                            android:id="@+id/faq_r7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/faq_7_respuesta"
+                            android:textColor="@color/negro"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/rethink_sans"
+                            android:lineSpacingExtra="2dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- BOTONES DE SESIÓN / CUENTA -->
+            <LinearLayout
+                android:id="@+id/lyt_botones_cuenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logoutButton"
+                    style="@style/BotonPrincipal"
+                    android:text="Cerrar Sesión"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_outline_button"
+                    android:textColor="@color/azul_profundo"
+                    android:layout_marginEnd="8dp" />
+
+            </LinearLayout>
+
+            <!-- ESPACIO FINAL PARA QUE NO PEGUE AL MENÚ -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- MENÚ INFERIOR REUTILIZABLE -->
+    <include
+        android:id="@+id/menu_inferior"
+        layout="@layout/menu_navegacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

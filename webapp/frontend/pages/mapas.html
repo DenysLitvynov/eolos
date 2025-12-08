@@ -6,18 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mapas</title>
 
-  <link rel="stylesheet" href="../css/generales.css">
-  <link rel="stylesheet" href="../css/header.css">
-  <link rel="stylesheet" href="../css/mapa.css">
+  <link rel="stylesheet" href="/css/generales.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/mapa.css">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <script src="/js/lib/leaflet.heat.js"></script>
 </head>
 
-<body>
+<body class="public-map">
   <header class="header" data-breakpoint="1050">
     <div class="logo">
-      <img src="../images/logo.png" alt="logo">
+      <img src="/images/logo.png" alt="logo">
     </div>
 
     <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false">
@@ -29,6 +31,7 @@
     <nav class="nav" id="site-nav">
       <a href="../index.html">Inicio</a>
       <a href="mapas.html">Mapas</a>
+      <a href="calidad-aire.html">Calidad de aire</a>
       <a href="sobre-nosotros.html">Sobre Nosotros</a>
       <a href="FAQ.html">Faq</a>
       <a href="contacto.html">Contacto</a>
@@ -61,10 +64,10 @@
       </div>
 
       <div class="filter-section">
-        <h3>Fecha</h3>
-        <input type="date" id="date-filter" class="date-input">
+        <h3>Hora</h3>
+        <input type="range" id="hour-slider" min="0" max="23" value="12" step="1">
+        <span id="hour-display">12:00</span>
       </div>
-
 
     </aside>
 
@@ -114,13 +117,21 @@
         <p>Pueden aparecer efectos negativos en grupos sensibles.</p>
       </div>
     </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="informacion.html" class="pollution-btn"
+        style="display: inline-block; text-decoration: none; color: var(--c-primary); border: 2px solid var(--c-primary); padding: 10px 20px; border-radius: 30px; font-weight: bold; transition: all 0.3s;">
+        Más información sobre contaminantes
+      </a>
+    </div>
   </section>
 
   <footer class="ft">
     <div class="ft__wrap ft--two-cols">
       <div class="ft__brand">
         <span class="ft__logo">
-          <img src="../images/logo_footer.png" alt="logo">
+          <img src="/images/logo_footer.png" alt="logo">
         </span>
         <address class="ft__addr">
           Calle Juanba Peris, Nº 11, Gandia, España<br>
@@ -131,14 +142,14 @@
 
       <div class="ft__links">
         <nav class="ft__col">
-          <a href="../index.html">Inicio</a>
-          <a href="mapas.html">Mapas</a>
-          <a href="sobre-nosotros.html">Sobre nosotros</a>
+          <a href="/index.html">Inicio</a>
+          <a href="/pages/mapas.html">Mapas</a>
+          <a href="/pages/sobre-nosotros.html">Sobre nosotros</a>
         </nav>
 
         <nav class="ft__col">
-          <a href="contacto.html">Contacto</a>
-          <a href="login.html">Iniciar sesión</a>
+          <a href="/pages/contacto.html">Contacto</a>
+          <a href="/pages/login.html">Iniciar sesión</a>
         </nav>
 
         <nav class="ft__col">
@@ -154,7 +165,7 @@
     </div>
   </footer>
 
-  <script src="../js/scripts/mapa.js"></script>
+  <script src="/js/scripts/mapa.js" type="module"></script>
 </body>
 
 </html>
