@@ -7,12 +7,6 @@
 // 15/11/2025
 //
 // --------------------------------------------------------------
-
-// https://learn.sparkfun.com/tutorials/nrf52840-development-with-arduino-and-circuitpython
-
-// https://stackoverflow.com/questions/29246805/can-an-ibeacon-have-a-data-payload
-
-// --------------------------------------------------------------
 // --------------------------------------------------------------
 #include <bluefruit.h>
 
@@ -27,10 +21,7 @@
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 namespace Globales {
-  
-  LED elLED ( /* NUMERO DEL PIN LED = */ 7 );
-
-  PuertoSerie elPuerto ( /* velocidad = */ 115200 ); // 115200 o 9600 o ...
+  PuertoSerie elPuerto ( /* velocidad = */ 9600 ); // 115200 o 9600 o ...
 };
 
 // --------------------------------------------------------------
@@ -38,7 +29,6 @@ namespace Globales {
 #include "EmisoraBLE.h"
 #include "Publicador.h"
 #include "Medidor.h"
-
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
@@ -53,9 +43,7 @@ namespace Globales {
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 void inicializarPlaquita () {
-
   // de momento nada
-
 } // ()
 
 // --------------------------------------------------------------
@@ -64,48 +52,20 @@ void inicializarPlaquita () {
 void setup() {
   // 
   // 
-  // 
   inicializarPlaquita();
-
-  // Suspend Loop() to save power
-  // suspendLoop();
-
   // 
-  // 
-  // 
+  //
   Globales::elPublicador.encenderEmisora();
-
-  // Globales::elPublicador.laEmisora.pruebaEmision();
-  
   // 
-  // 
-  // 
+  //
   Globales::elMedidor.iniciarMedidor();
-
   // 
   // 
-  // 
-  esperar( 1000 );
-
-  Globales::elPuerto.escribir( "---- setup(): fin ---- \n " );
-
 } // setup ()
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
-inline void lucecitas() {
-  using namespace Globales;
-
-  elLED.brillar( 100 ); // 100 encendido
-  esperar ( 400 ); //  100 apagado
-  elLED.brillar( 100 ); // 100 encendido
-  esperar ( 400 ); //  100 apagado
-  Globales::elLED.brillar( 100 ); // 100 encendido
-  esperar ( 400 ); //  100 apagado
-  Globales::elLED.brillar( 1000 ); // 1000 encendido
-  esperar ( 1000 ); //  100 apagado
-} // ()
-
+//  Se ha eliminado lucecitas por cuestions de autonomía
 // --------------------------------------------------------------
 // loop ()
 // --------------------------------------------------------------
@@ -121,14 +81,6 @@ void loop () {
   using namespace Globales;
 
   cont++;
-
-  elPuerto.escribir( "\n---- loop(): empieza " );
-  elPuerto.escribir( cont );
-  elPuerto.escribir( "\n" );
-
-
-  lucecitas();
-
   // 
   // mido y publico
   // 
@@ -137,45 +89,10 @@ void loop () {
   
   elPublicador.publicarCO2( valorCO2,
 							cont,
-							1000 // intervalo de emisión
+							120000 // intervalo de emisión ahora 120 segundos 2 minutos
 							);
-  
-  // 
-  // mido y publico
-  // 
-  //int valorTemperatura = elMedidor.medirTemperatura();
-  
-  /*elPublicador.publicarTemperatura( valorTemperatura, 
-									cont,
-									1000 // intervalo de emisión
-									);
-*/
-  // 
-  // prueba para emitir un iBeacon y poner
-  // en la carga (21 bytes = uuid 16 major 2 minor 2 txPower 1 )
-  // lo que queramos (sin seguir dicho formato)
-  // 
-  // Al terminar la prueba hay que hacer Publicador::laEmisora privado
-  // 
-  char datos[21] = {
-	'H', 'o', 'l', 'a',
-	'H', 'o', 'l', 'a',
-	'H', 'o', 'l', 'a',
-	'H', 'o', 'l', 'a',
-	'H', 'o', 'l', 'a',
-	'H'
-  };
-
-  esperar( 2000 );
 
   elPublicador.laEmisora.detenerAnuncio();
-  
-  // 
-  // 
-  // 
-  elPuerto.escribir( "---- loop(): acaba **** " );
-  elPuerto.escribir( cont );
-  elPuerto.escribir( "\n" );
   
 } // loop ()
 // --------------------------------------------------------------

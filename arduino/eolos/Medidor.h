@@ -26,7 +26,6 @@ const float TENSION_REF_MAX = 3.3;         // Voltaje máximo ADC
 // de realizar mediciones de distintos tipos de sensores.
 // ------------------------------------------------------
 class Medidor {
-
   // .....................................................
   // .....................................................
 private:
@@ -37,7 +36,6 @@ public:
   float voltRef = 0.0;
   float concentracion = 0.0;
   float concentracionFinal = 0.0;
-
 
   // .....................................................
   // constructor
@@ -63,27 +61,12 @@ public:
 
     //Calcular diferencia de voltaje
     float deltaV = voltOzono - voltRef;
-    Serial.print("Lectura ADC - Vgas: ");
-    Serial.print(lecturaOzono);
-    Serial.print(" | Vref: ");
-    Serial.println(lecturaVRef);
-    Serial.print("Voltajes - Vgas: ");
-    Serial.print(voltOzono, 4);
-    Serial.print(" V | Vref: ");
-    Serial.print(voltRef, 4);
-    Serial.println(" V");
-
-    Serial.print("Diferencia ΔV = ");
-    Serial.print(deltaV * 1000, 3);
-    Serial.println(" mV");
 
     //Calcular concentración (ppm)
     concentracion = (deltaV / (GAIN_TIA * SENSIBILIDAD_SENSOR * 1e-6));
     concentracionFinal = abs(concentracion);
     Serial.print("Concentración estimada de O3: ");
     Serial.print(concentracionFinal);
-    Serial.println(" ppm");
-    Serial.println("----------------------------------------");
 
     return concentracionFinal;
   }
@@ -92,8 +75,8 @@ public:
   // Mide la concentración de ozono en ppm
   // .....................................................
   float medirCO2() {
-    return 0.04;
-  }  // ()
+    return medirO3();
+    }  // ()
 
   // .....................................................
   // Método medirTemperatura()
