@@ -5,10 +5,10 @@
 
 // ==================== CONFIG ====================
 
-const ADMIN_API_BASE = "/api/admin_api"; // 对应后端 routers/admin_api.py 的前缀
+const ADMIN_API_BASE = "/api/admin_api"; // Prefijo correspondiente al backend en routers/admin_api.py
 const tokenKey = "token";
 
-/** 统一加上 JWT 头 */
+/** Añade automáticamente el encabezado JWT */
 function getAuthHeaders() {
     const token = localStorage.getItem(tokenKey);
     const headers = {
@@ -20,7 +20,7 @@ function getAuthHeaders() {
     return headers;
 }
 
-/** 真实后端 API 客户端 */
+/** Cliente real para el backend */
 const AdminServiceReal = {
     async listarUsuarios() {
         const res = await fetch(`${ADMIN_API_BASE}/usuarios`, {
@@ -73,15 +73,15 @@ const AdminServiceReal = {
     },
 };
 
-/** 最终真正用的 service（可能是真，也可能是 fake） */
+/** Servicio final usado (puede ser real o fake) */
 let AdminService = null;
 
 /**
- * 自动选择用真实后端还是 fake：
- * 1. 先试着请求后端 /usuarios
- *    - 如果网络错误或 5xx → 认为后端挂了，有 fake 就切 fake
- *    - 如果 2xx / 4xx（比如 401,403）→ 说明后端活着，用真实后端
- * 2. 如果页面根本没加载 admin-fake.js，就只能用真实后端
+ * Selección automática entre backend real o modo fake:
+ * 1. Primero intenta consultar /usuarios en el backend:
+ *    - Si hay error de red o 5xx → se considera que el backend está caído, se usa fake si existe.
+ *    - Si devuelve 2xx / 4xx (como 401 o 403) → backend funcional, se usa el real.
+ * 2. Si admin-fake.js no está cargado → solo se puede usar el servicio real.
  */
 async function elegirServicioAdmin() {
     const fakeDisponible = typeof window.AdminApiFake !== "undefined";
@@ -118,7 +118,7 @@ async function elegirServicioAdmin() {
                 </div>`
             );
         } else {
-            console.error("❌ No hay backend ni fake: AdminServiceReal será usado igualmente (pero fallará)");
+            console.error("❌ No hay backend ni fake: se usará AdminServiceReal (pero fallará)");
             AdminService = AdminServiceReal;
         }
     }
@@ -128,7 +128,7 @@ async function elegirServicioAdmin() {
 
 const tbody = document.getElementById("users-tbody");
 
-// 创建用户 modal
+// Modal de creación de usuario
 const modalBackdrop = document.getElementById("modal-backdrop");
 const btnOpenModal = document.getElementById("btn-open-modal");
 const btnCloseModal = document.getElementById("btn-close-modal");
@@ -136,7 +136,7 @@ const btnCancelModal = document.getElementById("btn-cancel-modal");
 const createUserForm = document.getElementById("create-user-form");
 const createRoleSelect = document.getElementById("rol");
 
-// 编辑用户 modal
+// Modal de edición de usuario
 const editModalBackdrop = document.getElementById("edit-user-modal");
 const btnCloseEditModal = document.getElementById("btn-close-edit-modal");
 const btnCancelEdit = document.getElementById("btn-cancel-edit");
@@ -184,7 +184,7 @@ function renderUsers() {
     });
 }
 
-// ==================== MODALS: CREAR ====================
+// ==================== MODALES: CREAR ====================
 
 function openCreateModal() {
     modalBackdrop.classList.remove("hidden");
@@ -203,7 +203,7 @@ modalBackdrop?.addEventListener("click", (e) => {
     if (e.target === modalBackdrop) closeCreateModal();
 });
 
-// ==================== MODALS: EDITAR ====================
+// ==================== MODALES: EDITAR ====================
 
 function openEditModal(user) {
     editingUser = user;
@@ -230,7 +230,7 @@ editModalBackdrop?.addEventListener("click", (e) => {
     if (e.target === editModalBackdrop) closeEditModal();
 });
 
-// ==================== LOAD USERS ====================
+// ==================== CARGAR USUARIOS ====================
 
 async function cargarUsuarios() {
     if (!AdminService) {
@@ -247,7 +247,7 @@ async function cargarUsuarios() {
     }
 }
 
-// ==================== CREATE USER ====================
+// ==================== CREAR USUARIO ====================
 createUserForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!AdminService) return;
@@ -263,7 +263,7 @@ createUserForm?.addEventListener("submit", async (e) => {
         return;
     }
 
-    // 你后端的 rol 有默认值，这里不传也可以
+    // Tu backend ya tiene un valor por defecto para rol, por lo que no es necesario enviarlo
     const payload = {
         nombre,
         apellido,
@@ -283,8 +283,7 @@ createUserForm?.addEventListener("submit", async (e) => {
     }
 });
 
-
-// ==================== EDIT USER (submit) ====================
+// ==================== EDITAR USUARIO (submit) ====================
 
 editUserForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -296,7 +295,7 @@ editUserForm?.addEventListener("submit", async (e) => {
         correo: editEmailInput.value.trim(),
         targeta_id: editCardInput.value.trim() || null,
         rol: editRoleSelect.value,
-        // 👇 不再修改密码，所以不传 contrasena_nueva
+        // 👇 Ya no se modifica la contraseña, por lo que no se envía contrasena_nueva
     };
 
     try {
@@ -317,7 +316,7 @@ editUserForm?.addEventListener("submit", async (e) => {
     }
 });
 
-// ==================== TABLE ACTIONS (edit / delete) ====================
+// ==================== ACCIONES DE TABLA (editar / eliminar) ====================
 
 tbody?.addEventListener("click", async (e) => {
     const btn = e.target.closest("button[data-action]");

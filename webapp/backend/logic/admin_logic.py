@@ -13,7 +13,7 @@ from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 from passlib.context import CryptContext
 
-from ..db.models import Usuario, Rol  # 如果还有 UsuarioRol 模型也可以引
+from ..db.models import Usuario, Rol  # Si existe un modelo UsuarioRol también podría importarse
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -47,7 +47,7 @@ class LogicaAdmin:
 
     def _obtener_rol_por_nombre(self, db: Session, nombre_rol: str) -> Rol:
         """
-        按 roles.nombre 查找角色，忽略大小写和前后空格
+        Buscar rol según roles.nombre, ignorando mayúsculas/minúsculas y espacios.
         """
         nombre_rol = nombre_rol.strip()
         rol = (
@@ -62,7 +62,7 @@ class LogicaAdmin:
     # ========= API público =========
 
     def listar_usuarios(self, db: Session) -> List[Usuario]:
-        # 如果在模型里 relationship roles 配了 lazy='joined'，这里直接 all 就行
+        # Si el modelo tiene relationship roles con lazy='joined', un simple all() basta
         return db.query(Usuario).order_by(Usuario.usuario_id).all()
 
     def crear_usuario_admin(
@@ -77,28 +77,28 @@ class LogicaAdmin:
         contrasena: str,
     ) -> Usuario:
 
-        # 1) contraseña
+        # 1) Validación de contraseña
         if not self._password_valida(contrasena):
             raise ValueError(
                 "La contraseña no cumple los requisitos: mínimo 8 caracteres, "
                 "incluyendo mayúsculas, minúsculas, números y símbolos (@$!%*?&)"
             )
 
-        # 2) correo único
+        # 2) Correo único
         correo = correo.strip().lower()
         existe = db.query(Usuario).filter(Usuario.correo == correo).first()
         if existe:
             raise ValueError("El correo ya está en uso por otro usuario")
 
-        # 3) targeta_id normalizado
+        # 3) Normalización de targeta_id
         if targeta_id is not None:
             targeta_id = str(targeta_id).strip()
             if targeta_id == "" or targeta_id.lower() == "null":
                 targeta_id = None
 
-        # 4) crear usuario
+        # 4) Crear usuario
         usuario = Usuario(
-            usuario_id=str(uuid4()),  # 如果模型里 default 已经是 uuid4，可以不传
+            usuario_id=str(uuid4()),  # Si el modelo ya tiene default=uuid4, este valor podría omitirse
             nombre=nombre.strip(),
             apellido=apellido.strip(),
             correo=correo,
@@ -106,7 +106,7 @@ class LogicaAdmin:
             contrasena_hash=pwd_context.hash(contrasena),
         )
 
-        # 5) 关联角色（假设一个用户只有一个主角色）
+        # 5) Asociar rol (suponiendo que un usuario solo tiene un rol principal)
         rol_obj = self._obtener_rol_por_nombre(db, rol)
         usuario.roles.append(rol_obj)
 
@@ -128,7 +128,7 @@ class LogicaAdmin:
     ) -> Usuario:
         usuario = self._obtener_usuario(db, usuario_id)
 
-        # correo único
+        # Validación y unicidad del correo
         if correo is not None:
             correo = correo.strip().lower()
             if correo != usuario.correo:
@@ -152,7 +152,7 @@ class LogicaAdmin:
                 None if targeta_id == "" or targeta_id.lower() == "null" else targeta_id
             )
 
-        # 角色更新：清空旧的，只保留一个
+        # Actualización del rol: limpiar rol anterior y asignar uno nuevo
         if rol is not None:
             nuevo_rol = self._obtener_rol_por_nombre(db, rol)
             usuario.roles.clear()
@@ -164,15 +164,16 @@ class LogicaAdmin:
 
     def eliminar_usuario_admin(self, db: Session, usuario_id: str) -> None:
         """
-        删除用户：
-        - 先清空 usuario_roles (通过 relationship roles)
-        - 再尝试删除 usuarios
-        - 如果还有其它外键（trayectos, incidencias 等），捕获 IntegrityError，
-          抛出友好的 ValueError，让 API 返回 400，而不是 500。
+        Eliminación de usuario:
+        - Primero limpiar usuario_roles (mediante la relación roles)
+        - Luego intentar borrar el usuario
+        - Si existen otras claves foráneas (trayectos, incidencias, etc.),
+          capturar IntegrityError y lanzar un ValueError más amigable,
+          para que la API devuelva 400 en lugar de 500.
         """
         usuario = self._obtener_usuario(db, usuario_id)
 
-        # 先清关系 (usuario_roles)
+        # Limpiar relaciones (usuario_roles)
         usuario.roles.clear()
 
         try:

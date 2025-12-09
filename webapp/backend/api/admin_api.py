@@ -11,7 +11,7 @@ from typing import List, Literal, Optional
 import os, jwt
 
 from ..db.database import get_db
-from ..db.models import Usuario, Rol  # 假设你这里有 Usuario / Rol 模型
+from ..db.models import Usuario, Rol  # Se asume que existen los modelos Usuario y Rol
 from ..logic.admin_logic import LogicaAdmin
 
 router = APIRouter(prefix="/admin_api", tags=["admin"])
@@ -46,7 +46,7 @@ class UsuarioAdminCreateIn(BaseModel):
     apellido: str = Field(..., max_length=120)
     correo: EmailStr
     targeta_id: str | None = Field(default=None, max_length=36)
-    # 用小写，和数据库里的 nombre 以及前端统一
+    # Usado en minúsculas, para coincidir con la base de datos y el frontend
     rol: Literal["admin", "tecnico", "usuario"] = "usuario"
     contrasena: str = Field(..., min_length=8)
 
@@ -82,7 +82,7 @@ def get_current_user(
     authorization: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ) -> Usuario:
-    """Igual que en perfil_api：lee token，返回 Usuario"""
+    """Igual que en perfil_api: lee el token y devuelve un Usuario."""
 
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Falta token Bearer")
@@ -109,8 +109,8 @@ def get_current_user(
 
 def require_admin(current_user: Usuario = Depends(get_current_user)) -> Usuario:
     """
-    只允许有 Rol 'admin' 的用户访问。
-    假设 Usuario 有 relationship: roles: List[Rol]
+    Solo se permite acceso a usuarios cuyo rol sea 'admin'.
+    Se asume que Usuario tiene: roles: List[Rol]
     """
     roles = getattr(current_user, "roles", []) or []
     nombres = {r.nombre.lower() for r in roles if isinstance(r, Rol)}
@@ -133,7 +133,7 @@ def listar_usuarios(
     salida: list[UsuarioAdminOut] = []
 
     for u in usuarios:
-        # 从用户的 roles 关系里取第一个名字作为 rol
+        # Usar el primer rol del usuario como rol principal
         rol_nombre = u.roles[0].nombre if getattr(u, "roles", None) else None
 
         salida.append(
@@ -189,7 +189,7 @@ def actualizar_usuario_admin(
     db: Session = Depends(get_db),
     _: Usuario = Depends(require_admin),
 ):
-    """Actualiza datos de un usuario (sin cambiar contraseña)."""
+    """Actualiza los datos de un usuario (sin cambiar la contraseña)."""
     try:
         usuario = logica.actualizar_usuario_admin(
             db=db,
@@ -226,7 +226,7 @@ def eliminar_usuario_admin(
         logica.eliminar_usuario_admin(db=db, usuario_id=usuario_id)
     except ValueError as e:
         msg = str(e).lower()
-        # 文本里有 "no encontrado" → 404，否则 400
+        # Si el mensaje contiene "no encontrado" → 404; de lo contrario → 400
         if "no encontrado" in msg:
             raise HTTPException(status_code=404, detail=str(e))
         else:
