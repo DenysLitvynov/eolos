@@ -56,6 +56,8 @@ class EstadoIncidencia(PyEnum):
 
 
 class FuenteReporte(PyEnum):
+    # Para diferencias entre una incidencidena de admin o tecnico, la fuente es la parada de bici(tecnico) y el resto admin.
+    bici="parada_bici"
     app = "app"
     web = "web"
     admin = "admin"

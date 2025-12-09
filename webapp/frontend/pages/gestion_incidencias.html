@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-        <header class="header">
+       <header class="header">
         <div class="logo">
-            <img src="../images/logo.png" alt="logo" />
+            <img src="../../images/logo.png" alt="logo" />
         </div>
         
         <!-- Botón hamburger -->
@@ -27,11 +27,11 @@
         
         <!-- Menú de navegación -->
         <nav class="nav" id="site-nav">
-            <a href="../landing.html">Inicio</a>
-            <a href="#">Incidencias</a>
-            <a href="estado-sensores.html">Sensores</a>
+            <a href="../../index.html">Inicio</a>
+            <a href="../pages/gestion_incidencias.html">Incidencias</a>
+            <a href="../pages/tecnico/estado-sensores.html">Sensores</a>
             <a href="#">Mapas</a>
-            <a href="#"><b>Marc Roig</b></a>
+            <a href="../pages/perfil.html" id="user-link"><b>Marc Roig</b></a>
         </nav>
     </header>
     <main class="contenedor-principal">
@@ -53,148 +53,31 @@
         </div>
 
         <!-- Contenedor de las tarjetas de incidencia (Grid) -->
-        <div class="grid-incidencias">
+        <div class="grid-incidencias" id="grid-incidencias">
 
-            <!-- Incidencias NO RESUELTAS (Rojo) -->
-            <div class="tarjeta-incidencia">
-                <!-- Zona de estado y píldora, ahora agrupada -->
-                <div class="encabezado-estado estado-noresuelto">
-                    <span class="pildora-estado">NO RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Error al Escanear QR</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
-                    <p class="detalle-incidencia fuente">Web</p>
-                </div>
-            </div>
-
-            
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-noresuelto">
-                    <span class="pildora-estado">NO RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Datos no se Actualizan</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 20min</p>
-                    <p class="detalle-incidencia fuente">App</p>
-                </div>
-            </div>
-
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-noresuelto">
-                    <span class="pildora-estado">NO RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Fallo al subir datos a la nube</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 39min</p>
-                    <p class="detalle-incidencia fuente">App</p>
-                </div>
-            </div>
-
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-noresuelto">
-                    <span class="pildora-estado">NO RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Error al reclamar recompensa</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 1min</p>
-                    <p class="detalle-incidencia fuente">App/Web</p>
-                </div>
-            </div>
-
-            <!-- Incidencias RESUELTAS (Verde) -->
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-resuelto">
-                    <span class="pildora-estado">RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Error al Escanear QR</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 40min</p>
-                    <p class="detalle-incidencia fuente">Web</p>
-                </div>
-            </div>
-
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-resuelto">
-                    <span class="pildora-estado">RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Datos no se Actualizan</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
-                    <p class="detalle-incidencia fuente">App</p>
-                </div>
-            </div>
-
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-resuelto">
-                    <span class="pildora-estado">RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Fallo al subir datos a la nube</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
-                    <p class="detalle-incidencia fuente">App</p>
-                </div>
-            </div>
-
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-resuelto">
-                    <span class="pildora-estado">RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Error al reclamar recompensa</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
-                    <p class="detalle-incidencia fuente">App/Web</p>
-                </div>
-            </div>
-            
-            <!-- Repetimos algunas para simular las 4x3 de la imagen -->
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-noresuelto">
-                    <span class="pildora-estado">NO RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Error al Escanear QR</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
-                    <p class="detalle-incidencia fuente">Web</p>
-                </div>
-            </div>
-            
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-noresuelto">
-                    <span class="pildora-estado">NO RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Datos no se Actualizan</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
-                    <p class="detalle-incidencia fuente">App</p>
-                </div>
-            </div>
-
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-noresuelto">
-                    <span class="pildora-estado">NO RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Fallo al subir datos a la nube</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
-                    <p class="detalle-incidencia fuente">App</p>
-                </div>
-            </div>
-
-            <div class="tarjeta-incidencia">
-                <div class="encabezado-estado estado-resuelto">
-                    <span class="pildora-estado">RESUELTO</span>
-                </div>
-                <div class="contenido-tarjeta">
-                    <h2 class="titulo-incidencia">Error al reclamar recompensa</h2>
-                    <p class="detalle-incidencia tiempo">Hace: 5min</p>
-                    <p class="detalle-incidencia fuente">App/Web</p>
-                </div>
-            </div>
         </div>
     </main>
     <script type="module" src="../js/scripts/gestion_incidencias.js"></script>
 
+    <script type="module">
+        // Actualiza el nombre del usuario en el header si hay token JWT
+        async function actualizarNombreUsuarioHeader() {
+            const link = document.getElementById('user-link');
+            if (!link) return;
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            if (!token) return;
+            try {
+                const res = await fetch('/api/v1/perfil', { headers: { 'Authorization': `Bearer ${token}` } });
+                if (!res.ok) return;
+                const perfil = await res.json();
+                const nombre = perfil.nombre || perfil.correo || null;
+                if (nombre) link.innerHTML = `<b>${nombre}</b>`;
+            } catch (e) {
+                console.warn('No se pudo obtener perfil para header:', e);
+            }
+        }
+        actualizarNombreUsuarioHeader();
+    </script>
 
 </body>
 
@@ -203,7 +86,7 @@
         <div class="ft__wrap ft--two-cols">
             <div class="ft__brand">
                 <span class="ft__logo">
-                    <img src="../images/logo_footer.png" alt="logo" />
+                    <img src="../../images/logo_footer.png" alt="logo" />
                 </span>
                 <address class="ft__addr">
                     <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>

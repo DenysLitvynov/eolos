@@ -48,7 +48,9 @@ def seed_data():
         # 1. Roles
         rol_usuario = Rol(nombre="usuario", descripcion="Usuario estándar")
         rol_admin = Rol(nombre="admin", descripcion="Administrador")
-        db.add_all([rol_usuario, rol_admin])
+        rol_tecnico = Rol(nombre="tecnico", descripcion="Tecnico")
+
+        db.add_all([rol_usuario, rol_admin,rol_tecnico])
         db.commit()
 
         # ---------------------------------------------------------
@@ -63,6 +65,7 @@ def seed_data():
         # 3. Usuarios de prueba
         hash1 = pwd_context.hash("Password123!")
         hash2 = pwd_context.hash("Admin123!")
+        hash3= pwd_context.hash("Tech123!")
 
         usuarios = []
         for i in range(2000):
@@ -85,8 +88,17 @@ def seed_data():
             correo="admin@fake.com",
             contrasena_hash=hash2
         )
+        usuario_tecnico = Usuario(
+            usuario_id=str(uuid.uuid4()),
+            targeta_id=None,
+            nombre="Marc",
+            apellido="Roig",
+            correo="tecnico@fake.com",
+            contrasena_hash=hash3
+        )
         usuario_admin.roles.append(rol_admin)
         usuario_admin.roles.append(rol_usuario)
+        usuario_tecnico.roles.append(rol_tecnico)
 
         db.add_all(usuarios + [usuario_admin])
         db.commit()
@@ -242,15 +254,49 @@ def seed_data():
         print("Medidas FAKE (Gandia) generadas correctamente.")
 
         # 9. Incidencia de ejemplo
-        incidencia = Incidencia(
+        incidencia_tec1 = Incidencia(
             incidencia_id=str(uuid.uuid4()),
             usuario_id=usuarios[0].usuario_id,
             bicicleta_id=bicicletas[0].bicicleta_id,
             descripcion="Rueda pinchada",
             estado=EstadoIncidencia.nuevo,
+            fuente=FuenteReporte.bici
+        )
+        db.add(incidencia_tec1)
+        db.commit()
+        
+        incidencia_tec2 = Incidencia(
+            incidencia_id=str(uuid.uuid4()),
+            usuario_id=usuario_normal.usuario_id,
+            bicicleta_id=bicicletas[0].bicicleta_id,
+            descripcion="Bici Vandalizada",
+            estado=EstadoIncidencia.nuevo,
+            fuente=FuenteReporte.bici
+        )
+        db.add(incidencia_tec2)
+        db.commit()
+        
+        incidencia_admin = Incidencia(
+            incidencia_id=str(uuid.uuid4()),
+            usuario_id=usuario_normal.usuario_id,
+            bicicleta_id=bicicletas[0].bicicleta_id,#estas incidencias en bicicleta ID deberian tener un 0 o algo pa distinguirlas de las del tecnico
+            descripcion="Error al canjear recompensas",
+            estado=EstadoIncidencia.nuevo,
             fuente=FuenteReporte.web
         )
-        db.add(incidencia)
+        db.add(incidencia_admin)
+        db.commit()
+        
+        
+        incidencia_admin2 = Incidencia(
+            incidencia_id=str(uuid.uuid4()),
+            usuario_id=usuario_normal.usuario_id,
+            bicicleta_id=bicicletas[0].bicicleta_id,#estas incidencias en bicicleta ID deberian tener un 0 o algo pa distinguirlas de las del tecnico
+            descripcion="Error al escanear QR",
+            estado=EstadoIncidencia.nuevo,
+            fuente=FuenteReporte.app
+        )
+        db.add(incidencia_admin2)
         db.commit()
 
         print("Seed completado: 2000 carnets DNI válidos + 2000 usuarios + estaciones + 2000 bicis + placas + trayecto + medidas + incidencia")
