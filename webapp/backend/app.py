@@ -21,6 +21,7 @@ from .api import perfil_api
 from .api import trayectos_api
 from .api import calidad_aire_api
 from .api import estado_sensores_api
+from .api.admin_api import router as admin_api
 from .api import mapas_api
 from .api import admin_mapas_api
 from .api import gestion_incidencias_api
@@ -39,6 +40,7 @@ app.include_router(incidencias_api.router, prefix="/api/v1")
 app.include_router(trayectos_api.router, prefix="/api/v1")  
 app.include_router(calidad_aire_api.router, prefix="/api/v1")
 app.include_router(estado_sensores_api.router, prefix="/api/v1")
+app.include_router(admin_api, prefix="/api")     # ✅ 这样最终路径就是 /api/admin_api/...
 app.include_router(mapas_api.router, prefix="/api/v1")
 app.include_router(admin_mapas_api.router, prefix="/api/v1")
 app.include_router(gestion_incidencias_api.router, prefix="/api/v1")

@@ -147,13 +147,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Lógica de redirección basada en roles
             if (roles.includes('admin')) {
-                redirectUrl = '/pages/tecnico/estado-sensores.html';
+                redirectUrl = '/pages/admin/gestion-usuarios.html';
                 console.log('Redirigiendo a estado-sensores.html (admin)');
             } else if (roles.includes('tecnico')) {
                 redirectUrl = '/pages/tecnico/estado-sensores.html'; 
                 console.log('Redirigiendo a estado-sensores.html (tecnico)');
             } else if (roles.includes('usuario')) {
-                redirectUrl = '/index.html'; 
+                redirectUrl = '/pages/landing-registrado.html';
                 console.log('Redirigiendo a index.html (usuario)');
             } else {
                 console.log('Rol no reconocido, redirigiendo por defecto');
