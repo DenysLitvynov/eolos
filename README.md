@@ -1,256 +1,321 @@
-# Guía de Instalación y Configuración - Eolos WebApp
+# 📘 Guía Completa (Docker-only) — Eolos WebApp
 
-## 📋 Prerrequisitos
+**Objetivo:** Esta guía está pensada para que cualquier persona, incluso sin experiencia previa, pueda clonar el repositorio, levantar toda la aplicación (frontend + backend + base de datos) con Docker, poblar la base de datos y empezar a trabajar sin romperse la cabeza.
 
-- Git instalado
-- Python 3.7+
-- PostgreSQL
-- pip (gestor de paquetes de Python)
+Todo funciona con Docker + Docker Compose.
+No necesitas instalar Python ni PostgreSQL en tu sistema. 
 
-## 🚀 Instalación Rápida
+---
 
-### 1. Clonar el Repositorio
+## 1️⃣ Requisitos previos (instalación de Docker)
+
+* Docker Engine: [https://docs.docker.com/engine/](https://docs.docker.com/engine/)
+* Docker Desktop (Windows / macOS): [https://docs.docker.com/desktop/](https://docs.docker.com/desktop/)
+
+Comprueba que están instalados:
 
 ```bash
-git clone <enlace-de-github>
+docker --version
+docker compose version
+```
+
+---
+
+## 2️⃣ Clonar el repositorio
+
+```bash
+git clone <URL-DEL-REPO>
 cd eolos/webapp
 ```
 
-### 2. Configurar Variables de Entorno
+---
 
-Crear archivo `.env` en la carpeta `webapp` con el siguiente contenido:
+## 3️⃣ Configurar `.env` (archivo obligatoria en `webapp/`)
+
+Crea `webapp/.env` con este contenido (valores de ejemplo):
 
 ```env
-# .env
+DATABASE_URL=postgresql://postgres:123456@db:5432/pbio_eolos
+JWT_SECRET=una_clave_muy_segura
+BASE_URL=http://localhost
+
+# Email (Brevo)
 SMTP_SERVER=smtp-relay.brevo.com
 SMTP_PORT=587
 SMTP_USER=
 SMTP_PASSWORD=
 FROM_EMAIL=
-BASE_URL=http://localhost:8000
-DATABASE_URL=postgresql://postgres:1234@localhost:5432/pbio_eolos
-JWT_SECRET=una_clave_muy_segura
+
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ALGORITHM=HS256
 ```
 
-## 🗄️ Instalación y Configuración de PostgreSQL
+> **No subir** el `.env` con credenciales reales al repositorio.
 
-### Linux (Fedora/RHEL)
+---
 
-```bash
-# Verificar si PostgreSQL está instalado
-psql --version
+## 4️⃣ Construir las imágenes Docker
 
-# Si no está instalado, instalar:
-sudo dnf install postgresql-server postgresql-contrib -y
+Hazlo **una vez** o cuando cambies Dockerfiles / dependencias / frontend estático (ver sección “¿Cuándo reconstruir imágenes?”).
 
-# Inicializar la base de datos (solo primera vez)
-sudo postgresql-setup --initdb
-
-# Iniciar el servicio
-sudo systemctl start postgresql
-
-# Verificar estado
-sudo systemctl status postgresql
-```
-
-### Windows
-
-1. Descargar PostgreSQL desde [postgresql.org](https://www.postgresql.org/download/windows/)
-2. Ejecutar el instalador y seguir las instrucciones
-3. Durante la instalación, establecer contraseña `1234` para el usuario postgres
-4. Crear la base de datos `pbio_eolos` usando pgAdmin o línea de comandos
-
-### macOS
+Desde `webapp/`:
 
 ```bash
-# Instalar con Homebrew
-brew install postgresql
-
-# Iniciar servicio
-brew services start postgresql
-
-# O instalar desde postgresapp.com (GUI)
+docker compose build
 ```
 
-## 🔧 Configuración de la Base de Datos
+— Para construir solo un servicio (p. ej. backend):
 
 ```bash
-# Acceder a PostgreSQL
-sudo -u postgres psql
-
-# En la consola de PostgreSQL, ejecutar:
-ALTER USER postgres WITH PASSWORD '1234';
-CREATE DATABASE pbio_eolos;
-GRANT ALL PRIVILEGES ON DATABASE pbio_eolos TO postgres;
-
-# Salir de psql
-\q
-
-# Probar conexión
-psql -h localhost -U postgres -d pbio_eolos
-# Contraseña: 1234
-
-# Si entra correctamente, salir con:
-\q
+docker compose build backend
 ```
 
-## 🐍 Entorno Virtual Python
+---
 
-### Crear y activar entorno virtual
+## 5️⃣ Levantar los contenedores (Linux / macOS / Windows)
+
+Antes de arrancar, si tienes Postgres **instalado localmente** debes pararlo para evitar conflicto en el puerto 5432:
+
+* **Linux (systemd)**:
+
+  ```bash
+  sudo systemctl stop postgresql
+  ```
+* **macOS (Homebrew)**:
+
+  ```bash
+  brew services stop postgresql
+  ```
+* **Windows** (PowerShell como administrador):
+
+  ```powershell
+  Stop-Service -Name postgresql*   # o usar services.msc y parar el servicio PostgreSQL
+  ```
+
+Ahora arranca la pila:
 
 ```bash
-# Desde la carpeta webapp
-python3 -m venv venv
+docker compose up -d
 ```
 
-### Activación del entorno virtual
-
-**Linux/macOS:**
-```bash
-# Bash
-source venv/bin/activate
-
-# Fish
-source venv/bin/activate.fish
-
-# Zsh
-source venv/bin/activate
-```
-
-**Windows:**
-```cmd
-# Command Prompt
-venv\Scripts\activate
-
-# PowerShell
-venv\Scripts\Activate.ps1
-```
-
-## 📦 Instalación de Dependencias
-
-Con el entorno virtual activado:
+Si necesitas forzar rebuild y arrancar:
 
 ```bash
-# Actualizar pip
-pip install --upgrade pip
-
-# Opción 1: Instalar dependencias individualmente
-pip install fastapi uvicorn sqlalchemy alembic python-dotenv passlib[bcrypt] psycopg2-binary pydantic[email] python-multipart pyjwt
-
-# Opción 2: Si existe requirements.txt
-pip install -r requirements.txt
+docker compose up -d --build
 ```
 
-## 🗃️ Migraciones de Base de Datos
+Comprobar contenedores:
 
 ```bash
-# Verificar migraciones existentes
-ls backend/migrations/versions
-
-# Si no hay migraciones, generar la inicial
-alembic revision --autogenerate -m "Inicial: Crea tablas de models"
-
-# Aplicar migraciones
-alembic upgrade head
+docker compose ps
 ```
 
-## 🌱 Poblar Base de Datos (Seed)
+Debes ver: `db`, `backend`, `frontend` → estado `Up`.
 
-```bash
-# Navegar a la carpeta de la base de datos
-cd backend/db
+---
 
-# Solucionar posibles conflictos con bcrypt
-pip uninstall -y bcrypt
-pip install bcrypt==4.1.2
-pip install --force-reinstall passlib
+## 6️⃣ Poblar la base de datos (seed)
 
-# Ejecutar script de seed
-python seed.py
-```
+Dentro de `webapp/`, elegir una de las dos opciones:
 
-**Nota:** Si aparece el error:
-```
-(trapped) error reading bcrypt version
-AttributeError: module 'bcrypt' has no attribute '__about__'
-```
-No afecta el funcionamiento, siempre que luego muestre "Seed completado: ..."
+* Datos de prueba simples:
 
-Regresar a la carpeta principal:
-```bash
-cd ../..
-```
+  ```bash
+  docker compose exec backend python backend/db/seed.py
+  ```
+* Datos más realistas:
 
-## 🚀 Ejecutar el Servidor
+  ```bash
+  docker compose exec backend python backend/db/seed_realistic.py
+  ```
 
-Desde la carpeta `webapp`:
+Si hay errores: ver logs del backend (más abajo).
 
-### Opción 1: Con run.py
-```bash
-python run.py
-```
+---
 
-### Opción 2: Con uvicorn (recomendado para desarrollo)
-```bash
-uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
-```
-📱 Integración con Android
+## 7️⃣ Probar la aplicación (URLs)
 
-⚠️ IMPORTANTE: Si se integra con un cliente Android, es necesario:
+* **Frontend (WebApp):** `http://localhost`
+* **Docs / Swagger (API):** `http://localhost:8000/docs`
+* **API base (FastAPI):** `http://localhost:8000/api/v1`
 
-    Ejecutar el servidor con acceso externo:
-    bash
+---
 
-uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
+## 8️⃣ Integración con Android / clientes externos
 
-Obtener la IP del servidor:
+1. Asegúrate que Backend está corriendo en `0.0.0.0` (ya lo hace en Docker).
+2. Obtén la IP del equipo anfitrión:
 
-    Linux/macOS: hostname -I o ip addr show
+* **Linux/macOS:** `hostname -I` o `ip addr show`
+* **Windows:** `ipconfig`
 
-    Windows: ipconfig
+3. En la app Android usa `http://<IP_DEL_PC>:8000` (no `localhost`).
+4. Comprueba firewall / reglas de red para permitir el puerto 8000.
 
-En el cliente Android, usar la IP del servidor en lugar de localhost:
-text
+---
 
-http://[IP-DEL-SERVIDOR]:8000
+## 9️⃣ Logs y depuración (comandos)
 
-Verificar firewall para permitir conexiones en el puerto 8000
-## 🔍 Probar la Aplicación
+* Logs de todos los servicios (en tiempo real):
 
-- **Aplicación web:** http://localhost:8000/
-- **Documentación API:** http://localhost:8000/docs (Swagger)
+  ```bash
+  docker compose logs -f
+  ```
+* Logs solo backend:
 
-### 👤 Usuarios de Prueba
+  ```bash
+  docker compose logs -f backend
+  ```
+* Ver estado rápido:
 
-**Usuario normal:**
-- Email: `pepe@fake.com`
-- Contraseña: `Password123!`
+  ```bash
+  docker compose ps
+  ```
 
-**Usuario administrador:**
-- Email: `admin@fake.com`
-- Contraseña: `Admin123!`
+---
 
-## ❗ Solución de Problemas Comunes
+## 🔴 Parar todo (comando explícito)
 
-### Error de conexión a PostgreSQL
-- Verificar que el servicio esté ejecutándose
-- Confirmar credenciales en el archivo `.env`
-- Asegurar que la base de datos `pbio_eolos` existe
+* **Parar contenedores y eliminar redes/containers (mantiene volúmenes):**
 
-### Error de dependencias
-- Verificar que el entorno virtual esté activado
-- Ejecutar `pip install --upgrade pip` antes de instalar dependencias
+  ```bash
+  docker compose down
+  ```
 
-### Error de migraciones
-- Verificar que la base de datos esté creada y accesible
-- Confirmar que los modelos estén correctamente definidos
+* **Parar y eliminar también volúmenes de datos (borra la BD):**
 
-## 📞 Soporte
+  ```bash
+  docker compose down -v
+  ```
 
-Si encuentras problemas durante la instalación, verifica:
-1. Todas las variables en `.env` son correctas
-2. PostgreSQL está ejecutándose
-3. El entorno virtual está activado
-4. Todas las dependencias están instaladas
+* **Solo parar (no eliminar):**
+
+  ```bash
+  docker compose stop
+  ```
+
+Usa `down -v` con cuidado: borra la base de datos persistida.
+
+---
+
+## 🔁 ¿Cuándo y cómo reconstruir imágenes? (explicación clara)
+
+**Regla general:**
+
+* Si cambias **dependencias** (`requirements.txt`) o los **Dockerfile**, o los **ficheros que se copian durante la build** (por ejemplo el frontend estático que se copia dentro de la imagen nginx), **debes reconstruir la imagen**.
+* Si cambias **código Python del backend** y el backend tiene el proyecto montado como volumen (`volumes: - .:/app`) y uvicorn está en modo `--reload`, los cambios se aplican **sin** reconstruir (se recargan automáticamente).
+* Si cambias solo **assets del frontend** (HTML/CSS/JS) y el frontend **no** tiene volumen montado (la Dockerfile copia `frontend/`), **debes reconstruir** el frontend.
+
+### Casos concretos y comandos
+
+1. **He cambiado solo código Python del backend (lógica, routers, templates, etc.)**
+
+   * Si el `backend` está montando el código con `.:/app` y Uvicorn usa `--reload` (modo dev), **NO hace falta rebuild**.
+   * Si no se recarga automáticamente: reinicia el contenedor backend:
+
+     ```bash
+     docker compose restart backend
+     ```
+
+2. **He cambiado `requirements.txt` (nuevas dependencias)**
+
+   * Reconstruir backend y arrancar:
+
+     ```bash
+     docker compose build backend
+     docker compose up -d --no-deps backend
+     ```
+   * O todo junto:
+
+     ```bash
+     docker compose up -d --build
+     ```
+
+3. **He cambiado `Dockerfile.backend` o archivos que el Dockerfile copia (sin volumen)**
+
+   * Reconstruir backend:
+
+     ```bash
+     docker compose build backend
+     docker compose up -d --no-deps backend
+     ```
+
+---
+
+4. **He cambiado el frontend (HTML/CSS/JS)**
+
+* **Opción A — Producción (Docker)**
+  Si el frontend se copia en la imagen (`Dockerfile.frontend`), debes **reconstruir y reiniciar solo el servicio del frontend**:
+
+  ```bash
+  docker compose build frontend
+  docker compose up -d --no-deps frontend
+  ```
+
+  Esto se usa para probar los cambios dentro del contenedor Nginx, como se verán en producción.
+
+* **Opción B — Desarrollo rápido (recomendado para programadores de frontend)**
+  Para desarrollo, lo más cómodo es **no usar Docker**. Así los cambios se reflejan al instante y no necesitas reconstruir imágenes:
+
+  ```bash
+  cd frontend
+  npm install
+  npm run dev
+  ```
+
+  La aplicación se abrirá en:
+
+  ```
+  http://localhost:5173
+  ```
+
+  ⚠️ Notas importantes:
+
+  * En este modo, los cambios se recargan automáticamente.
+  * Docker se utiliza solo para probar la versión compilada en producción.
+  * Alternativamente, si quieres usar Docker para desarrollo, puedes montar el directorio `frontend/` como volumen en `docker-compose.yml` para reflejar cambios sin rebuild (solo recomendado para dev).
+
+---
+
+5. **He cambiado `nginx.conf`**
+
+   * Reconstruir frontend (pues la config se copia en la imagen):
+
+     ```bash
+     docker compose build frontend
+     docker compose up -d --no-deps frontend
+     ```
+
+6. **Quiero forzar todo (reconstruir y reiniciar toda la pila)**
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+7. **Actualizar imágenes base (por ejemplo nueva versión de postgres)**
+
+   * Pull y rebuild:
+
+     ```bash
+     docker compose pull
+     docker compose up -d --build
+     ```
+
+---
+
+## 🔧 Troubleshooting rápido (problemas comunes)
+
+* **Contenedores no suben / crash** → `docker compose logs backend` y `docker compose logs db`.
+* **Puerto 5432 en uso** → detén el Postgres local (ver sección 5).
+* **Seed da error** → `docker compose logs backend` y ejecutar el seed de nuevo.
+* **Cambios no aparecen** → si fue cambio en frontend, reconstruye la imagen; si fue backend y no tienes `--reload`, reinicia el contenedor.
+
+---
+
+## ✅ Usuarios de prueba (si los seeds los generan)
+
+* **Usuario normal:** `pepe@fake.com` / `Password123!`
+* **Administrador:** `admin@fake.com` / `Admin123!`
+
+---
+
