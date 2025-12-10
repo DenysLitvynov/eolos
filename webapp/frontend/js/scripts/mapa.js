@@ -37,7 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const hourDisplay = document.getElementById('hour-display');
     const dateFilter = document.getElementById('date-filter');
     const tableBody = document.querySelector('#measures-table tbody');
+    
+     // Sidebar Toggle (Mobile)
+    const sidebar = document.querySelector('.sidebar');
+    const toggleBtn = document.getElementById('toggle-sidebar');
 
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
     // Inicialización
     const currentHour = new Date().getHours();
     hourSlider.value = currentHour;
