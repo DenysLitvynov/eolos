@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="../../css/estado-sensores.css">
 
     <script type="module" src="../../js/scripts/estado-sensores.js" defer></script>
-
-    <!-- <link rel="stylesheet" href="../../css/estado-sensores.css"> -->
 </head>
 <body>
     <header class="header">
@@ -58,6 +56,63 @@
         <!-- Contenedor de tarjetas -->
         <section id="bikeList" class="bike-list"></section>
     </main>
+
+    <!-- MODAL DE MEDICIONES -->
+    <div id="modalMediciones" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Mediciones - <span id="modalPlacaId"></span></h2>
+                <button id="cerrarModal" class="btn-cerrar">&times;</button>
+            </div>
+
+            <!-- Filtro por fechas -->
+            <div class="modal-filtros">
+                <label>Desde:</label>
+                <input type="datetime-local" id="filtroFechaInicio">
+                <label>Hasta:</label>
+                <input type="datetime-local" id="filtroFechaFin">
+                <button id="btnAplicarFiltros" class="btn-filtrar">Aplicar filtros</button>
+                <button id="btnLimpiarFiltros" class="btn-limpiar">Limpiar filtros</button>
+            </div>
+
+            <!-- Tabla de mediciones -->
+            <div class="modal-tabla-container">
+                <table id="tablaMediciones" class="tabla-mediciones">
+                    <thead>
+                        <tr>
+                            <th>Fecha/Hora</th>
+                            <th>Tipo</th>
+                            <th>Valor</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla">
+                        <!-- Se llenará dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="modal-acciones">
+                <button id="btnEliminarAnómalas" class="btn-danger">Eliminar todas las anómalas</button>
+                <button id="btnCerrarModal2" class="btn-secondary">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN -->
+    <div id="modalConfirmacion" class="modal-confirmacion">
+        <div class="confirmacion-content">
+            <h3>Confirmación</h3>
+            <p id="textoConfirmacion"></p>
+            <div class="confirmacion-botones">
+                <button id="btnConfirmarEliminar" class="btn-danger">Eliminar</button>
+                <button id="btnCancelarEliminar" class="btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="ft">
         <!-- Footer -->
         <div class="ft__wrap ft--two-cols">
