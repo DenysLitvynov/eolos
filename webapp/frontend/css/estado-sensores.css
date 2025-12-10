@@ -72,6 +72,44 @@
     background: #ddd;
 }
 
+/* Filtros adicionales */
+.station-filters,
+.update-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.station-filters label,
+.update-filters label {
+    font-weight: 600;
+    color: #0F4C81;
+    white-space: nowrap;
+}
+
+.station-filters select,
+.update-filters select {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 0.95rem;
+    min-width: 160px;
+}
+
+.station-filters select:hover,
+.update-filters select:hover {
+    border-color: #0F4C81;
+}
+
+.station-filters select:focus,
+.update-filters select:focus {
+    outline: none;
+    border-color: #0F4C81;
+    box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.1);
+}
+
 /* ------------------------------
    LISTA DE TARJETAS
 --------------------------------*/
@@ -256,6 +294,22 @@
     background: #ddd;
 }
 
+.btn-limpiar-todos {
+    padding: 0.5rem 1rem;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.btn-limpiar-todos:hover {
+    background: #e68900;
+}
+
 /* Tabla de mediciones */
 .modal-tabla-container {
     flex: 1;
@@ -438,5 +492,25 @@
     .btn-danger,
     .btn-secondary {
         width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .filters {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .state-filters,
+    .station-filters,
+    .update-filters,
+    .btn-limpiar-todos {
+        width: 100%;
+    }
+    
+    .station-filters select,
+    .update-filters select {
+        width: 100%;
+        min-width: unset;
     }
 }

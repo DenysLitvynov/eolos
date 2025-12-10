@@ -41,12 +41,16 @@ class BikeCard {
 const bikeList = document.getElementById("bikeList");
 const searchInput = document.getElementById("searchInput");
 const stateButtons = document.querySelectorAll(".state-btn");
+const selectEstacion = document.getElementById("selectEstacion");
+const selectActualizacion = document.getElementById("selectActualizacion");
 
 const logicaSensores = new EstadoSensoresFake();
 
 let allBikes = []; // Datos del backend
 let searchText = "";
 let selectedState = null; // null -> todas
+let selectedEstacion = ""; // "" -> todas
+let selectedActualizacion = ""; // "" -> todas
 let medicionesActuales = []; // Mediciones mostradas actualmente
 let placaIdActual = null; // Placa actual en el modal
 
@@ -56,11 +60,31 @@ let placaIdActual = null; // Placa actual en el modal
 async function cargarBicicletas() {
     try {
         allBikes = await logicaSensores.obtenerBicicletas();
+        poblarSelectEstaciones();
         applyFilters();
     } catch (error) {
         console.error('Error al obtener bicicletas:', error);
         bikeList.innerHTML = '<p class="error-message">Error al cargar los datos de las bicicletas</p>';
     }
+}
+
+// Función para poblar el select de estaciones
+function poblarSelectEstaciones() {
+    const estaciones = new Set();
+    allBikes.forEach(bike => {
+        if (bike.parada) {
+            estaciones.add(bike.parada);
+        }
+    });
+    
+    const selectEstacionOptions = Array.from(estaciones).sort();
+    
+    selectEstacionOptions.forEach(estacion => {
+        const option = document.createElement('option');
+        option.value = estacion;
+        option.textContent = estacion;
+        selectEstacion.appendChild(option);
+    });
 }
 
 // Cargar al iniciar
@@ -249,15 +273,17 @@ btnCancelarEliminar.addEventListener('click', () => {
 });
 
 // -----------------------------------
-// FILTRADO GENERAL
+// FILTRADO GENERAL (MEJORADO)
 // -----------------------------------
 function applyFilters() {
     let filtered = [...allBikes];
 
-    // Filtro por texto (ID)
+    // Filtro por texto (ID o Estación)
     if (searchText.trim() !== "") {
+        const searchLower = searchText.toLowerCase();
         filtered = filtered.filter(bike =>
-            bike.id.toLowerCase().includes(searchText.toLowerCase())
+            bike.id.toLowerCase().includes(searchLower) ||
+            bike.parada.toLowerCase().includes(searchLower)
         );
     }
 
@@ -268,14 +294,70 @@ function applyFilters() {
         );
     }
 
+    // Filtro por estación
+    if (selectedEstacion !== "") {
+        filtered = filtered.filter(bike =>
+            bike.parada === selectedEstacion
+        );
+    }
+
+    // Filtro por última actualización
+    if (selectedActualizacion !== "") {
+        filtered = filtered.filter(bike =>
+            cumpleCondicionActualizacion(bike.ultimaActualizacion)
+        );
+    }
+
     // Orden final (dañada → activa → desactivada)
     filtered = orderBikes(filtered);
 
     renderBikes(filtered);
 }
 
+function cumpleCondicionActualizacion(ultimaActualizacion) {
+    if (selectedActualizacion === "sin") {
+        return ultimaActualizacion === "Sin datos";
+    }
+    
+    // Extraer número y unidad de la cadena (ej: "5 min", "2 horas", "3 días")
+    const regex = /(\d+)\s*(\w+)/;
+    const match = ultimaActualizacion.match(regex);
+    
+    if (!match) return false;
+    
+    const cantidad = parseInt(match[1]);
+    const unidad = match[2].toLowerCase();
+    
+    let minutos = 0;
+    
+    if (unidad.startsWith('min')) {
+        minutos = cantidad;
+    } else if (unidad.startsWith('hora')) {
+        minutos = cantidad * 60;
+    } else if (unidad.startsWith('día')) {
+        minutos = cantidad * 24 * 60;
+    }
+    
+    switch (selectedActualizacion) {
+        case "24h":
+            return minutos <= 24 * 60;
+        case "7d":
+            return minutos <= 7 * 24 * 60;
+        case "30d":
+            return minutos <= 30 * 24 * 60;
+        default:
+            return true;
+    }
+}
+
 function renderBikes(data) {
     bikeList.innerHTML = "";
+    
+    if (data.length === 0) {
+        bikeList.innerHTML = '<p class="sin-resultados">No hay sensores que coincidan con los filtros</p>';
+        return;
+    }
+    
     data.forEach(bike => {
         const card = new BikeCard(bike).render();
         bikeList.appendChild(card);
@@ -343,4 +425,46 @@ stateButtons.forEach(btn => {
 
         applyFilters();
     });
+});
+
+// -----------------------------------
+// EVENTOS: Select de estación
+// -----------------------------------
+selectEstacion.addEventListener("change", (e) => {
+    selectedEstacion = e.target.value;
+    applyFilters();
+});
+
+// -----------------------------------
+// EVENTOS: Select de última actualización
+// -----------------------------------
+selectActualizacion.addEventListener("change", (e) => {
+    selectedActualizacion = e.target.value;
+    applyFilters();
+});
+
+// -----------------------------------
+// EVENTOS: Botón limpiar todos los filtros
+// -----------------------------------
+const btnLimpiarTodosFiltros = document.getElementById("btnLimpiarTodosFiltros");
+
+btnLimpiarTodosFiltros.addEventListener("click", () => {
+    // Limpiar búsqueda
+    searchText = "";
+    searchInput.value = "";
+    
+    // Limpiar estado
+    selectedState = null;
+    stateButtons.forEach(b => b.classList.remove("active"));
+    
+    // Limpiar estación
+    selectedEstacion = "";
+    selectEstacion.value = "";
+    
+    // Limpiar última actualización
+    selectedActualizacion = "";
+    selectActualizacion.value = "";
+    
+    // Aplicar filtros (sin filtros = mostrar todos)
+    applyFilters();
 });

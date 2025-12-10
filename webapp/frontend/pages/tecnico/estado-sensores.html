@@ -36,7 +36,7 @@
     <main class="bike-page">
         <h1 class="page-title">Lista de Sensores</h1>
     
-        <!-- Buscador + Estado -->
+        <!-- Buscador + Estado + Estación + Última Actualización -->
         <div class="filters">
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Buscar por id o zona">
@@ -51,6 +51,27 @@
                 <button class="state-btn" data-state="danada">Dañada</button>
                 <button class="state-btn" data-state="desactivada">Desactivado</button>
             </div>
+    
+            <div class="station-filters">
+                <label for="selectEstacion">Estación:</label>
+                <select id="selectEstacion">
+                    <option value="">Todas las estaciones</option>
+                    <!-- Se llenará dinámicamente -->
+                </select>
+            </div>
+    
+            <div class="update-filters">
+                <label for="selectActualizacion">Última actualización:</label>
+                <select id="selectActualizacion">
+                    <option value="">Todas</option>
+                    <option value="24h">Últimas 24h</option>
+                    <option value="7d">Últimos 7 días</option>
+                    <option value="30d">Últimos 30 días</option>
+                    <option value="sin">Sin actualizar</option>
+                </select>
+            </div>
+
+            <button id="btnLimpiarTodosFiltros" class="btn-limpiar-todos">Limpiar filtros</button>
         </div>
     
         <!-- Contenedor de tarjetas -->
