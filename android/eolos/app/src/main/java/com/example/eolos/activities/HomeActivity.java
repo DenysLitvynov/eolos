@@ -20,6 +20,7 @@ import com.example.eolos.servicio.GpsDistanceTrackerService;
 import androidx.appcompat.app.AlertDialog;
 import androidx.biometric.BiometricManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
     @Override
@@ -28,6 +29,24 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.home_page_usuario_registrado); // el que hemos ido tocando
 
         setupBottomNavigation();    // Configura la barra de navegación inferior
+
+        Button btnVerMapa = findViewById(R.id.btnVerMapa);
+        btnVerMapa.setOnClickListener(v -> {
+            startActivity(new Intent(HomeActivity.this, MapaActivity.class));
+        });
+
+
+        // ---------- BOTÓN "Ver Información" (Calidad del aire) ----------
+        Button btnVerInfo = findViewById(R.id.btn_ver_info);
+        btnVerInfo.setOnClickListener(v ->
+                startActivity(new Intent(this, CalidadAireActivity.class))
+        );
+
+        // ---------- BOTÓN "Ver Recompensas" ----------
+        Button btnVerRecompensas = findViewById(R.id.btn_ver_recompensas);
+        btnVerRecompensas.setOnClickListener(v ->
+                startActivity(new Intent(this, RecompensaActivity.class))
+        );
 
         // Verificar token
         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
@@ -89,29 +108,29 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupBottomNavigation() {
 
-        // Recuperamos cada icono directamente por su ID real del XML
         ImageView iconInicio = findViewById(R.id.icon1);
         ImageView iconMapa = findViewById(R.id.icon2);
         ImageView iconQR = findViewById(R.id.icon3);
         ImageView iconAlertas = findViewById(R.id.icon4);
         ImageView iconPerfil = findViewById(R.id.icon5);
 
-        // Listeners según tu lógica original
         iconInicio.setOnClickListener(v ->
                 startActivity(new Intent(this, HomeActivity.class)));
 
         iconMapa.setOnClickListener(v ->
-                Toast.makeText(this, "Mapa", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, MapaActivity.class)));
 
         iconQR.setOnClickListener(v ->
                 startActivity(new Intent(this, ConnectionActivity.class)));
 
         iconAlertas.setOnClickListener(v ->
-                Toast.makeText(this, "Alertas", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, IncidenciaActivity.class)));
+
 
         iconPerfil.setOnClickListener(v ->
                 startActivity(new Intent(this, PerfilActivity.class)));
     }
+
     //------------------------------------------------------------------------------------------
     //  void  →  void
     //  setupDistanceLiveTracking() – VERSIÓN FINAL 100% FUNCIONAL

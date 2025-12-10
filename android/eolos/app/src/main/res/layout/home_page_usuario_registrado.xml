@@ -50,27 +50,20 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginStart="24dp" />
 
-            <!-- CONTENEDOR MAPA -->
-            <FrameLayout
-                android:id="@+id/contenedor_mapa"
+            <!-- BOTÓN PARA VER EL MAPA -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerMapa"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="52dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="12dp"
-                android:background="@drawable/drawable_map_section">
-
-                <TextView
-                    android:id="@+id/tv_placeholder_mapa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/rethink_sans"
-                    android:text="Aquí va el mapa"
-                    android:textColor="@color/azul_profundo"
-                    android:textSize="40sp"
-                    android:textStyle="bold" />
-            </FrameLayout>
+                android:text="Ver Mapa"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/rethink_sans"
+                app:backgroundTint="#0A3D91"
+                style="@style/BotonPrincipal" />
 
             <!-- CONTENEDOR NIVEL / GASES -->
             <FrameLayout

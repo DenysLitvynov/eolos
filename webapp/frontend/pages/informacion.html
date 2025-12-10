@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Adicional - Contaminantes</title>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/informacion.css">
+</head>
+
+<body>
+    <header class="header" data-breakpoint="1050">
+        <div class="logo">
+            <img src="../images/logo.png" alt="logo" />
+        </div>
+
+        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
+            <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <span class="menu-toggle__label">Menú</span>
+        </button>
+
+        <nav class="nav" id="site-nav">
+            <a href="../index.html">Inicio</a>
+            <a href="mapas.html">Mapas</a>
+            <a href="calidad-aire.html">Calidad de aire</a>
+            <a href="sobre-nosotros.html">Sobre Nosotros</a>
+            <a href="FAQ.html">Faq</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="login.html" class="login">Inicia Sesión</a>
+            <a href="registro.html" class="login">Registrarse</a>
+        </nav>
+    </header>
+
+    <section class="info-hero">
+        <h1>Información sobre contaminantes atmosféricos</h1>
+        <p>
+            La calidad del aire exterior es uno de los principales riesgos ambientales para la salud.
+            Conoce más sobre los principales contaminantes: Ozono (O₃), Monóxido de Carbono (CO),
+            Dióxido de Azufre (SO₂) y Dióxido de Nitrógeno (NO₂).
+        </p>
+    </section>
+
+    <main class="info-container">
+        <div class="pollutants-grid">
+            <!-- Ozono -->
+            <article class="pollutant-card">
+                <h2>Ozono troposférico (O₃)</h2>
+
+                <div class="card-body">
+                    <div class="card-col-left">
+                        <div class="pollutant-section">
+                            <h3>Qué es y de dónde viene</h3>
+                            <p>Contaminante secundario formado por radiación solar sobre óxidos de nitrógeno y
+                                compuestos
+                                orgánicos volátiles. Común en días cálidos y soleados.</p>
+                        </div>
+
+                        <div class="pollutant-section">
+                            <h3>Efectos en salud y ambiente</h3>
+                            <p>Irritación respiratoria, tos, empeoramiento del asma. Daña cultivos y ecosistemas. Gas de
+                                efecto
+                                invernadero.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-col-right">
+                        <div class="pollutant-section">
+                            <h3>Rangos orientativos (Media 8h)</h3>
+                            <ul class="ranges-list">
+                                <li class="good"><strong>Bueno (0–100 µg/m³):</strong> Riesgo bajo.</li>
+                                <li class="regular"><strong>Regular (>100–120 µg/m³):</strong> Personas sensibles deben
+                                    limitar
+                                    esfuerzo.</li>
+                                <li class="bad"><strong>Malo (>120 µg/m³):</strong> Supera valor objetivo. Evitar
+                                    deporte
+                                    intenso.</li>
+                            </ul>
+                        </div>
+
+                        <div class="pollutant-section">
+                            <h3>Consejos</h3>
+                            <ul class="tips-list">
+                                <li>Evitar deporte intenso en horas centrales si es regular/malo.</li>
+                                <li>Priorizar actividades temprano o tarde.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Monóxido de Carbono -->
+            <article class="pollutant-card">
+                <h2>Monóxido de carbono (CO)</h2>
+
+                <div class="card-body">
+                    <div class="card-col-left">
+                        <div class="pollutant-section">
+                            <h3>Qué es y de dónde viene</h3>
+                            <p>Gas incoloro e inodoro por combustión incompleta (motores, estufas). Peligroso en
+                                espacios
+                                cerrados.</p>
+                        </div>
+
+                        <div class="pollutant-section">
+                            <h3>Efectos en salud</h3>
+                            <p>Reduce transporte de oxígeno. Causa dolor de cabeza, mareo, náuseas. Riesgo
+                                cardiovascular.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-col-right">
+                        <div class="pollutant-section">
+                            <h3>Rangos orientativos (Máx diaria 8h)</h3>
+                            <ul class="ranges-list">
+                                <li class="good"><strong>Bueno (0–5 mg/m³):</strong> Sin riesgo apreciable.</li>
+                                <li class="regular"><strong>Regular (>5–10 mg/m³):</strong> Vigilar personas con
+                                    enfermedades
+                                    cardiacas.</li>
+                                <li class="bad"><strong>Malo (>10 mg/m³):</strong> Supera límite legal. Situación de
+                                    riesgo.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="pollutant-section">
+                            <h3>Consejos</h3>
+                            <ul class="tips-list">
+                                <li>No usar combustión en interiores sin ventilación.</li>
+                                <li>Revisar calderas y aparatos de gas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Dióxido de Azufre -->
+            <article class="pollutant-card">
+                <h2>Dióxido de azufre (SO₂)</h2>
+
+                <div class="card-body">
+                    <div class="card-col-left">
+                        <div class="pollutant-section">
+                            <h3>Qué es y de dónde viene</h3>
+                            <p>Combustión de fósiles con azufre (industria, calefacción). También volcanes.</p>
+                        </div>
+
+                        <div class="pollutant-section">
+                            <h3>Efectos en salud y ambiente</h3>
+                            <p>Broncoespasmo, irritación respiratoria. Lluvia ácida que daña ecosistemas.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-col-right">
+                        <div class="pollutant-section">
+                            <h3>Rangos orientativos (Media diaria)</h3>
+                            <ul class="ranges-list">
+                                <li class="good"><strong>Bueno (0–50 µg/m³):</strong> Niveles habituales bajos.</li>
+                                <li class="regular"><strong>Regular (>50–125 µg/m³):</strong> Riesgo en personas muy
+                                    sensibles.
+                                </li>
+                                <li class="bad"><strong>Malo (>125 µg/m³):</strong> Supera límite diario. Limitar
+                                    actividad al
+                                    aire libre.</li>
+                            </ul>
+                        </div>
+
+                        <div class="pollutant-section">
+                            <h3>Consejos</h3>
+                            <ul class="tips-list">
+                                <li>Atención a avisos en zonas industriales.</li>
+                                <li>Reducir esfuerzo físico en episodios malos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Dióxido de Nitrógeno -->
+            <article class="pollutant-card">
+                <h2>Dióxido de nitrógeno (NO₂)</h2>
+
+                <div class="card-body">
+                    <div class="card-col-left">
+                        <div class="pollutant-section">
+                            <h3>Qué es y de dónde viene</h3>
+                            <p>Tráfico rodado (diésel) y combustión a alta temperatura. Gas irritante.</p>
+                        </div>
+
+                        <div class="pollutant-section">
+                            <h3>Efectos en salud y ambiente</h3>
+                            <p>Inflamación vías aéreas, asma. Acidificación y formación de ozono.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-col-right">
+                        <div class="pollutant-section">
+                            <h3>Rangos orientativos (Horario)</h3>
+                            <ul class="ranges-list">
+                                <li class="good"><strong>Bueno (0–40 µg/m³):</strong> Compatible con salud a largo
+                                    plazo.</li>
+                                <li class="regular"><strong>Regular (>40–200 µg/m³):</strong> Riesgo moderado en
+                                    población
+                                    sensible.</li>
+                                <li class="bad"><strong>Malo (>200 µg/m³):</strong> Supera límite horario. Episodio de
+                                    alta
+                                    contaminación.</li>
+                            </ul>
+                        </div>
+
+                        <div class="pollutant-section">
+                            <h3>Consejos</h3>
+                            <ul class="tips-list">
+                                <li>Evitar rutas con mucho tráfico.</li>
+                                <li>Ventilar en horas de menos tráfico.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <section class="comparison-section">
+            <h2>Tabla Comparativa</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Contaminante</th>
+                        <th>Base Tiempo</th>
+                        <th>Bueno</th>
+                        <th>Regular</th>
+                        <th>Malo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ozono (O₃)</td>
+                        <td>Máx. 8h</td>
+                        <td>0 – 100 µg/m³</td>
+                        <td>>100 – 120 µg/m³</td>
+                        <td>>120 µg/m³</td>
+                    </tr>
+                    <tr>
+                        <td>CO</td>
+                        <td>Máx. 8h</td>
+                        <td>0 – 5 mg/m³</td>
+                        <td>>5 – 10 mg/m³</td>
+                        <td>>10 mg/m³</td>
+                    </tr>
+                    <tr>
+                        <td>SO₂</td>
+                        <td>Diaria</td>
+                        <td>0 – 50 µg/m³</td>
+                        <td>>50 – 125 µg/m³</td>
+                        <td>>125 µg/m³</td>
+                    </tr>
+                    <tr>
+                        <td>NO₂</td>
+                        <td>Horaria</td>
+                        <td>0 – 40 µg/m³</td>
+                        <td>>40 – 200 µg/m³</td>
+                        <td>>200 µg/m³</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="sources-section">
+            <h3>Fuentes y Referencias</h3>
+            <ul class="sources-list">
+                <li><a href="https://www.sanidad.gob.es/areas/sanidadAmbiental/riesgosAmbientales/calidadAire/home.htm"
+                        target="_blank">Ministerio de Sanidad</a></li>
+                <li><a href="https://www.who.int/es/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health"
+                        target="_blank">OMS - Calidad del aire</a></li>
+                <li><a href="https://www.miteco.gob.es/" target="_blank">MITECO</a></li>
+                <li><a href="https://www.comunidad.madrid/servicios/salud/calidad-aire-salud" target="_blank">Comunidad
+                        de Madrid - Salud</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="ft">
+        <div class="ft__wrap ft--two-cols">
+            <div class="ft__brand">
+                <span class="ft__logo">
+                    <img src="../images/logo_footer.png" alt="logo" />
+                </span>
+                <address class="ft__addr">
+                    <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
+                    <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
+                    <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
+                </address>
+            </div>
+
+            <div class="ft__links">
+                <nav class="ft__col">
+                    <a href="../index.html">Inicio</a>
+                    <a href="mapas.html">Mapas</a>
+                    <a href="sobre-nosotros.html">Sobre nosotros</a>
+                </nav>
+
+                <nav class="ft__col">
+                    <a href="contacto.html">Contacto</a>
+                    <a href="login.html">Iniciar sesión</a>
+                </nav>
+
+                <nav class="ft__col">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="ft__copy">
+            Copyright ©éolos. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            const header = document.querySelector('.header');
+            const nav = header.querySelector('.nav');
+            const btn = header.querySelector('.menu-toggle');
+
+            function closeMenu() {
+                btn.setAttribute('aria-expanded', 'false');
+                nav.classList.remove('is-open');
+            }
+
+            function openMenu() {
+                btn.setAttribute('aria-expanded', 'true');
+                nav.classList.add('is-open');
+            }
+
+            btn.addEventListener('click', () => {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                expanded ? closeMenu() : openMenu();
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 1050) closeMenu();
+            });
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,288 @@
+.users-page {
+    margin: 2vh 0;
+    padding: 0 2vw;
+}
+
+/* 顶部标题 + 按钮 */
+
+.users-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.users-header h2 {
+    font-weight: 300;
+    color: #0D47A1;
+    margin: 3vh 3vw;
+    line-height: 1;
+}
+.users-actions {
+    display: flex;
+    justify-content: flex-end; /* 向右对齐 */
+    margin-left: 3vw ;
+}
+
+/* 卡片和表格 */
+
+.users-table-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+    overflow: hidden;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 14px;
+}
+
+.users-table thead {
+    background: #1f3b8f;
+    color: #ffffff;
+}
+
+.users-table th,
+.users-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: middle;
+}
+
+.users-table th {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.users-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.users-table tbody tr:hover {
+    background: #e5f0ff;
+}
+
+.users-table td.col-id,
+.users-table th.col-id {
+    font-family: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+
+/* 按钮 */
+
+.btn {
+    border: none;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease,
+    background 0.1s ease;
+    white-space: nowrap;
+    width: 90px;
+}
+
+.btn.primary {
+    background: #1f3b8f;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(31, 59, 143, 0.4);
+    font-size: 30px;
+    margin:3vh ;
+    width:fit-content ;
+}
+
+.btn.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(31, 59, 143, 0.45);
+}
+
+.btn.secondary {
+    background: #e5e7eb;
+    color: #111827;
+}
+.btn.tercero {
+    background: #1f3b8f;
+    color: #ffffff;
+}
+
+.btn.secondary:hover {
+    background: #d1d5db;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 999px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s ease, transform 0.1s ease;
+}
+
+.icon-btn:hover {
+    background: rgba(148, 163, 184, 0.25);
+    transform: translateY(-1px);
+}
+
+/* 表格里的动作按钮 */
+
+.action-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* 模态框 */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.modal-backdrop.hidden {
+    display: none;
+}
+
+.modal {
+    background: #1f3b8f;
+    color: #ffffff;
+    width: min(520px, 92vw);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.7);
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 模态框头部 */
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 12px;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* 模态框主体 */
+
+.modal-body {
+    background: #f8fafc;
+    color: #111827;
+    padding: 20px 22px 20px;
+}
+
+.modal-tip {
+    font-size: 12px;
+    color: #6b7280;
+    margin: 0 0 12px;
+}
+
+/* 表单样式 */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #111827;
+}
+
+.form-field input {
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    padding: 10px 14px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.1s ease, box-shadow 0.1s ease,
+    background 0.1s ease;
+    background: #ffffff;
+}
+
+.form-field input::placeholder {
+    color: #9ca3af;
+}
+
+.form-field input:focus {
+    border-color: #1f3b8f;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* 表单底部按钮 */
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* 响应式 */
+
+@media (max-width: 768px) {
+    .users-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .users-table-card {
+        border-radius: 12px;
+    }
+
+    .users-table th,
+    .users-table td {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .col-actions {
+        width: 80px;
+    }
+}
+
+.users-header {
+    display: block;
+    margin-bottom: 8px;
+}
+
+
+/* 新的一层，只放按钮，在标题下面一行靠右 */
+.users-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}

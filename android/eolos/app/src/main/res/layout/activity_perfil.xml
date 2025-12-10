@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F9FB"
+    android:fitsSystemWindows="true"
     tools:context=".activities.PerfilActivity">
 
     <!-- ⭐ 可滚动内容区 -->
@@ -26,23 +27,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- 顶部 azul 深蓝条 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="#0A3D91"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <TextView
-                    android:text="éolos"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+            <!-- HEADER CON FLECHA -->
+            <include
+                android:id="@+id/header_container"
+                layout="@layout/header_logoyflecha" />
 
             <!-- 图标/插画 -->
             <com.google.android.material.imageview.ShapeableImageView
@@ -115,16 +103,16 @@
                     android:saveEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Contraseña -->
+            <!-- Contraseña actual -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/InputField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:hint="Contraseña">
+                android:hint="Contraseña actual">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etContrasena"
+                    android:id="@+id/etContrasenaActual"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="12dp"
@@ -132,21 +120,37 @@
                     android:saveEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Fecha Registro -->
+            <!-- Nueva contraseña -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/InputField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:hint="Fecha Registro">
+                android:hint="Nueva contraseña">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etFecha"
+                    android:id="@+id/etNuevaContrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="12dp"
+                    android:saveEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Repite la nueva contraseña -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/InputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:hint="Repite la nueva contraseña">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRepetirContrasena"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="12dp"
-                    android:focusable="false"
-                    android:clickable="true"
+                    android:inputType="textPassword"
                     android:saveEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -190,10 +194,7 @@
                     android:textColor="#0A3D91"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/bg_outline_button" />
-
-
             </LinearLayout>
-
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -204,6 +205,7 @@
         layout="@layout/menu_navegacion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

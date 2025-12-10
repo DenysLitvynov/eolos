@@ -1,0 +1,416 @@
+
+.welcome-title {
+    color: #0D47A1;
+    font-weight: 200;
+    font-size: clamp(24px, 3vw + 10px, 42px);
+    margin: 5px 0;
+    text-align: center;
+}
+
+
+.map{
+    position: relative;
+    height: 80vh;
+    padding-top: 1rem;
+}
+
+#map {
+    width: 100%;
+    height: 100%;   /* 或 80vh，根据你页面整体布局自行调整 */
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+/* ====== Contenedor de las tarjetas ====== */
+.wrapper {
+    padding: 1.5rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap:4rem;
+    row-gap: 1.5rem;
+    align-items: stretch;
+}
+
+/* 窄屏时 2 列 → 1 列 */
+@media (max-width: 900px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+    }
+}
+
+.card-main {
+    background: #ffffff;
+    border-radius: 30px;
+    border: 1px solid #0D47A1;
+
+    /* 用 em 做内边距，跟字体一起缩放 */
+    padding: 1.5em 1.7em;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 覆盖你全局很大的 h2 */
+.card-main h2 {
+    font-size: 2.5rem;
+    font-weight: 100;
+    color: #0D47A1;
+    margin:0;
+    text-align: center;
+}
+
+.score-row {
+    display: flex;
+    align-items: baseline;
+    gap: 3em;
+    margin:3vh 10vw;
+}
+
+.score {
+    font-size:3em;
+    font-weight: 700;
+    color: #57b161;
+}
+
+.status {
+    font-size: 3em;
+    font-weight: 500;
+    color: #333333;
+}
+
+.description {
+    font-size: 2rem;
+    color: #555555;
+    max-width: 16em; /* 用 em 限宽，随字体变 */
+}
+
+.bottom-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.smiley {
+    width: 10vw;
+    display: block;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.card-side {
+    background: #E9EEF0;
+    border-radius: 24px;
+    padding: 1.6em 1.8em;
+    font-size: 0.9rem;
+    color: #333333;
+
+    /* 用一点点阴影增强层级感 */
+    box-shadow: 0 0.7vh 1.8vh rgba(0, 0, 0, 0.06);
+}
+
+/* 覆盖全局 h3 的 clamp，让这里更小一点 */
+.card-side h3 {
+    font-size: 2.5rem;
+    color: #0D47A1;
+    margin:0;
+    font-weight: 100;
+}
+
+.card-side h3 + p,
+.card-side h3 + ul {
+    margin-bottom: 0;
+}
+
+.card-side ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.card-side ul li {
+    margin-bottom: 0.15em;
+}
+
+.highlight {
+    color: #0D47A1;
+    font-weight: 600;
+}
+
+.small {
+    font-size: 1.2rem;
+    color: #000000;
+    margin-bottom: 0.8em;
+}
+
+/* 超小屏时稍微加大文字，保持可读性 */
+@media (max-width: 500px) {
+    .score {font-size:2em;}
+    .card-main h2 {
+        font-size: 1.5rem;}
+    .status {
+        font-size: 2rem;}
+    .card-main,
+    .card-side {
+        padding:1vw;
+    }
+    .card-side h3 {
+        font-size: 1.5rem}
+    .smiley {
+        width: 20vw;
+    padding: 5px}
+
+    .card-side,
+    .card-main .description {
+        font-size: 0.95rem;
+    }
+}
+
+/* ========== POLLUTION (tarjeta de contaminación en tiempo real) ========== */
+.pollution-card{
+    background: var(--c-muted);
+    border-radius:20px;
+    margin-top:40px;
+    padding: clamp(16px, 3vw, 24px) clamp(12px, 3vw, 40px);
+    overflow:hidden;
+}
+
+.pollution-grid{
+    display:grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: clamp(16px, 3vw, 40px);
+    align-items:start;
+}
+
+.pollution-left{
+    display:grid;
+    grid-template-rows:auto auto auto;
+    gap: clamp(12px, 4vw, 40px);
+}
+
+.pollution-left h2{
+    color: var(--c-primary);
+    font-weight:800;
+    font-size: clamp(24px, 4.5vw, 56px);
+    margin:0;
+}
+
+.pollution-lists{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(12px, 2vw, 24px);
+}
+
+.pollution-list{
+    list-style:none; margin:0; padding:0;
+    display:grid; gap: clamp(12px, 2vw, 20px);
+    /* Tamaño de fuente fluido para listas */
+    font-size: clamp(14px, 1.6vw, 24px);
+    color:#000; font-weight:700;
+}
+.pollution-list li{ display:flex; align-items:center; gap:12px; }
+
+.dot{ display:inline-block; width: clamp(14px, 3vw, 40px); height: clamp(14px, 3vw, 40px); border-radius:50%; flex:0 0 auto; }
+.dot.red{ background:#db4c4f; }
+.dot.yellow{ background:#f7d85d; }
+.dot.green{ background:#57b161; }
+
+.pollution-right{
+    display:flex; flex-direction:column; align-items:center; gap: clamp(8px, 2vw, 16px);
+    overflow:hidden; position:relative;
+}
+
+.pollution-legend{
+    border:2px solid var(--c-primary);
+    border-radius:16px;
+    padding: clamp(10px, 2vw, 20px) clamp(16px, 4vw, 60px) clamp(10px, 2vw, 20px) clamp(10px, 2vw, 10px);
+    display:grid; gap: clamp(10px, 2vw, 30px);
+    font-weight:700;
+    font-size: clamp(12px, 1.6vw, 22px);
+}
+.pollution-legend div{ display:flex; align-items:center; gap:12px; }
+
+.pollution-img{ width: clamp(140px, 22vw, 260px); max-height:45vh; }
+
+.pollution-btn{
+    justify-self:start;
+    margin-top:8px;
+    padding: clamp(8px, 1.2vw, 10px) clamp(16px, 2vw, 24px);
+    border:2px solid var(--c-primary);
+    border-radius:999px;
+    color: var(--c-primary);
+    text-decoration:none;
+    transition:.25s;
+    font-size: clamp(14px, 1.6vw, 22px);
+}
+.pollution-btn:hover{ background: var(--c-primary); color:#fff; }
+
+
+
+/* <700px: listas de contaminación en una sola columna */
+@media (max-width: 600px){
+    .pollution-lists{ grid-template-columns: 1fr; }
+    .pollution-grid{ grid-template-columns: 1fr; }
+    .pollution-right{ align-items:flex-start; }
+    .pollution-grid{
+        display:grid;
+        grid-template-columns: 2.5fr 2fr;}
+    .pollution-legend{
+        padding:3px;}
+    .pollution-legend div{ display:flex; align-items:center; gap:3px; }
+
+}
+@media (max-width: 900px) {
+    .pollution-left h2 {
+        font-size: clamp(22px, 5vw, 36px);
+    }
+
+    .pollution-list {
+        font-size: clamp(12px, 3vw, 18px);
+    }
+
+    .pollution-btn {
+        font-size: clamp(12px, 3vw, 16px);
+        padding: clamp(8px, 2vw, 12px) clamp(12px, 2.5vw, 18px);
+    }
+}
+/* 外层容器：两列卡片，跟 pedaleo-container 一样的套路 */
+.km-section {
+    margin: 4vh 0;
+    display: flex;
+    justify-content: center;
+}
+
+.km-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(16px, 4vw, 40px);
+    box-sizing: border-box;
+}
+
+/* 防止内容把列撑爆 */
+.km-card {
+    min-width: 0;
+    border-radius: 25px;
+    padding: clamp(16px, 3vw, 40px);
+    display: grid;
+    grid-template-rows: auto 1fr; /* 标题 + 内容 */
+}
+
+/* 左右卡片不同背景 */
+.km-card--left {
+    background: #fff;
+    border: 1.5px solid var(--c-primary);
+}
+
+.km-card--right {
+    background: #EFF3F6;
+    border: none;
+}
+
+/* 标题：完全复用 pedaleo-title 风格 */
+.km-title {
+    color: var(--c-primary);
+    font-weight: 200;
+    font-size: clamp(24px, 4vw, 35px);
+    line-height:1;
+    margin: 0;
+}
+
+/* 第二行：左文字 + 右图片，跟 pedaleo-content-row 超像 */
+.km-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: clamp(12px, 2vw, 20px);
+}
+
+.km-text p {
+    font-size: clamp(16px, 2.2vw, 22px);
+    line-height: 1.2;
+    margin: 1em 0;
+}
+
+.km-value {
+    font-weight: 600;
+    color: #018435;
+}
+
+/* 图片 */
+.km-img {
+    width: clamp(140px, 20vw, 260px);
+    max-width: 100%;
+    height: auto;
+}
+
+/* 赞助部分 */
+.km-sponsors {
+    display: grid;
+}
+
+
+.km-sponsor-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.8em;
+    font-size: clamp(16px, 2.2vw, 22px);
+}
+.km-sponsor-item p {
+    font-size: clamp(16px, 2.2vw, 22px);
+    line-height: 1.2;
+    margin: 0 0 0.5em 0;
+}
+
+
+.km-sponsor-logo img {
+    width: clamp(34px, 5vw, 60px);
+    height: auto;
+    object-fit: contain;
+}
+
+/* 复用你之前的按钮样式 */
+.btn {
+    border-radius: 28px;
+    padding: 0.7em 1.8em;
+    font-size: clamp(14px, 0.7vw + 10px, 18px);
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-block;
+    width: fit-content;
+}
+
+.btn-primary {
+    background: var(--c-primary);
+    color: #fff;
+    transition: 0.2s ease;
+}
+.btn-primary:hover {
+    background: #0b4aa0;
+}
+
+
+/* 响应式：跟 pedaleo 一样，小屏时变成一列，图片下移 */
+@media (max-width: 780px) {
+    .km-container {
+        grid-template-columns: 1fr;
+    }
+
+    .km-row {
+        grid-template-columns: 1fr;   /* 文本在上，图片在下 */
+        text-align: center;
+    }
+
+    .km-img {
+        justify-self: center;
+    }
+
+    .km-card--right {
+        text-align: center;
+    }
+
+    .km-sponsor-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}

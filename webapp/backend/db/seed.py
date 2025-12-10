@@ -1,6 +1,6 @@
 """
 Autor: Denys Litvynov Lymanets
-Fecha: 15-11-2025
+Fecha: 03-12-2025
 Descripción: Script para poblar todas las tablas de la base de datos con unos pocos datos de prueba.  
 """
 
@@ -33,19 +33,8 @@ def generar_dni_valido(numero: int) -> str:
     letra = letras[numero % 23]
     return f"{numero:08d}{letra}"
 
-# 10 carnets reales para pruebas
-CARNES_DNI = [
-    generar_dni_valido(12345678),  # 12345678Z
-    generar_dni_valido(87654321),  # 87654321T
-    generar_dni_valido(11111111),  # 11111111H
-    generar_dni_valido(22222222),  # 22222222Y
-    generar_dni_valido(33333333),  # 33333333F
-    generar_dni_valido(44444444),  # 44444444P
-    generar_dni_valido(55555555),  # 55555555D
-    generar_dni_valido(66666666),  # 66666666X
-    generar_dni_valido(77777777),  # 77777777B
-    generar_dni_valido(88888888),  # 88888888N
-]
+# 2000 carnets reales para pruebas
+CARNES_DNI = [generar_dni_valido(12345678 + i) for i in range(2000)]
 
 def seed_data():
     """
@@ -59,12 +48,14 @@ def seed_data():
         # 1. Roles
         rol_usuario = Rol(nombre="usuario", descripcion="Usuario estándar")
         rol_admin = Rol(nombre="admin", descripcion="Administrador")
-        db.add_all([rol_usuario, rol_admin])
+        rol_tecnico = Rol(nombre="tecnico", descripcion="Tecnico")
+
+        db.add_all([rol_usuario, rol_admin,rol_tecnico])
         db.commit()
 
         # ---------------------------------------------------------
 
-        # 2. Mibisivalencia - 10 carnets reales
+        # 2. Mibisivalencia - 2000 carnets reales
         carnets = [Mibisivalencia(targeta_id=dni) for dni in CARNES_DNI]
         db.add_all(carnets)
         db.commit()
@@ -74,15 +65,21 @@ def seed_data():
         # 3. Usuarios de prueba
         hash1 = pwd_context.hash("Password123!")
         hash2 = pwd_context.hash("Admin123!")
+        hash3= pwd_context.hash("Tech123!")
 
-        usuario_normal = Usuario(
-            usuario_id=str(uuid.uuid4()),
-            targeta_id=CARNES_DNI[0],  # 12345678Z
-            nombre="Pepe",
-            apellido="García",
-            correo="pepe@fake.com",
-            contrasena_hash=hash1
-        )
+        usuarios = []
+        for i in range(2000):
+            usuario = Usuario(
+                usuario_id=str(uuid.uuid4()),
+                targeta_id=CARNES_DNI[i],
+                nombre=f"User{i}",
+                apellido=f"Apellido{i}",
+                correo=f"user{i}@fake.com",
+                contrasena_hash=hash1
+            )
+            usuario.roles.append(rol_usuario)
+            usuarios.append(usuario)
+
         usuario_admin = Usuario(
             usuario_id=str(uuid.uuid4()),
             targeta_id=None,
@@ -91,12 +88,19 @@ def seed_data():
             correo="admin@fake.com",
             contrasena_hash=hash2
         )
-
-        usuario_normal.roles.append(rol_usuario)
+        usuario_tecnico = Usuario(
+            usuario_id=str(uuid.uuid4()),
+            targeta_id=None,
+            nombre="Marc",
+            apellido="Roig",
+            correo="tecnico@fake.com",
+            contrasena_hash=hash3
+        )
         usuario_admin.roles.append(rol_admin)
         usuario_admin.roles.append(rol_usuario)
+        usuario_tecnico.roles.append(rol_tecnico)
 
-        db.add_all([usuario_normal, usuario_admin])
+        db.add_all(usuarios + [usuario_admin])
         db.commit()
 
         # ---------------------------------------------------------
@@ -122,10 +126,10 @@ def seed_data():
 
         # ---------------------------------------------------------
 
-        # 5. Bicicletas (50) VLC001 - VLC050
+        # 5. Bicicletas (2000) VLC0001 - VLC2000
         bicicletas = []
-        for i in range(1, 51):
-            code = f"VLC{i:03d}"
+        for i in range(1, 2001):
+            code = f"VLC{i:04d}"
             estacion = random.choice(estaciones)
             bici = Bicicleta(
                 bicicleta_id=code,
@@ -158,7 +162,7 @@ def seed_data():
         ejemplo_bici = random.choice(bicicletas)
         trayecto = Trayecto(
             trayecto_id=str(uuid.uuid4()),
-            usuario_id=usuario_normal.usuario_id,
+            usuario_id=usuarios[0].usuario_id,
             bicicleta_id=ejemplo_bici.bicicleta_id,
             fecha_inicio=datetime.now(timezone.utc) - timedelta(minutes=30),
             fecha_fin=None,
@@ -169,48 +173,133 @@ def seed_data():
         db.commit()
 
         # ---------------------------------------------------------
+        # ---------------------------------------------------------
+        # 8. Medidas FAKE – verde/amarillo/rojo – Gandia
 
-        # 8. Medidas (2 ejemplos) asociadas a la placa de la bici del trayecto
-        placa_rel = db.query(PlacaSensores).filter_by(bicicleta_id=ejemplo_bici.bicicleta_id).first()
-        if placa_rel:
-            medida1 = Medida(
-                lectura_id=str(uuid.uuid4()),
-                placa_id=placa_rel.placa_id,
-                trayecto_id=trayecto.trayecto_id,
-                fecha_hora=datetime.now(timezone.utc) - timedelta(minutes=20),
-                tipo=TipoMedidaEnum.pm2_5,
-                valor=12.5,
-                lat=39.4750,
-                lon=-0.3500
-            )
-            medida2 = Medida(
-                lectura_id=str(uuid.uuid4()),
-                placa_id=placa_rel.placa_id,
-                trayecto_id=trayecto.trayecto_id,
-                fecha_hora=datetime.now(timezone.utc) - timedelta(minutes=10),
-                tipo=TipoMedidaEnum.temperatura,
-                valor=24.8,
-                lat=39.4760,
-                lon=-0.3550
-            )
-            db.add_all([medida1, medida2])
+        def generar_medidas_fake(db, placas):
+            import uuid
+            from datetime import datetime, timezone, timedelta
+            import random
+            from db.models import Medida, TipoMedidaEnum
+
+            now = datetime.now(timezone.utc)
+
+            # ------------ COORDENADAS REALES DE PLATJA I GRAU DE GANDIA --------------
+            LAT_MIN = 38.9865
+            LAT_MAX = 39.0035
+            LON_MIN = -0.1735
+            LON_MAX = -0.1485
+            # --------------------------------------------------------------------------
+
+            RANGOS = {
+                "verde": {
+                    TipoMedidaEnum.o3: (0, 80),
+                    TipoMedidaEnum.no2: (0, 30),
+                    TipoMedidaEnum.co: (0, 5),
+                    TipoMedidaEnum.pm2_5:(1, 12),
+                    TipoMedidaEnum.pm10:(5, 25),
+                },
+                "amarillo": {
+                    TipoMedidaEnum.o3: (100, 120),
+                    TipoMedidaEnum.no2: (40, 120),
+                    TipoMedidaEnum.co: (5, 10),
+                    TipoMedidaEnum.pm2_5:(12, 25),
+                    TipoMedidaEnum.pm10:(25, 50),
+                },
+                "rojo": {
+                    TipoMedidaEnum.o3: (120, 180),
+                    TipoMedidaEnum.no2: (200, 280),
+                    TipoMedidaEnum.co: (10, 18),
+                    TipoMedidaEnum.pm2_5:(25, 60),
+                    TipoMedidaEnum.pm10:(50, 120),
+                }
+            }
+
+            medidas = []
+            POR_FRANJA = 5000
+            orden = ["verde", "amarillo", "rojo"]
+
+            for franja in orden:
+                for _ in range(POR_FRANJA):
+                    placa = random.choice(placas)
+
+                    lat = random.uniform(LAT_MIN, LAT_MAX)
+                    lon = random.uniform(LON_MIN, LON_MAX)
+                    fecha = now - timedelta(hours=random.uniform(0, 48))
+
+                    tipo = random.choice(list(RANGOS[franja].keys()))
+                    vmin, vmax = RANGOS[franja][tipo]
+                    valor = random.uniform(vmin, vmax)
+
+                    medidas.append(
+                        Medida(
+                            lectura_id=str(uuid.uuid4()),
+                            placa_id=placa.placa_id,
+                            trayecto_id=None,
+                            fecha_hora=fecha,
+                            tipo=tipo,
+                            valor=valor,
+                            lat=lat,
+                            lon=lon
+                        )
+                    )
+
+            db.add_all(medidas)
             db.commit()
 
-        # ---------------------------------------------------------
+        # Ejecutar tras placas
+        placas_all = db.query(PlacaSensores).all()
+        generar_medidas_fake(db, placas_all)
+
+        print("Medidas FAKE (Gandia) generadas correctamente.")
 
         # 9. Incidencia de ejemplo
-        incidencia = Incidencia(
+        incidencia_tec1 = Incidencia(
             incidencia_id=str(uuid.uuid4()),
-            usuario_id=usuario_normal.usuario_id,
+            usuario_id=usuarios[0].usuario_id,
             bicicleta_id=bicicletas[0].bicicleta_id,
             descripcion="Rueda pinchada",
             estado=EstadoIncidencia.nuevo,
+            fuente=FuenteReporte.bici
+        )
+        db.add(incidencia_tec1)
+        db.commit()
+        
+        incidencia_tec2 = Incidencia(
+            incidencia_id=str(uuid.uuid4()),
+            usuario_id=usuario_normal.usuario_id,
+            bicicleta_id=bicicletas[0].bicicleta_id,
+            descripcion="Bici Vandalizada",
+            estado=EstadoIncidencia.nuevo,
+            fuente=FuenteReporte.bici
+        )
+        db.add(incidencia_tec2)
+        db.commit()
+        
+        incidencia_admin = Incidencia(
+            incidencia_id=str(uuid.uuid4()),
+            usuario_id=usuario_normal.usuario_id,
+            bicicleta_id=bicicletas[0].bicicleta_id,#estas incidencias en bicicleta ID deberian tener un 0 o algo pa distinguirlas de las del tecnico
+            descripcion="Error al canjear recompensas",
+            estado=EstadoIncidencia.nuevo,
             fuente=FuenteReporte.web
         )
-        db.add(incidencia)
+        db.add(incidencia_admin)
+        db.commit()
+        
+        
+        incidencia_admin2 = Incidencia(
+            incidencia_id=str(uuid.uuid4()),
+            usuario_id=usuario_normal.usuario_id,
+            bicicleta_id=bicicletas[0].bicicleta_id,#estas incidencias en bicicleta ID deberian tener un 0 o algo pa distinguirlas de las del tecnico
+            descripcion="Error al escanear QR",
+            estado=EstadoIncidencia.nuevo,
+            fuente=FuenteReporte.app
+        )
+        db.add(incidencia_admin2)
         db.commit()
 
-        print("Seed completado: 10 carnets DNI válidos + estaciones + 50 bicis + placas + trayecto + medidas + incidencia")
+        print("Seed completado: 2000 carnets DNI válidos + 2000 usuarios + estaciones + 2000 bicis + placas + trayecto + medidas + incidencia")
 
     except Exception as e:
         db.rollback()
@@ -223,4 +312,3 @@ def seed_data():
 
 if __name__ == "__main__":
     seed_data()
-

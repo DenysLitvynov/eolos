@@ -23,6 +23,12 @@ export class CalidadAireFake {
         const url = `/api/v1/calidad-aire/aqi/${placa_id}`;
         return await this.peticionario.hacerPeticionRest('GET', url);
     }
+
+    async obtenerHistorico24h(placa_id) {
+        const url = `/api/v1/calidad-aire/historico-24h/${placa_id}`;
+        return await this.peticionario.hacerPeticionRest('GET', url);
+    }
+
 }
 
 // ----------------------------------------------------------

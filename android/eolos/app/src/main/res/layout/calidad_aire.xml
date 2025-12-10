@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.CalidadAireActivity">
+
+    <!-- ===== HEADER (flecha + éolos) ===== -->
+    <include
+        android:id="@+id/header_container"
+        layout="@layout/header_logoyflecha"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ===== MENÚ INFERIOR ===== -->
+    <include
+        android:id="@+id/menu_inferior"
+        layout="@layout/menu_navegacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- ===== CONTENIDO SCROLLEABLE ===== -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_calidad"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/menu_inferior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- TÍTULO PRINCIPAL -->
+            <TextView
+                android:id="@+id/tv_titulo_calidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calidad de Aire"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_profundo"
+                android:fontFamily="@font/rethink_sans"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- TARJETA AQI PRINCIPAL -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_aqi_principal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                android:backgroundTint="@android:color/white"
+                app:strokeColor="@color/azul_grisaceo"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_aqi_titulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Índice de Calidad del Aire (AQI)"
+                        android:textColor="@color/negro"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/rethink_sans" />
+
+                    <!-- Fila con valor + emoji -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="12dp">
+
+                        <!-- Columna valor + estado -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_aqi_valor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="30"
+                                android:textSize="30sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/verde"
+                                android:fontFamily="@font/rethink_sans" />
+
+                            <TextView
+                                android:id="@+id/tv_aqi_estado"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Buena"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/negro"
+                                android:fontFamily="@font/rethink_sans" />
+                        </LinearLayout>
+
+                        <!-- Emoji como “carita feliz” -->
+                        <ImageView
+                            android:id="@+id/img_aqi_icon"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:padding="12dp"
+                            android:src="@drawable/feliz"
+                            app:tint="@color/verde"
+                            android:contentDescription="Estado AQI" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_aqi_descripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="La calidad del aire es satisfactoria y la contaminación del aire presenta poco o ningún riesgo."
+                        android:textSize="13sp"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ===== ESCALA DE NIVEL AIRE ===== -->
+            <TextView
+                android:id="@+id/tv_escala_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escala de Nivel aire"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_profundo"
+                android:fontFamily="@font/rethink_sans"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Repetimos bloques para cada nivel -->
+
+            <!-- Excelente -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="12dp"
+                        android:background="@drawable/circulo_azul" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="Excelente"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0–19"
+                        android:textSize="12sp"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="La calidad del aire es idónea para la mayoría de personas; puedes disfrutar de tus actividades al aire libre con normalidad."
+                    android:textSize="12sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+            </LinearLayout>
+
+            <!-- Buena -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="@drawable/circulo_verde" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="Buena"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20–49"
+                        android:textSize="12sp"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="La calidad del aire es buena para la mayoría de personas; puedes realizar tus actividades al aire libre con normalidad."
+                    android:textSize="12sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+            </LinearLayout>
+
+            <!-- Mala (amarillo) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="@drawable/circulo_amarillo" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="Mala"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50–99"
+                        android:textSize="12sp"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="El aire ha alcanzado un nivel alto de contaminación y es poco saludable para los grupos sensibles."
+                    android:textSize="12sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+            </LinearLayout>
+
+            <!-- Poco saludable (rojo) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="@drawable/circulo_rojo" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="Poco saludable"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100–149"
+                        android:textSize="12sp"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Los grupos sensibles pueden empezar a sentir efectos sobre la salud."
+                    android:textSize="12sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+            </LinearLayout>
+
+            <!-- Muy poco saludable (rosa) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="@drawable/circulo_rosa" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="Muy poco saludable"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="150–249"
+                        android:textSize="12sp"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Los grupos sensibles sentirán inmediatamente los efectos sobre la salud y deberán evitar las actividades al aire libre."
+                    android:textSize="12sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+            </LinearLayout>
+
+            <!-- Peligrosa (rojo) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="@drawable/circulo_morado" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="Peligrosa"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="250+"
+                        android:textSize="12sp"
+                        android:textColor="@color/negro"
+                        android:fontFamily="@font/rethink_sans" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="La exposición prolongada al aire puede provocar graves efectos en la salud de todas las personas."
+                    android:textSize="12sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+            </LinearLayout>
+
+            <!-- ===== GRÁFICO CO2 (PLACEHOLDER) ===== -->
+            <TextView
+                android:id="@+id/tv_co2_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Niveles de CO2 las últimas 24 horas"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_profundo"
+                android:fontFamily="@font/rethink_sans"
+                android:layout_marginBottom="8dp" />
+
+            <FrameLayout
+                android:id="@+id/grafico_co2_contenedor"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@drawable/seccion_1"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Aquí irá el gráfico de barras"
+                    android:textSize="13sp"
+                    android:textColor="@color/negro"
+                    android:fontFamily="@font/rethink_sans" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

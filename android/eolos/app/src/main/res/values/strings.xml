@@ -30,8 +30,47 @@
     <string name="biometric_not_enabled">Primero activa el acceso con huella iniciando sesión.</string>
     <string name="biometric_not_available">Este dispositivo no tiene biometría disponible.</string>
     <string name="biometric_enable_title">¿Activar inicio con huella?</string>
-    <string name="biometric_enable_message">
-        Podrás usar la huella guardada en este dispositivo para no escribir la contraseña cada vez.
-    </string>
+    <string name="biometric_enable_message"> Podrás usar la huella guardada en este dispositivo para no escribir la contraseña cada vez.</string>
+
+    <!-- ==== FAQS ==== -->
+    <string name="faq_1_pregunta">¿Qué es eolos?</string>
+    <string name="faq_1_respuesta">
+eolos es un sistema de monitoreo ambiental urbano que utiliza sensores instalados en bicicletas públicas para medir la calidad del aire en tiempo real. Los datos recopilados permiten a los ayuntamientos generar mapas dinámicos de contaminación y tomar decisiones informadas sobre movilidad y sostenibilidad.
+</string>
+    <string name="faq_2_pregunta">¿Cómo funciona eolos?</string>
+    <string name="faq_2_respuesta">
+Cada bicicleta pública lleva un sensor de gases y un código QR. El usuario escanea el QR con la app, se empareja con el sensor vía Bluetooth y, mientras pedalea, el móvil envía las mediciones y la posición al servidor. Al finalizar la ruta, el envío de datos se detiene automáticamente.
+</string>
+    <string name="faq_3_pregunta">¿Quién porta los sensores y cómo se usan?</string>
+    <string name="faq_3_respuesta">
+Los sensores van instalados en bicicletas públicas (por ejemplo, Valenbisi). Cuando alquilas una bici, escaneas el QR, la app se conecta al sensor y comienza a registrar la información de calidad del aire durante tu trayecto.
+</string>
+    <string name="faq_4_pregunta">¿Qué gana el ayuntamiento con este sistema?</string>
+    <string name="faq_4_respuesta">
+El ayuntamiento obtiene un mapa mucho más detallado y dinámico de la contaminación que con estaciones fijas. Esto le ayuda a cumplir normativas ambientales, justificar Zonas de Bajas Emisiones, impulsar la movilidad sostenible y mejorar su imagen como ciudad verde e innovadora.
+</string>
+    <string name="faq_5_pregunta">¿Qué gana el usuario al participar?</string>
+    <string name="faq_5_respuesta">
+El usuario contribuye a mejorar la calidad del aire de su ciudad y, además, puede recibir recompensas definidas por el ayuntamiento, como descuentos en el servicio de bicicletas o beneficios en programas de movilidad sostenible.
+</string>
+    <string name="faq_6_pregunta">¿Qué tipo de datos registra eolos?</string>
+    <string name="faq_6_respuesta">
+Se registran principalmente mediciones de gases contaminantes, información de la ruta (por ejemplo, tramos recorridos) y datos necesarios para el funcionamiento del sistema. La información se utiliza de forma agregada para generar mapas de contaminación.
+</string>
+    <string name="faq_7_pregunta">¿Qué pasa con mis datos personales?</string>
+    <string name="faq_7_respuesta">
+El tratamiento de los datos personales se realiza conforme a la normativa vigente y a la Política de Privacidad de eolos. Solo se recogen los datos necesarios para prestar el servicio y nunca se venden a terceros con fines comerciales ajenos al proyecto.
+</string>
+
+    <!-- Politica Privacidad -->
+    <string name="texto_politica_privacidad">
+En Éolos, valoramos y protegemos tu privacidad. Esta Política explica cómo tratamos los datos personales de los usuarios que utilizan nuestra aplicación. 1. Responsable del tratamiento El responsable del tratamiento de los datos es Éolos, en colaboración con el Ayuntamiento correspondiente cuando sea aplicable. 2. Finalidad del tratamiento Los datos personales recogidos a través de Éolos se utilizan únicamente para el funcionamiento y mejora de la aplicación, incluyendo: • La gestión y seguimiento de las funcionalidades ofrecidas. • La comunicación de información relevante sobre el uso del servicio. • La entrega de recompensas propias de la app, cuando aplique. 3. Base legal El tratamiento de los datos se realiza sobre la base del consentimiento del usuario y/o el cumplimiento de una función de interés público cuando interviene el Ayuntamiento. 4. Conservación de los datos Los datos se conservarán durante el tiempo necesario para cumplir con las finalidades indicadas o según lo exija la legislación aplicable. 5. Comunicación de datos a terceros Éolos no comparte datos personales con terceros salvo cuando sea estrictamente necesario para el funcionamiento técnico o legal de la app o cuando lo requiera una entidad pública en el marco de la colaboración con el Ayuntamiento. 6. Derechos del usuario El usuario puede ejercer en cualquier momento sus derechos de acceso, rectificación, supresión, oposición o limitación del tratamiento, contactando con el correo designado en la configuración de la app. 7. Seguridad de los datos Éolos aplica las medidas técnicas y organizativas adecuadas para proteger los datos personales frente a accesos no autorizados, pérdidas o alteraciones. 8. Modificaciones Nos reservamos el derecho a actualizar esta Política de Privacidad. Cualquier cambio será comunicado dentro de la aplicación y publicado con la fecha de revisión actualizada.
+</string>
+
+    <!-- Terminos y Condiciones -->
+    <string name="texto_terminos_condiciones">
+Bienvenido/a a Éolos. Al acceder o utilizar esta aplicación, aceptas los presentes Términos y Condiciones. Si no estás de acuerdo con ellos, te pedimos que no utilices la plataforma. 1. Uso del servicio Éolos ofrece sus servicios para facilitar el monitoreo ambiental urbano y la visualización de datos de calidad del aire. El usuario se compromete a utilizar la aplicación de forma responsable y conforme a la ley. 2. Registro y cuenta Al crear una cuenta, el usuario garantiza que la información proporcionada es veraz y se compromete a mantener la confidencialidad de sus credenciales. Éolos no se hace responsable del uso indebido o acceso no autorizado a la cuenta. 3. Propiedad intelectual Todos los contenidos, logotipos, textos e imágenes de Éolos son propiedad de sus titulares y están protegidos por las leyes de propiedad intelectual. Queda prohibida su reproducción, distribución o uso no autorizado. 4. Limitación de responsabilidad Aunque Éolos se esfuerza por garantizar el correcto funcionamiento de la app, no puede asegurar su disponibilidad continua ni la ausencia total de errores. El usuario acepta que el uso del servicio se realiza bajo su propia responsabilidad. 5. Privacidad El tratamiento de los datos personales se rige por la Política de Privacidad de Éolos, accesible desde la propia aplicación. 6. Modificaciones del servicio Éolos se reserva el derecho de modificar, suspender temporalmente o interrumpir el servicio en cualquier momento por motivos técnicos, operativos o legales. 7. Actualización de los Términos Éolos podrá actualizar estos Términos y Condiciones cuando sea necesario. Las modificaciones serán efectivas desde su publicación en la aplicación. 8. Legislación aplicable Estos Términos se rigen por la legislación de España. Cualquier disputa relacionada con el uso de la aplicación se someterá a los tribunales competentes.
+</string>
+    <string name="recibir_s_un_correo_cuando_la_incidencia_haya_sido_solucionada">* Recibirás un correo cuando la incidencia haya sido solucionada.</string>
 
 </resources>

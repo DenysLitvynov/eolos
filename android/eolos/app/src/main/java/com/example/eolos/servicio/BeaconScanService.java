@@ -158,7 +158,7 @@ public class BeaconScanService extends Service {
         PendingIntent pi = PendingIntent.getActivity(this, 100, openApp,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        String title = connected ? "🚴 Beacon Conectado" : "❌ Beacon Desconectado";
+        String title = connected ? "🚴 Sensor de la bici Conectado" : "❌ Sensor de la bici Desconectado";
         int icon = connected ? android.R.drawable.presence_online : android.R.drawable.presence_busy;
 
         Notification notif = new NotificationCompat.Builder(this, BEACON_CHANNEL_ID)

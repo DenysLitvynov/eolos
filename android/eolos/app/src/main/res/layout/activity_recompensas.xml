@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true">
+
+    <!-- CONTENIDO SCROLLEABLE -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_recompensas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/menu_inferior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- HEADER REUTILIZABLE (flecha + éolos) -->
+            <include
+                android:id="@+id/header_container"
+                layout="@layout/header_logoyflecha" />
+
+            <!-- TÍTULO "Recompensas" -->
+            <TextView
+                android:id="@+id/tv_titulo_recompensas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:text="Recompensas"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_profundo"
+                android:fontFamily="@font/rethink_sans" />
+
+            <!-- LABEL KM ACUMULADOS -->
+            <TextView
+                android:id="@+id/tv_km_acumulados_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="Km acumulados"
+                android:textSize="15sp"
+                android:textColor="@color/azul_profundo"
+                android:fontFamily="@font/rethink_sans" />
+
+            <!-- TARJETA COMPLETA CON TEXTO + CICLISTA + BARRA -->
+            <LinearLayout
+                android:id="@+id/layout_km_acumulados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:background="@drawable/seccion_1"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <!-- FILA TEXTO + CICLISTA -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_km_valor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="15 de 30 Km"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/azul_profundo"
+                        android:fontFamily="@font/rethink_sans" />
+
+                    <ImageView
+                        android:id="@+id/iv_ciclista"
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/foto_ciclista"
+                        android:scaleType="fitCenter"
+                        android:adjustViewBounds="true" />
+                </LinearLayout>
+
+                <!-- BARRA DE PROGRESO DENTRO DE LA TARJETA -->
+                <ProgressBar
+                    android:id="@+id/progreso_km"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="12dp"
+                    android:progress="50"
+                    android:max="100"
+                    android:progressDrawable="@drawable/barra_progreso" />
+            </LinearLayout>
+
+
+            <!-- RECOMPENSAS DISPONIBLES -->
+            <TextView
+                android:id="@+id/tv_recompensas_disponibles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Recompensas disponibles:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_profundo"
+                android:fontFamily="@font/rethink_sans" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recompensas_disponibles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false" />
+
+            <!-- PRÓXIMAS RECOMPENSAS -->
+            <TextView
+                android:id="@+id/tv_proximas_recompensas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Próximas recompensas"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/azul_profundo"
+                android:fontFamily="@font/rethink_sans" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_proximas_recompensas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- MENÚ INFERIOR -->
+    <include
+        android:id="@+id/menu_inferior"
+        layout="@layout/menu_navegacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
