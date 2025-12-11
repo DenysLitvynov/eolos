@@ -10,31 +10,16 @@
 
 
     <script type="module" src="../../js/scripts/admin.js" defer></script>
+    <script type="module" src="/js/components/header.js" defer></script>
+
+    <link rel="stylesheet" href="/css/footer.css">
+    <script type="module" src="/js/components/footer.js" defer></script>
+
 </head>
+
 <body>
 
-<header class="header">
-    <div class="logo">
-        <img src="../../images/logo.png" alt="logo" />
-    </div>
-
-    <!-- Botón hamburger -->
-    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
-        <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-        <span class="menu-toggle__label">Menú</span>
-    </button>
-
-    <!-- Menú de navegación -->
-    <nav class="nav" id="site-nav">
-        <a href="../landing-registrado.html">Inicio</a>
-        <a href="../gestion_incidencias.html">Incidencias</a>
-        <a href="estado-sensores.html">Sensores</a>
-        <a href="#">Mapas</a>
-        <a href="../perfil.html"><b>Marc Roig</b></a>
-    </nav>
-</header>
+<div id="site-header"></div>
 
 <main class="users-page">
 
@@ -205,9 +190,6 @@
                     </select>
                 </div>
 
-
-
-                <div class="form-footer">
                     <button type="button" class="btn secondary" id="btn-cancel-edit">
                         Cancelar
                     </button>
@@ -220,7 +202,7 @@
     </div>
 </div>
 
-
+ <div class="form-footer">
 
 </body>
 </html>

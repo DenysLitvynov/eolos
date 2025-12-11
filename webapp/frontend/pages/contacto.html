@@ -6,38 +6,16 @@
     <title>Contaacto</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/header.css">
+    <script type="module" src="/js/components/header.js" defer></script>
+      <link rel="stylesheet" href="/css/footer.css">
+    <script type="module" src="/js/components/footer.js" defer></script>
 </head>
 
 <body>
-    <header class="header" data-breakpoint="1050">
-        <div class="logo">
-            <img src="../images/logo.png" alt="logo" />
-        </div>
+    
+    <div id="site-header"></div>
 
-        <!-- Botón hamburger -->
-        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
-            <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            </svg>
-            <span class="menu-toggle__label">Menú</span>
-        </button>
-
-        <!-- Menú de navegación -->
-        <nav class="nav" id="site-nav">
-            <a href="../index.html">Inicio</a>
-            <a href="mapas.html">Mapas</a>
-            <a href="calidad-aire.html">Calidad de aire</a>
-            <a href="sobre-nosotros.html">Sobre Nosotros</a>
-            <a href="FAQ.html">Faq</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="login.html" class="login">Inicia Sesión</a>
-            <a href="registro.html" class="login">Registrarse</a>
-        </nav>
-    </header>
-
-
-
-
+    
     <footer class="ft">
         <div class="ft__wrap ft--two-cols">
             <div class="ft__brand">
@@ -76,6 +54,8 @@
         </div>
     </footer>
 
+     <div id="site-footer"></div>
+     
     <script>
         (function () {
             const header = document.querySelector('.header');
