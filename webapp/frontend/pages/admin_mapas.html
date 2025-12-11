@@ -13,16 +13,15 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/js/lib/leaflet.heat.js"></script>
+  <link rel="stylesheet" href="/css/header.css">
+<script type="module" src="/js/components/header.js" defer></script>
+<link rel="stylesheet" href="/css/footer.css">
+<script type="module" src="/js/components/footer.js" defer></script>
 </head>
 
 <body class="admin-map">
-  <header class="header">
-      <div class="logo"><img src="/images/logo.png" alt="logo"></div>
-      <nav class="nav">
-          <a href="/index.html">Inicio</a>
-          <a href="/pages/admin_mapas.html">Admin Mapas</a>
-      </nav>
-  </header>
+  
+  <div id="site-header"></div>
 
   <div class="main-title" style="padding: 20px; text-align: center;">
       <h1>Historial de Mapas de Calidad del Aire</h1>
@@ -86,8 +85,8 @@
     </div>
   </section>
 
-  <footer class="ft">
-      </footer>
+  <div id="site-footer"></div>
+
 
   <script src="/js/scripts/mapa.js" type="module"></script>
 </body>

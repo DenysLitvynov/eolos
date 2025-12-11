@@ -9,33 +9,19 @@
     <link rel="stylesheet" href="../../css/estado-sensores.css">
 
     <script type="module" src="../../js/scripts/estado-sensores.js" defer></script>
+    <script type="module" src="/js/components/header.js" defer></script>
 
     <!-- <link rel="stylesheet" href="../../css/estado-sensores.css"> -->
+
+    <link rel="stylesheet" href="/css/footer.css">
+    <script type="module" src="/js/components/footer.js" defer></script>
+
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <img src="../../images/logo.png" alt="logo" />
-        </div>
-        
-        <!-- Botón hamburger -->
-        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
-            <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            </svg>
-            <span class="menu-toggle__label">Menú</span>
-        </button>
-        
-        <!-- Menú de navegación -->
-        <nav class="nav" id="site-nav">
-            <a href="../../index.html">Inicio</a>
-            <a href="../gestion_incidencias.html">Incidencias</a>
-            <a href="estado-sensores.html">Sensores</a>
-            <a href="#">Mapas</a>
-            <a href="../perfil.html"><b>Marc Roig</b></a>
-        </nav>
-    </header>
-    <main class="bike-page">
+    
+   <div id="site-header"></div>
+    
+   <main class="bike-page">
         <h1 class="page-title">Lista de Sensores</h1>
     
         <!-- Buscador + Estado -->
@@ -58,43 +44,9 @@
         <!-- Contenedor de tarjetas -->
         <section id="bikeList" class="bike-list"></section>
     </main>
-    <footer class="ft">
-        <!-- Footer -->
-        <div class="ft__wrap ft--two-cols">
-            <div class="ft__brand">
-                <span class="ft__logo">
-                    <img src="../../images/logo_footer.png" alt="logo" />
-                </span>
-                <address class="ft__addr">
-                    <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
-                    <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
-                    <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
-                </address>
-            </div>
-    
-            <div class="ft__links">
-                <nav class="ft__col">
-                    <a href="../landing.html">Inicio</a>
-                    <a href="#">Mapas</a>
-                    <a href="#">Sobre nosotros</a>
-                </nav>
-    
-                <nav class="ft__col">
-                    <a href="#">Contacto</a>
-                    <a href="#">Iniciar sesión</a>
-                </nav>
-    
-                <nav class="ft__col">
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Instagram</a>
-                </nav>
-            </div>
-        </div>
-    
-        <div class="ft__copy">
-            Copyright ©éolos. Todos los derechos reservados.
-        </div>
-    </footer>
+ 
+    <div class="form-footer">
+        
+    </div>
 </body>
 </html>
