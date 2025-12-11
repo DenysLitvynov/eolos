@@ -72,6 +72,44 @@
     background: #ddd;
 }
 
+/* Filtros adicionales */
+.station-filters,
+.update-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.station-filters label,
+.update-filters label {
+    font-weight: 600;
+    color: #0F4C81;
+    white-space: nowrap;
+}
+
+.station-filters select,
+.update-filters select {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 0.95rem;
+    min-width: 160px;
+}
+
+.station-filters select:hover,
+.update-filters select:hover {
+    border-color: #0F4C81;
+}
+
+.station-filters select:focus,
+.update-filters select:focus {
+    outline: none;
+    border-color: #0F4C81;
+    box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.1);
+}
+
 /* ------------------------------
    LISTA DE TARJETAS
 --------------------------------*/
@@ -142,4 +180,337 @@
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
     font-size: 0.8rem;
+}
+
+/* ------------------------------
+   MODAL DE MEDICIONES
+--------------------------------*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 1000px;
+    max-height: 85vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #0F4C81;
+    font-size: 1.5rem;
+}
+
+.btn-cerrar {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cerrar:hover {
+    color: #000;
+}
+
+/* Filtros dentro del modal */
+.modal-filtros {
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.modal-filtros label {
+    font-weight: 600;
+    color: #0F4C81;
+}
+
+.modal-filtros input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.btn-filtrar,
+.btn-limpiar {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-filtrar {
+    background: #0F4C81;
+    color: white;
+}
+
+.btn-filtrar:hover {
+    background: #0d3a63;
+}
+
+.btn-limpiar {
+    background: #eee;
+    color: #333;
+}
+
+.btn-limpiar:hover {
+    background: #ddd;
+}
+
+.btn-limpiar-todos {
+    padding: 0.5rem 1rem;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.btn-limpiar-todos:hover {
+    background: #e68900;
+}
+
+/* Tabla de mediciones */
+.modal-tabla-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.tabla-mediciones {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.tabla-mediciones thead {
+    background: #0F4C81;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.tabla-mediciones th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.tabla-mediciones td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.tabla-mediciones tbody tr:hover {
+    background: #f5f5f5;
+}
+
+.tabla-mediciones tbody tr.anomalo {
+    background-color: #ffe6e6;
+}
+
+.tabla-mediciones tbody tr.anomalo:hover {
+    background-color: #ffd9d9;
+}
+
+.tabla-mediciones .sin-datos,
+.tabla-mediciones .error {
+    text-align: center;
+    color: #999;
+    padding: 2rem !important;
+}
+
+/* Botones en tabla */
+.btn-eliminar-med {
+    background: #e24d4d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.btn-eliminar-med:hover {
+    background: #c73e3e;
+}
+
+/* Acciones del modal */
+.modal-acciones {
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.btn-danger {
+    background: #e24d4d;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-danger:hover {
+    background: #c73e3e;
+}
+
+.btn-secondary {
+    background: #eee;
+    color: #333;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #ddd;
+}
+
+/* ------- MODAL DE CONFIRMACIÓN ------- */
+.modal-confirmacion {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmacion-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+}
+
+.confirmacion-content h3 {
+    margin-top: 0;
+    color: #0F4C81;
+    font-size: 1.3rem;
+}
+
+.confirmacion-content p {
+    margin: 1rem 0;
+    color: #666;
+}
+
+.confirmacion-botones {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .modal-filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .modal-filtros input,
+    .btn-filtrar,
+    .btn-limpiar {
+        width: 100%;
+    }
+    
+    .tabla-mediciones {
+        font-size: 0.9rem;
+    }
+    
+    .tabla-mediciones th,
+    .tabla-mediciones td {
+        padding: 0.6rem;
+    }
+    
+    .modal-acciones {
+        flex-direction: column;
+    }
+    
+    .btn-danger,
+    .btn-secondary {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .filters {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .state-filters,
+    .station-filters,
+    .update-filters,
+    .btn-limpiar-todos {
+        width: 100%;
+    }
+    
+    .station-filters select,
+    .update-filters select {
+        width: 100%;
+        min-width: unset;
+    }
 }
