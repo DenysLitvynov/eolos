@@ -5,7 +5,10 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -34,6 +37,7 @@ public class BeaconScanService extends Service {
     private Runnable beaconStatusRunnable;
     private boolean beaconConnected = false;
     private static final String BEACON_CHANNEL_ID = "beacon_status_channel";
+    private BroadcastReceiver medicionStateReceiver;
 
     @Override
     public void onCreate() {
@@ -43,6 +47,32 @@ public class BeaconScanService extends Service {
         beaconStatusHandler = new Handler(Looper.getMainLooper());
         // Usar Singleton
         logicaTrayectos = LogicaTrayectosFake.getInstance(this);
+
+        // Registrar receiver para cambios de medición
+        setupMedicionStateReceiver();
+    }
+
+    // ==================================================================
+    // SETUP RECEIVER PARA CAMBIOS EN ESTADO DE MEDICIÓN (NUEVO)
+    // ==================================================================
+    private void setupMedicionStateReceiver() {
+        medicionStateReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String estadoMedicion = intent.getStringExtra("estado_medicion");
+                double valorMedicion = intent.getDoubleExtra("valor_medicion", 0);
+                int icono = intent.getIntExtra("icono", android.R.drawable.presence_online);
+
+                Log.i(TAG, "Broadcast recibido: Estado=" + estadoMedicion + ", Valor=" + valorMedicion);
+
+                // Actualizar notificación con el estado de la medición
+                updateMedicionNotification(estadoMedicion, valorMedicion, icono);
+            }
+        };
+
+        IntentFilter filter = new IntentFilter("com.example.eolos.MEDICION_STATE_CHANGED");
+        LocalBroadcastManager.getInstance(this).registerReceiver(medicionStateReceiver, filter);
+        Log.d(TAG, "Receiver de estado de medición registrado");
     }
 
     @Override
@@ -180,10 +210,46 @@ public class BeaconScanService extends Service {
         }
     }
 
+    // ==================================================================
+    // ACTUALIZAR NOTIFICACIÓN CON ESTADO DE MEDICIÓN (NUEVA)
+    // ==================================================================
+    private void updateMedicionNotification(String estadoMedicion, double valorMedicion, int iconoColor) {
+        Intent openApp = new Intent(this, MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(this, 100, openApp,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        String title = "Medición de Calidad del Aire";
+        String content = "Estado: " + estadoMedicion + " (Valor: " + String.format("%.1f", valorMedicion) + ")";
+
+        Notification notif = new NotificationCompat.Builder(this, BEACON_CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setSmallIcon(iconoColor)
+                .setOngoing(true)
+                .setContentIntent(pi)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setOnlyAlertOnce(false)
+                .setShowWhen(true)
+                .build();
+
+        notificationManager.notify(NOTIF_ID, notif);
+        Log.i(TAG, "Notificación actualizada con estado: " + estadoMedicion);
+    }
+
     private void detenerEscaneo() {
         // Detener el verificador de estado
         if (beaconStatusHandler != null && beaconStatusRunnable != null) {
             beaconStatusHandler.removeCallbacks(beaconStatusRunnable);
+        }
+
+        // Desregistrar receiver de medición (NUEVO)
+        if (medicionStateReceiver != null) {
+            try {
+                LocalBroadcastManager.getInstance(this).unregisterReceiver(medicionStateReceiver);
+                Log.d(TAG, "Receiver de medición desregistrado");
+            } catch (Exception e) {
+                Log.e(TAG, "Error desregistrando receiver", e);
+            }
         }
 
         if (escanerIBeacons != null) {
