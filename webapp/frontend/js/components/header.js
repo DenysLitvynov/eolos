@@ -24,6 +24,7 @@ const NAV_CONFIG = {
     { label: 'FAQ', href: '/pages/FAQ.html' },
     { label: 'Contacto', href: '/pages/contacto.html' },
     { label: 'Perfil', href: '/pages/perfil.html', id: 'user-link' },
+    { label: 'Cerrar sesión', href: '#', dataAction: 'logout', className: 'logout' },
   ],
 
   tecnico: [
@@ -32,6 +33,7 @@ const NAV_CONFIG = {
     { label: 'Incidencias', href: '/pages/gestion_incidencias.html' },
     { label: 'Mapas', href: '/pages/mapas.html' },
     { label: 'Perfil', href: '/pages/perfil.html', id: 'user-link' },
+    { label: 'Cerrar sesión', href: '#', dataAction: 'logout', className: 'logout' },
   ],
 
   admin: [
@@ -41,6 +43,7 @@ const NAV_CONFIG = {
     { label: 'Sensores', href: '/pages/tecnico/estado-sensores.html' },
     { label: 'Mapas', href: '/pages/mapas.html' },
     { label: 'Perfil', href: '/pages/perfil.html', id: 'user-link' },
+    { label: 'Cerrar sesión', href: '#', dataAction: 'logout', className: 'logout' },
   ],
 
     tecnico_ayuntamiento: [
@@ -49,11 +52,13 @@ const NAV_CONFIG = {
     { label: 'Gestión recompensas', href: '/pages/gestion_recompensas.html' },
     { label: 'Mapas', href: '/pages/mapas.html' },
     { label: 'Perfil', href: '/pages/perfil.html', id: 'user-link' },
+    { label: 'Cerrar sesión', href: '#', dataAction: 'logout', className: 'logout' },
   ],
       tecnico_mapas: [
    { label: 'Inicio', href: '/pages/landing-registrado.html' },
    { label: 'Gestión mapas', href: '/pages/admin_mapas.html' },
     { label: 'Perfil', href: '/pages/perfil.html', id: 'user-link' },
+    { label: 'Cerrar sesión', href: '#', dataAction: 'logout', className: 'logout' },
   ],
 };
 
@@ -68,6 +73,7 @@ function buildNav(navElement, role) {
 
     if (item.className) link.classList.add(item.className);
     if (item.id) link.id = item.id;
+    if (item.dataAction) link.setAttribute('data-action', item.dataAction);
 
     navElement.appendChild(link);
   });
