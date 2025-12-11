@@ -1,28 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <title>Contaacto</title>
+    <title>Contacto | Éolos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   
     <link rel="stylesheet" href="../css/header.css">
-    <script type="module" src="/js/components/header.js" defer></script>
-      <link rel="stylesheet" href="/css/footer.css">
-    <script type="module" src="/js/components/footer.js" defer></script>
+    <script type="module" src="../js/components/header.js" defer></script>
+
+   
+    <link rel="stylesheet" href="../css/privacidad.css">
+    <link rel="stylesheet" href="../css/contacto.css">
+
+   
+    <link rel="stylesheet" href="../css/footer.css">
+    <script type="module" src="../js/components/footer.js" defer></script>
 </head>
 
 <body>
+
     
     <div id="site-header"></div>
 
 
-     <div id="site-footer"></div>
-     
+    <main class="page-content">
+        <div class="titulo">Contacto</div>
+
+        <div class="contact-container">
+            
+          
+            <section class="contact-info">
+                <h1>Ponte en contacto con el equipo de Éolos</h1>
+
+                <p>
+                    Si tienes dudas, propuestas de mejora o quieres colaborar con el proyecto,
+                    puedes escribirnos a través del formulario o usando los datos de contacto.
+                </p>
+
+                <div class="contact-details">
+                    <p><strong>Dirección:</strong> Calle Juanba Peris, Nº 11, Gandia, España</p>
+                    <p><strong>Teléfono:</strong> <a href="tel:+34345464356">(434) 546-4356</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:contact@eolos.com">contact@eolos.com</a></p>
+                </div>
+            </section>
+
+          
+            <section class="contact-form-section">
+                <h2>Envíanos un mensaje</h2>
+
+                <form class="contact-form">
+                    <div class="form-row">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="asunto">Asunto</label>
+                        <input type="text" id="asunto" name="asunto" placeholder="Motivo de tu consulta" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntanos en qué podemos ayudarte" required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit">Enviar mensaje</button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+   
+    <div id="site-footer"></div>
+
+
     <script>
         (function () {
             const header = document.querySelector('.header');
-            const nav = header.querySelector('.nav');
-            const btn = header.querySelector('.menu-toggle');
+            const nav = header?.querySelector('.nav');
+            const btn = header?.querySelector('.menu-toggle');
+
+            if (!header || !nav || !btn) return;
 
             function closeMenu() {
                 btn.setAttribute('aria-expanded', 'false');
@@ -39,7 +107,6 @@
                 expanded ? closeMenu() : openMenu();
             });
 
-
             window.addEventListener('resize', () => {
                 if (window.innerWidth > 1050) closeMenu();
             });
@@ -47,5 +114,4 @@
     </script>
 
 </body>
-
 </html>
