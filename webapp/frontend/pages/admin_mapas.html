@@ -14,9 +14,9 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/js/lib/leaflet.heat.js"></script>
   <link rel="stylesheet" href="/css/header.css">
-<script type="module" src="/js/components/header.js" defer></script>
-<link rel="stylesheet" href="/css/footer.css">
-<script type="module" src="/js/components/footer.js" defer></script>
+  <script type="module" src="/js/components/header.js" defer></script>
+  <link rel="stylesheet" href="/css/footer.css">
+  <script type="module" src="/js/components/footer.js" defer></script>
 </head>
 
 <body class="admin-map">
@@ -51,10 +51,16 @@
 
       <div class="filter-section">
         <h3>Hora</h3>
-        <input type="range" id="hour-slider" min="0" max="23" step="1">
-        <span id="hour-display">--:00</span>
+        <input type="range" id="hour-slider" min="0" max="23" value="12" step="1">
+        <span id="hour-display">12:00</span>
       </div>
     </aside>
+
+    <button id="toggle-sidebar">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
 
     <div id="map"></div>
 

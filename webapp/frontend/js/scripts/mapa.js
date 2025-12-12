@@ -42,9 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.querySelector('.sidebar');
     const toggleBtn = document.getElementById('toggle-sidebar');
 
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-    });
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    }
+
     // Inicialización
     const currentHour = new Date().getHours();
     hourSlider.value = currentHour;
@@ -187,4 +190,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateMapFilters();
 });
-

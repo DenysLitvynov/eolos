@@ -25,7 +25,7 @@ class SimuladorUsuarios:
         """
         Inicializa el simulador con configuración base y estructuras para medir rendimiento.
         """
-        self.base_url = "http://192.168.1.25:8000/api/v1/trayectos"
+        self.base_url = "http://172.20.10.12:8000/api/v1/trayectos"
         self.response_times = []  # Tiempos individuales de cada petición
         self.lock = threading.Lock()
         self.tipos_medida = ["pm2_5", "pm10", "co", "no2", "o3", "temperatura", "humedad"]
