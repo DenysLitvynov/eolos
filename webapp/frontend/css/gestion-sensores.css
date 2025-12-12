@@ -1,0 +1,236 @@
+/* ====== Detalle de Bici (vista técnico) ====== */
+
+.bike-detail-page {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.bike-detail__title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #0D47A1;
+  margin: 20px 0 30px 0;
+}
+
+.bike-detail__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+/* Columnas */
+
+.bike-detail__left,
+.bike-detail__right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Tarjetas genéricas */
+
+.card {
+  background: #E9EEF0;
+  border-radius: 20px;
+  padding: 18px 22px;
+  box-sizing: border-box;
+}
+
+.card__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Info bici */
+
+.card--info-bici p {
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+.text-ok {
+  color: #008000;
+}
+
+/* Incidencias relacionadas */
+
+.card--incidencias {
+  min-height: 180px;
+}
+
+.incidencias-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.incidencia {
+  display: block;
+  font-size: 14px;
+  margin: 4px 0;
+  text-decoration: none;
+}
+
+.incidencia--amarilla {
+  color: #e0a800;
+}
+
+.incidencia--naranja {
+  color: #e67e22;
+}
+
+.incidencia--roja {
+  color: #c0392b;
+}
+
+/* Problemas detectados */
+
+.card--problemas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.problem-item {
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+.problem-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.status-dot--rojo {
+  background: #d32f2f;
+}
+
+.status-dot--verde {
+  background: #2e7d32;
+}
+
+.problem-item__icon {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Card de mapa / botón centrado */
+
+.card--map {
+  background: transparent;
+  padding: 0;
+}
+
+.card__actions {
+  margin-top: 14px;
+}
+
+.card__actions--right {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.card__actions--center {
+  display: flex;
+  justify-content: center;
+}
+
+/* Botones grandes */
+
+.bike-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 10px 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.btn--primary {
+  background: #0052CC;
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background: #003f99;
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background: #ffffff;
+  color: #0052CC;
+  border: 2px solid #0052CC;
+}
+
+.btn--outline:hover {
+  background: #e0ecff;
+}
+
+.btn--icon-left span {
+  display: inline-block;
+}
+
+/* ===== Responsive (modo móvil) ===== */
+
+@media (max-width: 900px) {
+  .bike-detail__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .bike-detail-page {
+    padding: 16px;
+  }
+
+  .bike-detail__title {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .bike-detail__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bike-detail__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card--info-bici p,
+  .card--incidencias,
+  .contact-details p {
+    font-size: 15px;
+  }
+}

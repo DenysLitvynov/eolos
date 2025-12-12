@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestión de Sensores | Bici 189823</title>
+
+ 
+  <link rel="stylesheet" href="../../css/header.css">
+  <script type="module" src="../../js/components/header.js" defer></script>
+
+ 
+  <link rel="stylesheet" href="../../css/gestion-sensores.css">
+
+  
+  <link rel="stylesheet" href="../../css/footer.css">
+  <script type="module" src="../../js/components/footer.js" defer></script>
+</head>
+
+<body>
+
+  <div id="site-header"></div>
+
+  
+  <main class="page-content bike-detail-page">
+    <h1 class="bike-detail__title">Bici 189823</h1>
+
+    <section class="bike-detail__layout">
+
+      <div class="bike-detail__left">
+
+        <article class="card card--info-bici">
+          <h2 class="card__title">Info Bici</h2>
+          <p><strong>Estado:</strong> Estacionada</p>
+          <p><strong>Parada:</strong> Ciutat Vella</p>
+          <p><strong>Batería:</strong> <span class="text-ok">70%</span></p>
+        </article>
+
+        <article class="card card--incidencias">
+          <h2 class="card__title">Incidencias Relacionadas con esta Bici</h2>
+          <ul class="incidencias-list">
+            <li><a href="#" class="incidencia incidencia--amarilla">LED del Sensor no enciende</a></li>
+            <li><a href="#" class="incidencia incidencia--naranja">Caja Averiada</a></li>
+            <li><a href="#" class="incidencia incidencia--roja">Bici Vandalizada</a></li>
+            <li><a href="#" class="incidencia incidencia--roja">Shock de la Caja</a></li>
+          </ul>
+        </article>
+
+      </div>
+
+
+      <div class="bike-detail__right">
+
+        <article class="card card--problemas">
+          <h2 class="card__title">Problemas Detectados:</h2>
+
+          <div class="problem-item">
+            <div class="problem-item__header">
+              <span class="status-dot status-dot--rojo"></span>
+              <span>Placa</span>
+              <span class="problem-item__icon">⌄</span>
+            </div>
+          </div>
+
+          <div class="problem-item">
+            <div class="problem-item__header">
+              <span class="status-dot status-dot--verde"></span>
+              <span>Sensor de CO2</span>
+              <span class="problem-item__icon">⌄</span>
+            </div>
+          </div>
+
+          <div class="card__actions card__actions--right">
+            <button class="btn btn--primary">Abrir Historial de Medidas</button>
+          </div>
+        </article>
+
+        <article class="card card--map">
+          <div class="card__actions card__actions--center">
+            <button class="btn btn--primary">Ubicar Bici en el Mapa</button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <section class="bike-detail__actions">
+      <button class="btn btn--primary btn--icon-left">
+        🔊 <span>Encontrar Bici</span>
+      </button>
+
+      <button class="btn btn--primary btn--outline">
+        ⛔ <span>Desactivar Bicicleta</span>
+      </button>
+
+      <button class="btn btn--primary btn--outline">
+        ✔ <span>Marcar como arreglada</span>
+      </button>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script>
+    (function () {
+      const header = document.querySelector('.header');
+      const nav = header?.querySelector('.nav');
+      const btn = header?.querySelector('.menu-toggle');
+
+      if (!header || !nav || !btn) return;
+
+      function closeMenu() {
+        btn.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('is-open');
+      }
+
+      function openMenu() {
+        btn.setAttribute('aria-expanded', 'true');
+        nav.classList.add('is-open');
+      }
+
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        expanded ? closeMenu() : openMenu();
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 1050) closeMenu();
+      });
+    })();
+  </script>
+</body>
+</html>

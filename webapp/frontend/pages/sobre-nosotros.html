@@ -1,110 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sobre nosotros</title>
-    <link rel="stylesheet" href="../css/header.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiénes somos | Éolos</title>
+
+  <!-- Header -->
+  <link rel="stylesheet" href="../css/header.css">
+  <script type="module" src="../js/components/header.js" defer></script>
+
+  <!-- Estilos de texto (reutilizamos privacidad.css) -->
+  <link rel="stylesheet" href="../css/privacidad.css">
+
+  <!-- Footer -->
+  <link rel="stylesheet" href="../css/footer.css">
+  <script type="module" src="../js/components/footer.js" defer></script>
 </head>
 
 <body>
-    <header class="header" data-breakpoint="1050">
-        <div class="logo">
-            <img src="../images/logo.png" alt="logo" />
-        </div>
+  <!-- Header dinámico -->
+  <div id="site-header"></div>
 
-        <!-- Botón hamburger -->
-        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menú">
-            <svg class="menu-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            </svg>
-            <span class="menu-toggle__label">Menú</span>
-        </button>
+  <!-- Contenido principal -->
+  <main class="page-content">
+    <div class="titulo">Quiénes somos</div>
 
-        <!-- Menú de navegación -->
-        <nav class="nav" id="site-nav">
-            <a href="../index.html">Inicio</a>
-            <a href="mapas.html">Mapas</a>
-            <a href="calidad-aire.html">Calidad de aire</a>
-            <a href="sobre-nosotros.html">Sobre Nosotros</a>
-            <a href="FAQ.html">Faq</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="login.html" class="login">Inicia Sesión</a>
-            <a href="registro.html" class="login">Registrarse</a>
-        </nav>
-    </header>
+    <div class="privacy-container">
+      <h1>El equipo detrás de Éolos</h1>
 
+      <p>
+        Éolos es una plataforma diseñada para mejorar la movilidad urbana en bicicleta,
+        combinando tecnología, datos ambientales y participación ciudadana. Nuestro
+        objetivo es que moverse en bici sea más seguro, más cómodo y más sostenible.
+      </p>
 
+      <h2>1. Nuestra visión</h2>
+      <p>
+        Imaginamos ciudades donde la bicicleta sea una opción real y segura para el día a día.
+        Queremos que cualquier persona pueda decidir su ruta teniendo en cuenta el tráfico,
+        la calidad del aire y el estado de las bicicletas, todo en una sola aplicación.
+      </p>
 
+      <h2>2. Qué hacemos</h2>
+      <p>Desde Éolos trabajamos en tres grandes ejes:</p>
+      <ul>
+        <li>Recogida de datos mediante sensores instalados en las bicicletas.</li>
+        <li>Visualización de información en mapas de calidad del aire y estado de la flota.</li>
+        <li>Gestión de incidencias para usuarios, técnicos y ayuntamientos.</li>
+      </ul>
 
+      <h2>3. Para quién trabajamos</h2>
+      <p>Éolos está pensado para:</p>
+      <ul>
+        <li><strong>Usuarios ciclistas:</strong> que quieren rutas más seguras y saludables.</li>
+        <li><strong>Técnicos:</strong> que necesitan herramientas para mantener la flota en buen estado.</li>
+        <li><strong>Ayuntamientos:</strong> que buscan datos reales para tomar decisiones sobre movilidad.</li>
+      </ul>
 
+      <h2>4. Un proyecto con vocación educativa y social</h2>
+      <p>
+        Éolos nace como un proyecto académico, pero con una clara vocación de impacto
+        real. Nos interesa que la tecnología sirva para mejorar la calidad de vida en la ciudad
+        y fomentar un modelo de movilidad más respetuoso con el entorno.
+      </p>
 
-    <footer class="ft">
-        <div class="ft__wrap ft--two-cols">
-            <div class="ft__brand">
-                <span class="ft__logo">
-                    <img src="../images/logo_footer.png" alt="logo" />
-                </span>
-                <address class="ft__addr">
-                    <div class="addres">Calle Juanba Peris,<br>Nº 11, Gandia, España</div>
-                    <a href="tel:+34345464356" class="ft__link">(434) 546-4356</a><br>
-                    <a href="mailto:contact@eolos.com" class="ft__link">contact@eolos.com</a>
-                </address>
-            </div>
+      <h2>5. Nuestros valores</h2>
+      <ul>
+        <li><strong>Sostenibilidad:</strong> promover el uso de la bicicleta y la reducción de emisiones.</li>
+        <li><strong>Transparencia:</strong> ofrecer información clara, útil y accesible para todos.</li>
+        <li><strong>Colaboración:</strong> facilitar el trabajo conjunto entre ciudadanía y administración.</li>
+        <li><strong>Innovación:</strong> aprovechar los datos y la tecnología para resolver problemas reales.</li>
+      </ul>
 
-            <div class="ft__links">
-                <nav class="ft__col">
-                    <a href="../index.html">Inicio</a>
-                    <a href="mapas.html">Mapas</a>
-                    <a href="sobre-nosotros.html">Sobre nosotros</a>
-                </nav>
+      <h2>6. Cómo puedes participar</h2>
+      <p>
+        Puedes formar parte de Éolos como usuario, reportando incidencias, consultando
+        los mapas o aportando sugerencias. Si formas parte de un ayuntamiento o un equipo
+        técnico, puedes usar la plataforma para gestionar mejor la información y priorizar
+        actuaciones.
+      </p>
+      <p>
+        Si quieres ponerte en contacto con nosotros, puedes hacerlo a través de la sección de
+        <a href="/pages/contacto.html">Contacto</a>.
+      </p>
+    </div>
+  </main>
 
-                <nav class="ft__col">
-                    <a href="contacto.html">Contacto</a>
-                    <a href="login.html">Iniciar sesión</a>
-                </nav>
-
-                <nav class="ft__col">
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Instagram</a>
-                </nav>
-            </div>
-        </div>
-
-        <div class="ft__copy">
-            Copyright ©éolos. Todos los derechos reservados.
-        </div>
-    </footer>
-
-    <script>
-        (function () {
-            const header = document.querySelector('.header');
-            const nav = header.querySelector('.nav');
-            const btn = header.querySelector('.menu-toggle');
-
-            function closeMenu() {
-                btn.setAttribute('aria-expanded', 'false');
-                nav.classList.remove('is-open');
-            }
-
-            function openMenu() {
-                btn.setAttribute('aria-expanded', 'true');
-                nav.classList.add('is-open');
-            }
-
-            btn.addEventListener('click', () => {
-                const expanded = btn.getAttribute('aria-expanded') === 'true';
-                expanded ? closeMenu() : openMenu();
-            });
-
-
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 1050) closeMenu();
-            });
-        })();
-    </script>
+  <!-- Footer dinámico -->
+  <div id="site-footer"></div>
 </body>
-
 </html>
