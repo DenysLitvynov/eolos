@@ -38,7 +38,6 @@ const NAV_CONFIG = {
   ],
 
   admin: [
-    { label: 'Inicio', href: '/pages/admin/gestion-usuarios.html' },
     { label: 'Gestión usuarios', href: '/pages/admin/gestion-usuarios.html' },
     { label: 'Incidencias', href: '/pages/gestion_incidencias.html' },
     { label: 'Sensores', href: '/pages/tecnico/estado-sensores.html' },
@@ -48,7 +47,6 @@ const NAV_CONFIG = {
   ],
 
     tecnico_ayuntamiento: [
-    { label: 'Inicio', href: '/pages/admin/gestion-usuarios.html' },
     { label: 'Gestión usuarios', href: '/pages/admin/gestion-usuarios.html' },
     { label: 'Gestión recompensas', href: '/pages/gestion_recompensas.html' },
     { label: 'Mapas', href: '/pages/mapas.html' },
