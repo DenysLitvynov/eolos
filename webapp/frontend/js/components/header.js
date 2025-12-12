@@ -20,6 +20,7 @@ const NAV_CONFIG = {
   usuario: [
     { label: 'Inicio', href: '/pages/landing-registrado.html' },
     { label: 'Mapas', href: '/pages/mapas.html' },
+    { label: 'C. Aire', href: '/pages/calidad-aire.html' },
     { label: 'Sobre nosotros', href: '/pages/sobre-nosotros.html' },
     { label: 'FAQ', href: '/pages/FAQ.html' },
     { label: 'Recompensas', href: '/pages/recompensas.html' },
