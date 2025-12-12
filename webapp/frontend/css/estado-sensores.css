@@ -144,6 +144,34 @@
     border-color: #9E9E9E;
 }
 
+/* Botón de información */
+.btn-info-mediciones {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: 1px solid #0F4C81;
+    color: #0F4C81;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-info-mediciones:hover {
+    transform: scale(1.1);
+}
+
+.btn-info-mediciones:active {
+    transform: scale(0.95);
+}
+
 .problem-badge {
     position: absolute;
     top: 10px;

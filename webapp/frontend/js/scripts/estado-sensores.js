@@ -20,15 +20,18 @@ class BikeCard {
         if (stateClass) card.classList.add(stateClass);
 
         card.innerHTML = `
+            <button class="btn-info-mediciones" title="Ver mediciones">ℹ</button>
             <div class="bike-title">${this.id}</div>
             <p class="bike-info"><b>Último dato:</b> ${this.ultimaActualizacion}</p>
             <p class="bike-info"><b>Estado:</b> ${this.estado}</p>
             <p class="bike-info"><b>Parada:</b> ${this.parada}</p>
         `;
 
-        // Agregar evento de click para abrir modal - CAMBIAR a this.placa_id
-        card.addEventListener('click', () => {
-            abrirModalMediciones(this.placa_id);  // CAMBIAR AQUÍ
+        // Agregar evento de click SOLO al botón de información
+        const btnInfo = card.querySelector(".btn-info-mediciones");
+        btnInfo.addEventListener('click', (e) => {
+            e.stopPropagation();
+            abrirModalMediciones(this.placa_id);
         });
 
         return card;
