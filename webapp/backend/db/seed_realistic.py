@@ -232,7 +232,7 @@ def seed_data():
             # --------------------------------------------------------------------------
 
             medidas = []
-            TOTAL = 15000
+            TOTAL = 50000
 
             for _ in range(TOTAL):
                 placa = random.choice(placas)

@@ -6083,7 +6083,6 @@ BASESETTINGS_FULLNAME	webapp/venv/lib64/python3.13/site-packages/pydantic/mypy.p
 BASESETTINGS_FULLNAME	webapp/venv/lib64/python3.13/site-packages/pydantic/v1/mypy.py	/^BASESETTINGS_FULLNAME = f'{_NAMESPACE}.env_settings.BaseSettings'$/;"	v
 BASE_COMPLETION	webapp/venv/lib/python3.13/site-packages/pip/_internal/commands/completion.py	/^BASE_COMPLETION = """$/;"	v
 BASE_COMPLETION	webapp/venv/lib64/python3.13/site-packages/pip/_internal/commands/completion.py	/^BASE_COMPLETION = """$/;"	v
-BASE_DIR	webapp/backend/app.py	/^BASE_DIR = Path(__file__).resolve().parent.parent$/;"	v
 BASE_URL	android/eolos/app/src/main/java/com/example/eolos/logica_fake/IncidenciaFake.java	/^    private static final String BASE_URL = "http:\/\/192.168.1.133:8000";$/;"	f	class:IncidenciaFake	file:
 BASE_URL	android/eolos/app/src/main/java/com/example/eolos/logica_fake/LogicaTrayectosFake.java	/^    private static final String BASE_URL = "http:\/\/192.168.1.133:8000";$/;"	f	class:LogicaTrayectosFake	file:
 BASE_URL	android/eolos/app/src/main/java/com/example/eolos/logica_fake/LoginFake.java	/^    private static final String BASE_URL = "http:\/\/192.168.1.133:8000";$/;"	f	class:LoginFake	file:
@@ -10563,7 +10562,6 @@ FROM_LINTING	webapp/venv/lib/python3.13/site-packages/sqlalchemy/sql/compiler.py
 FROM_LINTING	webapp/venv/lib64/python3.13/site-packages/sqlalchemy/sql/__init__.py	/^from .compiler import FROM_LINTING as FROM_LINTING$/;"	Y	nameref:unknown:FROM_LINTING
 FROM_LINTING	webapp/venv/lib64/python3.13/site-packages/sqlalchemy/sql/compiler.py	/^    FROM_LINTING = COLLECT_CARTESIAN_PRODUCTS | WARN_LINTING$/;"	v	class:Linting
 FROM_LINTING	webapp/venv/lib64/python3.13/site-packages/sqlalchemy/sql/compiler.py	/^NO_LINTING, COLLECT_CARTESIAN_PRODUCTS, WARN_LINTING, FROM_LINTING = tuple($/;"	v
-FRONTEND_DIR	webapp/backend/app.py	/^FRONTEND_DIR = BASE_DIR \/ "frontend"$/;"	v
 FROZEN	webapp/venv/lib/python3.13/site-packages/pip/_vendor/tomli/_parser.py	/^    FROZEN: Final = 0$/;"	v	class:Flags	typeref:typename:Final
 FROZEN	webapp/venv/lib64/python3.13/site-packages/pip/_vendor/tomli/_parser.py	/^    FROZEN: Final = 0$/;"	v	class:Flags	typeref:typename:Final
 FROZEN_SET_TYPES	webapp/venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py	/^FROZEN_SET_TYPES: list[type] = [typing.FrozenSet, frozenset, collections.abc.Set]  # noqa: UP006$/;"	v	typeref:typename:list[type]
@@ -85091,6 +85089,7 @@ media_type	webapp/venv/lib64/python3.13/site-packages/starlette/responses.py	/^ 
 media_type	webapp/venv/lib64/python3.13/site-packages/starlette/responses.py	/^    media_type = "text\/plain"$/;"	v	class:PlainTextResponse
 media_type	webapp/venv/lib64/python3.13/site-packages/starlette/responses.py	/^    media_type = None$/;"	v	class:Response
 media_type	webapp/venv/lib64/python3.13/site-packages/starlette/schemas.py	/^    media_type = "application\/vnd.oai.openapi"$/;"	v	class:OpenAPIResponse
+medicionStateReceiver	android/eolos/app/src/main/java/com/example/eolos/servicio/BeaconScanService.java	/^    private BroadcastReceiver medicionStateReceiver;$/;"	f	class:BeaconScanService	file:
 medicionesActuales	webapp/frontend/js/scripts/estado-sensores.js	/^let medicionesActuales = []; \/\/ Mediciones mostradas actualmente$/;"	v
 medirCO2	arduino/eolos/Medidor.h	/^  float medirCO2() {$/;"	f	class:Medidor	typeref:typename:float
 medirO3	arduino/eolos/Medidor.h	/^  float medirO3() {$/;"	f	class:Medidor	typeref:typename:float
@@ -87002,6 +87001,7 @@ nothing	webapp/venv/lib64/python3.13/site-packages/alembic/command.py	/^        
 notices	webapp/venv/lib/python3.13/site-packages/sqlalchemy/dialects/postgresql/psycopg.py	/^        def notices(conn):$/;"	f	member:PGDialect_psycopg.on_connect	file:
 notices	webapp/venv/lib64/python3.13/site-packages/sqlalchemy/dialects/postgresql/psycopg.py	/^        def notices(conn):$/;"	f	member:PGDialect_psycopg.on_connect	file:
 notificarDatos	arduino/eolos/ServicioEnEmisora.h	/^	uint16_t notificarDatos( const char * str ) {$/;"	f	class:ServicioEnEmisora::Caracteristica	typeref:typename:uint16_t
+notificarEstadoMedicion	android/eolos/app/src/main/java/com/example/eolos/logica_fake/LogicaTrayectosFake.java	/^    private void notificarEstadoMedicion(double valor) {$/;"	m	class:LogicaTrayectosFake	file:
 notificationManager	android/eolos/app/src/main/java/com/example/eolos/activities/ConnectionActivity.java	/^    private NotificationManager notificationManager;$/;"	f	class:ConnectionActivity	file:
 notificationManager	android/eolos/app/src/main/java/com/example/eolos/servicio/BeaconScanService.java	/^    private NotificationManager notificationManager;$/;"	f	class:BeaconScanService	file:
 notify	webapp/venv/lib/python3.13/site-packages/anyio/_core/_synchronization.py	/^    def notify(self, n: int = 1) -> None:$/;"	m	class:Condition	typeref:typename:None
@@ -87266,6 +87266,7 @@ obtenerHistorico24h	webapp/frontend/js/logica_fake/calidad_aire_fake.js	/^    as
 obtenerIncidenciasFiltradas	webapp/frontend/js/logica_fake/gestion_incidencias_fake.js	/^    async obtenerIncidenciasFiltradas() {$/;"	m	class:GestionIncidenciasFake
 obtenerMapa	webapp/frontend/js/logica_fake/mapa_fake.js	/^    async obtenerMapa(tipo, dia, lat_min, lon_min, lat_max, lon_max) {$/;"	m	class:MapaFake
 obtenerMapaAdmin	webapp/frontend/js/logica_fake/admin_mapas_fake.js	/^    async obtenerMapaAdmin(tipo, dia, lat_min, lon_min, lat_max, lon_max) {$/;"	m	class:AdminMapasFake
+obtenerMediciones	webapp/frontend/js/logica_fake/calidad_aire_fake.js	/^    async obtenerMediciones(placa_id) {$/;"	m	class:CalidadAireFake
 obtenerMediciones	webapp/frontend/js/logica_fake/estado_sensores_fake.js	/^    async obtenerMediciones(placa_id, fecha_inicio = null, fecha_fin = null) {$/;"	m	class:EstadoSensoresFake
 obtenerPerfil	webapp/frontend/js/logica_fake/perfil_fake.js	/^    async obtenerPerfil(uid){$/;"	m	class:PerfilFake
 obtenerProximasRecompensas	android/eolos/app/src/main/java/com/example/eolos/activities/RecompensaActivity.java	/^    private List<Recompensa_Item> obtenerProximasRecompensas() {$/;"	m	class:RecompensaActivity	file:
@@ -87287,6 +87288,7 @@ obtener_posicion_gps	webapp/backend/pojos/posicion_gps.py	/^    def obtener_posi
 obtener_punto_en_cien_metros	simulador/simulador_usuarios.py	/^    def obtener_punto_en_cien_metros(self, pos_actual: dict, est_final: dict) -> dict:$/;"	m	class:SimuladorUsuarios	typeref:typename:dict
 obtener_temporizador_medidas	simulador/simulador_usuarios.py	/^    def obtener_temporizador_medidas(self, num_usuarios: int) -> float:$/;"	m	class:SimuladorUsuarios	typeref:typename:float
 obtener_todas_bicicletas	webapp/backend/logic/estado_sensores.py	/^    def obtener_todas_bicicletas(self, db: Session):$/;"	m	class:LogicaEstadoSensores
+obtener_todas_mediciones	webapp/backend/logic/calidad_aire.py	/^    def obtener_todas_mediciones(self, db: Session, placa_id: str):$/;"	m	class:LogicaCalidadAire
 obtener_trayecto	webapp/backend/pojos/trayecto.py	/^    def obtener_trayecto(self, db: Session) -> List[PosicionGPS]:$/;"	m	class:Trayecto	typeref:typename:List[PosicionGPS]
 obtenidas	webapp/backend/db/models.py	/^    obtenidas = relationship("RecompensaObtenida", back_populates="recompensa")$/;"	v	class:Recompensa
 octets	webapp/venv/lib/python3.13/site-packages/dns/dnssecalgs/ecdsa.py	/^    octets = 32$/;"	v	class:PublicECDSAP256SHA256
@@ -89330,7 +89332,7 @@ placaIdActual	webapp/frontend/js/scripts/estado-sensores.js	/^let placaIdActual 
 placaRunnable	android/eolos/app/src/main/java/com/example/eolos/logica_fake/LogicaTrayectosFake.java	/^    private Runnable placaRunnable;$/;"	f	class:LogicaTrayectosFake	file:
 placa_id	webapp/backend/db/models.py	/^    placa_id = Column(String(36), ForeignKey("placas_sensores.placa_id"))$/;"	v	class:Medida
 placa_id	webapp/backend/db/models.py	/^    placa_id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))$/;"	v	class:PlacaSensores
-placa_id	webapp/frontend/js/scripts/calidad-aire.js	/^const placa_id = localStorage.getItem('placa_id') || "005d0194-d3f0-4eea-be1f-5a9b4ab39e05";$/;"	C
+placa_id	webapp/frontend/js/scripts/calidad-aire.js	/^const placa_id = localStorage.getItem('placa_id') || "000e13a1-b96c-49e2-a98d-ccf53dbcc8e7";$/;"	C
 placa_id	webapp/frontend/js/scripts/estado-sensores.js	/^    constructor({ id, placa_id, estado, ultimaActualizacion, parada }) {$/;"	p	variable:BikeCard
 plain	webapp/venv/lib/python3.13/site-packages/pip/_vendor/rich/ansi.py	/^    plain: str = ""$/;"	v	class:_AnsiToken	typeref:typename:str
 plain	webapp/venv/lib/python3.13/site-packages/pip/_vendor/rich/text.py	/^    def plain(self) -> str:$/;"	m	class:Text	typeref:typename:str
@@ -95669,7 +95671,6 @@ rollup	webapp/venv/lib/python3.13/site-packages/sqlalchemy/sql/functions.py	/^cl
 rollup	webapp/venv/lib64/python3.13/site-packages/sqlalchemy/sql/functions.py	/^        def rollup(self) -> Type[rollup[Any]]: ...$/;"	m	class:_FunctionGenerator	typeref:typename:Type[rollup[Any]]
 rollup	webapp/venv/lib64/python3.13/site-packages/sqlalchemy/sql/functions.py	/^class rollup(GenericFunction[_T]):$/;"	c
 root	webapp/alembic.ini	/^[logger_root]$/;"	L
-root	webapp/backend/app.py	/^async def root():$/;"	f
 root	webapp/venv/lib/python3.13/site-packages/anyio/_core/_fileio.py	/^    def root(self) -> str:$/;"	m	class:Path	typeref:typename:str
 root	webapp/venv/lib/python3.13/site-packages/dns/name.py	/^root = Name([b""])$/;"	v
 root	webapp/venv/lib/python3.13/site-packages/pip/_vendor/rich/tree.py	/^    root = Tree("🌲 [b green]Rich Tree", highlight=True, hide_root=True)$/;"	v
@@ -96233,6 +96234,7 @@ ruta_login	webapp/backend/api/auth.py	/^def ruta_login(login_data: LoginRequest,
 ruta_obtener_aqi	webapp/backend/api/calidad_aire_api.py	/^def ruta_obtener_aqi(placa_id: str, db: Session = Depends(get_db)):$/;"	f
 ruta_obtener_bicicletas	webapp/backend/api/estado_sensores_api.py	/^def ruta_obtener_bicicletas(db: Session = Depends(get_db)):$/;"	f
 ruta_obtener_historico	webapp/backend/api/calidad_aire_api.py	/^def ruta_obtener_historico(placa_id: str, db: Session = Depends(get_db)):$/;"	f
+ruta_obtener_mediciones	webapp/backend/api/calidad_aire_api.py	/^def ruta_obtener_mediciones(placa_id: str, db: Session = Depends(get_db)):$/;"	f
 ruta_obtener_mediciones	webapp/backend/api/estado_sensores_api.py	/^def ruta_obtener_mediciones($/;"	f
 ruta_registro	webapp/backend/api/auth.py	/^def ruta_registro(registro_data: RegistroRequest, db: Session = Depends(get_db)):$/;"	f
 ruta_resend_reset	webapp/backend/api/auth.py	/^def ruta_resend_reset(resend_data: ForgotPasswordRequest, db: Session = Depends(get_db)):$/;"	f
@@ -98312,6 +98314,7 @@ setupButtons	android/eolos/app/src/main/java/com/example/eolos/activities/Incide
 setupConnectButton	android/eolos/app/src/main/java/com/example/eolos/activities/ConnectionActivity.java	/^    private void setupConnectButton() {$/;"	m	class:ConnectionActivity	file:
 setupDisconnectButton	android/eolos/app/src/main/java/com/example/eolos/activities/ConnectionActivity.java	/^    private void setupDisconnectButton() {$/;"	m	class:ConnectionActivity	file:
 setupExpandableSection	android/eolos/app/src/main/java/com/example/eolos/activities/AjustesActivity.java	/^    private void setupExpandableSection(View clickable, final View contenido, final ImageView ic/;"	m	class:AjustesActivity	file:
+setupMedicionStateReceiver	android/eolos/app/src/main/java/com/example/eolos/servicio/BeaconScanService.java	/^    private void setupMedicionStateReceiver() {$/;"	m	class:BeaconScanService	file:
 setupModalEventos	webapp/frontend/js/scripts/estado-sensores.js	/^function setupModalEventos() {$/;"	f
 setupRadioGroups	android/eolos/app/src/main/java/com/example/eolos/activities/IncidenciaActivity.java	/^    private void setupRadioGroups() {$/;"	m	class:IncidenciaActivity	file:
 setupValidation	webapp/frontend/js/scripts/perfil.js	/^    function setupValidation(input, errorElement) {$/;"	f
@@ -103266,8 +103269,8 @@ testing_util	webapp/venv/lib/python3.13/site-packages/alembic/testing/env.py	/^f
 testing_util	webapp/venv/lib64/python3.13/site-packages/alembic/testing/env.py	/^from . import util as testing_util$/;"	Y	nameref:unknown:util
 tests_path	webapp/venv/lib/python3.13/site-packages/passlib/tests/test_ext_django_source.py	/^        tests_path = os.path.join(source_path, "tests")$/;"	v
 tests_path	webapp/venv/lib64/python3.13/site-packages/passlib/tests/test_ext_django_source.py	/^        tests_path = os.path.join(source_path, "tests")$/;"	v
-text	webapp/frontend/js/scripts/calidad-aire.js	/^                            text: 'Hora del día'$/;"	p	property:cargarGrafico.anonymousObject684bb6000105.options.scales.x.title
 text	webapp/frontend/js/scripts/calidad-aire.js	/^                            text: 'Índice de Calidad del Aire (AQI)'$/;"	p	property:cargarGrafico.anonymousObject684bb6000105.options.scales.y.title
+text	webapp/frontend/js/scripts/calidad-aire.js	/^                            text: 'Últimas mediciones'$/;"	p	property:cargarGrafico.anonymousObject684bb6000105.options.scales.x.title
 text	webapp/frontend/js/scripts/perfil.js	/^                const text = await resp.text();$/;"	C
 text	webapp/venv/lib/python3.13/site-packages/pip/_vendor/requests/models.py	/^    def text(self):$/;"	m	class:Response
 text	webapp/venv/lib/python3.13/site-packages/pip/_vendor/rich/pretty.py	/^    text: str = ""$/;"	v	class:_Line	typeref:typename:str
@@ -105491,6 +105494,7 @@ update	webapp/venv/lib64/python3.13/site-packages/starlette/datastructures.py	/^
 update	webapp/venv/lib64/python3.13/site-packages/starlette/datastructures.py	/^    def update(self, other: Mapping[str, str]) -> None:$/;"	m	class:MutableHeaders	typeref:typename:None
 updateBeaconNotification	android/eolos/app/src/main/java/com/example/eolos/servicio/BeaconScanService.java	/^    private void updateBeaconNotification(boolean connected, String statusText) {$/;"	m	class:BeaconScanService	file:
 updateMapFilters	webapp/frontend/js/scripts/mapa.js	/^    async function updateMapFilters() {$/;"	f
+updateMedicionNotification	android/eolos/app/src/main/java/com/example/eolos/servicio/BeaconScanService.java	/^    private void updateMedicionNotification(String estadoMedicion, double valorMedicion, int ico/;"	m	class:BeaconScanService	file:
 updateOtherFieldState	android/eolos/app/src/main/java/com/example/eolos/activities/IncidenciaActivity.java	/^    private void updateOtherFieldState() {$/;"	m	class:IncidenciaActivity	file:
 update_cached_response	webapp/venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/controller.py	/^    def update_cached_response($/;"	m	class:CacheController	typeref:typename:HTTPResponse
 update_cached_response	webapp/venv/lib64/python3.13/site-packages/pip/_vendor/cachecontrol/controller.py	/^    def update_cached_response($/;"	m	class:CacheController	typeref:typename:HTTPResponse
@@ -106227,7 +106231,7 @@ usuario_id	webapp/frontend/js/logica_fake/perfil_fake.js	/^                usuar
 usuario_id	webapp/frontend/js/logica_fake/perfil_fake.js	/^                usuario_id: uid,$/;"	p	variable:anonymousObjectad9069850105
 usuario_roles	webapp/backend/db/models.py	/^usuario_roles = Table($/;"	v
 usuarios	webapp/backend/db/models.py	/^    usuarios = relationship("Usuario", secondary=usuario_roles, back_populates="roles")$/;"	v	class:Rol
-usuarios_a_probar	simulador/main.py	/^    usuarios_a_probar = [100, 200, 500, 1000, 2000]$/;"	v
+usuarios_a_probar	simulador/main.py	/^    usuarios_a_probar = [200]$/;"	v
 utcoffset	webapp/venv/lib/python3.13/site-packages/psycopg2/tz.py	/^    def utcoffset(self, dt):$/;"	m	class:FixedOffsetTimezone
 utcoffset	webapp/venv/lib/python3.13/site-packages/psycopg2/tz.py	/^    def utcoffset(self, dt):$/;"	m	class:LocalTimezone
 utcoffset	webapp/venv/lib64/python3.13/site-packages/psycopg2/tz.py	/^    def utcoffset(self, dt):$/;"	m	class:FixedOffsetTimezone
