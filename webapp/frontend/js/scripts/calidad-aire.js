@@ -27,7 +27,7 @@ const svgBad = `
 // -------------------------------
 
 // Obtener placa_id del localStorage
-const placa_id = localStorage.getItem('placa_id') || "005d0194-d3f0-4eea-be1f-5a9b4ab39e05";
+const placa_id = localStorage.getItem('placa_id') || "000e13a1-b96c-49e2-a98d-ccf53dbcc8e7";
 
 const numberEl = document.getElementById("aqi-number");
 const textEl = document.getElementById("aqi-text");
@@ -136,11 +136,15 @@ let co2Chart = null;
 // Función para cargar y mostrar el gráfico
 async function cargarGrafico(placa_id) {
     try {
-        const mediciones = await logicaAire.obtenerHistorico24h(placa_id);
+        // Obtener TODAS las mediciones (sin límite de 24 horas)
+        const mediciones = await logicaAire.obtenerMediciones(placa_id);
+        
+        // Tomar máximo los últimos 12 datos (o menos si no hay 12 disponibles)
+        const ultimos12 = mediciones.slice(Math.max(0, mediciones.length - 12));
         
         // Preparar datos
-        const horas = mediciones.map(m => formatearHora(m.fecha_hora));
-        const valores = mediciones.map(m => m.aqi);
+        const horas = ultimos12.map(m => formatearHora(m.fecha_hora));
+        const valores = ultimos12.map(m => m.aqi);
         const colores = valores.map(v => getColorAQI(v));
         
         // Destruir gráfico anterior si existe
@@ -182,15 +186,15 @@ async function cargarGrafico(placa_id) {
                     x: {
                         title: {
                             display: true,
-                            text: 'Hora del día'
+                            text: 'Últimas mediciones'
                         }
                     }
                 }
             }
         });
         
-        // Calcular y mostrar resumen
-        const resumen = calcularResumen(mediciones);
+        // Calcular y mostrar resumen (solo con los últimos 12)
+        const resumen = calcularResumen(ultimos12);
         actualizarResumenDiario(resumen);
         
     } catch (error) {

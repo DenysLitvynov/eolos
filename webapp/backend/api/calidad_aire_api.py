@@ -55,4 +55,18 @@ def ruta_obtener_historico(placa_id: str, db: Session = Depends(get_db)):
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.get("/mediciones/{placa_id}")
+def ruta_obtener_mediciones(placa_id: str, db: Session = Depends(get_db)):
+    """
+    Obtiene TODAS las mediciones de una placa (sin límite temporal).
+    """
+    try:
+        logica = LogicaCalidadAire()
+        resultado = logica.obtener_todas_mediciones(db, placa_id)
+        return [HistoricoResponse(**item) for item in resultado]
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 # ---------------------------------------------------------

@@ -29,6 +29,17 @@ export class CalidadAireFake {
         return await this.peticionario.hacerPeticionRest('GET', url);
     }
 
+    // ----------------------------------------------------------
+    // Método que obtiene TODAS las mediciones de una placa
+    //
+    // placa_id : string
+    // -> obtenerMediciones() -> Promise<json[]>
+    // ----------------------------------------------------------
+    async obtenerMediciones(placa_id) {
+        const url = `/api/v1/calidad-aire/mediciones/${placa_id}`;
+        return await this.peticionario.hacerPeticionRest('GET', url);
+    }
+
 }
 
 // ----------------------------------------------------------

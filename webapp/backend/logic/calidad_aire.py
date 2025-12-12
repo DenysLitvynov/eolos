@@ -104,4 +104,36 @@ class LogicaCalidadAire:
         except Exception as e:
             raise RuntimeError(f"Error obteniendo histórico: {e}")
 
+    def obtener_todas_mediciones(self, db: Session, placa_id: str):
+        """
+        Obtiene TODAS las mediciones de una placa (sin límite temporal).
+        
+        Args:
+            db (Session): Sesión de BD.
+            placa_id (str): ID de la placa.
+        
+        Returns:
+            list: Lista de mediciones ordenadas por fecha
+        """
+        try:
+            mediciones = db.query(Medida).filter(
+                Medida.placa_id == placa_id
+            ).order_by(Medida.fecha_hora.asc()).all()
+            
+            if not mediciones:
+                raise ValueError(f"No hay mediciones para la placa {placa_id}")
+            
+            return [
+                {
+                    "valor": float(m.valor),
+                    "fecha_hora": m.fecha_hora.isoformat(),
+                    "aqi": self.convertir_pm25_a_aqi(m.valor)
+                }
+                for m in mediciones
+            ]
+        except ValueError:
+            raise
+        except Exception as e:
+            raise RuntimeError(f"Error obteniendo mediciones: {e}")
+
 # ---------------------------------------------------------
