@@ -25,7 +25,7 @@ import java.util.TimeZone;
 public class LogicaTrayectosFake {
 
     private static final String TAG = "LogicaTrayectosFake";
-    private static final String BASE_URL = "http://192.168.1.133:8000";
+    private static final String BASE_URL = "http://51.95.74.33:8000";;
     private final Context context;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final LocationManager locationManager;
@@ -417,6 +417,9 @@ public class LogicaTrayectosFake {
 
                     if (codigo == 200) {
                         Log.i(TAG, "✅ Medida guardada correctamente: " + valor + " (" + tipo + ")");
+                        
+                        // Notificar al servicio sobre el estado de la medición
+                        notificarEstadoMedicion(valor);
                     } else {
                         Log.e(TAG, "❌ Error al guardar medida: " + codigo + " → " + cuerpo);
                     }
@@ -426,6 +429,41 @@ public class LogicaTrayectosFake {
         } catch (Exception e) {
             Log.e(TAG, "❌ Error procesando trama del beacon", e);
         }
+    }
+
+    // ==================================================================
+    // NOTIFICAR ESTADO DE LA MEDICIÓN (NUEVA FUNCIÓN)
+    // ==================================================================
+    private void notificarEstadoMedicion(double valor) {
+        String estado;
+        int icono;
+        
+        if (valor < 50) {
+            estado = "Buena";
+            icono = android.R.drawable.presence_online;  // Verde
+        } else if (valor < 100) {
+            estado = "Regular";
+            icono = android.R.drawable.presence_away;    // Amarillo
+        } else if (valor < 150) {
+            estado = "Mala";
+            icono = android.R.drawable.presence_busy;    // Rojo
+        } else if (valor < 200) {
+            estado = "Muy mala";
+            icono = android.R.drawable.presence_offline; // Negro
+        } else {
+            estado = "Errónea";
+            icono = android.R.drawable.ic_dialog_alert;  // Alerta
+        }
+        
+        Log.d(TAG, "Calidad de aire: " + estado + " (valor: " + valor + ")");
+        
+        // Enviar broadcast al servicio
+        android.content.Intent intent = new android.content.Intent("com.example.eolos.MEDICION_STATE_CHANGED");
+        intent.putExtra("estado_medicion", estado);
+        intent.putExtra("valor_medicion", valor);
+        intent.putExtra("icono", icono);
+        android.content.Context context = this.context;
+        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
     // ==================================================================

@@ -34,6 +34,11 @@ class BikeCard {
             abrirModalMediciones(this.placa_id);
         });
 
+        card.addEventListener('click', () => {
+            const url = `/pages/admin/admin_sensores.html?placa=${encodeURIComponent(this.placa_id)}`;
+            window.location.href = url;
+        });
+
         return card;
     }
 }

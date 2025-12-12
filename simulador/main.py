@@ -21,7 +21,7 @@ if __name__ == "__main__":
     estaciones = sim.leer_de_un_json("estaciones.json")
     bicicletas = sim.leer_de_un_json("bicicletas.json")
 
-    usuarios_a_probar = [100, 200, 500, 1000, 2000]
+    usuarios_a_probar = [200]
     resultados = {}
 
     print("Iniciando simulación de carga...\n")
