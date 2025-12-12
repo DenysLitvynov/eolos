@@ -152,9 +152,19 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (roles.includes('tecnico')) {
                 redirectUrl = '/pages/tecnico/estado-sensores.html'; 
                 console.log('Redirigiendo a estado-sensores.html (tecnico)');
+            
+            } else if (roles.includes('tecnico_ayuntamiento')) {
+                redirectUrl = '/pages/admin/gestion-usuarios.html';
+                console.log('Redirigiendo a gestion-usuarios.html (tecnico_ayuntamiento)');
+            
+            } else if (roles.includes('tecnico_mapas')) {
+                redirectUrl = '/pages/admin_mapas.html';
+                console.log('Redirigiendo a admin_mapas.html (tecnico_mapas)');
+
             } else if (roles.includes('usuario')) {
                 redirectUrl = '/pages/landing-registrado.html';
                 console.log('Redirigiendo a index.html (usuario)');
+        
             } else {
                 console.log('Rol no reconocido, redirigiendo por defecto');
             }
