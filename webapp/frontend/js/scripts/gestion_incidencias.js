@@ -83,7 +83,7 @@ function obtenerDatosIncidencia(tarjeta) {
     const estadoElement = tarjeta.querySelector('.encabezado-estado');
     const esResuelto = estadoElement.classList.contains('estado-resuelto');
     const estadoTexto = esResuelto ? 'RESUELTO' : 'NO RESUELTO';
-    const actionText = esResuelto ? 'cerrar incidencia' : 'Marcar como Resuelto';
+    const actionText = esResuelto ? 'Reabrir Incidencia' : 'Marcar como Resuelto';
 
     // Datos Fijos (por ahora, se simularán con datos reales de la DB en el futuro)
     const idUsuarioUnico = "ID Usuario: 1821981"; 

@@ -26,9 +26,10 @@ class BikeCard {
             <p class="bike-info"><b>Parada:</b> ${this.parada}</p>
         `;
 
-        // Agregar evento de click para abrir modal - CAMBIAR a this.placa_id
+        // Al hacer click en la tarjeta, redirigir a la página de administración
         card.addEventListener('click', () => {
-            abrirModalMediciones(this.placa_id);  // CAMBIAR AQUÍ
+            const url = `/pages/admin/admin_sensores.html?placa=${encodeURIComponent(this.placa_id)}`;
+            window.location.href = url;
         });
 
         return card;

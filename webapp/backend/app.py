@@ -45,6 +45,7 @@ app.include_router(mapas_api.router, prefix="/api/v1")
 app.include_router(admin_mapas_api.router, prefix="/api/v1")
 app.include_router(gestion_incidencias_api.router, prefix="/api/v1")
 
+
 # Middleware CORS
 app.add_middleware(
     CORSMiddleware,
