@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 public class VerifyFake {
 
-    private static final String BASE_URL = "http://51.95.74.33:8000";
+    private static final String BASE_URL = "http://51.95.74.33";
 
     public interface VerifyCallback {
         void onSuccess(String token);
