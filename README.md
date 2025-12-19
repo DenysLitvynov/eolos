@@ -1,4 +1,8 @@
+
+# Arquitectura del proyecto
 ![Arquitectura de la aplicación](./docs/arquitectura.png)
+
+# Diseño de la base de datos 
 ![Diseño de la base de datos](./docs/disenyobd.png)
 
 ---
