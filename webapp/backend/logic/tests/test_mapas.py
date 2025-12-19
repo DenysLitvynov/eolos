@@ -11,8 +11,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from ...db.models import Base, Medida as DBMedida, Interpolada as DBInterpolada, CalidadGeneral, TipoMedidaEnum
 from ..mapas import LogicaMapas
-from ....pojos.posicion_gps import PosicionGPS
-from ....pojos.medida import Medida
+from ...pojos.posicion_gps import PosicionGPS
+from ...pojos.medida import Medida
 
 
 @pytest.fixture(scope="function")
