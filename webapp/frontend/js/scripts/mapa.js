@@ -6,6 +6,7 @@
 
 import { MapaFake } from '../logica_fake/mapa_fake.js';
 import { AdminMapasFake } from '../logica_fake/admin_mapas_fake.js';
+import { cargarEstacionesDesdeApi } from './estaciones_api.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const isAdminPage = document.body.classList.contains('admin-map');
@@ -189,4 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateMapFilters();
+    cargarEstacionesDesdeApi(map);
+
 });
