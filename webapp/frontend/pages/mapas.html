@@ -12,9 +12,9 @@
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  
+
   <script src="/js/lib/leaflet.heat.js"></script>
-  
+
   <script type="module" src="/js/components/header.js" defer></script>
 
   <link rel="stylesheet" href="/css/footer.css">
@@ -22,8 +22,8 @@
 </head>
 
 <body class="public-map">
-  
-<div id="site-header"></div>
+
+  <div id="site-header"></div>
 
   <div class="map-container">
     <aside class="sidebar">
@@ -40,10 +40,10 @@
         <div class="select-wrapper">
           <select id="gas-select">
             <option value="general">Calidad General</option>
-            <option value="pm25">PM 2.5</option>
-            <option value="pm10">PM 10</option>
-            <option value="no2">NO2</option>
-            <option value="o3">O3</option>
+            <option value="pm25">Monóxido de carbono</option>
+            <option value="pm10">Dioxido de azufre</option>
+            <option value="no2">Dióxido de nitrógeno</option>
+            <option value="o3">Ozono</option>
           </select>
         </div>
       </div>
@@ -85,7 +85,8 @@
 
     <div style="text-align: center; max-width: 800px; margin: 0 auto; padding: 2rem;">
       <p style="font-size: 1.2rem; margin-bottom: 2rem;">
-        Vivir en un entorno con buena calidad del aire es fundamental, ya que una mala calidad tiene consecuencias nocivas para la salud.
+        Vivir en un entorno con buena calidad del aire es fundamental, ya que una mala calidad tiene consecuencias
+        nocivas para la salud.
       </p>
       <a href="informacion.html" class="pollution-btn"
         style="display: inline-block; text-decoration: none; color: var(--c-primary); border: 2px solid var(--c-primary); padding: 10px 20px; border-radius: 30px; font-weight: bold; transition: all 0.3s;">
