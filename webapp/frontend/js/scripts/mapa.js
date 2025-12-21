@@ -190,8 +190,44 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isAdminPage) populateTable(hour);
     });
 
+    // Filtros de capas
+    const bikesCheckbox = document.getElementById('layer-bikes');
+    const pollutionCheckbox = document.getElementById('layer-pollution');
+    let bikesLayer = null;
+    let pollutionLayer = null;
+
+    async function initLayers() {
+        // Cargar capas
+        bikesLayer = await cargarEstacionesBicicletas();
+        pollutionLayer = await cargarEstacionesDesdeApi();
+
+        // Estado inicial
+        if (bikesCheckbox.checked && bikesLayer) {
+            bikesLayer.addTo(map);
+        }
+        if (pollutionCheckbox.checked && pollutionLayer) {
+            pollutionLayer.addTo(map);
+        }
+
+        // Listeners
+        bikesCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                if (bikesLayer) bikesLayer.addTo(map);
+            } else {
+                if (bikesLayer) map.removeLayer(bikesLayer);
+            }
+        });
+
+        pollutionCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                if (pollutionLayer) pollutionLayer.addTo(map);
+            } else {
+                if (pollutionLayer) map.removeLayer(pollutionLayer);
+            }
+        });
+    }
+
     updateMapFilters();
-    cargarEstacionesDesdeApi(map);
-    cargarEstacionesBicicletas(map);
+    initLayers();
 
 });

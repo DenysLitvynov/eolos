@@ -1,7 +1,8 @@
-export function cargarEstacionesDesdeApi(map) {
-    fetch("https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/estacions-contaminacio-atmosferiques-estaciones-contaminacion-atmosfericas/records?limit=50")
+export function cargarEstacionesDesdeApi() {
+    return fetch("https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/estacions-contaminacio-atmosferiques-estaciones-contaminacion-atmosfericas/records?limit=50")
         .then(r => r.json())
         .then(data => {
+            const layerGroup = L.layerGroup();
             data.results.forEach(e => {
                 if (!e.geo_point_2d) return;
 
@@ -25,11 +26,14 @@ export function cargarEstacionesDesdeApi(map) {
                 });
 
                 L.marker([lat, lon], { icon: customIcon })
-                    .addTo(map)
-                    .bindPopup(popup);
+                    .bindPopup(popup)
+                    .addTo(layerGroup);
 
             });
-
+            return layerGroup;
         })
-        .catch(err => console.error("Error API estaciones:", err));
+        .catch(err => {
+            console.error("Error API estaciones:", err);
+            return L.layerGroup();
+        });
 }

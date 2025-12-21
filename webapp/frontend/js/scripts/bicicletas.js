@@ -1,19 +1,10 @@
-
-export function cargarEstacionesBicicletas(map) {
-    // Usamos la URL relativa a nuestro propio backend, que actúa como proxy
-    // Asumimos que el backend corre en el mismo host/puerto o está configurado el proxy
-    // Si estamos en desarrollo local, la URL completa podría ser necesaria si no hay proxy configurado en vite/nginx
-    // Pero dado que el usuario pidió "siguiendo la estructura actual", usaremos la ruta relativa a la API del backend.
-
-    // NOTA: Ajustar la URL base si es necesario. En el frontend actual parece que no hay una variable global para la API URL.
-    // Usaremos una ruta relativa asumiendo que el frontend se sirve desde el mismo origen o hay un proxy.
-    // Si falla, probaremos con localhost:8000 explícitamente.
-
+export function cargarEstacionesBicicletas() {
     const apiUrl = "http://localhost:8000/api/v1/bicicletas/estaciones";
 
-    fetch(apiUrl)
+    return fetch(apiUrl)
         .then(r => r.json())
         .then(estaciones => {
+            const layerGroup = L.layerGroup();
             estaciones.forEach(e => {
                 if (!e.lat || !e.lon) return;
 
@@ -35,10 +26,13 @@ export function cargarEstacionesBicicletas(map) {
                 });
 
                 L.marker([e.lat, e.lon], { icon: customIcon })
-                    .addTo(map)
-                    .bindPopup(popup);
-
+                    .bindPopup(popup)
+                    .addTo(layerGroup);
             });
+            return layerGroup;
         })
-        .catch(err => console.error("Error cargando estaciones de bicicletas:", err));
+        .catch(err => {
+            console.error("Error cargando estaciones de bicicletas:", err);
+            return L.layerGroup(); // Retorna grupo vacío en caso de error
+        });
 }
