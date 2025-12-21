@@ -7,6 +7,7 @@
 import { MapaFake } from '../logica_fake/mapa_fake.js';
 import { AdminMapasFake } from '../logica_fake/admin_mapas_fake.js';
 import { cargarEstacionesDesdeApi } from './estaciones_api.js';
+import { cargarEstacionesBicicletas } from './bicicletas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const isAdminPage = document.body.classList.contains('admin-map');
@@ -38,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const hourDisplay = document.getElementById('hour-display');
     const dateFilter = document.getElementById('date-filter');
     const tableBody = document.querySelector('#measures-table tbody');
-    
-     // Sidebar Toggle (Mobile)
+
+    // Sidebar Toggle (Mobile)
     const sidebar = document.querySelector('.sidebar');
     const toggleBtn = document.getElementById('toggle-sidebar');
 
@@ -191,5 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateMapFilters();
     cargarEstacionesDesdeApi(map);
+    cargarEstacionesBicicletas(map);
 
 });
