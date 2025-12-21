@@ -13,8 +13,8 @@ export function cargarEstacionesDesdeApi() {
                     <strong>${e.nombre}</strong><br>
                     NO₂: ${e.no2 ?? "-"}<br>
                     O₃: ${e.o3 ?? "-"}<br>
-                    PM10: ${e.pm10 ?? "-"}<br>
-                    PM2.5: ${e.pm25 ?? "-"}<br>
+                    so2: ${e.so2 ?? "-"}<br>
+                    co: ${e.co ?? "-"}<br>
                     Calidad: ${e.calidad_am}
                 `;
 
