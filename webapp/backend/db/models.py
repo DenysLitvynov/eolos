@@ -126,7 +126,7 @@ class Estacion(Base):
     nombre = Column(String(100), nullable=False)
     lat = Column(Float, nullable=False)
     lon = Column(Float, nullable=False)
-    # capacidad eliminado según petición
+    capacidad = Column(Integer, nullable=False, default=0)
 
     bicicletas = relationship("Bicicleta", back_populates="estacion")
 

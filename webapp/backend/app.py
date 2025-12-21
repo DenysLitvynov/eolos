@@ -25,6 +25,7 @@ from .api.admin_api import router as admin_api
 from .api import mapas_api
 from .api import admin_mapas_api
 from .api import gestion_incidencias_api
+from .api import bicicletas_api
 
 # ---------------------------------------------------------
 
@@ -44,6 +45,7 @@ app.include_router(admin_api, prefix="/api")
 app.include_router(mapas_api.router, prefix="/api/v1")
 app.include_router(admin_mapas_api.router, prefix="/api/v1")
 app.include_router(gestion_incidencias_api.router, prefix="/api/v1")
+app.include_router(bicicletas_api.router, prefix="/api/v1")
 
 
 # Middleware CORS

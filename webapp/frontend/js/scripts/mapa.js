@@ -7,6 +7,7 @@
 import { MapaFake } from '../logica_fake/mapa_fake.js';
 import { AdminMapasFake } from '../logica_fake/admin_mapas_fake.js';
 import { cargarEstacionesDesdeApi } from './estaciones_api.js';
+import { cargarEstacionesBicicletas } from './bicicletas.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const isAdminPage = document.body.classList.contains('admin-map');
@@ -38,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const hourDisplay = document.getElementById('hour-display');
     const dateFilter = document.getElementById('date-filter');
     const tableBody = document.querySelector('#measures-table tbody');
-    
-     // Sidebar Toggle (Mobile)
+
+    // Sidebar Toggle (Mobile)
     const sidebar = document.querySelector('.sidebar');
     const toggleBtn = document.getElementById('toggle-sidebar');
 
@@ -189,7 +190,44 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isAdminPage) populateTable(hour);
     });
 
+    // Filtros de capas
+    const bikesCheckbox = document.getElementById('layer-bikes');
+    const pollutionCheckbox = document.getElementById('layer-pollution');
+    let bikesLayer = null;
+    let pollutionLayer = null;
+
+    async function initLayers() {
+        // Cargar capas
+        bikesLayer = await cargarEstacionesBicicletas();
+        pollutionLayer = await cargarEstacionesDesdeApi();
+
+        // Estado inicial
+        if (bikesCheckbox.checked && bikesLayer) {
+            bikesLayer.addTo(map);
+        }
+        if (pollutionCheckbox.checked && pollutionLayer) {
+            pollutionLayer.addTo(map);
+        }
+
+        // Listeners
+        bikesCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                if (bikesLayer) bikesLayer.addTo(map);
+            } else {
+                if (bikesLayer) map.removeLayer(bikesLayer);
+            }
+        });
+
+        pollutionCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                if (pollutionLayer) pollutionLayer.addTo(map);
+            } else {
+                if (pollutionLayer) map.removeLayer(pollutionLayer);
+            }
+        });
+    }
+
     updateMapFilters();
-    cargarEstacionesDesdeApi(map);
+    initLayers();
 
 });
