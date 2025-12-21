@@ -17,10 +17,19 @@ export function cargarEstacionesDesdeApi(map) {
                     Calidad: ${e.calidad_am}
                 `;
 
-                L.marker([lat, lon])
+                const customIcon = L.icon({
+                    iconUrl: '../../images/icono-tiempo.png',
+                    iconSize: [32, 32],      // ancho, alto en píxeles
+                    iconAnchor: [16, 32],    // punto de anclaje (centro abajo)
+                    popupAnchor: [0, -32]    // posición del popup respecto al icono
+                });
+
+                L.marker([lat, lon], { icon: customIcon })
                     .addTo(map)
                     .bindPopup(popup);
+
             });
+
         })
         .catch(err => console.error("Error API estaciones:", err));
 }
