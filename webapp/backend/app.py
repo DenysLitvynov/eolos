@@ -25,6 +25,7 @@ from .api.admin_api import router as admin_api
 from .api import mapas_api
 from .api import admin_mapas_api
 from .api import gestion_incidencias_api
+from .api.home_api import router as home_router
 
 # ---------------------------------------------------------
 
@@ -44,7 +45,7 @@ app.include_router(admin_api, prefix="/api")
 app.include_router(mapas_api.router, prefix="/api/v1")
 app.include_router(admin_mapas_api.router, prefix="/api/v1")
 app.include_router(gestion_incidencias_api.router, prefix="/api/v1")
-
+app.include_router(home_router, prefix="/api/v1")
 
 # Middleware CORS
 app.add_middleware(
@@ -54,7 +55,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-"""
+
 # Archivos estáticos
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = BASE_DIR / "frontend"
@@ -70,6 +71,5 @@ app.mount("/css", StaticFiles(directory=FRONTEND_DIR / "css"), name="css")
 @app.get("/")
 async def root():
     return FileResponse(FRONTEND_DIR / "index.html")
-"""
-# ---------------------------------------------------------
+
 

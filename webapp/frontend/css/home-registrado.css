@@ -63,7 +63,8 @@
     display: flex;
     align-items: baseline;
     gap: 3em;
-    margin:3vh 10vw;
+    margin: 3vh 1vw;
+    justify-content: center;
 }
 
 .score {
@@ -414,3 +415,8 @@
         text-align: center;
     }
 }
+
+/* ✅ score 颜色切换 */
+.score.is-good { color: #4CAF50; }        /* verde */
+.score.is-bad { color: #FFC107; }         /* amarillo */
+.score.is-very-bad { color: #F44336; }    /* rojo */

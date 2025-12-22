@@ -9,187 +9,177 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/home-registrado.css">
 
-    <!-- Leaflet y heatmap eliminados -->
-    <!-- <script src="../js/scripts/home-mapa.js"></script> -->
-
     <script type="module" src="/js/components/header.js" defer></script>
     <link rel="stylesheet" href="/css/footer.css">
     <script type="module" src="/js/components/footer.js" defer></script>
+
+
+
+    <!-- <script src="/js/logica_fake/home_fake.js" defer></script> -->
+   <script src="/js/scripts/home-registrado.js" defer></script>
 </head>
 
 <body>
 
-    <div id="site-header"></div>
+<div id="site-header"></div>
 
-    <h2 class="welcome-title">
-        Bienvenido de nuevo <span class="welcome-name">Juan Bautista</span>
-    </h2>
+<h2 class="welcome-title">
+    Bienvenido de nuevo <span class="welcome-name" id="welcomeName">—</span>
+</h2>
 
-    <!-- MAPA ELIMINADO -->
+<div class="wrapper">
+    <!-- Tarjeta izquierda -->
+    <div class="card-main">
+        <div>
+            <h2>Calidad del aire en tu zona</h2>
 
-    <div class="wrapper">
-        <!-- Tarjeta izquierda -->
-        <div class="card-main">
-            <div>
-                <h2>Calidad del aire en tu zona</h2>
-
-                <div class="score-row">
-                    <span class="score">100</span>
-                    <span class="status">Buena</span>
-                </div>
-
-                <p class="description">
-                    La calidad del aire es satisfactoria y la contaminación del aire presenta poco o ningún riesgo.
-                </p>
+            <div class="score-row">
+                <span class="score" id="airScore">--</span>
+                <span class="status" id="airStatus">--</span>
             </div>
 
-            <div class="bottom-row">
-                <img src="../images/Group 258.png" class="smiley" alt="carita feliz">
-            </div>
+            <p class="description" id="airDesc">--</p>
         </div>
 
-        <!-- Tarjeta derecha -->
-        <div class="card-side">
-            <h3>Nivel Actual</h3>
-            <ul>
-                <li>Gas 1: -</li>
-                <li>Gas 2: -</li>
-                <li>Gas 3: -</li>
-            </ul>
-
-            <h3 class="highlight">Impacto positivo</h3>
-            <p class="small">
-                "Has contribuido con 22 rutas limpias" • Evitaste 0.8 kg de CO₂.
-            </p>
-            <p class="small">
-                "Tienes 35 puntos para canjear en Velobici".
-            </p>
-
-            <h3 class="highlight">Último trayecto</h3>
-            <p class="small">
-                Distancia: 2.8 km<br />
-                Tiempo: 21 min<br />
-                Calidad del aire promedio: Buena
-            </p>
+        <div class="bottom-row">
+            <img id="airSmiley" src="../images/smiley-green.png" class="smiley" alt="estado aire">
         </div>
     </div>
 
-    <!-- wuran-->
-    <section class="pollution-card">
-        <div class="pollution-grid">
+    <!-- Tarjeta derecha -->
+    <div class="card-side">
+        <h3>Nivel Actual</h3>
+        <ul id="gasList">
+            <li>Cargando...</li>
+        </ul>
 
-            <div class="pollution-left">
-                <h2>Contaminación en tiempo real</h2>
+        <h3 class="highlight">Impacto positivo</h3>
+        <p class="small" id="impact1">"Has contribuido con 0 rutas limpias" • Evitaste 0 kg de CO₂.</p>
+        <p class="small" id="impact2">"Tienes 0 puntos para canjear en Velobici".</p>
 
-                <div class="pollution-lists">
-                    <ul class="pollution-list">
-                        <li><span class="dot red"></span> Nodo en rojo: C/ Ferraz</li>
-                        <li><span class="dot red"></span> Nodo en rojo: C/ Colón</li>
-                        <li><span class="dot red"></span> Nodo en rojo: C/ Jaume I</li>
-                        <li><span class="dot red"></span> Nodo en rojo: C/ Cid</li>
-                        <li><span class="dot green"></span> Nodo en verde: C/ Riu del Turia</li>
-                    </ul>
+        <h3 class="highlight">Último trayecto</h3>
+        <p class="small" id="lastTrip">
+            Distancia: - km<br />
+            Tiempo: - min<br />
+            Calidad del aire promedio: -
+        </p>
+    </div>
+</div>
 
-                    <ul class="pollution-list">
-                        <li><span class="dot red"></span> Nodo en rojo: C/ La depresió</li>
-                        <li><span class="dot red"></span> Nodo en rojo: C/ Zapadores</li>
-                        <li><span class="dot red"></span> Nodo en rojo: C/ Jávea</li>
-                        <li><span class="dot red"></span> Nodo en rojo: C/ Xàtiva</li>
-                        <li><span class="dot green"></span> Nodo en verde: C/ Paraiso Floral</li>
-                    </ul>
-                </div>
 
-                <a href="#" class="pollution-btn">info del estado</a>
+<section class="pollution-card">
+    <div class="pollution-grid">
+
+        <div class="pollution-left">
+            <h2>Contaminación en tiempo real</h2>
+
+            <div class="pollution-lists">
+                <ul class="pollution-list">
+                    <li><span class="dot red"></span> Nodo en rojo: C/ Ferraz</li>
+                    <li><span class="dot red"></span> Nodo en rojo: C/ Colón</li>
+                    <li><span class="dot red"></span> Nodo en rojo: C/ Jaume I</li>
+                    <li><span class="dot red"></span> Nodo en rojo: C/ Cid</li>
+                    <li><span class="dot green"></span> Nodo en verde: C/ Riu del Turia</li>
+                </ul>
+
+                <ul class="pollution-list">
+                    <li><span class="dot red"></span> Nodo en rojo: C/ La depresió</li>
+                    <li><span class="dot red"></span> Nodo en rojo: C/ Zapadores</li>
+                    <li><span class="dot red"></span> Nodo en rojo: C/ Jávea</li>
+                    <li><span class="dot red"></span> Nodo en rojo: C/ Xàtiva</li>
+                    <li><span class="dot green"></span> Nodo en verde: C/ Paraiso Floral</li>
+                </ul>
             </div>
 
-            <aside class="pollution-right">
-                <div class="pollution-legend">
-                    <div><span class="dot red"></span> Contaminación alta</div>
-                    <div><span class="dot yellow"></span> Contaminación media</div>
-                    <div><span class="dot green"></span> Contaminación baja</div>
-                </div>
-
-                <img class="pollution-img" src="../images/canvas_1.png" alt="persona con móvil">
-            </aside>
+            <a href="#" class="pollution-btn">info del estado</a>
         </div>
-    </section>
 
-    <section class="km-section">
-        <div class="km-container">
+        <aside class="pollution-right">
+            <div class="pollution-legend">
+                <div><span class="dot red"></span> Contaminación alta</div>
+                <div><span class="dot yellow"></span> Contaminación media</div>
+                <div><span class="dot green"></span> Contaminación baja</div>
+            </div>
 
-            <article class="km-card km-card--left">
-                <h2 class="km-title">¿Cuántos Kilometros llevo?</h2>
+            <img class="pollution-img" src="../images/canvas_1.png" alt="persona con móvil">
+        </aside>
+    </div>
+</section>
 
-                <div class="km-row">
-                    <div class="km-text">
-                        <p>Usted lleva: <span class="km-value">100 Km</span></p>
-                        <p>Descuento acumulado: <span class="km-value">20 €</span></p>
-                        <p>Usted pagaría: <span class="km-value">39.99 €</span></p>
+<section class="km-section">
+    <div class="km-container">
 
-                        <button class="btn btn-primary">Ver descuentos</button>
-                    </div>
+        <article class="km-card km-card--left">
+            <h2 class="km-title">¿Cuántos Kilometros llevo?</h2>
 
-                    <img src="../images/cyclist-discount.png"
-                         alt="Ciclista con descuentos"
-                         class="km-img">
-                </div>
-            </article>
+            <div class="km-row">
+                <div class="km-text">
+                    <p>Usted lleva: <span class="km-value">100 Km</span></p>
+                    <p>Descuento acumulado: <span class="km-value">20 €</span></p>
+                    <p>Usted pagaría: <span class="km-value">39.99 €</span></p>
 
-            <article class="km-card km-card--right">
-                <h2 class="km-title">Promoción de patrocinadores</h2>
-
-                <div class="km-sponsors">
-                    <div class="km-sponsor-item">
-                        <div class="km-sponsor-logo">
-                            <img src="../images/logo-mcdonalds.png" alt="McDonald's">
-                        </div>
-                        <p>10% descuento en tu Mcmenú</p>
-                    </div>
-
-                    <div class="km-sponsor-item">
-                        <div class="km-sponsor-logo">
-                            <img src="../images/logo-peluqueria.png" alt="Peluquería Jaime Lozano">
-                        </div>
-                        <p>30% descuento en tu corte + lavado</p>
-                    </div>
+                    <button class="btn btn-primary">Ver descuentos</button>
                 </div>
 
-                <button class="btn btn-primary">Ver + Promociones</button>
-            </article>
+                <img src="../images/cyclist-discount.png" alt="Ciclista con descuentos" class="km-img">
+            </div>
+        </article>
 
-        </div>
-    </section>
+        <article class="km-card km-card--right">
+            <h2 class="km-title">Promoción de patrocinadores</h2>
 
-    <div id="site-footer"></div>
+            <div class="km-sponsors">
+                <div class="km-sponsor-item">
+                    <div class="km-sponsor-logo">
+                        <img src="../images/logo-mcdonalds.png" alt="McDonald's">
+                    </div>
+                    <p>10% descuento en tu Mcmenú</p>
+                </div>
 
-    <script>
-        (function(){
-            const header = document.querySelector('.header');
-            if (!header) return;
+                <div class="km-sponsor-item">
+                    <div class="km-sponsor-logo">
+                        <img src="../images/logo-peluqueria.png" alt="Peluquería Jaime Lozano">
+                    </div>
+                    <p>30% descuento en tu corte + lavado</p>
+                </div>
+            </div>
 
-            const nav = header.querySelector('.nav');
-            const btn = header.querySelector('.menu-toggle');
+            <button class="btn btn-primary">Ver + Promociones</button>
+        </article>
 
-            function closeMenu(){
-                btn.setAttribute('aria-expanded', 'false');
-                nav.classList.remove('is-open');
-            }
+    </div>
+</section>
 
-            function openMenu(){
-                btn.setAttribute('aria-expanded', 'true');
-                nav.classList.add('is-open');
-            }
+<div id="site-footer"></div>
 
-            btn.addEventListener('click', () => {
-                const expanded = btn.getAttribute('aria-expanded') === 'true';
-                expanded ? closeMenu() : openMenu();
-            });
+<script>
+    (function () {
+        const header = document.querySelector('.header');
+        if (!header) return;
 
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 1050) closeMenu();
-            });
-        })();
-    </script>
+        const nav = header.querySelector('.nav');
+        const btn = header.querySelector('.menu-toggle');
+
+        function closeMenu() {
+            btn.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('is-open');
+        }
+
+        function openMenu() {
+            btn.setAttribute('aria-expanded', 'true');
+            nav.classList.add('is-open');
+        }
+
+        btn.addEventListener('click', () => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            expanded ? closeMenu() : openMenu();
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1050) closeMenu();
+        });
+    })();
+</script>
 </body>
-</html>
 
+</html>
