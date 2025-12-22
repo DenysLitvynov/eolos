@@ -225,14 +225,14 @@ def seed_data():
             }
 
             # ------------ COORDENADAS REALES DE PLATJA I GRAU DE GANDIA --------------
-            LAT_MIN = 38.9865
-            LAT_MAX = 39.0035
-            LON_MIN = -0.1735
-            LON_MAX = -0.1485
+            LAT_MIN = 39.44 
+            LAT_MAX = 39.50
+            LON_MIN = -0.42
+            LON_MAX = -0.34
             # --------------------------------------------------------------------------
 
             medidas = []
-            TOTAL = 50000
+            TOTAL = 20000
 
             for _ in range(TOTAL):
                 placa = random.choice(placas)
