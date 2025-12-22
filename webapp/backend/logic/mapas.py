@@ -123,18 +123,9 @@ class LogicaMapas:
     def obtener_mapa_de_tipo_de_dia_de_destino(self, db: Session, tipo: str, fecha: datetime, esquina_inf_izq: PosicionGPS, esquina_sup_der: PosicionGPS) -> Dict:
         """
         Obtiene el mapa para un tipo y día, dentro de bounds. Para cada hora, recolecta todas las medidas hasta esa hora inclusive, y toma la más reciente por ubicación.
-
-        Args:
-            db (Session): Sesión de base de datos.
-            tipo (str): Tipo de medida o "general".
-            fecha (datetime): Fecha para obtener los datos.
-            esquina_inf_izq (PosicionGPS): Esquina inferior izquierda del bounding box.
-            esquina_sup_der (PosicionGPS): Esquina superior derecha del bounding box.
-
-        Returns:
-            Dict: Datos del mapa organizados por hora.
         """
         response = {"data": {}}
+        
         if tipo == "general":
             # Consulta calidad_general en lugar de medidas
             query = db.query(CalidadGeneral).filter(
@@ -147,7 +138,7 @@ class LogicaMapas:
             )
             results = query.all()
             
-            # Si no hay resultados, calculamos bajo demanda y volvemos a consultar
+            # Si no hay resultados, calculamos bajo demanda
             if not results:
                 print(f"No hay datos de calidad general para {fecha.date()}. Calculando bajo demanda...")
                 unified = self.unificar_medidas_de_todos_tipos_de_dia(db, fecha, esquina_inf_izq, esquina_sup_der)
@@ -162,26 +153,55 @@ class LogicaMapas:
                     "lat": r.lat,
                     "lng": r.lon,
                     "value": r.valor,
-                    "color": r.color  # Usa el color precalculado
+                    "color": r.color
                 })
             return response
         else:
-            # Código existente para gases específicos (mantén lo que ya tienes aquí, solo añade el if para general)
-            medidas = self.obtener_medidas_tipo_fecha_sitio(db, TipoMedidaEnum[tipo], fecha, esquina_inf_izq, esquina_sup_der, False)
-            interpoladas = self.obtener_medidas_tipo_fecha_sitio(db, TipoMedidaEnum[tipo], fecha, esquina_inf_izq, esquina_sup_der, True)
-            all_medidas = medidas + interpoladas
+            # PARA GASES ESPECÍFICOS: asegurar que hay interpolaciones
+            tipo_enum = TipoMedidaEnum[tipo]
+            
+            # Verificar si hay suficientes medidas para este día/área
+            medidas_reales = self.obtener_medidas_tipo_fecha_sitio(db, tipo_enum, fecha, esquina_inf_izq, esquina_sup_der, False)
+            medidas_interpoladas = self.obtener_medidas_tipo_fecha_sitio(db, tipo_enum, fecha, esquina_inf_izq, esquina_sup_der, True)
+            
+            # Si no hay suficientes datos interpolados, calcularlos bajo demanda
+            if len(medidas_interpoladas) < 100 and len(medidas_reales) > 10:
+                print(f"Calculando interpolaciones para {tipo} en {fecha.date()} bajo demanda...")
+                self.interpolar_para_tipo_fecha(db, tipo_enum, fecha, esquina_inf_izq, esquina_sup_der)
+                # Re-obtener interpoladas después de calcular
+                medidas_interpoladas = self.obtener_medidas_tipo_fecha_sitio(db, tipo_enum, fecha, esquina_inf_izq, esquina_sup_der, True)
+            
+            all_medidas = medidas_reales + medidas_interpoladas
+            
+            # Agrupar por ubicación y hora, tomando la más reciente
+            medidas_por_hora = {}
             for m in all_medidas:
                 hour = m.fecha_hora.hour
+                key = f"{hour}_{m.posicion.lat:.6f}_{m.posicion.lon:.6f}"
+                
+                # Si ya existe, mantener la más reciente
+                if key in medidas_por_hora:
+                    if m.fecha_hora > medidas_por_hora[key].fecha_hora:
+                        medidas_por_hora[key] = m
+                else:
+                    medidas_por_hora[key] = m
+            
+            # Construir respuesta
+            for key, m in medidas_por_hora.items():
+                hour = int(key.split('_')[0])
                 if hour not in response["data"]:
                     response["data"][hour] = []
-                aqi = self.get_aqi(TipoMedidaEnum[tipo], m.valor)
+                
+                aqi = self.get_aqi(tipo_enum, m.valor)
                 color = self.get_color_from_aqi(aqi)
+                
                 response["data"][hour].append({
                     "lat": m.posicion.lat,
                     "lng": m.posicion.lon,
                     "value": m.valor,
                     "color": color
                 })
+            
             return response
 
     # ---------------------------------------------------------
