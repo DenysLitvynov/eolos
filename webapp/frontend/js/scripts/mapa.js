@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isAdminPage && dateFilter) dateFilter.value = today;
 
     // ==========================================================
-    // FUNCIÓN IDW - EXACTAMENTE COMO EN EL EJEMPLO
+    // FUNCIÓN IDW – CUADRÍCULA CONTINUA (sin bordes visibles)
     // ==========================================================
     function dibujarIDW(layer, params) {
         const canvas = params.canvas;
@@ -154,21 +154,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (!puntosActuales.length) return;
 
-        const zoom = map.getZoom();
+        // Parámetros visuales
+        const RADIO = 0.015;
+        const GRID = 90;        // ↑ más celdas → menos efecto mosaico
+        const EXP = 2;
+        const ALPHA = 0.2;      // ligera subida para fusionar celdas
+        const RATIO = 1.15;     // solape entre cuadraditos
 
-        // Parámetros COPIADOS DEL EJEMPLO QUE FUNCIONA
-        const RADIO = 0.015; // Radio de influencia en grados (FIJO)
-        const GRID = 60;     // Resolución del grid (FIJO)
-        
         const stepX = canvas.width / GRID;
         const stepY = canvas.height / GRID;
-        const EXP = 2; // Inverse Distance Weighting
-        const ALPHA = 0.15; // Opacidad
-        const RATIO = 1.3;  // Tamaño relativo
 
-        // Iterar sobre cada celda del grid
+        ctx.imageSmoothingEnabled = true;
+        ctx.globalCompositeOperation = 'source-over';
+
         for (let ix = 0; ix < GRID; ix++) {
             for (let iy = 0; iy < GRID; iy++) {
+
                 const px = ix * stepX + stepX / 2;
                 const py = iy * stepY + stepY / 2;
 
@@ -178,15 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let sumW = 0, sumR = 0, sumG = 0, sumB = 0;
 
-                // Calcular influencia de todos los puntos cercanos
+                // IDW
                 for (let p of puntosActuales) {
                     const dx = lng - p.lng;
                     const dy = lat - p.lat;
-                    const d = Math.sqrt(dx*dx + dy*dy);
+                    const d = Math.sqrt(dx * dx + dy * dy);
 
                     if (d > RADIO) continue;
 
-                    const w = d === 0 ? 1 : 1 / Math.pow(d, EXP);
+                    const w = (d === 0) ? 1 : 1 / Math.pow(d, EXP);
 
                     sumW += w;
                     sumR += w * p.r;
@@ -196,16 +197,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (sumW === 0) continue;
 
-                // Calcular color interpolado
                 const r = sumR / sumW;
                 const g = sumG / sumW;
                 const b = sumB / sumW;
 
-                // Dibujar área coloreada (NO un punto)
                 ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${ALPHA})`;
+
+                // ⚠️ solape real para eliminar costuras
                 ctx.fillRect(
-                    ix * stepX,
-                    iy * stepY,
+                    ix * stepX - stepX * 0.075,
+                    iy * stepY - stepY * 0.075,
                     stepX * RATIO,
                     stepY * RATIO
                 );
@@ -213,6 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    
     async function updateMapFilters() {
         const selectedGas = gasSelect.value;
         const selectedHour = parseInt(hourSlider.value, 10);
