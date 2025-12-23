@@ -188,26 +188,115 @@ def seed_data():
 
         # ---------------------------------------------------------
 
-        # 7. Trayecto de ejemplo (usar una de las bicicletas creadas)
-        ejemplo_bici = random.choice(bicicletas)
-        trayecto = Trayecto(
-            trayecto_id=str(uuid.uuid4()),
-            usuario_id=usuarios[0].usuario_id,
-            bicicleta_id=ejemplo_bici.bicicleta_id,
-            fecha_inicio=datetime.now(timezone.utc) - timedelta(minutes=30),
-            fecha_fin=None,
-            origen_estacion_id=ejemplo_bici.estacion_id,
-            distancia_total=4.2
-        )
-        db.add(trayecto)
-        db.commit()
+        # 7. Trayectos REALISTAS - múltiples por usuario con distribución realista
+        def generar_trayectos_realistas(db, usuarios, bicicletas, estaciones):
+            """
+            Genera trayectos realistas:
+            - Distribución realista: algunos usuarios muchos trayectos, otros pocos
+            - 90% completados, 10% en progreso
+            - Distancias entre 0.5km - 30km
+            - Duraciones entre 5 - 120 minutos
+            """
+            import random
+            
+            now = datetime.now(timezone.utc)
+            TIEMPO_MEDICIONES_HORAS = 48  # Las mediciones existen en las últimas 48h
+            
+            # Distancia Haversine (aproximada)
+            def haversine_km(lat1, lon1, lat2, lon2):
+                from math import radians, cos, sin, asin, sqrt
+                lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+                dlon = lon2 - lon1
+                dlat = lat2 - lat1
+                a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+                c = 2 * asin(sqrt(a))
+                r = 6371  # Radio Tierra en km
+                return c * r
+            
+            trayectos = []
+            usuarios_id = [u.usuario_id for u in usuarios]
+            bicicletas_dict = {b.bicicleta_id: b for b in bicicletas}
+            
+            # Distribución realista sin numpy: 40% de usuarios tienen trayectos
+            num_usuarios_activos = int(len(usuarios) * 0.4)
+            usuarios_activos = random.sample(usuarios_id, num_usuarios_activos)
+            
+            # Distribuir ~5000 trayectos de forma realista:
+            # 10% de usuarios activos: 8-15 trayectos (power users)
+            # 20% de usuarios activos: 4-7 trayectos (usuarios regulares)
+            # 70% de usuarios activos: 1-3 trayectos (usuarios ocasionales)
+            
+            trayectos_count = 0
+            
+            for idx, usuario_id in enumerate(usuarios_activos):
+                rand = random.random()
+                if rand < 0.10:  # Power users (10%)
+                    num_trayectos_usuario = random.randint(8, 15)
+                elif rand < 0.30:  # Regular users (20%)
+                    num_trayectos_usuario = random.randint(4, 7)
+                else:  # Occasional users (70%)
+                    num_trayectos_usuario = random.randint(1, 3)
+                
+                for _ in range(num_trayectos_usuario):
+                    # Bicicleta aleatoria
+                    bici_id = random.choice(list(bicicletas_dict.keys()))
+                    bici = bicicletas_dict[bici_id]
+                    
+                    # Estación origen y destino
+                    estacion_origen = random.choice(estaciones)
+                    estacion_destino = random.choice(estaciones)
+                    
+                    # Fechas en el rango donde existen mediciones (últimas 48h)
+                    fecha_inicio = now - timedelta(hours=random.uniform(0.5, TIEMPO_MEDICIONES_HORAS))
+                    
+                    # 90% completados, 10% en progreso
+                    if random.random() < 0.9:
+                        duracion_minutos = random.uniform(5, 120)  # 5 a 120 minutos
+                        fecha_fin = fecha_inicio + timedelta(minutes=duracion_minutos)
+                    else:
+                        fecha_fin = None
+                    
+                    # Distancia realista basada en coordenadas o aleatoria
+                    if random.random() < 0.7:  # 70% usar Haversine
+                        distancia_km = haversine_km(
+                            estacion_origen.lat, estacion_origen.lon,
+                            estacion_destino.lat, estacion_destino.lon
+                        )
+                        # Agregar variación de ruta (no siempre en línea recta)
+                        distancia_km *= random.uniform(1.2, 1.8)
+                    else:  # 30% aleatorio realista
+                        distancia_km = random.uniform(0.5, 30)
+                    
+                    distancia_metros = distancia_km * 1000.0  # Convertir a metros con double precision
+                    
+                    trayecto = Trayecto(
+                        trayecto_id=str(uuid.uuid4()),
+                        usuario_id=usuario_id,
+                        bicicleta_id=bici_id,
+                        fecha_inicio=fecha_inicio,
+                        fecha_fin=fecha_fin,
+                        origen_estacion_id=estacion_origen.estacion_id,
+                        destino_estacion_id=estacion_destino.estacion_id,
+                        distancia_total=distancia_metros
+                    )
+                    trayectos.append(trayecto)
+                    trayectos_count += 1
+            
+            db.add_all(trayectos)
+            db.commit()
+            
+            return trayectos
+        
+        # Generar trayectos
+        trayectos_generados = generar_trayectos_realistas(db, usuarios, bicicletas, estaciones)
+        print(f"Trayectos generados: {len(trayectos_generados)}")
 
         # ---------------------------------------------------------
 
         # ---------------------------------------------------------
-        # 8. Medidas REALISTAS – adaptadas a Platja i Grau de Gandia
+        # 8. Medidas REALISTAS – adaptadas a Platja i Grau de Gandia (asociadas a trayectos)
 
-        def generar_medidas_realistas(db, placas):
+        def generar_medidas_realistas(db, placas, trayectos):
             import uuid
             from datetime import datetime, timezone, timedelta
             import random
@@ -245,12 +334,23 @@ def seed_data():
                 tipo = random.choice(list(RANGOS.keys()))
                 vmin, vmax = RANGOS[tipo]
                 valor = random.uniform(vmin, vmax)
+                
+                # Asociar a un trayecto si existe uno con fechas compatibles
+                trayecto_id = None
+                if trayectos:
+                    # Buscar trayectos cuyos rangos de fecha incluyan esta medida
+                    trayectos_candidatos = [
+                        t for t in trayectos
+                        if t.fecha_inicio <= fecha and (t.fecha_fin is None or t.fecha_fin >= fecha)
+                    ]
+                    if trayectos_candidatos:
+                        trayecto_id = random.choice(trayectos_candidatos).trayecto_id
 
                 medidas.append(
                     Medida(
                         lectura_id=str(uuid.uuid4()),
                         placa_id=placa.placa_id,
-                        trayecto_id=None,
+                        trayecto_id=trayecto_id,
                         fecha_hora=fecha,
                         tipo=tipo,
                         valor=valor,
@@ -262,9 +362,10 @@ def seed_data():
             db.add_all(medidas)
             db.commit()
 
-        # Ejecutar tras crear las placas
+        # Ejecutar tras crear placas y trayectos
         placas_all = db.query(PlacaSensores).all()
-        generar_medidas_realistas(db, placas_all)
+        trayectos_all = db.query(Trayecto).all()
+        generar_medidas_realistas(db, placas_all, trayectos_all)
 
         print("Medidas REALISTAS (Gandia) generadas correctamente.")
 
@@ -408,7 +509,7 @@ def seed_data():
         db.commit()
         
 
-        print("Seed completado: 2000 carnets DNI válidos + 2000 usuarios + estaciones + 2000 bicis + placas + trayecto + medidas + incidencia")
+        print("Seed completado: 2000 carnets DNI válidos + 2000 usuarios + 10 estaciones + 2000 bicis + placas + ~5000 trayectos + 20000 medidas + incidencias + 10 recompensas")
         
         
 
