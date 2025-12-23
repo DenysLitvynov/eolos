@@ -1,6 +1,7 @@
 # Autor: Denys Litvynov
 # Fecha : 08/12/2025
 # Descripción : Docker compose 
+
 services:
   db:
     image: postgres:16
@@ -17,6 +18,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
 
   backend:
     build:
@@ -26,7 +28,7 @@ services:
       db:
         condition: service_healthy
     env_file:
-      - .env                     # ← carga todo el .env automáticamente
+      - .env
     ports:
       - "8000:8000"
     volumes:
