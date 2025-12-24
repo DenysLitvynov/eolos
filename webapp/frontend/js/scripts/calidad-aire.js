@@ -38,6 +38,7 @@ const numberEl = document.getElementById("aqi-number");
 const textEl = document.getElementById("aqi-text");
 const descEl = document.getElementById("aqi-description");
 const iconEl = document.getElementById("aqi-icon");
+const maximoEl = document.getElementById("aqi-maximo");
 const h2Section = document.querySelector('.co2-section h2');
 
 const logicaAire = new CalidadAireFake();
@@ -133,6 +134,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         actualizarUI(trayecto.aqi_promedio);
         actualizarTituloConFechas(trayecto);
         
+        // Mostrar AQI máximo
+        if (maximoEl && trayecto.aqi_maximo) {
+            const colorMax = getColorAQI(trayecto.aqi_maximo);
+            maximoEl.innerHTML = `Valor máximo durante el trayecto: <span style="color: ${colorMax}; font-weight: bold;">${trayecto.aqi_maximo}</span>`;
+        }
+        
+        // Cargar lista de últimos 10 trayectos para el selector
+        await cargarTrayectosDisponibles(token);
+        
         // Cargar gráfico con mediciones del trayecto
         console.log(trayecto);
         
@@ -146,12 +156,75 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Variable para el gráfico
 let co2Chart = null;
+let trayectosDisponibles = [];
+let trayectoActual = null;
 
 // Función para formatear hora desde fecha ISO
 function formatearHora(fechaISO) {
     const fecha = new Date(fechaISO);
     return fecha.getHours().toString().padStart(2, '0') + ':' + 
            fecha.getMinutes().toString().padStart(2, '0');
+}
+
+// Función para formatear fecha corta (DD/MM HH:MM)
+function formatearFechaCorta(fechaISO) {
+    const fecha = new Date(fechaISO);
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const horas = fecha.getHours().toString().padStart(2, '0');
+    const minutos = fecha.getMinutes().toString().padStart(2, '0');
+    return `${dia}/${mes} ${horas}:${minutos}`;
+}
+
+// Función para cargar trayectos disponibles y llenar el selector
+async function cargarTrayectosDisponibles(token) {
+    try {
+        const trayectos = await logicaAire.obtenerUltimosTrayectos(token);
+        trayectosDisponibles = trayectos;
+        
+        const selector = document.getElementById('trayecto-selector');
+        if (!selector) return;
+        
+        // Limpiar opciones anteriores
+        selector.innerHTML = '';
+        
+        // Agregar opciones
+        trayectos.forEach((t, idx) => {
+            const fechaInicio = formatearFechaCorta(t.fecha_inicio);
+            const fechaFin = formatearFechaCorta(t.fecha_fin);
+            const opcionTexto = `${fechaInicio} - ${fechaFin.split(' ')[1]}`;
+            
+            const option = document.createElement('option');
+            option.value = idx;
+            option.textContent = opcionTexto;
+            selector.appendChild(option);
+        });
+        
+        // Seleccionar el primer trayecto (más reciente) por defecto
+        selector.value = '0';
+        trayectoActual = trayectosDisponibles[0];
+        
+        // Agregar listener para cambios
+        selector.addEventListener('change', (e) => {
+            const idx = parseInt(e.target.value);
+            trayectoActual = trayectosDisponibles[idx];
+            actualizarVistaGrafico(trayectoActual);
+        });
+        
+    } catch (error) {
+        console.error('Error cargando trayectos disponibles:', error);
+    }
+}
+
+// Función para actualizar el gráfico y resumen cuando cambia el trayecto
+async function actualizarVistaGrafico(trayecto) {
+    if (!trayecto) return;
+    
+    // Actualizar título con fechas del nuevo trayecto
+    actualizarTituloConFechas(trayecto);
+    
+    // Cargar gráfico
+    await cargarGraficoTrayecto(trayecto);
 }
 
 // Función para cargar gráfico del trayecto

@@ -29,6 +29,7 @@
                 <h2>Índice de Calidad del Aire (AQI)</h2>
                 <p class="aqi-value"><span id="aqi-number">--</span> <span id="aqi-text"></span></p>
                 <p id="aqi-description"></p>
+                <p id="aqi-maximo" style="font-size: 0.95em; margin-top: 0.8rem; font-weight: 600;"></p>
                 <p id="aqi-dates" style="font-size: 0.9em; color: #999; margin-top: 1rem;"></p>
             </div>
 
@@ -39,6 +40,14 @@
 
         <section class="co2-section">
             <h2>Niveles del Aire en las últimas 24 horas</h2>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <label for="trayecto-selector" style="font-weight: 600; margin-right: 0.5rem;">Selecciona un trayecto:</label>
+                <select id="trayecto-selector" style="padding: 0.5rem; border-radius: 4px; border: 1px solid #ccc; font-size: 1rem;">
+                    <option value="">Cargando trayectos...</option>
+                </select>
+            </div>
+            
             <div class="chart-container">
                 <canvas id="co2Chart"></canvas>
             </div>

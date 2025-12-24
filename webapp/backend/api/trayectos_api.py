@@ -292,6 +292,7 @@ class UltimoTrayectoResponse(BaseModel):
     origen_estacion_id: str
     destino_estacion_id: str
     aqi_promedio: int
+    aqi_maximo: int
     mediciones_count: int
 
 @router.get("/usuario/ultimo", response_model=UltimoTrayectoResponse)
@@ -328,9 +329,10 @@ def obtener_ultimo_trayecto(
             Medida.trayecto_id == trayecto.trayecto_id
         ).all()
         
-        # Calcular AQI promedio (usando valores directamente como AQI)
+        # Calcular AQI promedio y máximo (usando valores directamente como AQI)
         aqi_values = [m.valor for m in mediciones]
         aqi_promedio = int(sum(aqi_values) / len(aqi_values)) if aqi_values else 0
+        aqi_maximo = int(max(aqi_values)) if aqi_values else 0
         
         return UltimoTrayectoResponse(
             trayecto_id=trayecto.trayecto_id,
@@ -340,6 +342,7 @@ def obtener_ultimo_trayecto(
             origen_estacion_id=str(trayecto.origen_estacion_id),
             destino_estacion_id=str(trayecto.destino_estacion_id),
             aqi_promedio=aqi_promedio,
+            aqi_maximo=aqi_maximo,
             mediciones_count=len(mediciones)
         )
     except ValueError as e:
@@ -398,6 +401,79 @@ def obtener_mediciones_trayecto(
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error obteniendo mediciones: {str(e)}")
+
+# ---------------------------------------------------------
+# Ruta: usuario/ultimos - Obtener últimos 10 trayectos completados del usuario autenticado
+# ---------------------------------------------------------
+
+class TrayectoListaResponse(BaseModel):
+    trayecto_id: str
+    fecha_inicio: str
+    fecha_fin: str
+    aqi_promedio: int
+    aqi_maximo: int
+    mediciones_count: int
+    distancia_total: float
+    origen_estacion_id: str
+    destino_estacion_id: str
+
+@router.get("/usuario/ultimos", response_model=list[TrayectoListaResponse])
+def obtener_ultimos_trayectos(
+    db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user)
+):
+    """
+    Obtiene los últimos 10 trayectos completados del usuario autenticado.
+    Ordenados por fecha_fin descendente (más recientes primero).
+    
+    Args:
+        db (Session): Sesión de base de datos.
+        current_user (Usuario): Usuario autenticado del token.
+    
+    Returns:
+        list[TrayectoListaResponse]: Lista de últimos 10 trayectos.
+    """
+    try:
+        from ..db.models import Trayecto, Medida
+        
+        # Obtener últimos 10 trayectos completados del usuario
+        trayectos = db.query(Trayecto).filter(
+            Trayecto.usuario_id == str(current_user.usuario_id),
+            Trayecto.fecha_fin.isnot(None)  # Solo completados
+        ).order_by(Trayecto.fecha_fin.desc()).limit(10).all()
+        
+        if not trayectos:
+            raise ValueError(f"No hay trayectos completados para el usuario {current_user.usuario_id}")
+        
+        resultado = []
+        for trayecto in trayectos:
+            # Obtener mediciones para cada trayecto
+            mediciones = db.query(Medida).filter(
+                Medida.trayecto_id == trayecto.trayecto_id
+            ).all()
+            
+            # Calcular AQI promedio y máximo
+            aqi_values = [m.valor for m in mediciones]
+            aqi_promedio = int(sum(aqi_values) / len(aqi_values)) if aqi_values else 0
+            aqi_maximo = int(max(aqi_values)) if aqi_values else 0
+            
+            resultado.append(TrayectoListaResponse(
+                trayecto_id=trayecto.trayecto_id,
+                fecha_inicio=trayecto.fecha_inicio.isoformat(),
+                fecha_fin=trayecto.fecha_fin.isoformat(),
+                aqi_promedio=aqi_promedio,
+                aqi_maximo=aqi_maximo,
+                mediciones_count=len(mediciones),
+                distancia_total=float(trayecto.distancia_total),
+                origen_estacion_id=str(trayecto.origen_estacion_id),
+                destino_estacion_id=str(trayecto.destino_estacion_id)
+            ))
+        
+        return resultado
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error obteniendo trayectos: {str(e)}")
 
 # ---------------------------------------------------------
 

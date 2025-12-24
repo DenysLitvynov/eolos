@@ -55,6 +55,21 @@ export class CalidadAireFake {
         return await this.peticionario.hacerPeticionRest('GET', url, null, headers);
     }
 
+    // ----------------------------------------------------------
+    // Método que obtiene los últimos 10 trayectos completados del usuario
+    //
+    // token : string (Bearer token)
+    // -> obtenerUltimos() -> Promise<json[]>
+    // ----------------------------------------------------------
+    async obtenerUltimosTrayectos(token) {
+        const url = `/api/v1/trayectos/usuario/ultimos`;
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+        return await this.peticionario.hacerPeticionRest('GET', url, null, headers);
+    }
+
 }
 
 // ----------------------------------------------------------
