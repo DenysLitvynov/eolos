@@ -300,7 +300,7 @@ def seed_data():
             import uuid
             from datetime import datetime, timezone, timedelta
             import random
-            from db.models import Medida, TipoMedidaEnum
+            from db.models import Medida, TipoMedidaEnum, Trayecto
 
             now = datetime.now(timezone.utc)
 
@@ -320,6 +320,9 @@ def seed_data():
             LON_MAX = -0.34
             # --------------------------------------------------------------------------
 
+            # Recargar trayectos desde la BD (los objetos en memoria pueden estar desacoplados)
+            trayectos_bd = db.query(Trayecto).all()
+
             medidas = []
             TOTAL = 20000
 
@@ -337,11 +340,13 @@ def seed_data():
                 
                 # Asociar a un trayecto si existe uno con fechas compatibles
                 trayecto_id = None
-                if trayectos:
+                if trayectos_bd:
                     # Buscar trayectos cuyos rangos de fecha incluyan esta medida
+                    # Condición: fecha_inicio <= fecha <= fecha_fin (para completados)
+                    # O: fecha_inicio <= fecha (para en progreso, sin fecha_fin)
                     trayectos_candidatos = [
-                        t for t in trayectos
-                        if t.fecha_inicio <= fecha and (t.fecha_fin is None or t.fecha_fin >= fecha)
+                        t for t in trayectos_bd
+                        if t.fecha_inicio <= fecha and (t.fecha_fin is None or fecha <= t.fecha_fin)
                     ]
                     if trayectos_candidatos:
                         trayecto_id = random.choice(trayectos_candidatos).trayecto_id

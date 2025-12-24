@@ -14,13 +14,15 @@ export class PeticionarioREST {
     // method : string
     // url    : string
     // body   : json | null
+    // headers : object | null (headers adicionales)
     // -> hacerPeticionRest() -> Promise<json>
     // ----------------------------------------------------------
-    async hacerPeticionRest(method, url, body = null) {
+    async hacerPeticionRest(method, url, body = null, headers = null) {
         const options = {
             method: method,
             headers: {
-                'Content-Type' : 'application/json'
+                'Content-Type' : 'application/json',
+                ...(headers || {})
             }
         };
         if (body) {

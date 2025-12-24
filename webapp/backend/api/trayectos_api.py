@@ -5,16 +5,59 @@ Descripción: Rutas API para trayectos.
 """
 
 # ---------------------------------------------------------
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Header
 from pydantic import BaseModel
 from datetime import datetime
 from sqlalchemy.orm import Session
+import os
+import jwt
 # ---------------------------------------------------------
 from ..db.database import get_db
+from ..db.models import Usuario
 from ..logic.trayectos import LogicaTrayectos
 from ..pojos.posicion_gps import PosicionGPS
 from ..pojos.medida import Medida as DTOMedida
 from ..db.models import TipoMedidaEnum, EstadoBicicleta
+# ---------------------------------------------------------
+
+# JWT config
+JWT_SECRET = os.getenv("JWT_SECRET")
+JWT_ALGORITHM = "HS256"
+
+if not JWT_SECRET:
+    raise RuntimeError("Falta JWT_SECRET en las variables de entorno")
+
+# ---------------------------------------------------------
+# Helper de autenticación (igual a perfil_api.py)
+# ---------------------------------------------------------
+
+def get_current_user(
+    authorization: str | None = Header(default=None),
+    db: Session = Depends(get_db),
+) -> Usuario:
+
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Falta token Bearer")
+
+    token = authorization.split(" ", 1)[1]
+
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expirado")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Token inválido")
+
+    usuario_id = payload.get("sub")
+    if not usuario_id:
+        raise HTTPException(status_code=401, detail="Token inválido (sin sub)")
+
+    usuario = db.query(Usuario).filter(Usuario.usuario_id == usuario_id).first()
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+
+    return usuario
+
 # ---------------------------------------------------------
 
 router = APIRouter(prefix="/trayectos", tags=["trayectos"])
@@ -231,5 +274,130 @@ def comprobar_estacion_bici(data: ComprobarEstacionRequest, db: Session = Depend
         return {"estacion_id": estacion_id}
     except RuntimeError as e:
         raise HTTPException(500, str(e))
+
+# ---------------------------------------------------------
+# Ruta: usuario/ultimo - Obtener último trayecto completado del usuario autenticado
+# ---------------------------------------------------------
+
+class TrayectoMedidaResponse(BaseModel):
+    aqi: int
+    fecha_hora: str
+    valor: float
+
+class UltimoTrayectoResponse(BaseModel):
+    trayecto_id: str
+    fecha_inicio: str
+    fecha_fin: str | None
+    distancia_total: float
+    origen_estacion_id: str
+    destino_estacion_id: str
+    aqi_promedio: int
+    mediciones_count: int
+
+@router.get("/usuario/ultimo", response_model=UltimoTrayectoResponse)
+def obtener_ultimo_trayecto(
+    db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user)
+):
+    """
+    Obtiene el último trayecto completado del usuario autenticado.
+    Solo retorna trayectos con fecha_fin (completados).
+    
+    Args:
+        db (Session): Sesión de base de datos.
+        current_user (Usuario): Usuario autenticado del token.
+    
+    Returns:
+        UltimoTrayectoResponse: Datos del último trayecto con AQI promediado.
+    """
+    try:
+        from ..db.models import Trayecto, Medida
+        from ..logic.calidad_aire import LogicaCalidadAire
+        
+        # Obtener el último trayecto completado del usuario
+        trayecto = db.query(Trayecto).filter(
+            Trayecto.usuario_id == str(current_user.usuario_id),
+            Trayecto.fecha_fin.isnot(None)  # Solo completados
+        ).order_by(Trayecto.fecha_fin.desc()).first()
+        
+        if not trayecto:
+            raise ValueError(f"No hay trayectos completados para el usuario {current_user.usuario_id}")
+        
+        # Obtener todas las mediciones asociadas al trayecto
+        mediciones = db.query(Medida).filter(
+            Medida.trayecto_id == trayecto.trayecto_id
+        ).all()
+        
+        # Calcular AQI promedio (usando valores directamente como AQI)
+        aqi_values = [m.valor for m in mediciones]
+        aqi_promedio = int(sum(aqi_values) / len(aqi_values)) if aqi_values else 0
+        
+        return UltimoTrayectoResponse(
+            trayecto_id=trayecto.trayecto_id,
+            fecha_inicio=trayecto.fecha_inicio.isoformat(),
+            fecha_fin=trayecto.fecha_fin.isoformat() if trayecto.fecha_fin else None,
+            distancia_total=float(trayecto.distancia_total),
+            origen_estacion_id=str(trayecto.origen_estacion_id),
+            destino_estacion_id=str(trayecto.destino_estacion_id),
+            aqi_promedio=aqi_promedio,
+            mediciones_count=len(mediciones)
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error obteniendo trayecto: {str(e)}")
+
+# ---------------------------------------------------------
+# Ruta: trayectos/{trayecto_id}/mediciones - Obtener mediciones PM2.5 de un trayecto
+# ---------------------------------------------------------
+
+class MedicionPM25Response(BaseModel):
+    valor: float
+    fecha_hora: str
+    aqi: int
+
+@router.get("/{trayecto_id}/mediciones", response_model=list[MedicionPM25Response])
+def obtener_mediciones_trayecto(
+    trayecto_id: str,
+    db: Session = Depends(get_db)
+):
+    """
+    Obtiene todas las mediciones PM2.5 asociadas a un trayecto específico.
+    
+    Args:
+        trayecto_id (str): ID del trayecto.
+        db (Session): Sesión de base de datos.
+    
+    Returns:
+        list[MedicionPM25Response]: Lista de mediciones PM2.5 ordenadas por fecha.
+    """
+    try:
+        from ..db.models import Medida, TipoMedidaEnum
+        from ..logic.calidad_aire import LogicaCalidadAire
+        
+        # Obtener todas las mediciones para el trayecto
+        mediciones = db.query(Medida).filter(
+            Medida.trayecto_id == trayecto_id
+        ).order_by(Medida.fecha_hora.asc()).all()
+        
+        if not mediciones:
+            raise ValueError(f"No hay mediciones para el trayecto {trayecto_id}")
+        
+        # Usar valores directamente como AQI (sin conversión)
+        resultado = [
+            MedicionPM25Response(
+                valor=m.valor,
+                fecha_hora=m.fecha_hora.isoformat(),
+                aqi=int(m.valor)  # Usar el valor directamente como AQI
+            )
+            for m in mediciones
+        ]
+        
+        return resultado
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error obteniendo mediciones: {str(e)}")
+
 # ---------------------------------------------------------
 
