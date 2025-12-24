@@ -1,8 +1,9 @@
-export function cargarEstacionesBicicletas() {
-    const apiUrl = "http://localhost:8000/api/v1/bicicletas/estaciones";
+import { BicicletasFake } from '../logica_fake/bicicletas_fake.js';
 
-    return fetch(apiUrl)
-        .then(r => r.json())
+export function cargarEstacionesBicicletas() {
+    const logica = new BicicletasFake();
+
+    return logica.obtenerEstaciones()
         .then(estaciones => {
             const layerGroup = L.layerGroup();
             estaciones.forEach(e => {
