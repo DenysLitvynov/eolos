@@ -56,6 +56,7 @@ p {
     align-items: center;
     justify-content: space-between;
     border-radius: var(--radius);
+    position: relative;
 }
 
 .logo img {
@@ -93,11 +94,6 @@ p {
     border: 1.5px solid var(--c-white);
 }
 
-/* ====== Header: preparación para menú móvil ====== */
-.header {
-    position: relative;
-}
-
 /* Botón hamburguesa (oculto en escritorio) */
 .menu-toggle {
     display: none;
@@ -129,7 +125,7 @@ p {
 }
 
 /* ====== Breakpoint móvil ====== */
-@media (max-width: 1050px) {
+@media (max-width: 1380px) {
 
     /* botón visible; nav se convierte en panel desplegable */
     .menu-toggle {
@@ -140,6 +136,8 @@ p {
     .header {
         padding: 10px clamp(10px, 3vw, 16px);
         gap: 8px;
+        justify-content: space-between;
+        margin: 5px;
     }
 
     /* Nav como menú desplegable */
@@ -182,11 +180,6 @@ p {
         max-height: 80vh;
         opacity: 1;
         pointer-events: auto;
-    }
-
-    /* La nav horizontal ya no se usa en móvil */
-    .header {
-        justify-content: space-between;
     }
 }
 

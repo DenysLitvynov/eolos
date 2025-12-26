@@ -10,6 +10,13 @@
 }
 
 /* Bloque de info */
+.contact-info {
+    background: #E9EEF0;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
 .contact-info h1 {
     font-size: 32px;
     font-weight: 600;
@@ -38,6 +45,7 @@
 
 /* Formulario */
 .contact-form-section h2 {
+    color: #0D47A1;
     font-size: 26px;
     font-weight: 600;
     margin-bottom: 15px;
