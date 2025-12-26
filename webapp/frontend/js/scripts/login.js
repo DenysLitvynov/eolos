@@ -162,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Redirigiendo a admin_mapas.html (tecnico_mapas)');
 
             } else if (roles.includes('usuario')) {
-                redirectUrl = '/pages/landing-registrado.html';
-                console.log('Redirigiendo a index.html (usuario)');
+                redirectUrl = '/pages/calidad-aire.html';
+                console.log('Redirigiendo a calidad-aire.html (usuario)');
         
             } else {
                 console.log('Rol no reconocido, redirigiendo por defecto');

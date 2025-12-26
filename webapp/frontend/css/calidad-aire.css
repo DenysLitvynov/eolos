@@ -94,6 +94,58 @@ h2 {
     color: #555;
 }
 
+/* Secciones CTA */
+
+.cta-card {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 3rem;
+    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.2);
+}
+
+.cta-card h2 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.cta-card p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+}
+
+.cta-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: white;
+    color: #0D47A1;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: fit-content;
+    text-align: center;
+}
+
+.cta-button:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.impact-card {
+    background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
+}
+
 /* Sección gráfica */
 
 .co2-section {
