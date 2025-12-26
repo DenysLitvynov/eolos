@@ -18,9 +18,8 @@ const NAV_CONFIG = {
   ],
 
   usuario: [
-    { label: 'Inicio', href: '/pages/landing-registrado.html' },
+    { label: 'Inicio', href: '/pages/calidad-aire.html' },
     { label: 'Mapas', href: '/pages/mapas.html' },
-    { label: 'C. Aire', href: '/pages/calidad-aire.html' },
     { label: 'Sobre nosotros', href: '/pages/sobre-nosotros.html' },
     { label: 'FAQ', href: '/pages/FAQ.html' },
     { label: 'Recompensas', href: '/pages/recompensas.html' },
@@ -55,7 +54,7 @@ const NAV_CONFIG = {
     { label: 'Cerrar sesión', href: '#', dataAction: 'logout', className: 'logout' },
   ],
       tecnico_mapas: [
-   { label: 'Inicio', href: '/pages/landing-registrado.html' },
+   { label: 'Inicio', href: '/pages/calidad-aire.html' },
    { label: 'Gestión mapas', href: '/pages/admin_mapas.html' },
     { label: 'Perfil', href: '/pages/perfil.html', id: 'user-link' },
     { label: 'Cerrar sesión', href: '#', dataAction: 'logout', className: 'logout' },

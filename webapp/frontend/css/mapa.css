@@ -507,3 +507,15 @@ body {
 body.public-map #date-filter-container {
   display: none;
 }
+
+/* Responsive */
+@media (max-width: 800px) {
+  #map {
+    margin: 1rem;
+    max-width: 93%;
+  }
+
+  .pollution-info {
+    margin: 1rem;
+  }
+}

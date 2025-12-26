@@ -70,6 +70,21 @@ export class CalidadAireFake {
         return await this.peticionario.hacerPeticionRest('GET', url, null, headers);
     }
 
+    // ----------------------------------------------------------
+    // Método que obtiene el perfil del usuario autenticado
+    //
+    // token : string (Bearer token)
+    // -> obtenerPerfil() -> Promise<json>
+    // ----------------------------------------------------------
+    async obtenerPerfil(token) {
+        const url = `/api/v1/perfil`;
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        };
+        return await this.peticionario.hacerPeticionRest('GET', url, null, headers);
+    }
+
 }
 
 // ----------------------------------------------------------

@@ -48,6 +48,18 @@ h2 {
     height: 180px;
 }
 
+.aqi-maximo {
+    font-size: 0.95em;
+    margin-top: 0.8rem;
+    font-weight: 600;
+}
+
+.aqi-dates {
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 1rem;
+}
+
 .scale-item {
     margin-bottom: 1.8rem;
 }
@@ -80,6 +92,58 @@ h2 {
     float: right;
     font-weight: bold;
     color: #555;
+}
+
+/* Secciones CTA */
+
+.cta-card {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 3rem;
+    box-shadow: 0 4px 15px rgba(13, 71, 161, 0.2);
+}
+
+.cta-card h2 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.cta-card p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+}
+
+.cta-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: white;
+    color: #0D47A1;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: fit-content;
+    text-align: center;
+}
+
+.cta-button:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.impact-card {
+    background: linear-gradient(135deg, #2E7D32 0%, #43A047 100%);
 }
 
 /* Sección gráfica */
@@ -131,4 +195,34 @@ h2 {
 .resumen-valor {
     font-size: 1.8rem;
     font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .aqi-card {
+        flex-direction: column;
+        /* text-align: center; */
+    }
+
+    .aqi-info {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .aqi-info h2 {
+        max-width: 75%;
+    }
+
+    .aqi-icon {
+        position: absolute;
+        right: 20%;
+        top: 420px;
+    }
+    .aqi-icon svg {
+        width: 50px;
+    }
+
+    .aqi-maximo {
+        font-size: 1.2rem !important;
+    }
 }

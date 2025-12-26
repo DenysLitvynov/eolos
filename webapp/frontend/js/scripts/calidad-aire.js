@@ -122,6 +122,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
+        // Obtener perfil del usuario y mostrar nombre
+        try {
+            const perfil = await logicaAire.obtenerPerfil(token);
+            if (perfil && perfil.nombre) {
+                const usernameEl = document.getElementById('username');
+                if (usernameEl) {
+                    usernameEl.textContent = perfil.nombre;
+                }
+            }
+        } catch (error) {
+            console.warn('No se pudo obtener el perfil del usuario:', error);
+        }
+
         // Obtener el último trayecto completado del usuario
         const trayecto = await logicaAire.obtenerUltimoTrayecto(token);
         
