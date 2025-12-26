@@ -48,6 +48,18 @@ h2 {
     height: 180px;
 }
 
+.aqi-maximo {
+    font-size: 0.95em;
+    margin-top: 0.8rem;
+    font-weight: 600;
+}
+
+.aqi-dates {
+    font-size: 0.9em;
+    color: #999;
+    margin-top: 1rem;
+}
+
 .scale-item {
     margin-bottom: 1.8rem;
 }
@@ -131,4 +143,34 @@ h2 {
 .resumen-valor {
     font-size: 1.8rem;
     font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .aqi-card {
+        flex-direction: column;
+        /* text-align: center; */
+    }
+
+    .aqi-info {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .aqi-info h2 {
+        max-width: 75%;
+    }
+
+    .aqi-icon {
+        position: absolute;
+        right: 20%;
+        top: 420px;
+    }
+    .aqi-icon svg {
+        width: 50px;
+    }
+
+    .aqi-maximo {
+        font-size: 1.2rem !important;
+    }
 }
