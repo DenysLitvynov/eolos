@@ -48,4 +48,5 @@ dependencies {
     implementation("androidx.browser:browser:1.8.0")
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
