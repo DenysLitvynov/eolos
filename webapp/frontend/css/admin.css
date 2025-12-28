@@ -1,14 +1,17 @@
+/* ============================
+   admin.css
+   Estilos para panel admin (usuarios)
+   ============================ */
+
 .users-page {
     margin: 2vh 0;
     padding: 0 2vw;
 }
 
-/* 顶部标题 + 按钮 */
-
+/* Encabezado */
 .users-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: block;
+    margin-bottom: 8px;
 }
 
 .users-header h2 {
@@ -17,14 +20,15 @@
     margin: 3vh 3vw;
     line-height: 1;
 }
+
+/* Botón “Crear usuario” */
 .users-actions {
     display: flex;
-    justify-content: flex-end; /* 向右对齐 */
-    margin-left: 3vw ;
+    justify-content: flex-end;
+    margin: 0 3vw 16px 3vw;
 }
 
-/* 卡片和表格 */
-
+/* Tarjeta de tabla */
 .users-table-card {
     background: #ffffff;
     border-radius: 16px;
@@ -33,11 +37,18 @@
     overflow: hidden;
 }
 
+/* Contenedor con scroll horizontal (móvil) */
+.users-table-scroll {
+    overflow-x: auto;
+}
+
+/* Tabla */
 .users-table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     font-size: 14px;
+    min-width: 980px; /* fuerza scroll horizontal si la pantalla es pequeña */
 }
 
 .users-table thead {
@@ -55,7 +66,7 @@
 
 .users-table th {
     font-weight: 500;
-    font-size: 25px;
+    font-size: 24px; /* más razonable que 25px */
 }
 
 .users-table tbody tr:nth-child(even) {
@@ -66,17 +77,23 @@
     background: #e5f0ff;
 }
 
+/* Cols con ids */
 .users-table td.col-id,
 .users-table th.col-id {
-    font-family: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-size: 12px;
     word-break: break-all;
 }
 
+/* Grupo de acciones dentro de la tabla */
+.action-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
 
-/* 按钮 */
-
+/* Botones (base) */
 .btn {
     border: none;
     border-radius: 999px;
@@ -87,19 +104,16 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    transition: transform 0.1s ease, box-shadow 0.1s ease,
-    background 0.1s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
     white-space: nowrap;
-    width: 90px;
 }
 
 .btn.primary {
     background: #1f3b8f;
     color: #ffffff;
     box-shadow: 0 6px 16px rgba(31, 59, 143, 0.4);
-    font-size: 30px;
-    margin:3vh ;
-    width:fit-content ;
+    font-size: 24px;
+    width: fit-content;
 }
 
 .btn.primary:hover {
@@ -111,15 +125,17 @@
     background: #e5e7eb;
     color: #111827;
 }
-.btn.tercero {
-    background: #1f3b8f;
-    color: #ffffff;
-}
 
 .btn.secondary:hover {
     background: #d1d5db;
 }
 
+.btn.tercero {
+    background: #1f3b8f;
+    color: #ffffff;
+}
+
+/* Botones icono */
 .icon-btn {
     background: transparent;
     border: none;
@@ -138,16 +154,23 @@
     transform: translateY(-1px);
 }
 
-/* 表格里的动作按钮 */
-
-.action-group {
+/* Paginación */
+.users-pagination {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 12px;
+    margin: 16px 0 6px;
 }
 
-/* 模态框 */
+#page-info {
+    color: #334155;
+    font-size: 14px;
+}
+
+/* ============================
+   Modales
+   ============================ */
 
 .modal-backdrop {
     position: fixed;
@@ -173,13 +196,11 @@
     overflow: hidden;
 }
 
-/* 模态框头部 */
-
 .modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 20px 12px;
+    padding: 16px 18px 10px;
 }
 
 .modal-header h2 {
@@ -187,26 +208,26 @@
     font-weight: 600;
 }
 
-/* 模态框主体 */
-
 .modal-body {
     background: #f8fafc;
     color: #111827;
-    padding: 20px 22px 20px;
+    padding: 16px 18px 16px; /* más compacto */
 }
 
 .modal-tip {
     font-size: 12px;
     color: #6b7280;
-    margin: 0 0 12px;
+    margin: 0 0 10px;
 }
 
-/* 表单样式 */
+/* ============================
+   Formulario
+   ============================ */
 
 .form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px; /* menos espacio vertical */
 }
 
 .form-field {
@@ -215,20 +236,28 @@
     gap: 6px;
 }
 
+.form-field_bt {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 6px;
+}
+
 .form-field label {
     font-size: 13px;
     font-weight: 500;
     color: #111827;
 }
 
-.form-field input {
+.form-field input,
+.form-field select {
     border-radius: 999px;
     border: 1px solid #d1d5db;
-    padding: 10px 14px;
+    padding: 9px 14px;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.1s ease, box-shadow 0.1s ease,
-    background 0.1s ease;
+    transition: border-color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
     background: #ffffff;
 }
 
@@ -236,53 +265,147 @@
     color: #9ca3af;
 }
 
-.form-field input:focus {
+.form-field input:focus,
+.form-field select:focus {
     border-color: #1f3b8f;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
 }
 
-/* 表单底部按钮 */
+/* Texto de ayuda bajo un campo */
+.helper-text {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+    line-height: 1.25;
+}
 
+/* Error en la parte inferior del formulario */
+.form-bottom-error {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.12);
+    color: #b91c1c;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+/* Error general (si lo usas arriba) */
+.form-error {
+    margin: 8px 0 2px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.12);
+    color: #b91c1c;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+/* Ocultar elementos */
+.hidden { display: none !important; }
+
+/* Error bajo el input */
+.field-error {
+    margin-top: 6px;
+    color: #b91c1c;
+    font-size: 12px;
+    line-height: 1.2;
+    min-height: 14px; /* evita saltos de layout */
+}
+
+/* Input con error */
+.input-error {
+    border: 1px solid #ef4444 !important;
+    background: rgba(239, 68, 68, 0.08) !important;
+}
+
+/* Footer del formulario */
 .form-footer {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
-/* 响应式 */
+/* ============================
+   Input + botón Mostrar/Ocultar
+   ============================ */
 
+.input-with-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-toggle input {
+    width: 100%;
+    padding-right: 92px; /* espacio para el botón */
+}
+
+.toggle-btn {
+    position: absolute;
+    right: 10px;
+    height: 30px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    background: rgba(31, 59, 143, 0.10);
+    color: #1f3b8f;
+    font-size: 12px;
+}
+
+.toggle-btn:hover {
+    background: rgba(31, 59, 143, 0.16);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .users-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .users-table-card {
-        border-radius: 12px;
-    }
-
-    .users-table th,
-    .users-table td {
+    .users-table th, .users-table td {
         padding: 8px 10px;
         font-size: 13px;
     }
+}
+/* ============================
+   FIX: Modal demasiado alto (scroll interno)
+   ============================ */
 
-    .col-actions {
-        width: 80px;
-    }
+/* 1) 让弹窗不要死居中，改成靠上显示 */
+.modal-backdrop {
+    align-items: flex-start;     /* antes: center */
+    padding: 24px 12px;          /* 给顶部留空间 */
+    overflow-y: auto;            /* 小屏时允许整个遮罩层滚动 */
 }
 
-.users-header {
-    display: block;
-    margin-bottom: 8px;
-}
-
-
-/* 新的一层，只放按钮，在标题下面一行靠右 */
-.users-actions {
+/* 2) 限制弹窗最大高度，避免溢出屏幕 */
+.modal {
+    max-height: calc(100vh - 48px); /* 视口高度 - 上下 padding */
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
+    flex-direction: column;
+}
+
+/* 3) modal-body 内部滚动（表单太长就滚这里） */
+.modal-body {
+    overflow-y: auto;
+    max-height: calc(100vh - 48px - 56px);
+    /* 56px 约等于 header 高度；如果你 header 更高/更低可微调 */
+}
+
+/* 4) 表单间距再紧凑一点（可选） */
+.form {
+    gap: 10px;     /* 你如果还觉得高，可以改成 8px */
+}
+
+/* 5) 手机上更友好（可选） */
+@media (max-width: 480px) {
+    .modal-backdrop {
+        padding: 12px 8px;
+    }
+    .modal {
+        width: 96vw;
+        border-radius: 16px;
+    }
+    .modal-body {
+        padding: 14px 14px;
+    }
 }

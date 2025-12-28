@@ -12,7 +12,7 @@
     <script type="module" src="/js/components/header.js" defer></script>
     <link rel="stylesheet" href="/css/footer.css">
     <script type="module" src="/js/components/footer.js" defer></script>
-
+    <script src="/js/scripts/pollution.js" defer></script>
 
 
     <!-- <script src="/js/logica_fake/home_fake.js" defer></script> -->
@@ -69,29 +69,16 @@
 
 <section class="pollution-card">
     <div class="pollution-grid">
-
         <div class="pollution-left">
             <h2>Contaminación en tiempo real</h2>
 
             <div class="pollution-lists">
-                <ul class="pollution-list">
-                    <li><span class="dot red"></span> Nodo en rojo: C/ Ferraz</li>
-                    <li><span class="dot red"></span> Nodo en rojo: C/ Colón</li>
-                    <li><span class="dot red"></span> Nodo en rojo: C/ Jaume I</li>
-                    <li><span class="dot red"></span> Nodo en rojo: C/ Cid</li>
-                    <li><span class="dot green"></span> Nodo en verde: C/ Riu del Turia</li>
-                </ul>
-
-                <ul class="pollution-list">
-                    <li><span class="dot red"></span> Nodo en rojo: C/ La depresió</li>
-                    <li><span class="dot red"></span> Nodo en rojo: C/ Zapadores</li>
-                    <li><span class="dot red"></span> Nodo en rojo: C/ Jávea</li>
-                    <li><span class="dot red"></span> Nodo en rojo: C/ Xàtiva</li>
-                    <li><span class="dot green"></span> Nodo en verde: C/ Paraiso Floral</li>
-                </ul>
+                <ul class="pollution-list" id="pollution-left"></ul>
+                <ul class="pollution-list" id="pollution-right"></ul>
             </div>
 
-            <a href="#" class="pollution-btn">info del estado</a>
+            <a href="#" class="pollution-btn" id="btn-pollution-refresh">info del estado</a>
+            <p id="pollution-meta" style="margin-top:12px; font-size:14px;"></p>
         </div>
 
         <aside class="pollution-right">
@@ -114,9 +101,10 @@
 
             <div class="km-row">
                 <div class="km-text">
-                    <p>Usted lleva: <span class="km-value">100 Km</span></p>
-                    <p>Descuento acumulado: <span class="km-value">20 €</span></p>
-                    <p>Usted pagaría: <span class="km-value">39.99 €</span></p>
+                    <p>Usted lleva: <span class="km-value" id="kmValue">-- Km</span></p>
+                    <p>Descuento acumulado: <span class="km-value" id="discountValue">-- €</span></p>
+                    <p>Usted pagaría: <span class="km-value" id="payValue">-- €</span></p>
+
 
                     <button class="btn btn-primary">Ver descuentos</button>
                 </div>
