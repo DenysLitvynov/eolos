@@ -165,54 +165,6 @@
 
             <!-- Repetimos bloques para cada nivel -->
 
-            <!-- Excelente -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="12dp"
-                        android:background="@drawable/circulo_azul" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp"
-                        android:text="Excelente"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/negro"
-                        android:fontFamily="@font/rethink_sans" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0–19"
-                        android:textSize="12sp"
-                        android:textColor="@color/negro"
-                        android:fontFamily="@font/rethink_sans" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="La calidad del aire es idónea para la mayoría de personas; puedes disfrutar de tus actividades al aire libre con normalidad."
-                    android:textSize="12sp"
-                    android:textColor="@color/negro"
-                    android:fontFamily="@font/rethink_sans" />
-            </LinearLayout>
-
             <!-- Buena -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -245,7 +197,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20–49"
+                        android:text="0–49"
                         android:textSize="12sp"
                         android:textColor="@color/negro"
                         android:fontFamily="@font/rethink_sans" />
@@ -341,7 +293,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="100–149"
+                        android:text="+100"
                         android:textSize="12sp"
                         android:textColor="@color/negro"
                         android:fontFamily="@font/rethink_sans" />
@@ -352,102 +304,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="Los grupos sensibles pueden empezar a sentir efectos sobre la salud."
-                    android:textSize="12sp"
-                    android:textColor="@color/negro"
-                    android:fontFamily="@font/rethink_sans" />
-            </LinearLayout>
-
-            <!-- Muy poco saludable (rosa) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:background="@drawable/circulo_rosa" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp"
-                        android:text="Muy poco saludable"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/negro"
-                        android:fontFamily="@font/rethink_sans" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="150–249"
-                        android:textSize="12sp"
-                        android:textColor="@color/negro"
-                        android:fontFamily="@font/rethink_sans" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Los grupos sensibles sentirán inmediatamente los efectos sobre la salud y deberán evitar las actividades al aire libre."
-                    android:textSize="12sp"
-                    android:textColor="@color/negro"
-                    android:fontFamily="@font/rethink_sans" />
-            </LinearLayout>
-
-            <!-- Peligrosa (rojo) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:background="@drawable/circulo_morado" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp"
-                        android:text="Peligrosa"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/negro"
-                        android:fontFamily="@font/rethink_sans" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="250+"
-                        android:textSize="12sp"
-                        android:textColor="@color/negro"
-                        android:fontFamily="@font/rethink_sans" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="La exposición prolongada al aire puede provocar graves efectos en la salud de todas las personas."
                     android:textSize="12sp"
                     android:textColor="@color/negro"
                     android:fontFamily="@font/rethink_sans" />
