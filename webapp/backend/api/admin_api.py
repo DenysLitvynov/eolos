@@ -4,14 +4,14 @@ Fecha: 07-12-2025
 Descripción: API de administración de usuarios (listado / CRUD) usando JWT Bearer.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, Header
+from fastapi import APIRouter, Depends, HTTPException, Header, Query
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import List, Literal, Optional
 import os, jwt
 
 from ..db.database import get_db
-from ..db.models import Usuario, Rol  # Se asume que existen los modelos Usuario y Rol
+from ..db.models import Usuario, Rol
 from ..logic.admin_logic import LogicaAdmin
 
 router = APIRouter(prefix="/admin_api", tags=["admin"])
@@ -46,7 +46,6 @@ class UsuarioAdminCreateIn(BaseModel):
     apellido: str = Field(..., max_length=120)
     correo: EmailStr
     targeta_id: str | None = Field(default=None, max_length=36)
-    # Usado en minúsculas, para coincidir con la base de datos y el frontend
     rol: Literal["admin", "tecnico", "usuario"] = "usuario"
     contrasena: str = Field(..., min_length=8)
 
@@ -82,8 +81,7 @@ def get_current_user(
     authorization: str | None = Header(default=None),
     db: Session = Depends(get_db),
 ) -> Usuario:
-    """Igual que en perfil_api: lee el token y devuelve un Usuario."""
-
+    """Lee el token y devuelve un Usuario."""
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Falta token Bearer")
 
@@ -108,16 +106,11 @@ def get_current_user(
 
 
 def require_admin(current_user: Usuario = Depends(get_current_user)) -> Usuario:
-    """
-    Solo se permite acceso a usuarios cuyo rol sea 'admin'.
-    Se asume que Usuario tiene: roles: List[Rol]
-    """
+    """Solo acceso a admin."""
     roles = getattr(current_user, "roles", []) or []
     nombres = {r.nombre.lower() for r in roles if isinstance(r, Rol)}
-
     if "admin" not in nombres:
         raise HTTPException(status_code=403, detail="Permisos insuficientes (se requiere rol Admin)")
-
     return current_user
 
 
@@ -125,16 +118,22 @@ def require_admin(current_user: Usuario = Depends(get_current_user)) -> Usuario:
 
 @router.get("/usuarios", response_model=List[UsuarioAdminOut])
 def listar_usuarios(
+    limit: int = Query(default=100, ge=1, le=500),
+    offset: int = Query(default=0, ge=0),
     db: Session = Depends(get_db),
     _: Usuario = Depends(require_admin),
 ):
-    """Lista todos los usuarios para el panel admin."""
-    usuarios = logica.listar_usuarios(db)
-    salida: list[UsuarioAdminOut] = []
+    """
+    Lista usuarios con paginación.
+    Ejemplo:
+      /usuarios?limit=100&offset=0
+    """
+    usuarios = logica.listar_usuarios(db, limit=limit, offset=offset)
 
+    salida: list[UsuarioAdminOut] = []
     for u in usuarios:
-        # Usar el primer rol del usuario como rol principal
-        rol_nombre = u.roles[0].nombre if getattr(u, "roles", None) else None
+        roles = getattr(u, "roles", None) or []
+        rol_nombre = roles[0].nombre if len(roles) > 0 else None
 
         salida.append(
             UsuarioAdminOut(
@@ -170,7 +169,8 @@ def crear_usuario_admin(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-    rol_nombre = usuario.roles[0].nombre if getattr(usuario, "roles", None) else None
+    roles = getattr(usuario, "roles", None) or []
+    rol_nombre = roles[0].nombre if len(roles) > 0 else None
 
     return UsuarioAdminOut(
         usuario_id=str(usuario.usuario_id),
@@ -203,7 +203,8 @@ def actualizar_usuario_admin(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-    rol_nombre = usuario.roles[0].nombre if getattr(usuario, "roles", None) else None
+    roles = getattr(usuario, "roles", None) or []
+    rol_nombre = roles[0].nombre if len(roles) > 0 else None
 
     return UsuarioAdminOut(
         usuario_id=str(usuario.usuario_id),
@@ -226,9 +227,7 @@ def eliminar_usuario_admin(
         logica.eliminar_usuario_admin(db=db, usuario_id=usuario_id)
     except ValueError as e:
         msg = str(e).lower()
-        # Si el mensaje contiene "no encontrado" → 404; de lo contrario → 400
         if "no encontrado" in msg:
             raise HTTPException(status_code=404, detail=str(e))
-        else:
-            raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e))
     return
