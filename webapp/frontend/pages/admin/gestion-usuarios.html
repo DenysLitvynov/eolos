@@ -1,208 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Éolos – Gestion</title>
 
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/admin.css">
-
+    <link rel="stylesheet" href="../../css/header.css" />
+    <link rel="stylesheet" href="../../css/admin.css" />
 
     <script type="module" src="../../js/scripts/admin.js" defer></script>
     <script type="module" src="/js/components/header.js" defer></script>
 
-    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/footer.css" />
     <script type="module" src="/js/components/footer.js" defer></script>
-
 </head>
 
 <body>
-
 <div id="site-header"></div>
 
 <main class="users-page">
-
     <section class="users-header">
         <h2>Listado de usuarios</h2>
     </section>
 
     <section class="users-actions">
-        <button id="btn-open-modal" class="btn primary">
-            + Crear usuario
-        </button>
+        <button id="btn-open-modal" class="btn primary">+ Crear usuario</button>
     </section>
 
-
-    <!-- 用户表格 -->
     <section class="users-table-card">
-        <table class="users-table">
-            <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>ID de usuario</th>
-                <th>ID Tarjeta</th>
-                <th>Rol</th>
-                <th>Correo</th>
-                <th class="col-actions">Acciones</th>
-            </tr>
-            </thead>
-            <tbody id="users-tbody">
-
-            </tbody>
-        </table>
+        <!-- Permite scroll horizontal en pantallas pequeñas -->
+        <div class="users-table-scroll">
+            <table class="users-table">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>ID de usuario</th>
+                    <th>ID Tarjeta</th>
+                    <th>Rol</th>
+                    <th>Correo</th>
+                    <th class="col-actions">Acciones</th>
+                </tr>
+                </thead>
+                <tbody id="users-tbody"></tbody>
+            </table>
+        </div>
     </section>
+
+    <!-- Paginación -->
+    <section class="users-pagination">
+        <button id="btn-prev" class="btn secondary" disabled>← Anterior</button>
+        <span id="page-info">Página 1</span>
+        <button id="btn-next" class="btn tercero">Siguiente →</button>
+    </section>
+
+    <!-- Modal Crear -->
+    <div id="modal-backdrop" class="modal-backdrop hidden">
+        <div class="modal">
+            <header class="modal-header">
+                <h2>Creación de usuario</h2>
+                <button id="btn-close-modal" class="icon-btn" aria-label="Cerrar">✕</button>
+            </header>
+
+            <div class="modal-body">
+                <p class="modal-tip">
+                    * Tanto la ID de usuario como la fecha de creación son campos autogenerados.
+                </p>
+
+                <form id="create-user-form" class="form" novalidate>
+                    <div id="create-form-error" class="form-error hidden"></div>
+
+                    <div class="form-field">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Juan" />
+                        <div class="field-error" id="err-nombre"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" name="apellido" placeholder="Bautista Pérez" />
+                        <div class="field-error" id="err-apellido"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="email">Correo o número de teléfono</label>
+                        <input type="email" id="email" name="email" placeholder="juan@example.com" />
+                        <div class="field-error" id="err-email"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="cardId">ID Tarjeta</label>
+                        <input type="text" id="cardId" name="cardId" placeholder="12345655L" />
+                        <div class="field-error" id="err-cardId"></div>
+                    </div>
+
+                    <!-- Contraseña con botón Mostrar/Ocultar -->
+                    <div class="form-field">
+                        <label for="password">Contraseña</label>
+
+                        <div class="input-with-toggle">
+                            <input type="password" id="password" name="password" placeholder="••••••••" />
+                            <button type="button" class="toggle-btn" id="toggle-create-password" aria-label="Mostrar u ocultar contraseña">
+                                Mostrar
+                            </button>
+                        </div>
+
+                        <div class="helper-text">
+                            Mínimo 8 caracteres, debe incluir: mayúsculas, minúsculas, números y símbolos (@$!%*?&)
+                        </div>
+                        <div class="field-error" id="err-password"></div>
+                    </div>
+
+                    <!-- Repetir contraseña con botón Mostrar/Ocultar -->
+                    <div class="form-field">
+                        <label for="password2">Repite tu contraseña</label>
+
+                        <div class="input-with-toggle">
+                            <input type="password" id="password2" name="password2" placeholder="••••••••" />
+                            <button type="button" class="toggle-btn" id="toggle-create-password2" aria-label="Mostrar u ocultar repetir contraseña">
+                                Mostrar
+                            </button>
+                        </div>
+
+                        <div class="helper-text">Debe coincidir con la contraseña anterior</div>
+                        <div class="field-error" id="err-password2"></div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="button" class="btn secondary" id="btn-cancel-modal">Cancelar</button>
+                        <button type="submit" class="btn tercero">Crear</button>
+                    </div>
+
+                    <div id="create-form-bottom-error" class="form-bottom-error hidden"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar -->
+    <div id="edit-user-modal" class="modal-backdrop hidden">
+        <div class="modal">
+            <header class="modal-header">
+                <h2>Editar usuario</h2>
+                <button id="btn-close-edit-modal" class="icon-btn" aria-label="Cerrar">✕</button>
+            </header>
+
+            <div class="modal-body">
+                <form id="edit-user-form" class="form" novalidate>
+                    <div id="edit-form-error" class="form-error hidden"></div>
+
+                    <div class="form-field">
+                        <label>Nombre</label>
+                        <input type="text" id="edit-name" />
+                        <div class="field-error" id="err-edit-name"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Apellido</label>
+                        <input type="text" id="edit-lastname" />
+                        <div class="field-error" id="err-edit-lastname"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Correo</label>
+                        <input type="email" id="edit-email" />
+                        <div class="field-error" id="err-edit-email"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>ID Tarjeta</label>
+                        <input type="text" id="edit-card" />
+                        <div class="field-error" id="err-edit-card"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Rol</label>
+                        <select id="edit-role">
+                            <option>admin</option>
+                            <option>técnico</option>
+                            <option>usuario</option>
+                        </select>
+                        <div class="field-error" id="err-edit-role"></div>
+                    </div>
+
+                    <div class="form-field_bt">
+                        <button type="button" class="btn secondary" id="btn-cancel-edit">Cancelar</button>
+                        <button type="submit" class="btn tercero">Guardar</button>
+                    </div>
+
+                    <div id="edit-form-bottom-error" class="form-bottom-error hidden"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </main>
-
-
-<div id="modal-backdrop" class="modal-backdrop hidden">
-    <div class="modal">
-        <header class="modal-header">
-            <h2>Creación de usuario</h2>
-            <button id="btn-close-modal" class="icon-btn" aria-label="Cerrar">
-                ✕
-            </button>
-        </header>
-
-        <div class="modal-body">
-            <p class="modal-tip">
-                * Tanto la ID de usuario como la fecha de creación son campos autogenerados.
-            </p>
-
-            <form id="create-user-form" class="form">
-                <div class="form-field">
-                    <label for="nombre">Nombre</label>
-                    <input
-                            type="text"
-                            id="nombre"
-                            name="nombre"
-                            placeholder="Juan"
-                            required
-                    />
-                </div>
-
-                <div class="form-field">
-                    <label for="apellido">Apellido</label>
-                    <input
-                            type="text"
-                            id="apellido"
-                            name="apellido"
-                            placeholder="Bautista Pérez"
-                            required
-                    />
-                </div>
-
-                <div class="form-field">
-                    <label for="email">Correo o número de teléfono</label>
-                    <input
-                            type="text"
-                            id="email"
-                            name="email"
-                            placeholder="juan@example.com"
-                            required
-                    />
-                </div>
-
-                <div class="form-field">
-                    <label for="cardId">ID Tarjeta</label>
-                    <input
-                            type="text"
-                            id="cardId"
-                            name="cardId"
-                            placeholder="2025-03-27T14:05:03-0500"
-                    />
-                </div>
-
-                <div class="form-field">
-                    <label for="password">Contraseña</label>
-                    <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="••••••••"
-                            required
-                    />
-                </div>
-
-                <!--
-                <div class="form-field">
-                  <label for="rol">Rol</label>
-                  <select id="rol" name="rol">
-                    <option value="Ciudadano">Ciudadano</option>
-                    <option value="Técnico">Técnico</option>
-                    <option value="Admin">Admin</option>
-                  </select>
-                </div>
-                -->
-
-                <div class="form-footer">
-                    <button type="button" class="btn secondary" id="btn-cancel-modal">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn tercero">
-                        Crear
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div id="edit-user-modal" class="modal-backdrop hidden">
-    <div class="modal">
-        <header class="modal-header">
-            <h2>Editar usuario</h2>
-            <button id="btn-close-edit-modal" class="icon-btn" aria-label="Cerrar">
-                ✕
-            </button>
-        </header>
-
-        <div class="modal-body">
-            <form id="edit-user-form" class="form">
-                <div class="form-field">
-                    <label>Nombre</label>
-                    <input type="text" id="edit-name" required />
-                </div>
-
-                <div class="form-field">
-                    <label>Apellido</label>
-                    <input type="text" id="edit-lastname" required />
-                </div>
-
-                <div class="form-field">
-                    <label>Correo</label>
-                    <input type="email" id="edit-email" required />
-                </div>
-
-                <div class="form-field">
-                    <label>ID Tarjeta</label>
-                    <input type="text" id="edit-card" />
-                </div>
-
-                <div class="form-field">
-                    <label>Rol</label>
-                    <select id="edit-role">
-                        <option>admin</option>
-                        <option>técnico</option>
-                        <option>usuario</option>
-                    </select>
-                </div>
-
-                    <button type="button" class="btn secondary" id="btn-cancel-edit">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn tercero">
-                        Guardar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
- <div class="form-footer">
-
 </body>
 </html>

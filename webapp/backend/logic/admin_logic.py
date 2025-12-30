@@ -8,12 +8,13 @@ from typing import List, Optional
 from uuid import uuid4
 import re
 
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 from passlib.context import CryptContext
+from sqlalchemy import desc
 
-from ..db.models import Usuario, Rol  # Si existe un modelo UsuarioRol también podría importarse
+from ..db.models import Usuario, Rol
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -30,9 +31,7 @@ class LogicaAdmin:
             - Números
             - Símbolos especiales
         """
-        patron = re.compile(
-            r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
-        )
+        patron = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$")
         return bool(patron.match(password))
 
     def _obtener_usuario(self, db: Session, usuario_id: str) -> Usuario:
@@ -61,9 +60,28 @@ class LogicaAdmin:
 
     # ========= API público =========
 
-    def listar_usuarios(self, db: Session) -> List[Usuario]:
-        # Si el modelo tiene relationship roles con lazy='joined', un simple all() basta
-        return db.query(Usuario).order_by(Usuario.usuario_id).all()
+    def listar_usuarios(
+        self,
+        db: Session,
+        *,
+        limit: int = 100,
+        offset: int = 0,
+    ) -> List[Usuario]:
+        """
+        Lista usuarios con paginación y precarga de roles para evitar N+1.
+        """
+        # seguridad básica
+        limit = max(1, min(int(limit), 500))   # máx 500 por petición
+        offset = max(0, int(offset))
+
+        return (
+            db.query(Usuario)
+            .options(selectinload(Usuario.roles))  # ✅ evita N+1
+
+            .offset(offset)
+            .limit(limit)
+            .all()
+        )
 
     def crear_usuario_admin(
         self,
@@ -98,7 +116,7 @@ class LogicaAdmin:
 
         # 4) Crear usuario
         usuario = Usuario(
-            usuario_id=str(uuid4()),  # Si el modelo ya tiene default=uuid4, este valor podría omitirse
+            usuario_id=str(uuid4()),
             nombre=nombre.strip(),
             apellido=apellido.strip(),
             correo=correo,
@@ -106,7 +124,7 @@ class LogicaAdmin:
             contrasena_hash=pwd_context.hash(contrasena),
         )
 
-        # 5) Asociar rol (suponiendo que un usuario solo tiene un rol principal)
+        # 5) Asociar rol
         rol_obj = self._obtener_rol_por_nombre(db, rol)
         usuario.roles.append(rol_obj)
 
@@ -132,11 +150,7 @@ class LogicaAdmin:
         if correo is not None:
             correo = correo.strip().lower()
             if correo != usuario.correo:
-                existe = (
-                    db.query(Usuario)
-                    .filter(Usuario.correo == correo)
-                    .first()
-                )
+                existe = db.query(Usuario).filter(Usuario.correo == correo).first()
                 if existe:
                     raise ValueError("El correo ya está en uso por otro usuario")
                 usuario.correo = correo
@@ -148,11 +162,9 @@ class LogicaAdmin:
 
         if targeta_id is not None:
             targeta_id = str(targeta_id).strip()
-            usuario.targeta_id = (
-                None if targeta_id == "" or targeta_id.lower() == "null" else targeta_id
-            )
+            usuario.targeta_id = None if targeta_id == "" or targeta_id.lower() == "null" else targeta_id
 
-        # Actualización del rol: limpiar rol anterior y asignar uno nuevo
+        # Actualización del rol
         if rol is not None:
             nuevo_rol = self._obtener_rol_por_nombre(db, rol)
             usuario.roles.clear()
@@ -164,16 +176,10 @@ class LogicaAdmin:
 
     def eliminar_usuario_admin(self, db: Session, usuario_id: str) -> None:
         """
-        Eliminación de usuario:
-        - Primero limpiar usuario_roles (mediante la relación roles)
-        - Luego intentar borrar el usuario
-        - Si existen otras claves foráneas (trayectos, incidencias, etc.),
-          capturar IntegrityError y lanzar un ValueError más amigable,
-          para que la API devuelva 400 en lugar de 500.
+        Eliminación de usuario con manejo de IntegrityError.
         """
         usuario = self._obtener_usuario(db, usuario_id)
 
-        # Limpiar relaciones (usuario_roles)
         usuario.roles.clear()
 
         try:
