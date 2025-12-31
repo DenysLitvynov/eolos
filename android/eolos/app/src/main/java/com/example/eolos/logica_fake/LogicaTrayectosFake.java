@@ -1,6 +1,7 @@
 package com.example.eolos.logica_fake;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationListener;
@@ -8,6 +9,8 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -419,7 +422,7 @@ public class LogicaTrayectosFake {
                         Log.i(TAG, "✅ Medida guardada correctamente: " + valor + " (" + tipo + ")");
                         
                         // Notificar al servicio sobre el estado de la medición
-                        notificarEstadoMedicion(valor);
+                        notificarEstadoMedicion(tipo, valor);
                     } else {
                         Log.e(TAG, "❌ Error al guardar medida: " + codigo + " → " + cuerpo);
                     }
@@ -434,37 +437,38 @@ public class LogicaTrayectosFake {
     // ==================================================================
     // NOTIFICAR ESTADO DE LA MEDICIÓN (NUEVA FUNCIÓN)
     // ==================================================================
-    private void notificarEstadoMedicion(double valor) {
+    private void notificarEstadoMedicion(String tipo, double valor) {
         String estado;
         int icono;
-        
+
         if (valor < 50) {
             estado = "Buena";
-            icono = android.R.drawable.presence_online;  // Verde
+            icono = android.R.drawable.presence_online;
         } else if (valor < 100) {
             estado = "Regular";
-            icono = android.R.drawable.presence_away;    // Amarillo
+            icono = android.R.drawable.presence_away;
         } else if (valor < 150) {
             estado = "Mala";
-            icono = android.R.drawable.presence_busy;    // Rojo
+            icono = android.R.drawable.presence_busy;
         } else if (valor < 200) {
             estado = "Muy mala";
-            icono = android.R.drawable.presence_offline; // Negro
+            icono = android.R.drawable.presence_offline;
         } else {
             estado = "Errónea";
-            icono = android.R.drawable.ic_dialog_alert;  // Alerta
+            icono = android.R.drawable.ic_dialog_alert;
         }
-        
-        Log.d(TAG, "Calidad de aire: " + estado + " (valor: " + valor + ")");
-        
-        // Enviar broadcast al servicio
-        android.content.Intent intent = new android.content.Intent("com.example.eolos.MEDICION_STATE_CHANGED");
+
+        Intent intent = new Intent("com.example.eolos.MEDICION_STATE_CHANGED");
         intent.putExtra("estado_medicion", estado);
         intent.putExtra("valor_medicion", valor);
         intent.putExtra("icono", icono);
-        android.content.Context context = this.context;
-        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+
+        intent.putExtra("tipo_medicion", tipo);
+
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
+
 
     // ==================================================================
     // 5. FINALIZAR TRAYECTO
