@@ -409,3 +409,72 @@
         padding: 14px 14px;
     }
 }
+
+@media (max-width: 768px) {
+
+  /* En móvil NO queremos scroll lateral */
+  .users-table-scroll {
+    overflow-x: visible;
+  }
+
+  /* Ocultamos la cabecera */
+  .users-table thead {
+    display: none;
+  }
+
+  /* Convertimos la tabla en bloques */
+  .users-table,
+  .users-table tbody,
+  .users-table tr,
+  .users-table td {
+    display: block;
+    width: 100%;
+  }
+
+  /* Quitamos el min-width que obliga al scroll */
+  .users-table {
+    min-width: 0;
+    table-layout: auto;
+  }
+
+  /* Cada fila como tarjeta */
+  .users-table tbody tr {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    padding: 10px 12px;
+    margin-bottom: 14px;
+  }
+
+  /* Cada celda: etiqueta + valor */
+  .users-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 6px;
+    border-bottom: 1px solid #e2e8f0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .users-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Etiqueta sale del data-label */
+  .users-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #0D47A1;
+    flex: 0 0 42%;
+  }
+
+  /* Acciones alineadas a la derecha */
+  .users-table td[data-label="Acciones"] {
+    justify-content: flex-end;
+  }
+
+  .action-group {
+    justify-content: flex-end;
+  }
+}

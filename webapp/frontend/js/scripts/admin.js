@@ -218,17 +218,17 @@ let editingUser = null;
 // ==================== RENDER ====================
 
 function renderUsers() {
-    tbody.innerHTML = users
-        .map(
-            (user, index) => `
+  tbody.innerHTML = users
+    .map(
+      (user, index) => `
       <tr>
-        <td>${user.nombre ?? ""}</td>
-        <td>${user.apellido ?? ""}</td>
-        <td class="col-id">${user.usuario_id ?? ""}</td>
-        <td class="col-id">${user.targeta_id ?? ""}</td>
-        <td>${user.rol ?? ""}</td>
-        <td>${user.correo ?? ""}</td>
-        <td>
+        <td data-label="Nombre">${user.nombre ?? ""}</td>
+        <td data-label="Apellido">${user.apellido ?? ""}</td>
+        <td data-label="ID de usuario" class="col-id">${user.usuario_id ?? ""}</td>
+        <td data-label="ID Tarjeta" class="col-id">${user.targeta_id ?? ""}</td>
+        <td data-label="Rol">${user.rol ?? ""}</td>
+        <td data-label="Correo">${user.correo ?? ""}</td>
+        <td data-label="Acciones">
           <div class="action-group">
             <button class="icon-btn" data-action="edit" data-index="${index}" title="Editar">
               <img src="../../images/editar.png" alt="Editar" class="table-icon" />
@@ -239,8 +239,8 @@ function renderUsers() {
           </div>
         </td>
       </tr>`
-        )
-        .join("");
+    )
+    .join("");
 }
 
 function renderLoadingRow() {

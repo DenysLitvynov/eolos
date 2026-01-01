@@ -468,6 +468,39 @@ input[type="email"]:not(.password-wrapper input) {
     }
 }
 
+/* Asegurar que el body no tenga márgenes no deseados */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Previene scroll horizontal */
+}
+
+.auth-container {
+  margin-bottom: 0;
+}
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenido principal crece y empuja el footer */
+.auth-container {
+  flex: 1 0 auto;
+}
+
+/* El footer se va al final del viewport */
+#site-footer {
+  margin-top: auto;
+}
+
 /* Ajustes para landscape en móviles */
 @media (max-height: 500px) and (orientation: landscape) {
     .auth-container {
@@ -497,10 +530,66 @@ input[type="email"]:not(.password-wrapper input) {
     }
 }
 
-/* Asegurar que el body no tenga márgenes no deseados */
-body {
-    margin: 0;
-    padding: 0;
+
+
+#pag_perfil .auth-container{
+  /* que el layout sea estable y centrado */
+  width: 100%;
+  max-width: 100%;      /* ancho total de la zona */
+  margin: 24px auto;      /* centra */
+  padding: 0 24px;        /* aire lateral en PC */
+  box-sizing: border-box;
+}
+
+/* el panel (la tarjeta blanca del formulario) */
+#pag_perfil .form-section{
+  width: 100%;
+  max-width:100%;       /* <-- AQUI el ancho del formulario en PC */
+  margin: 0 auto;        
+  padding: 28px 34px;
+  box-sizing: border-box;
+}
+
+
+#pag_perfil .auth-title{
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+
+#pag_perfil input,
+#pag_perfil .password-wrapper{
+  font-size: 16px;
+}
+
+
+#pag_perfil .buttonperfil{
+  max-width: 520px;
+  margin: 18px auto 0;
+}
+
+#pag_perfil .buttonperfil button{
+  max-width: none;
+  padding: 12px 0;
+}
+
+@media (max-width: 768px){
+  #pag_perfil .auth-container{
+    padding: 0 12px;
+    margin: 14px auto;
+  }
+
+  #pag_perfil .form-section{
+    max-width: 100%;
+    padding: 18px 16px;
+  }
+
+  #pag_perfil .buttonperfil{
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  #pag_perfil .buttonperfil button{
     width: 100%;
-    overflow-x: hidden; /* Previene scroll horizontal */
+  }
 }

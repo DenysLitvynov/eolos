@@ -61,3 +61,15 @@ input[type="date"]:focus {
     border-color: #0047A1;
     box-shadow: 0 0 3px rgba(0, 71, 161, 0.4);
 }
+
+/* Igualar el “aire” del header sin tocar el header (NO cambia su altura) */
+body#pag_perfil {
+  padding: 14px 16px 0;  /* arriba/lados como el resto */
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  body#pag_perfil {
+    padding: 12px 12px 0;
+  }
+}
