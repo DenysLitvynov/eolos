@@ -327,6 +327,17 @@ h1{
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 }
-/*====================================================================*/
-/* RESPONSIVIDAD (Media Queries) */
-/*====================================================================*/
+
+/* Sticky footer SOLO para esta página */
+html, body { height: 100%; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenedor-principal { flex: 1 0 auto; }
+
+#site-footer { margin-top: auto; }
+

@@ -5,11 +5,12 @@ body {
 }
 
 .map-container {
-  position: relative;
+    position: relative;
   height: 80vh;
-  width: 95vw;
-  padding-top: 1rem;
-  margin: 0 auto;        /* CENTRA */
+  width: 92%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding-top: 3rem;
 }
 
 #map {
@@ -519,3 +520,30 @@ body.public-map #date-filter-container {
     margin: 1rem;
   }
 }
+
+/* =========================
+   TÍTULO DE PÁGINA (MISMO QUE GESTIÓN USUARIOS)
+   ========================= */
+
+.admin-map-main {
+  width: 95%;
+  max-width: 1500px;
+  margin: 30px auto;
+  padding: 0 15px;
+}
+
+.page-title {
+  color: #0D47A1;
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0 0 24px 0;
+}
+
+/* Móvil */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+} 

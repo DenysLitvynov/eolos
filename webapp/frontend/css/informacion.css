@@ -267,4 +267,23 @@ body {
     .comparison-section {
         padding: 20px;
     }
+
+    /* ✅ Fuentes y referencias en móvil: 1 botón por línea centrado */
+    .sources-list {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .sources-list li {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .sources-list a {
+        width: min(320px, 100%);
+        text-align: center;
+    }
 }

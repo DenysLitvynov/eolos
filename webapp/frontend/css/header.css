@@ -299,3 +299,82 @@ p {
         margin-top: 12px;
     }
 }
+
+/* ===== Header-back: solo un botón, sin hamburguesa ni panel desplegable ===== */
+.header.header-back .menu-toggle {
+  display: none !important;
+}
+
+/* En móvil tu CSS convierte .nav en panel oculto.
+   Para el back queremos que SIEMPRE se vea (solo hay 1 botón). */
+@media (max-width: 1380px) {
+  .header.header-back .nav {
+    position: static;
+    max-height: none;
+    opacity: 1;
+    pointer-events: auto;
+    overflow: visible;
+    transform: none;
+    transition: none;
+    display: flex;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .header.header-back .nav a {
+    width: auto;
+    padding: 6px 10px;       /* igual que desktop */
+    border-radius: 30px;     /* igual que desktop */
+    font-size: clamp(16px, 1vw + 12px, 24px);
+  }
+}
+
+
+/* =========================================
+   Botón "volver" del header-back
+   (idéntico visualmente a .nav a.login)
+   ========================================= */
+
+.header .header-back__btn {
+  /* reset total del button */
+  all: unset;
+
+  /* hereda exactamente lo mismo que un link */
+  color: var(--c-white);
+  font-family: inherit;
+  font-size: clamp(16px, 1vw + 12px, 24px);
+  line-height: normal;
+
+  padding: 6px 10px;
+  border-radius: 30px;
+  border: 1.5px solid var(--c-white);
+
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color .2s ease, border-color .2s ease;
+}
+
+.header .header-back__btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 0.5px solid var(--c-white);
+}
+
+/* En móvil: mismo tamaño que .nav a */
+@media (max-width: 1380px) {
+  .header .header-back__btn {
+    padding: 6px 10px;
+    border-radius: 30px;
+    font-size: clamp(16px, 1vw + 12px, 24px);
+  }
+}
+
+.header.header-back { margin: 20px 12px; }
+
+@media (max-width: 1380px) {
+  .header.header-back { margin: 5px; }
+}
