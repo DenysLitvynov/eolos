@@ -1,18 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap');
+
 :root{
-  --bg: #f3f5f8;
+  --font-sans: "Rethink Sans", ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bg: #ffffff;
   --card: #ffffff;
-  --soft: #eef3f8;
+  --soft: #E9EEF0;
   --text: #0f172a;
   --muted: #5b677a;
-  --primary: #1f57c3;
-  --primary-2: #2d6cdf;
+  --primary: #0D47A1;
+  --primary-2: #1f57c3;
   --border: rgba(15, 23, 42, 0.08);
   --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
   --radius: 18px;
 }
 
 *{ box-sizing: border-box; }
-body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background: var(--bg); }
+body{ margin:0; font-family: var(--font-sans); color: var(--text); background: var(--bg); }
 
 .rewards-page{
   padding: 24px 0 42px;
@@ -34,7 +37,7 @@ body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, 
   text-align: center;
   color: var(--primary);
   font-size: clamp(22px, 3vw, 30px);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .layout{
@@ -62,13 +65,14 @@ body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, 
 
 .progress-card__text h2{
   margin: 0 0 10px;
-  font-size: clamp(22px, 2.6vw, 34px);
+  font-size: 28px;
   line-height: 1.05;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .progress-meta{
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   color: var(--primary);
   margin-bottom: 10px;
 }
@@ -89,8 +93,8 @@ body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, 
 .progress-desc{
   margin: 18px 0 0;
   color: #1f2a3a;
-  line-height: 1.4;
-  font-size: 14px;
+  line-height: 1.6;
+  font-size: 24px;
 }
 
 .progress-card__art{
@@ -121,8 +125,8 @@ body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, 
 
 .panel__title{
   margin: 6px 6px 10px;
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 24px;
+  font-weight: 600;
   color: var(--text);
 }
 
@@ -160,8 +164,8 @@ body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, 
 }
 
 .reward-item__text{
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   color: #1f2a3a;
 }
 

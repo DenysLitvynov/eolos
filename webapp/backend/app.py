@@ -78,6 +78,6 @@ app.mount("/css", StaticFiles(directory=FRONTEND_DIR / "css"), name="css")
 @app.get("/")
 async def root():
     return FileResponse(FRONTEND_DIR / "index.html")
-""
+"""
 # ---------------------------------------------------------
 
