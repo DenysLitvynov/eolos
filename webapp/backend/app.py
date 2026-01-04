@@ -62,7 +62,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-"""
+
 # Archivos estáticos
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = BASE_DIR / "frontend"
@@ -78,6 +78,6 @@ app.mount("/css", StaticFiles(directory=FRONTEND_DIR / "css"), name="css")
 @app.get("/")
 async def root():
     return FileResponse(FRONTEND_DIR / "index.html")
-"""
+
 # ---------------------------------------------------------
 

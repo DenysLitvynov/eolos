@@ -2,6 +2,7 @@ package com.example.eolos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.example.eolos.Adapters.RecompensaAdapter;
 import com.example.eolos.Models.Recompensa_Item;
 import com.example.eolos.Models.Recompensa_Item;
 import com.example.eolos.R;
+import com.example.eolos.logica_fake.RecompensasFake;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,8 @@ public class RecompensaActivity extends AppCompatActivity {
     private RecyclerView rvProximas;
     private ProgressBar progresoKm;
     private TextView tvKmValor;
+    private RecompensasFake clienteRecompensas = new RecompensasFake();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +53,97 @@ public class RecompensaActivity extends AppCompatActivity {
         rvDisponibles.setNestedScrollingEnabled(false);
         rvProximas.setNestedScrollingEnabled(false);
 
-        rvDisponibles.setAdapter(new RecompensaAdapter(obtenerRecompensasDisponibles()));
-        rvProximas.setAdapter(new RecompensaAdapter(obtenerProximasRecompensas()));
+        cargarDatosDeRecompensas();
 
-        // TODO: sustituir por datos reales (desde backend / SharedPreferences)
-        int kmActuales = 15;
-        int kmObjetivo = 30;
-        tvKmValor.setText(kmActuales + " de " + kmObjetivo + " Km");
-        progresoKm.setMax(kmObjetivo);
-        progresoKm.setProgress(kmActuales);
+
+        obtenerKmAcumulados(new RecompensasFake.Km_acumulado_Callback() {
+            @Override
+            public void onResult(double km) {
+                double kmActuales = km;
+                double kmObjetivo = 30;
+                tvKmValor.setText(kmActuales + " de " + kmObjetivo + " Km");
+                progresoKm.setMax((int) kmObjetivo);
+                progresoKm.setProgress((int) kmActuales);
+            }
+
+            @Override
+            public void onError(String error) {
+                tvKmValor.setText(0 + " de " + 0 + " Km");
+                progresoKm.setMax(0);
+                progresoKm.setProgress(0);
+                Log.d("recompensas", "onError: ERROR CON LOS KM_ACUMULADOS");
+            }
+        });
     }
+
+    private void cargarDatosDeRecompensas() {
+
+        // obtenemos los KM acumulados
+        obtenerKmAcumulados(new RecompensasFake.Km_acumulado_Callback() {
+            @Override
+            public void onResult(double km_acumulados) {
+
+                // Luego pedimos todas las recompensas
+                clienteRecompensas.obtenerTodasLasRecompensas(new RecompensasFake.RecompensasCallback() {
+                    @Override
+                    public void onSuccess(List<Recompensa_Item> todasLasRecompensas) {
+
+                        List<Recompensa_Item> disponibles = new ArrayList<>();
+                        List<Recompensa_Item> proximas = new ArrayList<>();
+
+                        // Filtramos según crit_num_km de cada recompensa
+                        for (Recompensa_Item r : todasLasRecompensas) {
+                            if (km_acumulados >= r.get_Crit_num_km()) {
+                                disponibles.add(r);
+                            } else {
+                                proximas.add(r);
+                            }
+                        }
+
+                        // Actualiza UI
+                        runOnUiThread(() -> {
+                            rvDisponibles.setAdapter(new RecompensaAdapter(disponibles));
+                            rvProximas.setAdapter(new RecompensaAdapter(proximas));
+                        });
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(() -> {
+                            rvDisponibles.setAdapter(new RecompensaAdapter(new ArrayList<>()));
+                            rvProximas.setAdapter(new RecompensaAdapter(new ArrayList<>()));
+                        });
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+                // Error obteniendo KM → no podemos filtrar
+                rvDisponibles.setAdapter(new RecompensaAdapter(new ArrayList<>()));
+                rvProximas.setAdapter(new RecompensaAdapter(new ArrayList<>()));
+            }
+        });
+    }
+
+
+    // RecompensaActivity.java
+
+    private void obtenerKmAcumulados(RecompensasFake.Km_acumulado_Callback callback) {
+        clienteRecompensas.obtener_km_acumulados(new RecompensasFake.Km_acumulado_Callback() {
+            @Override
+            public void onResult(double km_acumulados) {
+                callback.onResult(km_acumulados);
+            }
+
+            @Override
+            public void onError(String error) {
+                callback.onError(error);
+            }
+        });
+    }
+
+
 
     private void setupBottomNavigation() {
         ImageView iconInicio = findViewById(R.id.icon1);
@@ -93,17 +178,19 @@ public class RecompensaActivity extends AppCompatActivity {
         }
     }
 
+/*
+    //TODO: Filtrar entre disponibles y proximos basados en km(<,o>)
     private List<Recompensa_Item> obtenerRecompensasDisponibles() {
         List<Recompensa_Item> list = new ArrayList<>();
 
         list.add(new Recompensa_Item(
                 R.drawable.logo_mcdonalds,
-                "10% menos en tu Mcmenú"
+                "10% menos en tu Mcmenú",0
         ));
 
         list.add(new Recompensa_Item(
                 R.drawable.logo_peluqueria,
-                "30% menos en corte + lavado"
+                "30% menos en corte + lavado",0
         ));
 
         return list;
@@ -114,17 +201,19 @@ public class RecompensaActivity extends AppCompatActivity {
 
         list.add(new Recompensa_Item(
                 R.drawable.logo_mcdonalds,
-                "10% descuento en tu Mcmenú"
+                "10% descuento en tu Mcmenú",0
         ));
         list.add(new Recompensa_Item(
                 R.drawable.logo_mcdonalds,
-                "10% descuento en tu Mcmenú"
+                "10% descuento en tu Mcmenú",0
         ));
         list.add(new Recompensa_Item(
                 R.drawable.logo_mcdonalds,
-                "10% descuento en tu Mcmenú"
+                "10% descuento en tu Mcmenú",0
         ));
 
         return list;
     }
+    /
+ */
 }
