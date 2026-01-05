@@ -90,21 +90,7 @@
 
   <div id="site-footer"></div>
 
-  <!-- Opcional: ejemplo para setear km sin modelo -->
-  <script>
-    // Cambia estos valores cuando tengas datos reales
-    const kmActual = 15;
-    const kmObjetivo = 30;
-
-    document.getElementById("kmText").textContent = `${kmActual} de ${kmObjetivo} Km`;
-    document.getElementById("kmTotal").textContent = kmActual;
-
-    const percent = Math.max(0, Math.min(100, (kmActual / kmObjetivo) * 100));
-    document.querySelector(".progressbar__fill").style.width = percent + "%";
-    document.querySelector(".progressbar").setAttribute("aria-valuenow", String(kmActual));
-    document.querySelector(".progressbar").setAttribute("aria-valuemax", String(kmObjetivo));
-  </script>
 
   <script type="module" src="../js/scripts/recompensas.js"></script>
 </body>
-</html>
+</html>\

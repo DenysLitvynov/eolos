@@ -21,4 +21,18 @@ export class RecompensasFake {
         throw e;
     }
 }
+async obtenerRecompensasUsuario() {
+    try {
+        const url = `/api/v1/recompensas/recompensas_obtenidas`;
+        // Recuperamos el token que guardaste al hacer login
+        const token = localStorage.getItem('token'); 
+
+        return await this.peticionario.hacerPeticionRest('GET', url, null, {
+            'Authorization': `Bearer ${token}` // <--- ESTO ES LO QUE FALTA
+        });
+    } catch (e) {
+        console.error('Error:', e);
+        throw e;
+    }
+}
 }

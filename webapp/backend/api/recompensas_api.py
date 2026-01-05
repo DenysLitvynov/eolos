@@ -57,6 +57,21 @@ def obtener_recompensas(db: Session = Depends(get_db)):
     except Exception as e:
         # Manejo de cualquier otra excepción no esperada
         raise HTTPException(status_code=500, detail=f"Error inesperado: {str(e)}")
+    
+@router.get("/recompensas_obtenidas", response_model=List[dict])
+def obtener_recompensas_con_progreso(
+        db: Session = Depends(get_db),
+        current_user: Usuario = Depends(get_current_user)
+    ):
+        """
+        Devuelve la lista de recompensas indicando cuáles ha superado el usuario
+        según su distancia recorrida en el mes.
+        """
+        try:
+            logica = RecompensasLogic()
+            return logica.obtener_estado_recompensas_usuario(db, current_user.usuario_id)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 # ---------------------------------------------------------
 
 

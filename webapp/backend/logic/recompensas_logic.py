@@ -92,9 +92,45 @@ class RecompensasLogic:
     
     # ---------------------------------------------------------
     
+    def obtener_estado_recompensas_usuario(self, db: Session, usuario_id: str):
+        """
+        Obtiene el estado de todas las recompensas para un usuario específico,
+        indicando si ha alcanzado cada una según sus kilómetros acumulados.
+        Args:
+            db: Sesión de base de datos.
+            usuario_id: ID del usuario.
+        Returns:
+            Lista de diccionarios con el estado de cada recompensa.
+        """
+        
+        try:
+            # 1. Obtenemos los KM actuales del usuario (puedes usar el mes actual o total)
+            km_usuario = self.obtener_distancia_total_mes_actual(db, usuario_id)
+            
+            # 2. Obtenemos todas las recompensas configuradas
+            recompensas_db = db.query(RecompensaDB).all()
+            
+            # 3. Construimos la lista con el estado de "alcanzada"
+            resultado = []
+            for r in recompensas_db:
+                # Marcamos como True si los KM del usuario superan el criterio
+                estado = {
+                    "recompensa_id": r.recompensa_id,
+                    "titulo": r.titulo,
+                    "descripcion": r.descripcion,
+                    "criterio_num_km": r.criterio_num_km,
+                    "km_actuales": km_usuario,
+                    "alcanzada": km_usuario >= r.criterio_num_km
+                }
+                resultado.append(estado)
+                
+            return resultado
+        except Exception as e:
+            raise RuntimeError(f"Error al procesar estado de recompensas: {str(e)}")
+    
     def actualizar_km_acumulados_este_mes(self, db: Session, usuario_id: str) -> float:
         """
-        Obtiene la distancia recorrida por el usuario en el MES ACTUAL 
+        Obtiene la distancia recorrida por el usuario en el MES ACTUAL self.obtener_di
         y actualiza el campo km_acumulados en la tabla recompensas_usuario con ese valor.
 
         Args:
