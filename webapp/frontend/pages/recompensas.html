@@ -74,15 +74,6 @@
             <h3 class="panel__title">Recompensas disponibles:</h3>
 
             <div class="reward-list" id="availableRewards">
-              <button class="reward-item" type="button">
-                <span class="reward-item__logo">🍔</span>
-                <span class="reward-item__text">10% menos en tu Mcmenú</span>
-              </button>
-
-              <button class="reward-item" type="button">
-                <span class="reward-item__logo">🧼</span>
-                <span class="reward-item__text">30% menos en corte + lavado</span>
-              </button>
             </div>
           </section>
 
@@ -90,27 +81,7 @@
             <h3 class="panel__title">Próximas Recompensas</h3>
 
             <div class="reward-list" id="nextRewards">
-              <div class="reward-item reward-item--muted">
-                <span class="reward-item__logo">🍔</span>
-                <span class="reward-item__text">10% descuento en tu Mcmenú</span>
-              </div>
-              <div class="reward-item reward-item--muted">
-                <span class="reward-item__logo">🍔</span>
-                <span class="reward-item__text">10% descuento en tu Mcmenú</span>
-              </div>
-              <div class="reward-item reward-item--muted">
-                <span class="reward-item__logo">🍔</span>
-                <span class="reward-item__text">10% descuento en tu Mcmenú</span>
-              </div>
-              <div class="reward-item reward-item--muted">
-                <span class="reward-item__logo">🍔</span>
-                <span class="reward-item__text">10% descuento en tu Mcmenú</span>
-              </div>
-              <div class="reward-item reward-item--muted">
-                <span class="reward-item__logo">🍔</span>
-                <span class="reward-item__text">10% descuento en tu Mcmenú</span>
-              </div>
-            </div>
+            
           </section>
         </aside>
       </section>
@@ -133,5 +104,7 @@
     document.querySelector(".progressbar").setAttribute("aria-valuenow", String(kmActual));
     document.querySelector(".progressbar").setAttribute("aria-valuemax", String(kmObjetivo));
   </script>
+
+  <script type="module" src="../js/scripts/recompensas.js"></script>
 </body>
 </html>

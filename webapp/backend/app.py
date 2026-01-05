@@ -26,6 +26,7 @@ from .api import mapas_api
 from .api import admin_mapas_api
 from .api import gestion_incidencias_api
 from .api import bicicletas_api
+from .api import recompensas_api
 from .api.home_api import router as home_router
 from .api import contaminacion_api
 
@@ -49,7 +50,7 @@ app.include_router(mapas_api.router, prefix="/api/v1")
 app.include_router(admin_mapas_api.router, prefix="/api/v1")
 app.include_router(gestion_incidencias_api.router, prefix="/api/v1")
 app.include_router(bicicletas_api.router, prefix="/api/v1")
-
+app.include_router(recompensas_api.router, prefix="/api/v1")
 app.include_router(home_router, prefix="/api/v1")
 app.include_router(contaminacion_api.router, prefix="/api/v1")
 

@@ -23,28 +23,15 @@ class RecompensasLogic:
         Returns:
             Lista de objetos RecompensaPOJO (o dicts) listos para la API.
         """
-        
         try:
             recompensas_db = db.query(RecompensaDB).all()
             
+            # Gracias a 'from_attributes=True' en el POJO, podemos hacer esto:
+            return [RecompensaPOJO.model_validate(r) for r in recompensas_db]
             
-            recompensas = []
-            for recompensa_db in recompensas_db:
-                
-                recompensa_dict = {
-                    "recompensa_id": str(recompensa_db.recompensa_id), # uuid debe convertirse a string para JSON/Pydantic
-                    "titulo": recompensa_db.titulo,
-                    "descripcion": recompensa_db.descripcion,
-                    "fecha_inicio": recompensa_db.fecha_inicio,
-                    "fecha_fin": recompensa_db.fecha_fin,
-                    "criterio_num_km": recompensa_db.criterio_num_km
-                }
-                recompensas.append(recompensa_dict) 
-            
-            return recompensas
-        
         except Exception as e:
             raise RuntimeError(f"Error al obtener recompensas: {str(e)}")
+
     
     def obtener_codigo_recompensa(self, db: Session, recompensa_id: str) -> str:
         """Obtiene el código de una recompensa específica por su ID.
