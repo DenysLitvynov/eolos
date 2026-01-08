@@ -1,0 +1,87 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Calidad\+General}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general}\index{webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Calidad\+General
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Calidad\+General\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a5bf3352d16cb3323cb35bceb7758392d}{valor\+\_\+id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a7cabcdd08b796b2c220fa7bb50d9ded7}{valor}} = Column(Float, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a194ee9571b4e3a85045414e0db2d20ad}{color}} = Column(String(50), nullable=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a933a6edb6a4c4869ffe60c8f411b2ae2}{fecha\+\_\+hora}} = Column(TIMESTAMP(timezone=True), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a7ccc01e3c2f86aad4f5f458642e5eb3b}{lat}} = Column(Float, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a13277bc8c12193235753761a4239aebb}{lon}} = Column(Float, nullable=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a5164ba53a49117232bbd76c0d7805614}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}calidad\+\_\+general"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla de calidad general (sin relación con otras tablas).
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a5164ba53a49117232bbd76c0d7805614}\index{webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a5164ba53a49117232bbd76c0d7805614} 
+str webapp.\+backend.\+db.\+models.\+Calidad\+General.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}calidad\+\_\+general"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a194ee9571b4e3a85045414e0db2d20ad}\index{webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}!color@{color}}
+\index{color@{color}!webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a194ee9571b4e3a85045414e0db2d20ad} 
+webapp.\+backend.\+db.\+models.\+Calidad\+General.\+color = Column(String(50), nullable=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a933a6edb6a4c4869ffe60c8f411b2ae2}\index{webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}!fecha\_hora@{fecha\_hora}}
+\index{fecha\_hora@{fecha\_hora}!webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}}
+\doxysubsubsection{\texorpdfstring{fecha\_hora}{fecha\_hora}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a933a6edb6a4c4869ffe60c8f411b2ae2} 
+webapp.\+backend.\+db.\+models.\+Calidad\+General.\+fecha\+\_\+hora = Column(TIMESTAMP(timezone=True), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a7ccc01e3c2f86aad4f5f458642e5eb3b}\index{webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}!lat@{lat}}
+\index{lat@{lat}!webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}}
+\doxysubsubsection{\texorpdfstring{lat}{lat}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a7ccc01e3c2f86aad4f5f458642e5eb3b} 
+webapp.\+backend.\+db.\+models.\+Calidad\+General.\+lat = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a13277bc8c12193235753761a4239aebb}\index{webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}!lon@{lon}}
+\index{lon@{lon}!webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}}
+\doxysubsubsection{\texorpdfstring{lon}{lon}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a13277bc8c12193235753761a4239aebb} 
+webapp.\+backend.\+db.\+models.\+Calidad\+General.\+lon = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a7cabcdd08b796b2c220fa7bb50d9ded7}\index{webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}!valor@{valor}}
+\index{valor@{valor}!webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}}
+\doxysubsubsection{\texorpdfstring{valor}{valor}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a7cabcdd08b796b2c220fa7bb50d9ded7} 
+webapp.\+backend.\+db.\+models.\+Calidad\+General.\+valor = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a5bf3352d16cb3323cb35bceb7758392d}\index{webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}!valor\_id@{valor\_id}}
+\index{valor\_id@{valor\_id}!webapp.backend.db.models.CalidadGeneral@{webapp.backend.db.models.CalidadGeneral}}
+\doxysubsubsection{\texorpdfstring{valor\_id}{valor\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general_a5bf3352d16cb3323cb35bceb7758392d} 
+webapp.\+backend.\+db.\+models.\+Calidad\+General.\+valor\+\_\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

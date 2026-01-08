@@ -1,0 +1,31 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+contaminacion\+\_\+logic.\+Logica\+Contaminacion}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1contaminacion__logic_1_1_logica_contaminacion}{}\label{classwebapp_1_1backend_1_1logic_1_1contaminacion__logic_1_1_logica_contaminacion}\index{webapp.backend.logic.contaminacion\_logic.LogicaContaminacion@{webapp.backend.logic.contaminacion\_logic.LogicaContaminacion}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+contaminacion\+\_\+logic.\+Logica\+Contaminacion\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1contaminacion__logic_1_1_logica_contaminacion_a309e6180f67c8b2032a2b9e5e66fa79e}{obtener\+\_\+contaminacion\+\_\+por\+\_\+estaciones}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, int limit=10)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1contaminacion__logic_1_1_logica_contaminacion_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1contaminacion__logic_1_1_logica_contaminacion_a309e6180f67c8b2032a2b9e5e66fa79e}\index{webapp.backend.logic.contaminacion\_logic.LogicaContaminacion@{webapp.backend.logic.contaminacion\_logic.LogicaContaminacion}!obtener\_contaminacion\_por\_estaciones@{obtener\_contaminacion\_por\_estaciones}}
+\index{obtener\_contaminacion\_por\_estaciones@{obtener\_contaminacion\_por\_estaciones}!webapp.backend.logic.contaminacion\_logic.LogicaContaminacion@{webapp.backend.logic.contaminacion\_logic.LogicaContaminacion}}
+\doxysubsubsection{\texorpdfstring{obtener\_contaminacion\_por\_estaciones()}{obtener\_contaminacion\_por\_estaciones()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1contaminacion__logic_1_1_logica_contaminacion_a309e6180f67c8b2032a2b9e5e66fa79e} 
+webapp.\+backend.\+logic.\+contaminacion\+\_\+logic.\+Logica\+Contaminacion.\+obtener\+\_\+contaminacion\+\_\+por\+\_\+estaciones (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{int }]{limit}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}- Obtiene las primeras estaciones (por estacion_id).
+- Para cada estación busca el punto más cercano en calidad_general.
+- Distancia aproximada sin PostGIS: (dlat^2 + dlon^2).
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{contaminacion__logic_8py}{contaminacion\+\_\+logic.\+py}}\end{DoxyCompactItemize}

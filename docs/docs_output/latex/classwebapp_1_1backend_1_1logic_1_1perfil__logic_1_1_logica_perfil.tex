@@ -1,0 +1,53 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+perfil\+\_\+logic.\+Logica\+Perfil}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil}{}\label{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil}\index{webapp.backend.logic.perfil\_logic.LogicaPerfil@{webapp.backend.logic.perfil\_logic.LogicaPerfil}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+perfil\+\_\+logic.\+Logica\+Perfil\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a7178706d1df2ec50d096c4bab666e705}{obtener\+\_\+perfil}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str usuario\+\_\+id)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a00f6560c5f29013a5066be71d70e9d42}{actualizar\+\_\+perfil}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str usuario\+\_\+id, \texorpdfstring{$\ast$}{*}, Optional\mbox{[}str\mbox{]} nombre=None, Optional\mbox{[}str\mbox{]} apellido=None, Optional\mbox{[}str\mbox{]} correo=None, Optional\mbox{[}str\mbox{]} targeta\+\_\+id=None, Optional\mbox{[}str\mbox{]} contrasena\+\_\+actual=None, Optional\mbox{[}str\mbox{]} contrasena\+\_\+nueva=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos protegidos}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a08ad6cf4a6639a4d6e5b38b201df0d05}{\+\_\+password\+\_\+valida}} (self, str password)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a08ad6cf4a6639a4d6e5b38b201df0d05}\index{webapp.backend.logic.perfil\_logic.LogicaPerfil@{webapp.backend.logic.perfil\_logic.LogicaPerfil}!\_password\_valida@{\_password\_valida}}
+\index{\_password\_valida@{\_password\_valida}!webapp.backend.logic.perfil\_logic.LogicaPerfil@{webapp.backend.logic.perfil\_logic.LogicaPerfil}}
+\doxysubsubsection{\texorpdfstring{\_password\_valida()}{\_password\_valida()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a08ad6cf4a6639a4d6e5b38b201df0d05} 
+ bool webapp.\+backend.\+logic.\+perfil\+\_\+logic.\+Logica\+Perfil.\+\_\+password\+\_\+valida (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{password}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Reglas iguales al registro:
+    - Mínimo 8 caracteres
+    - Mayúsculas
+    - Minúsculas
+    - Números
+    - Símbolos especiales
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a00f6560c5f29013a5066be71d70e9d42}\index{webapp.backend.logic.perfil\_logic.LogicaPerfil@{webapp.backend.logic.perfil\_logic.LogicaPerfil}!actualizar\_perfil@{actualizar\_perfil}}
+\index{actualizar\_perfil@{actualizar\_perfil}!webapp.backend.logic.perfil\_logic.LogicaPerfil@{webapp.backend.logic.perfil\_logic.LogicaPerfil}}
+\doxysubsubsection{\texorpdfstring{actualizar\_perfil()}{actualizar\_perfil()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a00f6560c5f29013a5066be71d70e9d42} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+logic.\+perfil\+\_\+logic.\+Logica\+Perfil.\+actualizar\+\_\+perfil (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{usuario\+\_\+id}{, }\item[{\texorpdfstring{$\ast$}{*}}]{}{, }\item[{Optional\mbox{[}str\mbox{]} }]{nombre}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{apellido}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{correo}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{targeta\+\_\+id}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{contrasena\+\_\+actual}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{contrasena\+\_\+nueva}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a7178706d1df2ec50d096c4bab666e705}\index{webapp.backend.logic.perfil\_logic.LogicaPerfil@{webapp.backend.logic.perfil\_logic.LogicaPerfil}!obtener\_perfil@{obtener\_perfil}}
+\index{obtener\_perfil@{obtener\_perfil}!webapp.backend.logic.perfil\_logic.LogicaPerfil@{webapp.backend.logic.perfil\_logic.LogicaPerfil}}
+\doxysubsubsection{\texorpdfstring{obtener\_perfil()}{obtener\_perfil()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil_a7178706d1df2ec50d096c4bab666e705} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+logic.\+perfil\+\_\+logic.\+Logica\+Perfil.\+obtener\+\_\+perfil (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{usuario\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{perfil__logic_8py}{perfil\+\_\+logic.\+py}}\end{DoxyCompactItemize}

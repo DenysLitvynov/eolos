@@ -1,0 +1,70 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+api.\+calidad\+\_\+aire\+\_\+api}
+\hypertarget{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api}{}\label{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api}\index{webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1calidad__aire__api_1_1_a_q_i_response}{AQIResponse}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1calidad__aire__api_1_1_historico_response}{Historico\+Response}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_ab4eafa021520068fc941a02cf341bcf0}{ruta\+\_\+obtener\+\_\+aqi}} (str placa\+\_\+id, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a43c698bf8944fe57bb1029b2e09b3a8f}{ruta\+\_\+obtener\+\_\+historico}} (str placa\+\_\+id, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a410ff74b94f123c135cb91d2831369de}{ruta\+\_\+obtener\+\_\+mediciones}} (str placa\+\_\+id, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a95260fa2c9b570055bbb828c51fc434d}{router}} = APIRouter(prefix="{}/calidad-\/aire"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: Víctor Morant
+Fecha: 20-11-2025
+Descripción: Rutas para calidad del aire.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_ab4eafa021520068fc941a02cf341bcf0}\index{webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}!ruta\_obtener\_aqi@{ruta\_obtener\_aqi}}
+\index{ruta\_obtener\_aqi@{ruta\_obtener\_aqi}!webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}}
+\doxysubsubsection{\texorpdfstring{ruta\_obtener\_aqi()}{ruta\_obtener\_aqi()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_ab4eafa021520068fc941a02cf341bcf0} 
+webapp.\+backend.\+api.\+calidad\+\_\+aire\+\_\+api.\+ruta\+\_\+obtener\+\_\+aqi (\begin{DoxyParamCaption}\item[{str}]{placa\+\_\+id}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene el AQI más reciente para una placa específica.
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a43c698bf8944fe57bb1029b2e09b3a8f}\index{webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}!ruta\_obtener\_historico@{ruta\_obtener\_historico}}
+\index{ruta\_obtener\_historico@{ruta\_obtener\_historico}!webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}}
+\doxysubsubsection{\texorpdfstring{ruta\_obtener\_historico()}{ruta\_obtener\_historico()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a43c698bf8944fe57bb1029b2e09b3a8f} 
+webapp.\+backend.\+api.\+calidad\+\_\+aire\+\_\+api.\+ruta\+\_\+obtener\+\_\+historico (\begin{DoxyParamCaption}\item[{str}]{placa\+\_\+id}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene todas las mediciones de las últimas 24 horas.
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a410ff74b94f123c135cb91d2831369de}\index{webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}!ruta\_obtener\_mediciones@{ruta\_obtener\_mediciones}}
+\index{ruta\_obtener\_mediciones@{ruta\_obtener\_mediciones}!webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}}
+\doxysubsubsection{\texorpdfstring{ruta\_obtener\_mediciones()}{ruta\_obtener\_mediciones()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a410ff74b94f123c135cb91d2831369de} 
+webapp.\+backend.\+api.\+calidad\+\_\+aire\+\_\+api.\+ruta\+\_\+obtener\+\_\+mediciones (\begin{DoxyParamCaption}\item[{str}]{placa\+\_\+id}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene TODAS las mediciones de una placa (sin límite temporal).
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a95260fa2c9b570055bbb828c51fc434d}\index{webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}!router@{router}}
+\index{router@{router}!webapp.backend.api.calidad\_aire\_api@{webapp.backend.api.calidad\_aire\_api}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1calidad__aire__api_a95260fa2c9b570055bbb828c51fc434d} 
+webapp.\+backend.\+api.\+calidad\+\_\+aire\+\_\+api.\+router = APIRouter(prefix="{}/calidad-\/aire"{})}
+

@@ -1,0 +1,85 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+pojos.\+trayecto.\+Trayecto}
+\hypertarget{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto}{}\label{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto}\index{webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+pojos.\+trayecto.\+Trayecto\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a65d63d642f39236d495e933380cb2ae4}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a895c60c407f839223257d268f7745481}{trayecto\+\_\+id}})
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a7623d4aacbcd7f85a5b6d0e1b3aa10bf}{obtener\+\_\+trayecto}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}})
+\item 
+float \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a730dca6119382f7040d179002a4fd6af}{calcular\+\_\+distancia}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a895c60c407f839223257d268f7745481}{trayecto\+\_\+id}} = trayecto\+\_\+id
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_doc-constructors}
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a65d63d642f39236d495e933380cb2ae4}\index{webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a65d63d642f39236d495e933380cb2ae4} 
+webapp.\+backend.\+pojos.\+trayecto.\+Trayecto.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{trayecto\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa un trayecto con su ID.
+
+Args:
+    trayecto_id (str): ID del trayecto.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a730dca6119382f7040d179002a4fd6af}\index{webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}!calcular\_distancia@{calcular\_distancia}}
+\index{calcular\_distancia@{calcular\_distancia}!webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}}
+\doxysubsubsection{\texorpdfstring{calcular\_distancia()}{calcular\_distancia()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a730dca6119382f7040d179002a4fd6af} 
+ float webapp.\+backend.\+pojos.\+trayecto.\+Trayecto.\+calcular\+\_\+distancia (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calcula la distancia total del trayecto en metros.
+
+Args:
+    db (Session): Sesión de la base de datos.
+
+Returns:
+    float: Distancia total en metros.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a7623d4aacbcd7f85a5b6d0e1b3aa10bf}\index{webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}!obtener\_trayecto@{obtener\_trayecto}}
+\index{obtener\_trayecto@{obtener\_trayecto}!webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}}
+\doxysubsubsection{\texorpdfstring{obtener\_trayecto()}{obtener\_trayecto()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a7623d4aacbcd7f85a5b6d0e1b3aa10bf} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}\mbox{]} webapp.\+backend.\+pojos.\+trayecto.\+Trayecto.\+obtener\+\_\+trayecto (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene la lista de posiciones GPS del trayecto desde la base de datos.
+
+Args:
+    db (Session): Sesión de la base de datos.
+
+Returns:
+    List[PosicionGPS]: Lista de posiciones.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a895c60c407f839223257d268f7745481}\index{webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}!trayecto\_id@{trayecto\_id}}
+\index{trayecto\_id@{trayecto\_id}!webapp.backend.pojos.trayecto.Trayecto@{webapp.backend.pojos.trayecto.Trayecto}}
+\doxysubsubsection{\texorpdfstring{trayecto\_id}{trayecto\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1trayecto_1_1_trayecto_a895c60c407f839223257d268f7745481} 
+webapp.\+backend.\+pojos.\+trayecto.\+Trayecto.\+trayecto\+\_\+id = trayecto\+\_\+id}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/pojos/\mbox{\hyperlink{trayecto_8py}{trayecto.\+py}}\end{DoxyCompactItemize}

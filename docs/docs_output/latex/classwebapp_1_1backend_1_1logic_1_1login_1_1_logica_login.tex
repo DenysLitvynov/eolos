@@ -1,0 +1,71 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+login.\+Logica\+Login}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login}{}\label{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login}\index{webapp.backend.logic.login.LogicaLogin@{webapp.backend.logic.login.LogicaLogin}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+login.\+Logica\+Login\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_ac2cfa3cdee3962991843366ab3ff37f7}{validar\+\_\+credenciales}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str correo, str contrasena)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_a5677edd3f8de71c0f6615477a5f11dac}{generar\+\_\+token}} (self, usuario)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_acabf8d0880e201d9dedcaa79e99220dd}{login}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str correo, str contrasena)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_a5677edd3f8de71c0f6615477a5f11dac}\index{webapp.backend.logic.login.LogicaLogin@{webapp.backend.logic.login.LogicaLogin}!generar\_token@{generar\_token}}
+\index{generar\_token@{generar\_token}!webapp.backend.logic.login.LogicaLogin@{webapp.backend.logic.login.LogicaLogin}}
+\doxysubsubsection{\texorpdfstring{generar\_token()}{generar\_token()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_a5677edd3f8de71c0f6615477a5f11dac} 
+webapp.\+backend.\+logic.\+login.\+Logica\+Login.\+generar\+\_\+token (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{usuario}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Genera un token JWT con lista de roles.
+
+Args:
+    usuario: Objeto Usuario completo
+
+Returns:
+    str: Token JWT.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_acabf8d0880e201d9dedcaa79e99220dd}\index{webapp.backend.logic.login.LogicaLogin@{webapp.backend.logic.login.LogicaLogin}!login@{login}}
+\index{login@{login}!webapp.backend.logic.login.LogicaLogin@{webapp.backend.logic.login.LogicaLogin}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_acabf8d0880e201d9dedcaa79e99220dd} 
+webapp.\+backend.\+logic.\+login.\+Logica\+Login.\+login (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{correo}{, }\item[{str}]{contrasena}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Proceso completo de login.
+
+Args:
+    db (Session): Sesión de BD.
+    correo (str): Correo.
+    contrasena (str): Contraseña.
+
+Returns:
+    str: Token si éxito.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_ac2cfa3cdee3962991843366ab3ff37f7}\index{webapp.backend.logic.login.LogicaLogin@{webapp.backend.logic.login.LogicaLogin}!validar\_credenciales@{validar\_credenciales}}
+\index{validar\_credenciales@{validar\_credenciales}!webapp.backend.logic.login.LogicaLogin@{webapp.backend.logic.login.LogicaLogin}}
+\doxysubsubsection{\texorpdfstring{validar\_credenciales()}{validar\_credenciales()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login_ac2cfa3cdee3962991843366ab3ff37f7} 
+webapp.\+backend.\+logic.\+login.\+Logica\+Login.\+validar\+\_\+credenciales (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{correo}{, }\item[{str}]{contrasena}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Valida las credenciales del usuario.
+
+Args:
+    db (Session): Sesión de BD.
+    correo (str): Correo del usuario.
+    contrasena (str): Contraseña plana.
+
+Returns:
+    Usuario: Objeto usuario si válido, None si no.
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{login_8py}{login.\+py}}\end{DoxyCompactItemize}

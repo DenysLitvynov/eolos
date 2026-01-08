@@ -1,0 +1,103 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Trayecto}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Trayecto
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Trayecto\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a9a5dfe01969878c7efebae46d5545b95}{trayecto\+\_\+id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_aaef1049a1f80e35d9b9238576704bfb2}{usuario\+\_\+id}} = Column(String(36), Foreign\+Key("{}usuarios.\+usuario\+\_\+id"{}))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_ae541d6ecc6451272a3a1548988d1c895}{bicicleta\+\_\+id}} = Column(String(20), Foreign\+Key("{}bicicletas.\+bicicleta\+\_\+id"{}))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a0307fddb5ff63893bbed4636128f7d24}{fecha\+\_\+inicio}} = Column(TIMESTAMP(timezone=True), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a1d5ba098135150b1215c0c94b21f905b}{fecha\+\_\+fin}} = Column(TIMESTAMP(timezone=True), nullable=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a1b765f7919ae894aeacac805e1a88ca0}{origen\+\_\+estacion\+\_\+id}} = Column(Integer, Foreign\+Key("{}estaciones.\+estacion\+\_\+id"{}))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a8a600daf9d787ce925f978745da45c01}{destino\+\_\+estacion\+\_\+id}} = Column(Integer, Foreign\+Key("{}estaciones.\+estacion\+\_\+id"{}), nullable=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_afa6d2e9f23f43b6d4d31bccc28ec4b6d}{distancia\+\_\+total}} = Column(Float)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a2e43e84681292d17b9060b03f113823e}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}trayectos"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla para almacenar los trayectos realizados.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a2e43e84681292d17b9060b03f113823e}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a2e43e84681292d17b9060b03f113823e} 
+str webapp.\+backend.\+db.\+models.\+Trayecto.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}trayectos"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_ae541d6ecc6451272a3a1548988d1c895}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!bicicleta\_id@{bicicleta\_id}}
+\index{bicicleta\_id@{bicicleta\_id}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{bicicleta\_id}{bicicleta\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_ae541d6ecc6451272a3a1548988d1c895} 
+webapp.\+backend.\+db.\+models.\+Trayecto.\+bicicleta\+\_\+id = Column(String(20), Foreign\+Key("{}bicicletas.\+bicicleta\+\_\+id"{}))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a8a600daf9d787ce925f978745da45c01}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!destino\_estacion\_id@{destino\_estacion\_id}}
+\index{destino\_estacion\_id@{destino\_estacion\_id}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{destino\_estacion\_id}{destino\_estacion\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a8a600daf9d787ce925f978745da45c01} 
+webapp.\+backend.\+db.\+models.\+Trayecto.\+destino\+\_\+estacion\+\_\+id = Column(Integer, Foreign\+Key("{}estaciones.\+estacion\+\_\+id"{}), nullable=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_afa6d2e9f23f43b6d4d31bccc28ec4b6d}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!distancia\_total@{distancia\_total}}
+\index{distancia\_total@{distancia\_total}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{distancia\_total}{distancia\_total}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_afa6d2e9f23f43b6d4d31bccc28ec4b6d} 
+webapp.\+backend.\+db.\+models.\+Trayecto.\+distancia\+\_\+total = Column(Float)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a1d5ba098135150b1215c0c94b21f905b}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!fecha\_fin@{fecha\_fin}}
+\index{fecha\_fin@{fecha\_fin}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{fecha\_fin}{fecha\_fin}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a1d5ba098135150b1215c0c94b21f905b} 
+webapp.\+backend.\+db.\+models.\+Trayecto.\+fecha\+\_\+fin = Column(TIMESTAMP(timezone=True), nullable=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a0307fddb5ff63893bbed4636128f7d24}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!fecha\_inicio@{fecha\_inicio}}
+\index{fecha\_inicio@{fecha\_inicio}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{fecha\_inicio}{fecha\_inicio}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a0307fddb5ff63893bbed4636128f7d24} 
+webapp.\+backend.\+db.\+models.\+Trayecto.\+fecha\+\_\+inicio = Column(TIMESTAMP(timezone=True), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a1b765f7919ae894aeacac805e1a88ca0}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!origen\_estacion\_id@{origen\_estacion\_id}}
+\index{origen\_estacion\_id@{origen\_estacion\_id}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{origen\_estacion\_id}{origen\_estacion\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a1b765f7919ae894aeacac805e1a88ca0} 
+webapp.\+backend.\+db.\+models.\+Trayecto.\+origen\+\_\+estacion\+\_\+id = Column(Integer, Foreign\+Key("{}estaciones.\+estacion\+\_\+id"{}))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a9a5dfe01969878c7efebae46d5545b95}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!trayecto\_id@{trayecto\_id}}
+\index{trayecto\_id@{trayecto\_id}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{trayecto\_id}{trayecto\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_a9a5dfe01969878c7efebae46d5545b95} 
+webapp.\+backend.\+db.\+models.\+Trayecto.\+trayecto\+\_\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_aaef1049a1f80e35d9b9238576704bfb2}\index{webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}!usuario\_id@{usuario\_id}}
+\index{usuario\_id@{usuario\_id}!webapp.backend.db.models.Trayecto@{webapp.backend.db.models.Trayecto}}
+\doxysubsubsection{\texorpdfstring{usuario\_id}{usuario\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto_aaef1049a1f80e35d9b9238576704bfb2} 
+webapp.\+backend.\+db.\+models.\+Trayecto.\+usuario\+\_\+id = Column(String(36), Foreign\+Key("{}usuarios.\+usuario\+\_\+id"{}))\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

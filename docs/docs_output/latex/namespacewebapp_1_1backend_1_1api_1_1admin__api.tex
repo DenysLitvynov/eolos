@@ -1,0 +1,123 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+api.\+admin\+\_\+api}
+\hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api}{}\label{namespacewebapp_1_1backend_1_1api_1_1admin__api}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1admin__api_1_1_usuario_admin_out}{Usuario\+Admin\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1admin__api_1_1_usuario_admin_create_in}{Usuario\+Admin\+Create\+In}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1admin__api_1_1_usuario_admin_update_in}{Usuario\+Admin\+Update\+In}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_af36349984e156594b6764b26de8e22c7}{get\+\_\+current\+\_\+user}} (str\texorpdfstring{$\vert$}{|}None authorization=Header(default=None), Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}} (\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} current\+\_\+user=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_af36349984e156594b6764b26de8e22c7}{get\+\_\+current\+\_\+user}}))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_acfaf31d41c7af0c18b006022ecd18ad8}{listar\+\_\+usuarios}} (int limit=Query(default=100, ge=1, le=500), int offset=Query(default=0, ge=0), Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \+\_\+=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}}))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_aacf9410d220c36eee3ffeba040e011e8}{crear\+\_\+usuario\+\_\+admin}} (\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1admin__api_1_1_usuario_admin_create_in}{Usuario\+Admin\+Create\+In}} data, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \+\_\+=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}}))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a4c888c7afd2b8ff7879119e366dde2a3}{actualizar\+\_\+usuario\+\_\+admin}} (str usuario\+\_\+id, \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1admin__api_1_1_usuario_admin_update_in}{Usuario\+Admin\+Update\+In}} data, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \+\_\+=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}}))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a9ec053e87b4b5c72c3b72fc47ce33c47}{eliminar\+\_\+usuario\+\_\+admin}} (str usuario\+\_\+id, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \+\_\+=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}}))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a629b84ca8d6055d916c2385be573fbf4}{router}} = APIRouter(prefix="{}/admin\+\_\+api"{}, tags=\mbox{[}"{}admin"{}\mbox{]})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a443c3082f7a0fbc06c8bff30acf64474}{logica}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin}{Logica\+Admin}}()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a00b33872179575278a7c66bad02660af}{JWT\+\_\+\+SECRET}} = os.\+getenv("{}JWT\+\_\+\+SECRET"{})
+\item 
+str \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a421fbdaefd8e61ace0683a81064fb488}{JWT\+\_\+\+ALGORITHM}} = "{}HS256"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: jinwei
+Fecha: 07-12-2025
+Descripción: API de administración de usuarios (listado / CRUD) usando JWT Bearer.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_a4c888c7afd2b8ff7879119e366dde2a3}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!actualizar\_usuario\_admin@{actualizar\_usuario\_admin}}
+\index{actualizar\_usuario\_admin@{actualizar\_usuario\_admin}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{actualizar\_usuario\_admin()}{actualizar\_usuario\_admin()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_a4c888c7afd2b8ff7879119e366dde2a3} 
+webapp.\+backend.\+api.\+admin\+\_\+api.\+actualizar\+\_\+usuario\+\_\+admin (\begin{DoxyParamCaption}\item[{str}]{usuario\+\_\+id}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1admin__api_1_1_usuario_admin_update_in}{Usuario\+Admin\+Update\+In}}}]{data}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{\+\_\+}{ = {\ttfamily Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}})}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Actualiza los datos de un usuario (sin cambiar la contraseña).\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_aacf9410d220c36eee3ffeba040e011e8}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!crear\_usuario\_admin@{crear\_usuario\_admin}}
+\index{crear\_usuario\_admin@{crear\_usuario\_admin}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{crear\_usuario\_admin()}{crear\_usuario\_admin()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_aacf9410d220c36eee3ffeba040e011e8} 
+webapp.\+backend.\+api.\+admin\+\_\+api.\+crear\+\_\+usuario\+\_\+admin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1admin__api_1_1_usuario_admin_create_in}{Usuario\+Admin\+Create\+In}}}]{data}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{\+\_\+}{ = {\ttfamily Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}})}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea un usuario nuevo.\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_a9ec053e87b4b5c72c3b72fc47ce33c47}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!eliminar\_usuario\_admin@{eliminar\_usuario\_admin}}
+\index{eliminar\_usuario\_admin@{eliminar\_usuario\_admin}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{eliminar\_usuario\_admin()}{eliminar\_usuario\_admin()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_a9ec053e87b4b5c72c3b72fc47ce33c47} 
+webapp.\+backend.\+api.\+admin\+\_\+api.\+eliminar\+\_\+usuario\+\_\+admin (\begin{DoxyParamCaption}\item[{str}]{usuario\+\_\+id}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{\+\_\+}{ = {\ttfamily Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}})}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Elimina un usuario.\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_af36349984e156594b6764b26de8e22c7}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!get\_current\_user@{get\_current\_user}}
+\index{get\_current\_user@{get\_current\_user}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{get\_current\_user()}{get\_current\_user()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_af36349984e156594b6764b26de8e22c7} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+api.\+admin\+\_\+api.\+get\+\_\+current\+\_\+user (\begin{DoxyParamCaption}\item[{str \texorpdfstring{$\vert$}{|} None }]{authorization}{ = {\ttfamily Header(default=None)}, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Lee el token y devuelve un Usuario.\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_acfaf31d41c7af0c18b006022ecd18ad8}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!listar\_usuarios@{listar\_usuarios}}
+\index{listar\_usuarios@{listar\_usuarios}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{listar\_usuarios()}{listar\_usuarios()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_acfaf31d41c7af0c18b006022ecd18ad8} 
+webapp.\+backend.\+api.\+admin\+\_\+api.\+listar\+\_\+usuarios (\begin{DoxyParamCaption}\item[{int }]{limit}{ = {\ttfamily Query(default=100,~ge=1,~le=500)}, }\item[{int }]{offset}{ = {\ttfamily Query(default=0,~ge=0)}, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{\+\_\+}{ = {\ttfamily Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}{require\+\_\+admin}})}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Lista usuarios con paginación.
+Ejemplo:
+  /usuarios?limit=100&offset=0
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!require\_admin@{require\_admin}}
+\index{require\_admin@{require\_admin}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{require\_admin()}{require\_admin()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_a374ae8884a23f360dd0536fc702152f9} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+api.\+admin\+\_\+api.\+require\+\_\+admin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{current\+\_\+user}{ = {\ttfamily Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1admin__api_af36349984e156594b6764b26de8e22c7}{get\+\_\+current\+\_\+user}})}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Solo acceso a admin.\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_a421fbdaefd8e61ace0683a81064fb488}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!JWT\_ALGORITHM@{JWT\_ALGORITHM}}
+\index{JWT\_ALGORITHM@{JWT\_ALGORITHM}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{JWT\_ALGORITHM}{JWT\_ALGORITHM}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_a421fbdaefd8e61ace0683a81064fb488} 
+str webapp.\+backend.\+api.\+admin\+\_\+api.\+JWT\+\_\+\+ALGORITHM = "{}HS256"{}}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_a00b33872179575278a7c66bad02660af}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!JWT\_SECRET@{JWT\_SECRET}}
+\index{JWT\_SECRET@{JWT\_SECRET}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{JWT\_SECRET}{JWT\_SECRET}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_a00b33872179575278a7c66bad02660af} 
+webapp.\+backend.\+api.\+admin\+\_\+api.\+JWT\+\_\+\+SECRET = os.\+getenv("{}JWT\+\_\+\+SECRET"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_a443c3082f7a0fbc06c8bff30acf64474}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!logica@{logica}}
+\index{logica@{logica}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{logica}{logica}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_a443c3082f7a0fbc06c8bff30acf64474} 
+webapp.\+backend.\+api.\+admin\+\_\+api.\+logica = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin}{Logica\+Admin}}()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1admin__api_a629b84ca8d6055d916c2385be573fbf4}\index{webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}!router@{router}}
+\index{router@{router}!webapp.backend.api.admin\_api@{webapp.backend.api.admin\_api}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1admin__api_a629b84ca8d6055d916c2385be573fbf4} 
+webapp.\+backend.\+api.\+admin\+\_\+api.\+router = APIRouter(prefix="{}/admin\+\_\+api"{}, tags=\mbox{[}"{}admin"{}\mbox{]})}
+

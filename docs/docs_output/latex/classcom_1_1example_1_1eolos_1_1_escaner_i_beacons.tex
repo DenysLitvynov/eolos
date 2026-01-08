@@ -1,0 +1,251 @@
+\doxysection{Referencia de la clase com.\+example.\+eolos.\+Escaner\+IBeacons}
+\hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons}{}\label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+
+
+Diagrama de colaboración de com.\+example.\+eolos.\+Escaner\+IBeacons\+:
+% FIG 0
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1_escaner_i_beacons_1_1_on_beacon_detected_listener}{On\+Beacon\+Detected\+Listener}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a20fad9a48ec256f17ab36c8090140abd}{set\+Id\+Bici}} (String id)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a0f665a9966d32435a27ae376bfd7f17c}{detener\+Busqueda\+Dispositivos\+BTLE}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4d00d73326041ce64ded70b485cf5d6d}{inicializar\+Blue\+Tooth}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ac83513a7a6a9bd5e40bc5d2da661629a}{iniciar\+Escaneo\+Automatico}} (String uuid)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_abda61dc197c5605391748f6d92c31b3d}{destroy}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static synchronized \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aaaf2560c2538c120537a68a577c7c0bd}{Escaner\+IBeacons}} \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_afae12b56579927636871df81a30f8a13}{get\+Instance}} (Context \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a7099ce64fd2a0c55467f6b306b855b3e}{context}}, \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1_escaner_i_beacons_1_1_on_beacon_detected_listener}{On\+Beacon\+Detected\+Listener}} \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_acc1fc834dfe7aa3497a3257bb5f1dc73}{listener}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+Context \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a7099ce64fd2a0c55467f6b306b855b3e}{context}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aaaf2560c2538c120537a68a577c7c0bd}{Escaner\+IBeacons}} (Context \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a7099ce64fd2a0c55467f6b306b855b3e}{context}}, \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1_escaner_i_beacons_1_1_on_beacon_detected_listener}{On\+Beacon\+Detected\+Listener}} \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_acc1fc834dfe7aa3497a3257bb5f1dc73}{listener}})
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a7fefb8704a1c4e4b53fc871f79c18d88}{mostrar\+Informacion\+Dispositivo\+BTLE}} (Scan\+Result resultado)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a84c57553d7746803c4e79a040cd8aab1}{buscar\+Por\+UUID}} (final String uuid\+Buscado)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+Bluetooth\+Le\+Scanner \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4c4f826b50bf52d5d593dec61bd545e0}{scanner}}
+\item 
+Scan\+Callback \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aa204a00e43777b5ac88f2eb2699e3d92}{scan\+Callback}}
+\item 
+final Handler \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aac681200e292bbccfe2237d2c148cbe1}{handler}} = new Handler()
+\item 
+\mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1_escaner_i_beacons_1_1_on_beacon_detected_listener}{On\+Beacon\+Detected\+Listener}} \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_acc1fc834dfe7aa3497a3257bb5f1dc73}{listener}}
+\item 
+final Map$<$ String, Long $>$ \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4e95201e40b798e1e86684be62bd749a}{last\+Seen}} = new Hash\+Map$<$$>$()
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_abd562b5d675b3f013b321b51d0dce860}{id\+Bici}} = "{}sin\+\_\+asignar"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ac6f30e385642c52f04725248dfd14d00}{TAG}} = "{}$>$$>$$>$$>$"{}
+\item 
+static final long \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a95ac304ca2195caa22d89087584ebaf8}{DUPLICATE\+\_\+\+THRESHOLD\+\_\+\+MS}} = 3000
+\item 
+static final long \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a39e66fa1047888604431cb7f13111e45}{REPEAT\+\_\+\+SCAN\+\_\+\+MS}} = 30\+\_\+000
+\item 
+static \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aaaf2560c2538c120537a68a577c7c0bd}{Escaner\+IBeacons}} \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ad7c800a30a90bc56f8880afc4f55071b}{instance}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_doc-constructors}
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aaaf2560c2538c120537a68a577c7c0bd}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!EscanerIBeacons@{EscanerIBeacons}}
+\index{EscanerIBeacons@{EscanerIBeacons}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{EscanerIBeacons()}{EscanerIBeacons()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aaaf2560c2538c120537a68a577c7c0bd} 
+com.\+example.\+eolos.\+Escaner\+IBeacons.\+Escaner\+IBeacons (\begin{DoxyParamCaption}\item[{Context}]{context}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1_escaner_i_beacons_1_1_on_beacon_detected_listener}{On\+Beacon\+Detected\+Listener}}}]{listener}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Constructor privado (singleton).
+
+
+\begin{DoxyParams}{Parámetros}
+{\em context} & Contexto de la aplicación \\
+\hline
+{\em listener} & Listener que recibirá las medidas cuando se detecte el beacon correcto \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a84c57553d7746803c4e79a040cd8aab1}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!buscarPorUUID@{buscarPorUUID}}
+\index{buscarPorUUID@{buscarPorUUID}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{buscarPorUUID()}{buscarPorUUID()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a84c57553d7746803c4e79a040cd8aab1} 
+void com.\+example.\+eolos.\+Escaner\+IBeacons.\+buscar\+Por\+UUID (\begin{DoxyParamCaption}\item[{final String}]{uuid\+Buscado}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Inicia el escaneo BLE filtrando exclusivamente por el uuid del beacon indicado.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em uuid\+Buscado} & uuid exacto del beacon a buscar \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_abda61dc197c5605391748f6d92c31b3d}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!destroy@{destroy}}
+\index{destroy@{destroy}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_abda61dc197c5605391748f6d92c31b3d} 
+void com.\+example.\+eolos.\+Escaner\+IBeacons.\+destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Detiene el escaneo, limpia todos los recursos y destruye la instancia singleton. Debe llamarse al cerrar la aplicación o al desconectar. \Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a0f665a9966d32435a27ae376bfd7f17c}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!detenerBusquedaDispositivosBTLE@{detenerBusquedaDispositivosBTLE}}
+\index{detenerBusquedaDispositivosBTLE@{detenerBusquedaDispositivosBTLE}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{detenerBusquedaDispositivosBTLE()}{detenerBusquedaDispositivosBTLE()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a0f665a9966d32435a27ae376bfd7f17c} 
+void com.\+example.\+eolos.\+Escaner\+IBeacons.\+detener\+Busqueda\+Dispositivos\+BTLE (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Detiene el escaneo BLE actual si está en curso. \Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_afae12b56579927636871df81a30f8a13}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_afae12b56579927636871df81a30f8a13} 
+synchronized \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aaaf2560c2538c120537a68a577c7c0bd}{Escaner\+IBeacons}} com.\+example.\+eolos.\+Escaner\+IBeacons.\+get\+Instance (\begin{DoxyParamCaption}\item[{Context}]{context}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1_escaner_i_beacons_1_1_on_beacon_detected_listener}{On\+Beacon\+Detected\+Listener}}}]{listener}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Obtiene la única instancia de \doxylink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons}{Escaner\+IBeacons} (patrón Singleton). Si ya existe, actualiza el listener.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em context} & Contexto de la aplicación \\
+\hline
+{\em listener} & Listener para recibir las detecciones \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+Instancia única de \doxylink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons}{Escaner\+IBeacons} 
+\end{DoxyReturn}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4d00d73326041ce64ded70b485cf5d6d}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!inicializarBlueTooth@{inicializarBlueTooth}}
+\index{inicializarBlueTooth@{inicializarBlueTooth}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{inicializarBlueTooth()}{inicializarBlueTooth()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4d00d73326041ce64ded70b485cf5d6d} 
+void com.\+example.\+eolos.\+Escaner\+IBeacons.\+inicializar\+Blue\+Tooth (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Inicializa el adaptador Bluetooth y obtiene el Bluetooth\+Le\+Scanner. Si Bluetooth no está disponible o desactivado, registra advertencia. \Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ac83513a7a6a9bd5e40bc5d2da661629a}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!iniciarEscaneoAutomatico@{iniciarEscaneoAutomatico}}
+\index{iniciarEscaneoAutomatico@{iniciarEscaneoAutomatico}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{iniciarEscaneoAutomatico()}{iniciarEscaneoAutomatico()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ac83513a7a6a9bd5e40bc5d2da661629a} 
+void com.\+example.\+eolos.\+Escaner\+IBeacons.\+iniciar\+Escaneo\+Automatico (\begin{DoxyParamCaption}\item[{String}]{uuid}{}\end{DoxyParamCaption})}
+
+Inicia el escaneo automático del beacon indicado. Detiene cualquier escaneo previo, realiza un primer escaneo inmediato y lo repite cada 30 segundos.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em uuid} & uuid exacto del beacon a escanear \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a7fefb8704a1c4e4b53fc871f79c18d88}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!mostrarInformacionDispositivoBTLE@{mostrarInformacionDispositivoBTLE}}
+\index{mostrarInformacionDispositivoBTLE@{mostrarInformacionDispositivoBTLE}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{mostrarInformacionDispositivoBTLE()}{mostrarInformacionDispositivoBTLE()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a7fefb8704a1c4e4b53fc871f79c18d88} 
+void com.\+example.\+eolos.\+Escaner\+IBeacons.\+mostrar\+Informacion\+Dispositivo\+BTLE (\begin{DoxyParamCaption}\item[{Scan\+Result}]{resultado}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Muestra información del dispositivo detectado y filtra duplicados en menos de 5 segundos.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em resultado} & Resultado del escaneo BLE \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a20fad9a48ec256f17ab36c8090140abd}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!setIdBici@{setIdBici}}
+\index{setIdBici@{setIdBici}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{setIdBici()}{setIdBici()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a20fad9a48ec256f17ab36c8090140abd} 
+void com.\+example.\+eolos.\+Escaner\+IBeacons.\+set\+Id\+Bici (\begin{DoxyParamCaption}\item[{String}]{id}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a7099ce64fd2a0c55467f6b306b855b3e}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!context@{context}}
+\index{context@{context}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{context}{context}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a7099ce64fd2a0c55467f6b306b855b3e} 
+Context com.\+example.\+eolos.\+Escaner\+IBeacons.\+context}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a95ac304ca2195caa22d89087584ebaf8}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!DUPLICATE\_THRESHOLD\_MS@{DUPLICATE\_THRESHOLD\_MS}}
+\index{DUPLICATE\_THRESHOLD\_MS@{DUPLICATE\_THRESHOLD\_MS}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{DUPLICATE\_THRESHOLD\_MS}{DUPLICATE\_THRESHOLD\_MS}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a95ac304ca2195caa22d89087584ebaf8} 
+final long com.\+example.\+eolos.\+Escaner\+IBeacons.\+DUPLICATE\+\_\+\+THRESHOLD\+\_\+\+MS = 3000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aac681200e292bbccfe2237d2c148cbe1}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!handler@{handler}}
+\index{handler@{handler}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{handler}{handler}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aac681200e292bbccfe2237d2c148cbe1} 
+final Handler com.\+example.\+eolos.\+Escaner\+IBeacons.\+handler = new Handler()\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_abd562b5d675b3f013b321b51d0dce860}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!idBici@{idBici}}
+\index{idBici@{idBici}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{idBici}{idBici}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_abd562b5d675b3f013b321b51d0dce860} 
+String com.\+example.\+eolos.\+Escaner\+IBeacons.\+id\+Bici = "{}sin\+\_\+asignar"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ad7c800a30a90bc56f8880afc4f55071b}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!instance@{instance}}
+\index{instance@{instance}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ad7c800a30a90bc56f8880afc4f55071b} 
+\mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aaaf2560c2538c120537a68a577c7c0bd}{Escaner\+IBeacons}} com.\+example.\+eolos.\+Escaner\+IBeacons.\+instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4e95201e40b798e1e86684be62bd749a}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!lastSeen@{lastSeen}}
+\index{lastSeen@{lastSeen}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{lastSeen}{lastSeen}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4e95201e40b798e1e86684be62bd749a} 
+final Map$<$String, Long$>$ com.\+example.\+eolos.\+Escaner\+IBeacons.\+last\+Seen = new Hash\+Map$<$$>$()\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_acc1fc834dfe7aa3497a3257bb5f1dc73}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!listener@{listener}}
+\index{listener@{listener}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{listener}{listener}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_acc1fc834dfe7aa3497a3257bb5f1dc73} 
+\mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1_escaner_i_beacons_1_1_on_beacon_detected_listener}{On\+Beacon\+Detected\+Listener}} com.\+example.\+eolos.\+Escaner\+IBeacons.\+listener\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a39e66fa1047888604431cb7f13111e45}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!REPEAT\_SCAN\_MS@{REPEAT\_SCAN\_MS}}
+\index{REPEAT\_SCAN\_MS@{REPEAT\_SCAN\_MS}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{REPEAT\_SCAN\_MS}{REPEAT\_SCAN\_MS}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a39e66fa1047888604431cb7f13111e45} 
+final long com.\+example.\+eolos.\+Escaner\+IBeacons.\+REPEAT\+\_\+\+SCAN\+\_\+\+MS = 30\+\_\+000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aa204a00e43777b5ac88f2eb2699e3d92}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!scanCallback@{scanCallback}}
+\index{scanCallback@{scanCallback}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{scanCallback}{scanCallback}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_aa204a00e43777b5ac88f2eb2699e3d92} 
+Scan\+Callback com.\+example.\+eolos.\+Escaner\+IBeacons.\+scan\+Callback\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4c4f826b50bf52d5d593dec61bd545e0}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!scanner@{scanner}}
+\index{scanner@{scanner}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{scanner}{scanner}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_a4c4f826b50bf52d5d593dec61bd545e0} 
+Bluetooth\+Le\+Scanner com.\+example.\+eolos.\+Escaner\+IBeacons.\+scanner\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ac6f30e385642c52f04725248dfd14d00}\index{com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}!TAG@{TAG}}
+\index{TAG@{TAG}!com.example.eolos.EscanerIBeacons@{com.example.eolos.EscanerIBeacons}}
+\doxysubsubsection{\texorpdfstring{TAG}{TAG}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons_ac6f30e385642c52f04725248dfd14d00} 
+final String com.\+example.\+eolos.\+Escaner\+IBeacons.\+TAG = "{}$>$$>$$>$$>$"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/\mbox{\hyperlink{_escaner_i_beacons_8java}{Escaner\+IBeacons.\+java}}\end{DoxyCompactItemize}

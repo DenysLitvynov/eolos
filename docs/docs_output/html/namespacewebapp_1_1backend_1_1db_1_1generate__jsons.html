@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Éolos: Referencia del espacio de nombres webapp.backend.db.generate_jsons</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Éolos<span id="projectnumber">&#160;v3.0</span>
+   </div>
+   <div id="projectbrief">Documentación técnica del proyecto</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('namespacewebapp_1_1backend_1_1db_1_1generate__jsons.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del espacio de nombres webapp.backend.db.generate_jsons</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a35405a6e2412ad7632efd60cc993c20a" id="r_a35405a6e2412ad7632efd60cc993c20a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35405a6e2412ad7632efd60cc993c20a">db</a> = SessionLocal()</td></tr>
+<tr class="memitem:ad4c3dcc9ce5019b70dbd4b2f8ed9ec15" id="r_ad4c3dcc9ce5019b70dbd4b2f8ed9ec15"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4c3dcc9ce5019b70dbd4b2f8ed9ec15">targetas</a> = [t.targeta_id for t in db.query(<a class="el" href="classwebapp_1_1backend_1_1db_1_1models_1_1_mibisivalencia.html">Mibisivalencia</a>).all()]</td></tr>
+<tr class="memitem:ae66df194c8450e2ab833dd38658a10c8" id="r_ae66df194c8450e2ab833dd38658a10c8"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae66df194c8450e2ab833dd38658a10c8">estaciones</a></td></tr>
+<tr class="memitem:a605afb6ccd654a28dd011ec96239b24e" id="r_a605afb6ccd654a28dd011ec96239b24e"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a605afb6ccd654a28dd011ec96239b24e">bicicletas</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
+<div class="textblock"><pre class="fragment">Autor: Denys Litvynov Lymanets
+Fecha: 03-12-2025
+Descripción: Script para generar JSONs con datos de la base de datos después de seed.
+</pre> </div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Documentación de variables</h2>
+<a id="a605afb6ccd654a28dd011ec96239b24e" name="a605afb6ccd654a28dd011ec96239b24e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a605afb6ccd654a28dd011ec96239b24e">&#9670;&#160;</a></span>bicicletas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list webapp.backend.db.generate_jsons.bicicletas</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor inicial:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  [</div>
+<div class="line"><span class="lineno">    2</span>        {</div>
+<div class="line"><span class="lineno">    3</span>            <span class="stringliteral">&quot;bicicleta_id&quot;</span>: b.bicicleta_id,</div>
+<div class="line"><span class="lineno">    4</span>            <span class="stringliteral">&quot;estacion_id&quot;</span>: b.estacion_id,</div>
+<div class="line"><span class="lineno">    5</span>            <span class="stringliteral">&quot;qr_code&quot;</span>: b.qr_code,</div>
+<div class="line"><span class="lineno">    6</span>            <span class="stringliteral">&quot;estado&quot;</span>: str(b.estado)  <span class="comment"># Convertir Enum a string</span></div>
+<div class="line"><span class="lineno">    7</span>        }</div>
+<div class="line"><span class="lineno">    8</span>        <span class="keywordflow">for</span> b <span class="keywordflow">in</span> db.query(Bicicleta).all()</div>
+<div class="line"><span class="lineno">    9</span>    ]</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a35405a6e2412ad7632efd60cc993c20a" name="a35405a6e2412ad7632efd60cc993c20a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35405a6e2412ad7632efd60cc993c20a">&#9670;&#160;</a></span>db</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">webapp.backend.db.generate_jsons.db = SessionLocal()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae66df194c8450e2ab833dd38658a10c8" name="ae66df194c8450e2ab833dd38658a10c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66df194c8450e2ab833dd38658a10c8">&#9670;&#160;</a></span>estaciones</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list webapp.backend.db.generate_jsons.estaciones</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor inicial:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  [</div>
+<div class="line"><span class="lineno">    2</span>        {<span class="stringliteral">&quot;estacion_id&quot;</span>: e.estacion_id, <span class="stringliteral">&quot;nombre&quot;</span>: e.nombre, <span class="stringliteral">&quot;lat&quot;</span>: e.lat, <span class="stringliteral">&quot;lon&quot;</span>: e.lon}</div>
+<div class="line"><span class="lineno">    3</span>        <span class="keywordflow">for</span> e <span class="keywordflow">in</span> db.query(Estacion).all()</div>
+<div class="line"><span class="lineno">    4</span>    ]</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad4c3dcc9ce5019b70dbd4b2f8ed9ec15" name="ad4c3dcc9ce5019b70dbd4b2f8ed9ec15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4c3dcc9ce5019b70dbd4b2f8ed9ec15">&#9670;&#160;</a></span>targetas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list webapp.backend.db.generate_jsons.targetas = [t.targeta_id for t in db.query(<a class="el" href="classwebapp_1_1backend_1_1db_1_1models_1_1_mibisivalencia.html">Mibisivalencia</a>).all()]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacewebapp.html">webapp</a></li><li class="navelem"><a href="namespacewebapp_1_1backend.html">backend</a></li><li class="navelem"><a href="namespacewebapp_1_1backend_1_1db.html">db</a></li><li class="navelem"><a href="namespacewebapp_1_1backend_1_1db_1_1generate__jsons.html">generate_jsons</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

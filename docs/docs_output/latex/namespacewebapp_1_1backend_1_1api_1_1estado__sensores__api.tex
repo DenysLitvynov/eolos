@@ -1,0 +1,83 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+api.\+estado\+\_\+sensores\+\_\+api}
+\hypertarget{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api}{}\label{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api}\index{webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1estado__sensores__api_1_1_bike_response}{Bike\+Response}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1estado__sensores__api_1_1_medicion_response}{Medicion\+Response}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1estado__sensores__api_1_1_mensaje_response}{Mensaje\+Response}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a4ea94776a1a2ef3be6a0648714e64b8a}{ruta\+\_\+obtener\+\_\+bicicletas}} (Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_af7010a15209b484c6fa42e9ec0272d4b}{ruta\+\_\+obtener\+\_\+mediciones}} (str placa\+\_\+id, Optional\mbox{[}str\mbox{]} fecha\+\_\+inicio=None, Optional\mbox{[}str\mbox{]} fecha\+\_\+fin=None, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a668c0fc80f9268434e1763587d99319c}{ruta\+\_\+eliminar\+\_\+medicion}} (str lectura\+\_\+id, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a406a6c5b0763de6e31bf7c560365abc5}{ruta\+\_\+eliminar\+\_\+mediciones\+\_\+anomalas}} (str placa\+\_\+id, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_adeffdd46de2c371337c8121daa51b83e}{router}} = APIRouter(prefix="{}/estado-\/sensores"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: Víctor Morant
+Fecha: 20-11-2025
+Descripción: Rutas para estado de sensores (bicicletas).
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a668c0fc80f9268434e1763587d99319c}\index{webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}!ruta\_eliminar\_medicion@{ruta\_eliminar\_medicion}}
+\index{ruta\_eliminar\_medicion@{ruta\_eliminar\_medicion}!webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}}
+\doxysubsubsection{\texorpdfstring{ruta\_eliminar\_medicion()}{ruta\_eliminar\_medicion()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a668c0fc80f9268434e1763587d99319c} 
+webapp.\+backend.\+api.\+estado\+\_\+sensores\+\_\+api.\+ruta\+\_\+eliminar\+\_\+medicion (\begin{DoxyParamCaption}\item[{str}]{lectura\+\_\+id}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Elimina una medición específica por su ID.
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a406a6c5b0763de6e31bf7c560365abc5}\index{webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}!ruta\_eliminar\_mediciones\_anomalas@{ruta\_eliminar\_mediciones\_anomalas}}
+\index{ruta\_eliminar\_mediciones\_anomalas@{ruta\_eliminar\_mediciones\_anomalas}!webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}}
+\doxysubsubsection{\texorpdfstring{ruta\_eliminar\_mediciones\_anomalas()}{ruta\_eliminar\_mediciones\_anomalas()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a406a6c5b0763de6e31bf7c560365abc5} 
+webapp.\+backend.\+api.\+estado\+\_\+sensores\+\_\+api.\+ruta\+\_\+eliminar\+\_\+mediciones\+\_\+anomalas (\begin{DoxyParamCaption}\item[{str}]{placa\+\_\+id}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Elimina todas las mediciones anómalas (< 0 o > 200) de una placa.
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a4ea94776a1a2ef3be6a0648714e64b8a}\index{webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}!ruta\_obtener\_bicicletas@{ruta\_obtener\_bicicletas}}
+\index{ruta\_obtener\_bicicletas@{ruta\_obtener\_bicicletas}!webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}}
+\doxysubsubsection{\texorpdfstring{ruta\_obtener\_bicicletas()}{ruta\_obtener\_bicicletas()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_a4ea94776a1a2ef3be6a0648714e64b8a} 
+webapp.\+backend.\+api.\+estado\+\_\+sensores\+\_\+api.\+ruta\+\_\+obtener\+\_\+bicicletas (\begin{DoxyParamCaption}\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene todas las bicicletas con su estado de sensor y información de estación.
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_af7010a15209b484c6fa42e9ec0272d4b}\index{webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}!ruta\_obtener\_mediciones@{ruta\_obtener\_mediciones}}
+\index{ruta\_obtener\_mediciones@{ruta\_obtener\_mediciones}!webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}}
+\doxysubsubsection{\texorpdfstring{ruta\_obtener\_mediciones()}{ruta\_obtener\_mediciones()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_af7010a15209b484c6fa42e9ec0272d4b} 
+webapp.\+backend.\+api.\+estado\+\_\+sensores\+\_\+api.\+ruta\+\_\+obtener\+\_\+mediciones (\begin{DoxyParamCaption}\item[{str}]{placa\+\_\+id}{, }\item[{Optional\mbox{[}str\mbox{]} }]{fecha\+\_\+inicio}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{fecha\+\_\+fin}{ = {\ttfamily None}, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene todas las mediciones de una placa con rango de fechas opcional.
+Marca las mediciones anómalas (< 0 o > 200).
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_adeffdd46de2c371337c8121daa51b83e}\index{webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}!router@{router}}
+\index{router@{router}!webapp.backend.api.estado\_sensores\_api@{webapp.backend.api.estado\_sensores\_api}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1estado__sensores__api_adeffdd46de2c371337c8121daa51b83e} 
+webapp.\+backend.\+api.\+estado\+\_\+sensores\+\_\+api.\+router = APIRouter(prefix="{}/estado-\/sensores"{})}
+

@@ -1,0 +1,367 @@
+\doxysection{Referencia del archivo D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/frontend/js/scripts/estado-\/sensores.js}
+\hypertarget{estado-sensores_8js}{}\label{estado-sensores_8js}\index{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/frontend/js/scripts/estado-\/sensores.js@{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/frontend/js/scripts/estado-\/sensores.js}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_bike_card}{Bike\+Card}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+function async \mbox{\hyperlink{estado-sensores_8js_a88dfa9ff986f1e80340278978aa9c09b}{cargar\+Bicicletas}} ()
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_ad8068a177159c2dff9f12345da4947be}{poblar\+Select\+Estaciones}} ()
+\item 
+function async \mbox{\hyperlink{estado-sensores_8js_ac14cd11a0bbd450ca660055d7ef809bb}{abrir\+Modal\+Mediciones}} (placa\+\_\+id)
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_a4d83f3fe20cf4ef138acd5ae5bff337f}{mostrar\+Mediciones}} (mediciones)
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_a4bcf3a87acf3c923a565b5960fbf0a86}{setup\+Modal\+Eventos}} ()
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_a540e81477e0acc7d2f55c26d81dfd0a7}{abrir\+Modal\+Confirmacion}} (lectura\+Id, valor, cantidad=null)
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_ac536ae06af10b51fb4624195ced16395}{apply\+Filters}} ()
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_a419c8bd244a20568ddb7cfc128bf4bea}{cumple\+Condicion\+Actualizacion}} (ultima\+Actualizacion)
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_ad8aea3d2ab74ef4bab7897788ca98a1d}{render\+Bikes}} (data)
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_ac87564879652feac76cb5e86d04c51d6}{get\+State\+Class}} (estado)
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_a54ee674215013f883f5df2c88663a8b4}{order\+Bikes}} (data)
+\item 
+function \mbox{\hyperlink{estado-sensores_8js_a95782e7d221dbb4966e0a7b30f96215e}{normalize\+State}} (estado)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{estado-sensores_8js_a59be084da8908b7d77ff34b25cd84488}{import}} \{ \mbox{\hyperlink{class_estado_sensores_fake}{Estado\+Sensores\+Fake}} \} from \textquotesingle{}../logica\+\_\+fake/estado\+\_\+sensores\+\_\+fake.\+js\textquotesingle{}
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a056364a3e9833ffff67a216e148e4e3b}{bike\+List}} = document.\+get\+Element\+By\+Id("{}bike\+List"{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_aeff086bc08e93eb100225a5c93ed92fa}{search\+Input}} = document.\+get\+Element\+By\+Id("{}search\+Input"{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_ae73727a44218b02ececbe813de79d17a}{state\+Buttons}} = document.\+query\+Selector\+All("{}.state-\/btn"{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a5dbaea395ef4744a19e35456285eef9b}{select\+Estacion}} = document.\+get\+Element\+By\+Id("{}select\+Estacion"{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a2a8e57035c4d2368b2c0795191b12e9a}{select\+Actualizacion}} = document.\+get\+Element\+By\+Id("{}select\+Actualizacion"{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a935dafb307747c73ceebe621e812c1d8}{logica\+Sensores}} = new \mbox{\hyperlink{class_estado_sensores_fake}{Estado\+Sensores\+Fake}}()
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_a20d800e06563f1064e8fc3ce426d9590}{all\+Bikes}} = \mbox{[}$\,$\mbox{]}
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_a4407a20baccb34081a400ed146902f92}{search\+Text}} = "{}"{}
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_a1d95f94f32bd0cdb21e0db5a56216b42}{selected\+State}} = null
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_afb9eb745be326fbba7049e9caa1a52ca}{selected\+Estacion}} = "{}"{}
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_a83f702691bf9cfbbcb187be55730aabe}{selected\+Actualizacion}} = "{}"{}
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_ae23f5edf066e692c06795565bd8d2d7e}{mediciones\+Actuales}} = \mbox{[}$\,$\mbox{]}
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_a88ceb7102aa2c30568cd28671562ce4e}{placa\+Id\+Actual}} = null
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a3cd609b5e468f8184499396f6cfcaa64}{modal}} = document.\+get\+Element\+By\+Id(\textquotesingle{}modal\+Mediciones\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_aa48a27a1eab85eb96cc328aa492dcd9d}{btn\+Cerrar}} = document.\+get\+Element\+By\+Id(\textquotesingle{}cerrar\+Modal\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_acc435eaaaaa031b85768e36563decc49}{btn\+Cerrar2}} = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Cerrar\+Modal2\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_ad44f2fc575d657f92a7e69f34ba222d3}{btn\+Eliminar\+Anómalas}} = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Eliminar\+Anómalas\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_abd4327f8ddc5d79ac3d647f57f8c3b97}{btn\+Aplicar\+Filtros}} = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Aplicar\+Filtros\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a0dd6e75dc6f7f51193c67bc8fe60622a}{btn\+Limpiar\+Filtros}} = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Limpiar\+Filtros\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a7f22504399ef5460ad5581619abe6fe8}{filtro\+Fecha\+Inicio}} = document.\+get\+Element\+By\+Id(\textquotesingle{}filtro\+Fecha\+Inicio\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_ad7167bc5ed09b2593729dd8c63dd5c13}{filtro\+Fecha\+Fin}} = document.\+get\+Element\+By\+Id(\textquotesingle{}filtro\+Fecha\+Fin\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a6de10e9e19abb47604d3d8306552a78b}{cuerpo\+Tabla}} = document.\+get\+Element\+By\+Id(\textquotesingle{}cuerpo\+Tabla\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a5f6f17adc533b00f12ed844872dc6e92}{modal\+Confirmacion}} = document.\+get\+Element\+By\+Id(\textquotesingle{}modal\+Confirmacion\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_abd02207974bffdcdd3aed1015cc91fde}{btn\+Confirmar\+Eliminar}} = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Confirmar\+Eliminar\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a4154ac9c29c53789f52540ca8d5699d0}{btn\+Cancelar\+Eliminar}} = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Cancelar\+Eliminar\textquotesingle{})
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_a0f6bd4b06b66017df13a36f47f77720e}{texto\+Confirmacion}} = document.\+get\+Element\+By\+Id(\textquotesingle{}texto\+Confirmacion\textquotesingle{})
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_a2e8c00cede8dfce717cc364e2b776bae}{tipo\+Eliminacion}} = null
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_a05400ea45dc66c4ea748ec29bb296316}{lectura\+Id\+Eliminar}} = null
+\item 
+let \mbox{\hyperlink{estado-sensores_8js_a13da876c81740562b17a79dd8cba16aa}{cantidad\+Anomalas}} = 0
+\item 
+const \mbox{\hyperlink{estado-sensores_8js_af61e04df0c5736d903554ecd10fd83a5}{btn\+Limpiar\+Todos\+Filtros}} = document.\+get\+Element\+By\+Id("{}btn\+Limpiar\+Todos\+Filtros"{})
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{estado-sensores_8js_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{estado-sensores_8js_a540e81477e0acc7d2f55c26d81dfd0a7}\index{estado-\/sensores.js@{estado-\/sensores.js}!abrirModalConfirmacion@{abrirModalConfirmacion}}
+\index{abrirModalConfirmacion@{abrirModalConfirmacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{abrirModalConfirmacion()}{abrirModalConfirmacion()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a540e81477e0acc7d2f55c26d81dfd0a7} 
+function abrir\+Modal\+Confirmacion (\begin{DoxyParamCaption}\item[{}]{lectura\+Id}{, }\item[{}]{valor}{, }\item[{}]{cantidad}{ = {\ttfamily null}}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_ac14cd11a0bbd450ca660055d7ef809bb}\index{estado-\/sensores.js@{estado-\/sensores.js}!abrirModalMediciones@{abrirModalMediciones}}
+\index{abrirModalMediciones@{abrirModalMediciones}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{abrirModalMediciones()}{abrirModalMediciones()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ac14cd11a0bbd450ca660055d7ef809bb} 
+function async abrir\+Modal\+Mediciones (\begin{DoxyParamCaption}\item[{}]{placa\+\_\+id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_ac536ae06af10b51fb4624195ced16395}\index{estado-\/sensores.js@{estado-\/sensores.js}!applyFilters@{applyFilters}}
+\index{applyFilters@{applyFilters}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{applyFilters()}{applyFilters()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ac536ae06af10b51fb4624195ced16395} 
+function apply\+Filters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_a88dfa9ff986f1e80340278978aa9c09b}\index{estado-\/sensores.js@{estado-\/sensores.js}!cargarBicicletas@{cargarBicicletas}}
+\index{cargarBicicletas@{cargarBicicletas}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{cargarBicicletas()}{cargarBicicletas()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a88dfa9ff986f1e80340278978aa9c09b} 
+function async cargar\+Bicicletas (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_a419c8bd244a20568ddb7cfc128bf4bea}\index{estado-\/sensores.js@{estado-\/sensores.js}!cumpleCondicionActualizacion@{cumpleCondicionActualizacion}}
+\index{cumpleCondicionActualizacion@{cumpleCondicionActualizacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{cumpleCondicionActualizacion()}{cumpleCondicionActualizacion()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a419c8bd244a20568ddb7cfc128bf4bea} 
+function cumple\+Condicion\+Actualizacion (\begin{DoxyParamCaption}\item[{}]{ultima\+Actualizacion}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_ac87564879652feac76cb5e86d04c51d6}\index{estado-\/sensores.js@{estado-\/sensores.js}!getStateClass@{getStateClass}}
+\index{getStateClass@{getStateClass}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{getStateClass()}{getStateClass()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ac87564879652feac76cb5e86d04c51d6} 
+function get\+State\+Class (\begin{DoxyParamCaption}\item[{}]{estado}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_a4d83f3fe20cf4ef138acd5ae5bff337f}\index{estado-\/sensores.js@{estado-\/sensores.js}!mostrarMediciones@{mostrarMediciones}}
+\index{mostrarMediciones@{mostrarMediciones}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{mostrarMediciones()}{mostrarMediciones()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a4d83f3fe20cf4ef138acd5ae5bff337f} 
+function mostrar\+Mediciones (\begin{DoxyParamCaption}\item[{}]{mediciones}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_a95782e7d221dbb4966e0a7b30f96215e}\index{estado-\/sensores.js@{estado-\/sensores.js}!normalizeState@{normalizeState}}
+\index{normalizeState@{normalizeState}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{normalizeState()}{normalizeState()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a95782e7d221dbb4966e0a7b30f96215e} 
+function normalize\+State (\begin{DoxyParamCaption}\item[{}]{estado}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_a54ee674215013f883f5df2c88663a8b4}\index{estado-\/sensores.js@{estado-\/sensores.js}!orderBikes@{orderBikes}}
+\index{orderBikes@{orderBikes}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{orderBikes()}{orderBikes()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a54ee674215013f883f5df2c88663a8b4} 
+function order\+Bikes (\begin{DoxyParamCaption}\item[{}]{data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_ad8068a177159c2dff9f12345da4947be}\index{estado-\/sensores.js@{estado-\/sensores.js}!poblarSelectEstaciones@{poblarSelectEstaciones}}
+\index{poblarSelectEstaciones@{poblarSelectEstaciones}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{poblarSelectEstaciones()}{poblarSelectEstaciones()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ad8068a177159c2dff9f12345da4947be} 
+function poblar\+Select\+Estaciones (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_ad8aea3d2ab74ef4bab7897788ca98a1d}\index{estado-\/sensores.js@{estado-\/sensores.js}!renderBikes@{renderBikes}}
+\index{renderBikes@{renderBikes}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{renderBikes()}{renderBikes()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ad8aea3d2ab74ef4bab7897788ca98a1d} 
+function render\+Bikes (\begin{DoxyParamCaption}\item[{}]{data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{estado-sensores_8js_a4bcf3a87acf3c923a565b5960fbf0a86}\index{estado-\/sensores.js@{estado-\/sensores.js}!setupModalEventos@{setupModalEventos}}
+\index{setupModalEventos@{setupModalEventos}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{setupModalEventos()}{setupModalEventos()}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a4bcf3a87acf3c923a565b5960fbf0a86} 
+function setup\+Modal\+Eventos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{estado-sensores_8js_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{estado-sensores_8js_a20d800e06563f1064e8fc3ce426d9590}\index{estado-\/sensores.js@{estado-\/sensores.js}!allBikes@{allBikes}}
+\index{allBikes@{allBikes}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{allBikes}{allBikes}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a20d800e06563f1064e8fc3ce426d9590} 
+let all\+Bikes = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{estado-sensores_8js_a056364a3e9833ffff67a216e148e4e3b}\index{estado-\/sensores.js@{estado-\/sensores.js}!bikeList@{bikeList}}
+\index{bikeList@{bikeList}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{bikeList}{bikeList}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a056364a3e9833ffff67a216e148e4e3b} 
+const bike\+List = document.\+get\+Element\+By\+Id("{}bike\+List"{})}
+
+\Hypertarget{estado-sensores_8js_abd4327f8ddc5d79ac3d647f57f8c3b97}\index{estado-\/sensores.js@{estado-\/sensores.js}!btnAplicarFiltros@{btnAplicarFiltros}}
+\index{btnAplicarFiltros@{btnAplicarFiltros}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{btnAplicarFiltros}{btnAplicarFiltros}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_abd4327f8ddc5d79ac3d647f57f8c3b97} 
+const btn\+Aplicar\+Filtros = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Aplicar\+Filtros\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_a4154ac9c29c53789f52540ca8d5699d0}\index{estado-\/sensores.js@{estado-\/sensores.js}!btnCancelarEliminar@{btnCancelarEliminar}}
+\index{btnCancelarEliminar@{btnCancelarEliminar}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{btnCancelarEliminar}{btnCancelarEliminar}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a4154ac9c29c53789f52540ca8d5699d0} 
+const btn\+Cancelar\+Eliminar = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Cancelar\+Eliminar\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_aa48a27a1eab85eb96cc328aa492dcd9d}\index{estado-\/sensores.js@{estado-\/sensores.js}!btnCerrar@{btnCerrar}}
+\index{btnCerrar@{btnCerrar}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{btnCerrar}{btnCerrar}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_aa48a27a1eab85eb96cc328aa492dcd9d} 
+const btn\+Cerrar = document.\+get\+Element\+By\+Id(\textquotesingle{}cerrar\+Modal\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_acc435eaaaaa031b85768e36563decc49}\index{estado-\/sensores.js@{estado-\/sensores.js}!btnCerrar2@{btnCerrar2}}
+\index{btnCerrar2@{btnCerrar2}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{btnCerrar2}{btnCerrar2}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_acc435eaaaaa031b85768e36563decc49} 
+const btn\+Cerrar2 = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Cerrar\+Modal2\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_abd02207974bffdcdd3aed1015cc91fde}\index{estado-\/sensores.js@{estado-\/sensores.js}!btnConfirmarEliminar@{btnConfirmarEliminar}}
+\index{btnConfirmarEliminar@{btnConfirmarEliminar}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{btnConfirmarEliminar}{btnConfirmarEliminar}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_abd02207974bffdcdd3aed1015cc91fde} 
+const btn\+Confirmar\+Eliminar = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Confirmar\+Eliminar\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_ad44f2fc575d657f92a7e69f34ba222d3}\index{estado-\/sensores.js@{estado-\/sensores.js}!btnEliminarAnómalas@{btnEliminarAnómalas}}
+\index{btnEliminarAnómalas@{btnEliminarAnómalas}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{btnEliminarAnómalas}{btnEliminarAnómalas}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ad44f2fc575d657f92a7e69f34ba222d3} 
+const btn\+Eliminar\+Anómalas = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Eliminar\+Anómalas\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_a0dd6e75dc6f7f51193c67bc8fe60622a}\index{estado-\/sensores.js@{estado-\/sensores.js}!btnLimpiarFiltros@{btnLimpiarFiltros}}
+\index{btnLimpiarFiltros@{btnLimpiarFiltros}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{btnLimpiarFiltros}{btnLimpiarFiltros}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a0dd6e75dc6f7f51193c67bc8fe60622a} 
+const btn\+Limpiar\+Filtros = document.\+get\+Element\+By\+Id(\textquotesingle{}btn\+Limpiar\+Filtros\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_af61e04df0c5736d903554ecd10fd83a5}\index{estado-\/sensores.js@{estado-\/sensores.js}!btnLimpiarTodosFiltros@{btnLimpiarTodosFiltros}}
+\index{btnLimpiarTodosFiltros@{btnLimpiarTodosFiltros}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{btnLimpiarTodosFiltros}{btnLimpiarTodosFiltros}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_af61e04df0c5736d903554ecd10fd83a5} 
+const btn\+Limpiar\+Todos\+Filtros = document.\+get\+Element\+By\+Id("{}btn\+Limpiar\+Todos\+Filtros"{})}
+
+\Hypertarget{estado-sensores_8js_a13da876c81740562b17a79dd8cba16aa}\index{estado-\/sensores.js@{estado-\/sensores.js}!cantidadAnomalas@{cantidadAnomalas}}
+\index{cantidadAnomalas@{cantidadAnomalas}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{cantidadAnomalas}{cantidadAnomalas}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a13da876c81740562b17a79dd8cba16aa} 
+let cantidad\+Anomalas = 0}
+
+\Hypertarget{estado-sensores_8js_a6de10e9e19abb47604d3d8306552a78b}\index{estado-\/sensores.js@{estado-\/sensores.js}!cuerpoTabla@{cuerpoTabla}}
+\index{cuerpoTabla@{cuerpoTabla}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{cuerpoTabla}{cuerpoTabla}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a6de10e9e19abb47604d3d8306552a78b} 
+const cuerpo\+Tabla = document.\+get\+Element\+By\+Id(\textquotesingle{}cuerpo\+Tabla\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_ad7167bc5ed09b2593729dd8c63dd5c13}\index{estado-\/sensores.js@{estado-\/sensores.js}!filtroFechaFin@{filtroFechaFin}}
+\index{filtroFechaFin@{filtroFechaFin}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{filtroFechaFin}{filtroFechaFin}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ad7167bc5ed09b2593729dd8c63dd5c13} 
+const filtro\+Fecha\+Fin = document.\+get\+Element\+By\+Id(\textquotesingle{}filtro\+Fecha\+Fin\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_a7f22504399ef5460ad5581619abe6fe8}\index{estado-\/sensores.js@{estado-\/sensores.js}!filtroFechaInicio@{filtroFechaInicio}}
+\index{filtroFechaInicio@{filtroFechaInicio}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{filtroFechaInicio}{filtroFechaInicio}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a7f22504399ef5460ad5581619abe6fe8} 
+const filtro\+Fecha\+Inicio = document.\+get\+Element\+By\+Id(\textquotesingle{}filtro\+Fecha\+Inicio\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_a59be084da8908b7d77ff34b25cd84488}\index{estado-\/sensores.js@{estado-\/sensores.js}!import@{import}}
+\index{import@{import}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a59be084da8908b7d77ff34b25cd84488} 
+import \{ \mbox{\hyperlink{class_estado_sensores_fake}{Estado\+Sensores\+Fake}} \} from \textquotesingle{}../logica\+\_\+fake/estado\+\_\+sensores\+\_\+fake.\+js\textquotesingle{}}
+
+\Hypertarget{estado-sensores_8js_a05400ea45dc66c4ea748ec29bb296316}\index{estado-\/sensores.js@{estado-\/sensores.js}!lecturaIdEliminar@{lecturaIdEliminar}}
+\index{lecturaIdEliminar@{lecturaIdEliminar}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{lecturaIdEliminar}{lecturaIdEliminar}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a05400ea45dc66c4ea748ec29bb296316} 
+let lectura\+Id\+Eliminar = null}
+
+\Hypertarget{estado-sensores_8js_a935dafb307747c73ceebe621e812c1d8}\index{estado-\/sensores.js@{estado-\/sensores.js}!logicaSensores@{logicaSensores}}
+\index{logicaSensores@{logicaSensores}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{logicaSensores}{logicaSensores}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a935dafb307747c73ceebe621e812c1d8} 
+const logica\+Sensores = new \mbox{\hyperlink{class_estado_sensores_fake}{Estado\+Sensores\+Fake}}()}
+
+\Hypertarget{estado-sensores_8js_ae23f5edf066e692c06795565bd8d2d7e}\index{estado-\/sensores.js@{estado-\/sensores.js}!medicionesActuales@{medicionesActuales}}
+\index{medicionesActuales@{medicionesActuales}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{medicionesActuales}{medicionesActuales}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ae23f5edf066e692c06795565bd8d2d7e} 
+let mediciones\+Actuales = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{estado-sensores_8js_a3cd609b5e468f8184499396f6cfcaa64}\index{estado-\/sensores.js@{estado-\/sensores.js}!modal@{modal}}
+\index{modal@{modal}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{modal}{modal}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a3cd609b5e468f8184499396f6cfcaa64} 
+const modal = document.\+get\+Element\+By\+Id(\textquotesingle{}modal\+Mediciones\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_a5f6f17adc533b00f12ed844872dc6e92}\index{estado-\/sensores.js@{estado-\/sensores.js}!modalConfirmacion@{modalConfirmacion}}
+\index{modalConfirmacion@{modalConfirmacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{modalConfirmacion}{modalConfirmacion}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a5f6f17adc533b00f12ed844872dc6e92} 
+const modal\+Confirmacion = document.\+get\+Element\+By\+Id(\textquotesingle{}modal\+Confirmacion\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_a88ceb7102aa2c30568cd28671562ce4e}\index{estado-\/sensores.js@{estado-\/sensores.js}!placaIdActual@{placaIdActual}}
+\index{placaIdActual@{placaIdActual}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{placaIdActual}{placaIdActual}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a88ceb7102aa2c30568cd28671562ce4e} 
+let placa\+Id\+Actual = null}
+
+\Hypertarget{estado-sensores_8js_aeff086bc08e93eb100225a5c93ed92fa}\index{estado-\/sensores.js@{estado-\/sensores.js}!searchInput@{searchInput}}
+\index{searchInput@{searchInput}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{searchInput}{searchInput}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_aeff086bc08e93eb100225a5c93ed92fa} 
+const search\+Input = document.\+get\+Element\+By\+Id("{}search\+Input"{})}
+
+\Hypertarget{estado-sensores_8js_a4407a20baccb34081a400ed146902f92}\index{estado-\/sensores.js@{estado-\/sensores.js}!searchText@{searchText}}
+\index{searchText@{searchText}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{searchText}{searchText}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a4407a20baccb34081a400ed146902f92} 
+let search\+Text = "{}"{}}
+
+\Hypertarget{estado-sensores_8js_a2a8e57035c4d2368b2c0795191b12e9a}\index{estado-\/sensores.js@{estado-\/sensores.js}!selectActualizacion@{selectActualizacion}}
+\index{selectActualizacion@{selectActualizacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{selectActualizacion}{selectActualizacion}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a2a8e57035c4d2368b2c0795191b12e9a} 
+const select\+Actualizacion = document.\+get\+Element\+By\+Id("{}select\+Actualizacion"{})}
+
+\Hypertarget{estado-sensores_8js_a83f702691bf9cfbbcb187be55730aabe}\index{estado-\/sensores.js@{estado-\/sensores.js}!selectedActualizacion@{selectedActualizacion}}
+\index{selectedActualizacion@{selectedActualizacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{selectedActualizacion}{selectedActualizacion}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a83f702691bf9cfbbcb187be55730aabe} 
+let selected\+Actualizacion = "{}"{}}
+
+\Hypertarget{estado-sensores_8js_afb9eb745be326fbba7049e9caa1a52ca}\index{estado-\/sensores.js@{estado-\/sensores.js}!selectedEstacion@{selectedEstacion}}
+\index{selectedEstacion@{selectedEstacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{selectedEstacion}{selectedEstacion}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_afb9eb745be326fbba7049e9caa1a52ca} 
+let selected\+Estacion = "{}"{}}
+
+\Hypertarget{estado-sensores_8js_a1d95f94f32bd0cdb21e0db5a56216b42}\index{estado-\/sensores.js@{estado-\/sensores.js}!selectedState@{selectedState}}
+\index{selectedState@{selectedState}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{selectedState}{selectedState}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a1d95f94f32bd0cdb21e0db5a56216b42} 
+let selected\+State = null}
+
+\Hypertarget{estado-sensores_8js_a5dbaea395ef4744a19e35456285eef9b}\index{estado-\/sensores.js@{estado-\/sensores.js}!selectEstacion@{selectEstacion}}
+\index{selectEstacion@{selectEstacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{selectEstacion}{selectEstacion}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a5dbaea395ef4744a19e35456285eef9b} 
+const select\+Estacion = document.\+get\+Element\+By\+Id("{}select\+Estacion"{})}
+
+\Hypertarget{estado-sensores_8js_ae73727a44218b02ececbe813de79d17a}\index{estado-\/sensores.js@{estado-\/sensores.js}!stateButtons@{stateButtons}}
+\index{stateButtons@{stateButtons}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{stateButtons}{stateButtons}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_ae73727a44218b02ececbe813de79d17a} 
+const state\+Buttons = document.\+query\+Selector\+All("{}.state-\/btn"{})}
+
+\Hypertarget{estado-sensores_8js_a0f6bd4b06b66017df13a36f47f77720e}\index{estado-\/sensores.js@{estado-\/sensores.js}!textoConfirmacion@{textoConfirmacion}}
+\index{textoConfirmacion@{textoConfirmacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{textoConfirmacion}{textoConfirmacion}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a0f6bd4b06b66017df13a36f47f77720e} 
+const texto\+Confirmacion = document.\+get\+Element\+By\+Id(\textquotesingle{}texto\+Confirmacion\textquotesingle{})}
+
+\Hypertarget{estado-sensores_8js_a2e8c00cede8dfce717cc364e2b776bae}\index{estado-\/sensores.js@{estado-\/sensores.js}!tipoEliminacion@{tipoEliminacion}}
+\index{tipoEliminacion@{tipoEliminacion}!estado-\/sensores.js@{estado-\/sensores.js}}
+\doxysubsubsection{\texorpdfstring{tipoEliminacion}{tipoEliminacion}}
+{\footnotesize\ttfamily \label{estado-sensores_8js_a2e8c00cede8dfce717cc364e2b776bae} 
+let tipo\+Eliminacion = null}
+

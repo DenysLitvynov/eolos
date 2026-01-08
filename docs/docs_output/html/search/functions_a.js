@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['incidenciafake_0',['IncidenciaFake',['../classcom_1_1example_1_1eolos_1_1logica__fake_1_1_incidencia_fake.html#aaba82490d15a19dfaf4e03b1bbf6bdd4',1,'com::example::eolos::logica_fake::IncidenciaFake']]],
+  ['inicializarbluetooth_1',['inicializarBlueTooth',['../classcom_1_1example_1_1eolos_1_1_escaner_i_beacons.html#a4d00d73326041ce64ded70b485cf5d6d',1,'com::example::eolos::EscanerIBeacons']]],
+  ['inicializarperfil_2',['inicializarPerfil',['../classcom_1_1example_1_1eolos_1_1logica__fake_1_1_perfil_fake.html#a9ea6361d403b7e09c217dc7bbd4240e3',1,'com::example::eolos::logica_fake::PerfilFake']]],
+  ['iniciar_5fregistro_3',['iniciar_registro',['../classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro.html#add181597c3b1819fa6501c45a736656f',1,'webapp::backend::logic::registro::LogicaRegistro']]],
+  ['iniciar_5ftrayecto_4',['iniciar_trayecto',['../classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos.html#a74939ab834d4290b2fdfb9a424b697cb',1,'webapp.backend.logic.trayectos.LogicaTrayectos.iniciar_trayecto()'],['../namespacewebapp_1_1backend_1_1api_1_1trayectos__api.html#a11ba0865473fb8e1af6e00ce2989b63c',1,'webapp.backend.api.trayectos_api.iniciar_trayecto()']]],
+  ['iniciaractualizacionesperiodicas_5',['iniciarActualizacionesPeriodicas',['../classcom_1_1example_1_1eolos_1_1logica__fake_1_1_logica_trayectos_fake.html#a8c4df27ac5a4f3508461e557207b5778',1,'com::example::eolos::logica_fake::LogicaTrayectosFake']]],
+  ['iniciaractualizacionesubicacion_6',['iniciarActualizacionesUbicacion',['../classcom_1_1example_1_1eolos_1_1logica__fake_1_1_logica_trayectos_fake.html#ad3e6e8da72188cb88914ec714857d436',1,'com::example::eolos::logica_fake::LogicaTrayectosFake']]],
+  ['iniciarbotonoes_7',['iniciarBotonoes',['../classcom_1_1example_1_1eolos_1_1activities_1_1_main_activity.html#a5f4daaa6702e647749d05d5b9adc2aff',1,'com::example::eolos::activities::MainActivity']]],
+  ['iniciarescaneoautomatico_8',['iniciarEscaneoAutomatico',['../classcom_1_1example_1_1eolos_1_1_escaner_i_beacons.html#ac83513a7a6a9bd5e40bc5d2da661629a',1,'com::example::eolos::EscanerIBeacons']]],
+  ['iniciarnuevoescaneo_9',['iniciarNuevoEscaneo',['../classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity.html#ad42492a55683c8f9872ffc5a0e8f3891',1,'com::example::eolos::activities::ConnectionActivity']]],
+  ['iniciartrayecto_10',['iniciarTrayecto',['../classcom_1_1example_1_1eolos_1_1logica__fake_1_1_logica_trayectos_fake.html#ace3b037f0b2923e74055487e137e0b9a',1,'com::example::eolos::logica_fake::LogicaTrayectosFake']]],
+  ['initlogout_11',['initLogout',['../header_8js.html#a968872fb7d359047d220fc5f91dcb822',1,'header.js']]],
+  ['initmenutoggle_12',['initMenuToggle',['../header_8js.html#a7631e0afea27d941224de90268eedb43',1,'header.js']]],
+  ['initviews_13',['initViews',['../classcom_1_1example_1_1eolos_1_1activities_1_1_home_activity.html#a43956ce81eac0d0d6611dd5b8204c514',1,'com.example.eolos.activities.HomeActivity.initViews()'],['../classcom_1_1example_1_1eolos_1_1activities_1_1_incidencia_activity.html#a52d9edd0a3e7c2e4111eb6e896659925',1,'com.example.eolos.activities.IncidenciaActivity.initViews()']]],
+  ['insertarincidencias_14',['insertarIncidencias',['../gestion__incidencias_8js.html#a5cd8c4e34b0f29df98a5a1e466ced45a',1,'gestion_incidencias.js']]],
+  ['interpolar_5fpara_5fpunto_15',['interpolar_para_punto',['../classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas.html#a3b8e91016362d73541ee744562a3d744',1,'webapp::backend::logic::mapas::LogicaMapas']]],
+  ['interpolar_5fpara_5ftipo_5ffecha_16',['interpolar_para_tipo_fecha',['../classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas.html#a5b8ccbadb63d7625e7acc5715886bde1',1,'webapp::backend::logic::mapas::LogicaMapas']]],
+  ['isbeaconconnected_17',['isBeaconConnected',['../classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service.html#aa89612dde9bdd26f95c2d50dc546927e',1,'com::example::eolos::servicio::BeaconScanService']]],
+  ['isbeacondetectedrecently_18',['isBeaconDetectedRecently',['../classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service.html#ae9c5b8ca3519c8b33a8d4fae4bd792ab',1,'com::example::eolos::servicio::BeaconScanService']]],
+  ['isexpandido_19',['isExpandido',['../classcom_1_1example_1_1eolos_1_1_models_1_1_faq___item.html#ab6f6cb990564ff44f831f6f9eb9f076f',1,'com::example::eolos::Models::Faq_Item']]],
+  ['islocationenabled_20',['isLocationEnabled',['../classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper.html#a3561b0166e9eded48c60953926d46ce4',1,'com::example::eolos::servicio::PermisosHelper']]],
+  ['isloggedin_21',['isLoggedIn',['../auth_8js.html#a7f4adad5ac565d9da6fa5f2ce96922f7',1,'auth.js']]],
+  ['isrunning_22',['isRunning',['../classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service.html#ab76a99019bc2512173c9372d5e719ed9',1,'com.example.eolos.servicio.BeaconScanService.isRunning()'],['../classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service.html#a37eca76cfdf06f0af5be44fcf53e91d2',1,'com.example.eolos.servicio.GpsDistanceTrackerService.isRunning()']]]
+];

@@ -1,0 +1,77 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+gestion\+\_\+incidencias\+\_\+logic.\+Gestion\+Incidencias\+Logic}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic}{}\label{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic}\index{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic@{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+gestion\+\_\+incidencias\+\_\+logic.\+Gestion\+Incidencias\+Logic\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}}\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_ae918a67d869324dd9be939896b9c1256}{listar\+\_\+todas\+\_\+incidencias}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}})
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}}\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_a0f0998677ab3f7d1a4a441048c6b1c2f}{listar\+\_\+incidencias\+\_\+por\+\_\+fuente}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, list fuentes)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_a8bbf21afae396195543c9d52599edcba}{cambiar\+\_\+estado\+\_\+incidencia}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str incidencia\+\_\+id, str nuevo\+\_\+estado)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Lógica para la página de gestión de incidencias.
+
+NOTA: Estas funciones se usan por el endpoint público de pruebas y no
+reemplazan la lógica de negocio de `incidencias_logic.py`.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_a8bbf21afae396195543c9d52599edcba}\index{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic@{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic}!cambiar\_estado\_incidencia@{cambiar\_estado\_incidencia}}
+\index{cambiar\_estado\_incidencia@{cambiar\_estado\_incidencia}!webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic@{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic}}
+\doxysubsubsection{\texorpdfstring{cambiar\_estado\_incidencia()}{cambiar\_estado\_incidencia()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_a8bbf21afae396195543c9d52599edcba} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}} webapp.\+backend.\+logic.\+gestion\+\_\+incidencias\+\_\+logic.\+Gestion\+Incidencias\+Logic.\+cambiar\+\_\+estado\+\_\+incidencia (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{incidencia\+\_\+id}{, }\item[{str}]{nuevo\+\_\+estado}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Cambia el estado de una incidencia dada.
+
+Args:
+    db: Sesión de base de datos.
+    incidencia_id: ID de la incidencia a modificar.
+    nuevo_estado: Nuevo estado a asignar (debe ser un valor válido de EstadoIncidencia).
+
+Returns:
+    La incidencia actualizada.
+
+Raises:
+    ValueError: Si el nuevo estado no es válido.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_a0f0998677ab3f7d1a4a441048c6b1c2f}\index{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic@{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic}!listar\_incidencias\_por\_fuente@{listar\_incidencias\_por\_fuente}}
+\index{listar\_incidencias\_por\_fuente@{listar\_incidencias\_por\_fuente}!webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic@{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic}}
+\doxysubsubsection{\texorpdfstring{listar\_incidencias\_por\_fuente()}{listar\_incidencias\_por\_fuente()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_a0f0998677ab3f7d1a4a441048c6b1c2f} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}}\mbox{]} webapp.\+backend.\+logic.\+gestion\+\_\+incidencias\+\_\+logic.\+Gestion\+Incidencias\+Logic.\+listar\+\_\+incidencias\+\_\+por\+\_\+fuente (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{list}]{fuentes}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Devuelve incidencias filtradas por fuentes específicas.
+
+Args:
+    db: Sesión de base de datos.
+    fuentes: Lista de enum FuenteReporte a filtrar (ej. [FuenteReporte.app, FuenteReporte.web]).
+
+Returns:
+    Lista de incidencias que coinciden con las fuentes indicadas.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_ae918a67d869324dd9be939896b9c1256}\index{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic@{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic}!listar\_todas\_incidencias@{listar\_todas\_incidencias}}
+\index{listar\_todas\_incidencias@{listar\_todas\_incidencias}!webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic@{webapp.backend.logic.gestion\_incidencias\_logic.GestionIncidenciasLogic}}
+\doxysubsubsection{\texorpdfstring{listar\_todas\_incidencias()}{listar\_todas\_incidencias()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic_ae918a67d869324dd9be939896b9c1256} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}}\mbox{]} webapp.\+backend.\+logic.\+gestion\+\_\+incidencias\+\_\+logic.\+Gestion\+Incidencias\+Logic.\+listar\+\_\+todas\+\_\+incidencias (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Devuelve todas las filas de la tabla `incidencias`, ordenadas por fecha (desc).
+
+Usar solo en entornos de desarrollo o para endpoints de depuración.
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{gestion__incidencias__logic_8py}{gestion\+\_\+incidencias\+\_\+logic.\+py}}\end{DoxyCompactItemize}

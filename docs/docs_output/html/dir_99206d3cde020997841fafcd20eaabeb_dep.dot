@@ -1,0 +1,22 @@
+digraph "D:/Codigo_GTI/Proyecto_Biometria/PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_b6ded707f13a6057dac9558300cecdbc {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="example", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_b6ded707f13a6057dac9558300cecdbc.html",tooltip=""]
+  subgraph clusterdir_99206d3cde020997841fafcd20eaabeb {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_99206d3cde020997841fafcd20eaabeb.html",tooltip=""]
+    dir_99206d3cde020997841fafcd20eaabeb [shape=plaintext, label="eolos"];
+  dir_6ed436a27c873b85642d6ea109805b48 [label="activities", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_6ed436a27c873b85642d6ea109805b48.html",tooltip=""];
+  dir_b31fa7f701db969649dce8bfb05b6cd0 [label="Adapters", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_b31fa7f701db969649dce8bfb05b6cd0.html",tooltip=""];
+  dir_ea544ba72c101f5ef727e407f67d458b [label="config", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_ea544ba72c101f5ef727e407f67d458b.html",tooltip=""];
+  dir_c846291656df4774efc6c89ea716fe2f [label="fragments", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_c846291656df4774efc6c89ea716fe2f.html",tooltip=""];
+  dir_6b52cd1ea37b9d9522dbfc28809cd227 [label="logica_fake", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_6b52cd1ea37b9d9522dbfc28809cd227.html",tooltip=""];
+  dir_47eae36345b2dd422f68bd9bafdca91a [label="Models", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_47eae36345b2dd422f68bd9bafdca91a.html",tooltip=""];
+  dir_79aed5acc2908856b97e0de716bafe92 [label="servicio", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_79aed5acc2908856b97e0de716bafe92.html",tooltip=""];
+  }
+  }
+}

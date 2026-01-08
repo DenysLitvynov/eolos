@@ -1,0 +1,162 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos}{}\label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a0d93d3484ffa8b4f4a053feea9c7a7fc}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a0efe4c7ec6afbfa8870648541d66e8bf}{guardar\+\_\+medida}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, DTOMedida medida)
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a74939ab834d4290b2fdfb9a424b697cb}{iniciar\+\_\+trayecto}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str targeta\+\_\+id, str bicicleta\+\_\+id, datetime fecha\+\_\+inicio, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} origen)
+\item 
+Tuple\mbox{[}str, str\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a5d38bc68e59ef45725f77e564043b6d2}{obtener\+\_\+datos\+\_\+trayecto}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str trayecto\+\_\+id)
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a4dbd138dfc9ac54632eff428402635eb}{finalizar\+\_\+trayecto}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str trayecto\+\_\+id, datetime fecha\+\_\+fin, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} destino)
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a3813f42caf40a0e33a939e94faf35d05}{actualizar\+\_\+estado\+\_\+placa}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str placa\+\_\+id, str estado, datetime ult\+\_\+actualizacion\+\_\+estado)
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_abbaf4937cea42af38255b51a29442147}{actualizar\+\_\+estado\+\_\+bici}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str bicicleta\+\_\+id, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} posicion, Estado\+Bicicleta estado)
+\item 
+Optional\mbox{[}int\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a24440f45dc7aecd4c48aa6697b6ef027}{comprobar\+\_\+estacion\+\_\+bici}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} posicion)
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_doc-constructors}
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a0d93d3484ffa8b4f4a053feea9c7a7fc}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a0d93d3484ffa8b4f4a053feea9c7a7fc} 
+webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa la lógica de trayectos.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_abbaf4937cea42af38255b51a29442147}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}!actualizar\_estado\_bici@{actualizar\_estado\_bici}}
+\index{actualizar\_estado\_bici@{actualizar\_estado\_bici}!webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+\doxysubsubsection{\texorpdfstring{actualizar\_estado\_bici()}{actualizar\_estado\_bici()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_abbaf4937cea42af38255b51a29442147} 
+ str webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos.\+actualizar\+\_\+estado\+\_\+bici (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{bicicleta\+\_\+id}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{posicion}{, }\item[{Estado\+Bicicleta}]{estado}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Actualiza el estado de una bicicleta.
+
+Args:
+    db (Session): Sesión de BD.
+    bicicleta_id (str): ID de la bicicleta.
+    posicion (PosicionGPS): Posición actual.
+    estado (EstadoBicicleta): Nuevo estado.
+
+Returns:
+    str: "OK" si éxito.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a3813f42caf40a0e33a939e94faf35d05}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}!actualizar\_estado\_placa@{actualizar\_estado\_placa}}
+\index{actualizar\_estado\_placa@{actualizar\_estado\_placa}!webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+\doxysubsubsection{\texorpdfstring{actualizar\_estado\_placa()}{actualizar\_estado\_placa()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a3813f42caf40a0e33a939e94faf35d05} 
+ str webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos.\+actualizar\+\_\+estado\+\_\+placa (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{placa\+\_\+id}{, }\item[{str}]{estado}{, }\item[{datetime}]{ult\+\_\+actualizacion\+\_\+estado}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Actualiza el estado de una placa.
+
+Args:
+    db (Session): Sesión de BD.
+    placa_id (str): ID de la placa.
+    estado (str): Nuevo estado.
+    ult_actualizacion_estado (datetime): Última actualización.
+
+Returns:
+    str: "OK" si éxito.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a24440f45dc7aecd4c48aa6697b6ef027}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}!comprobar\_estacion\_bici@{comprobar\_estacion\_bici}}
+\index{comprobar\_estacion\_bici@{comprobar\_estacion\_bici}!webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+\doxysubsubsection{\texorpdfstring{comprobar\_estacion\_bici()}{comprobar\_estacion\_bici()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a24440f45dc7aecd4c48aa6697b6ef027} 
+ Optional\mbox{[}int\mbox{]} webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos.\+comprobar\+\_\+estacion\+\_\+bici (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{posicion}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Comprueba si la posición coincide con una estación.
+
+Args:
+    db (Session): Sesión de BD.
+    posicion (PosicionGPS): Posición a comprobar.
+
+Returns:
+    Optional[int]: estacion_id si coincide, None si no.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a4dbd138dfc9ac54632eff428402635eb}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}!finalizar\_trayecto@{finalizar\_trayecto}}
+\index{finalizar\_trayecto@{finalizar\_trayecto}!webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+\doxysubsubsection{\texorpdfstring{finalizar\_trayecto()}{finalizar\_trayecto()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a4dbd138dfc9ac54632eff428402635eb} 
+ str webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos.\+finalizar\+\_\+trayecto (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{trayecto\+\_\+id}{, }\item[{datetime}]{fecha\+\_\+fin}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{destino}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Finaliza un trayecto, calculando la distancia total internamente.
+
+Args:
+    db (Session): Sesión de BD.
+    trayecto_id (str): ID del trayecto.
+    fecha_fin (datetime): Fecha de fin.
+    destino (PosicionGPS): Posición de destino.
+
+Returns:
+    str: "OK" si éxito.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a0efe4c7ec6afbfa8870648541d66e8bf}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}!guardar\_medida@{guardar\_medida}}
+\index{guardar\_medida@{guardar\_medida}!webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+\doxysubsubsection{\texorpdfstring{guardar\_medida()}{guardar\_medida()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a0efe4c7ec6afbfa8870648541d66e8bf} 
+ str webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos.\+guardar\+\_\+medida (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{DTOMedida}]{medida}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Guarda una medida en la base de datos, generando el lectura_id.
+
+Args:
+    db (Session): Sesión de BD.
+    medida (DTOMedida): Objeto medida.
+
+Returns:
+    str: "OK" si éxito.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a74939ab834d4290b2fdfb9a424b697cb}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}!iniciar\_trayecto@{iniciar\_trayecto}}
+\index{iniciar\_trayecto@{iniciar\_trayecto}!webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+\doxysubsubsection{\texorpdfstring{iniciar\_trayecto()}{iniciar\_trayecto()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a74939ab834d4290b2fdfb9a424b697cb} 
+ str webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos.\+iniciar\+\_\+trayecto (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{targeta\+\_\+id}{, }\item[{str}]{bicicleta\+\_\+id}{, }\item[{datetime}]{fecha\+\_\+inicio}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{origen}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicia un nuevo trayecto.
+
+Args:
+    db (Session): Sesión de BD.
+    targeta_id (str): ID de la tarjeta.
+    bicicleta_id (str): ID de la bicicleta.
+    fecha_inicio (datetime): Fecha de inicio.
+    origen (PosicionGPS): Posición de origen.
+
+Returns:
+    str: trayecto_id generado.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a5d38bc68e59ef45725f77e564043b6d2}\index{webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}!obtener\_datos\_trayecto@{obtener\_datos\_trayecto}}
+\index{obtener\_datos\_trayecto@{obtener\_datos\_trayecto}!webapp.backend.logic.trayectos.LogicaTrayectos@{webapp.backend.logic.trayectos.LogicaTrayectos}}
+\doxysubsubsection{\texorpdfstring{obtener\_datos\_trayecto()}{obtener\_datos\_trayecto()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1trayectos_1_1_logica_trayectos_a5d38bc68e59ef45725f77e564043b6d2} 
+ Tuple\mbox{[}str, str\mbox{]} webapp.\+backend.\+logic.\+trayectos.\+Logica\+Trayectos.\+obtener\+\_\+datos\+\_\+trayecto (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{trayecto\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene usuario_id y placa_id para un trayecto.
+
+Args:
+    db (Session): Sesión de BD.
+    trayecto_id (str): ID del trayecto.
+
+Returns:
+    Tuple[str, str]: (usuario_id, placa_id)
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{trayectos_8py}{trayectos.\+py}}\end{DoxyCompactItemize}

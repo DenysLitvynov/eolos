@@ -1,0 +1,16 @@
+digraph "D:/Codigo_GTI/Proyecto_Biometria/PBIO/eolos/android/eolos/app/src/main"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_2b2ee625e13104f87c32b8b8079f33cf {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="src", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_2b2ee625e13104f87c32b8b8079f33cf.html",tooltip=""]
+  subgraph clusterdir_b10b8dc8208aa033f31b652e0f0c5619 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_b10b8dc8208aa033f31b652e0f0c5619.html",tooltip=""]
+    dir_b10b8dc8208aa033f31b652e0f0c5619 [shape=plaintext, label="main"];
+  dir_eb8739217ba3a4903374002470484bed [label="java", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_eb8739217ba3a4903374002470484bed.html",tooltip=""];
+  }
+  }
+}

@@ -1,0 +1,103 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Medida}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Medida
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Medida\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a5cfa6cf5af8ed66d250b56ed14e64e6b}{lectura\+\_\+id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ab72784c7a492578704a15be621a185a7}{placa\+\_\+id}} = Column(String(36), Foreign\+Key("{}placas\+\_\+sensores.\+placa\+\_\+id"{}))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a911a896eaebac94064ea0b741d1cbff2}{trayecto\+\_\+id}} = Column(String(36), Foreign\+Key("{}trayectos.\+trayecto\+\_\+id"{}))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a17fd8bfd0550a6e5c37dea6dfeb6d8c7}{fecha\+\_\+hora}} = Column(TIMESTAMP(timezone=True), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a9a8cda3a3326444f9626847d5aedaf5c}{tipo}} = Column(SQLEnum(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_tipo_medida_enum}{Tipo\+Medida\+Enum}}), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ae3d135633528a6d14cab63a60ce66517}{valor}} = Column(Float, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a35830e05076cfbc767e28dc8bb5f76d7}{lat}} = Column(Float, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ab34e848329d74e23d22c8e008b9797bc}{lon}} = Column(Float, nullable=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a389b8403fe1f57330f937639a68a2180}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}medidas"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla para almacenar las medidas.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a389b8403fe1f57330f937639a68a2180}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a389b8403fe1f57330f937639a68a2180} 
+str webapp.\+backend.\+db.\+models.\+Medida.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}medidas"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a17fd8bfd0550a6e5c37dea6dfeb6d8c7}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!fecha\_hora@{fecha\_hora}}
+\index{fecha\_hora@{fecha\_hora}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{fecha\_hora}{fecha\_hora}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a17fd8bfd0550a6e5c37dea6dfeb6d8c7} 
+webapp.\+backend.\+db.\+models.\+Medida.\+fecha\+\_\+hora = Column(TIMESTAMP(timezone=True), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a35830e05076cfbc767e28dc8bb5f76d7}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!lat@{lat}}
+\index{lat@{lat}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{lat}{lat}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a35830e05076cfbc767e28dc8bb5f76d7} 
+webapp.\+backend.\+db.\+models.\+Medida.\+lat = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a5cfa6cf5af8ed66d250b56ed14e64e6b}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!lectura\_id@{lectura\_id}}
+\index{lectura\_id@{lectura\_id}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{lectura\_id}{lectura\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a5cfa6cf5af8ed66d250b56ed14e64e6b} 
+webapp.\+backend.\+db.\+models.\+Medida.\+lectura\+\_\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ab34e848329d74e23d22c8e008b9797bc}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!lon@{lon}}
+\index{lon@{lon}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{lon}{lon}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ab34e848329d74e23d22c8e008b9797bc} 
+webapp.\+backend.\+db.\+models.\+Medida.\+lon = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ab72784c7a492578704a15be621a185a7}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!placa\_id@{placa\_id}}
+\index{placa\_id@{placa\_id}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{placa\_id}{placa\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ab72784c7a492578704a15be621a185a7} 
+webapp.\+backend.\+db.\+models.\+Medida.\+placa\+\_\+id = Column(String(36), Foreign\+Key("{}placas\+\_\+sensores.\+placa\+\_\+id"{}))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a9a8cda3a3326444f9626847d5aedaf5c}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!tipo@{tipo}}
+\index{tipo@{tipo}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{tipo}{tipo}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a9a8cda3a3326444f9626847d5aedaf5c} 
+webapp.\+backend.\+db.\+models.\+Medida.\+tipo = Column(SQLEnum(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_tipo_medida_enum}{Tipo\+Medida\+Enum}}), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a911a896eaebac94064ea0b741d1cbff2}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!trayecto\_id@{trayecto\_id}}
+\index{trayecto\_id@{trayecto\_id}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{trayecto\_id}{trayecto\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_a911a896eaebac94064ea0b741d1cbff2} 
+webapp.\+backend.\+db.\+models.\+Medida.\+trayecto\+\_\+id = Column(String(36), Foreign\+Key("{}trayectos.\+trayecto\+\_\+id"{}))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ae3d135633528a6d14cab63a60ce66517}\index{webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}!valor@{valor}}
+\index{valor@{valor}!webapp.backend.db.models.Medida@{webapp.backend.db.models.Medida}}
+\doxysubsubsection{\texorpdfstring{valor}{valor}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_medida_ae3d135633528a6d14cab63a60ce66517} 
+webapp.\+backend.\+db.\+models.\+Medida.\+valor = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

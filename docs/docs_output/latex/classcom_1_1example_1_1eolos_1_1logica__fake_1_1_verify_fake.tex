@@ -1,0 +1,78 @@
+\doxysection{Referencia de la clase com.\+example.\+eolos.\+logica\+\_\+fake.\+Verify\+Fake}
+\hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake}{}\label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake}\index{com.example.eolos.logica\_fake.VerifyFake@{com.example.eolos.logica\_fake.VerifyFake}}
+
+
+Diagrama de colaboración de com.\+example.\+eolos.\+logica\+\_\+fake.\+Verify\+Fake\+:
+% FIG 0
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_1_1_verify_callback}{Verify\+Callback}}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_1_1_reenvio_callback}{Reenvio\+Callback}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_a4b481ae9cee5e856e33b3f0d46c8754d}{verificar}} (String correo, String verification\+\_\+code, \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_1_1_verify_callback}{Verify\+Callback}} callback)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_a079fc75c46ebcb107e2667ea2c4fab37}{reenviar}} (String correo, \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_1_1_reenvio_callback}{Reenvio\+Callback}} callback)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_adb948a84bd72b166199de219dd39f058}{BASE\+\_\+\+URL}} = "{}http\+://51.\+95.\+74.\+33"{}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_a079fc75c46ebcb107e2667ea2c4fab37}\index{com.example.eolos.logica\_fake.VerifyFake@{com.example.eolos.logica\_fake.VerifyFake}!reenviar@{reenviar}}
+\index{reenviar@{reenviar}!com.example.eolos.logica\_fake.VerifyFake@{com.example.eolos.logica\_fake.VerifyFake}}
+\doxysubsubsection{\texorpdfstring{reenviar()}{reenviar()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_a079fc75c46ebcb107e2667ea2c4fab37} 
+void com.\+example.\+eolos.\+logica\+\_\+fake.\+Verify\+Fake.\+reenviar (\begin{DoxyParamCaption}\item[{String}]{correo}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_1_1_reenvio_callback}{Reenvio\+Callback}}}]{callback}{}\end{DoxyParamCaption})}
+
+Solicita el reenvío del código de verificación al correo indicado.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em correo} & Correo electrónico del usuario pendiente de verificación \\
+\hline
+{\em callback} & Callback que notifica éxito o error \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_a4b481ae9cee5e856e33b3f0d46c8754d}\index{com.example.eolos.logica\_fake.VerifyFake@{com.example.eolos.logica\_fake.VerifyFake}!verificar@{verificar}}
+\index{verificar@{verificar}!com.example.eolos.logica\_fake.VerifyFake@{com.example.eolos.logica\_fake.VerifyFake}}
+\doxysubsubsection{\texorpdfstring{verificar()}{verificar()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_a4b481ae9cee5e856e33b3f0d46c8754d} 
+void com.\+example.\+eolos.\+logica\+\_\+fake.\+Verify\+Fake.\+verificar (\begin{DoxyParamCaption}\item[{String}]{correo}{, }\item[{String}]{verification\+\_\+code}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_1_1_verify_callback}{Verify\+Callback}}}]{callback}{}\end{DoxyParamCaption})}
+
+Envía el código de verificación al backend para completar el registro.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em correo} & Correo electrónico del usuario \\
+\hline
+{\em verification\+\_\+code} & Código de 6 dígitos recibido por email \\
+\hline
+{\em callback} & Callback que recibe el token JWT o error \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_adb948a84bd72b166199de219dd39f058}\index{com.example.eolos.logica\_fake.VerifyFake@{com.example.eolos.logica\_fake.VerifyFake}!BASE\_URL@{BASE\_URL}}
+\index{BASE\_URL@{BASE\_URL}!com.example.eolos.logica\_fake.VerifyFake@{com.example.eolos.logica\_fake.VerifyFake}}
+\doxysubsubsection{\texorpdfstring{BASE\_URL}{BASE\_URL}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_adb948a84bd72b166199de219dd39f058} 
+final String com.\+example.\+eolos.\+logica\+\_\+fake.\+Verify\+Fake.\+BASE\+\_\+\+URL = "{}http\+://51.\+95.\+74.\+33"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/logica\+\_\+fake/\mbox{\hyperlink{_verify_fake_8java}{Verify\+Fake.\+java}}\end{DoxyCompactItemize}

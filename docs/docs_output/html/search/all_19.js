@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['validar_5fcredenciales_0',['validar_credenciales',['../classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login.html#ac2cfa3cdee3962991843366ab3ff37f7',1,'webapp::backend::logic::login::LogicaLogin']]],
+  ['validar_5fdatos_1',['validar_datos',['../classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro.html#a348420c39151ec0c21ba4901937b6545',1,'webapp::backend::logic::registro::LogicaRegistro']]],
+  ['validatecreateform_2',['validateCreateForm',['../admin_8js.html#a0af71f1b7a6b3868cff5758a2fdb0cc3',1,'admin.js']]],
+  ['validateeditform_3',['validateEditForm',['../admin_8js.html#aa3fe85899a4ebeed374c6013289bfa96',1,'admin.js']]],
+  ['validateinputs_4',['validateInputs',['../classcom_1_1example_1_1eolos_1_1activities_1_1_perfil_activity.html#aafcd5e11364ca152eef1b65861a6a3a8',1,'com::example::eolos::activities::PerfilActivity']]],
+  ['valor_5',['valor',['../classwebapp_1_1backend_1_1api_1_1contaminacion__api_1_1_medicion_out.html#a192db5f5dd0b028b2566f365d47cd79d',1,'webapp.backend.api.contaminacion_api.MedicionOut.valor'],['../classwebapp_1_1backend_1_1api_1_1home__api_1_1_gas_out.html#aa2d57812fd3d7572fb584a74d5b0668b',1,'webapp.backend.api.home_api.GasOut.valor'],['../classwebapp_1_1backend_1_1db_1_1models_1_1_medida.html#ae3d135633528a6d14cab63a60ce66517',1,'webapp.backend.db.models.Medida.valor'],['../classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada.html#ae6c2130b62cf1f02503b401eb739d670',1,'webapp.backend.db.models.Interpolada.valor'],['../classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general.html#a7cabcdd08b796b2c220fa7bb50d9ded7',1,'webapp.backend.db.models.CalidadGeneral.valor'],['../classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida.html#a110ad15ea65df235e1f989dcdd710877',1,'webapp.backend.pojos.medida.Medida.valor']]],
+  ['valor_5fid_6',['valor_id',['../classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general.html#a5bf3352d16cb3323cb35bceb7758392d',1,'webapp::backend::db::models::CalidadGeneral']]],
+  ['verificar_7',['verificar',['../class_verify_fake.html#a0257862b9df11ec9e6a5b5c065a6d557',1,'VerifyFake::verificar()'],['../classcom_1_1example_1_1eolos_1_1activities_1_1_verify_registration_activity.html#a646362a84449352f9235ce078caa0867',1,'com.example.eolos.activities.VerifyRegistrationActivity.verificar()'],['../classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake.html#a4b481ae9cee5e856e33b3f0d46c8754d',1,'com.example.eolos.logica_fake.VerifyFake.verificar()']]],
+  ['verificar_5fy_5fcompletar_8',['verificar_y_completar',['../classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro.html#a4bb32d7e0dc17f526e128a25dbb76cf2',1,'webapp::backend::logic::registro::LogicaRegistro']]],
+  ['verificaryiniciarservicio_9',['verificarYIniciarServicio',['../classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper.html#aaee0db9734552da4e5ff32a145b0f417',1,'com::example::eolos::servicio::PermisosHelper']]],
+  ['verification_5fcode_10',['verification_code',['../classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration.html#ab6a623f422084c49a7f34af8e92b5716',1,'webapp::backend::db::models::PendingRegistration']]],
+  ['verify_2dregistration_2ehtml_11',['verify-registration.html',['../verify-registration_8html.html',1,'']]],
+  ['verify_2dregistration_2ejs_12',['verify-registration.js',['../verify-registration_8js.html',1,'']]],
+  ['verify_5fregistration_5ffake_2ejs_13',['verify_registration_fake.js',['../verify__registration__fake_8js.html',1,'']]],
+  ['verifybutton_14',['verifyButton',['../classcom_1_1example_1_1eolos_1_1activities_1_1_verify_registration_activity.html#a25145c992158391af3f2b3df85a57a56',1,'com::example::eolos::activities::VerifyRegistrationActivity']]],
+  ['verifycallback_15',['VerifyCallback',['../interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake_1_1_verify_callback.html',1,'com::example::eolos::logica_fake::VerifyFake']]],
+  ['verifyfake_16',['VerifyFake',['../classcom_1_1example_1_1eolos_1_1logica__fake_1_1_verify_fake.html',1,'com.example.eolos.logica_fake.VerifyFake'],['../class_verify_fake.html',1,'VerifyFake']]],
+  ['verifyfake_17',['verifyFake',['../classcom_1_1example_1_1eolos_1_1activities_1_1_verify_registration_activity.html#ac496a0b57007aa29b32c41b5693a5f5c',1,'com::example::eolos::activities::VerifyRegistrationActivity']]],
+  ['verifyfake_2ejava_18',['VerifyFake.java',['../_verify_fake_8java.html',1,'']]],
+  ['verifyregistrationactivity_19',['VerifyRegistrationActivity',['../classcom_1_1example_1_1eolos_1_1activities_1_1_verify_registration_activity.html',1,'com::example::eolos::activities']]],
+  ['verifyregistrationactivity_2ejava_20',['VerifyRegistrationActivity.java',['../_verify_registration_activity_8java.html',1,'']]],
+  ['verifyregistrationrequest_21',['VerifyRegistrationRequest',['../classwebapp_1_1backend_1_1api_1_1auth_1_1_verify_registration_request.html',1,'webapp::backend::api::auth']]]
+];

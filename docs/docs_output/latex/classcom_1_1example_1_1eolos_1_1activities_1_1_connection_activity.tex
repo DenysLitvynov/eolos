@@ -1,0 +1,192 @@
+\doxysection{Referencia de la clase com.\+example.\+eolos.\+activities.\+Connection\+Activity}
+\hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity}{}\label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+
+
+Diagrama de herencia de com.\+example.\+eolos.\+activities.\+Connection\+Activity
+% FIG 0
+
+
+Diagrama de colaboración de com.\+example.\+eolos.\+activities.\+Connection\+Activity\+:
+% FIG 1
+\doxysubsubsection*{Métodos protegidos}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0f3dbba53c6d93243b70e193b241f830}{on\+Create}} (Bundle saved\+Instance\+State)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a1d5fd9fdea52e4ae1d51344db9b7f3a9}{on\+New\+Intent}} (Intent intent)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_ab24adaa93b30a851312f6ce0e65c01b5}{on\+Destroy}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a1983d1b509a47479431383ec8a2fbbef}{create\+Notification\+Channel}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a6a5c4595412c91ef75098cf30187258e}{show\+Connection\+Notification}} (String bike\+Id, String uuid)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af26921700958104c72ef8d2dbcafc55e}{show\+Disconnection\+Notification}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0dde9ca4390bb511076eed1a57f0f89b}{cancel\+Connection\+Notification}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0ff9e565c7aa05fa371c18b5ff22e8c6}{setup\+Bottom\+Navigation}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a580a69f0030dde79682d07ad71894914}{setup\+Connect\+Button}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_acc38ffe0c5ff2d3f7fadb398a1236d70}{setup\+Disconnect\+Button}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a9e09b2ef63d1b72c9693e958e1bfef2f}{desconectar\+Trayecto}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a612a111a38bbca6ee1e22de95b0b85ac}{procesar\+QR}} (String qr\+Content)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_ad42492a55683c8f9872ffc5a0e8f3891}{iniciar\+Nuevo\+Escaneo}} (String uuid, String id\+Bici)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_logica_trayectos_fake}{Logica\+Trayectos\+Fake}} \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af592ec8d5e4f68a946d929f36cd58d91}{logica\+Trayectos}}
+\item 
+Notification\+Manager \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a27ce50e765341f4d9ce70a0382a576e6}{notification\+Manager}}
+\item 
+final Activity\+Result\+Launcher$<$ Intent $>$ \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a9e7af3d39babc9afcf5d8117ea2c59fc}{qr\+Launcher}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af939d1a0ba88123d0841d1fea5a9a91b}{CHANNEL\+\_\+\+ID}} = "{}connection\+\_\+channel"{}
+\item 
+static final int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a7bd8e01052f252413cae38380f018c3a}{NOTIFICATION\+\_\+\+ID}} = 1001
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0dde9ca4390bb511076eed1a57f0f89b}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!cancelConnectionNotification@{cancelConnectionNotification}}
+\index{cancelConnectionNotification@{cancelConnectionNotification}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{cancelConnectionNotification()}{cancelConnectionNotification()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0dde9ca4390bb511076eed1a57f0f89b} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+cancel\+Connection\+Notification (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a1983d1b509a47479431383ec8a2fbbef}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!createNotificationChannel@{createNotificationChannel}}
+\index{createNotificationChannel@{createNotificationChannel}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{createNotificationChannel()}{createNotificationChannel()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a1983d1b509a47479431383ec8a2fbbef} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+create\+Notification\+Channel (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a9e09b2ef63d1b72c9693e958e1bfef2f}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!desconectarTrayecto@{desconectarTrayecto}}
+\index{desconectarTrayecto@{desconectarTrayecto}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{desconectarTrayecto()}{desconectarTrayecto()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a9e09b2ef63d1b72c9693e958e1bfef2f} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+desconectar\+Trayecto (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_ad42492a55683c8f9872ffc5a0e8f3891}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!iniciarNuevoEscaneo@{iniciarNuevoEscaneo}}
+\index{iniciarNuevoEscaneo@{iniciarNuevoEscaneo}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{iniciarNuevoEscaneo()}{iniciarNuevoEscaneo()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_ad42492a55683c8f9872ffc5a0e8f3891} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+iniciar\+Nuevo\+Escaneo (\begin{DoxyParamCaption}\item[{String}]{uuid}{, }\item[{String}]{id\+Bici}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0f3dbba53c6d93243b70e193b241f830}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!onCreate@{onCreate}}
+\index{onCreate@{onCreate}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{onCreate()}{onCreate()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0f3dbba53c6d93243b70e193b241f830} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+on\+Create (\begin{DoxyParamCaption}\item[{Bundle}]{saved\+Instance\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_ab24adaa93b30a851312f6ce0e65c01b5}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!onDestroy@{onDestroy}}
+\index{onDestroy@{onDestroy}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{onDestroy()}{onDestroy()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_ab24adaa93b30a851312f6ce0e65c01b5} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+on\+Destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a1d5fd9fdea52e4ae1d51344db9b7f3a9}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!onNewIntent@{onNewIntent}}
+\index{onNewIntent@{onNewIntent}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{onNewIntent()}{onNewIntent()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a1d5fd9fdea52e4ae1d51344db9b7f3a9} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+on\+New\+Intent (\begin{DoxyParamCaption}\item[{Intent}]{intent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a612a111a38bbca6ee1e22de95b0b85ac}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!procesarQR@{procesarQR}}
+\index{procesarQR@{procesarQR}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{procesarQR()}{procesarQR()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a612a111a38bbca6ee1e22de95b0b85ac} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+procesar\+QR (\begin{DoxyParamCaption}\item[{String}]{qr\+Content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0ff9e565c7aa05fa371c18b5ff22e8c6}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!setupBottomNavigation@{setupBottomNavigation}}
+\index{setupBottomNavigation@{setupBottomNavigation}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{setupBottomNavigation()}{setupBottomNavigation()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a0ff9e565c7aa05fa371c18b5ff22e8c6} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+setup\+Bottom\+Navigation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a580a69f0030dde79682d07ad71894914}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!setupConnectButton@{setupConnectButton}}
+\index{setupConnectButton@{setupConnectButton}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{setupConnectButton()}{setupConnectButton()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a580a69f0030dde79682d07ad71894914} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+setup\+Connect\+Button (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_acc38ffe0c5ff2d3f7fadb398a1236d70}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!setupDisconnectButton@{setupDisconnectButton}}
+\index{setupDisconnectButton@{setupDisconnectButton}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{setupDisconnectButton()}{setupDisconnectButton()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_acc38ffe0c5ff2d3f7fadb398a1236d70} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+setup\+Disconnect\+Button (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a6a5c4595412c91ef75098cf30187258e}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!showConnectionNotification@{showConnectionNotification}}
+\index{showConnectionNotification@{showConnectionNotification}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{showConnectionNotification()}{showConnectionNotification()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a6a5c4595412c91ef75098cf30187258e} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+show\+Connection\+Notification (\begin{DoxyParamCaption}\item[{String}]{bike\+Id}{, }\item[{String}]{uuid}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af26921700958104c72ef8d2dbcafc55e}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!showDisconnectionNotification@{showDisconnectionNotification}}
+\index{showDisconnectionNotification@{showDisconnectionNotification}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{showDisconnectionNotification()}{showDisconnectionNotification()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af26921700958104c72ef8d2dbcafc55e} 
+void com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+show\+Disconnection\+Notification (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af939d1a0ba88123d0841d1fea5a9a91b}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!CHANNEL\_ID@{CHANNEL\_ID}}
+\index{CHANNEL\_ID@{CHANNEL\_ID}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{CHANNEL\_ID}{CHANNEL\_ID}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af939d1a0ba88123d0841d1fea5a9a91b} 
+final String com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+CHANNEL\+\_\+\+ID = "{}connection\+\_\+channel"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af592ec8d5e4f68a946d929f36cd58d91}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!logicaTrayectos@{logicaTrayectos}}
+\index{logicaTrayectos@{logicaTrayectos}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{logicaTrayectos}{logicaTrayectos}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_af592ec8d5e4f68a946d929f36cd58d91} 
+\mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_logica_trayectos_fake}{Logica\+Trayectos\+Fake}} com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+logica\+Trayectos\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a7bd8e01052f252413cae38380f018c3a}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!NOTIFICATION\_ID@{NOTIFICATION\_ID}}
+\index{NOTIFICATION\_ID@{NOTIFICATION\_ID}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{NOTIFICATION\_ID}{NOTIFICATION\_ID}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a7bd8e01052f252413cae38380f018c3a} 
+final int com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+NOTIFICATION\+\_\+\+ID = 1001\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a27ce50e765341f4d9ce70a0382a576e6}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!notificationManager@{notificationManager}}
+\index{notificationManager@{notificationManager}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{notificationManager}{notificationManager}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a27ce50e765341f4d9ce70a0382a576e6} 
+Notification\+Manager com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+notification\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a9e7af3d39babc9afcf5d8117ea2c59fc}\index{com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}!qrLauncher@{qrLauncher}}
+\index{qrLauncher@{qrLauncher}!com.example.eolos.activities.ConnectionActivity@{com.example.eolos.activities.ConnectionActivity}}
+\doxysubsubsection{\texorpdfstring{qrLauncher}{qrLauncher}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1activities_1_1_connection_activity_a9e7af3d39babc9afcf5d8117ea2c59fc} 
+final Activity\+Result\+Launcher$<$Intent$>$ com.\+example.\+eolos.\+activities.\+Connection\+Activity.\+qr\+Launcher\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ registerForActivityResult(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ ActivityResultContracts.StartActivityForResult(),\ result\ -\/>\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (result.getResultCode()\ ==\ RESULT\_OK\ \&\&\ result.getData()\ !=\ null)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ String\ qrResult\ =\ result.getData().getStringExtra(\textcolor{stringliteral}{"{}qr\_result"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ procesarQR(qrResult);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \})}
+
+\end{DoxyCode}
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/activities/\mbox{\hyperlink{_connection_activity_8java}{Connection\+Activity.\+java}}\end{DoxyCompactItemize}

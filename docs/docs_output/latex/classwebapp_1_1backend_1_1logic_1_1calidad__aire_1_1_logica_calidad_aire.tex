@@ -1,0 +1,88 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+calidad\+\_\+aire.\+Logica\+Calidad\+Aire}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire}{}\label{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire}\index{webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+calidad\+\_\+aire.\+Logica\+Calidad\+Aire\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_acd3ab1a017930e8d70a782816d438035}{convertir\+\_\+pm25\+\_\+a\+\_\+aqi}} (self, pm25\+\_\+valor)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a6f3cd57224abf58c27ad564fe5d78617}{obtener\+\_\+aqi\+\_\+reciente}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str placa\+\_\+id)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a55e8d574e5caf4d64496963e96d67850}{obtener\+\_\+historico\+\_\+24h}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str placa\+\_\+id)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a780d7e2e712acf2d36a6e212b21e2da4}{obtener\+\_\+todas\+\_\+mediciones}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str placa\+\_\+id)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_acd3ab1a017930e8d70a782816d438035}\index{webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}!convertir\_pm25\_a\_aqi@{convertir\_pm25\_a\_aqi}}
+\index{convertir\_pm25\_a\_aqi@{convertir\_pm25\_a\_aqi}!webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}}
+\doxysubsubsection{\texorpdfstring{convertir\_pm25\_a\_aqi()}{convertir\_pm25\_a\_aqi()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_acd3ab1a017930e8d70a782816d438035} 
+webapp.\+backend.\+logic.\+calidad\+\_\+aire.\+Logica\+Calidad\+Aire.\+convertir\+\_\+pm25\+\_\+a\+\_\+aqi (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{pm25\+\_\+valor}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Convierte valor de PM2.5 (µg/m³) a AQI.
+Basado en el estándar EPA.
+
+Args:
+    pm25_valor (float): Valor de PM2.5 en µg/m³
+
+Returns:
+    int: Valor AQI
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a6f3cd57224abf58c27ad564fe5d78617}\index{webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}!obtener\_aqi\_reciente@{obtener\_aqi\_reciente}}
+\index{obtener\_aqi\_reciente@{obtener\_aqi\_reciente}!webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}}
+\doxysubsubsection{\texorpdfstring{obtener\_aqi\_reciente()}{obtener\_aqi\_reciente()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a6f3cd57224abf58c27ad564fe5d78617} 
+webapp.\+backend.\+logic.\+calidad\+\_\+aire.\+Logica\+Calidad\+Aire.\+obtener\+\_\+aqi\+\_\+reciente (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{placa\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene el AQI más reciente de una placa específica.
+Calcula el AQI a partir de la medición PM2.5 más reciente.
+
+Args:
+    db (Session): Sesión de BD.
+    placa_id (str): ID de la placa.
+
+Returns:
+    dict: {"aqi": int, "fecha_hora": str}
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a55e8d574e5caf4d64496963e96d67850}\index{webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}!obtener\_historico\_24h@{obtener\_historico\_24h}}
+\index{obtener\_historico\_24h@{obtener\_historico\_24h}!webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}}
+\doxysubsubsection{\texorpdfstring{obtener\_historico\_24h()}{obtener\_historico\_24h()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a55e8d574e5caf4d64496963e96d67850} 
+webapp.\+backend.\+logic.\+calidad\+\_\+aire.\+Logica\+Calidad\+Aire.\+obtener\+\_\+historico\+\_\+24h (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{placa\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene todas las mediciones de las últimas 24 horas para una placa.
+
+Args:
+    db (Session): Sesión de BD.
+    placa_id (str): ID de la placa.
+
+Returns:
+    list: Lista de mediciones ordenadas por fecha
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a780d7e2e712acf2d36a6e212b21e2da4}\index{webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}!obtener\_todas\_mediciones@{obtener\_todas\_mediciones}}
+\index{obtener\_todas\_mediciones@{obtener\_todas\_mediciones}!webapp.backend.logic.calidad\_aire.LogicaCalidadAire@{webapp.backend.logic.calidad\_aire.LogicaCalidadAire}}
+\doxysubsubsection{\texorpdfstring{obtener\_todas\_mediciones()}{obtener\_todas\_mediciones()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1calidad__aire_1_1_logica_calidad_aire_a780d7e2e712acf2d36a6e212b21e2da4} 
+webapp.\+backend.\+logic.\+calidad\+\_\+aire.\+Logica\+Calidad\+Aire.\+obtener\+\_\+todas\+\_\+mediciones (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{placa\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene TODAS las mediciones de una placa (sin límite temporal).
+
+Args:
+    db (Session): Sesión de BD.
+    placa_id (str): ID de la placa.
+
+Returns:
+    list: Lista de mediciones ordenadas por fecha
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{calidad__aire_8py}{calidad\+\_\+aire.\+py}}\end{DoxyCompactItemize}

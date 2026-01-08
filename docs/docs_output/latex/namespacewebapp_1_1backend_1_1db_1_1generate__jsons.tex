@@ -1,0 +1,70 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+db.\+generate\+\_\+jsons}
+\hypertarget{namespacewebapp_1_1backend_1_1db_1_1generate__jsons}{}\label{namespacewebapp_1_1backend_1_1db_1_1generate__jsons}\index{webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_a35405a6e2412ad7632efd60cc993c20a}{db}} = Session\+Local()
+\item 
+list \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_ad4c3dcc9ce5019b70dbd4b2f8ed9ec15}{targetas}} = \mbox{[}t.\+targeta\+\_\+id for t in db.\+query(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_mibisivalencia}{Mibisivalencia}}).all()\mbox{]}
+\item 
+list \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_ae66df194c8450e2ab833dd38658a10c8}{estaciones}}
+\item 
+list \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_a605afb6ccd654a28dd011ec96239b24e}{bicicletas}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: Denys Litvynov Lymanets
+Fecha: 03-12-2025
+Descripción: Script para generar JSONs con datos de la base de datos después de seed.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_a605afb6ccd654a28dd011ec96239b24e}\index{webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}!bicicletas@{bicicletas}}
+\index{bicicletas@{bicicletas}!webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}}
+\doxysubsubsection{\texorpdfstring{bicicletas}{bicicletas}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_a605afb6ccd654a28dd011ec96239b24e} 
+list webapp.\+backend.\+db.\+generate\+\_\+jsons.\+bicicletas}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bicicleta\_id"{}}:\ b.bicicleta\_id,}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}estacion\_id"{}}:\ b.estacion\_id,}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}qr\_code"{}}:\ b.qr\_code,}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}estado"{}}:\ str(b.estado)\ \ \textcolor{comment}{\#\ Convertir\ Enum\ a\ string}}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ b\ \textcolor{keywordflow}{in}\ db.query(Bicicleta).all()}
+\DoxyCodeLine{00009\ \ \ \ \ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_a35405a6e2412ad7632efd60cc993c20a}\index{webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}!db@{db}}
+\index{db@{db}!webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}}
+\doxysubsubsection{\texorpdfstring{db}{db}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_a35405a6e2412ad7632efd60cc993c20a} 
+webapp.\+backend.\+db.\+generate\+\_\+jsons.\+db = Session\+Local()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_ae66df194c8450e2ab833dd38658a10c8}\index{webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}!estaciones@{estaciones}}
+\index{estaciones@{estaciones}!webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}}
+\doxysubsubsection{\texorpdfstring{estaciones}{estaciones}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_ae66df194c8450e2ab833dd38658a10c8} 
+list webapp.\+backend.\+db.\+generate\+\_\+jsons.\+estaciones}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}estacion\_id"{}}:\ e.estacion\_id,\ \textcolor{stringliteral}{"{}nombre"{}}:\ e.nombre,\ \textcolor{stringliteral}{"{}lat"{}}:\ e.lat,\ \textcolor{stringliteral}{"{}lon"{}}:\ e.lon\}}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ e\ \textcolor{keywordflow}{in}\ db.query(Estacion).all()}
+\DoxyCodeLine{00004\ \ \ \ \ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_ad4c3dcc9ce5019b70dbd4b2f8ed9ec15}\index{webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}!targetas@{targetas}}
+\index{targetas@{targetas}!webapp.backend.db.generate\_jsons@{webapp.backend.db.generate\_jsons}}
+\doxysubsubsection{\texorpdfstring{targetas}{targetas}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1generate__jsons_ad4c3dcc9ce5019b70dbd4b2f8ed9ec15} 
+list webapp.\+backend.\+db.\+generate\+\_\+jsons.\+targetas = \mbox{[}t.\+targeta\+\_\+id for t in db.\+query(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_mibisivalencia}{Mibisivalencia}}).all()\mbox{]}}
+

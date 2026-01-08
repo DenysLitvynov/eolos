@@ -1,0 +1,105 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+estado\+\_\+sensores.\+Logica\+Estado\+Sensores}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores}{}\label{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores}\index{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+estado\+\_\+sensores.\+Logica\+Estado\+Sensores\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a2de7c3152e2ec3132ae306720693c0b6}{calcular\+\_\+tiempo\+\_\+transcurrido}} (self, fecha\+\_\+hora)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a9f06ebaaf5bdbdca396417a57f4d705a}{obtener\+\_\+todas\+\_\+bicicletas}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}})
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a9308b8e82567f07380be82919bb07cda}{obtener\+\_\+mediciones\+\_\+placa}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str placa\+\_\+id, str fecha\+\_\+inicio=None, str fecha\+\_\+fin=None)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a199f914bac7f11cba04116c88ed94373}{eliminar\+\_\+medicion}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str lectura\+\_\+id)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_abb439f39512d63a2146285833e1fc6bf}{eliminar\+\_\+mediciones\+\_\+anomalas}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str placa\+\_\+id)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a2de7c3152e2ec3132ae306720693c0b6}\index{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}!calcular\_tiempo\_transcurrido@{calcular\_tiempo\_transcurrido}}
+\index{calcular\_tiempo\_transcurrido@{calcular\_tiempo\_transcurrido}!webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}}
+\doxysubsubsection{\texorpdfstring{calcular\_tiempo\_transcurrido()}{calcular\_tiempo\_transcurrido()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a2de7c3152e2ec3132ae306720693c0b6} 
+webapp.\+backend.\+logic.\+estado\+\_\+sensores.\+Logica\+Estado\+Sensores.\+calcular\+\_\+tiempo\+\_\+transcurrido (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{fecha\+\_\+hora}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calcula el tiempo transcurrido desde una fecha hasta ahora.
+Retorna una cadena legible como "5 min", "2 horas", etc.
+
+Args:
+    fecha_hora (datetime): Fecha a comparar
+
+Returns:
+    str: Tiempo transcurrido en formato legible
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a199f914bac7f11cba04116c88ed94373}\index{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}!eliminar\_medicion@{eliminar\_medicion}}
+\index{eliminar\_medicion@{eliminar\_medicion}!webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}}
+\doxysubsubsection{\texorpdfstring{eliminar\_medicion()}{eliminar\_medicion()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a199f914bac7f11cba04116c88ed94373} 
+webapp.\+backend.\+logic.\+estado\+\_\+sensores.\+Logica\+Estado\+Sensores.\+eliminar\+\_\+medicion (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{lectura\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Elimina una medición específica por su lectura_id.
+
+Args:
+    db (Session): Sesión de BD.
+    lectura_id (str): ID de la lectura/medición.
+
+Returns:
+    dict: Mensaje de confirmación
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_abb439f39512d63a2146285833e1fc6bf}\index{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}!eliminar\_mediciones\_anomalas@{eliminar\_mediciones\_anomalas}}
+\index{eliminar\_mediciones\_anomalas@{eliminar\_mediciones\_anomalas}!webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}}
+\doxysubsubsection{\texorpdfstring{eliminar\_mediciones\_anomalas()}{eliminar\_mediciones\_anomalas()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_abb439f39512d63a2146285833e1fc6bf} 
+webapp.\+backend.\+logic.\+estado\+\_\+sensores.\+Logica\+Estado\+Sensores.\+eliminar\+\_\+mediciones\+\_\+anomalas (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{placa\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Elimina todas las mediciones anómalas (< 0 o > 200) de una placa.
+
+Args:
+    db (Session): Sesión de BD.
+    placa_id (str): ID de la placa.
+
+Returns:
+    dict: Información sobre mediciones eliminadas
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a9308b8e82567f07380be82919bb07cda}\index{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}!obtener\_mediciones\_placa@{obtener\_mediciones\_placa}}
+\index{obtener\_mediciones\_placa@{obtener\_mediciones\_placa}!webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}}
+\doxysubsubsection{\texorpdfstring{obtener\_mediciones\_placa()}{obtener\_mediciones\_placa()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a9308b8e82567f07380be82919bb07cda} 
+webapp.\+backend.\+logic.\+estado\+\_\+sensores.\+Logica\+Estado\+Sensores.\+obtener\+\_\+mediciones\+\_\+placa (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{placa\+\_\+id}{, }\item[{str }]{fecha\+\_\+inicio}{ = {\ttfamily None}, }\item[{str }]{fecha\+\_\+fin}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene todas las mediciones de una placa con rango de fechas opcional.
+
+Args:
+    db (Session): Sesión de BD.
+    placa_id (str): ID de la placa.
+    fecha_inicio (str): Fecha inicio en formato ISO (opcional)
+    fecha_fin (str): Fecha fin en formato ISO (opcional)
+
+Returns:
+    list: Lista de mediciones ordenadas por fecha
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a9f06ebaaf5bdbdca396417a57f4d705a}\index{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}!obtener\_todas\_bicicletas@{obtener\_todas\_bicicletas}}
+\index{obtener\_todas\_bicicletas@{obtener\_todas\_bicicletas}!webapp.backend.logic.estado\_sensores.LogicaEstadoSensores@{webapp.backend.logic.estado\_sensores.LogicaEstadoSensores}}
+\doxysubsubsection{\texorpdfstring{obtener\_todas\_bicicletas()}{obtener\_todas\_bicicletas()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1estado__sensores_1_1_logica_estado_sensores_a9f06ebaaf5bdbdca396417a57f4d705a} 
+webapp.\+backend.\+logic.\+estado\+\_\+sensores.\+Logica\+Estado\+Sensores.\+obtener\+\_\+todas\+\_\+bicicletas (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene todas las bicicletas con su información de sensores y estación.
+
+Args:
+    db (Session): Sesión de BD.
+
+Returns:
+    list: Lista de dicts con datos de bicicletas
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{estado__sensores_8py}{estado\+\_\+sensores.\+py}}\end{DoxyCompactItemize}

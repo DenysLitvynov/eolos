@@ -1,0 +1,67 @@
+\doxysection{Referencia de la clase com.\+example.\+eolos.\+logica\+\_\+fake.\+Login\+Fake}
+\hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake}{}\label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake}\index{com.example.eolos.logica\_fake.LoginFake@{com.example.eolos.logica\_fake.LoginFake}}
+
+
+Diagrama de colaboración de com.\+example.\+eolos.\+logica\+\_\+fake.\+Login\+Fake\+:
+% FIG 0
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_1_1_login_callback}{Login\+Callback}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_ab329d0507b1f90e41d7853e7c208b7bf}{login}} (String correo, String contrasena, \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_1_1_login_callback}{Login\+Callback}} callback)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_a671dd76bf80a8c2cda602e693919919f}{BASE\+\_\+\+URL}} = "{}http\+://51.\+95.\+74.\+33"{}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_a217aefe410a968798630946845bbd232}{ENDPOINT\+\_\+\+LOGIN}} = "{}/api/v1/auth/login"{}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_ab329d0507b1f90e41d7853e7c208b7bf}\index{com.example.eolos.logica\_fake.LoginFake@{com.example.eolos.logica\_fake.LoginFake}!login@{login}}
+\index{login@{login}!com.example.eolos.logica\_fake.LoginFake@{com.example.eolos.logica\_fake.LoginFake}}
+\doxysubsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_ab329d0507b1f90e41d7853e7c208b7bf} 
+void com.\+example.\+eolos.\+logica\+\_\+fake.\+Login\+Fake.\+login (\begin{DoxyParamCaption}\item[{String}]{correo}{, }\item[{String}]{contrasena}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_1_1_login_callback}{Login\+Callback}}}]{callback}{}\end{DoxyParamCaption})}
+
+Realiza el login enviando correo y contraseña al endpoint de autenticación.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em correo} & Correo electrónico del usuario \\
+\hline
+{\em contrasena} & Contraseña en texto plano \\
+\hline
+{\em callback} & Callback con el token JWT o mensaje de error \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_a671dd76bf80a8c2cda602e693919919f}\index{com.example.eolos.logica\_fake.LoginFake@{com.example.eolos.logica\_fake.LoginFake}!BASE\_URL@{BASE\_URL}}
+\index{BASE\_URL@{BASE\_URL}!com.example.eolos.logica\_fake.LoginFake@{com.example.eolos.logica\_fake.LoginFake}}
+\doxysubsubsection{\texorpdfstring{BASE\_URL}{BASE\_URL}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_a671dd76bf80a8c2cda602e693919919f} 
+final String com.\+example.\+eolos.\+logica\+\_\+fake.\+Login\+Fake.\+BASE\+\_\+\+URL = "{}http\+://51.\+95.\+74.\+33"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_a217aefe410a968798630946845bbd232}\index{com.example.eolos.logica\_fake.LoginFake@{com.example.eolos.logica\_fake.LoginFake}!ENDPOINT\_LOGIN@{ENDPOINT\_LOGIN}}
+\index{ENDPOINT\_LOGIN@{ENDPOINT\_LOGIN}!com.example.eolos.logica\_fake.LoginFake@{com.example.eolos.logica\_fake.LoginFake}}
+\doxysubsubsection{\texorpdfstring{ENDPOINT\_LOGIN}{ENDPOINT\_LOGIN}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_login_fake_a217aefe410a968798630946845bbd232} 
+final String com.\+example.\+eolos.\+logica\+\_\+fake.\+Login\+Fake.\+ENDPOINT\+\_\+\+LOGIN = "{}/api/v1/auth/login"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/logica\+\_\+fake/\mbox{\hyperlink{_login_fake_8java}{Login\+Fake.\+java}}\end{DoxyCompactItemize}

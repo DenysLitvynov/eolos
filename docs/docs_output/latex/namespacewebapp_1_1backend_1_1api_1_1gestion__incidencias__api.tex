@@ -1,0 +1,111 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+api.\+gestion\+\_\+incidencias\+\_\+api}
+\hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api}{}\label{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api}\index{webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1gestion__incidencias__api_1_1_incidencia_listado_out}{Incidencia\+Listado\+Out}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a3e493c0b74f8e9addb7d6d00c654d62d}{\+\_\+formatear\+\_\+tiempo\+\_\+relativo}} (datetime fecha\+\_\+reporte)
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1gestion__incidencias__api_1_1_incidencia_listado_out}{Incidencia\+Listado\+Out}}\mbox{]} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_afc9af1e608e6c2b91e1823347a193fb7}{listar\+\_\+incidencias\+\_\+filtradas\+\_\+por\+\_\+rol}} (Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), current\+\_\+user=Depends(get\+\_\+current\+\_\+user))
+\begin{DoxyCompactList}\small\item\em ➡️ NUEVA RUTA\+: Filtrada por Rol (Admin/\+Técnico) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1gestion__incidencias__api_1_1_incidencia_listado_out}{Incidencia\+Listado\+Out}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a5cf847ccba441d26a78a89d1cbdb64c8}{cambiar\+\_\+estado\+\_\+incidencia}} (str incidencia\+\_\+id, str nuevo\+\_\+estado, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), current\+\_\+user=Depends(get\+\_\+current\+\_\+user))
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1gestion__incidencias__api_1_1_incidencia_listado_out}{Incidencia\+Listado\+Out}}\mbox{]} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a0848c1191116ce8d63e9fcd356b82cf1}{listar\+\_\+incidencias\+\_\+publicas}} (Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\begin{DoxyCompactList}\small\item\em ➡️ RUTA /public (Se mantiene para pruebas sin autenticación) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a17b26fcdbe3d634a68940e025da5cd3b}{router}} = APIRouter(prefix="{}/gestion-\/incidencias"{})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a1798ae4c0aa4407836d9c5755e5e1a9e}{logica}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias}{Logica\+Incidencias}}()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_aec045288d38e61bc96e593ae5609bc7b}{gestion\+\_\+logic}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic}{Gestion\+Incidencias\+Logic}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: Ariel Bejaran
+Fecha: 05-12-2025
+Descripción: API auxiliares para la gestión de incidencias (lista simplificada para frontend).
+Se reutiliza `LogicaIncidencias` y `get_current_user` para devolver una lista de incidencias
+en un formato amigable para el frontend de `gestion_incidencias`.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a3e493c0b74f8e9addb7d6d00c654d62d}\index{webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}!\_formatear\_tiempo\_relativo@{\_formatear\_tiempo\_relativo}}
+\index{\_formatear\_tiempo\_relativo@{\_formatear\_tiempo\_relativo}!webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{\_formatear\_tiempo\_relativo()}{\_formatear\_tiempo\_relativo()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a3e493c0b74f8e9addb7d6d00c654d62d} 
+ str webapp.\+backend.\+api.\+gestion\+\_\+incidencias\+\_\+api.\+\_\+formatear\+\_\+tiempo\+\_\+relativo (\begin{DoxyParamCaption}\item[{datetime}]{fecha\+\_\+reporte}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Devuelve una cadena simple tipo '5min', '1h 30min' o fecha.
+Se usa para mostrar en las tarjetas del frontend.
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a5cf847ccba441d26a78a89d1cbdb64c8}\index{webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}!cambiar\_estado\_incidencia@{cambiar\_estado\_incidencia}}
+\index{cambiar\_estado\_incidencia@{cambiar\_estado\_incidencia}!webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{cambiar\_estado\_incidencia()}{cambiar\_estado\_incidencia()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a5cf847ccba441d26a78a89d1cbdb64c8} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1gestion__incidencias__api_1_1_incidencia_listado_out}{Incidencia\+Listado\+Out}} webapp.\+backend.\+api.\+gestion\+\_\+incidencias\+\_\+api.\+cambiar\+\_\+estado\+\_\+incidencia (\begin{DoxyParamCaption}\item[{str}]{incidencia\+\_\+id}{, }\item[{str}]{nuevo\+\_\+estado}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{}]{current\+\_\+user}{ = {\ttfamily Depends(get\+\_\+current\+\_\+user)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Cambia el estado de una incidencia dada.
+
+Ruta montada como: POST /api/v1/gestion-incidencias/cambiar_estado
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_afc9af1e608e6c2b91e1823347a193fb7}\index{webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}!listar\_incidencias\_filtradas\_por\_rol@{listar\_incidencias\_filtradas\_por\_rol}}
+\index{listar\_incidencias\_filtradas\_por\_rol@{listar\_incidencias\_filtradas\_por\_rol}!webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{listar\_incidencias\_filtradas\_por\_rol()}{listar\_incidencias\_filtradas\_por\_rol()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_afc9af1e608e6c2b91e1823347a193fb7} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1gestion__incidencias__api_1_1_incidencia_listado_out}{Incidencia\+Listado\+Out}}\mbox{]} webapp.\+backend.\+api.\+gestion\+\_\+incidencias\+\_\+api.\+listar\+\_\+incidencias\+\_\+filtradas\+\_\+por\+\_\+rol (\begin{DoxyParamCaption}\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{}]{current\+\_\+user}{ = {\ttfamily Depends(get\+\_\+current\+\_\+user)}}\end{DoxyParamCaption})}
+
+
+
+➡️ NUEVA RUTA\+: Filtrada por Rol (Admin/\+Técnico) 
+
+\begin{DoxyVerb}Ruta que devuelve incidencias filtradas según el rol del usuario:
+- Admin: Fuentes 'app' o 'web'.
+- Tecnico: Fuente 'parada_bici'.
+- Otros: Lista vacía.
+
+Ruta montada como: GET /api/v1/gestion-incidencias/filtradas
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a0848c1191116ce8d63e9fcd356b82cf1}\index{webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}!listar\_incidencias\_publicas@{listar\_incidencias\_publicas}}
+\index{listar\_incidencias\_publicas@{listar\_incidencias\_publicas}!webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{listar\_incidencias\_publicas()}{listar\_incidencias\_publicas()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a0848c1191116ce8d63e9fcd356b82cf1} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1gestion__incidencias__api_1_1_incidencia_listado_out}{Incidencia\+Listado\+Out}}\mbox{]} webapp.\+backend.\+api.\+gestion\+\_\+incidencias\+\_\+api.\+listar\+\_\+incidencias\+\_\+publicas (\begin{DoxyParamCaption}\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+
+
+➡️ RUTA /public (Se mantiene para pruebas sin autenticación) 
+
+\begin{DoxyVerb}Endpoint público de solo-lectura para pruebas en frontend.\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_aec045288d38e61bc96e593ae5609bc7b}\index{webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}!gestion\_logic@{gestion\_logic}}
+\index{gestion\_logic@{gestion\_logic}!webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{gestion\_logic}{gestion\_logic}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_aec045288d38e61bc96e593ae5609bc7b} 
+webapp.\+backend.\+api.\+gestion\+\_\+incidencias\+\_\+api.\+gestion\+\_\+logic = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic}{Gestion\+Incidencias\+Logic}}()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a1798ae4c0aa4407836d9c5755e5e1a9e}\index{webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}!logica@{logica}}
+\index{logica@{logica}!webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{logica}{logica}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a1798ae4c0aa4407836d9c5755e5e1a9e} 
+webapp.\+backend.\+api.\+gestion\+\_\+incidencias\+\_\+api.\+logica = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias}{Logica\+Incidencias}}()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a17b26fcdbe3d634a68940e025da5cd3b}\index{webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}!router@{router}}
+\index{router@{router}!webapp.backend.api.gestion\_incidencias\_api@{webapp.backend.api.gestion\_incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1gestion__incidencias__api_a17b26fcdbe3d634a68940e025da5cd3b} 
+webapp.\+backend.\+api.\+gestion\+\_\+incidencias\+\_\+api.\+router = APIRouter(prefix="{}/gestion-\/incidencias"{})}
+

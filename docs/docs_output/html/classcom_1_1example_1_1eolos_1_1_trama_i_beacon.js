@@ -1,0 +1,26 @@
+var classcom_1_1example_1_1eolos_1_1_trama_i_beacon =
+[
+    [ "TramaIBeacon", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a326ab1eec17fe6ef154126eaa3759c1e", null ],
+    [ "getAdvFlags", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a995ebacafa798b11a841eaa0fdf9c3e6", null ],
+    [ "getAdvHeader", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#ab5887b30fd4cc3277d4c8ed0204dd930", null ],
+    [ "getCompanyID", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a22c1c861d93ae7ecdc463b5a8f0defe3", null ],
+    [ "getiBeaconLength", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a611f1b88b5a6700d805386e697a88619", null ],
+    [ "getiBeaconType", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#aa99201e7c4f0c4ffb53bee6248909563", null ],
+    [ "getLosBytes", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#aa4d71fb2de2ed2e8ea52d74929c6bf8d", null ],
+    [ "getMajor", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a9553a357eac513c07cdae77e44cfbd67", null ],
+    [ "getMinor", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a257454cba87374f8e218218ec479cfae", null ],
+    [ "getPrefijo", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a65cf243deb1c7acf29dfc1103dcc7b79", null ],
+    [ "getTxPower", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#acbb82cc8e6096be89f74ec91b28b9c7c", null ],
+    [ "getUUID", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a56f48b6cf8988f27e5a09dbd7aee12b7", null ],
+    [ "advFlags", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a026dc80a1a3fa30592be65cbf23fb555", null ],
+    [ "advHeader", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a073e12327769a21278e49457eea7ad0b", null ],
+    [ "companyID", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a2d2bf750fb65be975eefbeac65ee7feb", null ],
+    [ "iBeaconLength", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#adccae42bc9b049a9a184f80d09aafe74", null ],
+    [ "iBeaconType", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a17260a06fd5d73c0808c267f503f4be9", null ],
+    [ "losBytes", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#ab78157bc55fd851aa2709b0b9bc95bbd", null ],
+    [ "major", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a2a7ffcc83e579d9f7d94c683f90a4e66", null ],
+    [ "minor", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a9e64b7823fa4309805683a1901fd5c4a", null ],
+    [ "prefijo", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a041afab763c151a7cc180471c0744253", null ],
+    [ "txPower", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a444c9fc806e2a4b4dd8fdbc078384628", null ],
+    [ "uuid", "classcom_1_1example_1_1eolos_1_1_trama_i_beacon.html#a949c5f080db1b9a2f6efe6f09f9bf740", null ]
+];

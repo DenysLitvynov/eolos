@@ -1,0 +1,95 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Incidencia}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Incidencia
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Incidencia\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a377934210305515c73b421c78beb6dc5}{incidencia\+\_\+id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a7efebe396bd9d308dcec237d5459c8e8}{usuario\+\_\+id}} = Column(String(36), Foreign\+Key("{}usuarios.\+usuario\+\_\+id"{}))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a457256016320d9f6c0f69185650c666e}{bicicleta\+\_\+id}} = Column(String(20), Foreign\+Key("{}bicicletas.\+bicicleta\+\_\+id"{}), nullable=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a5f9e80ca8d807c03a749638ca1670ffe}{descripcion}} = Column(Text, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a4604460023fecc0a10c61406f77ed444}{fecha\+\_\+reporte}} = Column(TIMESTAMP(timezone=True), server\+\_\+default=func.\+now())
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a9c4fcad9a9c61bc4975c512ff611b5cf}{estado}} = Column(SQLEnum(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estado_incidencia}{Estado\+Incidencia}}), default=\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estado_incidencia_aa82bd97a24c67cdbb3e30c78480a2fca}{Estado\+Incidencia.\+nuevo}})
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_ab21f750e2bfb6095dafb4d1148b2ef25}{fuente}} = Column(SQLEnum(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_fuente_reporte}{Fuente\+Reporte}}), nullable=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_abf60124711274980b21244f9dfdf2ea2}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}incidencias"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla para almacenar las incidencias de los usuarios.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_abf60124711274980b21244f9dfdf2ea2}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_abf60124711274980b21244f9dfdf2ea2} 
+str webapp.\+backend.\+db.\+models.\+Incidencia.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}incidencias"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a457256016320d9f6c0f69185650c666e}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}!bicicleta\_id@{bicicleta\_id}}
+\index{bicicleta\_id@{bicicleta\_id}!webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+\doxysubsubsection{\texorpdfstring{bicicleta\_id}{bicicleta\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a457256016320d9f6c0f69185650c666e} 
+webapp.\+backend.\+db.\+models.\+Incidencia.\+bicicleta\+\_\+id = Column(String(20), Foreign\+Key("{}bicicletas.\+bicicleta\+\_\+id"{}), nullable=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a5f9e80ca8d807c03a749638ca1670ffe}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}!descripcion@{descripcion}}
+\index{descripcion@{descripcion}!webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+\doxysubsubsection{\texorpdfstring{descripcion}{descripcion}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a5f9e80ca8d807c03a749638ca1670ffe} 
+webapp.\+backend.\+db.\+models.\+Incidencia.\+descripcion = Column(Text, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a9c4fcad9a9c61bc4975c512ff611b5cf}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}!estado@{estado}}
+\index{estado@{estado}!webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+\doxysubsubsection{\texorpdfstring{estado}{estado}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a9c4fcad9a9c61bc4975c512ff611b5cf} 
+webapp.\+backend.\+db.\+models.\+Incidencia.\+estado = Column(SQLEnum(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estado_incidencia}{Estado\+Incidencia}}), default=\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estado_incidencia_aa82bd97a24c67cdbb3e30c78480a2fca}{Estado\+Incidencia.\+nuevo}})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a4604460023fecc0a10c61406f77ed444}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}!fecha\_reporte@{fecha\_reporte}}
+\index{fecha\_reporte@{fecha\_reporte}!webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+\doxysubsubsection{\texorpdfstring{fecha\_reporte}{fecha\_reporte}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a4604460023fecc0a10c61406f77ed444} 
+webapp.\+backend.\+db.\+models.\+Incidencia.\+fecha\+\_\+reporte = Column(TIMESTAMP(timezone=True), server\+\_\+default=func.\+now())\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_ab21f750e2bfb6095dafb4d1148b2ef25}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}!fuente@{fuente}}
+\index{fuente@{fuente}!webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+\doxysubsubsection{\texorpdfstring{fuente}{fuente}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_ab21f750e2bfb6095dafb4d1148b2ef25} 
+webapp.\+backend.\+db.\+models.\+Incidencia.\+fuente = Column(SQLEnum(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_fuente_reporte}{Fuente\+Reporte}}), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a377934210305515c73b421c78beb6dc5}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}!incidencia\_id@{incidencia\_id}}
+\index{incidencia\_id@{incidencia\_id}!webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+\doxysubsubsection{\texorpdfstring{incidencia\_id}{incidencia\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a377934210305515c73b421c78beb6dc5} 
+webapp.\+backend.\+db.\+models.\+Incidencia.\+incidencia\+\_\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a7efebe396bd9d308dcec237d5459c8e8}\index{webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}!usuario\_id@{usuario\_id}}
+\index{usuario\_id@{usuario\_id}!webapp.backend.db.models.Incidencia@{webapp.backend.db.models.Incidencia}}
+\doxysubsubsection{\texorpdfstring{usuario\_id}{usuario\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia_a7efebe396bd9d308dcec237d5459c8e8} 
+webapp.\+backend.\+db.\+models.\+Incidencia.\+usuario\+\_\+id = Column(String(36), Foreign\+Key("{}usuarios.\+usuario\+\_\+id"{}))\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

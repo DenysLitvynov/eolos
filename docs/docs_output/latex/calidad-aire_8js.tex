@@ -1,0 +1,242 @@
+\doxysection{Referencia del archivo D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/frontend/js/scripts/calidad-\/aire.js}
+\hypertarget{calidad-aire_8js}{}\label{calidad-aire_8js}\index{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/frontend/js/scripts/calidad-\/aire.js@{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/frontend/js/scripts/calidad-\/aire.js}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+function \mbox{\hyperlink{calidad-aire_8js_ad81a9f05d75c649eed36385b3453df21}{parse\+Jwt}} (token)
+\item 
+function \mbox{\hyperlink{calidad-aire_8js_ab54663ef87fc9ab9d4760f100b283f3b}{actualizar\+UI}} (aqi)
+\item 
+function \mbox{\hyperlink{calidad-aire_8js_a2c5528fd037d7dc8313214e30d114fcf}{formatear\+Fecha}} (fecha\+ISO)
+\item 
+function \mbox{\hyperlink{calidad-aire_8js_ae312d27cc533bc3b989eb00b65841892}{get\+Color\+AQI}} (valor)
+\item 
+function \mbox{\hyperlink{calidad-aire_8js_ad02494ddf76214e1b54a25b14df638de}{actualizar\+Titulo\+Con\+Fechas}} (trayecto)
+\item 
+function \mbox{\hyperlink{calidad-aire_8js_ab948d09972bbde069f477d755947a559}{mostrar\+Mensaje\+Error}} (mensaje)
+\item 
+function \mbox{\hyperlink{calidad-aire_8js_ad9d868ea6b73cbba7e4d1ddba78c15b3}{formatear\+Hora}} (fecha\+ISO)
+\item 
+function \mbox{\hyperlink{calidad-aire_8js_a33b0d06c5c2506d0867de3be5591316e}{formatear\+Fecha\+Corta}} (fecha\+ISO)
+\item 
+function async \mbox{\hyperlink{calidad-aire_8js_adb65f93d0542d804c9d5094e5d5e1c53}{cargar\+Trayectos\+Disponibles}} (token)
+\item 
+function async \mbox{\hyperlink{calidad-aire_8js_afa4aca98814e22a32763822464369a7e}{actualizar\+Vista\+Grafico}} (trayecto)
+\item 
+function async \mbox{\hyperlink{calidad-aire_8js_a5290a980eb0f4a036c46c4caaef0db2b}{cargar\+Grafico\+Trayecto}} (trayecto)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{calidad-aire_8js_a59be084da8908b7d77ff34b25cd84488}{import}} \{ \mbox{\hyperlink{class_calidad_aire_fake}{Calidad\+Aire\+Fake}} \} from \textquotesingle{}../logica\+\_\+fake/calidad\+\_\+aire\+\_\+fake.\+js\textquotesingle{}
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a1b2ad48f9999cd191b820d5793498fb1}{svg\+Good}}
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a4efd6f87954afd3678733baa24724f13}{svg\+Moderate}}
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a1dc4413a1b895cd3d1fcbea3a3e406a4}{svg\+Bad}}
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a7805543f71a0e20c4f0f7bcf8e6aa254}{number\+El}} = document.\+get\+Element\+By\+Id("{}aqi-\/number"{})
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a0b2f4bd7e3684c972d53a0ecba15351b}{text\+El}} = document.\+get\+Element\+By\+Id("{}aqi-\/text"{})
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a1f21df9d1c32eaf85b790b2562d18b88}{desc\+El}} = document.\+get\+Element\+By\+Id("{}aqi-\/description"{})
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a442ae47bbfe6b297dfaebd3b88f98336}{icon\+El}} = document.\+get\+Element\+By\+Id("{}aqi-\/icon"{})
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a63518df6f4c1e3c41a021518ead45237}{maximo\+El}} = document.\+get\+Element\+By\+Id("{}aqi-\/maximo"{})
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a1de019c2d83dea1eafb0641e9e64467d}{h2\+Section}} = document.\+query\+Selector(\textquotesingle{}.co2-\/section h2\textquotesingle{})
+\item 
+const \mbox{\hyperlink{calidad-aire_8js_a11f999850f04ecaf12b50529bcfb69f4}{logica\+Aire}} = new \mbox{\hyperlink{class_calidad_aire_fake}{Calidad\+Aire\+Fake}}()
+\item 
+let \mbox{\hyperlink{calidad-aire_8js_a1a5cc9b84664677f9adfe82ec920c8b3}{co2\+Chart}} = null
+\item 
+let \mbox{\hyperlink{calidad-aire_8js_ad2908c0b3ccb2b0fa30e639ac66be22f}{trayectos\+Disponibles}} = \mbox{[}$\,$\mbox{]}
+\item 
+let \mbox{\hyperlink{calidad-aire_8js_ad4e38fce711ae0e82a0c86336e52f680}{trayecto\+Actual}} = null
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{calidad-aire_8js_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{calidad-aire_8js_ad02494ddf76214e1b54a25b14df638de}\index{calidad-\/aire.js@{calidad-\/aire.js}!actualizarTituloConFechas@{actualizarTituloConFechas}}
+\index{actualizarTituloConFechas@{actualizarTituloConFechas}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{actualizarTituloConFechas()}{actualizarTituloConFechas()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_ad02494ddf76214e1b54a25b14df638de} 
+function actualizar\+Titulo\+Con\+Fechas (\begin{DoxyParamCaption}\item[{}]{trayecto}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_ab54663ef87fc9ab9d4760f100b283f3b}\index{calidad-\/aire.js@{calidad-\/aire.js}!actualizarUI@{actualizarUI}}
+\index{actualizarUI@{actualizarUI}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{actualizarUI()}{actualizarUI()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_ab54663ef87fc9ab9d4760f100b283f3b} 
+function actualizar\+UI (\begin{DoxyParamCaption}\item[{}]{aqi}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_afa4aca98814e22a32763822464369a7e}\index{calidad-\/aire.js@{calidad-\/aire.js}!actualizarVistaGrafico@{actualizarVistaGrafico}}
+\index{actualizarVistaGrafico@{actualizarVistaGrafico}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{actualizarVistaGrafico()}{actualizarVistaGrafico()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_afa4aca98814e22a32763822464369a7e} 
+function async actualizar\+Vista\+Grafico (\begin{DoxyParamCaption}\item[{}]{trayecto}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_a5290a980eb0f4a036c46c4caaef0db2b}\index{calidad-\/aire.js@{calidad-\/aire.js}!cargarGraficoTrayecto@{cargarGraficoTrayecto}}
+\index{cargarGraficoTrayecto@{cargarGraficoTrayecto}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{cargarGraficoTrayecto()}{cargarGraficoTrayecto()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a5290a980eb0f4a036c46c4caaef0db2b} 
+function async cargar\+Grafico\+Trayecto (\begin{DoxyParamCaption}\item[{}]{trayecto}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_adb65f93d0542d804c9d5094e5d5e1c53}\index{calidad-\/aire.js@{calidad-\/aire.js}!cargarTrayectosDisponibles@{cargarTrayectosDisponibles}}
+\index{cargarTrayectosDisponibles@{cargarTrayectosDisponibles}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{cargarTrayectosDisponibles()}{cargarTrayectosDisponibles()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_adb65f93d0542d804c9d5094e5d5e1c53} 
+function async cargar\+Trayectos\+Disponibles (\begin{DoxyParamCaption}\item[{}]{token}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_a2c5528fd037d7dc8313214e30d114fcf}\index{calidad-\/aire.js@{calidad-\/aire.js}!formatearFecha@{formatearFecha}}
+\index{formatearFecha@{formatearFecha}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{formatearFecha()}{formatearFecha()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a2c5528fd037d7dc8313214e30d114fcf} 
+function formatear\+Fecha (\begin{DoxyParamCaption}\item[{}]{fecha\+ISO}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_a33b0d06c5c2506d0867de3be5591316e}\index{calidad-\/aire.js@{calidad-\/aire.js}!formatearFechaCorta@{formatearFechaCorta}}
+\index{formatearFechaCorta@{formatearFechaCorta}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{formatearFechaCorta()}{formatearFechaCorta()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a33b0d06c5c2506d0867de3be5591316e} 
+function formatear\+Fecha\+Corta (\begin{DoxyParamCaption}\item[{}]{fecha\+ISO}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_ad9d868ea6b73cbba7e4d1ddba78c15b3}\index{calidad-\/aire.js@{calidad-\/aire.js}!formatearHora@{formatearHora}}
+\index{formatearHora@{formatearHora}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{formatearHora()}{formatearHora()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_ad9d868ea6b73cbba7e4d1ddba78c15b3} 
+function formatear\+Hora (\begin{DoxyParamCaption}\item[{}]{fecha\+ISO}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_ae312d27cc533bc3b989eb00b65841892}\index{calidad-\/aire.js@{calidad-\/aire.js}!getColorAQI@{getColorAQI}}
+\index{getColorAQI@{getColorAQI}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{getColorAQI()}{getColorAQI()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_ae312d27cc533bc3b989eb00b65841892} 
+function get\+Color\+AQI (\begin{DoxyParamCaption}\item[{}]{valor}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_ab948d09972bbde069f477d755947a559}\index{calidad-\/aire.js@{calidad-\/aire.js}!mostrarMensajeError@{mostrarMensajeError}}
+\index{mostrarMensajeError@{mostrarMensajeError}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{mostrarMensajeError()}{mostrarMensajeError()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_ab948d09972bbde069f477d755947a559} 
+function mostrar\+Mensaje\+Error (\begin{DoxyParamCaption}\item[{}]{mensaje}{}\end{DoxyParamCaption})}
+
+\Hypertarget{calidad-aire_8js_ad81a9f05d75c649eed36385b3453df21}\index{calidad-\/aire.js@{calidad-\/aire.js}!parseJwt@{parseJwt}}
+\index{parseJwt@{parseJwt}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{parseJwt()}{parseJwt()}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_ad81a9f05d75c649eed36385b3453df21} 
+function parse\+Jwt (\begin{DoxyParamCaption}\item[{}]{token}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{calidad-aire_8js_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{calidad-aire_8js_a1a5cc9b84664677f9adfe82ec920c8b3}\index{calidad-\/aire.js@{calidad-\/aire.js}!co2Chart@{co2Chart}}
+\index{co2Chart@{co2Chart}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{co2Chart}{co2Chart}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a1a5cc9b84664677f9adfe82ec920c8b3} 
+let co2\+Chart = null}
+
+\Hypertarget{calidad-aire_8js_a1f21df9d1c32eaf85b790b2562d18b88}\index{calidad-\/aire.js@{calidad-\/aire.js}!descEl@{descEl}}
+\index{descEl@{descEl}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{descEl}{descEl}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a1f21df9d1c32eaf85b790b2562d18b88} 
+const desc\+El = document.\+get\+Element\+By\+Id("{}aqi-\/description"{})}
+
+\Hypertarget{calidad-aire_8js_a1de019c2d83dea1eafb0641e9e64467d}\index{calidad-\/aire.js@{calidad-\/aire.js}!h2Section@{h2Section}}
+\index{h2Section@{h2Section}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{h2Section}{h2Section}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a1de019c2d83dea1eafb0641e9e64467d} 
+const h2\+Section = document.\+query\+Selector(\textquotesingle{}.co2-\/section h2\textquotesingle{})}
+
+\Hypertarget{calidad-aire_8js_a442ae47bbfe6b297dfaebd3b88f98336}\index{calidad-\/aire.js@{calidad-\/aire.js}!iconEl@{iconEl}}
+\index{iconEl@{iconEl}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{iconEl}{iconEl}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a442ae47bbfe6b297dfaebd3b88f98336} 
+const icon\+El = document.\+get\+Element\+By\+Id("{}aqi-\/icon"{})}
+
+\Hypertarget{calidad-aire_8js_a59be084da8908b7d77ff34b25cd84488}\index{calidad-\/aire.js@{calidad-\/aire.js}!import@{import}}
+\index{import@{import}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a59be084da8908b7d77ff34b25cd84488} 
+import \{ \mbox{\hyperlink{class_calidad_aire_fake}{Calidad\+Aire\+Fake}} \} from \textquotesingle{}../logica\+\_\+fake/calidad\+\_\+aire\+\_\+fake.\+js\textquotesingle{}}
+
+\Hypertarget{calidad-aire_8js_a11f999850f04ecaf12b50529bcfb69f4}\index{calidad-\/aire.js@{calidad-\/aire.js}!logicaAire@{logicaAire}}
+\index{logicaAire@{logicaAire}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{logicaAire}{logicaAire}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a11f999850f04ecaf12b50529bcfb69f4} 
+const logica\+Aire = new \mbox{\hyperlink{class_calidad_aire_fake}{Calidad\+Aire\+Fake}}()}
+
+\Hypertarget{calidad-aire_8js_a63518df6f4c1e3c41a021518ead45237}\index{calidad-\/aire.js@{calidad-\/aire.js}!maximoEl@{maximoEl}}
+\index{maximoEl@{maximoEl}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{maximoEl}{maximoEl}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a63518df6f4c1e3c41a021518ead45237} 
+const maximo\+El = document.\+get\+Element\+By\+Id("{}aqi-\/maximo"{})}
+
+\Hypertarget{calidad-aire_8js_a7805543f71a0e20c4f0f7bcf8e6aa254}\index{calidad-\/aire.js@{calidad-\/aire.js}!numberEl@{numberEl}}
+\index{numberEl@{numberEl}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{numberEl}{numberEl}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a7805543f71a0e20c4f0f7bcf8e6aa254} 
+const number\+El = document.\+get\+Element\+By\+Id("{}aqi-\/number"{})}
+
+\Hypertarget{calidad-aire_8js_a1dc4413a1b895cd3d1fcbea3a3e406a4}\index{calidad-\/aire.js@{calidad-\/aire.js}!svgBad@{svgBad}}
+\index{svgBad@{svgBad}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{svgBad}{svgBad}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a1dc4413a1b895cd3d1fcbea3a3e406a4} 
+const svg\+Bad}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \`{}}
+\DoxyCodeLine{<svg\ xmlns=\textcolor{stringliteral}{"{}http://www.w3.org/2000/svg"{}}\ viewBox=\textcolor{stringliteral}{"{}0\ 0\ 512\ 512"{}}\ fill=\textcolor{stringliteral}{"{}\#e53935"{}}>}
+\DoxyCodeLine{<path\ d=\textcolor{stringliteral}{"{}M256\ 512a256\ 256\ 0\ 1\ 0\ 0-\/512\ 256\ 256\ 0\ 1\ 0\ 0\ 512zm90.6-\/113.9c-\/20.4-\/28-\/53.4-\/46.1-\/90.6-\/46.1s-\/70.2\ 18.1-\/90.6\ 46.1c-\/7.8\ 10.7-\/22.8\ 13.1-\/33.5\ 5.3s-\/13.1-\/22.8-\/5.3-\/33.5C155.7\ 330\ 202.8\ 304\ 256\ 304s100.3\ 26\ 129.4\ 65.9c7.8\ 10.7\ 5.4\ 25.7-\/5.3\ 33.5s-\/25.7\ 5.4-\/33.5-\/5.3zM144\ 208a32\ 32\ 0\ 1\ 1\ 64\ 0\ 32\ 32\ 0\ 1\ 1\ -\/64\ 0zm192-\/32a32\ 32\ 0\ 1\ 1\ 0\ 64\ 32\ 32\ 0\ 1\ 1\ 0-\/64z"{}}/>}
+\DoxyCodeLine{</svg>\`{}}
+
+\end{DoxyCode}
+\Hypertarget{calidad-aire_8js_a1b2ad48f9999cd191b820d5793498fb1}\index{calidad-\/aire.js@{calidad-\/aire.js}!svgGood@{svgGood}}
+\index{svgGood@{svgGood}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{svgGood}{svgGood}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a1b2ad48f9999cd191b820d5793498fb1} 
+const svg\+Good}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \`{}}
+\DoxyCodeLine{<svg\ xmlns=\textcolor{stringliteral}{"{}http://www.w3.org/2000/svg"{}}\ viewBox=\textcolor{stringliteral}{"{}0\ 0\ 512\ 512"{}}\ fill=\textcolor{stringliteral}{"{}\#4CAF50"{}}>}
+\DoxyCodeLine{<path\ d=\textcolor{stringliteral}{"{}M256\ 512a256\ 256\ 0\ 1\ 0\ 0-\/512\ 256\ 256\ 0\ 1\ 0\ 0\ 512zM165.4\ 321.9c20.4\ 28\ 53.4\ 46.1\ 90.6\ 46.1s70.2-\/18.1\ 90.6-\/46.1c7.8-\/10.7\ 22.8-\/13.1\ 33.5-\/5.3s13.1\ 22.8\ 5.3\ 33.5C356.3\ 390\ 309.2\ 416\ 256\ 416s-\/100.3-\/26-\/129.4-\/65.9c-\/7.8-\/10.7-\/5.4-\/25.7\ 5.3-\/33.5s25.7-\/5.4\ 33.5\ 5.3zM144\ 208a32\ 32\ 0\ 1\ 1\ 64\ 0\ 32\ 32\ 0\ 1\ 1\ -\/64\ 0zm192-\/32a32\ 32\ 0\ 1\ 1\ 0\ 64\ 32\ 32\ 0\ 1\ 1\ 0-\/64z"{}}/>}
+\DoxyCodeLine{</svg>\`{}}
+
+\end{DoxyCode}
+\Hypertarget{calidad-aire_8js_a4efd6f87954afd3678733baa24724f13}\index{calidad-\/aire.js@{calidad-\/aire.js}!svgModerate@{svgModerate}}
+\index{svgModerate@{svgModerate}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{svgModerate}{svgModerate}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a4efd6f87954afd3678733baa24724f13} 
+const svg\+Moderate}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \`{}}
+\DoxyCodeLine{<svg\ xmlns=\textcolor{stringliteral}{"{}http://www.w3.org/2000/svg"{}}\ viewBox=\textcolor{stringliteral}{"{}0\ 0\ 512\ 512"{}}\ fill=\textcolor{stringliteral}{"{}\#ffcc00"{}}>}
+\DoxyCodeLine{<path\ d=\textcolor{stringliteral}{"{}M256\ 512a256\ 256\ 0\ 1\ 0\ 0-\/512\ 256\ 256\ 0\ 1\ 0\ 0\ 512zM176\ 176a32\ 32\ 0\ 1\ 1\ 0\ 64\ 32\ 32\ 0\ 1\ 1\ 0-\/64zm128\ 32a32\ 32\ 0\ 1\ 1\ 64\ 0\ 32\ 32\ 0\ 1\ 1\ -\/64\ 0zM176\ 320l160\ 0c13.3\ 0\ 24\ 10.7\ 24\ 24s-\/10.7\ 24-\/24\ 24l-\/160\ 0c-\/13.3\ 0-\/24-\/10.7-\/24-\/24s10.7-\/24\ 24-\/24z"{}}/>}
+\DoxyCodeLine{</svg>\`{}}
+
+\end{DoxyCode}
+\Hypertarget{calidad-aire_8js_a0b2f4bd7e3684c972d53a0ecba15351b}\index{calidad-\/aire.js@{calidad-\/aire.js}!textEl@{textEl}}
+\index{textEl@{textEl}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{textEl}{textEl}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_a0b2f4bd7e3684c972d53a0ecba15351b} 
+const text\+El = document.\+get\+Element\+By\+Id("{}aqi-\/text"{})}
+
+\Hypertarget{calidad-aire_8js_ad4e38fce711ae0e82a0c86336e52f680}\index{calidad-\/aire.js@{calidad-\/aire.js}!trayectoActual@{trayectoActual}}
+\index{trayectoActual@{trayectoActual}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{trayectoActual}{trayectoActual}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_ad4e38fce711ae0e82a0c86336e52f680} 
+let trayecto\+Actual = null}
+
+\Hypertarget{calidad-aire_8js_ad2908c0b3ccb2b0fa30e639ac66be22f}\index{calidad-\/aire.js@{calidad-\/aire.js}!trayectosDisponibles@{trayectosDisponibles}}
+\index{trayectosDisponibles@{trayectosDisponibles}!calidad-\/aire.js@{calidad-\/aire.js}}
+\doxysubsubsection{\texorpdfstring{trayectosDisponibles}{trayectosDisponibles}}
+{\footnotesize\ttfamily \label{calidad-aire_8js_ad2908c0b3ccb2b0fa30e639ac66be22f} 
+let trayectos\+Disponibles = \mbox{[}$\,$\mbox{]}}
+

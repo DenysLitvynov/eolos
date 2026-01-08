@@ -1,0 +1,87 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Interpolada}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada}\index{webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Interpolada
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Interpolada\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ac2e1ee64a45dff1b476b8e8f5c23b49a}{lectura\+\_\+id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a868fe90963424d314be17750aa3e7dc2}{fecha\+\_\+hora}} = Column(TIMESTAMP(timezone=True), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ac4e94a720777ba734f2f103acb6fbd95}{tipo}} = Column(SQLEnum(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_tipo_medida_enum}{Tipo\+Medida\+Enum}}), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a0f46602b870fb4ea76a869c85a28c5a2}{lat}} = Column(Float, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a542c29f8bdbbc826a1fdcb2a3efc8acb}{lon}} = Column(Float, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ae6c2130b62cf1f02503b401eb739d670}{valor}} = Column(Float, nullable=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a585597f607e612d9d6c015d1c00d7eeb}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}interpoladas"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla de medidas interpoladas (estructura igual que medidas, sin relación con otras tablas).
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a585597f607e612d9d6c015d1c00d7eeb}\index{webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a585597f607e612d9d6c015d1c00d7eeb} 
+str webapp.\+backend.\+db.\+models.\+Interpolada.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}interpoladas"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a868fe90963424d314be17750aa3e7dc2}\index{webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}!fecha\_hora@{fecha\_hora}}
+\index{fecha\_hora@{fecha\_hora}!webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}}
+\doxysubsubsection{\texorpdfstring{fecha\_hora}{fecha\_hora}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a868fe90963424d314be17750aa3e7dc2} 
+webapp.\+backend.\+db.\+models.\+Interpolada.\+fecha\+\_\+hora = Column(TIMESTAMP(timezone=True), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a0f46602b870fb4ea76a869c85a28c5a2}\index{webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}!lat@{lat}}
+\index{lat@{lat}!webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}}
+\doxysubsubsection{\texorpdfstring{lat}{lat}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a0f46602b870fb4ea76a869c85a28c5a2} 
+webapp.\+backend.\+db.\+models.\+Interpolada.\+lat = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ac2e1ee64a45dff1b476b8e8f5c23b49a}\index{webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}!lectura\_id@{lectura\_id}}
+\index{lectura\_id@{lectura\_id}!webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}}
+\doxysubsubsection{\texorpdfstring{lectura\_id}{lectura\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ac2e1ee64a45dff1b476b8e8f5c23b49a} 
+webapp.\+backend.\+db.\+models.\+Interpolada.\+lectura\+\_\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a542c29f8bdbbc826a1fdcb2a3efc8acb}\index{webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}!lon@{lon}}
+\index{lon@{lon}!webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}}
+\doxysubsubsection{\texorpdfstring{lon}{lon}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_a542c29f8bdbbc826a1fdcb2a3efc8acb} 
+webapp.\+backend.\+db.\+models.\+Interpolada.\+lon = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ac4e94a720777ba734f2f103acb6fbd95}\index{webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}!tipo@{tipo}}
+\index{tipo@{tipo}!webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}}
+\doxysubsubsection{\texorpdfstring{tipo}{tipo}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ac4e94a720777ba734f2f103acb6fbd95} 
+webapp.\+backend.\+db.\+models.\+Interpolada.\+tipo = Column(SQLEnum(\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_tipo_medida_enum}{Tipo\+Medida\+Enum}}), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ae6c2130b62cf1f02503b401eb739d670}\index{webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}!valor@{valor}}
+\index{valor@{valor}!webapp.backend.db.models.Interpolada@{webapp.backend.db.models.Interpolada}}
+\doxysubsubsection{\texorpdfstring{valor}{valor}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada_ae6c2130b62cf1f02503b401eb739d670} 
+webapp.\+backend.\+db.\+models.\+Interpolada.\+valor = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

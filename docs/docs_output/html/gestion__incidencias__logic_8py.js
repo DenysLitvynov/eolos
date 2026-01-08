@@ -1,0 +1,4 @@
+var gestion__incidencias__logic_8py =
+[
+    [ "webapp.backend.logic.gestion_incidencias_logic.GestionIncidenciasLogic", "classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic.html", "classwebapp_1_1backend_1_1logic_1_1gestion__incidencias__logic_1_1_gestion_incidencias_logic" ]
+];

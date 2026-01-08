@@ -1,0 +1,77 @@
+\doxysection{Referencia de la clase com.\+example.\+eolos.\+logica\+\_\+fake.\+Registro\+Fake}
+\hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake}{}\label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake}\index{com.example.eolos.logica\_fake.RegistroFake@{com.example.eolos.logica\_fake.RegistroFake}}
+
+
+Diagrama de colaboración de com.\+example.\+eolos.\+logica\+\_\+fake.\+Registro\+Fake\+:
+% FIG 0
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_1_1_registro_callback}{Registro\+Callback}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_a23f00aab71961183b5eeb077023ec303}{registro}} (String nombre, String apellido, String correo, String targeta\+Id, String contrasena, String contrasena\+Repite, boolean acepta\+Politica, \mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_1_1_registro_callback}{Registro\+Callback}} callback)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_abe0de214988a9995e82b44934646ad80}{BASE\+\_\+\+URL}} = "{}http\+://51.\+95.\+74.\+33"{}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_a2f01ffd4323ea499878f5f942240bf62}{ENDPOINT\+\_\+\+REGISTRO}} = "{}/api/v1/auth/registro"{}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_a23f00aab71961183b5eeb077023ec303}\index{com.example.eolos.logica\_fake.RegistroFake@{com.example.eolos.logica\_fake.RegistroFake}!registro@{registro}}
+\index{registro@{registro}!com.example.eolos.logica\_fake.RegistroFake@{com.example.eolos.logica\_fake.RegistroFake}}
+\doxysubsubsection{\texorpdfstring{registro()}{registro()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_a23f00aab71961183b5eeb077023ec303} 
+void com.\+example.\+eolos.\+logica\+\_\+fake.\+Registro\+Fake.\+registro (\begin{DoxyParamCaption}\item[{String}]{nombre}{, }\item[{String}]{apellido}{, }\item[{String}]{correo}{, }\item[{String}]{targeta\+Id}{, }\item[{String}]{contrasena}{, }\item[{String}]{contrasena\+Repite}{, }\item[{boolean}]{acepta\+Politica}{, }\item[{\mbox{\hyperlink{interfacecom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_1_1_registro_callback}{Registro\+Callback}}}]{callback}{}\end{DoxyParamCaption})}
+
+Inicia el proceso de registro enviando todos los datos del formulario al backend.
+
+
+\begin{DoxyParams}{Parámetros}
+{\em nombre} & Nombre del usuario \\
+\hline
+{\em apellido} & Apellido del usuario \\
+\hline
+{\em correo} & Correo electrónico \\
+\hline
+{\em targeta\+Id} & ID del carnet (DNI/\+NIE) \\
+\hline
+{\em contrasena} & Contraseña \\
+\hline
+{\em contrasena\+Repite} & Repetición de contraseña \\
+\hline
+{\em acepta\+Politica} & Aceptación de política de privacidad \\
+\hline
+{\em callback} & Callback con resultado \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_abe0de214988a9995e82b44934646ad80}\index{com.example.eolos.logica\_fake.RegistroFake@{com.example.eolos.logica\_fake.RegistroFake}!BASE\_URL@{BASE\_URL}}
+\index{BASE\_URL@{BASE\_URL}!com.example.eolos.logica\_fake.RegistroFake@{com.example.eolos.logica\_fake.RegistroFake}}
+\doxysubsubsection{\texorpdfstring{BASE\_URL}{BASE\_URL}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_abe0de214988a9995e82b44934646ad80} 
+final String com.\+example.\+eolos.\+logica\+\_\+fake.\+Registro\+Fake.\+BASE\+\_\+\+URL = "{}http\+://51.\+95.\+74.\+33"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_a2f01ffd4323ea499878f5f942240bf62}\index{com.example.eolos.logica\_fake.RegistroFake@{com.example.eolos.logica\_fake.RegistroFake}!ENDPOINT\_REGISTRO@{ENDPOINT\_REGISTRO}}
+\index{ENDPOINT\_REGISTRO@{ENDPOINT\_REGISTRO}!com.example.eolos.logica\_fake.RegistroFake@{com.example.eolos.logica\_fake.RegistroFake}}
+\doxysubsubsection{\texorpdfstring{ENDPOINT\_REGISTRO}{ENDPOINT\_REGISTRO}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_registro_fake_a2f01ffd4323ea499878f5f942240bf62} 
+final String com.\+example.\+eolos.\+logica\+\_\+fake.\+Registro\+Fake.\+ENDPOINT\+\_\+\+REGISTRO = "{}/api/v1/auth/registro"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/logica\+\_\+fake/\mbox{\hyperlink{_registro_fake_8java}{Registro\+Fake.\+java}}\end{DoxyCompactItemize}

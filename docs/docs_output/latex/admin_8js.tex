@@ -1,0 +1,607 @@
+\doxysection{Referencia del archivo D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/frontend/js/scripts/admin.js}
+\hypertarget{admin_8js}{}\label{admin_8js}\index{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/frontend/js/scripts/admin.js@{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/frontend/js/scripts/admin.js}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_api_error}{Api\+Error}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+function \mbox{\hyperlink{admin_8js_a700f0ced74cd85608ecdaea51476c5cc}{get\+Auth\+Headers}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_a3d864c56d66c8284bcdf1e08b2859ab0}{build\+Human\+Message}} (status, data)
+\item 
+function \mbox{\hyperlink{admin_8js_a94e703c8c2b5d8bfc0b8234803044044}{map\+Fast\+Api\+Validation\+Errors}} (data)
+\item 
+function async \mbox{\hyperlink{admin_8js_a29076eb599fe969ced782b4dc69175cd}{elegir\+Servicio\+Admin}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_acc53098aa56b443e22d685775bea872a}{render\+Users}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_a1d473a6a23b0b9403c5ed1944d4a97f1}{render\+Loading\+Row}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_a9c29bb75206b97254ff9d23fb086fa22}{set\+Paging\+UI}} (\{ loading=false \}=\{\})
+\item 
+function \mbox{\hyperlink{admin_8js_af16c710531628b0490d2dc777a6ea3f1}{set\+Field\+Error}} (input\+El, err\+El, msg)
+\item 
+function \mbox{\hyperlink{admin_8js_a8e4118be21a360637d0f1a69a3693a29}{show\+Bottom\+Error}} (el, msg)
+\item 
+function \mbox{\hyperlink{admin_8js_a13a0b589101b145db71b80c83f0ff5ce}{clear\+Create\+Errors}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_a00c5b5b84cf21a1c053f6d3fad1c8436}{clear\+Edit\+Errors}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_ae4890ed9b1cb56e8ead9a7c969d06514}{password\+Rule\+Ok}} (pwd)
+\item 
+function \mbox{\hyperlink{admin_8js_a525d61bcd524fc5255b7762f7099e16a}{card\+Id\+Rule\+Ok}} (card\+Id)
+\item 
+function \mbox{\hyperlink{admin_8js_a6c1a89cd0a3e4d34b5c6adca32fb528b}{normalize\+Role}} (raw)
+\item 
+function \mbox{\hyperlink{admin_8js_a0af71f1b7a6b3868cff5758a2fdb0cc3}{validate\+Create\+Form}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_aa3fe85899a4ebeed374c6013289bfa96}{validate\+Edit\+Form}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_a34b488a4d0b3c56addf0f81f955872d6}{apply\+Backend\+Errors\+To\+Create\+Form}} (api\+Err)
+\item 
+function \mbox{\hyperlink{admin_8js_a68c34af680d768bc60465d34219b34dd}{apply\+Backend\+Errors\+To\+Edit\+Form}} (api\+Err)
+\item 
+function \mbox{\hyperlink{admin_8js_a22049db40b59e44d1e1ab640341cdf4f}{toggle\+Password}} (input\+El, btn\+El)
+\item 
+function \mbox{\hyperlink{admin_8js_a31b9cd64153569a78c907cbd26b3818e}{open\+Create\+Modal}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_aee21f7006b49e535efdc69eca782f293}{close\+Create\+Modal}} ()
+\item 
+function \mbox{\hyperlink{admin_8js_a1b691276b05964fd6df1075f42f3324c}{open\+Edit\+Modal}} (user)
+\item 
+function \mbox{\hyperlink{admin_8js_ae27944f1dab7a216ee054e9c131daa93}{close\+Edit\+Modal}} ()
+\item 
+function async \mbox{\hyperlink{admin_8js_a8e7b8453ef7d95201e0314d114f5e89e}{cargar\+Usuarios\+Pagina}} (offset)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{admin_8js_aab78db7e357cf21a4bfcb72904e5b353}{ADMIN\+\_\+\+API\+\_\+\+BASE}} = "{}/api/admin\+\_\+api"{}
+\item 
+const \mbox{\hyperlink{admin_8js_a6dd30ab1f03139e2b10950d1645c52b3}{token\+Key}} = "{}token"{}
+\item 
+const \mbox{\hyperlink{admin_8js_a4634a091c35db33009455321e1d259e3}{PAGE\+\_\+\+SIZE}} = 100
+\item 
+let \mbox{\hyperlink{admin_8js_ab4fe4e902716a53b4e88b86e26d2334c}{current\+Offset}} = 0
+\item 
+let \mbox{\hyperlink{admin_8js_a3f7458b76b60b9a46f3c10d55e4ff01e}{has\+Next\+Page}} = true
+\item 
+const \mbox{\hyperlink{admin_8js_a574ccb4f95cc5f0c612b7ccb9047c477}{Admin\+Service\+Real}}
+\item 
+let \mbox{\hyperlink{admin_8js_ab8b4993beef17b2a084da6bbeb0a8267}{Admin\+Service}} = null
+\item 
+let \mbox{\hyperlink{admin_8js_ab214c55d9779b6a96be6d09fd9d9bb7c}{\+\_\+first\+Page\+Cache}} = null
+\item 
+const \mbox{\hyperlink{admin_8js_a3d62030bff7f800914044602edde9122}{tbody}} = document.\+get\+Element\+By\+Id("{}users-\/tbody"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a365bc574c09f5d4683930ebb1ddd55f7}{btn\+Prev}} = document.\+get\+Element\+By\+Id("{}btn-\/prev"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a3a0f4ff86c2414ced8fd408f11421a28}{btn\+Next}} = document.\+get\+Element\+By\+Id("{}btn-\/next"{})
+\item 
+const \mbox{\hyperlink{admin_8js_abf57b19cfff5f09574a5922ea0756c82}{page\+Info}} = document.\+get\+Element\+By\+Id("{}page-\/info"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a8d07dab740c3c34028036e03a4f78ccd}{modal\+Backdrop}} = document.\+get\+Element\+By\+Id("{}modal-\/backdrop"{})
+\item 
+const \mbox{\hyperlink{admin_8js_ad97bda034ec5e21c5c00d7bb0f8af223}{btn\+Open\+Modal}} = document.\+get\+Element\+By\+Id("{}btn-\/open-\/modal"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a727ff9825b1fc88e44c4054d8fa6900d}{btn\+Close\+Modal}} = document.\+get\+Element\+By\+Id("{}btn-\/close-\/modal"{})
+\item 
+const \mbox{\hyperlink{admin_8js_af54ec4732c28226041ae0992b13ba262}{btn\+Cancel\+Modal}} = document.\+get\+Element\+By\+Id("{}btn-\/cancel-\/modal"{})
+\item 
+const \mbox{\hyperlink{admin_8js_aeb7baf4fe7bc6455be6f00bc573eec51}{create\+User\+Form}} = document.\+get\+Element\+By\+Id("{}create-\/user-\/form"{})
+\item 
+const \mbox{\hyperlink{admin_8js_aedd89bc3cc52758af691833d8d5589e0}{create\+Nombre}} = document.\+get\+Element\+By\+Id("{}nombre"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a0b3e542a5cbb9ccf366000fe82b72a10}{create\+Apellido}} = document.\+get\+Element\+By\+Id("{}apellido"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a2d507a3b0e74544e04214bd6b85ccd75}{create\+Email}} = document.\+get\+Element\+By\+Id("{}email"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a2ee4fc4f68321dc622e83d708c2c9ce9}{create\+Card\+Id}} = document.\+get\+Element\+By\+Id("{}card\+Id"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a767f59708c252c53a72542b5ca2e75ba}{create\+Password}} = document.\+get\+Element\+By\+Id("{}password"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a11f678aa327d5f178b914dbc7b4a7b94}{create\+Password2}} = document.\+get\+Element\+By\+Id("{}password2"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a580d7c8e253500230acea367df3f0219}{btn\+Toggle\+Create\+Pwd}} = document.\+get\+Element\+By\+Id("{}toggle-\/create-\/password"{})
+\item 
+const \mbox{\hyperlink{admin_8js_ac88d4bc50cfb1f0982677ccb709044ca}{btn\+Toggle\+Create\+Pwd2}} = document.\+get\+Element\+By\+Id("{}toggle-\/create-\/password2"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a07be3271d1ae9d5d0e621a39fda6505a}{err\+Nombre}} = document.\+get\+Element\+By\+Id("{}err-\/nombre"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a628b251cf4bdf431020244c05fe05646}{err\+Apellido}} = document.\+get\+Element\+By\+Id("{}err-\/apellido"{})
+\item 
+const \mbox{\hyperlink{admin_8js_aee862f28eb62e324f6ccae479548b739}{err\+Email}} = document.\+get\+Element\+By\+Id("{}err-\/email"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a344def2729343bcf281aeffa73db40a5}{err\+Card\+Id}} = document.\+get\+Element\+By\+Id("{}err-\/card\+Id"{})
+\item 
+const \mbox{\hyperlink{admin_8js_ab196b270d760884d22a2a204a2ec98cc}{err\+Password}} = document.\+get\+Element\+By\+Id("{}err-\/password"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a1fb695796f7c13a7b817191cbebf3711}{err\+Password2}} = document.\+get\+Element\+By\+Id("{}err-\/password2"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a3ef57afa0770d96761fd9527171bc9b3}{create\+Bottom\+Error}} = document.\+get\+Element\+By\+Id("{}create-\/form-\/bottom-\/error"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a73e44f3e2a930f5260dfef6e928d4341}{edit\+Modal\+Backdrop}} = document.\+get\+Element\+By\+Id("{}edit-\/user-\/modal"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a5589b08f6a888c8c65fdb67b8d82b8f3}{btn\+Close\+Edit\+Modal}} = document.\+get\+Element\+By\+Id("{}btn-\/close-\/edit-\/modal"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a1d6173eeb05f04408abb85c7f6c43790}{btn\+Cancel\+Edit}} = document.\+get\+Element\+By\+Id("{}btn-\/cancel-\/edit"{})
+\item 
+const \mbox{\hyperlink{admin_8js_ad87fde3a9894719fbd8ebab6ce22ff7f}{edit\+User\+Form}} = document.\+get\+Element\+By\+Id("{}edit-\/user-\/form"{})
+\item 
+const \mbox{\hyperlink{admin_8js_ae4d5aeb0e376c920268669143fc444b9}{edit\+Name\+Input}} = document.\+get\+Element\+By\+Id("{}edit-\/name"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a704d661364ecbdaca7b8c79b5ca18132}{edit\+Last\+Name\+Input}} = document.\+get\+Element\+By\+Id("{}edit-\/lastname"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a2c0347bbbb288631b8a685375875341c}{edit\+Email\+Input}} = document.\+get\+Element\+By\+Id("{}edit-\/email"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a0248d423f59e345010c806707b018557}{edit\+Card\+Input}} = document.\+get\+Element\+By\+Id("{}edit-\/card"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a5d23ad37ae86ce830049401f346add21}{edit\+Role\+Select}} = document.\+get\+Element\+By\+Id("{}edit-\/role"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a8a7c2fcbef724338aa0ae0a2d0fcde00}{err\+Edit\+Name}} = document.\+get\+Element\+By\+Id("{}err-\/edit-\/name"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a85949b40b498eb627944c10cbfec01e3}{err\+Edit\+Last}} = document.\+get\+Element\+By\+Id("{}err-\/edit-\/lastname"{})
+\item 
+const \mbox{\hyperlink{admin_8js_ae9547dd57ed7114a9efb343a7ee7d247}{err\+Edit\+Email}} = document.\+get\+Element\+By\+Id("{}err-\/edit-\/email"{})
+\item 
+const \mbox{\hyperlink{admin_8js_a27ad17a38503f399164912dba35d625d}{err\+Edit\+Card}} = document.\+get\+Element\+By\+Id("{}err-\/edit-\/card"{})
+\item 
+const \mbox{\hyperlink{admin_8js_ac813d2f02b9ab378947595ea713a7cac}{err\+Edit\+Role}} = document.\+get\+Element\+By\+Id("{}err-\/edit-\/role"{})
+\item 
+const \mbox{\hyperlink{admin_8js_aaa539776670b85694af737bbf5934632}{edit\+Bottom\+Error}} = document.\+get\+Element\+By\+Id("{}edit-\/form-\/bottom-\/error"{})
+\item 
+let \mbox{\hyperlink{admin_8js_a9d1d9665b439108a83c3cb8c4095f3bd}{users}} = \mbox{[}$\,$\mbox{]}
+\item 
+let \mbox{\hyperlink{admin_8js_aa6ef24ecce284c88588056f8524a1d3b}{editing\+User}} = null
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{admin_8js_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{admin_8js_a34b488a4d0b3c56addf0f81f955872d6}\index{admin.js@{admin.js}!applyBackendErrorsToCreateForm@{applyBackendErrorsToCreateForm}}
+\index{applyBackendErrorsToCreateForm@{applyBackendErrorsToCreateForm}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{applyBackendErrorsToCreateForm()}{applyBackendErrorsToCreateForm()}}
+{\footnotesize\ttfamily \label{admin_8js_a34b488a4d0b3c56addf0f81f955872d6} 
+function apply\+Backend\+Errors\+To\+Create\+Form (\begin{DoxyParamCaption}\item[{}]{api\+Err}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a68c34af680d768bc60465d34219b34dd}\index{admin.js@{admin.js}!applyBackendErrorsToEditForm@{applyBackendErrorsToEditForm}}
+\index{applyBackendErrorsToEditForm@{applyBackendErrorsToEditForm}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{applyBackendErrorsToEditForm()}{applyBackendErrorsToEditForm()}}
+{\footnotesize\ttfamily \label{admin_8js_a68c34af680d768bc60465d34219b34dd} 
+function apply\+Backend\+Errors\+To\+Edit\+Form (\begin{DoxyParamCaption}\item[{}]{api\+Err}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a3d864c56d66c8284bcdf1e08b2859ab0}\index{admin.js@{admin.js}!buildHumanMessage@{buildHumanMessage}}
+\index{buildHumanMessage@{buildHumanMessage}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{buildHumanMessage()}{buildHumanMessage()}}
+{\footnotesize\ttfamily \label{admin_8js_a3d864c56d66c8284bcdf1e08b2859ab0} 
+function build\+Human\+Message (\begin{DoxyParamCaption}\item[{}]{status}{, }\item[{}]{data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a525d61bcd524fc5255b7762f7099e16a}\index{admin.js@{admin.js}!cardIdRuleOk@{cardIdRuleOk}}
+\index{cardIdRuleOk@{cardIdRuleOk}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{cardIdRuleOk()}{cardIdRuleOk()}}
+{\footnotesize\ttfamily \label{admin_8js_a525d61bcd524fc5255b7762f7099e16a} 
+function card\+Id\+Rule\+Ok (\begin{DoxyParamCaption}\item[{}]{card\+Id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a8e7b8453ef7d95201e0314d114f5e89e}\index{admin.js@{admin.js}!cargarUsuariosPagina@{cargarUsuariosPagina}}
+\index{cargarUsuariosPagina@{cargarUsuariosPagina}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{cargarUsuariosPagina()}{cargarUsuariosPagina()}}
+{\footnotesize\ttfamily \label{admin_8js_a8e7b8453ef7d95201e0314d114f5e89e} 
+function async cargar\+Usuarios\+Pagina (\begin{DoxyParamCaption}\item[{}]{offset}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a13a0b589101b145db71b80c83f0ff5ce}\index{admin.js@{admin.js}!clearCreateErrors@{clearCreateErrors}}
+\index{clearCreateErrors@{clearCreateErrors}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{clearCreateErrors()}{clearCreateErrors()}}
+{\footnotesize\ttfamily \label{admin_8js_a13a0b589101b145db71b80c83f0ff5ce} 
+function clear\+Create\+Errors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a00c5b5b84cf21a1c053f6d3fad1c8436}\index{admin.js@{admin.js}!clearEditErrors@{clearEditErrors}}
+\index{clearEditErrors@{clearEditErrors}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{clearEditErrors()}{clearEditErrors()}}
+{\footnotesize\ttfamily \label{admin_8js_a00c5b5b84cf21a1c053f6d3fad1c8436} 
+function clear\+Edit\+Errors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_aee21f7006b49e535efdc69eca782f293}\index{admin.js@{admin.js}!closeCreateModal@{closeCreateModal}}
+\index{closeCreateModal@{closeCreateModal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{closeCreateModal()}{closeCreateModal()}}
+{\footnotesize\ttfamily \label{admin_8js_aee21f7006b49e535efdc69eca782f293} 
+function close\+Create\+Modal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_ae27944f1dab7a216ee054e9c131daa93}\index{admin.js@{admin.js}!closeEditModal@{closeEditModal}}
+\index{closeEditModal@{closeEditModal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{closeEditModal()}{closeEditModal()}}
+{\footnotesize\ttfamily \label{admin_8js_ae27944f1dab7a216ee054e9c131daa93} 
+function close\+Edit\+Modal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a29076eb599fe969ced782b4dc69175cd}\index{admin.js@{admin.js}!elegirServicioAdmin@{elegirServicioAdmin}}
+\index{elegirServicioAdmin@{elegirServicioAdmin}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{elegirServicioAdmin()}{elegirServicioAdmin()}}
+{\footnotesize\ttfamily \label{admin_8js_a29076eb599fe969ced782b4dc69175cd} 
+function async elegir\+Servicio\+Admin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a700f0ced74cd85608ecdaea51476c5cc}\index{admin.js@{admin.js}!getAuthHeaders@{getAuthHeaders}}
+\index{getAuthHeaders@{getAuthHeaders}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{getAuthHeaders()}{getAuthHeaders()}}
+{\footnotesize\ttfamily \label{admin_8js_a700f0ced74cd85608ecdaea51476c5cc} 
+function get\+Auth\+Headers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a94e703c8c2b5d8bfc0b8234803044044}\index{admin.js@{admin.js}!mapFastApiValidationErrors@{mapFastApiValidationErrors}}
+\index{mapFastApiValidationErrors@{mapFastApiValidationErrors}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{mapFastApiValidationErrors()}{mapFastApiValidationErrors()}}
+{\footnotesize\ttfamily \label{admin_8js_a94e703c8c2b5d8bfc0b8234803044044} 
+function map\+Fast\+Api\+Validation\+Errors (\begin{DoxyParamCaption}\item[{}]{data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a6c1a89cd0a3e4d34b5c6adca32fb528b}\index{admin.js@{admin.js}!normalizeRole@{normalizeRole}}
+\index{normalizeRole@{normalizeRole}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{normalizeRole()}{normalizeRole()}}
+{\footnotesize\ttfamily \label{admin_8js_a6c1a89cd0a3e4d34b5c6adca32fb528b} 
+function normalize\+Role (\begin{DoxyParamCaption}\item[{}]{raw}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a31b9cd64153569a78c907cbd26b3818e}\index{admin.js@{admin.js}!openCreateModal@{openCreateModal}}
+\index{openCreateModal@{openCreateModal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{openCreateModal()}{openCreateModal()}}
+{\footnotesize\ttfamily \label{admin_8js_a31b9cd64153569a78c907cbd26b3818e} 
+function open\+Create\+Modal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a1b691276b05964fd6df1075f42f3324c}\index{admin.js@{admin.js}!openEditModal@{openEditModal}}
+\index{openEditModal@{openEditModal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{openEditModal()}{openEditModal()}}
+{\footnotesize\ttfamily \label{admin_8js_a1b691276b05964fd6df1075f42f3324c} 
+function open\+Edit\+Modal (\begin{DoxyParamCaption}\item[{}]{user}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_ae4890ed9b1cb56e8ead9a7c969d06514}\index{admin.js@{admin.js}!passwordRuleOk@{passwordRuleOk}}
+\index{passwordRuleOk@{passwordRuleOk}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{passwordRuleOk()}{passwordRuleOk()}}
+{\footnotesize\ttfamily \label{admin_8js_ae4890ed9b1cb56e8ead9a7c969d06514} 
+function password\+Rule\+Ok (\begin{DoxyParamCaption}\item[{}]{pwd}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a1d473a6a23b0b9403c5ed1944d4a97f1}\index{admin.js@{admin.js}!renderLoadingRow@{renderLoadingRow}}
+\index{renderLoadingRow@{renderLoadingRow}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{renderLoadingRow()}{renderLoadingRow()}}
+{\footnotesize\ttfamily \label{admin_8js_a1d473a6a23b0b9403c5ed1944d4a97f1} 
+function render\+Loading\+Row (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_acc53098aa56b443e22d685775bea872a}\index{admin.js@{admin.js}!renderUsers@{renderUsers}}
+\index{renderUsers@{renderUsers}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{renderUsers()}{renderUsers()}}
+{\footnotesize\ttfamily \label{admin_8js_acc53098aa56b443e22d685775bea872a} 
+function render\+Users (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_af16c710531628b0490d2dc777a6ea3f1}\index{admin.js@{admin.js}!setFieldError@{setFieldError}}
+\index{setFieldError@{setFieldError}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{setFieldError()}{setFieldError()}}
+{\footnotesize\ttfamily \label{admin_8js_af16c710531628b0490d2dc777a6ea3f1} 
+function set\+Field\+Error (\begin{DoxyParamCaption}\item[{}]{input\+El}{, }\item[{}]{err\+El}{, }\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a9c29bb75206b97254ff9d23fb086fa22}\index{admin.js@{admin.js}!setPagingUI@{setPagingUI}}
+\index{setPagingUI@{setPagingUI}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{setPagingUI()}{setPagingUI()}}
+{\footnotesize\ttfamily \label{admin_8js_a9c29bb75206b97254ff9d23fb086fa22} 
+function set\+Paging\+UI (\begin{DoxyParamCaption}\item[{}]{\{ loading=false \}}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a8e4118be21a360637d0f1a69a3693a29}\index{admin.js@{admin.js}!showBottomError@{showBottomError}}
+\index{showBottomError@{showBottomError}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{showBottomError()}{showBottomError()}}
+{\footnotesize\ttfamily \label{admin_8js_a8e4118be21a360637d0f1a69a3693a29} 
+function show\+Bottom\+Error (\begin{DoxyParamCaption}\item[{}]{el}{, }\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a22049db40b59e44d1e1ab640341cdf4f}\index{admin.js@{admin.js}!togglePassword@{togglePassword}}
+\index{togglePassword@{togglePassword}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{togglePassword()}{togglePassword()}}
+{\footnotesize\ttfamily \label{admin_8js_a22049db40b59e44d1e1ab640341cdf4f} 
+function toggle\+Password (\begin{DoxyParamCaption}\item[{}]{input\+El}{, }\item[{}]{btn\+El}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_a0af71f1b7a6b3868cff5758a2fdb0cc3}\index{admin.js@{admin.js}!validateCreateForm@{validateCreateForm}}
+\index{validateCreateForm@{validateCreateForm}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{validateCreateForm()}{validateCreateForm()}}
+{\footnotesize\ttfamily \label{admin_8js_a0af71f1b7a6b3868cff5758a2fdb0cc3} 
+function validate\+Create\+Form (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{admin_8js_aa3fe85899a4ebeed374c6013289bfa96}\index{admin.js@{admin.js}!validateEditForm@{validateEditForm}}
+\index{validateEditForm@{validateEditForm}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{validateEditForm()}{validateEditForm()}}
+{\footnotesize\ttfamily \label{admin_8js_aa3fe85899a4ebeed374c6013289bfa96} 
+function validate\+Edit\+Form (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{admin_8js_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{admin_8js_ab214c55d9779b6a96be6d09fd9d9bb7c}\index{admin.js@{admin.js}!\_firstPageCache@{\_firstPageCache}}
+\index{\_firstPageCache@{\_firstPageCache}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{\_firstPageCache}{\_firstPageCache}}
+{\footnotesize\ttfamily \label{admin_8js_ab214c55d9779b6a96be6d09fd9d9bb7c} 
+let \+\_\+first\+Page\+Cache = null}
+
+\Hypertarget{admin_8js_aab78db7e357cf21a4bfcb72904e5b353}\index{admin.js@{admin.js}!ADMIN\_API\_BASE@{ADMIN\_API\_BASE}}
+\index{ADMIN\_API\_BASE@{ADMIN\_API\_BASE}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{ADMIN\_API\_BASE}{ADMIN\_API\_BASE}}
+{\footnotesize\ttfamily \label{admin_8js_aab78db7e357cf21a4bfcb72904e5b353} 
+const ADMIN\+\_\+\+API\+\_\+\+BASE = "{}/api/admin\+\_\+api"{}}
+
+\Hypertarget{admin_8js_ab8b4993beef17b2a084da6bbeb0a8267}\index{admin.js@{admin.js}!AdminService@{AdminService}}
+\index{AdminService@{AdminService}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{AdminService}{AdminService}}
+{\footnotesize\ttfamily \label{admin_8js_ab8b4993beef17b2a084da6bbeb0a8267} 
+let Admin\+Service = null}
+
+\Hypertarget{admin_8js_a574ccb4f95cc5f0c612b7ccb9047c477}\index{admin.js@{admin.js}!AdminServiceReal@{AdminServiceReal}}
+\index{AdminServiceReal@{AdminServiceReal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{AdminServiceReal}{AdminServiceReal}}
+{\footnotesize\ttfamily \label{admin_8js_a574ccb4f95cc5f0c612b7ccb9047c477} 
+const Admin\+Service\+Real}
+
+\Hypertarget{admin_8js_a1d6173eeb05f04408abb85c7f6c43790}\index{admin.js@{admin.js}!btnCancelEdit@{btnCancelEdit}}
+\index{btnCancelEdit@{btnCancelEdit}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnCancelEdit}{btnCancelEdit}}
+{\footnotesize\ttfamily \label{admin_8js_a1d6173eeb05f04408abb85c7f6c43790} 
+const btn\+Cancel\+Edit = document.\+get\+Element\+By\+Id("{}btn-\/cancel-\/edit"{})}
+
+\Hypertarget{admin_8js_af54ec4732c28226041ae0992b13ba262}\index{admin.js@{admin.js}!btnCancelModal@{btnCancelModal}}
+\index{btnCancelModal@{btnCancelModal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnCancelModal}{btnCancelModal}}
+{\footnotesize\ttfamily \label{admin_8js_af54ec4732c28226041ae0992b13ba262} 
+const btn\+Cancel\+Modal = document.\+get\+Element\+By\+Id("{}btn-\/cancel-\/modal"{})}
+
+\Hypertarget{admin_8js_a5589b08f6a888c8c65fdb67b8d82b8f3}\index{admin.js@{admin.js}!btnCloseEditModal@{btnCloseEditModal}}
+\index{btnCloseEditModal@{btnCloseEditModal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnCloseEditModal}{btnCloseEditModal}}
+{\footnotesize\ttfamily \label{admin_8js_a5589b08f6a888c8c65fdb67b8d82b8f3} 
+const btn\+Close\+Edit\+Modal = document.\+get\+Element\+By\+Id("{}btn-\/close-\/edit-\/modal"{})}
+
+\Hypertarget{admin_8js_a727ff9825b1fc88e44c4054d8fa6900d}\index{admin.js@{admin.js}!btnCloseModal@{btnCloseModal}}
+\index{btnCloseModal@{btnCloseModal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnCloseModal}{btnCloseModal}}
+{\footnotesize\ttfamily \label{admin_8js_a727ff9825b1fc88e44c4054d8fa6900d} 
+const btn\+Close\+Modal = document.\+get\+Element\+By\+Id("{}btn-\/close-\/modal"{})}
+
+\Hypertarget{admin_8js_a3a0f4ff86c2414ced8fd408f11421a28}\index{admin.js@{admin.js}!btnNext@{btnNext}}
+\index{btnNext@{btnNext}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnNext}{btnNext}}
+{\footnotesize\ttfamily \label{admin_8js_a3a0f4ff86c2414ced8fd408f11421a28} 
+const btn\+Next = document.\+get\+Element\+By\+Id("{}btn-\/next"{})}
+
+\Hypertarget{admin_8js_ad97bda034ec5e21c5c00d7bb0f8af223}\index{admin.js@{admin.js}!btnOpenModal@{btnOpenModal}}
+\index{btnOpenModal@{btnOpenModal}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnOpenModal}{btnOpenModal}}
+{\footnotesize\ttfamily \label{admin_8js_ad97bda034ec5e21c5c00d7bb0f8af223} 
+const btn\+Open\+Modal = document.\+get\+Element\+By\+Id("{}btn-\/open-\/modal"{})}
+
+\Hypertarget{admin_8js_a365bc574c09f5d4683930ebb1ddd55f7}\index{admin.js@{admin.js}!btnPrev@{btnPrev}}
+\index{btnPrev@{btnPrev}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnPrev}{btnPrev}}
+{\footnotesize\ttfamily \label{admin_8js_a365bc574c09f5d4683930ebb1ddd55f7} 
+const btn\+Prev = document.\+get\+Element\+By\+Id("{}btn-\/prev"{})}
+
+\Hypertarget{admin_8js_a580d7c8e253500230acea367df3f0219}\index{admin.js@{admin.js}!btnToggleCreatePwd@{btnToggleCreatePwd}}
+\index{btnToggleCreatePwd@{btnToggleCreatePwd}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnToggleCreatePwd}{btnToggleCreatePwd}}
+{\footnotesize\ttfamily \label{admin_8js_a580d7c8e253500230acea367df3f0219} 
+const btn\+Toggle\+Create\+Pwd = document.\+get\+Element\+By\+Id("{}toggle-\/create-\/password"{})}
+
+\Hypertarget{admin_8js_ac88d4bc50cfb1f0982677ccb709044ca}\index{admin.js@{admin.js}!btnToggleCreatePwd2@{btnToggleCreatePwd2}}
+\index{btnToggleCreatePwd2@{btnToggleCreatePwd2}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{btnToggleCreatePwd2}{btnToggleCreatePwd2}}
+{\footnotesize\ttfamily \label{admin_8js_ac88d4bc50cfb1f0982677ccb709044ca} 
+const btn\+Toggle\+Create\+Pwd2 = document.\+get\+Element\+By\+Id("{}toggle-\/create-\/password2"{})}
+
+\Hypertarget{admin_8js_a0b3e542a5cbb9ccf366000fe82b72a10}\index{admin.js@{admin.js}!createApellido@{createApellido}}
+\index{createApellido@{createApellido}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{createApellido}{createApellido}}
+{\footnotesize\ttfamily \label{admin_8js_a0b3e542a5cbb9ccf366000fe82b72a10} 
+const create\+Apellido = document.\+get\+Element\+By\+Id("{}apellido"{})}
+
+\Hypertarget{admin_8js_a3ef57afa0770d96761fd9527171bc9b3}\index{admin.js@{admin.js}!createBottomError@{createBottomError}}
+\index{createBottomError@{createBottomError}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{createBottomError}{createBottomError}}
+{\footnotesize\ttfamily \label{admin_8js_a3ef57afa0770d96761fd9527171bc9b3} 
+const create\+Bottom\+Error = document.\+get\+Element\+By\+Id("{}create-\/form-\/bottom-\/error"{})}
+
+\Hypertarget{admin_8js_a2ee4fc4f68321dc622e83d708c2c9ce9}\index{admin.js@{admin.js}!createCardId@{createCardId}}
+\index{createCardId@{createCardId}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{createCardId}{createCardId}}
+{\footnotesize\ttfamily \label{admin_8js_a2ee4fc4f68321dc622e83d708c2c9ce9} 
+const create\+Card\+Id = document.\+get\+Element\+By\+Id("{}card\+Id"{})}
+
+\Hypertarget{admin_8js_a2d507a3b0e74544e04214bd6b85ccd75}\index{admin.js@{admin.js}!createEmail@{createEmail}}
+\index{createEmail@{createEmail}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{createEmail}{createEmail}}
+{\footnotesize\ttfamily \label{admin_8js_a2d507a3b0e74544e04214bd6b85ccd75} 
+const create\+Email = document.\+get\+Element\+By\+Id("{}email"{})}
+
+\Hypertarget{admin_8js_aedd89bc3cc52758af691833d8d5589e0}\index{admin.js@{admin.js}!createNombre@{createNombre}}
+\index{createNombre@{createNombre}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{createNombre}{createNombre}}
+{\footnotesize\ttfamily \label{admin_8js_aedd89bc3cc52758af691833d8d5589e0} 
+const create\+Nombre = document.\+get\+Element\+By\+Id("{}nombre"{})}
+
+\Hypertarget{admin_8js_a767f59708c252c53a72542b5ca2e75ba}\index{admin.js@{admin.js}!createPassword@{createPassword}}
+\index{createPassword@{createPassword}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{createPassword}{createPassword}}
+{\footnotesize\ttfamily \label{admin_8js_a767f59708c252c53a72542b5ca2e75ba} 
+const create\+Password = document.\+get\+Element\+By\+Id("{}password"{})}
+
+\Hypertarget{admin_8js_a11f678aa327d5f178b914dbc7b4a7b94}\index{admin.js@{admin.js}!createPassword2@{createPassword2}}
+\index{createPassword2@{createPassword2}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{createPassword2}{createPassword2}}
+{\footnotesize\ttfamily \label{admin_8js_a11f678aa327d5f178b914dbc7b4a7b94} 
+const create\+Password2 = document.\+get\+Element\+By\+Id("{}password2"{})}
+
+\Hypertarget{admin_8js_aeb7baf4fe7bc6455be6f00bc573eec51}\index{admin.js@{admin.js}!createUserForm@{createUserForm}}
+\index{createUserForm@{createUserForm}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{createUserForm}{createUserForm}}
+{\footnotesize\ttfamily \label{admin_8js_aeb7baf4fe7bc6455be6f00bc573eec51} 
+const create\+User\+Form = document.\+get\+Element\+By\+Id("{}create-\/user-\/form"{})}
+
+\Hypertarget{admin_8js_ab4fe4e902716a53b4e88b86e26d2334c}\index{admin.js@{admin.js}!currentOffset@{currentOffset}}
+\index{currentOffset@{currentOffset}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{currentOffset}{currentOffset}}
+{\footnotesize\ttfamily \label{admin_8js_ab4fe4e902716a53b4e88b86e26d2334c} 
+let current\+Offset = 0}
+
+\Hypertarget{admin_8js_aaa539776670b85694af737bbf5934632}\index{admin.js@{admin.js}!editBottomError@{editBottomError}}
+\index{editBottomError@{editBottomError}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editBottomError}{editBottomError}}
+{\footnotesize\ttfamily \label{admin_8js_aaa539776670b85694af737bbf5934632} 
+const edit\+Bottom\+Error = document.\+get\+Element\+By\+Id("{}edit-\/form-\/bottom-\/error"{})}
+
+\Hypertarget{admin_8js_a0248d423f59e345010c806707b018557}\index{admin.js@{admin.js}!editCardInput@{editCardInput}}
+\index{editCardInput@{editCardInput}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editCardInput}{editCardInput}}
+{\footnotesize\ttfamily \label{admin_8js_a0248d423f59e345010c806707b018557} 
+const edit\+Card\+Input = document.\+get\+Element\+By\+Id("{}edit-\/card"{})}
+
+\Hypertarget{admin_8js_a2c0347bbbb288631b8a685375875341c}\index{admin.js@{admin.js}!editEmailInput@{editEmailInput}}
+\index{editEmailInput@{editEmailInput}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editEmailInput}{editEmailInput}}
+{\footnotesize\ttfamily \label{admin_8js_a2c0347bbbb288631b8a685375875341c} 
+const edit\+Email\+Input = document.\+get\+Element\+By\+Id("{}edit-\/email"{})}
+
+\Hypertarget{admin_8js_aa6ef24ecce284c88588056f8524a1d3b}\index{admin.js@{admin.js}!editingUser@{editingUser}}
+\index{editingUser@{editingUser}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editingUser}{editingUser}}
+{\footnotesize\ttfamily \label{admin_8js_aa6ef24ecce284c88588056f8524a1d3b} 
+let editing\+User = null}
+
+\Hypertarget{admin_8js_a704d661364ecbdaca7b8c79b5ca18132}\index{admin.js@{admin.js}!editLastNameInput@{editLastNameInput}}
+\index{editLastNameInput@{editLastNameInput}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editLastNameInput}{editLastNameInput}}
+{\footnotesize\ttfamily \label{admin_8js_a704d661364ecbdaca7b8c79b5ca18132} 
+const edit\+Last\+Name\+Input = document.\+get\+Element\+By\+Id("{}edit-\/lastname"{})}
+
+\Hypertarget{admin_8js_a73e44f3e2a930f5260dfef6e928d4341}\index{admin.js@{admin.js}!editModalBackdrop@{editModalBackdrop}}
+\index{editModalBackdrop@{editModalBackdrop}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editModalBackdrop}{editModalBackdrop}}
+{\footnotesize\ttfamily \label{admin_8js_a73e44f3e2a930f5260dfef6e928d4341} 
+const edit\+Modal\+Backdrop = document.\+get\+Element\+By\+Id("{}edit-\/user-\/modal"{})}
+
+\Hypertarget{admin_8js_ae4d5aeb0e376c920268669143fc444b9}\index{admin.js@{admin.js}!editNameInput@{editNameInput}}
+\index{editNameInput@{editNameInput}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editNameInput}{editNameInput}}
+{\footnotesize\ttfamily \label{admin_8js_ae4d5aeb0e376c920268669143fc444b9} 
+const edit\+Name\+Input = document.\+get\+Element\+By\+Id("{}edit-\/name"{})}
+
+\Hypertarget{admin_8js_a5d23ad37ae86ce830049401f346add21}\index{admin.js@{admin.js}!editRoleSelect@{editRoleSelect}}
+\index{editRoleSelect@{editRoleSelect}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editRoleSelect}{editRoleSelect}}
+{\footnotesize\ttfamily \label{admin_8js_a5d23ad37ae86ce830049401f346add21} 
+const edit\+Role\+Select = document.\+get\+Element\+By\+Id("{}edit-\/role"{})}
+
+\Hypertarget{admin_8js_ad87fde3a9894719fbd8ebab6ce22ff7f}\index{admin.js@{admin.js}!editUserForm@{editUserForm}}
+\index{editUserForm@{editUserForm}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{editUserForm}{editUserForm}}
+{\footnotesize\ttfamily \label{admin_8js_ad87fde3a9894719fbd8ebab6ce22ff7f} 
+const edit\+User\+Form = document.\+get\+Element\+By\+Id("{}edit-\/user-\/form"{})}
+
+\Hypertarget{admin_8js_a628b251cf4bdf431020244c05fe05646}\index{admin.js@{admin.js}!errApellido@{errApellido}}
+\index{errApellido@{errApellido}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errApellido}{errApellido}}
+{\footnotesize\ttfamily \label{admin_8js_a628b251cf4bdf431020244c05fe05646} 
+const err\+Apellido = document.\+get\+Element\+By\+Id("{}err-\/apellido"{})}
+
+\Hypertarget{admin_8js_a344def2729343bcf281aeffa73db40a5}\index{admin.js@{admin.js}!errCardId@{errCardId}}
+\index{errCardId@{errCardId}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errCardId}{errCardId}}
+{\footnotesize\ttfamily \label{admin_8js_a344def2729343bcf281aeffa73db40a5} 
+const err\+Card\+Id = document.\+get\+Element\+By\+Id("{}err-\/card\+Id"{})}
+
+\Hypertarget{admin_8js_a27ad17a38503f399164912dba35d625d}\index{admin.js@{admin.js}!errEditCard@{errEditCard}}
+\index{errEditCard@{errEditCard}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errEditCard}{errEditCard}}
+{\footnotesize\ttfamily \label{admin_8js_a27ad17a38503f399164912dba35d625d} 
+const err\+Edit\+Card = document.\+get\+Element\+By\+Id("{}err-\/edit-\/card"{})}
+
+\Hypertarget{admin_8js_ae9547dd57ed7114a9efb343a7ee7d247}\index{admin.js@{admin.js}!errEditEmail@{errEditEmail}}
+\index{errEditEmail@{errEditEmail}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errEditEmail}{errEditEmail}}
+{\footnotesize\ttfamily \label{admin_8js_ae9547dd57ed7114a9efb343a7ee7d247} 
+const err\+Edit\+Email = document.\+get\+Element\+By\+Id("{}err-\/edit-\/email"{})}
+
+\Hypertarget{admin_8js_a85949b40b498eb627944c10cbfec01e3}\index{admin.js@{admin.js}!errEditLast@{errEditLast}}
+\index{errEditLast@{errEditLast}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errEditLast}{errEditLast}}
+{\footnotesize\ttfamily \label{admin_8js_a85949b40b498eb627944c10cbfec01e3} 
+const err\+Edit\+Last = document.\+get\+Element\+By\+Id("{}err-\/edit-\/lastname"{})}
+
+\Hypertarget{admin_8js_a8a7c2fcbef724338aa0ae0a2d0fcde00}\index{admin.js@{admin.js}!errEditName@{errEditName}}
+\index{errEditName@{errEditName}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errEditName}{errEditName}}
+{\footnotesize\ttfamily \label{admin_8js_a8a7c2fcbef724338aa0ae0a2d0fcde00} 
+const err\+Edit\+Name = document.\+get\+Element\+By\+Id("{}err-\/edit-\/name"{})}
+
+\Hypertarget{admin_8js_ac813d2f02b9ab378947595ea713a7cac}\index{admin.js@{admin.js}!errEditRole@{errEditRole}}
+\index{errEditRole@{errEditRole}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errEditRole}{errEditRole}}
+{\footnotesize\ttfamily \label{admin_8js_ac813d2f02b9ab378947595ea713a7cac} 
+const err\+Edit\+Role = document.\+get\+Element\+By\+Id("{}err-\/edit-\/role"{})}
+
+\Hypertarget{admin_8js_aee862f28eb62e324f6ccae479548b739}\index{admin.js@{admin.js}!errEmail@{errEmail}}
+\index{errEmail@{errEmail}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errEmail}{errEmail}}
+{\footnotesize\ttfamily \label{admin_8js_aee862f28eb62e324f6ccae479548b739} 
+const err\+Email = document.\+get\+Element\+By\+Id("{}err-\/email"{})}
+
+\Hypertarget{admin_8js_a07be3271d1ae9d5d0e621a39fda6505a}\index{admin.js@{admin.js}!errNombre@{errNombre}}
+\index{errNombre@{errNombre}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errNombre}{errNombre}}
+{\footnotesize\ttfamily \label{admin_8js_a07be3271d1ae9d5d0e621a39fda6505a} 
+const err\+Nombre = document.\+get\+Element\+By\+Id("{}err-\/nombre"{})}
+
+\Hypertarget{admin_8js_ab196b270d760884d22a2a204a2ec98cc}\index{admin.js@{admin.js}!errPassword@{errPassword}}
+\index{errPassword@{errPassword}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errPassword}{errPassword}}
+{\footnotesize\ttfamily \label{admin_8js_ab196b270d760884d22a2a204a2ec98cc} 
+const err\+Password = document.\+get\+Element\+By\+Id("{}err-\/password"{})}
+
+\Hypertarget{admin_8js_a1fb695796f7c13a7b817191cbebf3711}\index{admin.js@{admin.js}!errPassword2@{errPassword2}}
+\index{errPassword2@{errPassword2}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{errPassword2}{errPassword2}}
+{\footnotesize\ttfamily \label{admin_8js_a1fb695796f7c13a7b817191cbebf3711} 
+const err\+Password2 = document.\+get\+Element\+By\+Id("{}err-\/password2"{})}
+
+\Hypertarget{admin_8js_a3f7458b76b60b9a46f3c10d55e4ff01e}\index{admin.js@{admin.js}!hasNextPage@{hasNextPage}}
+\index{hasNextPage@{hasNextPage}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{hasNextPage}{hasNextPage}}
+{\footnotesize\ttfamily \label{admin_8js_a3f7458b76b60b9a46f3c10d55e4ff01e} 
+let has\+Next\+Page = true}
+
+\Hypertarget{admin_8js_a8d07dab740c3c34028036e03a4f78ccd}\index{admin.js@{admin.js}!modalBackdrop@{modalBackdrop}}
+\index{modalBackdrop@{modalBackdrop}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{modalBackdrop}{modalBackdrop}}
+{\footnotesize\ttfamily \label{admin_8js_a8d07dab740c3c34028036e03a4f78ccd} 
+const modal\+Backdrop = document.\+get\+Element\+By\+Id("{}modal-\/backdrop"{})}
+
+\Hypertarget{admin_8js_a4634a091c35db33009455321e1d259e3}\index{admin.js@{admin.js}!PAGE\_SIZE@{PAGE\_SIZE}}
+\index{PAGE\_SIZE@{PAGE\_SIZE}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{PAGE\_SIZE}{PAGE\_SIZE}}
+{\footnotesize\ttfamily \label{admin_8js_a4634a091c35db33009455321e1d259e3} 
+const PAGE\+\_\+\+SIZE = 100}
+
+\Hypertarget{admin_8js_abf57b19cfff5f09574a5922ea0756c82}\index{admin.js@{admin.js}!pageInfo@{pageInfo}}
+\index{pageInfo@{pageInfo}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{pageInfo}{pageInfo}}
+{\footnotesize\ttfamily \label{admin_8js_abf57b19cfff5f09574a5922ea0756c82} 
+const page\+Info = document.\+get\+Element\+By\+Id("{}page-\/info"{})}
+
+\Hypertarget{admin_8js_a3d62030bff7f800914044602edde9122}\index{admin.js@{admin.js}!tbody@{tbody}}
+\index{tbody@{tbody}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{tbody}{tbody}}
+{\footnotesize\ttfamily \label{admin_8js_a3d62030bff7f800914044602edde9122} 
+const tbody = document.\+get\+Element\+By\+Id("{}users-\/tbody"{})}
+
+\Hypertarget{admin_8js_a6dd30ab1f03139e2b10950d1645c52b3}\index{admin.js@{admin.js}!tokenKey@{tokenKey}}
+\index{tokenKey@{tokenKey}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{tokenKey}{tokenKey}}
+{\footnotesize\ttfamily \label{admin_8js_a6dd30ab1f03139e2b10950d1645c52b3} 
+const token\+Key = "{}token"{}}
+
+\Hypertarget{admin_8js_a9d1d9665b439108a83c3cb8c4095f3bd}\index{admin.js@{admin.js}!users@{users}}
+\index{users@{users}!admin.js@{admin.js}}
+\doxysubsubsection{\texorpdfstring{users}{users}}
+{\footnotesize\ttfamily \label{admin_8js_a9d1d9665b439108a83c3cb8c4095f3bd} 
+let users = \mbox{[}$\,$\mbox{]}}
+

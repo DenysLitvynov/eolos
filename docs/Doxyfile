@@ -1,0 +1,83 @@
+#Comandos en la terminal:
+# Para generar la documentación en formato LaTeX y PDF, navega al directorio 'docs' y ejecuta:
+# doxygen Doxyfile
+
+# Luego, para compilar el archivo LaTeX generado y obtener el PDF, navega al directorio 'docs/docs_output/latex' y ejecuta:
+# pdflatex refman.tex
+
+
+# =========================
+# Proyecto
+# =========================
+PROJECT_NAME           = "Éolos"
+PROJECT_BRIEF          = "Documentación técnica del proyecto"
+PROJECT_NUMBER         = "v3.0"
+
+# =========================
+# Entrada
+# =========================
+INPUT = \
+    ../webapp/backend \
+    ../webapp/frontend \
+    ../scripts \
+    ../android/eolos/app/src/main
+
+RECURSIVE              = YES
+
+FILE_PATTERNS = \
+    *.c *.cpp *.h *.hpp \
+    *.py \
+    *.java \
+    *.js *.ts \
+    *.html *.css
+
+EXCLUDE_PATTERNS = \
+    */build/* \
+    */dist/* \
+    */node_modules/* \
+    */.gradle/* \
+    */.idea/*
+
+INPUT_ENCODING         = UTF-8
+
+# =========================
+# Salida
+# =========================
+OUTPUT_DIRECTORY       = docs_output
+OUTPUT_LANGUAGE        = Spanish
+
+# =========================
+# HTML
+# =========================
+GENERATE_HTML          = YES
+
+# =========================
+# LaTeX / PDF
+# =========================
+GENERATE_LATEX         = YES
+LATEX_OUTPUT           = latex
+USE_PDFLATEX           = YES
+PDF_HYPERLINKS         = YES
+LATEX_BATCHMODE        = YES
+
+# =========================
+# Contenido
+# =========================
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTENSION_MAPPING = js=JavaScript
+OPTIMIZE_OUTPUT_JAVA = YES
+
+
+# =========================
+# Markdown
+# =========================
+MARKDOWN_SUPPORT       = YES
+USE_MDFILE_AS_MAINPAGE = README.md
+
+# =========================
+# Diagramas
+# =========================
+HAVE_DOT               = YES
+UML_LOOK               = YES

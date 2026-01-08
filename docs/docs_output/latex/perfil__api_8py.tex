@@ -1,0 +1,42 @@
+\doxysection{Referencia del archivo D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/api/perfil\+\_\+api.py}
+\hypertarget{perfil__api_8py}{}\label{perfil__api_8py}\index{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/backend/api/perfil\_api.py@{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/backend/api/perfil\_api.py}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+Perfil\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out_1_1_config}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+Perfil\+Out.\+Config}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_update_in}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+Perfil\+Update\+In}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Espacios de nombres}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacewebapp}{webapp}}
+\item 
+namespace \mbox{\hyperlink{namespacewebapp_1_1backend}{webapp.\+backend}}
+\item 
+namespace \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api}{webapp.\+backend.\+api}}
+\item 
+namespace \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api}{webapp.\+backend.\+api.\+perfil\+\_\+api}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+get\+\_\+current\+\_\+user}} (str\texorpdfstring{$\vert$}{|}None authorization=Header(default=None), Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out}{Perfil\+Out}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a3a76bbcc7c27a7b577ecfe87b2b70f96}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+read\+\_\+perfil}} (\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} current\+\_\+user=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}{get\+\_\+current\+\_\+user}}))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out}{Perfil\+Out}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a93bd2d47ac1036a33471df9d3673ef38}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+update\+\_\+perfil}} (\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_update_in}{Perfil\+Update\+In}} data, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} current\+\_\+user=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}{get\+\_\+current\+\_\+user}}))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a818a8fa6b245ab4b6678fb7f6989b9df}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+router}} = APIRouter()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a5057110aa7fffc3513bd0d1a80ff195b}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+logica}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil}{Logica\+Perfil}}()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a2db4a34be4b6ec925a31c92eae0efa86}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+JWT\+\_\+\+SECRET}} = os.\+getenv("{}JWT\+\_\+\+SECRET"{})
+\item 
+str \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a17eaf583a9bc2c77259a8a1df95ba739}{webapp.\+backend.\+api.\+perfil\+\_\+api.\+JWT\+\_\+\+ALGORITHM}} = "{}HS256"{}
+\end{DoxyCompactItemize}

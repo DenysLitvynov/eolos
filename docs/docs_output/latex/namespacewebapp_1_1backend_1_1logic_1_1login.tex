@@ -1,0 +1,54 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+logic.\+login}
+\hypertarget{namespacewebapp_1_1backend_1_1logic_1_1login}{}\label{namespacewebapp_1_1backend_1_1logic_1_1login}\index{webapp.backend.logic.login@{webapp.backend.logic.login}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1login_1_1_logica_login}{Logica\+Login}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1login_a83010ed6e1d59ea19438dbe6bf4764dd}{JWT\+\_\+\+SECRET}} = os.\+getenv("{}JWT\+\_\+\+SECRET"{})
+\item 
+str \mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1login_a1f7897e5c92c5cc1eb5785e7bc6a501e}{JWT\+\_\+\+ALGORITHM}} = "{}HS256"{}
+\item 
+int \mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1login_a7eb601a9adf4434bd495c74ac6dfb0d3}{ACCESS\+\_\+\+TOKEN\+\_\+\+EXPIRE\+\_\+\+MINUTES}} = 30
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1login_a02117a0e8977628523d58ad518148f85}{pwd\+\_\+context}} = Crypt\+Context(schemes=\mbox{[}"{}bcrypt"{}\mbox{]}, deprecated="{}auto"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: Denys Litvynov Lymanets
+Fecha: 15-11-2025
+Descripción: Lógica de negocio para el login. Valida credenciales y genera JWT.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1login_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1login_a7eb601a9adf4434bd495c74ac6dfb0d3}\index{webapp.backend.logic.login@{webapp.backend.logic.login}!ACCESS\_TOKEN\_EXPIRE\_MINUTES@{ACCESS\_TOKEN\_EXPIRE\_MINUTES}}
+\index{ACCESS\_TOKEN\_EXPIRE\_MINUTES@{ACCESS\_TOKEN\_EXPIRE\_MINUTES}!webapp.backend.logic.login@{webapp.backend.logic.login}}
+\doxysubsubsection{\texorpdfstring{ACCESS\_TOKEN\_EXPIRE\_MINUTES}{ACCESS\_TOKEN\_EXPIRE\_MINUTES}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1login_a7eb601a9adf4434bd495c74ac6dfb0d3} 
+int webapp.\+backend.\+logic.\+login.\+ACCESS\+\_\+\+TOKEN\+\_\+\+EXPIRE\+\_\+\+MINUTES = 30}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1login_a1f7897e5c92c5cc1eb5785e7bc6a501e}\index{webapp.backend.logic.login@{webapp.backend.logic.login}!JWT\_ALGORITHM@{JWT\_ALGORITHM}}
+\index{JWT\_ALGORITHM@{JWT\_ALGORITHM}!webapp.backend.logic.login@{webapp.backend.logic.login}}
+\doxysubsubsection{\texorpdfstring{JWT\_ALGORITHM}{JWT\_ALGORITHM}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1login_a1f7897e5c92c5cc1eb5785e7bc6a501e} 
+str webapp.\+backend.\+logic.\+login.\+JWT\+\_\+\+ALGORITHM = "{}HS256"{}}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1login_a83010ed6e1d59ea19438dbe6bf4764dd}\index{webapp.backend.logic.login@{webapp.backend.logic.login}!JWT\_SECRET@{JWT\_SECRET}}
+\index{JWT\_SECRET@{JWT\_SECRET}!webapp.backend.logic.login@{webapp.backend.logic.login}}
+\doxysubsubsection{\texorpdfstring{JWT\_SECRET}{JWT\_SECRET}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1login_a83010ed6e1d59ea19438dbe6bf4764dd} 
+webapp.\+backend.\+logic.\+login.\+JWT\+\_\+\+SECRET = os.\+getenv("{}JWT\+\_\+\+SECRET"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1login_a02117a0e8977628523d58ad518148f85}\index{webapp.backend.logic.login@{webapp.backend.logic.login}!pwd\_context@{pwd\_context}}
+\index{pwd\_context@{pwd\_context}!webapp.backend.logic.login@{webapp.backend.logic.login}}
+\doxysubsubsection{\texorpdfstring{pwd\_context}{pwd\_context}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1login_a02117a0e8977628523d58ad518148f85} 
+webapp.\+backend.\+logic.\+login.\+pwd\+\_\+context = Crypt\+Context(schemes=\mbox{[}"{}bcrypt"{}\mbox{]}, deprecated="{}auto"{})}
+

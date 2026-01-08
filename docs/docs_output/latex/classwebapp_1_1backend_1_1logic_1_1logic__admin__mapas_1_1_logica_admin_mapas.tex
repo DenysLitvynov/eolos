@@ -1,0 +1,70 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+logic\+\_\+admin\+\_\+mapas.\+Logica\+Admin\+Mapas}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas}{}\label{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas}\index{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas@{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+logic\+\_\+admin\+\_\+mapas.\+Logica\+Admin\+Mapas\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_a7cbda81f8010398c217d1ecddcc24e1e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+Dict \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_a4baefb72eeca6979846c7b6ea93e6e2c}{obtener\+\_\+mapa\+\_\+admin}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str tipo, datetime fecha, float lat\+\_\+min, float lon\+\_\+min, float lat\+\_\+max, float lon\+\_\+max)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_ace35c73950b9d36653bff3d31a4e648b}{logica\+\_\+base}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas}{Logica\+Mapas}}()
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_doc-constructors}
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_a7cbda81f8010398c217d1ecddcc24e1e}\index{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas@{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas@{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_a7cbda81f8010398c217d1ecddcc24e1e} 
+webapp.\+backend.\+logic.\+logic\+\_\+admin\+\_\+mapas.\+Logica\+Admin\+Mapas.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_a4baefb72eeca6979846c7b6ea93e6e2c}\index{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas@{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas}!obtener\_mapa\_admin@{obtener\_mapa\_admin}}
+\index{obtener\_mapa\_admin@{obtener\_mapa\_admin}!webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas@{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas}}
+\doxysubsubsection{\texorpdfstring{obtener\_mapa\_admin()}{obtener\_mapa\_admin()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_a4baefb72eeca6979846c7b6ea93e6e2c} 
+ Dict webapp.\+backend.\+logic.\+logic\+\_\+admin\+\_\+mapas.\+Logica\+Admin\+Mapas.\+obtener\+\_\+mapa\+\_\+admin (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{tipo}{, }\item[{datetime}]{fecha}{, }\item[{float}]{lat\+\_\+min}{, }\item[{float}]{lon\+\_\+min}{, }\item[{float}]{lat\+\_\+max}{, }\item[{float}]{lon\+\_\+max}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene los datos del mapa para un rango geográfico y una fecha histórica específica.
+
+Args:
+    db (Session): Sesión de base de datos.
+    tipo (str): Tipo de medida ('general', 'pm2_5', etc).
+    fecha (datetime): Fecha del histórico.
+    lat_min (float): Latitud mínima.
+    lon_min (float): Longitud mínima.
+    lat_max (float): Latitud máxima.
+    lon_max (float): Longitud máxima.
+    
+Returns:
+    Dict: Diccionario con timestamps y datos por hora.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_ace35c73950b9d36653bff3d31a4e648b}\index{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas@{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas}!logica\_base@{logica\_base}}
+\index{logica\_base@{logica\_base}!webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas@{webapp.backend.logic.logic\_admin\_mapas.LogicaAdminMapas}}
+\doxysubsubsection{\texorpdfstring{logica\_base}{logica\_base}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1logic__admin__mapas_1_1_logica_admin_mapas_ace35c73950b9d36653bff3d31a4e648b} 
+webapp.\+backend.\+logic.\+logic\+\_\+admin\+\_\+mapas.\+Logica\+Admin\+Mapas.\+logica\+\_\+base = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas}{Logica\+Mapas}}()}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{logic__admin__mapas_8py}{logic\+\_\+admin\+\_\+mapas.\+py}}\end{DoxyCompactItemize}

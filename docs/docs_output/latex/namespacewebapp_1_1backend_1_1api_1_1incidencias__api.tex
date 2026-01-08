@@ -1,0 +1,78 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+api.\+incidencias\+\_\+api}
+\hypertarget{namespacewebapp_1_1backend_1_1api_1_1incidencias__api}{}\label{namespacewebapp_1_1backend_1_1api_1_1incidencias__api}\index{webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1incidencias__api_1_1_incidencia_create_in}{Incidencia\+Create\+In}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1incidencias__api_1_1_incidencia_out}{Incidencia\+Out}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1incidencias__api_1_1_incidencia_out}{Incidencia\+Out}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_ad945ac37c15d5a092843a0870e9e7030}{crear\+\_\+incidencia}} (\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1incidencias__api_1_1_incidencia_create_in}{Incidencia\+Create\+In}} data, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} current\+\_\+user=Depends(get\+\_\+current\+\_\+user))
+\item 
+list\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1incidencias__api_1_1_incidencia_out}{Incidencia\+Out}}\mbox{]} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_a74764c88992c6306d9e3529a639fa9f1}{listar\+\_\+mis\+\_\+incidencias}} (Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} current\+\_\+user=Depends(get\+\_\+current\+\_\+user))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_ad43afcf0e5daa476448d6ed9a2b8ca80}{router}} = APIRouter()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_a5dd3bcee2a468162224cb9572ce02aac}{logica}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias}{Logica\+Incidencias}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: JINWEI
+Fecha: 17-11-2025
+Descripción: API de incidencias (crear + listar) utilizando autenticación JWT Bearer.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_ad945ac37c15d5a092843a0870e9e7030}\index{webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}!crear\_incidencia@{crear\_incidencia}}
+\index{crear\_incidencia@{crear\_incidencia}!webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{crear\_incidencia()}{crear\_incidencia()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_ad945ac37c15d5a092843a0870e9e7030} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1incidencias__api_1_1_incidencia_out}{Incidencia\+Out}} webapp.\+backend.\+api.\+incidencias\+\_\+api.\+crear\+\_\+incidencia (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1incidencias__api_1_1_incidencia_create_in}{Incidencia\+Create\+In}}}]{data}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{current\+\_\+user}{ = {\ttfamily Depends(get\+\_\+current\+\_\+user)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea una nueva incidencia asociada al usuario autenticado.
+- Valida el bicicleta_id y los datos de entrada.
+- Usa la lógica de negocio para registrar la incidencia.
+- Devuelve la incidencia recién creada.
+
+Si ocurre un error controlado (ej.: bici no encontrada),
+se devuelve un error 400 con el mensaje correspondiente.
+\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_a74764c88992c6306d9e3529a639fa9f1}\index{webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}!listar\_mis\_incidencias@{listar\_mis\_incidencias}}
+\index{listar\_mis\_incidencias@{listar\_mis\_incidencias}!webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{listar\_mis\_incidencias()}{listar\_mis\_incidencias()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_a74764c88992c6306d9e3529a639fa9f1} 
+ list\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1incidencias__api_1_1_incidencia_out}{Incidencia\+Out}}\mbox{]} webapp.\+backend.\+api.\+incidencias\+\_\+api.\+listar\+\_\+mis\+\_\+incidencias (\begin{DoxyParamCaption}\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{current\+\_\+user}{ = {\ttfamily Depends(get\+\_\+current\+\_\+user)}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Devuelve todas las incidencias creadas por el usuario autenticado.
+- No incluye incidencias de otros usuarios.
+- Devuelve la lista en formato seguro y serializable.
+
+Retorna una lista vacía si el usuario no tiene incidencias registradas.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_a5dd3bcee2a468162224cb9572ce02aac}\index{webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}!logica@{logica}}
+\index{logica@{logica}!webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{logica}{logica}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_a5dd3bcee2a468162224cb9572ce02aac} 
+webapp.\+backend.\+api.\+incidencias\+\_\+api.\+logica = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias}{Logica\+Incidencias}}()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_ad43afcf0e5daa476448d6ed9a2b8ca80}\index{webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}!router@{router}}
+\index{router@{router}!webapp.backend.api.incidencias\_api@{webapp.backend.api.incidencias\_api}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1incidencias__api_ad43afcf0e5daa476448d6ed9a2b8ca80} 
+webapp.\+backend.\+api.\+incidencias\+\_\+api.\+router = APIRouter()}
+

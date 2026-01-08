@@ -1,0 +1,76 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+incidencias\+\_\+logic.\+Logica\+Incidencias}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias}{}\label{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias}\index{webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+incidencias\+\_\+logic.\+Logica\+Incidencias\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a2179fc8bb88f4390994f74cd7633728f}{crear\+\_\+incidencia}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, \texorpdfstring{$\ast$}{*}, str usuario\+\_\+id, str bicicleta\+\_\+id, str descripcion, str fuente\+\_\+str)
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}}\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_ab112cddbcdd09ce27d8da0fcdccf6279}{listar\+\_\+incidencias\+\_\+por\+\_\+usuario}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, \texorpdfstring{$\ast$}{*}, str usuario\+\_\+id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos protegidos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a2e2af0996f6b538cdfe85363902ed39c}{\+\_\+obtener\+\_\+usuario}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str usuario\+\_\+id)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_bicicleta}{Bicicleta}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a8e98e1dd538780cf1e5a72561c7dfe62}{\+\_\+obtener\+\_\+bicicleta\+\_\+por\+\_\+id}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str bicicleta\+\_\+id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Encapsula la lógica relacionada con la creación y consulta de incidencias.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a8e98e1dd538780cf1e5a72561c7dfe62}\index{webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}!\_obtener\_bicicleta\_por\_id@{\_obtener\_bicicleta\_por\_id}}
+\index{\_obtener\_bicicleta\_por\_id@{\_obtener\_bicicleta\_por\_id}!webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}}
+\doxysubsubsection{\texorpdfstring{\_obtener\_bicicleta\_por\_id()}{\_obtener\_bicicleta\_por\_id()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a8e98e1dd538780cf1e5a72561c7dfe62} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_bicicleta}{Bicicleta}} webapp.\+backend.\+logic.\+incidencias\+\_\+logic.\+Logica\+Incidencias.\+\_\+obtener\+\_\+bicicleta\+\_\+por\+\_\+id (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{bicicleta\+\_\+id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Busca una bicicleta usando su bicicleta_id (VLC001, VLC045, etc.).
+Lanza ValueError si no existe ninguna bicicleta con ese ID.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a2e2af0996f6b538cdfe85363902ed39c}\index{webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}!\_obtener\_usuario@{\_obtener\_usuario}}
+\index{\_obtener\_usuario@{\_obtener\_usuario}!webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}}
+\doxysubsubsection{\texorpdfstring{\_obtener\_usuario()}{\_obtener\_usuario()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a2e2af0996f6b538cdfe85363902ed39c} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+logic.\+incidencias\+\_\+logic.\+Logica\+Incidencias.\+\_\+obtener\+\_\+usuario (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{usuario\+\_\+id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Recupera un usuario por su ID.
+Lanza ValueError si no existe.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a2179fc8bb88f4390994f74cd7633728f}\index{webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}!crear\_incidencia@{crear\_incidencia}}
+\index{crear\_incidencia@{crear\_incidencia}!webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}}
+\doxysubsubsection{\texorpdfstring{crear\_incidencia()}{crear\_incidencia()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_a2179fc8bb88f4390994f74cd7633728f} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}} webapp.\+backend.\+logic.\+incidencias\+\_\+logic.\+Logica\+Incidencias.\+crear\+\_\+incidencia (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{\texorpdfstring{$\ast$}{*}}]{}{, }\item[{str}]{usuario\+\_\+id}{, }\item[{str}]{bicicleta\+\_\+id}{, }\item[{str}]{descripcion}{, }\item[{str}]{fuente\+\_\+str}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crea una incidencia asociada a un usuario y a una bicicleta.
+
+Parámetros:
+  - usuario_id: viene del JWT (el backend lo resuelve a partir del token)
+  - bicicleta_id: ID de la bici (VLC001, VLC045…)
+  - descripcion: texto descriptivo del problema
+  - fuente_str: "admin", "app" o "web", según desde dónde se reporta
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_ab112cddbcdd09ce27d8da0fcdccf6279}\index{webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}!listar\_incidencias\_por\_usuario@{listar\_incidencias\_por\_usuario}}
+\index{listar\_incidencias\_por\_usuario@{listar\_incidencias\_por\_usuario}!webapp.backend.logic.incidencias\_logic.LogicaIncidencias@{webapp.backend.logic.incidencias\_logic.LogicaIncidencias}}
+\doxysubsubsection{\texorpdfstring{listar\_incidencias\_por\_usuario()}{listar\_incidencias\_por\_usuario()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1incidencias__logic_1_1_logica_incidencias_ab112cddbcdd09ce27d8da0fcdccf6279} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia}{Incidencia}}\mbox{]} webapp.\+backend.\+logic.\+incidencias\+\_\+logic.\+Logica\+Incidencias.\+listar\+\_\+incidencias\+\_\+por\+\_\+usuario (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{\texorpdfstring{$\ast$}{*}}]{}{, }\item[{str}]{usuario\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Devuelve todas las incidencias que pertenecen a un usuario,
+ordenadas de la más reciente a la más antigua.
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{incidencias__logic_8py}{incidencias\+\_\+logic.\+py}}\end{DoxyCompactItemize}

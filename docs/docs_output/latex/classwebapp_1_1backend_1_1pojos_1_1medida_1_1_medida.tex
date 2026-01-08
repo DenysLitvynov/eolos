@@ -1,0 +1,111 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+pojos.\+medida.\+Medida}
+\hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida}{}\label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+pojos.\+medida.\+Medida\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_ada6e37ae1bef3c2b0b19ba87eb138a17}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a528ed1519ba9f3ea5c32bccb62968945}{trayecto\+\_\+id}}, str \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_ada7d862fa3bd62a46fbefc233f1c32e1}{placa\+\_\+id}}, \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_tipo_medida_enum}{Tipo\+Medida\+Enum}} \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_afdbd38d783a8589200cf33dd6ee2426e}{tipo}}, float \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a110ad15ea65df235e1f989dcdd710877}{valor}}, datetime \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a8d46b8d0e29744ba9d4ca2e9afc78f4b}{fecha\+\_\+hora}}, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_af13b7e6eaea9b436acfb2fe60637e5ca}{posicion}})
+\item 
+dict \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a5a6653b20e3de62bc0729e0ed018e014}{obtener\+\_\+medida}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a528ed1519ba9f3ea5c32bccb62968945}{trayecto\+\_\+id}} = trayecto\+\_\+id
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_ada7d862fa3bd62a46fbefc233f1c32e1}{placa\+\_\+id}} = placa\+\_\+id
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_afdbd38d783a8589200cf33dd6ee2426e}{tipo}} = tipo
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a110ad15ea65df235e1f989dcdd710877}{valor}} = valor
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a8d46b8d0e29744ba9d4ca2e9afc78f4b}{fecha\+\_\+hora}} = fecha\+\_\+hora
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_af13b7e6eaea9b436acfb2fe60637e5ca}{posicion}} = posicion
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_doc-constructors}
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_ada6e37ae1bef3c2b0b19ba87eb138a17}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_ada6e37ae1bef3c2b0b19ba87eb138a17} 
+webapp.\+backend.\+pojos.\+medida.\+Medida.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{trayecto\+\_\+id}{, }\item[{str}]{placa\+\_\+id}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_tipo_medida_enum}{Tipo\+Medida\+Enum}}}]{tipo}{, }\item[{float}]{valor}{, }\item[{datetime}]{fecha\+\_\+hora}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{posicion}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicializa una medida.
+
+Args:
+    trayecto_id (str): ID del trayecto.
+    placa_id (str): ID de la placa.
+    tipo (TipoMedidaEnum): Tipo de medida.
+    valor (float): Valor de la medida.
+    fecha_hora (datetime): Fecha y hora.
+    posicion (PosicionGPS): Posición GPS.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a5a6653b20e3de62bc0729e0ed018e014}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}!obtener\_medida@{obtener\_medida}}
+\index{obtener\_medida@{obtener\_medida}!webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+\doxysubsubsection{\texorpdfstring{obtener\_medida()}{obtener\_medida()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a5a6653b20e3de62bc0729e0ed018e014} 
+ dict webapp.\+backend.\+pojos.\+medida.\+Medida.\+obtener\+\_\+medida (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Devuelve la medida como un diccionario.
+
+Returns:
+    dict: Representación de la medida.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a8d46b8d0e29744ba9d4ca2e9afc78f4b}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}!fecha\_hora@{fecha\_hora}}
+\index{fecha\_hora@{fecha\_hora}!webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+\doxysubsubsection{\texorpdfstring{fecha\_hora}{fecha\_hora}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a8d46b8d0e29744ba9d4ca2e9afc78f4b} 
+webapp.\+backend.\+pojos.\+medida.\+Medida.\+fecha\+\_\+hora = fecha\+\_\+hora}
+
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_ada7d862fa3bd62a46fbefc233f1c32e1}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}!placa\_id@{placa\_id}}
+\index{placa\_id@{placa\_id}!webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+\doxysubsubsection{\texorpdfstring{placa\_id}{placa\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_ada7d862fa3bd62a46fbefc233f1c32e1} 
+webapp.\+backend.\+pojos.\+medida.\+Medida.\+placa\+\_\+id = placa\+\_\+id}
+
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_af13b7e6eaea9b436acfb2fe60637e5ca}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}!posicion@{posicion}}
+\index{posicion@{posicion}!webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+\doxysubsubsection{\texorpdfstring{posicion}{posicion}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_af13b7e6eaea9b436acfb2fe60637e5ca} 
+webapp.\+backend.\+pojos.\+medida.\+Medida.\+posicion = posicion}
+
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_afdbd38d783a8589200cf33dd6ee2426e}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}!tipo@{tipo}}
+\index{tipo@{tipo}!webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+\doxysubsubsection{\texorpdfstring{tipo}{tipo}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_afdbd38d783a8589200cf33dd6ee2426e} 
+webapp.\+backend.\+pojos.\+medida.\+Medida.\+tipo = tipo}
+
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a528ed1519ba9f3ea5c32bccb62968945}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}!trayecto\_id@{trayecto\_id}}
+\index{trayecto\_id@{trayecto\_id}!webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+\doxysubsubsection{\texorpdfstring{trayecto\_id}{trayecto\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a528ed1519ba9f3ea5c32bccb62968945} 
+webapp.\+backend.\+pojos.\+medida.\+Medida.\+trayecto\+\_\+id = trayecto\+\_\+id}
+
+\Hypertarget{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a110ad15ea65df235e1f989dcdd710877}\index{webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}!valor@{valor}}
+\index{valor@{valor}!webapp.backend.pojos.medida.Medida@{webapp.backend.pojos.medida.Medida}}
+\doxysubsubsection{\texorpdfstring{valor}{valor}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1pojos_1_1medida_1_1_medida_a110ad15ea65df235e1f989dcdd710877} 
+webapp.\+backend.\+pojos.\+medida.\+Medida.\+valor = valor}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/pojos/\mbox{\hyperlink{medida_8py}{medida.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,91 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin}{}\label{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin}\index{webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}}\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a1d283d5205703e18029c0fa376d68797}{listar\+\_\+usuarios}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, \texorpdfstring{$\ast$}{*}, int limit=100, int offset=0)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a2ea57b12330d0f5289c9c1d2f8715135}{crear\+\_\+usuario\+\_\+admin}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, \texorpdfstring{$\ast$}{*}, str nombre, str apellido, str correo, Optional\mbox{[}str\mbox{]} targeta\+\_\+id, str rol, str contrasena)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a268c6845d46c399585a280e96488c2fb}{actualizar\+\_\+usuario\+\_\+admin}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, \texorpdfstring{$\ast$}{*}, str usuario\+\_\+id, Optional\mbox{[}str\mbox{]} nombre=None, Optional\mbox{[}str\mbox{]} apellido=None, Optional\mbox{[}str\mbox{]} correo=None, Optional\mbox{[}str\mbox{]} targeta\+\_\+id=None, Optional\mbox{[}str\mbox{]} rol=None)
+\item 
+None \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_ab9c4ceb37000e736702b4fd031296cc8}{eliminar\+\_\+usuario\+\_\+admin}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str usuario\+\_\+id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos protegidos}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a5a3659d6f5b7fc6e0eb87b635ee5588a}{\+\_\+password\+\_\+valida}} (self, str password)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a5cfcf5d0ea1498e30247297280a89f40}{\+\_\+obtener\+\_\+usuario}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str usuario\+\_\+id)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_rol}{Rol}} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_adba7243ed9ad38e10535b4acb3ff5237}{\+\_\+obtener\+\_\+rol\+\_\+por\+\_\+nombre}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str nombre\+\_\+rol)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_adba7243ed9ad38e10535b4acb3ff5237}\index{webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}!\_obtener\_rol\_por\_nombre@{\_obtener\_rol\_por\_nombre}}
+\index{\_obtener\_rol\_por\_nombre@{\_obtener\_rol\_por\_nombre}!webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}}
+\doxysubsubsection{\texorpdfstring{\_obtener\_rol\_por\_nombre()}{\_obtener\_rol\_por\_nombre()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_adba7243ed9ad38e10535b4acb3ff5237} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_rol}{Rol}} webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin.\+\_\+obtener\+\_\+rol\+\_\+por\+\_\+nombre (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{nombre\+\_\+rol}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Buscar rol según roles.nombre, ignorando mayúsculas/minúsculas y espacios.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a5cfcf5d0ea1498e30247297280a89f40}\index{webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}!\_obtener\_usuario@{\_obtener\_usuario}}
+\index{\_obtener\_usuario@{\_obtener\_usuario}!webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}}
+\doxysubsubsection{\texorpdfstring{\_obtener\_usuario()}{\_obtener\_usuario()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a5cfcf5d0ea1498e30247297280a89f40} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin.\+\_\+obtener\+\_\+usuario (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{usuario\+\_\+id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a5a3659d6f5b7fc6e0eb87b635ee5588a}\index{webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}!\_password\_valida@{\_password\_valida}}
+\index{\_password\_valida@{\_password\_valida}!webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}}
+\doxysubsubsection{\texorpdfstring{\_password\_valida()}{\_password\_valida()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a5a3659d6f5b7fc6e0eb87b635ee5588a} 
+ bool webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin.\+\_\+password\+\_\+valida (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{password}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Reglas iguales al registro:
+    - Mínimo 8 caracteres
+    - Mayúsculas
+    - Minúsculas
+    - Números
+    - Símbolos especiales
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a268c6845d46c399585a280e96488c2fb}\index{webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}!actualizar\_usuario\_admin@{actualizar\_usuario\_admin}}
+\index{actualizar\_usuario\_admin@{actualizar\_usuario\_admin}!webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}}
+\doxysubsubsection{\texorpdfstring{actualizar\_usuario\_admin()}{actualizar\_usuario\_admin()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a268c6845d46c399585a280e96488c2fb} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin.\+actualizar\+\_\+usuario\+\_\+admin (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{\texorpdfstring{$\ast$}{*}}]{}{, }\item[{str}]{usuario\+\_\+id}{, }\item[{Optional\mbox{[}str\mbox{]} }]{nombre}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{apellido}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{correo}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{targeta\+\_\+id}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{rol}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a2ea57b12330d0f5289c9c1d2f8715135}\index{webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}!crear\_usuario\_admin@{crear\_usuario\_admin}}
+\index{crear\_usuario\_admin@{crear\_usuario\_admin}!webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}}
+\doxysubsubsection{\texorpdfstring{crear\_usuario\_admin()}{crear\_usuario\_admin()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a2ea57b12330d0f5289c9c1d2f8715135} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin.\+crear\+\_\+usuario\+\_\+admin (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{\texorpdfstring{$\ast$}{*}}]{}{, }\item[{str}]{nombre}{, }\item[{str}]{apellido}{, }\item[{str}]{correo}{, }\item[{Optional\mbox{[}str\mbox{]}}]{targeta\+\_\+id}{, }\item[{str}]{rol}{, }\item[{str}]{contrasena}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_ab9c4ceb37000e736702b4fd031296cc8}\index{webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}!eliminar\_usuario\_admin@{eliminar\_usuario\_admin}}
+\index{eliminar\_usuario\_admin@{eliminar\_usuario\_admin}!webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}}
+\doxysubsubsection{\texorpdfstring{eliminar\_usuario\_admin()}{eliminar\_usuario\_admin()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_ab9c4ceb37000e736702b4fd031296cc8} 
+ None webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin.\+eliminar\+\_\+usuario\+\_\+admin (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{usuario\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Eliminación de usuario con manejo de IntegrityError.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a1d283d5205703e18029c0fa376d68797}\index{webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}!listar\_usuarios@{listar\_usuarios}}
+\index{listar\_usuarios@{listar\_usuarios}!webapp.backend.logic.admin\_logic.LogicaAdmin@{webapp.backend.logic.admin\_logic.LogicaAdmin}}
+\doxysubsubsection{\texorpdfstring{listar\_usuarios()}{listar\_usuarios()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1admin__logic_1_1_logica_admin_a1d283d5205703e18029c0fa376d68797} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}}\mbox{]} webapp.\+backend.\+logic.\+admin\+\_\+logic.\+Logica\+Admin.\+listar\+\_\+usuarios (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{\texorpdfstring{$\ast$}{*}}]{}{, }\item[{int }]{limit}{ = {\ttfamily 100}, }\item[{int }]{offset}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Lista usuarios con paginación y precarga de roles para evitar N+1.
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{admin__logic_8py}{admin\+\_\+logic.\+py}}\end{DoxyCompactItemize}

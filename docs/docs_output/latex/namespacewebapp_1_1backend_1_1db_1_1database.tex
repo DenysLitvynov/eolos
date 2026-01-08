@@ -1,0 +1,67 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+db.\+database}
+\hypertarget{namespacewebapp_1_1backend_1_1db_1_1database}{}\label{namespacewebapp_1_1backend_1_1db_1_1database}\index{webapp.backend.db.database@{webapp.backend.db.database}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_a2f9cd20de2e4110f154b42c23463c715}{get\+\_\+db}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_a4a74e499b48e370f16f17fbca9ce6edb}{DATABASE\+\_\+\+URL}} = os.\+getenv("{}DATABASE\+\_\+\+URL"{})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_a375782b98fde933ef09cdb639a2736f7}{engine}} = create\+\_\+engine(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_a4a74e499b48e370f16f17fbca9ce6edb}{DATABASE\+\_\+\+URL}})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_abc863728014aad5e616d64c649c84676}{Session\+Local}} = sessionmaker(autocommit=False, autoflush=False, bind=\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_a375782b98fde933ef09cdb639a2736f7}{engine}})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_ad82684fa3323fce37a1573fff4c75210}{Base}} = declarative\+\_\+base()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: Denys Litvynov Lymanets
+Fecha: 26-10-2025
+Descripción: Configura la conexión a la base de datos con SQLAlchemy.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1database_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1database_a2f9cd20de2e4110f154b42c23463c715}\index{webapp.backend.db.database@{webapp.backend.db.database}!get\_db@{get\_db}}
+\index{get\_db@{get\_db}!webapp.backend.db.database@{webapp.backend.db.database}}
+\doxysubsubsection{\texorpdfstring{get\_db()}{get\_db()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1database_a2f9cd20de2e4110f154b42c23463c715} 
+webapp.\+backend.\+db.\+database.\+get\+\_\+db (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generador que provee una sesión de DB.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1database_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1database_ad82684fa3323fce37a1573fff4c75210}\index{webapp.backend.db.database@{webapp.backend.db.database}!Base@{Base}}
+\index{Base@{Base}!webapp.backend.db.database@{webapp.backend.db.database}}
+\doxysubsubsection{\texorpdfstring{Base}{Base}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1database_ad82684fa3323fce37a1573fff4c75210} 
+webapp.\+backend.\+db.\+database.\+Base = declarative\+\_\+base()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1database_a4a74e499b48e370f16f17fbca9ce6edb}\index{webapp.backend.db.database@{webapp.backend.db.database}!DATABASE\_URL@{DATABASE\_URL}}
+\index{DATABASE\_URL@{DATABASE\_URL}!webapp.backend.db.database@{webapp.backend.db.database}}
+\doxysubsubsection{\texorpdfstring{DATABASE\_URL}{DATABASE\_URL}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1database_a4a74e499b48e370f16f17fbca9ce6edb} 
+webapp.\+backend.\+db.\+database.\+DATABASE\+\_\+\+URL = os.\+getenv("{}DATABASE\+\_\+\+URL"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1database_a375782b98fde933ef09cdb639a2736f7}\index{webapp.backend.db.database@{webapp.backend.db.database}!engine@{engine}}
+\index{engine@{engine}!webapp.backend.db.database@{webapp.backend.db.database}}
+\doxysubsubsection{\texorpdfstring{engine}{engine}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1database_a375782b98fde933ef09cdb639a2736f7} 
+webapp.\+backend.\+db.\+database.\+engine = create\+\_\+engine(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_a4a74e499b48e370f16f17fbca9ce6edb}{DATABASE\+\_\+\+URL}})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1database_abc863728014aad5e616d64c649c84676}\index{webapp.backend.db.database@{webapp.backend.db.database}!SessionLocal@{SessionLocal}}
+\index{SessionLocal@{SessionLocal}!webapp.backend.db.database@{webapp.backend.db.database}}
+\doxysubsubsection{\texorpdfstring{SessionLocal}{SessionLocal}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1database_abc863728014aad5e616d64c649c84676} 
+webapp.\+backend.\+db.\+database.\+Session\+Local = sessionmaker(autocommit=False, autoflush=False, bind=\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1database_a375782b98fde933ef09cdb639a2736f7}{engine}})}
+

@@ -1,0 +1,73 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+api.\+home\+\_\+api}
+\hypertarget{namespacewebapp_1_1backend_1_1api_1_1home__api}{}\label{namespacewebapp_1_1backend_1_1api_1_1home__api}\index{webapp.backend.api.home\_api@{webapp.backend.api.home\_api}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1home__api_1_1_usuario_home_out}{Usuario\+Home\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1home__api_1_1_gas_out}{Gas\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1home__api_1_1_nivel_actual_out}{Nivel\+Actual\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1home__api_1_1_calidad_aire_out}{Calidad\+Aire\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1home__api_1_1_impacto_out}{Impacto\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1home__api_1_1_ultimo_trayecto_out}{Ultimo\+Trayecto\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1home__api_1_1_km_resumen_out}{Km\+Resumen\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1home__api_1_1_home_out}{Home\+Out}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1home__api_a280228f29184b064000430c3bae5ec96}{get\+\_\+home}} (float\texorpdfstring{$\vert$}{|}None lat=Query(default=None), float\texorpdfstring{$\vert$}{|}None lon=Query(default=None), Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} current\+\_\+user=Depends(get\+\_\+current\+\_\+user))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1home__api_a143eefb3c446919058b627dedc1da3e7}{router}} = APIRouter()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1home__api_ac932a16adc2ce76850c770bf843dd00b}{logica}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1home__logic_1_1_logica_home}{Logica\+Home}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: JINWEI
+Fecha: 21-12-2025
+Descripción: Home API (landing registrado).
+
+Notas:
+- usuario_id SIEMPRE se obtiene desde el JWT (current_user)
+- lat/lon son opcionales (GPS del cliente)
+- La respuesta incluye km_resumen para renderizar la sección de KM en el frontend
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1home__api_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1home__api_a280228f29184b064000430c3bae5ec96}\index{webapp.backend.api.home\_api@{webapp.backend.api.home\_api}!get\_home@{get\_home}}
+\index{get\_home@{get\_home}!webapp.backend.api.home\_api@{webapp.backend.api.home\_api}}
+\doxysubsubsection{\texorpdfstring{get\_home()}{get\_home()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1home__api_a280228f29184b064000430c3bae5ec96} 
+webapp.\+backend.\+api.\+home\+\_\+api.\+get\+\_\+home (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\vert$}{|} None }]{lat}{ = {\ttfamily Query(default=None)}, }\item[{float \texorpdfstring{$\vert$}{|} None }]{lon}{ = {\ttfamily Query(default=None)}, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{current\+\_\+user}{ = {\ttfamily Depends(get\+\_\+current\+\_\+user)}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1home__api_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1home__api_ac932a16adc2ce76850c770bf843dd00b}\index{webapp.backend.api.home\_api@{webapp.backend.api.home\_api}!logica@{logica}}
+\index{logica@{logica}!webapp.backend.api.home\_api@{webapp.backend.api.home\_api}}
+\doxysubsubsection{\texorpdfstring{logica}{logica}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1home__api_ac932a16adc2ce76850c770bf843dd00b} 
+webapp.\+backend.\+api.\+home\+\_\+api.\+logica = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1home__logic_1_1_logica_home}{Logica\+Home}}()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1home__api_a143eefb3c446919058b627dedc1da3e7}\index{webapp.backend.api.home\_api@{webapp.backend.api.home\_api}!router@{router}}
+\index{router@{router}!webapp.backend.api.home\_api@{webapp.backend.api.home\_api}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1home__api_a143eefb3c446919058b627dedc1da3e7} 
+webapp.\+backend.\+api.\+home\+\_\+api.\+router = APIRouter()}
+

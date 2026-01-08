@@ -1,0 +1,93 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+logic.\+registro}
+\hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro}{}\label{namespacewebapp_1_1backend_1_1logic_1_1registro}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro}{Logica\+Registro}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1registro_a3d1b879c156fc15efac46c7a8cba75ec}{SMTP\+\_\+\+SERVER}} = os.\+getenv("{}SMTP\+\_\+\+SERVER"{})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1registro_a5bce5f38b4ac821bfdf0e8a47d833920}{SMTP\+\_\+\+PORT}} = int(os.\+getenv("{}SMTP\+\_\+\+PORT"{}, "{}587"{}))
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1registro_af2ee691a62a8c36b880cc9b63d4958c2}{SMTP\+\_\+\+USER}} = os.\+getenv("{}SMTP\+\_\+\+USER"{})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1registro_a1244dd80df0f740e16480a2a41f84394}{SMTP\+\_\+\+PASSWORD}} = os.\+getenv("{}SMTP\+\_\+\+PASSWORD"{})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1registro_ab0a17339b2bab5a4fa5ded02410d225f}{FROM\+\_\+\+EMAIL}} = os.\+getenv("{}FROM\+\_\+\+EMAIL"{})
+\item 
+str \mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1registro_af90955776c2d38f600f0337dd632ae43}{TESTING}} = "{}true"{}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1registro_ad96cbb41e7db1afbfb9820c12939d02a}{pwd\+\_\+context}} = Crypt\+Context(schemes=\mbox{[}"{}bcrypt"{}\mbox{]}, deprecated="{}auto"{})
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1logic_1_1registro_a9a7d205dd68296cd3c0c80cd5c32a2fd}{PASSWORD\+\_\+\+REGEX}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: Denys Litvynov Lymanets
+Fecha: 15-11-2025
+Descripción: Lógica de negocio para el registro. Valida datos, maneja pendientes y verificación por email.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_ab0a17339b2bab5a4fa5ded02410d225f}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}!FROM\_EMAIL@{FROM\_EMAIL}}
+\index{FROM\_EMAIL@{FROM\_EMAIL}!webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection{\texorpdfstring{FROM\_EMAIL}{FROM\_EMAIL}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1registro_ab0a17339b2bab5a4fa5ded02410d225f} 
+webapp.\+backend.\+logic.\+registro.\+FROM\+\_\+\+EMAIL = os.\+getenv("{}FROM\+\_\+\+EMAIL"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_a9a7d205dd68296cd3c0c80cd5c32a2fd}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}!PASSWORD\_REGEX@{PASSWORD\_REGEX}}
+\index{PASSWORD\_REGEX@{PASSWORD\_REGEX}!webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection{\texorpdfstring{PASSWORD\_REGEX}{PASSWORD\_REGEX}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1registro_a9a7d205dd68296cd3c0c80cd5c32a2fd} 
+webapp.\+backend.\+logic.\+registro.\+PASSWORD\+\_\+\+REGEX}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ re.compile(}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{r"{}\string^(?=.*[a-\/z])(?=.*[A-\/Z])(?=.*\(\backslash\)d)(?=.*[@\$!\%*?\&])[A-\/Za-\/z\(\backslash\)d@\$!\%*?\&]\{8,\}\$"{}}}
+\DoxyCodeLine{00003\ )}
+
+\end{DoxyCode}
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_ad96cbb41e7db1afbfb9820c12939d02a}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}!pwd\_context@{pwd\_context}}
+\index{pwd\_context@{pwd\_context}!webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection{\texorpdfstring{pwd\_context}{pwd\_context}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1registro_ad96cbb41e7db1afbfb9820c12939d02a} 
+webapp.\+backend.\+logic.\+registro.\+pwd\+\_\+context = Crypt\+Context(schemes=\mbox{[}"{}bcrypt"{}\mbox{]}, deprecated="{}auto"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_a1244dd80df0f740e16480a2a41f84394}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}!SMTP\_PASSWORD@{SMTP\_PASSWORD}}
+\index{SMTP\_PASSWORD@{SMTP\_PASSWORD}!webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection{\texorpdfstring{SMTP\_PASSWORD}{SMTP\_PASSWORD}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1registro_a1244dd80df0f740e16480a2a41f84394} 
+webapp.\+backend.\+logic.\+registro.\+SMTP\+\_\+\+PASSWORD = os.\+getenv("{}SMTP\+\_\+\+PASSWORD"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_a5bce5f38b4ac821bfdf0e8a47d833920}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}!SMTP\_PORT@{SMTP\_PORT}}
+\index{SMTP\_PORT@{SMTP\_PORT}!webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection{\texorpdfstring{SMTP\_PORT}{SMTP\_PORT}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1registro_a5bce5f38b4ac821bfdf0e8a47d833920} 
+webapp.\+backend.\+logic.\+registro.\+SMTP\+\_\+\+PORT = int(os.\+getenv("{}SMTP\+\_\+\+PORT"{}, "{}587"{}))}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_a3d1b879c156fc15efac46c7a8cba75ec}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}!SMTP\_SERVER@{SMTP\_SERVER}}
+\index{SMTP\_SERVER@{SMTP\_SERVER}!webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection{\texorpdfstring{SMTP\_SERVER}{SMTP\_SERVER}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1registro_a3d1b879c156fc15efac46c7a8cba75ec} 
+webapp.\+backend.\+logic.\+registro.\+SMTP\+\_\+\+SERVER = os.\+getenv("{}SMTP\+\_\+\+SERVER"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_af2ee691a62a8c36b880cc9b63d4958c2}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}!SMTP\_USER@{SMTP\_USER}}
+\index{SMTP\_USER@{SMTP\_USER}!webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection{\texorpdfstring{SMTP\_USER}{SMTP\_USER}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1registro_af2ee691a62a8c36b880cc9b63d4958c2} 
+webapp.\+backend.\+logic.\+registro.\+SMTP\+\_\+\+USER = os.\+getenv("{}SMTP\+\_\+\+USER"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1logic_1_1registro_af90955776c2d38f600f0337dd632ae43}\index{webapp.backend.logic.registro@{webapp.backend.logic.registro}!TESTING@{TESTING}}
+\index{TESTING@{TESTING}!webapp.backend.logic.registro@{webapp.backend.logic.registro}}
+\doxysubsubsection{\texorpdfstring{TESTING}{TESTING}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1logic_1_1registro_af90955776c2d38f600f0337dd632ae43} 
+str webapp.\+backend.\+logic.\+registro.\+TESTING = "{}true"{}}
+

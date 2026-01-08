@@ -1,0 +1,328 @@
+\doxysection{Referencia de la clase com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service}
+\hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service}{}\label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+
+
+Diagrama de herencia de com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service
+% FIG 0
+
+
+Diagrama de colaboración de com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service\+:
+% FIG 1
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a4367044f3164573b479a6767c879e492}{on\+Create}} ()
+\item 
+int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ab31c15606daddffdb502f9caeeef95e4}{on\+Start\+Command}} (Intent intent, int flags, int start\+Id)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0a07f30fe3a4fe562a8b03055146940e}{on\+Destroy}} ()
+\item 
+IBinder \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae7d1ed8a02672fb9d3dd0adce7443e3f}{on\+Bind}} (Intent intent)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ab76a99019bc2512173c9372d5e719ed9}{is\+Running}} ()
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae9c5b8ca3519c8b33a8d4fae4bd792ab}{is\+Beacon\+Detected\+Recently}} ()
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aa89612dde9bdd26f95c2d50dc546927e}{is\+Beacon\+Connected}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a1888ee5e635265f70fa223f64640c32a}{setup\+Medicion\+State\+Receiver}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ac5c17bcffcfc53fb80510b459adf7ed1}{start\+Beacon\+Status\+Checker}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a017d4d66ebdf589b69994ef037357dda}{reset\+Beacon\+Status\+Timer}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a5c2c98622ea081ed6d557b5f6a2be2ca}{update\+Beacon\+Notification}} (boolean connected, String status\+Text)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a7e98cea2dc904d07464be9e4aecc6ece}{update\+Medicion\+Notification}} (String tipo, String estado\+Medicion, double valor\+Medicion, int icon\+Res\+Id)
+\item 
+boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a21dd1adbcf2bc56286b14a069442f793}{should\+Alert}} (String tipo, String estado\+Medicion, double valor\+Medicion)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a072ee35e4a98e95dcbc19550a20c2d4e}{show\+Or\+Update\+Air\+Quality\+Alert}} (String tipo)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aa3ab1f6514566685ca891f6ed72da1a1}{format\+Tipo\+For\+Ui}} (String tipo)
+\item 
+String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ad347e0d0066b4199958eba2f04489b08}{safe}} (String s)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_af7a98cf795e9cac78ba4bdf71299b60f}{detener\+Escaneo}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a7ae3b27156103f19fafbcbf2f4045faf}{ensure\+Channels}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons}{Escaner\+IBeacons}} \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0da008d73cd991d07ad9f0b68b8048ef}{escaner\+IBeacons}}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_logica_trayectos_fake}{Logica\+Trayectos\+Fake}} \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a2cdbea489f1c458298c25ba0ba3a9da0}{logica\+Trayectos}}
+\item 
+Notification\+Manager \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a03c7b64d27373804d9e3831f26d5ec25}{notification\+Manager}}
+\item 
+Handler \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aef8307ddadb2745cfcc6efb8c68a8f40}{beacon\+Status\+Handler}}
+\item 
+Runnable \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae66333423dd1adb8544834b4e2ae0409}{beacon\+Status\+Runnable}}
+\item 
+boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0ab3826c3e6f32382779cb8a5be62477}{beacon\+Connected}} = false
+\item 
+Broadcast\+Receiver \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae2bbc544342a32cadc7b7176df5ae92d}{medicion\+State\+Receiver}}
+\item 
+boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a8dcc59994030877c7349451388a7a8d2}{alert\+Active}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ad3f67704cc45e3c79ff57ea746ca896f}{TAG}} = "{}Beacon\+Svc"{}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aba582769910e31e094100a754dd87f20}{ACTION\+\_\+\+STOP}} = "{}ACTION\+\_\+\+STOP\+\_\+\+BEACON\+\_\+\+SCAN"{}
+\item 
+static final int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_adf64bb42a5e68646fd1cb2ec7f2d1c1e}{NOTIF\+\_\+\+ID\+\_\+\+FOREGROUND}} = 1
+\item 
+static final int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0d91eb050f3a3e5ea848c3caa6f8163a}{NOTIF\+\_\+\+ID\+\_\+\+AIR\+\_\+\+ALERT}} = 2
+\item 
+static final int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_acf8c769e3ca025d2ba4495695da455ea}{NOTIF\+\_\+\+ID\+\_\+\+MEASUREMENT}} = 3
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_af3e42843def04560552bde62522086f0}{is\+Running}} = false
+\item 
+static long \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a233f0ef66ca6f3de9310acb960c681fd}{last\+Detected\+Time}} = 0
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a58360bc8a40336bad517dcbd6443c084}{BEACON\+\_\+\+CHANNEL\+\_\+\+ID}} = "{}beacon\+\_\+status\+\_\+channel"{}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a8777773d23585a3a55b19185caa70a82}{AIR\+\_\+\+ALERT\+\_\+\+CHANNEL\+\_\+\+ID}} = "{}air\+\_\+alert\+\_\+channel"{}
+\item 
+static final double \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a640e48194879b8f41a2bcc15e6223b51}{ALERT\+\_\+\+THRESHOLD\+\_\+\+VALUE}} = 100.\+0
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_af7a98cf795e9cac78ba4bdf71299b60f}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!detenerEscaneo@{detenerEscaneo}}
+\index{detenerEscaneo@{detenerEscaneo}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{detenerEscaneo()}{detenerEscaneo()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_af7a98cf795e9cac78ba4bdf71299b60f} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+detener\+Escaneo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a7ae3b27156103f19fafbcbf2f4045faf}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!ensureChannels@{ensureChannels}}
+\index{ensureChannels@{ensureChannels}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{ensureChannels()}{ensureChannels()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a7ae3b27156103f19fafbcbf2f4045faf} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+ensure\+Channels (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aa3ab1f6514566685ca891f6ed72da1a1}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!formatTipoForUi@{formatTipoForUi}}
+\index{formatTipoForUi@{formatTipoForUi}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{formatTipoForUi()}{formatTipoForUi()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aa3ab1f6514566685ca891f6ed72da1a1} 
+String com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+format\+Tipo\+For\+Ui (\begin{DoxyParamCaption}\item[{String}]{tipo}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aa89612dde9bdd26f95c2d50dc546927e}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!isBeaconConnected@{isBeaconConnected}}
+\index{isBeaconConnected@{isBeaconConnected}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{isBeaconConnected()}{isBeaconConnected()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aa89612dde9bdd26f95c2d50dc546927e} 
+boolean com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+is\+Beacon\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae9c5b8ca3519c8b33a8d4fae4bd792ab}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!isBeaconDetectedRecently@{isBeaconDetectedRecently}}
+\index{isBeaconDetectedRecently@{isBeaconDetectedRecently}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{isBeaconDetectedRecently()}{isBeaconDetectedRecently()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae9c5b8ca3519c8b33a8d4fae4bd792ab} 
+boolean com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+is\+Beacon\+Detected\+Recently (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ab76a99019bc2512173c9372d5e719ed9}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!isRunning@{isRunning}}
+\index{isRunning@{isRunning}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{isRunning()}{isRunning()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ab76a99019bc2512173c9372d5e719ed9} 
+boolean com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae7d1ed8a02672fb9d3dd0adce7443e3f}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!onBind@{onBind}}
+\index{onBind@{onBind}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{onBind()}{onBind()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae7d1ed8a02672fb9d3dd0adce7443e3f} 
+IBinder com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+on\+Bind (\begin{DoxyParamCaption}\item[{Intent}]{intent}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a4367044f3164573b479a6767c879e492}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!onCreate@{onCreate}}
+\index{onCreate@{onCreate}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{onCreate()}{onCreate()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a4367044f3164573b479a6767c879e492} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+on\+Create (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0a07f30fe3a4fe562a8b03055146940e}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!onDestroy@{onDestroy}}
+\index{onDestroy@{onDestroy}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{onDestroy()}{onDestroy()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0a07f30fe3a4fe562a8b03055146940e} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+on\+Destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ab31c15606daddffdb502f9caeeef95e4}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!onStartCommand@{onStartCommand}}
+\index{onStartCommand@{onStartCommand}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{onStartCommand()}{onStartCommand()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ab31c15606daddffdb502f9caeeef95e4} 
+int com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+on\+Start\+Command (\begin{DoxyParamCaption}\item[{Intent}]{intent}{, }\item[{int}]{flags}{, }\item[{int}]{start\+Id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a017d4d66ebdf589b69994ef037357dda}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!resetBeaconStatusTimer@{resetBeaconStatusTimer}}
+\index{resetBeaconStatusTimer@{resetBeaconStatusTimer}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{resetBeaconStatusTimer()}{resetBeaconStatusTimer()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a017d4d66ebdf589b69994ef037357dda} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+reset\+Beacon\+Status\+Timer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ad347e0d0066b4199958eba2f04489b08}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!safe@{safe}}
+\index{safe@{safe}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{safe()}{safe()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ad347e0d0066b4199958eba2f04489b08} 
+String com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+safe (\begin{DoxyParamCaption}\item[{String}]{s}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a1888ee5e635265f70fa223f64640c32a}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!setupMedicionStateReceiver@{setupMedicionStateReceiver}}
+\index{setupMedicionStateReceiver@{setupMedicionStateReceiver}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{setupMedicionStateReceiver()}{setupMedicionStateReceiver()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a1888ee5e635265f70fa223f64640c32a} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+setup\+Medicion\+State\+Receiver (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a21dd1adbcf2bc56286b14a069442f793}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!shouldAlert@{shouldAlert}}
+\index{shouldAlert@{shouldAlert}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{shouldAlert()}{shouldAlert()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a21dd1adbcf2bc56286b14a069442f793} 
+boolean com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+should\+Alert (\begin{DoxyParamCaption}\item[{String}]{tipo}{, }\item[{String}]{estado\+Medicion}{, }\item[{double}]{valor\+Medicion}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a072ee35e4a98e95dcbc19550a20c2d4e}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!showOrUpdateAirQualityAlert@{showOrUpdateAirQualityAlert}}
+\index{showOrUpdateAirQualityAlert@{showOrUpdateAirQualityAlert}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{showOrUpdateAirQualityAlert()}{showOrUpdateAirQualityAlert()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a072ee35e4a98e95dcbc19550a20c2d4e} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+show\+Or\+Update\+Air\+Quality\+Alert (\begin{DoxyParamCaption}\item[{String}]{tipo}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ac5c17bcffcfc53fb80510b459adf7ed1}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!startBeaconStatusChecker@{startBeaconStatusChecker}}
+\index{startBeaconStatusChecker@{startBeaconStatusChecker}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{startBeaconStatusChecker()}{startBeaconStatusChecker()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ac5c17bcffcfc53fb80510b459adf7ed1} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+start\+Beacon\+Status\+Checker (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a5c2c98622ea081ed6d557b5f6a2be2ca}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!updateBeaconNotification@{updateBeaconNotification}}
+\index{updateBeaconNotification@{updateBeaconNotification}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{updateBeaconNotification()}{updateBeaconNotification()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a5c2c98622ea081ed6d557b5f6a2be2ca} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+update\+Beacon\+Notification (\begin{DoxyParamCaption}\item[{boolean}]{connected}{, }\item[{String}]{status\+Text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a7e98cea2dc904d07464be9e4aecc6ece}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!updateMedicionNotification@{updateMedicionNotification}}
+\index{updateMedicionNotification@{updateMedicionNotification}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{updateMedicionNotification()}{updateMedicionNotification()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a7e98cea2dc904d07464be9e4aecc6ece} 
+void com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+update\+Medicion\+Notification (\begin{DoxyParamCaption}\item[{String}]{tipo}{, }\item[{String}]{estado\+Medicion}{, }\item[{double}]{valor\+Medicion}{, }\item[{int}]{icon\+Res\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aba582769910e31e094100a754dd87f20}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!ACTION\_STOP@{ACTION\_STOP}}
+\index{ACTION\_STOP@{ACTION\_STOP}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{ACTION\_STOP}{ACTION\_STOP}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aba582769910e31e094100a754dd87f20} 
+final String com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+ACTION\+\_\+\+STOP = "{}ACTION\+\_\+\+STOP\+\_\+\+BEACON\+\_\+\+SCAN"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a8777773d23585a3a55b19185caa70a82}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!AIR\_ALERT\_CHANNEL\_ID@{AIR\_ALERT\_CHANNEL\_ID}}
+\index{AIR\_ALERT\_CHANNEL\_ID@{AIR\_ALERT\_CHANNEL\_ID}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{AIR\_ALERT\_CHANNEL\_ID}{AIR\_ALERT\_CHANNEL\_ID}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a8777773d23585a3a55b19185caa70a82} 
+final String com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+AIR\+\_\+\+ALERT\+\_\+\+CHANNEL\+\_\+\+ID = "{}air\+\_\+alert\+\_\+channel"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a640e48194879b8f41a2bcc15e6223b51}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!ALERT\_THRESHOLD\_VALUE@{ALERT\_THRESHOLD\_VALUE}}
+\index{ALERT\_THRESHOLD\_VALUE@{ALERT\_THRESHOLD\_VALUE}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{ALERT\_THRESHOLD\_VALUE}{ALERT\_THRESHOLD\_VALUE}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a640e48194879b8f41a2bcc15e6223b51} 
+final double com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+ALERT\+\_\+\+THRESHOLD\+\_\+\+VALUE = 100.\+0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a8dcc59994030877c7349451388a7a8d2}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!alertActive@{alertActive}}
+\index{alertActive@{alertActive}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{alertActive}{alertActive}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a8dcc59994030877c7349451388a7a8d2} 
+boolean com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+alert\+Active = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a58360bc8a40336bad517dcbd6443c084}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!BEACON\_CHANNEL\_ID@{BEACON\_CHANNEL\_ID}}
+\index{BEACON\_CHANNEL\_ID@{BEACON\_CHANNEL\_ID}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{BEACON\_CHANNEL\_ID}{BEACON\_CHANNEL\_ID}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a58360bc8a40336bad517dcbd6443c084} 
+final String com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+BEACON\+\_\+\+CHANNEL\+\_\+\+ID = "{}beacon\+\_\+status\+\_\+channel"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0ab3826c3e6f32382779cb8a5be62477}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!beaconConnected@{beaconConnected}}
+\index{beaconConnected@{beaconConnected}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{beaconConnected}{beaconConnected}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0ab3826c3e6f32382779cb8a5be62477} 
+boolean com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+beacon\+Connected = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aef8307ddadb2745cfcc6efb8c68a8f40}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!beaconStatusHandler@{beaconStatusHandler}}
+\index{beaconStatusHandler@{beaconStatusHandler}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{beaconStatusHandler}{beaconStatusHandler}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_aef8307ddadb2745cfcc6efb8c68a8f40} 
+Handler com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+beacon\+Status\+Handler\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae66333423dd1adb8544834b4e2ae0409}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!beaconStatusRunnable@{beaconStatusRunnable}}
+\index{beaconStatusRunnable@{beaconStatusRunnable}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{beaconStatusRunnable}{beaconStatusRunnable}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae66333423dd1adb8544834b4e2ae0409} 
+Runnable com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+beacon\+Status\+Runnable\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0da008d73cd991d07ad9f0b68b8048ef}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!escanerIBeacons@{escanerIBeacons}}
+\index{escanerIBeacons@{escanerIBeacons}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{escanerIBeacons}{escanerIBeacons}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0da008d73cd991d07ad9f0b68b8048ef} 
+\mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1_escaner_i_beacons}{Escaner\+IBeacons}} com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+escaner\+IBeacons\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_af3e42843def04560552bde62522086f0}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!isRunning@{isRunning}}
+\index{isRunning@{isRunning}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{isRunning}{isRunning}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_af3e42843def04560552bde62522086f0} 
+boolean com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+is\+Running = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a233f0ef66ca6f3de9310acb960c681fd}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!lastDetectedTime@{lastDetectedTime}}
+\index{lastDetectedTime@{lastDetectedTime}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{lastDetectedTime}{lastDetectedTime}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a233f0ef66ca6f3de9310acb960c681fd} 
+long com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+last\+Detected\+Time = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a2cdbea489f1c458298c25ba0ba3a9da0}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!logicaTrayectos@{logicaTrayectos}}
+\index{logicaTrayectos@{logicaTrayectos}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{logicaTrayectos}{logicaTrayectos}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a2cdbea489f1c458298c25ba0ba3a9da0} 
+\mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1logica__fake_1_1_logica_trayectos_fake}{Logica\+Trayectos\+Fake}} com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+logica\+Trayectos\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae2bbc544342a32cadc7b7176df5ae92d}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!medicionStateReceiver@{medicionStateReceiver}}
+\index{medicionStateReceiver@{medicionStateReceiver}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{medicionStateReceiver}{medicionStateReceiver}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ae2bbc544342a32cadc7b7176df5ae92d} 
+Broadcast\+Receiver com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+medicion\+State\+Receiver\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0d91eb050f3a3e5ea848c3caa6f8163a}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!NOTIF\_ID\_AIR\_ALERT@{NOTIF\_ID\_AIR\_ALERT}}
+\index{NOTIF\_ID\_AIR\_ALERT@{NOTIF\_ID\_AIR\_ALERT}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{NOTIF\_ID\_AIR\_ALERT}{NOTIF\_ID\_AIR\_ALERT}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a0d91eb050f3a3e5ea848c3caa6f8163a} 
+final int com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+NOTIF\+\_\+\+ID\+\_\+\+AIR\+\_\+\+ALERT = 2\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_adf64bb42a5e68646fd1cb2ec7f2d1c1e}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!NOTIF\_ID\_FOREGROUND@{NOTIF\_ID\_FOREGROUND}}
+\index{NOTIF\_ID\_FOREGROUND@{NOTIF\_ID\_FOREGROUND}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{NOTIF\_ID\_FOREGROUND}{NOTIF\_ID\_FOREGROUND}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_adf64bb42a5e68646fd1cb2ec7f2d1c1e} 
+final int com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+NOTIF\+\_\+\+ID\+\_\+\+FOREGROUND = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_acf8c769e3ca025d2ba4495695da455ea}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!NOTIF\_ID\_MEASUREMENT@{NOTIF\_ID\_MEASUREMENT}}
+\index{NOTIF\_ID\_MEASUREMENT@{NOTIF\_ID\_MEASUREMENT}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{NOTIF\_ID\_MEASUREMENT}{NOTIF\_ID\_MEASUREMENT}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_acf8c769e3ca025d2ba4495695da455ea} 
+final int com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+NOTIF\+\_\+\+ID\+\_\+\+MEASUREMENT = 3\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a03c7b64d27373804d9e3831f26d5ec25}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!notificationManager@{notificationManager}}
+\index{notificationManager@{notificationManager}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{notificationManager}{notificationManager}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_a03c7b64d27373804d9e3831f26d5ec25} 
+Notification\+Manager com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+notification\+Manager\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ad3f67704cc45e3c79ff57ea746ca896f}\index{com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}!TAG@{TAG}}
+\index{TAG@{TAG}!com.example.eolos.servicio.BeaconScanService@{com.example.eolos.servicio.BeaconScanService}}
+\doxysubsubsection{\texorpdfstring{TAG}{TAG}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_beacon_scan_service_ad3f67704cc45e3c79ff57ea746ca896f} 
+final String com.\+example.\+eolos.\+servicio.\+Beacon\+Scan\+Service.\+TAG = "{}Beacon\+Svc"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/servicio/\mbox{\hyperlink{_beacon_scan_service_8java}{Beacon\+Scan\+Service.\+java}}\end{DoxyCompactItemize}

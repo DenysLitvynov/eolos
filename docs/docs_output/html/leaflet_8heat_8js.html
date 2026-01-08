@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.15.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Éolos: Referencia del archivo D:/Codigo_GTI/Proyecto_Biometria/PBIO/eolos/webapp/frontend/js/lib/leaflet.heat.js</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Éolos<span id="projectnumber">&#160;v3.0</span>
+   </div>
+   <div id="projectbrief">Documentación técnica del proyecto</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.15.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('leaflet_8heat_8js.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo leaflet.heat.js</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a57e164b1380f869a0165aaf7bf392a6a" id="r_a57e164b1380f869a0165aaf7bf392a6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57e164b1380f869a0165aaf7bf392a6a">!function</a> ()</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a90d7c8658281e9510679b489af33ee05" id="r_a90d7c8658281e9510679b489af33ee05"><td class="memItemLeft" align="right" valign="top">L&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90d7c8658281e9510679b489af33ee05">HeatLayer</a> =(L.Layer?L.Layer:L.Class).extend({initialize:function(t,i){this._latlngs=t,L.setOptions(this,i)},setLatLngs:function(t){return this._latlngs=t,this.redraw()},addLatLng:function(t){return this._latlngs.push(t),this.redraw()},setOptions:function(t){return L.setOptions(this,t),this._heat&amp;&amp;this._updateOptions(),this.redraw()},redraw:function(){return!this._heat||this._frame||this._map._animating||(this._frame=L.Util.requestAnimFrame(this._redraw,this)),this},onAdd:function(t){this._map=t,this._canvas||this._initCanvas(),t._panes.overlayPane.appendChild(this._canvas),t.on(&quot;moveend&quot;,this._reset,this),t.options.zoomAnimation&amp;&amp;L.Browser.any3d&amp;&amp;t.on(&quot;zoomanim&quot;,this._animateZoom,this),this._reset()},onRemove:function(t){t.getPanes().overlayPane.removeChild(this._canvas),t.off(&quot;moveend&quot;,this._reset,this),t.options.zoomAnimation&amp;&amp;t.off(&quot;zoomanim&quot;,this._animateZoom,this)},addTo:function(t){return t.addLayer(this),this},_initCanvas:function(){var t=this._canvas=L.DomUtil.create(&quot;canvas&quot;,&quot;leaflet-heatmap-layer leaflet-layer&quot;),i=L.DomUtil.testProp([&quot;transformOrigin&quot;,&quot;WebkitTransformOrigin&quot;,&quot;msTransformOrigin&quot;]);t.style[i]=&quot;50% 50%&quot;;var a=this._map.getSize();t.width=a.x,t.height=a.y;var s=this._map.options.zoomAnimation&amp;&amp;L.Browser.any3d;L.DomUtil.addClass(t,&quot;leaflet-zoom-&quot;+(s?&quot;animated&quot;:&quot;hide&quot;)),this._heat=simpleheat(t),this._updateOptions()},_updateOptions:function(){this._heat.radius(this.options.radius||this._heat.defaultRadius,this.options.blur),this.options.gradient&amp;&amp;this._heat.gradient(this.options.gradient),this.options.max&amp;&amp;this._heat.max(this.options.max)},_reset:function(){var t=this._map.containerPointToLayerPoint([0,0]);L.DomUtil.setPosition(this._canvas,t);var i=this._map.getSize();this._heat._width!==i.x&amp;&amp;(this._canvas.width=this._heat._width=i.x),this._heat._height!==i.y&amp;&amp;(this._canvas.height=this._heat._height=i.y),this._redraw()},_redraw:function(){var t,i,a,s,e,n,h,o,r,d=[],_=this._heat._r,l=this._map.getSize(),m=new L.Bounds(L.point([-_,-_]),l.add([_,_])),c=void 0===this.options.max?1:this.options.max,u=void 0===this.options.maxZoom?this._map.getMaxZoom():this.options.maxZoom,f=1/Math.pow(2,Math.max(0,Math.min(u-this._map.getZoom(),12))),g=_/2,p=[],v=this._map._getMapPanePos(),w=v.x%g,y=v.y%g;for(t=0,i=this._latlngs.length;i&gt;t;t++)if(a=this._map.latLngToContainerPoint(this._latlngs[t]),m.contains(a)){e=Math.floor((a.x-w)/g)+2,n=Math.floor((a.y-y)/g)+2;var x=void 0!==this._latlngs[t].alt?this._latlngs[t].alt:void 0!==this._latlngs[t][2]?+this._latlngs[t][2]:1;r=x*f,p[n]=p[n]||[],s=p[n][e],s?(s[0]=(s[0]*s[2]+a.x*r)/(s[2]+r),s[1]=(s[1]*s[2]+a.y*r)/(s[2]+r),s[2]+=r):p[n][e]=[a.x,a.y,r]}for(t=0,i=p.length;i&gt;t;t++)if(p[t])for(h=0,o=p[t].length;o&gt;h;h++)s=p[t][h],s&amp;&amp;d.push([Math.round(s[0]),Math.round(s[1]),Math.min(s[2],c)]);this._heat.data(d).draw(this.options.minOpacity),this._frame=null},_animateZoom:function(t){var i=this._map.getZoomScale(t.zoom),a=this._map._getCenterOffset(t.center)._multiplyBy(-i).subtract(this._map._getMapPanePos());L.DomUtil.setTransform?L.DomUtil.setTransform(this._canvas,a,i):this._canvas.style[L.DomUtil.TRANSFORM]=L.DomUtil.getTranslateString(a)+&quot; scale(&quot;+i+&quot;)&quot;}})</td></tr>
+<tr class="memitem:a46b0003804d3243420fe1abfa4b455fd" id="r_a46b0003804d3243420fe1abfa4b455fd"><td class="memItemLeft" align="right" valign="top">L L&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46b0003804d3243420fe1abfa4b455fd">heatLayer</a> =function(t,i){return new <a class="el" href="#a90d7c8658281e9510679b489af33ee05">L.HeatLayer</a>(t,i)}</td></tr>
+</table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentación de funciones</h2>
+<a id="a57e164b1380f869a0165aaf7bf392a6a" name="a57e164b1380f869a0165aaf7bf392a6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57e164b1380f869a0165aaf7bf392a6a">&#9670;&#160;</a></span>!function()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">!function </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Documentación de variables</h2>
+<a id="a90d7c8658281e9510679b489af33ee05" name="a90d7c8658281e9510679b489af33ee05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90d7c8658281e9510679b489af33ee05">&#9670;&#160;</a></span>HeatLayer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L HeatLayer =(L.Layer?L.Layer:L.Class).extend({initialize:function(t,i){this._latlngs=t,L.setOptions(this,i)},setLatLngs:function(t){return this._latlngs=t,this.redraw()},addLatLng:function(t){return this._latlngs.push(t),this.redraw()},setOptions:function(t){return L.setOptions(this,t),this._heat&amp;&amp;this._updateOptions(),this.redraw()},redraw:function(){return!this._heat||this._frame||this._map._animating||(this._frame=L.Util.requestAnimFrame(this._redraw,this)),this},onAdd:function(t){this._map=t,this._canvas||this._initCanvas(),t._panes.overlayPane.appendChild(this._canvas),t.on(&quot;moveend&quot;,this._reset,this),t.options.zoomAnimation&amp;&amp;L.Browser.any3d&amp;&amp;t.on(&quot;zoomanim&quot;,this._animateZoom,this),this._reset()},onRemove:function(t){t.getPanes().overlayPane.removeChild(this._canvas),t.off(&quot;moveend&quot;,this._reset,this),t.options.zoomAnimation&amp;&amp;t.off(&quot;zoomanim&quot;,this._animateZoom,this)},addTo:function(t){return t.addLayer(this),this},_initCanvas:function(){var t=this._canvas=L.DomUtil.create(&quot;canvas&quot;,&quot;leaflet-heatmap-layer leaflet-layer&quot;),i=L.DomUtil.testProp([&quot;transformOrigin&quot;,&quot;WebkitTransformOrigin&quot;,&quot;msTransformOrigin&quot;]);t.style[i]=&quot;50% 50%&quot;;var a=this._map.getSize();t.width=a.x,t.height=a.y;var s=this._map.options.zoomAnimation&amp;&amp;L.Browser.any3d;L.DomUtil.addClass(t,&quot;leaflet-zoom-&quot;+(s?&quot;animated&quot;:&quot;hide&quot;)),this._heat=simpleheat(t),this._updateOptions()},_updateOptions:function(){this._heat.radius(this.options.radius||this._heat.defaultRadius,this.options.blur),this.options.gradient&amp;&amp;this._heat.gradient(this.options.gradient),this.options.max&amp;&amp;this._heat.max(this.options.max)},_reset:function(){var t=this._map.containerPointToLayerPoint([0,0]);L.DomUtil.setPosition(this._canvas,t);var i=this._map.getSize();this._heat._width!==i.x&amp;&amp;(this._canvas.width=this._heat._width=i.x),this._heat._height!==i.y&amp;&amp;(this._canvas.height=this._heat._height=i.y),this._redraw()},_redraw:function(){var t,i,a,s,e,n,h,o,r,d=[],_=this._heat._r,l=this._map.getSize(),m=new L.Bounds(L.point([-_,-_]),l.add([_,_])),c=void 0===this.options.max?1:this.options.max,u=void 0===this.options.maxZoom?this._map.getMaxZoom():this.options.maxZoom,f=1/Math.pow(2,Math.max(0,Math.min(u-this._map.getZoom(),12))),g=_/2,p=[],v=this._map._getMapPanePos(),w=v.x%g,y=v.y%g;for(t=0,i=this._latlngs.length;i&gt;t;t++)if(a=this._map.latLngToContainerPoint(this._latlngs[t]),m.contains(a)){e=Math.floor((a.x-w)/g)+2,n=Math.floor((a.y-y)/g)+2;var x=void 0!==this._latlngs[t].alt?this._latlngs[t].alt:void 0!==this._latlngs[t][2]?+this._latlngs[t][2]:1;r=x*f,p[n]=p[n]||[],s=p[n][e],s?(s[0]=(s[0]*s[2]+a.x*r)/(s[2]+r),s[1]=(s[1]*s[2]+a.y*r)/(s[2]+r),s[2]+=r):p[n][e]=[a.x,a.y,r]}for(t=0,i=p.length;i&gt;t;t++)if(p[t])for(h=0,o=p[t].length;o&gt;h;h++)s=p[t][h],s&amp;&amp;d.push([Math.round(s[0]),Math.round(s[1]),Math.min(s[2],c)]);this._heat.data(d).draw(this.options.minOpacity),this._frame=null},_animateZoom:function(t){var i=this._map.getZoomScale(t.zoom),a=this._map._getCenterOffset(t.center)._multiplyBy(-i).subtract(this._map._getMapPanePos());L.DomUtil.setTransform?L.DomUtil.setTransform(this._canvas,a,i):this._canvas.style[L.DomUtil.TRANSFORM]=L.DomUtil.getTranslateString(a)+&quot; scale(&quot;+i+&quot;)&quot;}})</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46b0003804d3243420fe1abfa4b455fd" name="a46b0003804d3243420fe1abfa4b455fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46b0003804d3243420fe1abfa4b455fd">&#9670;&#160;</a></span>heatLayer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">L L heatLayer =function(t,i){return new <a class="el" href="#a90d7c8658281e9510679b489af33ee05">L.HeatLayer</a>(t,i)}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_c3572a7e6dccfb87b5caf6d10317ffd1.html">webapp</a></li><li class="navelem"><a href="dir_9f2d26aca2e6380ad193abad9cdb6a9b.html">frontend</a></li><li class="navelem"><a href="dir_9c212b9b11d334698d0f7da40bd20e6d.html">js</a></li><li class="navelem"><a href="dir_0e1ec195b36c356349870922c0d84a5e.html">lib</a></li><li class="navelem"><a href="leaflet_8heat_8js.html">leaflet.heat.js</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
+  </ul>
+</div>
+</body>
+</html>

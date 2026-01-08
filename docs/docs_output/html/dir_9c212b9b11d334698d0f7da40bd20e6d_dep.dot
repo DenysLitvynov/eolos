@@ -1,0 +1,20 @@
+digraph "D:/Codigo_GTI/Proyecto_Biometria/PBIO/eolos/webapp/frontend/js"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_9f2d26aca2e6380ad193abad9cdb6a9b {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="frontend", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_9f2d26aca2e6380ad193abad9cdb6a9b.html",tooltip=""]
+  subgraph clusterdir_9c212b9b11d334698d0f7da40bd20e6d {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", label="", fontname=Helvetica,fontsize=10 style="filled,bold", URL="dir_9c212b9b11d334698d0f7da40bd20e6d.html",tooltip=""]
+    dir_9c212b9b11d334698d0f7da40bd20e6d [shape=plaintext, label="js"];
+  dir_d0f3355766fc6cb59cd9164318598514 [label="components", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_d0f3355766fc6cb59cd9164318598514.html",tooltip=""];
+  dir_0e1ec195b36c356349870922c0d84a5e [label="lib", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_0e1ec195b36c356349870922c0d84a5e.html",tooltip=""];
+  dir_01c275e9ffd9d2244be8c415a1f87e50 [label="logica_fake", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_01c275e9ffd9d2244be8c415a1f87e50.html",tooltip=""];
+  dir_eff2113c7934364efa3793c488974fe7 [label="scripts", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_eff2113c7934364efa3793c488974fe7.html",tooltip=""];
+  dir_63eb4268fb2690e49e26aa5ebd237413 [label="utilidades", fillcolor="#a2b4d6", color="grey25", style="filled", URL="dir_63eb4268fb2690e49e26aa5ebd237413.html",tooltip=""];
+  }
+  }
+}

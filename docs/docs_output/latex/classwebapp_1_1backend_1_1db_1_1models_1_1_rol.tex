@@ -1,0 +1,71 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Rol}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_rol}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_rol}\index{webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Rol
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Rol\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a2bcf17695ec5c95f769d1b2e559031ab}{rol\+\_\+id}} = Column(Integer, primary\+\_\+key=True, autoincrement=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a19afa678ce75e4e43625399e4050e011}{nombre}} = Column(String(50), nullable=False, unique=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_ae72e6038bf198c33ca90a70a3d2e817e}{descripcion}} = Column(Text)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_ad01a10d6330283b78aebeb47fbf0629a}{usuarios}} = relationship("{}Usuario"{}, secondary=\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1models_a0e7166e801b315bcd4aabe248aa5b267}{usuario\+\_\+roles}}, back\+\_\+populates="{}roles"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a84f54e3fb9b06e826b33ce3df601e963}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}roles"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla para guardar los roles existentes en el proyecto que pueden tomar los usuarios.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a84f54e3fb9b06e826b33ce3df601e963}\index{webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a84f54e3fb9b06e826b33ce3df601e963} 
+str webapp.\+backend.\+db.\+models.\+Rol.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}roles"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_ae72e6038bf198c33ca90a70a3d2e817e}\index{webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}!descripcion@{descripcion}}
+\index{descripcion@{descripcion}!webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}}
+\doxysubsubsection{\texorpdfstring{descripcion}{descripcion}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_ae72e6038bf198c33ca90a70a3d2e817e} 
+webapp.\+backend.\+db.\+models.\+Rol.\+descripcion = Column(Text)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a19afa678ce75e4e43625399e4050e011}\index{webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}!nombre@{nombre}}
+\index{nombre@{nombre}!webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}}
+\doxysubsubsection{\texorpdfstring{nombre}{nombre}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a19afa678ce75e4e43625399e4050e011} 
+webapp.\+backend.\+db.\+models.\+Rol.\+nombre = Column(String(50), nullable=False, unique=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a2bcf17695ec5c95f769d1b2e559031ab}\index{webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}!rol\_id@{rol\_id}}
+\index{rol\_id@{rol\_id}!webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}}
+\doxysubsubsection{\texorpdfstring{rol\_id}{rol\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_a2bcf17695ec5c95f769d1b2e559031ab} 
+webapp.\+backend.\+db.\+models.\+Rol.\+rol\+\_\+id = Column(Integer, primary\+\_\+key=True, autoincrement=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_ad01a10d6330283b78aebeb47fbf0629a}\index{webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}!usuarios@{usuarios}}
+\index{usuarios@{usuarios}!webapp.backend.db.models.Rol@{webapp.backend.db.models.Rol}}
+\doxysubsubsection{\texorpdfstring{usuarios}{usuarios}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_rol_ad01a10d6330283b78aebeb47fbf0629a} 
+webapp.\+backend.\+db.\+models.\+Rol.\+usuarios = relationship("{}Usuario"{}, secondary=\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1models_a0e7166e801b315bcd4aabe248aa5b267}{usuario\+\_\+roles}}, back\+\_\+populates="{}roles"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

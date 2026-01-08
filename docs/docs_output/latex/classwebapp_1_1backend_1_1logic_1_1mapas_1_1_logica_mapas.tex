@@ -1,0 +1,217 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas}{}\label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a229b8c5c26b8f93faa2f39c77f7f9fe5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+float \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a76f2eed501e997450c2f92eb7f6a4e9a}{get\+\_\+aqi}} (self, Tipo\+Medida\+Enum tipo, float value)
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a14b3c0e43c2e4f3f21d1a436fe9a428d}{get\+\_\+color\+\_\+from\+\_\+aqi}} (self, float aqi)
+\item 
+Dict \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a61a4984b60c7bd6c8d612b14f5ddad0f}{obtener\+\_\+mapa\+\_\+de\+\_\+tipo\+\_\+de\+\_\+dia\+\_\+de\+\_\+destino}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str tipo, datetime fecha, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} esquina\+\_\+inf\+\_\+izq, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} esquina\+\_\+sup\+\_\+der)
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida}{Medida}}\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_abe581418740458b364e870031895227f}{obtener\+\_\+medidas\+\_\+tipo\+\_\+fecha\+\_\+sitio}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, Tipo\+Medida\+Enum tipo, datetime fecha, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} esquina\+\_\+inf\+\_\+izq, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} esquina\+\_\+sup\+\_\+der, bool interpoladas=False)
+\item 
+List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}\mbox{]} \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_aa3486a0ac759d9f6aee77bcbf5692641}{construir\+\_\+matriz\+\_\+interpolacion}} (self, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} esquina\+\_\+inf\+\_\+izq, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} esquina\+\_\+sup\+\_\+der)
+\item 
+float \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a3b8e91016362d73541ee744562a3d744}{interpolar\+\_\+para\+\_\+punto}} (self, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} punto, List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida}{Medida}}\mbox{]} medidas)
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a5b8ccbadb63d7625e7acc5715886bde1}{interpolar\+\_\+para\+\_\+tipo\+\_\+fecha}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, Tipo\+Medida\+Enum tipo, datetime fecha, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} esquina\+\_\+inf\+\_\+izq, \mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}} esquina\+\_\+sup\+\_\+der)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a66e36292bb3b00899dde08cd9ff33ec9}{unificar\+\_\+medidas\+\_\+de\+\_\+todos\+\_\+tipos\+\_\+de\+\_\+dia}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, datetime fecha, esquina\+\_\+inf\+\_\+izq, esquina\+\_\+sup\+\_\+der)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a161e4055b60e1374d5b22fa4db257de5}{calcular\+\_\+calidad\+\_\+general\+\_\+del\+\_\+aire}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, Dict medidas\+\_\+json, datetime fecha)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a03fc5765484e42a6bce54ea3e0d75986}{GASES}} = \mbox{[}Tipo\+Medida\+Enum.\+pm2\+\_\+5, Tipo\+Medida\+Enum.\+pm10, Tipo\+Medida\+Enum.\+no2, Tipo\+Medida\+Enum.\+o3\mbox{]}
+\item 
+bool \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_ad966dcc0bc3766256a8df2d869650a5d}{AREA\+\_\+\+LIMITADA}} = True
+\item 
+float \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_af22be595700a287b2d033e0ca80de3fa}{LAT\+\_\+\+MIN\+\_\+\+LIMIT}} = 39.\+44
+\item 
+float \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a7149d031ed89c4c0091efd726eb373b3}{LAT\+\_\+\+MAX\+\_\+\+LIMIT}} = 39.\+50
+\item 
+float \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_aaa02419202d04f390f85569980050789}{LON\+\_\+\+MIN\+\_\+\+LIMIT}} = -\/0.\+42
+\item 
+float \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a3e4ff6e54a8e32605a4d2a32a24bbce3}{LON\+\_\+\+MAX\+\_\+\+LIMIT}} = -\/0.\+34
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos protegidos}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a5516d751a43baefa142a2b316a2392d0}{\+\_\+cache\+\_\+interpolaciones}} = \{\}
+\item 
+dict \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a538c3efb53d7d07dbe375fd3de32f10a}{\+\_\+cache\+\_\+general}} = \{\}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_doc-constructors}
+\doxysubsection{Documentación de constructores y destructores}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a229b8c5c26b8f93faa2f39c77f7f9fe5}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a229b8c5c26b8f93faa2f39c77f7f9fe5} 
+webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a161e4055b60e1374d5b22fa4db257de5}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!calcular\_calidad\_general\_del\_aire@{calcular\_calidad\_general\_del\_aire}}
+\index{calcular\_calidad\_general\_del\_aire@{calcular\_calidad\_general\_del\_aire}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{calcular\_calidad\_general\_del\_aire()}{calcular\_calidad\_general\_del\_aire()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a161e4055b60e1374d5b22fa4db257de5} 
+webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+calcular\+\_\+calidad\+\_\+general\+\_\+del\+\_\+aire (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{Dict}]{medidas\+\_\+json}{, }\item[{datetime}]{fecha}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calcula la calidad general del aire y almacena en DB.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_aa3486a0ac759d9f6aee77bcbf5692641}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!construir\_matriz\_interpolacion@{construir\_matriz\_interpolacion}}
+\index{construir\_matriz\_interpolacion@{construir\_matriz\_interpolacion}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{construir\_matriz\_interpolacion()}{construir\_matriz\_interpolacion()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_aa3486a0ac759d9f6aee77bcbf5692641} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}\mbox{]} webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+construir\+\_\+matriz\+\_\+interpolacion (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{esquina\+\_\+inf\+\_\+izq}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{esquina\+\_\+sup\+\_\+der}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Construye una lista de puntos de grilla para interpolación.
+OPTIMIZADO: Menos puntos y más espaciados para mejor rendimiento.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a76f2eed501e997450c2f92eb7f6a4e9a}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!get\_aqi@{get\_aqi}}
+\index{get\_aqi@{get\_aqi}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{get\_aqi()}{get\_aqi()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a76f2eed501e997450c2f92eb7f6a4e9a} 
+ float webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+get\+\_\+aqi (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Tipo\+Medida\+Enum}]{tipo}{, }\item[{float}]{value}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calcula el AQI basado en el tipo y valor de la medida.
+
+Args:
+    tipo (TipoMedidaEnum): Tipo de medida (pm2_5, pm10, no2, o3).
+    value (float): Valor de la medida.
+
+Returns:
+    float: Valor de AQI calculado.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a14b3c0e43c2e4f3f21d1a436fe9a428d}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!get\_color\_from\_aqi@{get\_color\_from\_aqi}}
+\index{get\_color\_from\_aqi@{get\_color\_from\_aqi}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{get\_color\_from\_aqi()}{get\_color\_from\_aqi()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a14b3c0e43c2e4f3f21d1a436fe9a428d} 
+ str webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+get\+\_\+color\+\_\+from\+\_\+aqi (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float}]{aqi}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene el color basado en el valor de AQI.
+
+Args:
+    aqi (float): Valor de AQI.
+
+Returns:
+    str: Color correspondiente ("verde", "amarillo", "rojo").
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a3b8e91016362d73541ee744562a3d744}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!interpolar\_para\_punto@{interpolar\_para\_punto}}
+\index{interpolar\_para\_punto@{interpolar\_para\_punto}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{interpolar\_para\_punto()}{interpolar\_para\_punto()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a3b8e91016362d73541ee744562a3d744} 
+ float webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+interpolar\+\_\+para\+\_\+punto (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{punto}{, }\item[{List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida}{Medida}}\mbox{]}}]{medidas}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Interpola el valor para un punto usando IDW (Inverse Distance Weighting).
+OPTIMIZADO: Usar menos medidas cercanas.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a5b8ccbadb63d7625e7acc5715886bde1}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!interpolar\_para\_tipo\_fecha@{interpolar\_para\_tipo\_fecha}}
+\index{interpolar\_para\_tipo\_fecha@{interpolar\_para\_tipo\_fecha}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{interpolar\_para\_tipo\_fecha()}{interpolar\_para\_tipo\_fecha()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a5b8ccbadb63d7625e7acc5715886bde1} 
+ str webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+interpolar\+\_\+para\+\_\+tipo\+\_\+fecha (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{Tipo\+Medida\+Enum}]{tipo}{, }\item[{datetime}]{fecha}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{esquina\+\_\+inf\+\_\+izq}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{esquina\+\_\+sup\+\_\+der}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Realiza interpolación para un tipo y fecha, almacena en DB.
+OPTIMIZADO: Menos puntos y por horas clave.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a61a4984b60c7bd6c8d612b14f5ddad0f}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!obtener\_mapa\_de\_tipo\_de\_dia\_de\_destino@{obtener\_mapa\_de\_tipo\_de\_dia\_de\_destino}}
+\index{obtener\_mapa\_de\_tipo\_de\_dia\_de\_destino@{obtener\_mapa\_de\_tipo\_de\_dia\_de\_destino}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{obtener\_mapa\_de\_tipo\_de\_dia\_de\_destino()}{obtener\_mapa\_de\_tipo\_de\_dia\_de\_destino()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a61a4984b60c7bd6c8d612b14f5ddad0f} 
+ Dict webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+obtener\+\_\+mapa\+\_\+de\+\_\+tipo\+\_\+de\+\_\+dia\+\_\+de\+\_\+destino (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{tipo}{, }\item[{datetime}]{fecha}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{esquina\+\_\+inf\+\_\+izq}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{esquina\+\_\+sup\+\_\+der}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene el mapa para un tipo y día, dentro de bounds. Para cada hora, recolecta todas 
+las medidas hasta esa hora inclusive, y toma la más reciente por ubicación.
+CON CACHÉ para mejorar rendimiento.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_abe581418740458b364e870031895227f}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!obtener\_medidas\_tipo\_fecha\_sitio@{obtener\_medidas\_tipo\_fecha\_sitio}}
+\index{obtener\_medidas\_tipo\_fecha\_sitio@{obtener\_medidas\_tipo\_fecha\_sitio}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{obtener\_medidas\_tipo\_fecha\_sitio()}{obtener\_medidas\_tipo\_fecha\_sitio()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_abe581418740458b364e870031895227f} 
+ List\mbox{[}\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_medida}{Medida}}\mbox{]} webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+obtener\+\_\+medidas\+\_\+tipo\+\_\+fecha\+\_\+sitio (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{Tipo\+Medida\+Enum}]{tipo}{, }\item[{datetime}]{fecha}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{esquina\+\_\+inf\+\_\+izq}{, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1pojos_1_1posicion__gps_1_1_posicion_g_p_s}{Posicion\+GPS}}}]{esquina\+\_\+sup\+\_\+der}{, }\item[{bool }]{interpoladas}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtiene medidas de un tipo, fecha y sitio, reales o interpoladas.
+CON ÁREA LIMITADA para mejorar rendimiento.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a66e36292bb3b00899dde08cd9ff33ec9}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!unificar\_medidas\_de\_todos\_tipos\_de\_dia@{unificar\_medidas\_de\_todos\_tipos\_de\_dia}}
+\index{unificar\_medidas\_de\_todos\_tipos\_de\_dia@{unificar\_medidas\_de\_todos\_tipos\_de\_dia}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{unificar\_medidas\_de\_todos\_tipos\_de\_dia()}{unificar\_medidas\_de\_todos\_tipos\_de\_dia()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a66e36292bb3b00899dde08cd9ff33ec9} 
+webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+unificar\+\_\+medidas\+\_\+de\+\_\+todos\+\_\+tipos\+\_\+de\+\_\+dia (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{datetime}]{fecha}{, }\item[{}]{esquina\+\_\+inf\+\_\+izq}{, }\item[{}]{esquina\+\_\+sup\+\_\+der}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Unifica medidas de todos los tipos para un día (ambas tablas).
+OPTIMIZADO: Solo horas clave.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a538c3efb53d7d07dbe375fd3de32f10a}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!\_cache\_general@{\_cache\_general}}
+\index{\_cache\_general@{\_cache\_general}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{\_cache\_general}{\_cache\_general}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a538c3efb53d7d07dbe375fd3de32f10a} 
+webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+\_\+cache\+\_\+general = \{\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a5516d751a43baefa142a2b316a2392d0}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!\_cache\_interpolaciones@{\_cache\_interpolaciones}}
+\index{\_cache\_interpolaciones@{\_cache\_interpolaciones}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{\_cache\_interpolaciones}{\_cache\_interpolaciones}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a5516d751a43baefa142a2b316a2392d0} 
+dict webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+\_\+cache\+\_\+interpolaciones = \{\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_ad966dcc0bc3766256a8df2d869650a5d}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!AREA\_LIMITADA@{AREA\_LIMITADA}}
+\index{AREA\_LIMITADA@{AREA\_LIMITADA}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{AREA\_LIMITADA}{AREA\_LIMITADA}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_ad966dcc0bc3766256a8df2d869650a5d} 
+bool webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+AREA\+\_\+\+LIMITADA = True\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a03fc5765484e42a6bce54ea3e0d75986}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!GASES@{GASES}}
+\index{GASES@{GASES}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{GASES}{GASES}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a03fc5765484e42a6bce54ea3e0d75986} 
+list webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+GASES = \mbox{[}Tipo\+Medida\+Enum.\+pm2\+\_\+5, Tipo\+Medida\+Enum.\+pm10, Tipo\+Medida\+Enum.\+no2, Tipo\+Medida\+Enum.\+o3\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a7149d031ed89c4c0091efd726eb373b3}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!LAT\_MAX\_LIMIT@{LAT\_MAX\_LIMIT}}
+\index{LAT\_MAX\_LIMIT@{LAT\_MAX\_LIMIT}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{LAT\_MAX\_LIMIT}{LAT\_MAX\_LIMIT}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a7149d031ed89c4c0091efd726eb373b3} 
+float webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+LAT\+\_\+\+MAX\+\_\+\+LIMIT = 39.\+50\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_af22be595700a287b2d033e0ca80de3fa}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!LAT\_MIN\_LIMIT@{LAT\_MIN\_LIMIT}}
+\index{LAT\_MIN\_LIMIT@{LAT\_MIN\_LIMIT}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{LAT\_MIN\_LIMIT}{LAT\_MIN\_LIMIT}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_af22be595700a287b2d033e0ca80de3fa} 
+float webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+LAT\+\_\+\+MIN\+\_\+\+LIMIT = 39.\+44\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a3e4ff6e54a8e32605a4d2a32a24bbce3}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!LON\_MAX\_LIMIT@{LON\_MAX\_LIMIT}}
+\index{LON\_MAX\_LIMIT@{LON\_MAX\_LIMIT}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{LON\_MAX\_LIMIT}{LON\_MAX\_LIMIT}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_a3e4ff6e54a8e32605a4d2a32a24bbce3} 
+float webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+LON\+\_\+\+MAX\+\_\+\+LIMIT = -\/0.\+34\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_aaa02419202d04f390f85569980050789}\index{webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}!LON\_MIN\_LIMIT@{LON\_MIN\_LIMIT}}
+\index{LON\_MIN\_LIMIT@{LON\_MIN\_LIMIT}!webapp.backend.logic.mapas.LogicaMapas@{webapp.backend.logic.mapas.LogicaMapas}}
+\doxysubsubsection{\texorpdfstring{LON\_MIN\_LIMIT}{LON\_MIN\_LIMIT}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1mapas_1_1_logica_mapas_aaa02419202d04f390f85569980050789} 
+float webapp.\+backend.\+logic.\+mapas.\+Logica\+Mapas.\+LON\+\_\+\+MIN\+\_\+\+LIMIT = -\/0.\+42\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{mapas_8py}{mapas.\+py}}\end{DoxyCompactItemize}

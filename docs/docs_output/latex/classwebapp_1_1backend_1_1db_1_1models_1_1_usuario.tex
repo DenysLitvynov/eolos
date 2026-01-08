@@ -1,0 +1,103 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Usuario}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Usuario
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Usuario\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_aab2739c9d7a250bd4da8cb9d5ef96b65}{usuario\+\_\+id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a613c7352f94e5352ceb92525714d12f8}{targeta\+\_\+id}} = Column(String(9), Foreign\+Key("{}mibisivalencia.\+targeta\+\_\+id"{}, ondelete="{}SET NULL"{}), nullable=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a1e30c74dfa79ef3bf07517e85e6286d4}{nombre}} = Column(String(100), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_abc04b744761ae88a2607f8e19bedb2b6}{apellido}} = Column(String(100))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a661bc584c54e62a63e5e79c6d29cccd2}{correo}} = Column(String(100), unique=True, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_ae3ad9938a8f11c72526d01ca90e7cb0d}{contrasena\+\_\+hash}} = Column(Text, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_acb7159a81b22dbfbd4c31ad8689bc148}{roles}} = relationship("{}Rol"{}, secondary=\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1models_a0e7166e801b315bcd4aabe248aa5b267}{usuario\+\_\+roles}}, back\+\_\+populates="{}usuarios"{})
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_aced2b2448c678652a7565a1e1430c89d}{mibisivalencia}} = relationship("{}Mibisivalencia"{}, uselist=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a4ab7916ba631def8cb43561ea4019e0c}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}usuarios"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla para almacenar los datos de todos los usuarios registrados.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a4ab7916ba631def8cb43561ea4019e0c}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a4ab7916ba631def8cb43561ea4019e0c} 
+str webapp.\+backend.\+db.\+models.\+Usuario.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}usuarios"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_abc04b744761ae88a2607f8e19bedb2b6}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!apellido@{apellido}}
+\index{apellido@{apellido}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{apellido}{apellido}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_abc04b744761ae88a2607f8e19bedb2b6} 
+webapp.\+backend.\+db.\+models.\+Usuario.\+apellido = Column(String(100))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_ae3ad9938a8f11c72526d01ca90e7cb0d}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!contrasena\_hash@{contrasena\_hash}}
+\index{contrasena\_hash@{contrasena\_hash}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{contrasena\_hash}{contrasena\_hash}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_ae3ad9938a8f11c72526d01ca90e7cb0d} 
+webapp.\+backend.\+db.\+models.\+Usuario.\+contrasena\+\_\+hash = Column(Text, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a661bc584c54e62a63e5e79c6d29cccd2}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!correo@{correo}}
+\index{correo@{correo}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{correo}{correo}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a661bc584c54e62a63e5e79c6d29cccd2} 
+webapp.\+backend.\+db.\+models.\+Usuario.\+correo = Column(String(100), unique=True, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_aced2b2448c678652a7565a1e1430c89d}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!mibisivalencia@{mibisivalencia}}
+\index{mibisivalencia@{mibisivalencia}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{mibisivalencia}{mibisivalencia}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_aced2b2448c678652a7565a1e1430c89d} 
+webapp.\+backend.\+db.\+models.\+Usuario.\+mibisivalencia = relationship("{}Mibisivalencia"{}, uselist=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a1e30c74dfa79ef3bf07517e85e6286d4}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!nombre@{nombre}}
+\index{nombre@{nombre}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{nombre}{nombre}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a1e30c74dfa79ef3bf07517e85e6286d4} 
+webapp.\+backend.\+db.\+models.\+Usuario.\+nombre = Column(String(100), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_acb7159a81b22dbfbd4c31ad8689bc148}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!roles@{roles}}
+\index{roles@{roles}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{roles}{roles}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_acb7159a81b22dbfbd4c31ad8689bc148} 
+webapp.\+backend.\+db.\+models.\+Usuario.\+roles = relationship("{}Rol"{}, secondary=\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1models_a0e7166e801b315bcd4aabe248aa5b267}{usuario\+\_\+roles}}, back\+\_\+populates="{}usuarios"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a613c7352f94e5352ceb92525714d12f8}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!targeta\_id@{targeta\_id}}
+\index{targeta\_id@{targeta\_id}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{targeta\_id}{targeta\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_a613c7352f94e5352ceb92525714d12f8} 
+webapp.\+backend.\+db.\+models.\+Usuario.\+targeta\+\_\+id = Column(String(9), Foreign\+Key("{}mibisivalencia.\+targeta\+\_\+id"{}, ondelete="{}SET NULL"{}), nullable=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_aab2739c9d7a250bd4da8cb9d5ef96b65}\index{webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}!usuario\_id@{usuario\_id}}
+\index{usuario\_id@{usuario\_id}!webapp.backend.db.models.Usuario@{webapp.backend.db.models.Usuario}}
+\doxysubsubsection{\texorpdfstring{usuario\_id}{usuario\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario_aab2739c9d7a250bd4da8cb9d5ef96b65} 
+webapp.\+backend.\+db.\+models.\+Usuario.\+usuario\+\_\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

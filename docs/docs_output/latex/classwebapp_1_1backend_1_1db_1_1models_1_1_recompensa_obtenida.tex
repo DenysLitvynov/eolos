@@ -1,0 +1,87 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida}\index{webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_ad88eb15bf30d5682ac03792f9b4dcb0b}{id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a3874a8dfd36bb50e8fc0208e5136268b}{usuario\+\_\+id}} = Column(String(36), Foreign\+Key("{}usuarios.\+usuario\+\_\+id"{}), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a81cc0f1a37c9a50b8f3517b2e7a5dd73}{recompensa\+\_\+id}} = Column(String(36), Foreign\+Key("{}recompensas.\+recompensa\+\_\+id"{}), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a0a75698e077a5d2a3a901d8a15d9b099}{codigo\+\_\+unico}} = Column(String(100), nullable=False, unique=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a3f36b245b3ee7afe8c221bc67e7de0ec}{usuario}} = relationship("{}Usuario"{}, backref="{}recompensas\+\_\+obtenidas"{})
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_aa1c00a61fe2b27fda10d18f401aa53b8}{recompensa}} = relationship("{}Recompensa"{}, back\+\_\+populates="{}obtenidas"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_accd46246ff0f2a34344fecc550ef4863}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}recompensas\+\_\+obtenidas"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla que indica qué recompensas han sido obtenidas por qué usuario.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_accd46246ff0f2a34344fecc550ef4863}\index{webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_accd46246ff0f2a34344fecc550ef4863} 
+str webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}recompensas\+\_\+obtenidas"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a0a75698e077a5d2a3a901d8a15d9b099}\index{webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}!codigo\_unico@{codigo\_unico}}
+\index{codigo\_unico@{codigo\_unico}!webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}}
+\doxysubsubsection{\texorpdfstring{codigo\_unico}{codigo\_unico}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a0a75698e077a5d2a3a901d8a15d9b099} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida.\+codigo\+\_\+unico = Column(String(100), nullable=False, unique=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_ad88eb15bf30d5682ac03792f9b4dcb0b}\index{webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}!id@{id}}
+\index{id@{id}!webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_ad88eb15bf30d5682ac03792f9b4dcb0b} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida.\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_aa1c00a61fe2b27fda10d18f401aa53b8}\index{webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}!recompensa@{recompensa}}
+\index{recompensa@{recompensa}!webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}}
+\doxysubsubsection{\texorpdfstring{recompensa}{recompensa}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_aa1c00a61fe2b27fda10d18f401aa53b8} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida.\+recompensa = relationship("{}Recompensa"{}, back\+\_\+populates="{}obtenidas"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a81cc0f1a37c9a50b8f3517b2e7a5dd73}\index{webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}!recompensa\_id@{recompensa\_id}}
+\index{recompensa\_id@{recompensa\_id}!webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}}
+\doxysubsubsection{\texorpdfstring{recompensa\_id}{recompensa\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a81cc0f1a37c9a50b8f3517b2e7a5dd73} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida.\+recompensa\+\_\+id = Column(String(36), Foreign\+Key("{}recompensas.\+recompensa\+\_\+id"{}), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a3f36b245b3ee7afe8c221bc67e7de0ec}\index{webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}!usuario@{usuario}}
+\index{usuario@{usuario}!webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}}
+\doxysubsubsection{\texorpdfstring{usuario}{usuario}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a3f36b245b3ee7afe8c221bc67e7de0ec} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida.\+usuario = relationship("{}Usuario"{}, backref="{}recompensas\+\_\+obtenidas"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a3874a8dfd36bb50e8fc0208e5136268b}\index{webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}!usuario\_id@{usuario\_id}}
+\index{usuario\_id@{usuario\_id}!webapp.backend.db.models.RecompensaObtenida@{webapp.backend.db.models.RecompensaObtenida}}
+\doxysubsubsection{\texorpdfstring{usuario\_id}{usuario\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida_a3874a8dfd36bb50e8fc0208e5136268b} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Obtenida.\+usuario\+\_\+id = Column(String(36), Foreign\+Key("{}usuarios.\+usuario\+\_\+id"{}), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

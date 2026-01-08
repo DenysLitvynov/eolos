@@ -1,0 +1,10 @@
+digraph "D:/Codigo_GTI/Proyecto_Biometria/PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/TramaIBeacon.java"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [id="Node000001",label="D:/Codigo_GTI/Proyecto\l_Biometria/PBIO/eolos\l/android/eolos/app/src\l/main/java/com/example/eolos\l/TramaIBeacon.java",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge2_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="java.util.Arrays",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+}

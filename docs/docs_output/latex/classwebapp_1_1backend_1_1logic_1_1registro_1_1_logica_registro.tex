@@ -1,0 +1,164 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+logic.\+registro.\+Logica\+Registro}
+\hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro}{}\label{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro}\index{webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}}
+
+
+Diagrama de colaboración de webapp.\+backend.\+logic.\+registro.\+Logica\+Registro\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a348420c39151ec0c21ba4901937b6545}{validar\+\_\+datos}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str nombre, str apellido, str correo, str targeta\+\_\+id, str contrasena, str contrasena\+\_\+repite, bool acepta\+\_\+politica=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_af02931e3962b34d74806c7a796d7f026}{hashear\+\_\+contrasena}} (self, str contrasena)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a90eb2c67ccac42ff002df58ace8e0ecc}{generar\+\_\+codigo\+\_\+verificacion}} (self)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_ae6a3423eb04b384aa3e65c921b83cb36}{enviar\+\_\+email\+\_\+verificacion}} (self, str correo, str codigo)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_add181597c3b1819fa6501c45a736656f}{iniciar\+\_\+registro}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str nombre, str apellido, str correo, str targeta\+\_\+id, str contrasena, str contrasena\+\_\+repite, bool acepta\+\_\+politica)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_abe122752af0420a564c06eb5536cd0b3}{reenviar\+\_\+codigo}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str correo)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a4bb32d7e0dc17f526e128a25dbb76cf2}{verificar\+\_\+y\+\_\+completar}} (self, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}, str correo, str verification\+\_\+code)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_ae6a3423eb04b384aa3e65c921b83cb36}\index{webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}!enviar\_email\_verificacion@{enviar\_email\_verificacion}}
+\index{enviar\_email\_verificacion@{enviar\_email\_verificacion}!webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}}
+\doxysubsubsection{\texorpdfstring{enviar\_email\_verificacion()}{enviar\_email\_verificacion()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_ae6a3423eb04b384aa3e65c921b83cb36} 
+webapp.\+backend.\+logic.\+registro.\+Logica\+Registro.\+enviar\+\_\+email\+\_\+verificacion (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{correo}{, }\item[{str}]{codigo}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Envía email con código de verificación (o print si TESTING=True).
+
+Args:
+    correo (str): Destinatario.
+    codigo (str): Código a enviar.
+
+Raises:
+    RuntimeError: Si falla el envío.
+
+Returns:
+    bool: True si se envió.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a90eb2c67ccac42ff002df58ace8e0ecc}\index{webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}!generar\_codigo\_verificacion@{generar\_codigo\_verificacion}}
+\index{generar\_codigo\_verificacion@{generar\_codigo\_verificacion}!webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}}
+\doxysubsubsection{\texorpdfstring{generar\_codigo\_verificacion()}{generar\_codigo\_verificacion()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a90eb2c67ccac42ff002df58ace8e0ecc} 
+webapp.\+backend.\+logic.\+registro.\+Logica\+Registro.\+generar\+\_\+codigo\+\_\+verificacion (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Genera un código de verificación de 6 dígitos.
+
+Returns:
+    str: Código generado.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_af02931e3962b34d74806c7a796d7f026}\index{webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}!hashear\_contrasena@{hashear\_contrasena}}
+\index{hashear\_contrasena@{hashear\_contrasena}!webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}}
+\doxysubsubsection{\texorpdfstring{hashear\_contrasena()}{hashear\_contrasena()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_af02931e3962b34d74806c7a796d7f026} 
+webapp.\+backend.\+logic.\+registro.\+Logica\+Registro.\+hashear\+\_\+contrasena (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{contrasena}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Hashea la contraseña usando bcrypt.
+
+Args:
+    contrasena (str): Contraseña en texto plano.
+
+Returns:
+    str: Hash de la contraseña.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_add181597c3b1819fa6501c45a736656f}\index{webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}!iniciar\_registro@{iniciar\_registro}}
+\index{iniciar\_registro@{iniciar\_registro}!webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}}
+\doxysubsubsection{\texorpdfstring{iniciar\_registro()}{iniciar\_registro()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_add181597c3b1819fa6501c45a736656f} 
+webapp.\+backend.\+logic.\+registro.\+Logica\+Registro.\+iniciar\+\_\+registro (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{nombre}{, }\item[{str}]{apellido}{, }\item[{str}]{correo}{, }\item[{str}]{targeta\+\_\+id}{, }\item[{str}]{contrasena}{, }\item[{str}]{contrasena\+\_\+repite}{, }\item[{bool}]{acepta\+\_\+politica}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inicia el proceso de registro guardando en pending y enviando código.
+
+Args:
+    db (Session): Sesión de la base de datos.
+    nombre (str): Nombre del usuario.
+    apellido (str): Apellido del usuario.
+    correo (str): Correo electrónico.
+    targeta_id (str): ID del carnet.
+    contrasena (str): Contraseña.
+    contrasena_repite (str): Repetición de contraseña.
+    acepta_politica (bool): Si acepta la política.
+
+Raises:
+    ValueError: Si validación falla.
+    RuntimeError: Si error interno.
+
+Returns:
+    bool: True si iniciado correctamente.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_abe122752af0420a564c06eb5536cd0b3}\index{webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}!reenviar\_codigo@{reenviar\_codigo}}
+\index{reenviar\_codigo@{reenviar\_codigo}!webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}}
+\doxysubsubsection{\texorpdfstring{reenviar\_codigo()}{reenviar\_codigo()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_abe122752af0420a564c06eb5536cd0b3} 
+webapp.\+backend.\+logic.\+registro.\+Logica\+Registro.\+reenviar\+\_\+codigo (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{correo}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reenvía un nuevo código de verificación, invalidando el anterior.
+
+Args:
+    db (Session): Sesión de la base de datos.
+    correo (str): Correo del pendiente.
+
+Raises:
+    ValueError: Si no pendiente o expirado.
+    RuntimeError: Si error interno.
+
+Returns:
+    bool: True si reenviado.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a348420c39151ec0c21ba4901937b6545}\index{webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}!validar\_datos@{validar\_datos}}
+\index{validar\_datos@{validar\_datos}!webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}}
+\doxysubsubsection{\texorpdfstring{validar\_datos()}{validar\_datos()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a348420c39151ec0c21ba4901937b6545} 
+webapp.\+backend.\+logic.\+registro.\+Logica\+Registro.\+validar\+\_\+datos (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{nombre}{, }\item[{str}]{apellido}{, }\item[{str}]{correo}{, }\item[{str}]{targeta\+\_\+id}{, }\item[{str}]{contrasena}{, }\item[{str}]{contrasena\+\_\+repite}{, }\item[{bool }]{acepta\+\_\+politica}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Valida los datos de registro.
+
+Args:
+    db (Session): Sesión de la base de datos.
+    nombre (str): Nombre del usuario.
+    apellido (str): Apellido del usuario.
+    correo (str): Correo electrónico.
+    targeta_id (str): ID del carnet.
+    contrasena (str): Contraseña.
+    contrasena_repite (str): Repetición de contraseña.
+    acepta_politica (bool): Si acepta la política (default False).
+
+Raises:
+    ValueError: Si algún dato es inválido.
+
+Returns:
+    bool: True si todo es válido.
+\end{DoxyVerb}
+ \Hypertarget{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a4bb32d7e0dc17f526e128a25dbb76cf2}\index{webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}!verificar\_y\_completar@{verificar\_y\_completar}}
+\index{verificar\_y\_completar@{verificar\_y\_completar}!webapp.backend.logic.registro.LogicaRegistro@{webapp.backend.logic.registro.LogicaRegistro}}
+\doxysubsubsection{\texorpdfstring{verificar\_y\_completar()}{verificar\_y\_completar()}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1logic_1_1registro_1_1_logica_registro_a4bb32d7e0dc17f526e128a25dbb76cf2} 
+webapp.\+backend.\+logic.\+registro.\+Logica\+Registro.\+verificar\+\_\+y\+\_\+completar (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Session}]{db}{, }\item[{str}]{correo}{, }\item[{str}]{verification\+\_\+code}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Verifica el código y completa el registro creando el usuario, con auto-login.
+
+Args:
+    db (Session): Sesión de la base de datos.
+    correo (str): Correo del pendiente.
+    verification_code (str): Código a verificar.
+
+Raises:
+    ValueError: Si código inválido o expirado.
+    RuntimeError: Si error interno.
+
+Returns:
+    str: Token de login generado.
+\end{DoxyVerb}
+ 
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/logic/\mbox{\hyperlink{registro_8py}{registro.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,90 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+api.\+perfil\+\_\+api}
+\hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api}{}\label{namespacewebapp_1_1backend_1_1api_1_1perfil__api}\index{webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out}{Perfil\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_update_in}{Perfil\+Update\+In}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}{get\+\_\+current\+\_\+user}} (str\texorpdfstring{$\vert$}{|}None authorization=Header(default=None), Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out}{Perfil\+Out}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a3a76bbcc7c27a7b577ecfe87b2b70f96}{read\+\_\+perfil}} (\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} current\+\_\+user=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}{get\+\_\+current\+\_\+user}}))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out}{Perfil\+Out}} \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a93bd2d47ac1036a33471df9d3673ef38}{update\+\_\+perfil}} (\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_update_in}{Perfil\+Update\+In}} data, Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db), \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} current\+\_\+user=Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}{get\+\_\+current\+\_\+user}}))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a818a8fa6b245ab4b6678fb7f6989b9df}{router}} = APIRouter()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a5057110aa7fffc3513bd0d1a80ff195b}{logica}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil}{Logica\+Perfil}}()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a2db4a34be4b6ec925a31c92eae0efa86}{JWT\+\_\+\+SECRET}} = os.\+getenv("{}JWT\+\_\+\+SECRET"{})
+\item 
+str \mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a17eaf583a9bc2c77259a8a1df95ba739}{JWT\+\_\+\+ALGORITHM}} = "{}HS256"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: jinwei
+Fecha: 26-10-2025
+Descripción: API de perfil (GET/PUT) usando autenticación JWT Bearer.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}\index{webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}!get\_current\_user@{get\_current\_user}}
+\index{get\_current\_user@{get\_current\_user}!webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}}
+\doxysubsubsection{\texorpdfstring{get\_current\_user()}{get\_current\_user()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} webapp.\+backend.\+api.\+perfil\+\_\+api.\+get\+\_\+current\+\_\+user (\begin{DoxyParamCaption}\item[{str \texorpdfstring{$\vert$}{|} None }]{authorization}{ = {\ttfamily Header(default=None)}, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a3a76bbcc7c27a7b577ecfe87b2b70f96}\index{webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}!read\_perfil@{read\_perfil}}
+\index{read\_perfil@{read\_perfil}!webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}}
+\doxysubsubsection{\texorpdfstring{read\_perfil()}{read\_perfil()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a3a76bbcc7c27a7b577ecfe87b2b70f96} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out}{Perfil\+Out}} webapp.\+backend.\+api.\+perfil\+\_\+api.\+read\+\_\+perfil (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{current\+\_\+user}{ = {\ttfamily Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}{get\+\_\+current\+\_\+user}})}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Devuelve los datos del perfil del usuario autenticado.\end{DoxyVerb}
+ \Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a93bd2d47ac1036a33471df9d3673ef38}\index{webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}!update\_perfil@{update\_perfil}}
+\index{update\_perfil@{update\_perfil}!webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}}
+\doxysubsubsection{\texorpdfstring{update\_perfil()}{update\_perfil()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a93bd2d47ac1036a33471df9d3673ef38} 
+ \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_out}{Perfil\+Out}} webapp.\+backend.\+api.\+perfil\+\_\+api.\+update\+\_\+perfil (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1perfil__api_1_1_perfil_update_in}{Perfil\+Update\+In}}}]{data}{, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}, }\item[{\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_usuario}{Usuario}} }]{current\+\_\+user}{ = {\ttfamily Depends(\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1perfil__api_aed8b7ac48ea17a3852ec9bed6e2381b7}{get\+\_\+current\+\_\+user}})}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Actualiza los datos del perfil.\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a17eaf583a9bc2c77259a8a1df95ba739}\index{webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}!JWT\_ALGORITHM@{JWT\_ALGORITHM}}
+\index{JWT\_ALGORITHM@{JWT\_ALGORITHM}!webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}}
+\doxysubsubsection{\texorpdfstring{JWT\_ALGORITHM}{JWT\_ALGORITHM}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a17eaf583a9bc2c77259a8a1df95ba739} 
+str webapp.\+backend.\+api.\+perfil\+\_\+api.\+JWT\+\_\+\+ALGORITHM = "{}HS256"{}}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a2db4a34be4b6ec925a31c92eae0efa86}\index{webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}!JWT\_SECRET@{JWT\_SECRET}}
+\index{JWT\_SECRET@{JWT\_SECRET}!webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}}
+\doxysubsubsection{\texorpdfstring{JWT\_SECRET}{JWT\_SECRET}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a2db4a34be4b6ec925a31c92eae0efa86} 
+webapp.\+backend.\+api.\+perfil\+\_\+api.\+JWT\+\_\+\+SECRET = os.\+getenv("{}JWT\+\_\+\+SECRET"{})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a5057110aa7fffc3513bd0d1a80ff195b}\index{webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}!logica@{logica}}
+\index{logica@{logica}!webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}}
+\doxysubsubsection{\texorpdfstring{logica}{logica}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a5057110aa7fffc3513bd0d1a80ff195b} 
+webapp.\+backend.\+api.\+perfil\+\_\+api.\+logica = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1perfil__logic_1_1_logica_perfil}{Logica\+Perfil}}()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a818a8fa6b245ab4b6678fb7f6989b9df}\index{webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}!router@{router}}
+\index{router@{router}!webapp.backend.api.perfil\_api@{webapp.backend.api.perfil\_api}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1perfil__api_a818a8fa6b245ab4b6678fb7f6989b9df} 
+webapp.\+backend.\+api.\+perfil\+\_\+api.\+router = APIRouter()}
+

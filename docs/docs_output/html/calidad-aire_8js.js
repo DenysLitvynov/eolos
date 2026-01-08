@@ -1,0 +1,28 @@
+var calidad_aire_8js =
+[
+    [ "actualizarTituloConFechas", "calidad-aire_8js.html#ad02494ddf76214e1b54a25b14df638de", null ],
+    [ "actualizarUI", "calidad-aire_8js.html#ab54663ef87fc9ab9d4760f100b283f3b", null ],
+    [ "actualizarVistaGrafico", "calidad-aire_8js.html#afa4aca98814e22a32763822464369a7e", null ],
+    [ "cargarGraficoTrayecto", "calidad-aire_8js.html#a5290a980eb0f4a036c46c4caaef0db2b", null ],
+    [ "cargarTrayectosDisponibles", "calidad-aire_8js.html#adb65f93d0542d804c9d5094e5d5e1c53", null ],
+    [ "formatearFecha", "calidad-aire_8js.html#a2c5528fd037d7dc8313214e30d114fcf", null ],
+    [ "formatearFechaCorta", "calidad-aire_8js.html#a33b0d06c5c2506d0867de3be5591316e", null ],
+    [ "formatearHora", "calidad-aire_8js.html#ad9d868ea6b73cbba7e4d1ddba78c15b3", null ],
+    [ "getColorAQI", "calidad-aire_8js.html#ae312d27cc533bc3b989eb00b65841892", null ],
+    [ "mostrarMensajeError", "calidad-aire_8js.html#ab948d09972bbde069f477d755947a559", null ],
+    [ "parseJwt", "calidad-aire_8js.html#ad81a9f05d75c649eed36385b3453df21", null ],
+    [ "co2Chart", "calidad-aire_8js.html#a1a5cc9b84664677f9adfe82ec920c8b3", null ],
+    [ "descEl", "calidad-aire_8js.html#a1f21df9d1c32eaf85b790b2562d18b88", null ],
+    [ "h2Section", "calidad-aire_8js.html#a1de019c2d83dea1eafb0641e9e64467d", null ],
+    [ "iconEl", "calidad-aire_8js.html#a442ae47bbfe6b297dfaebd3b88f98336", null ],
+    [ "import", "calidad-aire_8js.html#a59be084da8908b7d77ff34b25cd84488", null ],
+    [ "logicaAire", "calidad-aire_8js.html#a11f999850f04ecaf12b50529bcfb69f4", null ],
+    [ "maximoEl", "calidad-aire_8js.html#a63518df6f4c1e3c41a021518ead45237", null ],
+    [ "numberEl", "calidad-aire_8js.html#a7805543f71a0e20c4f0f7bcf8e6aa254", null ],
+    [ "svgBad", "calidad-aire_8js.html#a1dc4413a1b895cd3d1fcbea3a3e406a4", null ],
+    [ "svgGood", "calidad-aire_8js.html#a1b2ad48f9999cd191b820d5793498fb1", null ],
+    [ "svgModerate", "calidad-aire_8js.html#a4efd6f87954afd3678733baa24724f13", null ],
+    [ "textEl", "calidad-aire_8js.html#a0b2f4bd7e3684c972d53a0ecba15351b", null ],
+    [ "trayectoActual", "calidad-aire_8js.html#ad4e38fce711ae0e82a0c86336e52f680", null ],
+    [ "trayectosDisponibles", "calidad-aire_8js.html#ad2908c0b3ccb2b0fa30e639ac66be22f", null ]
+];

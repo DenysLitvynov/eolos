@@ -1,0 +1,169 @@
+\doxysection{Referencia de la clase com.\+example.\+eolos.\+servicio.\+Permisos\+Helper}
+\hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper}{}\label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+
+
+Diagrama de colaboración de com.\+example.\+eolos.\+servicio.\+Permisos\+Helper\+:
+% FIG 0
+\doxysubsubsection*{Métodos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_aaee0db9734552da4e5ff32a145b0f417}{verificar\+YIniciar\+Servicio}} (Activity activity)
+\item 
+static void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a8a64f33fb8bd5939d85c64986fcf42bb}{on\+Request\+Permissions\+Result}} (Activity a, int request\+Code)
+\item 
+static void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_ad02011f541cf6eeadb9c1ecc330713c2}{on\+Activity\+Result}} (Activity a, int request\+Code, int result\+Code, Intent data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_afdf2fcd492d91513bb6fa704bebb01f8}{CHANNEL\+\_\+\+ID}} = "{}beacon\+\_\+scan\+\_\+channel"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos privados estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a9586f2537419019deab3047bc56e3113}{ensure\+Bluetooth\+Runtime\+Perms}} (Activity a)
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a51b3526c35f94ea731f388c6bd2e5ac5}{ensure\+Bluetooth\+Switch}} (Activity a)
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a49c4af32bf9921e22207f82b96cafe94}{ensure\+Notification\+Permission}} (Activity a)
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a8935b8fb0b52bf3ce446acbf7e8b11cb}{ensure\+Location\+Permission}} (Activity a)
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a0c6692a478cc3d29cac7bcb75b4c737d}{has\+Perm}} (Context c, String perm)
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a5930714b1284e4b56c5a5b4bb0735f1e}{ensure\+Bluetooth\+Ready\+Soft}} (Context c)
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a3561b0166e9eded48c60953926d46ce4}{is\+Location\+Enabled}} (Context c)
+\item 
+static void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a0ef7a08987d353c5524e8e7e7bb7166f}{prompt\+Enable\+Location\+Service}} (Activity a)
+\item 
+static void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_afa9ef6096dbfae43aa657ec056947d4c}{ensure\+Notification\+Channel\+Exists}} (Context c)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a09a56174c8383c100a5074cf2a7218a0}{TAG}} = "{}Perms\+Helper"{}
+\item 
+static final int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a49f0a8bc9e9a822c1363c042668c3714}{REQ\+\_\+\+ENABLE\+\_\+\+BT}} = 3002
+\item 
+static final int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_ac2f344fdda527fa813d04bb7bdac01b5}{REQ\+\_\+\+ENABLE\+\_\+\+LOCATION}} = 3004
+\item 
+static final int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_aa6cbc66b7e4e304314d119ceeee0254f}{REQ\+\_\+\+PERMS\+\_\+\+CHAIN}} = 3100
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a5930714b1284e4b56c5a5b4bb0735f1e}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!ensureBluetoothReadySoft@{ensureBluetoothReadySoft}}
+\index{ensureBluetoothReadySoft@{ensureBluetoothReadySoft}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{ensureBluetoothReadySoft()}{ensureBluetoothReadySoft()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a5930714b1284e4b56c5a5b4bb0735f1e} 
+boolean com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+ensure\+Bluetooth\+Ready\+Soft (\begin{DoxyParamCaption}\item[{Context}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Verifica si el Bluetooth está preparado para escanear (tiene adaptador y escáner BLE disponible). \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a9586f2537419019deab3047bc56e3113}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!ensureBluetoothRuntimePerms@{ensureBluetoothRuntimePerms}}
+\index{ensureBluetoothRuntimePerms@{ensureBluetoothRuntimePerms}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{ensureBluetoothRuntimePerms()}{ensureBluetoothRuntimePerms()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a9586f2537419019deab3047bc56e3113} 
+boolean com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+ensure\+Bluetooth\+Runtime\+Perms (\begin{DoxyParamCaption}\item[{Activity}]{a}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Verifica y solicita permisos de Bluetooth (Android 12+). \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a51b3526c35f94ea731f388c6bd2e5ac5}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!ensureBluetoothSwitch@{ensureBluetoothSwitch}}
+\index{ensureBluetoothSwitch@{ensureBluetoothSwitch}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{ensureBluetoothSwitch()}{ensureBluetoothSwitch()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a51b3526c35f94ea731f388c6bd2e5ac5} 
+boolean com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+ensure\+Bluetooth\+Switch (\begin{DoxyParamCaption}\item[{Activity}]{a}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Verifica si el Bluetooth está activado y, si no lo está, solicita al usuario que lo active. \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a8935b8fb0b52bf3ce446acbf7e8b11cb}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!ensureLocationPermission@{ensureLocationPermission}}
+\index{ensureLocationPermission@{ensureLocationPermission}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{ensureLocationPermission()}{ensureLocationPermission()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a8935b8fb0b52bf3ce446acbf7e8b11cb} 
+boolean com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+ensure\+Location\+Permission (\begin{DoxyParamCaption}\item[{Activity}]{a}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Verifica y solicita el permiso de ubicación, necesario para el escaneo BLE. \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_afa9ef6096dbfae43aa657ec056947d4c}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!ensureNotificationChannelExists@{ensureNotificationChannelExists}}
+\index{ensureNotificationChannelExists@{ensureNotificationChannelExists}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{ensureNotificationChannelExists()}{ensureNotificationChannelExists()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_afa9ef6096dbfae43aa657ec056947d4c} 
+void com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+ensure\+Notification\+Channel\+Exists (\begin{DoxyParamCaption}\item[{Context}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Crea el canal de notificaciones necesario para los servicios en primer plano (Android 8.\+0+). \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a49c4af32bf9921e22207f82b96cafe94}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!ensureNotificationPermission@{ensureNotificationPermission}}
+\index{ensureNotificationPermission@{ensureNotificationPermission}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{ensureNotificationPermission()}{ensureNotificationPermission()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a49c4af32bf9921e22207f82b96cafe94} 
+boolean com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+ensure\+Notification\+Permission (\begin{DoxyParamCaption}\item[{Activity}]{a}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Verifica y solicita el permiso para mostrar notificaciones (Android 13+). \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a0c6692a478cc3d29cac7bcb75b4c737d}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!hasPerm@{hasPerm}}
+\index{hasPerm@{hasPerm}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{hasPerm()}{hasPerm()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a0c6692a478cc3d29cac7bcb75b4c737d} 
+boolean com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+has\+Perm (\begin{DoxyParamCaption}\item[{Context}]{c}{, }\item[{String}]{perm}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Comprueba si el permiso indicado está concedido. \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a3561b0166e9eded48c60953926d46ce4}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!isLocationEnabled@{isLocationEnabled}}
+\index{isLocationEnabled@{isLocationEnabled}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{isLocationEnabled()}{isLocationEnabled()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a3561b0166e9eded48c60953926d46ce4} 
+boolean com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+is\+Location\+Enabled (\begin{DoxyParamCaption}\item[{Context}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Comprueba si los servicios de ubicación del sistema están activados. \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_ad02011f541cf6eeadb9c1ecc330713c2}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!onActivityResult@{onActivityResult}}
+\index{onActivityResult@{onActivityResult}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{onActivityResult()}{onActivityResult()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_ad02011f541cf6eeadb9c1ecc330713c2} 
+void com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+on\+Activity\+Result (\begin{DoxyParamCaption}\item[{Activity}]{a}{, }\item[{int}]{request\+Code}{, }\item[{int}]{result\+Code}{, }\item[{Intent}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Llamar desde \doxylink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_ad02011f541cf6eeadb9c1ecc330713c2}{on\+Activity\+Result()} en la Activity después de que el usuario haya activado Bluetooth o ubicación. \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a8a64f33fb8bd5939d85c64986fcf42bb}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!onRequestPermissionsResult@{onRequestPermissionsResult}}
+\index{onRequestPermissionsResult@{onRequestPermissionsResult}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{onRequestPermissionsResult()}{onRequestPermissionsResult()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a8a64f33fb8bd5939d85c64986fcf42bb} 
+void com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+on\+Request\+Permissions\+Result (\begin{DoxyParamCaption}\item[{Activity}]{a}{, }\item[{int}]{request\+Code}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Llamar desde \doxylink{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a8a64f33fb8bd5939d85c64986fcf42bb}{on\+Request\+Permissions\+Result()} en la Activity para continuar el flujo después de conceder permisos. \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a0ef7a08987d353c5524e8e7e7bb7166f}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!promptEnableLocationService@{promptEnableLocationService}}
+\index{promptEnableLocationService@{promptEnableLocationService}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{promptEnableLocationService()}{promptEnableLocationService()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a0ef7a08987d353c5524e8e7e7bb7166f} 
+void com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+prompt\+Enable\+Location\+Service (\begin{DoxyParamCaption}\item[{Activity}]{a}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Abre la pantalla de ajustes para que el usuario active la ubicación. \Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_aaee0db9734552da4e5ff32a145b0f417}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!verificarYIniciarServicio@{verificarYIniciarServicio}}
+\index{verificarYIniciarServicio@{verificarYIniciarServicio}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{verificarYIniciarServicio()}{verificarYIniciarServicio()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_aaee0db9734552da4e5ff32a145b0f417} 
+void com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+verificar\+YIniciar\+Servicio (\begin{DoxyParamCaption}\item[{Activity}]{activity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Punto de entrada principal\+: Llamar a este método desde una Activity para verificar permisos y arrancar el servicio BLE. 
+
+\label{doc-variable-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_afdf2fcd492d91513bb6fa704bebb01f8}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!CHANNEL\_ID@{CHANNEL\_ID}}
+\index{CHANNEL\_ID@{CHANNEL\_ID}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{CHANNEL\_ID}{CHANNEL\_ID}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_afdf2fcd492d91513bb6fa704bebb01f8} 
+final String com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+CHANNEL\+\_\+\+ID = "{}beacon\+\_\+scan\+\_\+channel"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a49f0a8bc9e9a822c1363c042668c3714}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!REQ\_ENABLE\_BT@{REQ\_ENABLE\_BT}}
+\index{REQ\_ENABLE\_BT@{REQ\_ENABLE\_BT}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{REQ\_ENABLE\_BT}{REQ\_ENABLE\_BT}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a49f0a8bc9e9a822c1363c042668c3714} 
+final int com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+REQ\+\_\+\+ENABLE\+\_\+\+BT = 3002\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_ac2f344fdda527fa813d04bb7bdac01b5}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!REQ\_ENABLE\_LOCATION@{REQ\_ENABLE\_LOCATION}}
+\index{REQ\_ENABLE\_LOCATION@{REQ\_ENABLE\_LOCATION}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{REQ\_ENABLE\_LOCATION}{REQ\_ENABLE\_LOCATION}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_ac2f344fdda527fa813d04bb7bdac01b5} 
+final int com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+REQ\+\_\+\+ENABLE\+\_\+\+LOCATION = 3004\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_aa6cbc66b7e4e304314d119ceeee0254f}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!REQ\_PERMS\_CHAIN@{REQ\_PERMS\_CHAIN}}
+\index{REQ\_PERMS\_CHAIN@{REQ\_PERMS\_CHAIN}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{REQ\_PERMS\_CHAIN}{REQ\_PERMS\_CHAIN}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_aa6cbc66b7e4e304314d119ceeee0254f} 
+final int com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+REQ\+\_\+\+PERMS\+\_\+\+CHAIN = 3100\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a09a56174c8383c100a5074cf2a7218a0}\index{com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}!TAG@{TAG}}
+\index{TAG@{TAG}!com.example.eolos.servicio.PermisosHelper@{com.example.eolos.servicio.PermisosHelper}}
+\doxysubsubsection{\texorpdfstring{TAG}{TAG}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_permisos_helper_a09a56174c8383c100a5074cf2a7218a0} 
+final String com.\+example.\+eolos.\+servicio.\+Permisos\+Helper.\+TAG = "{}Perms\+Helper"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/servicio/\mbox{\hyperlink{_permisos_helper_8java}{Permisos\+Helper.\+java}}\end{DoxyCompactItemize}

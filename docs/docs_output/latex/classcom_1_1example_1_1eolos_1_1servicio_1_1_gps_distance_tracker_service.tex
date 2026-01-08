@@ -1,0 +1,195 @@
+\doxysection{Referencia de la clase com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service}
+\hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service}{}\label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+
+
+Diagrama de herencia de com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service
+% FIG 0
+
+
+Diagrama de colaboración de com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service\+:
+% FIG 1
+\doxysubsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a19d9f33f3586bf1cd49f7d66a55236fc}{on\+Create}} ()
+\item 
+int \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a13941800f9721656f2c594ab9add2194}{on\+Start\+Command}} (Intent intent, int flags, int start\+Id)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a0ccfd26f013fddaf3492a5ee570877ca}{on\+Destroy}} ()
+\item 
+IBinder \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ae1c19717f46b89cca47e045691e0c929}{on\+Bind}} (Intent intent)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a37eca76cfdf06f0af5be44fcf53e91d2}{is\+Running}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a96247f3ec4eed0ab7d2c050e51ba3a04}{ACCION\+\_\+\+DETENER}} = "{}ACCION\+\_\+\+DETENER"{}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a2c49043f1ad3d4701b9e7631b37d3a59}{ACCION\+\_\+\+ACTUALIZAR\+\_\+\+DISTANCIA}} = "{}com.\+example.\+eolos.\+DISTANCE\+\_\+\+UPDATE"{}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_aeb691d68e04b6b57ae18f8e4617418b5}{ACCION\+\_\+\+SERVICIO\+\_\+\+DETENIDO}} = "{}com.\+example.\+eolos.\+DISTANCE\+\_\+\+SERVICE\+\_\+\+STOPPED"{}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a1864c9b38558db5187ab5d6118d0d96b}{EXTRA\+\_\+\+DISTANCIA}} = "{}distance\+\_\+meters"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Métodos privados}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a543cb2ff452c76de14a916d662d3e7f4}{construir\+Callback\+Ubicacion}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a9dd630bc9055fea8716738b1e30d3517}{solicitar\+Actualizaciones\+Ubicacion}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a5b53244993787f025b1696c6f81280dd}{detener\+Seguimiento\+YTerminar}} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ab6394153d568f36a43ca9867daa61fed}{emitir\+Distancia}} (float metros)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+Fused\+Location\+Provider\+Client \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_af2a0f455bd6767668c541faa6a542ddd}{cliente\+Ubicacion\+Fusionada}}
+\item 
+Location\+Callback \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a27e03ce9456a1d2f133ac1420a5ad30d}{callback\+Ubicacion}}
+\item 
+Location \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a8036578fd03672eeb353b06f74e6fea1}{ultima\+Ubicacion}}
+\item 
+float \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ac556f6091ce3cad682563e08585ab158}{distancia\+Total\+Metros}} = 0.\+0f
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a696cabb3931540c1fdd1b8c6d0f7c797}{TAG}} = "{}GPS\+\_\+\+DIST"{}
+\item 
+static boolean \mbox{\hyperlink{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ab66be3322fb15563127d9994be316865}{servicio\+Ejecutandose}} = false
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_doc-func-members}
+\doxysubsection{Documentación de funciones miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a543cb2ff452c76de14a916d662d3e7f4}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!construirCallbackUbicacion@{construirCallbackUbicacion}}
+\index{construirCallbackUbicacion@{construirCallbackUbicacion}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{construirCallbackUbicacion()}{construirCallbackUbicacion()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a543cb2ff452c76de14a916d662d3e7f4} 
+void com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+construir\+Callback\+Ubicacion (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a5b53244993787f025b1696c6f81280dd}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!detenerSeguimientoYTerminar@{detenerSeguimientoYTerminar}}
+\index{detenerSeguimientoYTerminar@{detenerSeguimientoYTerminar}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{detenerSeguimientoYTerminar()}{detenerSeguimientoYTerminar()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a5b53244993787f025b1696c6f81280dd} 
+void com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+detener\+Seguimiento\+YTerminar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ab6394153d568f36a43ca9867daa61fed}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!emitirDistancia@{emitirDistancia}}
+\index{emitirDistancia@{emitirDistancia}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{emitirDistancia()}{emitirDistancia()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ab6394153d568f36a43ca9867daa61fed} 
+void com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+emitir\+Distancia (\begin{DoxyParamCaption}\item[{float}]{metros}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a37eca76cfdf06f0af5be44fcf53e91d2}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!isRunning@{isRunning}}
+\index{isRunning@{isRunning}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{isRunning()}{isRunning()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a37eca76cfdf06f0af5be44fcf53e91d2} 
+boolean com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ae1c19717f46b89cca47e045691e0c929}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!onBind@{onBind}}
+\index{onBind@{onBind}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{onBind()}{onBind()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ae1c19717f46b89cca47e045691e0c929} 
+IBinder com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+on\+Bind (\begin{DoxyParamCaption}\item[{Intent}]{intent}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a19d9f33f3586bf1cd49f7d66a55236fc}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!onCreate@{onCreate}}
+\index{onCreate@{onCreate}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{onCreate()}{onCreate()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a19d9f33f3586bf1cd49f7d66a55236fc} 
+void com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+on\+Create (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a0ccfd26f013fddaf3492a5ee570877ca}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!onDestroy@{onDestroy}}
+\index{onDestroy@{onDestroy}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{onDestroy()}{onDestroy()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a0ccfd26f013fddaf3492a5ee570877ca} 
+void com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+on\+Destroy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a13941800f9721656f2c594ab9add2194}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!onStartCommand@{onStartCommand}}
+\index{onStartCommand@{onStartCommand}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{onStartCommand()}{onStartCommand()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a13941800f9721656f2c594ab9add2194} 
+int com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+on\+Start\+Command (\begin{DoxyParamCaption}\item[{Intent}]{intent}{, }\item[{int}]{flags}{, }\item[{int}]{start\+Id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a9dd630bc9055fea8716738b1e30d3517}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!solicitarActualizacionesUbicacion@{solicitarActualizacionesUbicacion}}
+\index{solicitarActualizacionesUbicacion@{solicitarActualizacionesUbicacion}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{solicitarActualizacionesUbicacion()}{solicitarActualizacionesUbicacion()}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a9dd630bc9055fea8716738b1e30d3517} 
+void com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+solicitar\+Actualizaciones\+Ubicacion (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a2c49043f1ad3d4701b9e7631b37d3a59}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!ACCION\_ACTUALIZAR\_DISTANCIA@{ACCION\_ACTUALIZAR\_DISTANCIA}}
+\index{ACCION\_ACTUALIZAR\_DISTANCIA@{ACCION\_ACTUALIZAR\_DISTANCIA}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{ACCION\_ACTUALIZAR\_DISTANCIA}{ACCION\_ACTUALIZAR\_DISTANCIA}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a2c49043f1ad3d4701b9e7631b37d3a59} 
+final String com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+ACCION\+\_\+\+ACTUALIZAR\+\_\+\+DISTANCIA = "{}com.\+example.\+eolos.\+DISTANCE\+\_\+\+UPDATE"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a96247f3ec4eed0ab7d2c050e51ba3a04}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!ACCION\_DETENER@{ACCION\_DETENER}}
+\index{ACCION\_DETENER@{ACCION\_DETENER}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{ACCION\_DETENER}{ACCION\_DETENER}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a96247f3ec4eed0ab7d2c050e51ba3a04} 
+final String com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+ACCION\+\_\+\+DETENER = "{}ACCION\+\_\+\+DETENER"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_aeb691d68e04b6b57ae18f8e4617418b5}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!ACCION\_SERVICIO\_DETENIDO@{ACCION\_SERVICIO\_DETENIDO}}
+\index{ACCION\_SERVICIO\_DETENIDO@{ACCION\_SERVICIO\_DETENIDO}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{ACCION\_SERVICIO\_DETENIDO}{ACCION\_SERVICIO\_DETENIDO}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_aeb691d68e04b6b57ae18f8e4617418b5} 
+final String com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+ACCION\+\_\+\+SERVICIO\+\_\+\+DETENIDO = "{}com.\+example.\+eolos.\+DISTANCE\+\_\+\+SERVICE\+\_\+\+STOPPED"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a27e03ce9456a1d2f133ac1420a5ad30d}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!callbackUbicacion@{callbackUbicacion}}
+\index{callbackUbicacion@{callbackUbicacion}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{callbackUbicacion}{callbackUbicacion}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a27e03ce9456a1d2f133ac1420a5ad30d} 
+Location\+Callback com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+callback\+Ubicacion\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_af2a0f455bd6767668c541faa6a542ddd}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!clienteUbicacionFusionada@{clienteUbicacionFusionada}}
+\index{clienteUbicacionFusionada@{clienteUbicacionFusionada}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{clienteUbicacionFusionada}{clienteUbicacionFusionada}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_af2a0f455bd6767668c541faa6a542ddd} 
+Fused\+Location\+Provider\+Client com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+cliente\+Ubicacion\+Fusionada\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ac556f6091ce3cad682563e08585ab158}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!distanciaTotalMetros@{distanciaTotalMetros}}
+\index{distanciaTotalMetros@{distanciaTotalMetros}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{distanciaTotalMetros}{distanciaTotalMetros}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ac556f6091ce3cad682563e08585ab158} 
+float com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+distancia\+Total\+Metros = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a1864c9b38558db5187ab5d6118d0d96b}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!EXTRA\_DISTANCIA@{EXTRA\_DISTANCIA}}
+\index{EXTRA\_DISTANCIA@{EXTRA\_DISTANCIA}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{EXTRA\_DISTANCIA}{EXTRA\_DISTANCIA}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a1864c9b38558db5187ab5d6118d0d96b} 
+final String com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+EXTRA\+\_\+\+DISTANCIA = "{}distance\+\_\+meters"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ab66be3322fb15563127d9994be316865}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!servicioEjecutandose@{servicioEjecutandose}}
+\index{servicioEjecutandose@{servicioEjecutandose}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{servicioEjecutandose}{servicioEjecutandose}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_ab66be3322fb15563127d9994be316865} 
+boolean com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+servicio\+Ejecutandose = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a696cabb3931540c1fdd1b8c6d0f7c797}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!TAG@{TAG}}
+\index{TAG@{TAG}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{TAG}{TAG}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a696cabb3931540c1fdd1b8c6d0f7c797} 
+final String com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+TAG = "{}GPS\+\_\+\+DIST"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a8036578fd03672eeb353b06f74e6fea1}\index{com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}!ultimaUbicacion@{ultimaUbicacion}}
+\index{ultimaUbicacion@{ultimaUbicacion}!com.example.eolos.servicio.GpsDistanceTrackerService@{com.example.eolos.servicio.GpsDistanceTrackerService}}
+\doxysubsubsection{\texorpdfstring{ultimaUbicacion}{ultimaUbicacion}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1eolos_1_1servicio_1_1_gps_distance_tracker_service_a8036578fd03672eeb353b06f74e6fea1} 
+Location com.\+example.\+eolos.\+servicio.\+Gps\+Distance\+Tracker\+Service.\+ultima\+Ubicacion\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/android/eolos/app/src/main/java/com/example/eolos/servicio/\mbox{\hyperlink{_gps_distance_tracker_service_8java}{Gps\+Distance\+Tracker\+Service.\+java}}\end{DoxyCompactItemize}

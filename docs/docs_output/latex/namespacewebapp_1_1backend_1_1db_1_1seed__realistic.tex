@@ -1,0 +1,67 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+db.\+seed\+\_\+realistic}
+\hypertarget{namespacewebapp_1_1backend_1_1db_1_1seed__realistic}{}\label{namespacewebapp_1_1backend_1_1db_1_1seed__realistic}\index{webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a36bf02370df0ec2bbc42948c863874e6}{generar\+\_\+dni\+\_\+valido}} (int numero)
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a64e40ba28787948e27f84a6051a15f80}{seed\+\_\+data}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_aded9d6262cb82931866611eab1c0cfa2}{backend\+\_\+path}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve().parent.\+parent
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a01b09799da95231b89bab9725f696ff5}{pwd\+\_\+context}} = Crypt\+Context(schemes=\mbox{[}"{}bcrypt"{}\mbox{]}, deprecated="{}auto"{})
+\item 
+list \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a51742124b42751bc95571ec5883d1b93}{CARNES\+\_\+\+DNI}} = \mbox{[}\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a36bf02370df0ec2bbc42948c863874e6}{generar\+\_\+dni\+\_\+valido}}(12345678 + i) for i in range(2000)\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: Denys Litvynov Lymanets
+Fecha: 03-12-2025
+Descripción: Script para poblar todas las tablas de la base de datos con unos pocos datos de prueba.  
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a36bf02370df0ec2bbc42948c863874e6}\index{webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}!generar\_dni\_valido@{generar\_dni\_valido}}
+\index{generar\_dni\_valido@{generar\_dni\_valido}!webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}}
+\doxysubsubsection{\texorpdfstring{generar\_dni\_valido()}{generar\_dni\_valido()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a36bf02370df0ec2bbc42948c863874e6} 
+ str webapp.\+backend.\+db.\+seed\+\_\+realistic.\+generar\+\_\+dni\+\_\+valido (\begin{DoxyParamCaption}\item[{int}]{numero}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a64e40ba28787948e27f84a6051a15f80}\index{webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}!seed\_data@{seed\_data}}
+\index{seed\_data@{seed\_data}!webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}}
+\doxysubsubsection{\texorpdfstring{seed\_data()}{seed\_data()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a64e40ba28787948e27f84a6051a15f80} 
+webapp.\+backend.\+db.\+seed\+\_\+realistic.\+seed\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Método para poblar las tablas con datos simulados.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_aded9d6262cb82931866611eab1c0cfa2}\index{webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}!backend\_path@{backend\_path}}
+\index{backend\_path@{backend\_path}!webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}}
+\doxysubsubsection{\texorpdfstring{backend\_path}{backend\_path}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_aded9d6262cb82931866611eab1c0cfa2} 
+webapp.\+backend.\+db.\+seed\+\_\+realistic.\+backend\+\_\+path = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve().parent.\+parent}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a51742124b42751bc95571ec5883d1b93}\index{webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}!CARNES\_DNI@{CARNES\_DNI}}
+\index{CARNES\_DNI@{CARNES\_DNI}!webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}}
+\doxysubsubsection{\texorpdfstring{CARNES\_DNI}{CARNES\_DNI}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a51742124b42751bc95571ec5883d1b93} 
+list webapp.\+backend.\+db.\+seed\+\_\+realistic.\+CARNES\+\_\+\+DNI = \mbox{[}\mbox{\hyperlink{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a36bf02370df0ec2bbc42948c863874e6}{generar\+\_\+dni\+\_\+valido}}(12345678 + i) for i in range(2000)\mbox{]}}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a01b09799da95231b89bab9725f696ff5}\index{webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}!pwd\_context@{pwd\_context}}
+\index{pwd\_context@{pwd\_context}!webapp.backend.db.seed\_realistic@{webapp.backend.db.seed\_realistic}}
+\doxysubsubsection{\texorpdfstring{pwd\_context}{pwd\_context}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1db_1_1seed__realistic_a01b09799da95231b89bab9725f696ff5} 
+webapp.\+backend.\+db.\+seed\+\_\+realistic.\+pwd\+\_\+context = Crypt\+Context(schemes=\mbox{[}"{}bcrypt"{}\mbox{]}, deprecated="{}auto"{})}
+

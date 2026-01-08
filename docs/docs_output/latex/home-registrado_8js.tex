@@ -1,0 +1,130 @@
+\doxysection{Referencia del archivo D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/frontend/js/scripts/home-\/registrado.js}
+\hypertarget{home-registrado_8js}{}\label{home-registrado_8js}\index{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/frontend/js/scripts/home-\/registrado.js@{D:/Codigo\_GTI/Proyecto\_Biometria/PBIO/eolos/webapp/frontend/js/scripts/home-\/registrado.js}}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+function \mbox{\hyperlink{home-registrado_8js_ae8f6603c8aa6c3a3a56a956d90799daa}{set\+Text}} (id, text)
+\item 
+function \mbox{\hyperlink{home-registrado_8js_ab45316459200d57b3c3ef1970d60473e}{set\+HTML}} (id, html)
+\item 
+function \mbox{\hyperlink{home-registrado_8js_a445a0536659aebb898306909fdbb5acf}{get\+Current\+Position}} ()
+\item 
+function async \mbox{\hyperlink{home-registrado_8js_a446be2905c89d0acc87e84dda04395f4}{auth\+Fetch}} (path, options=\{\})
+\item 
+function async \mbox{\hyperlink{home-registrado_8js_a23976bf072f06f12227551818c7ebef2}{api\+Get\+Home}} ()
+\item 
+function \mbox{\hyperlink{home-registrado_8js_a03b486a243d9eff82b20f78b8bfed698}{apply\+Air\+UI}} (estado)
+\item 
+function \mbox{\hyperlink{home-registrado_8js_a3f71c447b5d52956a1e1eda7220a9d5a}{render\+Gases}} (gases)
+\item 
+function \mbox{\hyperlink{home-registrado_8js_a78075a32efe83c25550780294758a9d9}{fmt\+Num}} (n, digits=2)
+\item 
+function \mbox{\hyperlink{home-registrado_8js_a805daf7e0c5da0c4c95547216c7a0674}{render\+Home}} (data)
+\item 
+function async \mbox{\hyperlink{home-registrado_8js_a8b1e2258a5b1bdd06f0fbae9e50f6e4c}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{home-registrado_8js_ad44978a163941459dc3c420632ef0626}{API\+\_\+\+BASE}} = "{}/api/v1"{}
+\item 
+const \mbox{\hyperlink{home-registrado_8js_a6fc7eb5a48f4de126dd97a30c00ba250}{log}} = (...args) =$>$ console.\+log(new Date().to\+ISOString(), "{}\mbox{[}home\mbox{]}"{}, ...args)
+\item 
+const \mbox{\hyperlink{home-registrado_8js_a370ae5c560cb045f8670e017b93458e8}{err}} = (...args) =$>$ console.\+error(new Date().to\+ISOString(), "{}\mbox{[}home\+:\+ERR\mbox{]}"{}, ...args)
+\item 
+const \mbox{\hyperlink{home-registrado_8js_aa9b54a630db023a86f3786d6e4bf1de2}{\$}} = (id) =$>$ document.\+get\+Element\+By\+Id(id)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{home-registrado_8js_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{home-registrado_8js_a23976bf072f06f12227551818c7ebef2}\index{home-\/registrado.js@{home-\/registrado.js}!apiGetHome@{apiGetHome}}
+\index{apiGetHome@{apiGetHome}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{apiGetHome()}{apiGetHome()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a23976bf072f06f12227551818c7ebef2} 
+function async api\+Get\+Home (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_a03b486a243d9eff82b20f78b8bfed698}\index{home-\/registrado.js@{home-\/registrado.js}!applyAirUI@{applyAirUI}}
+\index{applyAirUI@{applyAirUI}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{applyAirUI()}{applyAirUI()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a03b486a243d9eff82b20f78b8bfed698} 
+function apply\+Air\+UI (\begin{DoxyParamCaption}\item[{}]{estado}{}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_a446be2905c89d0acc87e84dda04395f4}\index{home-\/registrado.js@{home-\/registrado.js}!authFetch@{authFetch}}
+\index{authFetch@{authFetch}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{authFetch()}{authFetch()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a446be2905c89d0acc87e84dda04395f4} 
+function async auth\+Fetch (\begin{DoxyParamCaption}\item[{}]{path}{, }\item[{}]{options}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_a78075a32efe83c25550780294758a9d9}\index{home-\/registrado.js@{home-\/registrado.js}!fmtNum@{fmtNum}}
+\index{fmtNum@{fmtNum}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{fmtNum()}{fmtNum()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a78075a32efe83c25550780294758a9d9} 
+function fmt\+Num (\begin{DoxyParamCaption}\item[{}]{n}{, }\item[{}]{digits}{ = {\ttfamily 2}}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_a445a0536659aebb898306909fdbb5acf}\index{home-\/registrado.js@{home-\/registrado.js}!getCurrentPosition@{getCurrentPosition}}
+\index{getCurrentPosition@{getCurrentPosition}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{getCurrentPosition()}{getCurrentPosition()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a445a0536659aebb898306909fdbb5acf} 
+function get\+Current\+Position (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_a8b1e2258a5b1bdd06f0fbae9e50f6e4c}\index{home-\/registrado.js@{home-\/registrado.js}!main@{main}}
+\index{main@{main}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a8b1e2258a5b1bdd06f0fbae9e50f6e4c} 
+function async main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_a3f71c447b5d52956a1e1eda7220a9d5a}\index{home-\/registrado.js@{home-\/registrado.js}!renderGases@{renderGases}}
+\index{renderGases@{renderGases}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{renderGases()}{renderGases()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a3f71c447b5d52956a1e1eda7220a9d5a} 
+function render\+Gases (\begin{DoxyParamCaption}\item[{}]{gases}{}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_a805daf7e0c5da0c4c95547216c7a0674}\index{home-\/registrado.js@{home-\/registrado.js}!renderHome@{renderHome}}
+\index{renderHome@{renderHome}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{renderHome()}{renderHome()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a805daf7e0c5da0c4c95547216c7a0674} 
+function render\+Home (\begin{DoxyParamCaption}\item[{}]{data}{}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_ab45316459200d57b3c3ef1970d60473e}\index{home-\/registrado.js@{home-\/registrado.js}!setHTML@{setHTML}}
+\index{setHTML@{setHTML}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{setHTML()}{setHTML()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_ab45316459200d57b3c3ef1970d60473e} 
+function set\+HTML (\begin{DoxyParamCaption}\item[{}]{id}{, }\item[{}]{html}{}\end{DoxyParamCaption})}
+
+\Hypertarget{home-registrado_8js_ae8f6603c8aa6c3a3a56a956d90799daa}\index{home-\/registrado.js@{home-\/registrado.js}!setText@{setText}}
+\index{setText@{setText}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{setText()}{setText()}}
+{\footnotesize\ttfamily \label{home-registrado_8js_ae8f6603c8aa6c3a3a56a956d90799daa} 
+function set\+Text (\begin{DoxyParamCaption}\item[{}]{id}{, }\item[{}]{text}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{home-registrado_8js_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{home-registrado_8js_aa9b54a630db023a86f3786d6e4bf1de2}\index{home-\/registrado.js@{home-\/registrado.js}!\$@{\$}}
+\index{\$@{\$}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{\$}{\$}}
+{\footnotesize\ttfamily \label{home-registrado_8js_aa9b54a630db023a86f3786d6e4bf1de2} 
+const \$ = (id) =$>$ document.\+get\+Element\+By\+Id(id)}
+
+\Hypertarget{home-registrado_8js_ad44978a163941459dc3c420632ef0626}\index{home-\/registrado.js@{home-\/registrado.js}!API\_BASE@{API\_BASE}}
+\index{API\_BASE@{API\_BASE}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{API\_BASE}{API\_BASE}}
+{\footnotesize\ttfamily \label{home-registrado_8js_ad44978a163941459dc3c420632ef0626} 
+const API\+\_\+\+BASE = "{}/api/v1"{}}
+
+\Hypertarget{home-registrado_8js_a370ae5c560cb045f8670e017b93458e8}\index{home-\/registrado.js@{home-\/registrado.js}!err@{err}}
+\index{err@{err}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{err}{err}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a370ae5c560cb045f8670e017b93458e8} 
+const err = (...args) =$>$ console.\+error(new Date().to\+ISOString(), "{}\mbox{[}home\+:\+ERR\mbox{]}"{}, ...args)}
+
+\Hypertarget{home-registrado_8js_a6fc7eb5a48f4de126dd97a30c00ba250}\index{home-\/registrado.js@{home-\/registrado.js}!log@{log}}
+\index{log@{log}!home-\/registrado.js@{home-\/registrado.js}}
+\doxysubsubsection{\texorpdfstring{log}{log}}
+{\footnotesize\ttfamily \label{home-registrado_8js_a6fc7eb5a48f4de126dd97a30c00ba250} 
+const log = (...args) =$>$ console.\+log(new Date().to\+ISOString(), "{}\mbox{[}home\mbox{]}"{}, ...args)}
+

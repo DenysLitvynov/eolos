@@ -1,0 +1,41 @@
+digraph "Gráfico de jerarquía de clases"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="Base",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node0 -> Node1 [id="edge18_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="webapp.backend.db.models.\lBicicleta",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_bicicleta.html",tooltip=" "];
+  Node0 -> Node2 [id="edge19_Node000000_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="webapp.backend.db.models.\lCalidadGeneral",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_calidad_general.html",tooltip=" "];
+  Node0 -> Node3 [id="edge20_Node000000_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="webapp.backend.db.models.\lEstacion",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_estacion.html",tooltip=" "];
+  Node0 -> Node4 [id="edge21_Node000000_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="webapp.backend.db.models.\lIncidencia",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_incidencia.html",tooltip=" "];
+  Node0 -> Node5 [id="edge22_Node000000_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="webapp.backend.db.models.\lInterpolada",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_interpolada.html",tooltip=" "];
+  Node0 -> Node6 [id="edge23_Node000000_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="webapp.backend.db.models.\lMedida",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_medida.html",tooltip=" "];
+  Node0 -> Node7 [id="edge24_Node000000_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="webapp.backend.db.models.\lMibisivalencia",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_mibisivalencia.html",tooltip=" "];
+  Node0 -> Node8 [id="edge25_Node000000_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="webapp.backend.db.models.\lPasswordResetToken",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_password_reset_token.html",tooltip=" "];
+  Node0 -> Node9 [id="edge26_Node000000_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="webapp.backend.db.models.\lPendingRegistration",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration.html",tooltip=" "];
+  Node0 -> Node10 [id="edge27_Node000000_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="webapp.backend.db.models.\lPlacaSensores",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores.html",tooltip=" "];
+  Node0 -> Node11 [id="edge28_Node000000_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="webapp.backend.db.models.\lRecompensa",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa.html",tooltip=" "];
+  Node0 -> Node12 [id="edge29_Node000000_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="webapp.backend.db.models.\lRecompensaObtenida",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_obtenida.html",tooltip=" "];
+  Node0 -> Node13 [id="edge30_Node000000_Node000013",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="webapp.backend.db.models.\lRecompensaUsuario",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario.html",tooltip=" "];
+  Node0 -> Node14 [id="edge31_Node000000_Node000014",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="webapp.backend.db.models.Rol",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_rol.html",tooltip=" "];
+  Node0 -> Node15 [id="edge32_Node000000_Node000015",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="webapp.backend.db.models.\lTrayecto",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_trayecto.html",tooltip=" "];
+  Node0 -> Node16 [id="edge33_Node000000_Node000016",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="webapp.backend.db.models.\lUsuario",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classwebapp_1_1backend_1_1db_1_1models_1_1_usuario.html",tooltip=" "];
+}

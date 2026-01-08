@@ -1,0 +1,60 @@
+\doxysection{Referencia del espacio de nombres webapp.\+backend.\+api.\+contaminacion\+\_\+api}
+\hypertarget{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api}{}\label{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api}\index{webapp.backend.api.contaminacion\_api@{webapp.backend.api.contaminacion\_api}}
+\doxysubsubsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1contaminacion__api_1_1_punto}{Punto}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1contaminacion__api_1_1_medicion_out}{Medicion\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1contaminacion__api_1_1_estacion_contaminacion_out}{Estacion\+Contaminacion\+Out}}
+\item 
+class \mbox{\hyperlink{classwebapp_1_1backend_1_1api_1_1contaminacion__api_1_1_contaminacion_response}{Contaminacion\+Response}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a29a58d9da1bb2be5391768e5f794ef3d}{get\+\_\+contaminacion\+\_\+estaciones}} (int limit=Query(default=10, ge=1, le=50), Session \mbox{\hyperlink{namespacewebapp_1_1backend_1_1db}{db}}=Depends(get\+\_\+db))
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a548244bce0c79c51db2ee7f021eb9f16}{router}} = APIRouter()
+\item 
+\mbox{\hyperlink{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a7689f9b822d5c61cab640fc9940cd10d}{logica}} = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1contaminacion__logic_1_1_logica_contaminacion}{Logica\+Contaminacion}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Autor: JINWEI
+Fecha: 28-12-2025
+Descripción: API para contaminación en tiempo real por estación usando el punto más cercano en calidad_general.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_doc-func-members}
+\doxysubsection{Documentación de funciones}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a29a58d9da1bb2be5391768e5f794ef3d}\index{webapp.backend.api.contaminacion\_api@{webapp.backend.api.contaminacion\_api}!get\_contaminacion\_estaciones@{get\_contaminacion\_estaciones}}
+\index{get\_contaminacion\_estaciones@{get\_contaminacion\_estaciones}!webapp.backend.api.contaminacion\_api@{webapp.backend.api.contaminacion\_api}}
+\doxysubsubsection{\texorpdfstring{get\_contaminacion\_estaciones()}{get\_contaminacion\_estaciones()}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a29a58d9da1bb2be5391768e5f794ef3d} 
+webapp.\+backend.\+api.\+contaminacion\+\_\+api.\+get\+\_\+contaminacion\+\_\+estaciones (\begin{DoxyParamCaption}\item[{int }]{limit}{ = {\ttfamily Query(default=10,~ge=1,~le=50)}, }\item[{Session }]{db}{ = {\ttfamily Depends(get\+\_\+db)}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_doc-var-members}
+\doxysubsection{Documentación de variables}
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a7689f9b822d5c61cab640fc9940cd10d}\index{webapp.backend.api.contaminacion\_api@{webapp.backend.api.contaminacion\_api}!logica@{logica}}
+\index{logica@{logica}!webapp.backend.api.contaminacion\_api@{webapp.backend.api.contaminacion\_api}}
+\doxysubsubsection{\texorpdfstring{logica}{logica}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a7689f9b822d5c61cab640fc9940cd10d} 
+webapp.\+backend.\+api.\+contaminacion\+\_\+api.\+logica = \mbox{\hyperlink{classwebapp_1_1backend_1_1logic_1_1contaminacion__logic_1_1_logica_contaminacion}{Logica\+Contaminacion}}()}
+
+\Hypertarget{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a548244bce0c79c51db2ee7f021eb9f16}\index{webapp.backend.api.contaminacion\_api@{webapp.backend.api.contaminacion\_api}!router@{router}}
+\index{router@{router}!webapp.backend.api.contaminacion\_api@{webapp.backend.api.contaminacion\_api}}
+\doxysubsubsection{\texorpdfstring{router}{router}}
+{\footnotesize\ttfamily \label{namespacewebapp_1_1backend_1_1api_1_1contaminacion__api_a548244bce0c79c51db2ee7f021eb9f16} 
+webapp.\+backend.\+api.\+contaminacion\+\_\+api.\+router = APIRouter()}
+

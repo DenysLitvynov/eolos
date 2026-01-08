@@ -1,0 +1,63 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Recompensa\+Usuario}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario}\index{webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Recompensa\+Usuario
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Recompensa\+Usuario\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a3f870eda623bf9f563d5201aadceb898}{usuario\+\_\+id}} = Column(String(36), Foreign\+Key("{}usuarios.\+usuario\+\_\+id"{}), primary\+\_\+key=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a9a35a5f7433cdd033c9e4b2eb1373f13}{km\+\_\+acumulados}} = Column(Float, default=0.\+0, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a8deef9f1915acafa7fdf76636eb92841}{usuario}} = relationship("{}Usuario"{}, backref="{}recompensa\+\_\+estadistica"{}, uselist=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a5c810d8ba7b6fb0b42eace4cd1ac5c27}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}recompensas\+\_\+usuario"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla que almacena kilómetros acumulados por usuario (una fila por usuario).
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a5c810d8ba7b6fb0b42eace4cd1ac5c27}\index{webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a5c810d8ba7b6fb0b42eace4cd1ac5c27} 
+str webapp.\+backend.\+db.\+models.\+Recompensa\+Usuario.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}recompensas\+\_\+usuario"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a9a35a5f7433cdd033c9e4b2eb1373f13}\index{webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}!km\_acumulados@{km\_acumulados}}
+\index{km\_acumulados@{km\_acumulados}!webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}}
+\doxysubsubsection{\texorpdfstring{km\_acumulados}{km\_acumulados}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a9a35a5f7433cdd033c9e4b2eb1373f13} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Usuario.\+km\+\_\+acumulados = Column(Float, default=0.\+0, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a8deef9f1915acafa7fdf76636eb92841}\index{webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}!usuario@{usuario}}
+\index{usuario@{usuario}!webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}}
+\doxysubsubsection{\texorpdfstring{usuario}{usuario}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a8deef9f1915acafa7fdf76636eb92841} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Usuario.\+usuario = relationship("{}Usuario"{}, backref="{}recompensa\+\_\+estadistica"{}, uselist=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a3f870eda623bf9f563d5201aadceb898}\index{webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}!usuario\_id@{usuario\_id}}
+\index{usuario\_id@{usuario\_id}!webapp.backend.db.models.RecompensaUsuario@{webapp.backend.db.models.RecompensaUsuario}}
+\doxysubsubsection{\texorpdfstring{usuario\_id}{usuario\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_recompensa_usuario_a3f870eda623bf9f563d5201aadceb898} 
+webapp.\+backend.\+db.\+models.\+Recompensa\+Usuario.\+usuario\+\_\+id = Column(String(36), Foreign\+Key("{}usuarios.\+usuario\+\_\+id"{}), primary\+\_\+key=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

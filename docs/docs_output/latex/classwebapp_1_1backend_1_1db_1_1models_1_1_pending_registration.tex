@@ -1,0 +1,111 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Pending\+Registration}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Pending\+Registration
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Pending\+Registration\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ac4fa0423e5f358046e5994bf9b0b4bcc}{id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a5824d086e37db441360b3587ecac83d7}{nombre}} = Column(String(100), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a740f7bbf4ca24e06b7882ba13522f8c4}{apellido}} = Column(String(100))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a0d195d116511f39653865ca482ba9cc7}{correo}} = Column(String(100), unique=True, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a29e44debe1e9759815ef4980cc8d8ec6}{targeta\+\_\+id}} = Column(String(9), Foreign\+Key("{}mibisivalencia.\+targeta\+\_\+id"{}, ondelete="{}SET NULL"{}), nullable=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a70b565c9fd3dc2473e847451c972e624}{contrasena\+\_\+hash}} = Column(Text, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ab6a623f422084c49a7f34af8e92b5716}{verification\+\_\+code}} = Column(String(6), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ab9891bf4d4e59ecaf76e8c823a6ad382}{expires\+\_\+at}} = Column(TIMESTAMP(timezone=True), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a13d74d85c14df53a12695e1aaa4124bb}{created\+\_\+at}} = Column(TIMESTAMP(timezone=True), server\+\_\+default=func.\+now(), nullable=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a628255a98e6dfffcec5c27f95409bf4b}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}pending\+\_\+registrations"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla para almacenar temporalmente los datos de usuario hasta que verifique su correo para completar el registro.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a628255a98e6dfffcec5c27f95409bf4b}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a628255a98e6dfffcec5c27f95409bf4b} 
+str webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}pending\+\_\+registrations"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a740f7bbf4ca24e06b7882ba13522f8c4}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!apellido@{apellido}}
+\index{apellido@{apellido}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{apellido}{apellido}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a740f7bbf4ca24e06b7882ba13522f8c4} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+apellido = Column(String(100))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a70b565c9fd3dc2473e847451c972e624}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!contrasena\_hash@{contrasena\_hash}}
+\index{contrasena\_hash@{contrasena\_hash}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{contrasena\_hash}{contrasena\_hash}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a70b565c9fd3dc2473e847451c972e624} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+contrasena\+\_\+hash = Column(Text, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a0d195d116511f39653865ca482ba9cc7}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!correo@{correo}}
+\index{correo@{correo}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{correo}{correo}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a0d195d116511f39653865ca482ba9cc7} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+correo = Column(String(100), unique=True, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a13d74d85c14df53a12695e1aaa4124bb}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!created\_at@{created\_at}}
+\index{created\_at@{created\_at}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{created\_at}{created\_at}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a13d74d85c14df53a12695e1aaa4124bb} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+created\+\_\+at = Column(TIMESTAMP(timezone=True), server\+\_\+default=func.\+now(), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ab9891bf4d4e59ecaf76e8c823a6ad382}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!expires\_at@{expires\_at}}
+\index{expires\_at@{expires\_at}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{expires\_at}{expires\_at}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ab9891bf4d4e59ecaf76e8c823a6ad382} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+expires\+\_\+at = Column(TIMESTAMP(timezone=True), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ac4fa0423e5f358046e5994bf9b0b4bcc}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!id@{id}}
+\index{id@{id}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ac4fa0423e5f358046e5994bf9b0b4bcc} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a5824d086e37db441360b3587ecac83d7}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!nombre@{nombre}}
+\index{nombre@{nombre}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{nombre}{nombre}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a5824d086e37db441360b3587ecac83d7} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+nombre = Column(String(100), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a29e44debe1e9759815ef4980cc8d8ec6}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!targeta\_id@{targeta\_id}}
+\index{targeta\_id@{targeta\_id}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{targeta\_id}{targeta\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_a29e44debe1e9759815ef4980cc8d8ec6} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+targeta\+\_\+id = Column(String(9), Foreign\+Key("{}mibisivalencia.\+targeta\+\_\+id"{}, ondelete="{}SET NULL"{}), nullable=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ab6a623f422084c49a7f34af8e92b5716}\index{webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}!verification\_code@{verification\_code}}
+\index{verification\_code@{verification\_code}!webapp.backend.db.models.PendingRegistration@{webapp.backend.db.models.PendingRegistration}}
+\doxysubsubsection{\texorpdfstring{verification\_code}{verification\_code}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_pending_registration_ab6a623f422084c49a7f34af8e92b5716} 
+webapp.\+backend.\+db.\+models.\+Pending\+Registration.\+verification\+\_\+code = Column(String(6), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

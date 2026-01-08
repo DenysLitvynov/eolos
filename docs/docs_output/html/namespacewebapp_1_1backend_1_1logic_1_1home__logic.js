@@ -1,0 +1,4 @@
+var namespacewebapp_1_1backend_1_1logic_1_1home__logic =
+[
+    [ "LogicaHome", "classwebapp_1_1backend_1_1logic_1_1home__logic_1_1_logica_home.html", "classwebapp_1_1backend_1_1logic_1_1home__logic_1_1_logica_home" ]
+];

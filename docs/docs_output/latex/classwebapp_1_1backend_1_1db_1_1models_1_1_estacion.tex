@@ -1,0 +1,87 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Estacion}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion}\index{webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Estacion
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Estacion\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a78e073c635d4cd0c97035a99e07ef653}{estacion\+\_\+id}} = Column(Integer, primary\+\_\+key=True, autoincrement=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_add90dd121f0debc90b66e6855b85f3f8}{nombre}} = Column(String(100), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a3721f74b92860bed572179489fcee46e}{lat}} = Column(Float, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a16c38334f875e859a54672138abf0309}{lon}} = Column(Float, nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a05f41b4065066615646791e83b6da544}{capacidad}} = Column(Integer, nullable=False, default=0)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_affbcddde2f97dd049b29478a8a7a65bc}{bicicletas}} = relationship("{}Bicicleta"{}, back\+\_\+populates="{}estacion"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a00a4953be00fd199767c0b06cd8726f1}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}estaciones"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla para almacenar las estaciones fijas existentes de bicicletas.
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a00a4953be00fd199767c0b06cd8726f1}\index{webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a00a4953be00fd199767c0b06cd8726f1} 
+str webapp.\+backend.\+db.\+models.\+Estacion.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}estaciones"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_affbcddde2f97dd049b29478a8a7a65bc}\index{webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}!bicicletas@{bicicletas}}
+\index{bicicletas@{bicicletas}!webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}}
+\doxysubsubsection{\texorpdfstring{bicicletas}{bicicletas}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_affbcddde2f97dd049b29478a8a7a65bc} 
+webapp.\+backend.\+db.\+models.\+Estacion.\+bicicletas = relationship("{}Bicicleta"{}, back\+\_\+populates="{}estacion"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a05f41b4065066615646791e83b6da544}\index{webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}!capacidad@{capacidad}}
+\index{capacidad@{capacidad}!webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}}
+\doxysubsubsection{\texorpdfstring{capacidad}{capacidad}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a05f41b4065066615646791e83b6da544} 
+webapp.\+backend.\+db.\+models.\+Estacion.\+capacidad = Column(Integer, nullable=False, default=0)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a78e073c635d4cd0c97035a99e07ef653}\index{webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}!estacion\_id@{estacion\_id}}
+\index{estacion\_id@{estacion\_id}!webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}}
+\doxysubsubsection{\texorpdfstring{estacion\_id}{estacion\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a78e073c635d4cd0c97035a99e07ef653} 
+webapp.\+backend.\+db.\+models.\+Estacion.\+estacion\+\_\+id = Column(Integer, primary\+\_\+key=True, autoincrement=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a3721f74b92860bed572179489fcee46e}\index{webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}!lat@{lat}}
+\index{lat@{lat}!webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}}
+\doxysubsubsection{\texorpdfstring{lat}{lat}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a3721f74b92860bed572179489fcee46e} 
+webapp.\+backend.\+db.\+models.\+Estacion.\+lat = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a16c38334f875e859a54672138abf0309}\index{webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}!lon@{lon}}
+\index{lon@{lon}!webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}}
+\doxysubsubsection{\texorpdfstring{lon}{lon}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_a16c38334f875e859a54672138abf0309} 
+webapp.\+backend.\+db.\+models.\+Estacion.\+lon = Column(Float, nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_add90dd121f0debc90b66e6855b85f3f8}\index{webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}!nombre@{nombre}}
+\index{nombre@{nombre}!webapp.backend.db.models.Estacion@{webapp.backend.db.models.Estacion}}
+\doxysubsubsection{\texorpdfstring{nombre}{nombre}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_estacion_add90dd121f0debc90b66e6855b85f3f8} 
+webapp.\+backend.\+db.\+models.\+Estacion.\+nombre = Column(String(100), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}

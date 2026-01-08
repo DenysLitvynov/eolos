@@ -1,0 +1,79 @@
+\doxysection{Referencia de la clase webapp.\+backend.\+db.\+models.\+Placa\+Sensores}
+\hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores}{}\label{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores}\index{webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}}
+
+
+Diagrama de herencia de webapp.\+backend.\+db.\+models.\+Placa\+Sensores
+% FIG 0
+
+
+Diagrama de colaboración de webapp.\+backend.\+db.\+models.\+Placa\+Sensores\+:
+% FIG 1
+\doxysubsubsection*{Atributos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a8d832db8083e4420a4e93626ca49b877}{placa\+\_\+id}} = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a544e8763c7d2fba1457ab7ef2a7d905f}{bicicleta\+\_\+id}} = Column(String(20), Foreign\+Key("{}bicicletas.\+bicicleta\+\_\+id"{}, ondelete="{}CASCADE"{}), unique=True)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a086c3f99532fb9d6661bc8461c6eab78}{estado}} = Column(String(50), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_acad26b63ffccaf303e09a94224709b37}{ult\+\_\+actualizacion\+\_\+estado}} = Column(TIMESTAMP(timezone=True), server\+\_\+default=func.\+now(), nullable=False)
+\item 
+\mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a471c2fcb4c14e1a6f06e372198c18c85}{bicicleta}} = relationship("{}Bicicleta"{}, back\+\_\+populates="{}placa"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Atributos estáticos privados}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_acb950ef70faaf5e13c5c90dfb46f4d5c}{\+\_\+\+\_\+tablename\+\_\+\+\_\+}} = "{}placas\+\_\+sensores"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descripción detallada}
+\begin{DoxyVerb}Tabla para guardar todas las placas/sensores en uso. 
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_doc-variable-members}
+\doxysubsection{Documentación de datos miembro}
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_acb950ef70faaf5e13c5c90dfb46f4d5c}\index{webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}!\_\_tablename\_\_@{\_\_tablename\_\_}}
+\index{\_\_tablename\_\_@{\_\_tablename\_\_}!webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}}
+\doxysubsubsection{\texorpdfstring{\_\_tablename\_\_}{\_\_tablename\_\_}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_acb950ef70faaf5e13c5c90dfb46f4d5c} 
+str webapp.\+backend.\+db.\+models.\+Placa\+Sensores.\+\_\+\+\_\+tablename\+\_\+\+\_\+ = "{}placas\+\_\+sensores"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a471c2fcb4c14e1a6f06e372198c18c85}\index{webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}!bicicleta@{bicicleta}}
+\index{bicicleta@{bicicleta}!webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}}
+\doxysubsubsection{\texorpdfstring{bicicleta}{bicicleta}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a471c2fcb4c14e1a6f06e372198c18c85} 
+webapp.\+backend.\+db.\+models.\+Placa\+Sensores.\+bicicleta = relationship("{}Bicicleta"{}, back\+\_\+populates="{}placa"{})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a544e8763c7d2fba1457ab7ef2a7d905f}\index{webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}!bicicleta\_id@{bicicleta\_id}}
+\index{bicicleta\_id@{bicicleta\_id}!webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}}
+\doxysubsubsection{\texorpdfstring{bicicleta\_id}{bicicleta\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a544e8763c7d2fba1457ab7ef2a7d905f} 
+webapp.\+backend.\+db.\+models.\+Placa\+Sensores.\+bicicleta\+\_\+id = Column(String(20), Foreign\+Key("{}bicicletas.\+bicicleta\+\_\+id"{}, ondelete="{}CASCADE"{}), unique=True)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a086c3f99532fb9d6661bc8461c6eab78}\index{webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}!estado@{estado}}
+\index{estado@{estado}!webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}}
+\doxysubsubsection{\texorpdfstring{estado}{estado}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a086c3f99532fb9d6661bc8461c6eab78} 
+webapp.\+backend.\+db.\+models.\+Placa\+Sensores.\+estado = Column(String(50), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a8d832db8083e4420a4e93626ca49b877}\index{webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}!placa\_id@{placa\_id}}
+\index{placa\_id@{placa\_id}!webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}}
+\doxysubsubsection{\texorpdfstring{placa\_id}{placa\_id}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_a8d832db8083e4420a4e93626ca49b877} 
+webapp.\+backend.\+db.\+models.\+Placa\+Sensores.\+placa\+\_\+id = Column(String(36), primary\+\_\+key=True, default=lambda\+: str(uuid.\+uuid4()))\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_acad26b63ffccaf303e09a94224709b37}\index{webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}!ult\_actualizacion\_estado@{ult\_actualizacion\_estado}}
+\index{ult\_actualizacion\_estado@{ult\_actualizacion\_estado}!webapp.backend.db.models.PlacaSensores@{webapp.backend.db.models.PlacaSensores}}
+\doxysubsubsection{\texorpdfstring{ult\_actualizacion\_estado}{ult\_actualizacion\_estado}}
+{\footnotesize\ttfamily \label{classwebapp_1_1backend_1_1db_1_1models_1_1_placa_sensores_acad26b63ffccaf303e09a94224709b37} 
+webapp.\+backend.\+db.\+models.\+Placa\+Sensores.\+ult\+\_\+actualizacion\+\_\+estado = Column(TIMESTAMP(timezone=True), server\+\_\+default=func.\+now(), nullable=False)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+La documentación de esta clase está generada del siguiente archivo\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Codigo\+\_\+\+GTI/\+Proyecto\+\_\+\+Biometria/\+PBIO/eolos/webapp/backend/db/\mbox{\hyperlink{models_8py}{models.\+py}}\end{DoxyCompactItemize}
