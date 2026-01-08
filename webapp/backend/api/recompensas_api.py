@@ -33,7 +33,7 @@ class RecompensaResponse(BaseModel):
 class Recompensa_Usuario(BaseModel):
     usuario_id: str
     km_acumulados: float
-    fecha_actualizacion: datetime.datetime = datetime.datetime.now() # Metadato
+    fecha_actualizacion: datetime.datetime | None = None #esto puedo causar problemas?
     
 #=================================
 # Rutas GET
@@ -72,7 +72,6 @@ def obtener_recompensas_con_progreso(
             return logica.obtener_estado_recompensas_usuario(db, current_user.usuario_id)
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
-# ---------------------------------------------------------
 
 
 @router.get("/obtener_distancia_acumulada", response_model=Recompensa_Usuario)
@@ -81,31 +80,27 @@ def obtener_distancia_acumulada_este_mes(
     usuario_id: str | None = None,
     authorization: str | None = Header(default=None),
 ):
-    """
-    Obtiene la distancia total recorrida por el usuario logeado en el mes actual.
-    Ruta Final: /api/v1/recompensas/distancia-mensual
-    """
     try:
         logica = RecompensasLogic()
         
-        # Resolver usuario: si se pasa `usuario_id` por query param lo usamos (útil para pruebas),
-        # en caso contrario intentamos autenticar con el token Bearer usando `get_current_user`.
+        # Resolución de usuario (se mantiene igual)
         if usuario_id:
             usuario = db.query(Usuario).filter(Usuario.usuario_id == usuario_id).first()
             if not usuario:
-                raise HTTPException(status_code=404, detail="Usuario no encontrado por usuario_id")
+                raise HTTPException(status_code=404, detail="Usuario no encontrado")
         else:
-            # Esto lanzará HTTPException(401) si la cabecera falta o el token es inválido.
             usuario = get_current_user(authorization, db)
 
         km_mes = logica.obtener_distancia_total_mes_actual(db, usuario.usuario_id)
 
         return Recompensa_Usuario(
             usuario_id=usuario.usuario_id,
-            km_acumulados_este_mes=km_mes
+            km_acumulados=km_mes  # Antes tenías km_acumulados_este_mes (esto causaba el 500)
         )
         
     except Exception as e:
+        # Imprime el error en la consola del servidor para ver qué falla exactamente
+        print(f"DEBUG ERROR: {e}") 
         raise HTTPException(status_code=500, detail=f"Error al obtener distancia: {str(e)}")
 
 

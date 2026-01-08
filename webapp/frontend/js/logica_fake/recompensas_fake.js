@@ -28,11 +28,27 @@ async obtenerRecompensasUsuario() {
         const token = localStorage.getItem('token'); 
 
         return await this.peticionario.hacerPeticionRest('GET', url, null, {
-            'Authorization': `Bearer ${token}` // <--- ESTO ES LO QUE FALTA
+            'Authorization': `Bearer ${token}` 
         });
     } catch (e) {
         console.error('Error:', e);
         throw e;
     }
 }
+
+async obtenerDistanciaRecorrida() {
+    try {
+        const url = `/api/v1/recompensas/obtener_distancia_acumulada`;
+        const token = localStorage.getItem('token'); 
+
+        const data = await this.peticionario.hacerPeticionRest('GET', url, null, {
+            'Authorization': `Bearer ${token}` // <--- Faltaba esto
+        });
+        return data.km_acumulados; 
+    } catch (e) {
+        console.error("Error al obtener distancia:", e);
+        return 0; 
+    }
+}
+
 }

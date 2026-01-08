@@ -56,40 +56,28 @@ class RecompensasLogic:
     # ---------------------------------------------------------
     
     def obtener_distancia_total_mes_actual(self, db: Session, userid: str) -> float:
-        """
-        Calcula la distancia total recorrida por un usuario en el mes actual 
-        accediendo a la tabla Trayectos y sumando 'distancia_total'.
-        
-        Args:
-            db: Sesión de base de datos.
-            userid: ID del usuario.
-
-        Returns:
-            Distancia total recorrida en kilómetros en el mes actual.
-        """
         try:
-            ahora = datetime.now(timezone.utc)
-            # Definimos el inicio del mes actual
-            inicio_mes = datetime(ahora.year, ahora.month, 1, tzinfo=timezone.utc)
+            # Quitamos timezone.utc para evitar conflictos de tipos con la DB
+            ahora = datetime.now() 
+            inicio_mes = datetime(ahora.year, ahora.month, 1)
             
-            # Definimos el inicio del siguiente mes para definir el final del rango
             if ahora.month == 12:
-                fin_mes = datetime(ahora.year + 1, 1, 1, tzinfo=timezone.utc)
+                fin_mes = datetime(ahora.year + 1, 1, 1)
             else:
-                fin_mes = datetime(ahora.year, ahora.month + 1, 1, tzinfo=timezone.utc)
+                fin_mes = datetime(ahora.year, ahora.month + 1, 1)
                 
-            # Usamos func.sum para sumar la columna distancia_total
+            # Ejecutamos la suma
             distancia_total = db.query(func.sum(Trayecto.distancia_total)).filter(
                 Trayecto.usuario_id == userid,
                 Trayecto.fecha_inicio >= inicio_mes,
-                Trayecto.fecha_inicio < fin_mes,
-                Trayecto.distancia_total.isnot(None) # Aseguramos que solo sume trayectos con distancia
+                Trayecto.fecha_inicio < fin_mes
             ).scalar()
             
-            return distancia_total if distancia_total is not None else 0.0 
+            return float(distancia_total) if distancia_total is not None else 0.0 
         except Exception as e:
-            raise RuntimeError(f"Error al calcular distancia total del mes: {str(e)}")
-    
+            print(f"Error SQL: {e}") # Esto saldrá en tu terminal de Python
+            raise RuntimeError(f"Error al calcular distancia: {str(e)}")
+        
     # ---------------------------------------------------------
     
     def obtener_estado_recompensas_usuario(self, db: Session, usuario_id: str):
