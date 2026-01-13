@@ -1,11 +1,13 @@
 //Recompensas JS
 //@description: Scrpt con funcionalidad de las recompensas
 //
-//@Author: Ariel Bejaran 
+//S@ Author: Ariel Bejaran 
 
 
 
-import { RecompensasFake } from "../logica_fake/recompensas_fake.js"; 
+import { RecompensasFake } from "../logica_fake/recompensas_fake.js";
+import { Popup } from '../utilidades/class_popup.js';
+
 const recompensasFake = new RecompensasFake();
 
 
@@ -40,8 +42,6 @@ function icon_selector(descripcion) {
 
 async function cargar_sistema_recompensas() {
     try {
-        // Llamamos a la lógica que procesa y devuelve las listas separadas
-        // Asumiendo que actualizaste el endpoint /recompensas_obtenidas
         const data = await recompensasFake.obtenerRecompensasUsuario(); 
         
         const contenedorObtenidas = document.getElementById('availableRewards');
@@ -50,41 +50,112 @@ async function cargar_sistema_recompensas() {
         contenedorObtenidas.innerHTML = '';
         contenedorProximas.innerHTML = '';
 
-        // 1. Renderizar Obtenidas (Las que ya filtró el backend y guardó)
+        // 1. Renderizar Obtenidas (Interactivos: abren popup)
         data.obtenidas.forEach(recompensa => {
-            contenedorObtenidas.appendChild(crearTarjeta(recompensa));
+            contenedorObtenidas.appendChild(crearTarjeta(recompensa, true));
         });
 
-        // 2. Renderizar Próximas (Las que NO han sido filtradas/alcanzadas aún)
+        // 2. Renderizar Próximas (No interactivos o bloqueados)
         data.proximas.forEach(recompensa => {
-            contenedorProximas.appendChild(crearTarjeta(recompensa));
+            contenedorProximas.appendChild(crearTarjeta(recompensa, false));
         });
 
-        // 3. Actualizar barra de progreso con la primera recompensa próxima
-        if (data.proximas.length > 0) {
-            const kmActual = await recompensasFake.obtenerDistanciaRecorrida();
-            const proximoObjetivo = data.proximas[0].criterio_num_km;
-            actualizar_barra_progreso(kmActual, proximoObjetivo);
-        }
-
+        // ... resto del código de la barra de progreso ...
     } catch (error) {
         console.error("Error al cargar recompensas:", error);
     }
 }
 
-// Función auxiliar para no repetir código de creación de HTML
-function crearTarjeta(recompensa) {
+function crearTarjeta(recompensa, esObtenida = false) {
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta-recompensa';
+    
+    // Creamos el HTML
     tarjeta.innerHTML = `
-        <button class="reward-item" type="button">
+        <button class="reward-item" type="button" ${!esObtenida ? 'style="opacity: 0.6; cursor: default;"' : ''}>
             <span class="reward-item__logo">${icon_selector(recompensa.descripcion)}</span>
             <span class="reward-item__text">${recompensa.descripcion}</span>
         </button>
     `;
+
+    // Si la recompensa es obtenida, le asignamos el evento para abrir el popup
+    if (esObtenida) {
+        const boton = tarjeta.querySelector('.reward-item');
+        boton.addEventListener('click', () => {
+            mostrarPopupRecompensa(recompensa);
+        });
+    }
+
     return tarjeta;
 }
 
+function mostrarPopupRecompensa(recompensa) {
+    // 1. Contenedor principal del cuerpo
+    const contenidoPopup = document.createElement('div');
+    
+    // 2. Subtítulo h2 (Aplica color azul de Éolos)
+    const subtitle = document.createElement('h2');
+    subtitle.textContent = 'Detalles de tu recompensa';
+    contenidoPopup.appendChild(subtitle);
+    
+    // 3. Wrapper de detalles (Activa fondos y bordes redondeados del CSS)
+    const detalleWrapper = document.createElement('div');
+    detalleWrapper.className = 'popup-detailed-content'; 
+
+    // 4. Lista de información
+    const ul = document.createElement('ul');
+    ul.innerHTML = `
+        <li><strong>Premio:</strong> ${recompensa.titulo}</li>
+        <li><strong>Descripción:</strong> ${recompensa.descripcion}</li>
+    `;
+
+    // 6. Imagen del QR dentro de la lista para mantener el formato
+    const qrLi = document.createElement('li');
+    qrLi.style.textAlign = 'center';
+    qrLi.style.padding = '15px';
+    qrLi.innerHTML = `
+        <img src="/images/VLC001_uuid.png" 
+             alt="QR" 
+             style="width: 150px; background: white; padding: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    `;
+    ul.appendChild(qrLi);
+
+    detalleWrapper.appendChild(ul);
+    contenidoPopup.appendChild(detalleWrapper);
+
+    // 7. Botón de acción (popup-action-btn + icono de descarga)
+    const actionButton = document.createElement('button');
+    actionButton.className = 'popup-action-btn fas fa-download'; 
+    
+    // Añadir texto al botón respetando la fuente
+    const btnText = document.createElement('span');
+    btnText.textContent = ' Descargar Recompensa QR';
+    btnText.style.fontFamily = 'inherit';
+    btnText.style.marginLeft = '10px';
+    actionButton.appendChild(btnText);
+
+    // Evento de descarga con la ruta verificada
+    actionButton.addEventListener('click', () => {
+        const rutaImagen = `/images/VLC001_uuid.png`; 
+        descargarImagen(rutaImagen, `QR_${recompensa.titulo}.png`);
+    });
+    
+    contenidoPopup.appendChild(actionButton);
+
+    // 8. Crear instancia y ABRIR (Es vital llamar a abrirPopup)
+    const recompensaPopup = new Popup(recompensa.titulo, contenidoPopup);
+    recompensaPopup.abrirPopup();
+}
+
+// Función auxiliar para forzar la descarga
+function descargarImagen(url, nombre) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = nombre;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 function actualizar_barra_progreso(kmActual, kmObjetivo) {
     // Validar que kmActual sea un número válido

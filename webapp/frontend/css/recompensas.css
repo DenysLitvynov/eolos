@@ -203,3 +203,104 @@ body{ margin:0; font-family: var(--font-sans); color: var(--text); background: v
     padding: 10px;
   }
 }
+
+
+/*====================================================================*/
+/* ESTILOS DE POPUP (PORTADOS DE INCIDENCIAS)
+/*====================================================================*/
+/* ==================================================================== */
+/* CORRECCIÓN FINAL POPUP RECOMPENSAS */
+/* ==================================================================== */
+
+/* 1. Forzar que el contenedor sea visible y centrado al abrirse */
+.popup-container {
+    display: none; /* Se controla por JS */
+    position: fixed;
+    inset: 0; /* Cubre toda la pantalla */
+    z-index: 9999;
+    background-color: rgba(15, 23, 42, 0.7) !important;
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+}
+
+/* 2. La caja del popup: debe verse como una tarjeta blanca */
+.popup-content {
+    background-color: #ffffff !important;
+    padding: 25px !important;
+    border-radius: 18px !important; /* Usando tu --radius */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
+    max-width: 450px;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    color: #0f172a !important; /* --text */
+}
+
+/* 3. Títulos */
+.popup-content h1 { color: #0D47A1 !important; margin-bottom: 5px; }
+.popup-content h2 { color: #1f57c3 !important; font-size: 1.2rem; margin-top: 0; }
+
+/* 4. El recuadro gris de detalles (popup-detailed-content) */
+.popup-detailed-content {
+    background-color: #f6f8fb !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    margin: 15px 0 !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+}
+
+.popup-detailed-content ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.popup-detailed-content li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* 5. El estado "DISPONIBLE" en verde */
+.estado-pop-up.resuelto {
+    display: inline-block;
+    color: #2ecc71 !important;
+    font-weight: 800 !important;
+    font-size: 0.9rem;
+    padding: 4px 0;
+}
+
+/* 6. El botón de descarga (azul Éolos) */
+.popup-action-btn {
+    width: 100% !important;
+    background-color: #0D47A1 !important; /* Forzado a azul */
+    color: #ffffff !important;
+    border: none !important;
+    padding: 14px !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    font-family: var(--font-sans) !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.popup-action-btn:hover {
+    background-color: #1f57c3 !important;
+}
+
+/* Botón cerrar (X) */
+.close-popup-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #5b677a;
+    cursor: pointer;
+}
