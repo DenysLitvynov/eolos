@@ -29,7 +29,7 @@ class RecompensaResponse(BaseModel):
     fecha_inicio: datetime.datetime
     fecha_fin: datetime.datetime
     criterio_num_km: float
-    
+        
 class Recompensa_Usuario(BaseModel):
     usuario_id: str
     km_acumulados: float
@@ -38,7 +38,6 @@ class Recompensa_Usuario(BaseModel):
 #=================================
 # Rutas GET
 #=================================
-
 @router.get("/obtener_recompensas", response_model=List[RecompensaResponse])
 def obtener_recompensas(db: Session = Depends(get_db)):
     """
@@ -58,20 +57,18 @@ def obtener_recompensas(db: Session = Depends(get_db)):
         # Manejo de cualquier otra excepción no esperada
         raise HTTPException(status_code=500, detail=f"Error inesperado: {str(e)}")
     
-@router.get("/recompensas_obtenidas", response_model=List[dict])
+    
+@router.get("/recompensas_obtenidas", response_model=dict) # Cambiado de List[dict] a dict
 def obtener_recompensas_con_progreso(
-        db: Session = Depends(get_db),
-        current_user: Usuario = Depends(get_current_user)
-    ):
-        """
-        Devuelve la lista de recompensas indicando cuáles ha superado el usuario
-        según su distancia recorrida en el mes.
-        """
-        try:
-            logica = RecompensasLogic()
-            return logica.obtener_estado_recompensas_usuario(db, current_user.usuario_id)
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
+    db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user)
+):
+    try:
+        logica = RecompensasLogic()
+        # Esta llamada ahora devuelve el objeto {obtenidas: [], proximas: []}
+        return logica.procesar_y_obtener_recompensas(db, current_user.usuario_id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/obtener_distancia_acumulada", response_model=Recompensa_Usuario)

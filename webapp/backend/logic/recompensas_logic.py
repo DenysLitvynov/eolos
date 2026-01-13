@@ -9,7 +9,8 @@ from sqlalchemy.orm import Session
 from typing import List
 from ..pojos.recompensa import Recompensa as RecompensaPOJO
 from sqlalchemy import func # Necesario para la función SUM() de SQL
-from datetime import datetime,timezone
+from datetime import datetime
+import uuid
 
 
 class RecompensasLogic:
@@ -53,6 +54,72 @@ class RecompensasLogic:
         return recompensa.codigo
     
     
+    def procesar_y_obtener_recompensas(self, db: Session, usuario_id: str):
+        try:
+            # 1. Obtener KM del usuario en el mes actual
+            km_usuario = self.obtener_distancia_total_mes_actual(db, usuario_id)
+
+            # 2. Obtener IDs de recompensas que el usuario YA TIENE
+            obtenidas_db = db.query(RecompensaObtenida.recompensa_id).filter(
+                RecompensaObtenida.usuario_id == usuario_id
+            ).all()
+            ids_ya_obtenidos = [r[0] for r in obtenidas_db]
+
+            # 3. Buscar recompensas que HA ALCANZADO pero NO TIENE guardadas
+            recompensas_nuevas = db.query(RecompensaDB).filter(
+                RecompensaDB.criterio_num_km <= km_usuario,
+                ~RecompensaDB.recompensa_id.in_(ids_ya_obtenidos)
+            ).all()
+
+            # 4. GUARDADO AUTOMÁTICO: Insertar en recompensas_obtenidas
+            for r_db in recompensas_nuevas:
+                nueva_relacion = RecompensaObtenida(
+                    id=str(uuid.uuid4()),
+                    usuario_id=usuario_id,
+                    recompensa_id=r_db.recompensa_id,
+                    # SOLUCIÓN AL ERROR 500: Generamos el código único obligatorio
+                    codigo_unico=f"REW-{usuario_id[:4]}-{r_db.recompensa_id[:4]}-{uuid.uuid4().hex[:4]}".upper()
+                )
+                db.add(nueva_relacion)
+            
+            if recompensas_nuevas:
+                db.commit() # Guardamos cambios en la base de datos
+
+            # 5. CONSTRUIR RESPUESTA PARA EL FRONTEND
+            todas_las_recompensas = db.query(RecompensaDB).all()
+            
+            # Volvemos a consultar los IDs obtenidos (incluyendo los nuevos)
+            ids_finales = [r[0] for r in db.query(RecompensaObtenida.recompensa_id).filter(
+                RecompensaObtenida.usuario_id == usuario_id
+            ).all()]
+
+            resultado = {
+                "obtenidas": [],
+                "proximas": []
+            }
+
+            for r in todas_las_recompensas:
+                # Estructura limpia para el JS icon_selector
+                item = {
+                    "recompensa_id": r.recompensa_id,
+                    "titulo": r.titulo,
+                    "descripcion": r.descripcion,
+                    "criterio_num_km": r.criterio_num_km,
+                    "alcanzada": r.recompensa_id in ids_finales
+                }
+                
+                if item["alcanzada"]:
+                    resultado["obtenidas"].append(item)
+                else:
+                    resultado["proximas"].append(item)
+
+            return resultado
+
+        except Exception as e:
+            db.rollback()
+            print(f"DEBUG LOGIC ERROR: {str(e)}") # Esto te dirá el error exacto en consola
+            raise RuntimeError(f"Error procesando recompensas: {str(e)}")
+        
     # ---------------------------------------------------------
     
     def obtener_distancia_total_mes_actual(self, db: Session, userid: str) -> float:

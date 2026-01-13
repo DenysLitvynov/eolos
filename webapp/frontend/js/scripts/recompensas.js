@@ -38,50 +38,51 @@ function icon_selector(descripcion) {
 }
 
 
-function cargar_recompensas() {
-    recompensasFake.obtenerRecompensas().then(recompensas => {
-        const contenedor = document.getElementById('nextRewards');
+async function cargar_sistema_recompensas() {
+    try {
+        // Llamamos a la lógica que procesa y devuelve las listas separadas
+        // Asumiendo que actualizaste el endpoint /recompensas_obtenidas
+        const data = await recompensasFake.obtenerRecompensasUsuario(); 
+        
+        const contenedorObtenidas = document.getElementById('availableRewards');
+        const contenedorProximas = document.getElementById('nextRewards');
 
-        contenedor.innerHTML = '';  // Limpiar el contenedor antes de agregar nuevas recompensas
-        recompensas.forEach(recompensa => {
-            const tarjeta = document.createElement('div');
-            tarjeta.className = 'tarjeta-recompensa';
-            tarjeta.innerHTML = `
+        contenedorObtenidas.innerHTML = '';
+        contenedorProximas.innerHTML = '';
 
-             <button class="reward-item" type="button">
-                <span class="reward-item__logo">${icon_selector(recompensa.descripcion)}</span>
-                <span class="reward-item__text">${recompensa.descripcion}</span>
-              </button>
+        // 1. Renderizar Obtenidas (Las que ya filtró el backend y guardó)
+        data.obtenidas.forEach(recompensa => {
+            contenedorObtenidas.appendChild(crearTarjeta(recompensa));
+        });
 
-                `;
-            contenedor.appendChild(tarjeta);
+        // 2. Renderizar Próximas (Las que NO han sido filtradas/alcanzadas aún)
+        data.proximas.forEach(recompensa => {
+            contenedorProximas.appendChild(crearTarjeta(recompensa));
+        });
+
+        // 3. Actualizar barra de progreso con la primera recompensa próxima
+        if (data.proximas.length > 0) {
+            const kmActual = await recompensasFake.obtenerDistanciaRecorrida();
+            const proximoObjetivo = data.proximas[0].criterio_num_km;
+            actualizar_barra_progreso(kmActual, proximoObjetivo);
         }
-        );
-    });
 
+    } catch (error) {
+        console.error("Error al cargar recompensas:", error);
+    }
 }
 
-function cargar_recompensas_usuario() {
-    recompensasFake.obtenerRecompensasUsuario().then(recompensas => {
-        const contenedor = document.getElementById('availableRewards');
-
-        contenedor.innerHTML = '';  // Limpiar el contenedor antes de agregar nuevas recompensas
-        recompensas.forEach(recompensa => {
-            const tarjeta = document.createElement('div');
-            tarjeta.className = 'tarjeta-recompensa';
-            tarjeta.innerHTML = `
-
-             <button class="reward-item" type="button">
-                <span class="reward-item__logo">${icon_selector(recompensa.descripcion)}</span>
-                <span class="reward-item__text">${recompensa.descripcion}</span>
-              </button>
-
-                `;
-            contenedor.appendChild(tarjeta);
-        }
-        );
-    });
-
+// Función auxiliar para no repetir código de creación de HTML
+function crearTarjeta(recompensa) {
+    const tarjeta = document.createElement('div');
+    tarjeta.className = 'tarjeta-recompensa';
+    tarjeta.innerHTML = `
+        <button class="reward-item" type="button">
+            <span class="reward-item__logo">${icon_selector(recompensa.descripcion)}</span>
+            <span class="reward-item__text">${recompensa.descripcion}</span>
+        </button>
+    `;
+    return tarjeta;
 }
 
 
@@ -125,7 +126,6 @@ async function inicializarProgreso() {
 
 // Modifica tu DOMContentLoaded para llamar a la nueva función
 document.addEventListener('DOMContentLoaded', function () {
-    cargar_recompensas();
-    cargar_recompensas_usuario();
+    cargar_sistema_recompensas();
     inicializarProgreso(); // <--- Llamada asíncrona correcta
 });

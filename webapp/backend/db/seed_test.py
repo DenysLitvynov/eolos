@@ -152,7 +152,18 @@ def seed_data():
                 fecha_inicio=ahora - timedelta(days=1),
                 fecha_fin=ahora + timedelta(days=30),
                 criterio_num_km=10.0
-            )
+            ),
+            
+            Recompensa(
+                recompensa_id=str(uuid.uuid4()),  
+                titulo="Recompensa prueba alta",
+                descripcion="Recompensa prueba alta para testing.",
+                fecha_inicio=ahora - timedelta(days=1),
+                fecha_fin=ahora + timedelta(days=30),
+                criterio_num_km=50.0
+            ),
+            
+            
         ]
         db.add_all(recompensas)
         db.commit()
