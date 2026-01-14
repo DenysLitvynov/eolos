@@ -60,7 +60,6 @@ async function cargar_sistema_recompensas() {
             contenedorProximas.appendChild(crearTarjeta(recompensa, false));
         });
 
-        // ... resto del código de la barra de progreso ...
     } catch (error) {
         console.error("Error al cargar recompensas:", error);
     }
@@ -90,31 +89,26 @@ function crearTarjeta(recompensa, esObtenida = false) {
 }
 
 function mostrarPopupRecompensa(recompensa) {
-    // 1. Contenedor principal del cuerpo
     const contenidoPopup = document.createElement('div');
     
-    // 2. Subtítulo h2 (Aplica color azul de Éolos)
     const subtitle = document.createElement('h2');
     subtitle.textContent = 'Detalles de tu recompensa';
     contenidoPopup.appendChild(subtitle);
     
-    // 3. Wrapper de detalles (Activa fondos y bordes redondeados del CSS)
     const detalleWrapper = document.createElement('div');
     detalleWrapper.className = 'popup-detailed-content'; 
 
-    // 4. Lista de información
     const ul = document.createElement('ul');
     ul.innerHTML = `
         <li><strong>Premio:</strong> ${recompensa.titulo}</li>
         <li><strong>Descripción:</strong> ${recompensa.descripcion}</li>
     `;
 
-    // 6. Imagen del QR dentro de la lista para mantener el formato
     const qrLi = document.createElement('li');
     qrLi.style.textAlign = 'center';
     qrLi.style.padding = '15px';
     qrLi.innerHTML = `
-        <img src="/images/VLC001_uuid.png" 
+        <img src="/images/recompensa_eolos.png" 
              alt="QR" 
              style="width: 150px; background: white; padding: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
     `;
@@ -123,26 +117,22 @@ function mostrarPopupRecompensa(recompensa) {
     detalleWrapper.appendChild(ul);
     contenidoPopup.appendChild(detalleWrapper);
 
-    // 7. Botón de acción (popup-action-btn + icono de descarga)
     const actionButton = document.createElement('button');
     actionButton.className = 'popup-action-btn fas fa-download'; 
     
-    // Añadir texto al botón respetando la fuente
     const btnText = document.createElement('span');
     btnText.textContent = ' Descargar Recompensa QR';
     btnText.style.fontFamily = 'inherit';
     btnText.style.marginLeft = '10px';
     actionButton.appendChild(btnText);
 
-    // Evento de descarga con la ruta verificada
     actionButton.addEventListener('click', () => {
-        const rutaImagen = `/images/VLC001_uuid.png`; 
+        const rutaImagen = `/images/recompensa_eolos.png`; 
         descargarImagen(rutaImagen, `QR_${recompensa.titulo}.png`);
     });
     
     contenidoPopup.appendChild(actionButton);
 
-    // 8. Crear instancia y ABRIR (Es vital llamar a abrirPopup)
     const recompensaPopup = new Popup(recompensa.titulo, contenidoPopup);
     recompensaPopup.abrirPopup();
 }
