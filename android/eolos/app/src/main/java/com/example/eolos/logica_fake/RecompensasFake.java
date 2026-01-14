@@ -14,6 +14,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @RecompensaFake.java
+ * @Autor: Ariel Bejaran
+ * @Desc: Actividad android que carga y permite descargar el qr de la recompensa
+ * @Fecha: 7/01/2026
+ */
 public class RecompensasFake {
 
     // Configuración de rutas
@@ -22,7 +28,6 @@ public class RecompensasFake {
     private static final String ENDPOINT_RECOMPENSAS = "/recompensas";
     private static String url_api_recompensas = BASE_URL + API_PREFIX + ENDPOINT_RECOMPENSAS;
 
-    // --- INTERFACES (Esto es lo que faltaba y causaba los errores) ---
     public interface RecompensasCallback {
         void onSuccess(List<Recompensa_Item> recompensas);
         void onError(String error);

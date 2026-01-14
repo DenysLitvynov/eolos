@@ -10,12 +10,19 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.eolos.R;
 import com.google.android.material.button.MaterialButton;
 import java.io.OutputStream;
 
+/**
+ * @QR_recompensa_activity
+ * @Autor: Ariel Bejaran
+ * @Desc: Actividad android que carga y permite descargar el qr de la recompensa
+ * @Fecha: 14/01/2026
+ */
 public class QR_recompensa_activity extends AppCompatActivity {
 
     private ImageView ivCodigoQr;
@@ -39,6 +46,15 @@ public class QR_recompensa_activity extends AppCompatActivity {
             Bitmap qrBitmap = vistaToBitmap(ivCodigoQr);
             guardarImagenEnGaleria(qrBitmap);
         });
+
+        // Referencia al TextView del Layout
+        TextView tvNombre = findViewById(R.id.tv_nombre_recompensa);
+
+        // Recuperar el dato enviado por el Adapter
+        String tituloRecibido = getIntent().getStringExtra("titulo");
+        if (tituloRecibido != null) {
+            tvNombre.setText(tituloRecibido);
+        }
 
         setupBottomNavigation();
     }

@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icono_qr" />
+                android:src="@drawable/recompensa_eolos" />
         </FrameLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -75,6 +75,7 @@
             android:paddingEnd="32dp"
             android:text="Descargar QR"
             android:textAllCaps="false"
+            android:textColor="@color/blanco"
             android:textSize="16sp"
             app:cornerRadius="12dp" />
 

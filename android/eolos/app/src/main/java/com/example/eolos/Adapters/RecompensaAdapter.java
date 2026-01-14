@@ -27,6 +27,7 @@ public class RecompensaAdapter extends RecyclerView.Adapter<RecompensaAdapter.Re
     public RecompensaAdapter(List<Recompensa_Item> recompensas, boolean esDisponible) {
         this.recompensas = recompensas;
         this.esDisponible = esDisponible;
+
     }
 
     @NonNull
@@ -66,6 +67,7 @@ public class RecompensaAdapter extends RecyclerView.Adapter<RecompensaAdapter.Re
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

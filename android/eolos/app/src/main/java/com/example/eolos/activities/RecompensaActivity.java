@@ -62,7 +62,8 @@ public class RecompensaActivity extends AppCompatActivity {
             public void onResult(double km) {
                 double kmActuales = km;
                 double kmObjetivo = 30;
-                tvKmValor.setText(kmActuales + " de " + kmObjetivo + " Km");
+                String kmFormateados = String.format(java.util.Locale.US, "%.2f", kmActuales);
+                tvKmValor.setText(kmFormateados + " de " + kmObjetivo + " Km");
                 progresoKm.setMax((int) kmObjetivo);
                 progresoKm.setProgress((int) kmActuales);
             }
@@ -178,43 +179,4 @@ public class RecompensaActivity extends AppCompatActivity {
                     startActivity(new Intent(this, PerfilActivity.class)));
         }
     }
-
-/*
-    //TODO: Filtrar entre disponibles y proximos basados en km(<,o>)
-    private List<Recompensa_Item> obtenerRecompensasDisponibles() {
-        List<Recompensa_Item> list = new ArrayList<>();
-
-        list.add(new Recompensa_Item(
-                R.drawable.logo_mcdonalds,
-                "10% menos en tu Mcmenú",0
-        ));
-
-        list.add(new Recompensa_Item(
-                R.drawable.logo_peluqueria,
-                "30% menos en corte + lavado",0
-        ));
-
-        return list;
-    }
-
-    private List<Recompensa_Item> obtenerProximasRecompensas() {
-        List<Recompensa_Item> list = new ArrayList<>();
-
-        list.add(new Recompensa_Item(
-                R.drawable.logo_mcdonalds,
-                "10% descuento en tu Mcmenú",0
-        ));
-        list.add(new Recompensa_Item(
-                R.drawable.logo_mcdonalds,
-                "10% descuento en tu Mcmenú",0
-        ));
-        list.add(new Recompensa_Item(
-                R.drawable.logo_mcdonalds,
-                "10% descuento en tu Mcmenú",0
-        ));
-
-        return list;
-    }
-    /
- */
 }
