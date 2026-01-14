@@ -1,5 +1,6 @@
 package com.example.eolos.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,7 +57,7 @@ public class RecompensaActivity extends AppCompatActivity {
         cargarDatosDeRecompensas();
 
 
-        obtenerKmAcumulados(new RecompensasFake.Km_acumulado_Callback() {
+        obtenerKmAcumulados(this,new RecompensasFake.Km_acumulado_Callback() {
             @Override
             public void onResult(double km) {
                 double kmActuales = km;
@@ -77,21 +78,15 @@ public class RecompensaActivity extends AppCompatActivity {
     }
 
     private void cargarDatosDeRecompensas() {
-
-        // obtenemos los KM acumulados
-        obtenerKmAcumulados(new RecompensasFake.Km_acumulado_Callback() {
+        obtenerKmAcumulados(RecompensaActivity.this,new RecompensasFake.Km_acumulado_Callback() {
             @Override
             public void onResult(double km_acumulados) {
-
-                // Luego pedimos todas las recompensas
-                clienteRecompensas.obtenerTodasLasRecompensas(new RecompensasFake.RecompensasCallback() {
+                clienteRecompensas.obtenerTodasLasRecompensas(RecompensaActivity.this,new RecompensasFake.RecompensasCallback() {
                     @Override
                     public void onSuccess(List<Recompensa_Item> todasLasRecompensas) {
-
                         List<Recompensa_Item> disponibles = new ArrayList<>();
                         List<Recompensa_Item> proximas = new ArrayList<>();
 
-                        // Filtramos según crit_num_km de cada recompensa
                         for (Recompensa_Item r : todasLasRecompensas) {
                             if (km_acumulados >= r.get_Crit_num_km()) {
                                 disponibles.add(r);
@@ -100,18 +95,19 @@ public class RecompensaActivity extends AppCompatActivity {
                             }
                         }
 
-                        // Actualiza UI
                         runOnUiThread(() -> {
-                            rvDisponibles.setAdapter(new RecompensaAdapter(disponibles));
-                            rvProximas.setAdapter(new RecompensaAdapter(proximas));
+                            // AQUÍ YA LO TENÍAS BIEN
+                            rvDisponibles.setAdapter(new RecompensaAdapter(disponibles, true));
+                            rvProximas.setAdapter(new RecompensaAdapter(proximas, false));
                         });
                     }
 
                     @Override
                     public void onError(String error) {
                         runOnUiThread(() -> {
-                            rvDisponibles.setAdapter(new RecompensaAdapter(new ArrayList<>()));
-                            rvProximas.setAdapter(new RecompensaAdapter(new ArrayList<>()));
+                            // ERROR 1 y 2 AQUÍ: Faltaba el ", false"
+                            rvDisponibles.setAdapter(new RecompensaAdapter(new ArrayList<>(), false));
+                            rvProximas.setAdapter(new RecompensaAdapter(new ArrayList<>(), false));
                         });
                     }
                 });
@@ -119,26 +115,31 @@ public class RecompensaActivity extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                // Error obteniendo KM → no podemos filtrar
-                rvDisponibles.setAdapter(new RecompensaAdapter(new ArrayList<>()));
-                rvProximas.setAdapter(new RecompensaAdapter(new ArrayList<>()));
+                // ERROR 3 y 4 AQUÍ: Faltaba el ", false"
+                runOnUiThread(() -> {
+                    rvDisponibles.setAdapter(new RecompensaAdapter(new ArrayList<>(), false));
+                    rvProximas.setAdapter(new RecompensaAdapter(new ArrayList<>(), false));
+                });
             }
         });
     }
 
-
     // RecompensaActivity.java
 
-    private void obtenerKmAcumulados(RecompensasFake.Km_acumulado_Callback callback) {
-        clienteRecompensas.obtener_km_acumulados(new RecompensasFake.Km_acumulado_Callback() {
+    private void obtenerKmAcumulados(Context context, RecompensasFake.Km_acumulado_Callback callback) {
+        clienteRecompensas.obtener_km_acumulados(context,new RecompensasFake.Km_acumulado_Callback() {
+
             @Override
             public void onResult(double km_acumulados) {
                 callback.onResult(km_acumulados);
+                Log.d("EOLOS_DEBUG", "KM recibidos: " + km_acumulados);
             }
 
             @Override
             public void onError(String error) {
                 callback.onError(error);
+                Log.d("EOLOS_DEBUG", "KM recibidos: " + error);
+
             }
         });
     }
