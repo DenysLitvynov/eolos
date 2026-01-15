@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Éolos – Gestión de Recompensas</title>
+
+    <link rel="stylesheet" href="../../css/header.css" />
+    <link rel="stylesheet" href="../../css/admin.css" />
+    <link rel="stylesheet" href="../../css/gestion_recompensas_card.css" />
+
+
+    <script type="module" src="../../js/scripts/gestion_recompensas.js" defer></script>
+    <script type="module" src="/js/components/header.js" defer></script>
+
+    <link rel="stylesheet" href="/css/footer.css" />
+    <script type="module" src="/js/components/footer.js" defer></script>
+</head>
+
+<body>
+<div id="site-header"></div>
+
+<main class="users-page">
+    <section class="users-header">
+        <h2>Gestión de Recompensas</h2>
+    </section>
+
+    <section class="users-actions">
+        <button id="btn-open-modal" class="btn primary">+ Crear recompensa</button>
+    </section>
+
+    <section class="users-table-card">
+        <div class="users-table-scroll">
+            <table class="users-table">
+                <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>KM Requeridos</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th class="col-actions">Acciones</th>
+                </tr>
+                </thead>
+                <tbody id="rewards-tbody"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Paginación -->
+    <section class="users-pagination">
+        <button id="btn-prev" class="btn secondary" disabled>← Anterior</button>
+        <span id="page-info">Página 1</span>
+        <button id="btn-next" class="btn tercero">Siguiente →</button>
+    </section>
+
+    <!-- Modal Crear Recompensa -->
+    <div id="modal-backdrop" class="modal-backdrop hidden">
+        <div class="modal">
+            <header class="modal-header">
+                <h2>Creación de recompensa</h2>
+                <button id="btn-close-modal" class="icon-btn" aria-label="Cerrar">✕</button>
+            </header>
+
+            <div class="modal-body">
+                <p class="modal-tip">
+                    * La recompensa estará disponible para los usuarios que cumplan el criterio de kilómetros.
+                </p>
+
+                <form id="create-reward-form" class="form" novalidate>
+                    <div id="create-form-error" class="form-error hidden"></div>
+
+                    <div class="form-field">
+                        <label for="titulo">Título de la recompensa *</label>
+                        <input type="text" id="titulo" name="titulo" placeholder="Descuento 10% en cafetería" maxlength="100" required />
+                        <div class="field-error" id="err-titulo"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="descripcion">Descripción *</label>
+                        <textarea id="descripcion" name="descripcion" rows="3" placeholder="Obtén un 10% de descuento en tu consumición. Válido por 3 meses." maxlength="500" required></textarea>
+                        <div class="helper-text">Máximo 500 caracteres</div>
+                        <div class="field-error" id="err-descripcion"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="criterio_km">Kilómetros requeridos *</label>
+                        <input type="number" id="criterio_km" name="criterio_km" placeholder="10.0" step="0.1" min="0.1" max="500" required />
+                        <div class="helper-text">Distancia mínima que debe recorrer el usuario</div>
+                        <div class="field-error" id="err-criterio_km"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="fecha_inicio">Fecha de inicio *</label>
+                        <input type="datetime-local" id="fecha_inicio" name="fecha_inicio" required />
+                        <div class="helper-text">Fecha desde la cual la recompensa estará disponible</div>
+                        <div class="field-error" id="err-fecha_inicio"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="fecha_fin">Fecha de fin *</label>
+                        <input type="datetime-local" id="fecha_fin" name="fecha_fin" required />
+                        <div class="helper-text">Fecha hasta la cual la recompensa estará vigente</div>
+                        <div class="field-error" id="err-fecha_fin"></div>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="button" class="btn secondary" id="btn-cancel-modal">Cancelar</button>
+                        <button type="submit" class="btn tercero">Crear</button>
+                    </div>
+
+                    <div id="create-form-bottom-error" class="form-bottom-error hidden"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Recompensa -->
+    <div id="edit-reward-modal" class="modal-backdrop hidden">
+        <div class="modal">
+            <header class="modal-header">
+                <h2>Editar recompensa</h2>
+                <button id="btn-close-edit-modal" class="icon-btn" aria-label="Cerrar">✕</button>
+            </header>
+
+            <div class="modal-body">
+                <form id="edit-reward-form" class="form" novalidate>
+                    <div id="edit-form-error" class="form-error hidden"></div>
+
+                    <input type="hidden" id="edit-reward-id" />
+
+                    <div class="form-field">
+                        <label for="edit-titulo">Título de la recompensa</label>
+                        <input type="text" id="edit-titulo" maxlength="100" required />
+                        <div class="field-error" id="err-edit-titulo"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="edit-descripcion">Descripción</label>
+                        <textarea id="edit-descripcion" rows="3" maxlength="500" required></textarea>
+                        <div class="helper-text">Máximo 500 caracteres</div>
+                        <div class="field-error" id="err-edit-descripcion"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="edit-criterio-km">Kilómetros requeridos</label>
+                        <input type="number" id="edit-criterio-km" step="0.1" min="0.1" max="500" required />
+                        <div class="field-error" id="err-edit-criterio-km"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="edit-fecha-inicio">Fecha de inicio</label>
+                        <input type="datetime-local" id="edit-fecha-inicio" required />
+                        <div class="field-error" id="err-edit-fecha-inicio"></div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="edit-fecha-fin">Fecha de fin</label>
+                        <input type="datetime-local" id="edit-fecha-fin" required />
+                        <div class="field-error" id="err-edit-fecha-fin"></div>
+                    </div>
+
+                    <div class="form-field_bt">
+                        <button type="button" class="btn secondary" id="btn-cancel-edit">Cancelar</button>
+                        <button type="submit" class="btn tercero">Guardar</button>
+                    </div>
+
+                    <div id="edit-form-bottom-error" class="form-bottom-error hidden"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmar Eliminación -->
+    <div id="delete-modal" class="modal-backdrop hidden">
+        <div class="modal modal-small">
+            <header class="modal-header">
+                <h2>Confirmar eliminación</h2>
+                <button id="btn-close-delete-modal" class="icon-btn" aria-label="Cerrar">✕</button>
+            </header>
+
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar esta recompensa?</p>
+                <p><strong id="delete-reward-name"></strong></p>
+                <p class="modal-tip">Esta acción no se puede deshacer.</p>
+
+                <div class="form-footer">
+                    <button type="button" class="btn secondary" id="btn-cancel-delete">Cancelar</button>
+                    <button type="button" class="btn primary" id="btn-confirm-delete">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<div id="site-footer"></div>
+
+</body>
+</html>

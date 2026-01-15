@@ -48,7 +48,7 @@ const NAV_CONFIG = {
 
     tecnico_ayuntamiento: [
     { label: 'Gestión usuarios', href: '/pages/admin/gestion-usuarios.html' },
-    { label: 'Gestión recompensas', href: '/pages/gestion_recompensas.html' },
+    { label: 'Gestión recompensas', href: '/pages/tecnico_ayuntamiento/gestion_recompensas.html' },
     { label: 'Mapas', href: '/pages/mapas.html' },
     { label: 'Perfil', href: '/pages/perfil.html', id: 'user-link' },
     { label: 'Cerrar sesión', href: '#', dataAction: 'logout', className: 'logout' },
