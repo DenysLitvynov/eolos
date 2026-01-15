@@ -31,7 +31,7 @@ public class PerfilFake {
 
     private static final String TAG = "PerfilFake";
 
-    private static final String BASE_URL = "http://192.168.18.199:8000";
+    private static final String BASE_URL = "http://192.168.1.149:8000";
     private static final String ENDPOINT_PERFIL = "/api/v1/perfil";
 
     // ==== Datos del perfil ====

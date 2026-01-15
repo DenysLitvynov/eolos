@@ -105,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 PeticionarioREST peticionario = new PeticionarioREST();
-                peticionario.hacerPeticionREST("GET", ApiConfig.ENDPOINT_PERFIL, null,
+                peticionario.hacerPeticionRESTconAuth("GET", ApiConfig.ENDPOINT_PERFIL, null, tokenActual,
                         new PeticionarioREST.RespuestaREST() {
                             @Override
                             public void callback(int codigo, String cuerpo) {
@@ -134,10 +134,8 @@ public class HomeActivity extends AppCompatActivity {
             try {
                 PeticionarioREST peticionario = new PeticionarioREST();
                 String url = ApiConfig.ENDPOINT_TRAYECTOS_ULTIMO;
-                JSONObject headers = new JSONObject();
-                headers.put("Authorization", "Bearer " + tokenActual);
 
-                peticionario.hacerPeticionREST("GET", url, null, new PeticionarioREST.RespuestaREST() {
+                peticionario.hacerPeticionRESTconAuth("GET", url, null, tokenActual, new PeticionarioREST.RespuestaREST() {
                     @Override
                     public void callback(int codigo, String cuerpo) {
                         if (codigo == 200) {
@@ -167,10 +165,8 @@ public class HomeActivity extends AppCompatActivity {
             try {
                 PeticionarioREST peticionario = new PeticionarioREST();
                 String url = ApiConfig.ENDPOINT_TRAYECTOS_ULTIMOS;
-                JSONObject headers = new JSONObject();
-                headers.put("Authorization", "Bearer " + tokenActual);
 
-                peticionario.hacerPeticionREST("GET", url, null, new PeticionarioREST.RespuestaREST() {
+                peticionario.hacerPeticionRESTconAuth("GET", url, null, tokenActual, new PeticionarioREST.RespuestaREST() {
                     @Override
                     public void callback(int codigo, String cuerpo) {
                         if (codigo == 200) {
@@ -225,10 +221,8 @@ public class HomeActivity extends AppCompatActivity {
                 String trayectoId = trayecto.getString("trayecto_id");
                 PeticionarioREST peticionario = new PeticionarioREST();
                 String url = String.format(ApiConfig.ENDPOINT_TRAYECTO_MEDICIONES, trayectoId);
-                JSONObject headers = new JSONObject();
-                headers.put("Authorization", "Bearer " + tokenActual);
 
-                peticionario.hacerPeticionREST("GET", url, null, new PeticionarioREST.RespuestaREST() {
+                peticionario.hacerPeticionRESTconAuth("GET", url, null, tokenActual, new PeticionarioREST.RespuestaREST() {
                     @Override
                     public void callback(int codigo, String cuerpo) {
                         if (codigo == 200) {

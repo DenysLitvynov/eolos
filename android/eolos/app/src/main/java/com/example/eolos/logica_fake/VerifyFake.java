@@ -9,6 +9,7 @@
 package com.example.eolos.logica_fake;
 
 import com.example.eolos.PeticionarioREST;
+import com.example.eolos.config.ApiConfig;
 
 import org.json.JSONObject;
 
@@ -16,8 +17,6 @@ import org.json.JSONObject;
 // -------------------------------------------------------------------------------
 
 public class VerifyFake {
-
-    private static final String BASE_URL = "http://51.95.74.33";
 
     public interface VerifyCallback {
         void onSuccess(String token);
@@ -41,7 +40,7 @@ public class VerifyFake {
      */
     public void verificar(String correo, String verification_code, VerifyCallback callback) {
         PeticionarioREST p = new PeticionarioREST();
-        String url = BASE_URL + "/api/v1/auth/verify-registration";
+        String url = ApiConfig.BASE_URL + "/api/v1/auth/verify-registration";
 
         try {
             JSONObject body = new JSONObject();
@@ -82,7 +81,7 @@ public class VerifyFake {
      */
     public void reenviar(String correo, ReenvioCallback callback) {
         PeticionarioREST p = new PeticionarioREST();
-        String url = BASE_URL + "/api/v1/auth/resend-verification";
+        String url = ApiConfig.BASE_URL + "/api/v1/auth/resend-verification";
 
         try {
             JSONObject body = new JSONObject();

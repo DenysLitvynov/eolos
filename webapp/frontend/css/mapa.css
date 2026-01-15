@@ -7,7 +7,7 @@ body {
 .map-container {
     position: relative;
   height: 80vh;
-  width: 92%;
+  width: 100%;
   max-width: 1800px;
   margin: 0 auto;
   padding-top: 3rem;

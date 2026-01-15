@@ -12,6 +12,7 @@ package com.example.eolos.logica_fake;
 import android.util.Log;
 
 import com.example.eolos.PeticionarioREST;
+import com.example.eolos.config.ApiConfig;
 
 import org.json.JSONObject;
 
@@ -20,7 +21,6 @@ import org.json.JSONObject;
 
 public class RegistroFake {
 
-    private static final String BASE_URL = "http://51.95.74.33";
     private static final String ENDPOINT_REGISTRO = "/api/v1/auth/registro";
 
     /**
@@ -53,7 +53,7 @@ public class RegistroFake {
                          RegistroCallback callback) {
 
         PeticionarioREST peticionario = new PeticionarioREST();
-        String url = BASE_URL + ENDPOINT_REGISTRO;
+        String url = ApiConfig.BASE_URL + ENDPOINT_REGISTRO;
 
         try {
             JSONObject body = new JSONObject();

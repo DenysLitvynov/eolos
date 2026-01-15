@@ -13,7 +13,7 @@ public class IncidenciaFake {
 
     private static final String TAG = "IncidenciaFake";
 
-    private static final String BASE_URL = "http://51.95.74.33";
+    private static final String BASE_URL = "http://192.168.1.149";
     private static final String ENDPOINT_INCIDENCIAS = "/api/v1/incidencias";
 
     // Callback para devolver el resultado de la petición
