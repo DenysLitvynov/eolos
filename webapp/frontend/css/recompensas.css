@@ -205,6 +205,23 @@ body{ margin:0; font-family: var(--font-sans); color: var(--text); background: v
 }
 
 
+#site-header {
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+
+    padding: 18px 24px 0;
+    background: transparent;
+}
+
+#site-header header,
+#site-header nav,
+#site-header .navbar,
+#site-header .header {
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
 
 /* ==================================================================== */
 /*  POPUP RECOMPENSAS */
