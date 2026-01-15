@@ -1,0 +1,133 @@
+/* Añadir al final de tu archivo admin.css existente */
+
+/* ============================================
+   ESTILOS ESPECÍFICOS PARA RECOMPENSAS
+   ============================================ */
+
+/* Celda de descripción con límite de altura */
+.description-cell {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Badges de estado */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-expired {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Botones de acción */
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    margin: 0 4px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.btn-icon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn-danger:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Modal pequeño para confirmaciones */
+.modal-small {
+    max-width: 500px;
+}
+
+.modal-small .modal-body p {
+    margin-bottom: 1rem;
+}
+
+.modal-small .modal-tip {
+    color: #856404;
+    background-color: #fff3cd;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+/* Textarea en formularios */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 100%;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Helper text */
+.helper-text {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+/* Input datetime-local específico */
+input[type="datetime-local"] {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    width: 100%;
+}
+
+input[type="datetime-local"]:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Mejoras responsive */
+@media (max-width: 768px) {
+    .description-cell {
+        max-width: 200px;
+    }
+    
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+    
+    .btn-icon {
+        font-size: 1rem;
+        padding: 4px 8px;
+    }
+}

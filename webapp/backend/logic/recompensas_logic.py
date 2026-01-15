@@ -121,6 +121,17 @@ class RecompensasLogic:
     # ---------------------------------------------------------
     
     def obtener_distancia_total_mes_actual(self, db: Session, userid: str) -> float:
+        """
+        Obtiene la distancia total en KILÓMETROS del usuario en el mes actual.
+        
+        
+        Args:
+            db: Sesión de base de datos.
+            userid: ID del usuario.
+            
+        Returns:
+            Distancia total en KILÓMETROS (float).
+        """
         try:
             # Quitamos timezone.utc para evitar conflictos de tipos con la DB
             ahora = datetime.now() 
@@ -131,14 +142,19 @@ class RecompensasLogic:
             else:
                 fin_mes = datetime(ahora.year, ahora.month + 1, 1)
                 
-            # Ejecutamos la suma
-            distancia_total = db.query(func.sum(Trayecto.distancia_total)).filter(
+            # Ejecutamos la suma (resultado en METROS)
+            distancia_metros = db.query(func.sum(Trayecto.distancia_total)).filter(
                 Trayecto.usuario_id == userid,
                 Trayecto.fecha_inicio >= inicio_mes,
                 Trayecto.fecha_inicio < fin_mes
             ).scalar()
             
-            return float(distancia_total) if distancia_total is not None else 0.0 
+            if distancia_metros is not None and distancia_metros > 0:
+                distancia_km = float(distancia_metros) / 1000.0
+                return round(distancia_km, 2)  # Redondear a 2 decimales
+            else:
+                return 0.0
+                
         except Exception as e:
             print(f"Error SQL: {e}") # Esto saldrá en tu terminal de Python
             raise RuntimeError(f"Error al calcular distancia: {str(e)}")
@@ -157,7 +173,7 @@ class RecompensasLogic:
         """
         
         try:
-            # Obtenemos los KM actuales del usuario (puedes usar el mes actual o total)
+            # Obtenemos los KM actuales del usuario (ya convertidos a KM)
             km_usuario = self.obtener_distancia_total_mes_actual(db, usuario_id)
             
             # Obtenemos todas las recompensas configuradas
@@ -183,7 +199,7 @@ class RecompensasLogic:
     
     def actualizar_km_acumulados_este_mes(self, db: Session, usuario_id: str) -> float:
         """
-        Obtiene la distancia recorrida por el usuario en el MES ACTUAL self.obtener_di
+        Obtiene la distancia recorrida por el usuario en el MES ACTUAL
         y actualiza el campo km_acumulados en la tabla recompensas_usuario con ese valor.
 
         Args:
@@ -191,10 +207,10 @@ class RecompensasLogic:
             usuario_id: ID del usuario.
             
         Returns:
-            El valor de kilómetros actualizado (del mes actual).
+            El valor de kilómetros actualizado (del mes actual) en KM.
         """
         try:
-            # 1. Obtener la distancia total del mes actual
+            # 1. Obtener la distancia total del mes actual (ya en KM)
             km_mensuales = self.obtener_distancia_total_mes_actual(db, usuario_id)
             
             # 2. Buscar/Crear el registro en recompensas_usuario
@@ -220,4 +236,3 @@ class RecompensasLogic:
         except Exception as e:
             db.rollback()
             raise RuntimeError(f"Error al actualizar km acumulados: {str(e)}")
-    
