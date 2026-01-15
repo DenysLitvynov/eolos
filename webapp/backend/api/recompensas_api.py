@@ -58,11 +58,12 @@ def obtener_recompensas(db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Error inesperado: {str(e)}")
     
     
-@router.get("/recompensas_obtenidas", response_model=dict) # Cambiado de List[dict] a dict
-def obtener_recompensas_con_progreso(
-    db: Session = Depends(get_db),
-    current_user: Usuario = Depends(get_current_user)
-):
+@router.get("/recompensas_obtenidas", response_model=dict) 
+
+def obtener_recompensas_con_progreso(db: Session = Depends(get_db),current_user: Usuario = Depends(get_current_user)):
+    """
+    Obtiene las recompensas obtenidas y las próximas recompensas para el usuario actual.
+    """
     try:
         logica = RecompensasLogic()
         # Esta llamada ahora devuelve el objeto {obtenidas: [], proximas: []}

@@ -1,7 +1,7 @@
 //Recompensas JS
 //@description: Scrpt con funcionalidad de las recompensas
 //
-//S@ Author: Ariel Bejaran 
+//@ Author: Ariel Bejaran 
 
 
 
@@ -10,9 +10,13 @@ import { Popup } from '../utilidades/class_popup.js';
 
 const recompensasFake = new RecompensasFake();
 
-
+/**
+ * @function icon_selector
+ * @description Evalúa la descripción de una recompensa para asignar un emoji representativo basado en palabras clave.
+ * @param {string} descripcion - Texto descriptivo de la recompensa.
+ * @returns {string} Emoji correspondiente a la categoría detectada.
+ */
 function icon_selector(descripcion) {
-    // Convertimos a minúsculas para que la búsqueda no sea sensible a mayúsculas
     const texto = descripcion.toLowerCase();
 
     switch (true) {
@@ -39,7 +43,11 @@ function icon_selector(descripcion) {
     }
 }
 
-
+/**
+ * @function cargar_sistema_recompensas
+ * @description Función asíncrona que obtiene las recompensas del usuario y las renderiza en los contenedores de "Disponibles" y "Próximas".
+ * @async
+ */
 async function cargar_sistema_recompensas() {
     try {
         const data = await recompensasFake.obtenerRecompensasUsuario(); 
@@ -64,7 +72,13 @@ async function cargar_sistema_recompensas() {
         console.error("Error al cargar recompensas:", error);
     }
 }
-
+/**
+ * @function crearTarjeta
+ * @description Genera el elemento DOM (tarjeta) para una recompensa específica, configurando su estilo y eventos según disponibilidad.
+ * @param {Object} recompensa - Objeto con los datos de la recompensa (título, descripción, etc.).
+ * @param {boolean} [esObtenida=false] - Indica si la recompensa ya fue alcanzada por el usuario.
+ * @returns {HTMLElement} Nodo de la tarjeta lista para insertar en el DOM.
+ */
 function crearTarjeta(recompensa, esObtenida = false) {
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta-recompensa';
@@ -87,7 +101,11 @@ function crearTarjeta(recompensa, esObtenida = false) {
 
     return tarjeta;
 }
-
+/**
+ * @function mostrarPopupRecompensa
+ * @description Crea y despliega un popup detallado con la información de la recompensa, el código QR y la opción de descarga.
+ * @param {Object} recompensa - Objeto con la información detallada del premio.
+ */
 function mostrarPopupRecompensa(recompensa) {
     const contenidoPopup = document.createElement('div');
     
@@ -137,7 +155,13 @@ function mostrarPopupRecompensa(recompensa) {
     recompensaPopup.abrirPopup();
 }
 
-// Función auxiliar para forzar la descarga
+
+/**
+ * @function descargarImagen
+ * @description Crea un enlace temporal en el DOM para forzar la descarga de un archivo de imagen al dispositivo local.
+ * @param {string} url - Ruta de la imagen (QR).
+ * @param {string} nombre - Nombre sugerido para el archivo descargado.
+ */
 function descargarImagen(url, nombre) {
     const link = document.createElement('a');
     link.href = url;
@@ -147,6 +171,12 @@ function descargarImagen(url, nombre) {
     document.body.removeChild(link);
 }
 
+/**
+ * @function actualizar_barra_progreso
+ * @description Calcula el porcentaje de avance y actualiza visualmente la barra de progreso y los textos de kilometraje.
+ * @param {number|string} kmActual - Kilómetros recorridos actualmente por el usuario.
+ * @param {number|string} kmObjetivo - Meta de kilómetros necesaria para completar el ciclo.
+ */
 function actualizar_barra_progreso(kmActual, kmObjetivo) {
     // Validar que kmActual sea un número válido
     const actual = parseFloat(kmActual) || 0;
@@ -167,6 +197,12 @@ function actualizar_barra_progreso(kmActual, kmObjetivo) {
     }
 }
 
+
+/**
+ * @function inicializarProgreso
+ * @description Lógica de arranque que solicita la distancia real al backend y configura el estado inicial del progreso en la interfaz.
+ * @async
+ */
 async function inicializarProgreso() {
     try {
         // 1. Obtenemos los KM reales del backend

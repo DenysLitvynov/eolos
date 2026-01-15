@@ -56,10 +56,10 @@ class RecompensasLogic:
     
     def procesar_y_obtener_recompensas(self, db: Session, usuario_id: str):
         try:
-            # 1. Obtener KM del usuario en el mes actual
+            # Obtener KM del usuario en el mes actual
             km_usuario = self.obtener_distancia_total_mes_actual(db, usuario_id)
 
-            # 2. Obtener IDs de recompensas que el usuario YA TIENE
+            # Obtener IDs de recompensas que el usuario YA TIENE
             obtenidas_db = db.query(RecompensaObtenida.recompensa_id).filter(
                 RecompensaObtenida.usuario_id == usuario_id
             ).all()
@@ -71,13 +71,12 @@ class RecompensasLogic:
                 ~RecompensaDB.recompensa_id.in_(ids_ya_obtenidos)
             ).all()
 
-            # 4. GUARDADO AUTOMÁTICO: Insertar en recompensas_obtenidas
+            # GUARDADO AUTOMÁTICO: Insertar en recompensas_obtenidas
             for r_db in recompensas_nuevas:
                 nueva_relacion = RecompensaObtenida(
                     id=str(uuid.uuid4()),
                     usuario_id=usuario_id,
                     recompensa_id=r_db.recompensa_id,
-                    # SOLUCIÓN AL ERROR 500: Generamos el código único obligatorio
                     codigo_unico=f"REW-{usuario_id[:4]}-{r_db.recompensa_id[:4]}-{uuid.uuid4().hex[:4]}".upper()
                 )
                 db.add(nueva_relacion)
@@ -85,10 +84,9 @@ class RecompensasLogic:
             if recompensas_nuevas:
                 db.commit() # Guardamos cambios en la base de datos
 
-            # 5. CONSTRUIR RESPUESTA PARA EL FRONTEND
+            # CONSTRUIR RESPUESTA PARA EL FRONTEND
             todas_las_recompensas = db.query(RecompensaDB).all()
             
-            # Volvemos a consultar los IDs obtenidos (incluyendo los nuevos)
             ids_finales = [r[0] for r in db.query(RecompensaObtenida.recompensa_id).filter(
                 RecompensaObtenida.usuario_id == usuario_id
             ).all()]
@@ -159,13 +157,13 @@ class RecompensasLogic:
         """
         
         try:
-            # 1. Obtenemos los KM actuales del usuario (puedes usar el mes actual o total)
+            # Obtenemos los KM actuales del usuario (puedes usar el mes actual o total)
             km_usuario = self.obtener_distancia_total_mes_actual(db, usuario_id)
             
-            # 2. Obtenemos todas las recompensas configuradas
+            # Obtenemos todas las recompensas configuradas
             recompensas_db = db.query(RecompensaDB).all()
             
-            # 3. Construimos la lista con el estado de "alcanzada"
+            # Construimos la lista con el estado de "alcanzada"
             resultado = []
             for r in recompensas_db:
                 # Marcamos como True si los KM del usuario superan el criterio

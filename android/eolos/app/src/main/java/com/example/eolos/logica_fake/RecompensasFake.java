@@ -37,8 +37,38 @@ public class RecompensasFake {
         void onResult(double km);
         void onError(String error);
     }
+
+    /**
+     * @method seleccionarLogoPorTitulo
+     * @description Implementa una lógica de selección dinámica que asigna un recurso gráfico (ID de drawable)
+     * basándose en palabras clave detectadas en el título de la recompensa.
+     * @param {String} titulo - Nombre de la recompensa a evaluar.
+     * @returns {int} ID del recurso gráfico (R.drawable) correspondiente.
+     */
+    private int seleccionarLogoPorTitulo(String titulo) {
+        if (titulo == null) return R.drawable.regalo; // Por defecto
+
+        String t = titulo.toLowerCase();
+
+        if (t.contains("café") || t.contains("cafe")) {
+            return R.drawable.cafe; // Asegúrate de tener estos iconos o usa emojis en un TextView
+        } else if (t.contains("burger") || t.contains("menú") || t.contains("mcmenú")) {
+            return R.drawable.burger;
+        } else if (t.contains("cine") || t.contains("película")) {
+            return R.drawable.peli;
+        }
+
+        return R.drawable.regalo; // Fallback
+    }
     // -----------------------------------------------------------------
 
+    /**
+     * @method getToken
+     * @description Recupera el token de autenticación almacenado de forma persistente en SharedPreferences
+     * para validar las peticiones hacia la API.
+     * @param {Context} context - Contexto de la aplicación necesario para acceder a las preferencias.
+     * @returns {String} Token de acceso o null si no existe.
+     */
     private String getToken(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
         String token = prefs.getString("token", null);
@@ -46,6 +76,13 @@ public class RecompensasFake {
         return token;
     }
 
+    /**
+     * @method obtener_km_acumulados
+     * @description Realiza una petición GET autenticada al servidor para obtener la distancia total
+     * recorrida por el usuario y la devuelve a través de un callback.
+     * @param {Context} context - Contexto para obtención del token.
+     * @param {Km_acumulado_Callback} callback - Interfaz para gestionar la respuesta de éxito o error.
+     */
     public void obtener_km_acumulados(Context context, Km_acumulado_Callback callback) {
         PeticionarioREST peticionario = new PeticionarioREST();
         String url = BASE_URL + API_PREFIX + "/recompensas/obtener_distancia_acumulada";
@@ -71,7 +108,13 @@ public class RecompensasFake {
             }
         });
     }
-
+    /**
+     * @method obtenerTodasLasRecompensas
+     * @description Solicita al endpoint REST el listado completo de recompensas, procesa el JSON recibido
+     * mapeando cada elemento al modelo Recompensa_Item e integrando la lógica de logos dinámicos.
+     * @param {Context} context - Contexto para autenticación de la petición.
+     * @param {RecompensasCallback} callback - Interfaz que retorna la lista procesada o el mensaje de fallo.
+     */
     public void obtenerTodasLasRecompensas(Context context, RecompensasCallback callback) {
         PeticionarioREST peticionario = new PeticionarioREST();
         String url = url_api_recompensas + "/obtener_recompensas";
@@ -88,9 +131,11 @@ public class RecompensasFake {
                     List<Recompensa_Item> recompensas = new ArrayList<>();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject json = jsonArray.getJSONObject(i);
+                        String titulo = json.getString("titulo");
+                        int logoDinamico = seleccionarLogoPorTitulo(titulo);
                         recompensas.add(new Recompensa_Item(
-                                R.drawable.logo_mcdonalds,
-                                json.getString("titulo"),
+                                logoDinamico,
+                                titulo,
                                 json.optString("descripcion", ""),
                                 json.getDouble("criterio_num_km")
                         ));
