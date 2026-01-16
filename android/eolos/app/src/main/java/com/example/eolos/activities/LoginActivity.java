@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
          * Abre la página web de recuperación de contraseña en Chrome Custom Tab.
          */
         forgotPassword.setOnClickListener(v -> {
-            String url = "http://192.168.1.149:8000/pages/forgot-password.html";
+            String url = "http://10.131.251.51:8000/pages/forgot-password.html";
             Uri uri = Uri.parse(url);
             CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
             builder.setToolbarColor(ContextCompat.getColor(this, R.color.azul_profundo));

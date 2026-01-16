@@ -23,7 +23,7 @@ import java.util.List;
 public class RecompensasFake {
 
     // Configuración de rutas
-    private static final String BASE_URL = "http://192.168.18.199:8000";
+    private static final String BASE_URL = "http://10.131.251.51:8000";
     private static final String API_PREFIX = "/api/v1";
     private static final String ENDPOINT_RECOMPENSAS = "/recompensas";
     private static String url_api_recompensas = BASE_URL + API_PREFIX + ENDPOINT_RECOMPENSAS;

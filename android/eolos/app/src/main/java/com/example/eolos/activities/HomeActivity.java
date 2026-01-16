@@ -294,7 +294,7 @@ public class HomeActivity extends AppCompatActivity {
 
             addResumenItem("Mediciones", String.valueOf(medicionesCount));
             addResumenItem("AQI Promedio", String.format("%.1f", aqiPromedio));
-            addResumenItem("Distancia", String.format("%.2f km", distanciaTotal));
+            addResumenItem("Distancia", String.format("%.2f m", distanciaTotal));
         } catch (Exception e) {
             Log.e("HomeActivity", "Error actualizando resumen", e);
         }
